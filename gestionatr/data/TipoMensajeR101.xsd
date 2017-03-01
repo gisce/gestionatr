@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia León (Comisión Nacional de los Mercados y la Competencia) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="TiposComplejos.xsd"/>
+	<xs:include schemaLocation="TiposSencillos.xsd"/>
+	<xs:annotation>
+		<xs:documentation>
+			Version 1.0 CNMC 2016.xx.xx
+		</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="SolicitudReclamacion">
+		<xs:sequence>
+			<xs:element name="DatosSolicitud" type="DatosPasoSolicitud"/>
+			<xs:element name="VariablesDetalleReclamacion" type="VariablesDetalleReclamacion" minOccurs="0"/>
+			<xs:element name="Cliente" type="ClienteConDireccion" minOccurs="0"/>
+			<xs:element name="TipoReclamante" type="TipoReclamante">
+				<xs:annotation>
+					<xs:documentation>Tabla 83</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Reclamante" type="DatosReclamante" minOccurs="0"/>
+			<xs:element name="Comentarios" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X4000">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="RegistrosDocumento" type="RegistrosDocs" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Tipos secundarios de la transaccion actual -->
+	<!-- Datos de la solicitud para el mensaje R101 de peticion de reclamacion -->
+	<xs:complexType name="DatosPasoSolicitud">
+		<xs:sequence>
+			<xs:element name="Tipo" type="TipoReclamacionPeticion">
+				<xs:annotation>
+					<xs:documentation>Tabla 81</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Subtipo" type="SubtipoReclamacionPeticion">
+				<xs:annotation>
+					<xs:documentation>Tabla 82</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ReferenciaOrigen" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X35">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="FechaLimite" type="xs:date" minOccurs="0"/>
+			<xs:element name="Prioritario" type="Indicativo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VariablesDetalleReclamacion">
+		<xs:sequence>
+			<xs:element name="VariableDetalleReclamacion" type="VariableDetalleReclamacion" minOccurs="0" maxOccurs="10"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VariableDetalleReclamacion">
+		<xs:sequence>
+			<xs:element name="NumExpedienteAcometida" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X20">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="NumExpedienteFraude" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X16">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="FechaIncidente" type="xs:date" minOccurs="0"/>
+			<xs:element name="NumFacturaATR" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X26">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="TipoConceptoFacturado" type="TipoConceptoFacturado" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 77</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaLectura" type="xs:date" minOccurs="0"/>
+			<xs:element name="TipoDHEdM" type="TipoDHEdM" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 35</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LecturasAportadas" type="LecturasAportadas" minOccurs="0"/>
+			<xs:element name="CodigoIncidencia" type="TipoIncidencia" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 86</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CodigoSolicitud" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X12">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ParametroContratacion" type="ParametroContratacion" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 79</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ConceptoDisconformidad" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X120">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="TipoDeAtencionIncorrecta" type="TipoAtencionIncorrecta" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 87</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IBAN" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X34">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Contacto" type="ContactoRecl" minOccurs="0"/>
+			<xs:element name="CodigoSolicitudReclamacion" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X12">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="FechaDesde" type="xs:date" minOccurs="0"/>
+			<xs:element name="FechaHasta" type="xs:date" minOccurs="0"/>
+			<xs:element name="ImporteReclamado" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="Decimal10V2">
+						<xs:minExclusive value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="UbicacionIncidencia" type="UbicacionIncidencia" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

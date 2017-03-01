@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Teresa Rodriguez-Losada Marco (Comisión Nacional de los Mercados y la Competencia) -->
+<!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End User (free.org) -->
+<!-- edited with XML Spy v4.3 U (http://www.xmlspy.com)  -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="TiposSencillos.xsd"/>
+	<xs:include schemaLocation="TiposComplejos.xsd"/>
+	<xs:annotation>
+		<xs:documentation>
+			Version 1.0 CNMC 2016.xx.xx
+		</xs:documentation>
+	</xs:annotation>
+	<xs:element name="MensajeFacturacion" type="MensajeFacturacion">
+		<xs:annotation>
+			<xs:documentation>Version CNMC 1.0</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="MensajeFacturacion">
+		<xs:sequence>
+			<xs:element name="Cabecera" type="Cabecera"/>
+			<xs:element name="Facturas" type="Facturas"/>
+			<xs:element name="OtrosDatosFactura" type="OtrosDatosFactura" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="Firmar" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="TipoDatosGeneralesFactura">
+		<xs:sequence>
+			<xs:element name="CodigoFiscalFactura">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="26"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="TipoFactura" type="TipoFactura">
+				<xs:annotation>
+					<xs:documentation>Tabla 102 </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MotivoFacturacion" type="MotivoFacturacion">
+				<xs:annotation>
+					<xs:documentation>Tabla 101 </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CodigoFacturaRectificadaAnulada" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="26"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Expediente" type="Expediente" minOccurs="0"/>
+			<xs:element name="FechaFactura" type="xs:date"/>
+			<xs:element name="IdentificadorEmisora">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="7"/>
+						<xs:maxLength value="14"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Comentarios" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="4000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ImporteTotalFactura" type="ImporteFact"/>
+			<xs:element name="SaldoFactura" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="12"/>
+						<xs:fractionDigits value="2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="TipoMoneda" type="TipoMoneda">
+				<xs:annotation>
+					<xs:documentation>Tabla 104 </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:annotation>
+		<xs:documentation>Version 1.0, Mensaje de negocio, intercambiado entre agentes</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="Facturas">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="FacturaATR">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="DatosGeneralesFacturaATR">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="DireccionSuministro" type="Direccion"/>
+										<xs:element name="Cliente" type="IdCliente"/>
+										<xs:element name="CodContrato" type="CodigoContrato"/>
+										<xs:element name="DatosGeneralesFactura" type="TipoDatosGeneralesFactura"/>
+										<xs:element name="DatosFacturaATR">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="FechaBOE" type="xs:date"/>
+													<xs:element name="TarifaATRFact" type="TarifaATRFact">
+														<xs:annotation>
+															<xs:documentation>Tabla 107</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="ModoControlPotencia" type="ModoControlPotencia" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation> Tabla 51</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="MarcaMedidaConPerdidas" type="Indicativo">
+														<xs:annotation>
+															<xs:documentation>Tabla 26</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="VAsTrafo" type="Potencia" minOccurs="0"/>
+													<xs:element name="PorcentajePerdidas" minOccurs="0">
+														<xs:simpleType>
+															<xs:restriction base="Decimal4V2">
+																<xs:minInclusive value="0"/>
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
+													<xs:element name="IndicativoCurvaCarga" type="IndicativoCurvaCarga">
+														<xs:annotation>
+															<xs:documentation>Tabla 110 </xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="PeriodoCCH" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="FechaDesdeCCH" type="xs:date"/>
+																<xs:element name="FechaHastaCCH" type="xs:date"/>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="Periodo">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="FechaDesdeFactura" type="xs:date"/>
+																<xs:element name="FechaHastaFactura" type="xs:date"/>
+																<xs:element name="NumeroDias">
+																	<xs:simpleType>
+																		<xs:restriction base="xs:decimal">
+																			<xs:minInclusive value="0"/>
+																			<xs:totalDigits value="3"/>
+																			<xs:fractionDigits value="0"/>
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Potencia" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="TerminoPotencia" maxOccurs="6">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="FechaDesde" type="xs:date"/>
+													<xs:element name="FechaHasta" type="xs:date"/>
+													<xs:element name="Periodo" maxOccurs="6">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="PotenciaContratada">
+																	<xs:simpleType>
+																		<xs:restriction base="xs:integer">
+																			<xs:minInclusive value="0"/>
+																			<xs:totalDigits value="14"/>
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
+																<xs:element name="PotenciaMaxDemandada">
+																	<xs:simpleType>
+																		<xs:restriction base="xs:integer">
+																			<xs:totalDigits value="14"/>
+																			<xs:minInclusive value="0"/>
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
+																<xs:element name="PotenciaAFacturar">
+																	<xs:simpleType>
+																		<xs:restriction base="xs:integer">
+																			<xs:totalDigits value="14"/>
+																			<xs:minInclusive value="0"/>
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
+																<xs:element name="PrecioPotencia" type="PrecioFact"/>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="PenalizacionNoICP" type="Indicativo" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Tabla 26</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="ImporteTotalTerminoPotencia" type="ImporteFact"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="ExcesoPotencia" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Periodo" maxOccurs="6">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="ValorExcesoPotencia">
+														<xs:simpleType>
+															<xs:restriction base="xs:integer">
+																<xs:totalDigits value="9"/>
+																<xs:minInclusive value="0"/>
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="ImporteTotalExcesos" type="ImporteFact"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="EnergiaActiva" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="TerminoEnergiaActiva" maxOccurs="6">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="FechaDesde" type="xs:date"/>
+													<xs:element name="FechaHasta" type="xs:date"/>
+													<xs:element name="Periodo" maxOccurs="6">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="ValorEnergiaActiva">
+																	<xs:annotation>
+																		<xs:documentation>En Kwh</xs:documentation>
+																	</xs:annotation>
+																	<xs:simpleType>
+																		<xs:restriction base="xs:decimal">
+																			<xs:totalDigits value="13"/>
+																			<xs:fractionDigits value="2"/>
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
+																<xs:element name="PrecioEnergia" type="PrecioFact"/>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="ImporteTotalEnergiaActiva" type="ImporteFact"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="EnergiaReactiva" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="TerminoEnergiaReactiva" maxOccurs="6">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="FechaDesde" type="xs:date"/>
+													<xs:element name="FechaHasta" type="xs:date"/>
+													<xs:element name="Periodo" maxOccurs="6">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="ValorEnergiaReactiva">
+																	<xs:simpleType>
+																		<xs:restriction base="xs:decimal">
+																			<xs:totalDigits value="13"/>
+																			<xs:fractionDigits value="2"/>
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
+																<xs:element name="PrecioEnergiaReactiva" type="PrecioFact"/>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="ImporteTotalEnergiaReactiva" type="ImporteFact"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="ImpuestoElectrico">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="BaseImponible">
+											<xs:simpleType>
+												<xs:restriction base="xs:decimal">
+													<xs:totalDigits value="12"/>
+													<xs:fractionDigits value="2"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Porcentaje">
+											<xs:simpleType>
+												<xs:restriction base="xs:decimal">
+													<xs:totalDigits value="13"/>
+													<xs:fractionDigits value="8"/>
+													<xs:minInclusive value="0"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Importe" type="ImporteFact"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Alquileres" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="PrecioDiarioAlquiler" type="PrecioDiarioAlquiler" maxOccurs="6"/>
+										<xs:element name="ImporteFacturacionAlquileres" type="ImporteFact" minOccurs="0"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="ImporteIntereses" type="ImporteFact" minOccurs="0"/>
+							<xs:element name="ConceptoRepercutible" type="ConceptoRepercutibleFact" minOccurs="0" maxOccurs="50"/>
+							<xs:element name="IVA" type="TipoIVAIGIC" maxOccurs="2"/>
+							<xs:element name="IVAReducido" type="TipoIVAIGIC" minOccurs="0" maxOccurs="2"/>
+							<xs:element name="Medidas" type="MedidaFact" minOccurs="0" maxOccurs="10"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="OtrasFacturas">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="DatosGeneralesOtrasFacturas">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="DireccionSuministro" type="Direccion"/>
+										<xs:element name="Cliente" type="IdCliente"/>
+										<xs:element name="CodContrato" type="CodigoContrato"/>
+										<xs:element name="DatosGeneralesFactura" type="TipoDatosGeneralesOtraFactura"/>
+										<xs:element name="FechaBOE" type="xs:date" minOccurs="0"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="ConceptoRepercutible" type="ConceptoRepercutibleFact" maxOccurs="50"/>
+							<xs:element name="IVA" type="TipoIVAIGIC"/>
+							<xs:element name="IVAReducido" type="TipoIVAIGIC" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="RegistroFin">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ImporteTotal">
+							<xs:simpleType>
+								<xs:restriction base="xs:decimal">
+									<xs:totalDigits value="15"/>
+									<xs:fractionDigits value="2"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="SaldoTotalFacturacion" minOccurs="0">
+							<xs:simpleType>
+								<xs:restriction base="xs:decimal">
+									<xs:totalDigits value="15"/>
+									<xs:fractionDigits value="2"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="TotalRecibos">
+							<xs:simpleType>
+								<xs:restriction base="xs:decimal">
+									<xs:totalDigits value="5"/>
+									<xs:minInclusive value="0"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="TipoMoneda" type="TipoMoneda">
+							<xs:annotation>
+								<xs:documentation>Tabla 104</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="FechaValor" type="xs:date"/>
+						<xs:element name="FechaLimitePago" type="xs:date">
+							<xs:annotation>
+								<xs:documentation> </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="IBAN" type="X34" minOccurs="0"/>
+						<xs:element name="IdRemesa">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="26"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TipoDireccionSuministro">
+		<xs:sequence>
+			<xs:element name="Municipio">
+				<xs:simpleType>
+					<xs:restriction base="X6">
+						<xs:minLength value="5"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="DirSuministro">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="60"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TipoIVAIGIC">
+		<xs:sequence>
+			<xs:element name="BaseImponible">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="12"/>
+						<xs:fractionDigits value="2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Porcentaje">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="6"/>
+						<xs:fractionDigits value="2"/>
+						<xs:minInclusive value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Importe" type="ImporteFact"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OtrosDatosFactura">
+		<xs:sequence>
+			<xs:element name="SociedadMercantilEmisora">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="40"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="SociedadMercantilDestino">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="40"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="DireccionEmisora">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="60"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="DireccionDestino">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="60"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PrecioDiarioAlquiler">
+		<xs:sequence>
+			<xs:element name="PrecioDia" type="PrecioFact"/>
+			<xs:element name="NumeroDias" type="Decimal3"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ConceptoRepercutibleFact">
+		<xs:sequence>
+			<xs:element name="ConceptoRepercutible" type="ConceptoRepercutible">
+				<xs:annotation>
+					<xs:documentation>Tabla 103</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TipoImpositivoConceptoRepercutible" type="TipoImpositivo"/>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element name="FechaDesde" type="xs:date"/>
+					<xs:element name="FechaHasta" type="xs:date"/>
+				</xs:sequence>
+				<xs:element name="FechaOperacion" type="xs:date"/>
+			</xs:choice>
+			<xs:element name="UnidadesConceptoRepercutible" type="Decimal10V2"/>
+			<xs:element name="PrecioUnidadConceptoRepercutible" type="PrecioFact"/>
+			<xs:element name="ImporteTotalConceptoRepercutible" type="ImporteFact"/>
+			<xs:element name="Comentarios" type="X4000" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TipoDatosGeneralesOtraFactura">
+		<xs:sequence>
+			<xs:element name="CodigoFiscalFactura">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="26"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="TipoFactura" type="TipoFactura">
+				<xs:annotation>
+					<xs:documentation>Tabla 102 </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MotivoFacturacion" type="MotivoFacturacion">
+				<xs:annotation>
+					<xs:documentation>Tabla 101 </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CodigoFacturaRectificadaAnulada" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="26"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="FechaFactura" type="xs:date"/>
+			<xs:element name="IdentificadorEmisora">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="7"/>
+						<xs:maxLength value="14"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Comentarios" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="4000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ImporteTotalFactura" type="ImporteFact"/>
+			<xs:element name="SaldoFactura" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="12"/>
+						<xs:fractionDigits value="2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="TipoMoneda" type="TipoMoneda">
+				<xs:annotation>
+					<xs:documentation>Tabla 104 </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

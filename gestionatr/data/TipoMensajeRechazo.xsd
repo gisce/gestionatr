@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia León (Comisión Nacional de los Mercados y la Competencia) -->
+<xs:schema xmlns="http://localhost/elegibilidad" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="TiposComplejos.xsd"/>
+	<xs:include schemaLocation="TiposSencillos.xsd"/>
+	<xs:annotation>
+		<xs:documentation>
+			Version 1.0 CNMC 2016.xx.xx
+		</xs:documentation>
+	</xs:annotation>
+	<!-- Rechazo -->
+	<xs:complexType name="RechazoDistribuidor">
+		<xs:sequence>
+			<xs:element name="FechaRechazo" type="xs:date"/>
+			<xs:element name="Rechazo" type="Rechazo" maxOccurs="unbounded"/>
+			<xs:element name="RegistrosDocumento" type="RegistrosDocs" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Rechazo">
+		<xs:sequence>
+			<xs:element name="Secuencial">
+				<xs:simpleType>
+					<xs:restriction base="Decimal2">
+						<xs:minInclusive value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="CodigoMotivo" type="CodigoMotivoRechazo">
+				<xs:annotation>
+					<xs:documentation>Tabla 27</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Comentarios">
+				<xs:simpleType>
+					<xs:restriction base="X4000">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RechazoDistribuidorRecl">
+		<xs:sequence>
+			<xs:element name="FechaRechazo" type="xs:date"/>
+			<xs:element name="Rechazo" type="RechazoRecl" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RechazoRecl">
+		<xs:sequence>
+			<xs:element name="Secuencial">
+				<xs:simpleType>
+					<xs:restriction base="Decimal2">
+						<xs:minInclusive value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="CodigoMotivo" type="CodigoMotivoRechazo">
+				<xs:annotation>
+					<xs:documentation>Tabla 27</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Comentarios">
+				<xs:simpleType>
+					<xs:restriction base="X4000">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Incidencia -->
+	<xs:complexType name="IncidenciasATRDistribuidorB">
+		<xs:sequence>
+			<xs:element name="FechaIncidencia" type="xs:date"/>
+			<xs:element name="FechaPrevistaAccion" type="xs:date" minOccurs="0"/>
+			<xs:element name="Incidencia" type="Incidencia" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Incidencia">
+		<xs:sequence>
+			<xs:element name="Secuencial">
+				<xs:simpleType>
+					<xs:restriction base="Decimal2">
+						<xs:minInclusive value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="CodigoMotivo" type="CodigoMotivoIncidencia">
+				<xs:annotation>
+					<xs:documentation>Tabla 28</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Comentarios">
+				<xs:simpleType>
+					<xs:restriction base="X4000">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
