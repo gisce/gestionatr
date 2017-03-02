@@ -95,12 +95,12 @@ class MessageBase(object):
         self._header = ''
         self.pas = ''
         self.f_xsd = ''
+        self.set_head()
         self.set_tipus()
         if force_tipus and self.tipus != force_tipus:
             msg = u'El XML no se corresponde con el tipo {0}'.format(force_tipus)
             raise except_f1('Error', msg)
         self.set_xsd()
-        self.set_head()
 
     @staticmethod
     def check_fpos(f_obj):
