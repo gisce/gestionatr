@@ -27,7 +27,64 @@ class test_MessageBase(unittest.TestCase):
         self.assertEqual(c.data_sollicitud, '2016-07-21 12:59:47')
 
 
+class test_C1(unittest.TestCase):
 
+    def setUp(self):
+        self.xml_c101_completo = open(get_data("c101.xml"), "r")
+        self.xml_c101_minim = open(get_data("c101_minim.xml"), "r")
 
+    def tearDown(self):
+        self.xml_c101_completo.close()
+        self.xml_c101_minim.close()
 
+    def test_c101_completo(self):
+        c = C1(self.xml_c101_completo)
+        c.parse_xml()
+        # Datos Solicitud
+        self.assertEqual(c.datos_solicitud.ind_activacion, 'L')
+        self.assertEqual(c.datos_solicitud.fecha_prevista_accion, '2016-06-06')
+        self.assertEqual(c.datos_solicitud.contratacion_incondicional_ps, 'S')
+        # Cliente
+        self.assertEqual(c.cliente.tipo_identificador, 'NI')
+        self.assertEqual(c.cliente.identificador, 'B36385870')
+        self.assertEqual(c.cliente.tipo_persona, 'J')
+        self.assertEqual(c.cliente.razon_social, 'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
+        self.assertEqual(c.cliente.nombre, 'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
+        self.assertFalse(c.cliente.nombre_de_pila)
+        self.assertEqual(c.cliente.telfono_numero, '666777888')
+        self.assertEqual(c.cliente.telfono_prefijo_pais, '34')
+        self.assertEqual(c.cliente.correo_electronico, 'email@host')
+        # Comentarios
+        self.assertFalse(c.comentarios)
+        # Registros Documento
+        self.assertEqual(len(c.registros_documento), 2)
+        doc1 = c.registros_documento[0]
+        doc2 = c.registros_documento[1]
+        self.assertEqual(doc1.tipo_doc_aportado, '08')
+        self.assertEqual(doc1.direccion_url, 'http://eneracme.com/docs/NIF11111111H.pdf')
+        self.assertEqual(doc2.tipo_doc_aportado, '07')
+        self.assertEqual(doc2.direccion_url, 'http://eneracme.com/docs/NIF11111111H.pdf')
 
+    def test_c101_minim(self):
+        c = C1(self.xml_c101_minim)
+        c.parse_xml()
+        # Datos Solicitud
+        self.assertEqual(c.datos_solicitud.ind_activacion, 'L')
+        self.assertFalse(c.datos_solicitud.fecha_prevista_accion)
+        self.assertEqual(c.datos_solicitud.contratacion_incondicional_ps, 'S')
+        # Cliente
+        self.assertEqual(c.cliente.tipo_identificador, 'NI')
+        self.assertEqual(c.cliente.identificador, 'B36385870')
+        self.assertEqual(c.cliente.tipo_persona, 'F')
+        self.assertEqual(c.cliente.nombre_de_pila, 'NOMBRE')
+        self.assertEqual(c.cliente.primer_apellido, 'APELLIDO1')
+        self.assertFalse(c.cliente.segundo_apellido)
+        self.assertEqual(c.cliente.nombre, 'APELLIDO1, NOMBRE')
+        self.assertFalse(c.cliente.razon_social)
+        self.assertFalse(c.cliente.telfono_numero)
+        self.assertFalse(c.cliente.telfono_prefijo_pais)
+        self.assertFalse(c.cliente.correo_electronico)
+        # Comentarios
+        self.assertFalse(c.comentarios)
+        # Registros Documento
+        self.assertFalse(c.registros_documento)
