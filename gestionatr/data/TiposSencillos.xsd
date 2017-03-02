@@ -1275,7 +1275,7 @@
 			<xs:documentation>Escalera (tabla 13) </xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
-			<xs:pattern value="CTR|DCH|EST|EXT|INT|IZQ|NOR|OES|"/>
+			<xs:pattern value="CTR|DCH|EST|EXT|INT|IZQ|NOR|OES"/>
 			<xs:pattern value="[0-9]{3}"/>
 		</xs:restriction>
 	</xs:simpleType>
