@@ -87,7 +87,7 @@ class C1(Message, ProcessDeadline):
 
     @property
     def fecha_rechazo(self):
-        tree = 'Rechazos.FechaRechazo'
+        tree = '{0}.FechaRechazo'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data:
             return data.text
@@ -113,6 +113,16 @@ class C1(Message, ProcessDeadline):
             for d in obj.PuntosDeMedida.PuntoDeMedida:
                 data.append(PuntoDeMedida(d))
         return data
+
+    # Datos paso 06
+    @property
+    def datos_notificacion(self):
+        tree = '{0}.DatosNotificacion'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data:
+            return DatosNotificacion(data)
+        else:
+            return False
 
 
 class DatosSolicitud(object):
@@ -920,6 +930,21 @@ class Medida(object):
         data = ''
         try:
             data = self.medida.Comentarios.text
+        except AttributeError:
+            pass
+        return data
+
+
+class DatosNotificacion(object):
+
+    def __init__(self, data):
+        self.datos_notificacion = data
+
+    @property
+    def fecha_activacion(self):
+        data = ''
+        try:
+            data = self.datos_notificacion.FechaActivacion.text
         except AttributeError:
             pass
         return data
