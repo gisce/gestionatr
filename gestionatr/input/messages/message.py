@@ -4,7 +4,7 @@ from gestionatr import utils
 
 XSD_DATA = {'F1': {'01': 'Facturacion.xsd'},
             'Q1': {'01': 'SaldoLecturasFacturacion.xsd'},
-            'A3': {'01': 'TipoMensajeA301.xsd',
+            'A3': {'01': 'Alta.xsd',
                    '02': ('AceptacionAlta.xsd',
                           'Rechazo.xsd'),
                    '03': 'IncidenciasATRDistribuidor.xsd',
@@ -72,6 +72,40 @@ XSD_DATA = {'F1': {'01': 'Facturacion.xsd'},
                           'Rechazo.xsd'),
                    },
             }
+
+MAIN_MESSAGE_XSD = {
+    'SaldoLecturasFacturacion': 'Medidas',
+    'Alta': 'Alta',
+    'AceptacionAlta': 'AceptacionAlta',
+    'Rechazo': 'Rechazos',
+    'IncidenciasATRDistribuidor': 'IncidenciasATRDistribuidor',
+    'ActivacionAlta': 'ActivacionAlta',
+    'AnulacionSolicitud': '',
+    'AceptacionAnulacion': 'AceptacionAnulacion',
+    'BajaSuspension': 'BajaSuspension',
+    'AceptacionBajaSuspension': 'AceptacionBajaSuspension',
+    'AceptacionAnulacionBaja': 'AceptacionAnulacion',
+    'ActivacionBajaSuspension': 'ActivacionBaja',
+    'CambiodeComercializadorSinCambios': 'CambiodeComercializadorSinCambios',
+    'AceptacionCambiodeComercializadorSinCambios': 'AceptacionCambiodeComercializadorSinCambios',
+    'ActivacionCambiodeComercializadorSinCambios': 'ActivacionCambiodeComercializadorSinCambios',
+    'ActivacionComercializadorSaliente': 'NotificacionComercializadorSaliente',
+    'AceptacionCambiodeComercializadorSaliente': 'AceptacionCambiodeComercializadorSaliente',
+    'RechazoCambiodeComercializadorSaliente': 'RechazoCambiodeComercializadorSaliente',
+    'NotificacionCambiosATRDesdeDistribuidor': 'NotificacionCambiosATRDesdeDistribuidor',
+    'ModificacionDeATR': 'ModificacionDeATR',
+    'AceptacionModificacionDeATR': 'AceptacionModificacionDeATR',
+    'ActivacionModificacionDeATR': 'ActivacionModificaciones',
+    'ReclamacionPeticion': 'SolicitudReclamacion',
+    'AceptacionReclamacion': 'AceptacionReclamacion',
+    'RechazoReclamacion': 'Rechazos',
+    'PeticionInformacionAdicionalReclamacion': 'InformacionAdicional',
+    'EnvioInformacionReclamacion': 'EnvioInformacionReclamacion',
+    'CierreReclamacion': 'CierreReclamacion',
+    'MensajeAportacionLectura': ['DatosSolicitudAportacionLectura', 'LecturaAportada'],
+    'AceptacionAportacionLectura': 'DatosAceptacionLectura',
+    'Facturacion': ['Facturas',  'OtrosDatosFactura'],
+}
 
 
 class MessageBase(object):
@@ -181,7 +215,10 @@ class Message(MessageBase):
                     raise except_f1('Error', msg)
             else:
                 fitxer = XSD_DATA[self.tipus][self.pas]
-            self._header = fitxer.split(".xsd")[0]
+            try:
+                self._header = MAIN_MESSAGE_XSD[fitxer.split(".xsd")[0]]
+            except:
+                self._header = fitxer.split(".xsd")[0]
             xsd = utils.get_data(fitxer)
             self.f_xsd = open(xsd, 'r')
         except except_f1, e:
