@@ -74,7 +74,7 @@ class C1(Message, ProcessDeadline):
         else:
             return False
 
-    # Datos paso 02 rechazo
+    # Datos paso 02 rechazo y paso 4
     @property
     def rechazos(self):
         obj = getattr(self.obj, 'Rechazos')
