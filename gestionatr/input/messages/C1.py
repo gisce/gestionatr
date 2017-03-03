@@ -124,6 +124,25 @@ class C1(Message, ProcessDeadline):
         else:
             return False
 
+    # Datos paso 09 i 10
+    @property
+    def fecha_aceptacion(self):
+        tree = '{0}.FechaAceptacion'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data:
+            return data.text
+        else:
+            return False
+
+    # Datos paso 11
+    @property
+    def fecha_activacion_prevista(self):
+        tree = '{0}.FechaActivacionPrevista'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data:
+            return data.text
+        else:
+            return False
 
 class DatosSolicitud(object):
 

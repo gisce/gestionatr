@@ -37,6 +37,10 @@ class test_C1(unittest.TestCase):
         self.xml_c104 = open(get_data("c104.xml"), "r")
         self.xml_c105 = open(get_data("c105.xml"), "r")
         self.xml_c106 = open(get_data("c106.xml"), "r")
+        self.xml_c108 = open(get_data("c108.xml"), "r")
+        self.xml_c109 = open(get_data("c109.xml"), "r")
+        self.xml_c111 = open(get_data("c111.xml"), "r")
+        self.xml_c112 = open(get_data("c112.xml"), "r")
 
     def tearDown(self):
         self.xml_c101_completo.close()
@@ -46,6 +50,10 @@ class test_C1(unittest.TestCase):
         self.xml_c104.close()
         self.xml_c105.close()
         self.xml_c106.close()
+        self.xml_c108.close()
+        self.xml_c109.close()
+        self.xml_c111.close()
+        self.xml_c112.close()
 
     def test_c101_completo(self):
         c = C1(self.xml_c101_completo)
@@ -289,3 +297,23 @@ class test_C1(unittest.TestCase):
         self.assertFalse(md2.anomalia)
         self.assertFalse(md2.comentarios)
         self.assertEqual(md2.fecha_lectura_firme, '2003-01-03')
+
+    def test_c108(self):
+        c = C1(self.xml_c108)
+        c.parse_xml()
+        self.assertEqual(c.pas, '08')
+
+    def test_c109(self):
+        c = C1(self.xml_c109)
+        c.parse_xml()
+        self.assertEqual(c.fecha_aceptacion, '2017-02-02')
+
+    def test_c111(self):
+        c = C1(self.xml_c111)
+        c.parse_xml()
+        self.assertEqual(c.fecha_activacion_prevista, '2017-02-02')
+
+    def test_c112(self):
+        c = C1(self.xml_c112)
+        c.parse_xml()
+        self.assertEqual(c.fecha_rechazo, '2017-02-02')
