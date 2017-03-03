@@ -46,7 +46,9 @@ class C1(Message, ProcessDeadline):
     @property
     def registros_documento(self):
         data = []
-        obj = getattr(self.obj, self._header)
+        obj = get_rec_attr(self.obj, self._header, False)
+        if not hasattr(obj, 'RegistrosDocumento'):
+            obj = get_rec_attr(self.obj, 'Rechazos', False)
         if (hasattr(obj, 'RegistrosDocumento') and
                 hasattr(obj.RegistrosDocumento, 'RegistroDoc')):
             for d in obj.RegistrosDocumento.RegistroDoc:
@@ -69,6 +71,26 @@ class C1(Message, ProcessDeadline):
         data = get_rec_attr(self.obj, tree, False)
         if data:
             return Contrato(data)
+        else:
+            return False
+
+    # Datos paso 02 rechazo
+    @property
+    def rechazos(self):
+        obj = getattr(self.obj, 'Rechazos')
+        data = []
+        if obj:
+            for i in obj.Rechazo:
+                data.append(Rechazo(i))
+            return data
+        return data
+
+    @property
+    def fecha_rechazo(self):
+        tree = 'Rechazos.FechaRechazo'
+        data = get_rec_attr(self.obj, tree, False)
+        if data:
+            return data.text
         else:
             return False
 
@@ -276,6 +298,15 @@ class Contrato(object):
         self.contrato = data
 
     @property
+    def tipo_contrato_atr(self):
+        data = ''
+        try:
+            data = self.contrato.TipoContratoATR.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
     def tipo_activacion_prevista(self):
         data = ''
         try:
@@ -319,4 +350,37 @@ class Contrato(object):
                 hasattr(obj.PotenciasContratadas, 'Potencia')):
             for d in obj.PotenciasContratadas.Potencia:
                 data.append(d.text)
+        return data
+
+
+class Rechazo(object):
+
+    def __init__(self, data):
+        self.rechazo = data
+
+    @property
+    def secuencial(self):
+        data = ''
+        try:
+            data = self.rechazo.Secuencial.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def codigo_motivo(self):
+        data = ''
+        try:
+            data = self.rechazo.CodigoMotivo.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def comentarios(self):
+        data = ''
+        try:
+            data = self.rechazo.Comentarios.text
+        except AttributeError:
+            pass
         return data

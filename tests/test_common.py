@@ -32,10 +32,14 @@ class test_C1(unittest.TestCase):
     def setUp(self):
         self.xml_c101_completo = open(get_data("c101.xml"), "r")
         self.xml_c101_minim = open(get_data("c101_minim.xml"), "r")
+        self.xml_c102_accept = open(get_data("c102_accept.xml"), "r")
+        self.xml_c102_reject = open(get_data("c102_reject.xml"), "r")
 
     def tearDown(self):
         self.xml_c101_completo.close()
         self.xml_c101_minim.close()
+        self.xml_c102_accept.close()
+        self.xml_c102_reject.close()
 
     def test_c101_completo(self):
         c = C1(self.xml_c101_completo)
@@ -88,3 +92,40 @@ class test_C1(unittest.TestCase):
         self.assertFalse(c.comentarios)
         # Registros Documento
         self.assertFalse(c.registros_documento)
+
+    def test_c102_accept(self):
+        c = C1(self.xml_c102_accept)
+        c.parse_xml()
+        # Datos Aceptacion
+        self.assertEqual(c.datos_aceptacion.fecha_aceptacion, '2016-06-06')
+        self.assertEqual(c.datos_aceptacion.fecha_ultima_lectura_firme, '2016-06-01')
+        # Contrato
+        self.assertEqual(c.contrato.tipo_contrato_atr, '02')
+        self.assertEqual(c.contrato.tipo_activacion_prevista, 'C0')
+        self.assertEqual(c.contrato.fecha_activacion_prevista, '2016-07-06')
+        self.assertEqual(c.contrato.tarifa_atr, '003')
+        pots = c.contrato.potencias_contratadas
+        self.assertEqual(len(pots), 2)
+        self.assertEqual(pots[0], '1000')
+        self.assertEqual(pots[1], '2000')
+
+    def test_c102_reject(self):
+        c = C1(self.xml_c102_reject)
+        c.parse_xml()
+        self.assertEqual(c.fecha_rechazo, '2016-07-20')
+        self.assertEqual(len(c.registros_documento), 2)
+        doc1 = c.registros_documento[0]
+        doc2 = c.registros_documento[1]
+        self.assertEqual(doc1.tipo_doc_aportado, '08')
+        self.assertEqual(doc1.direccion_url, 'http://eneracme.com/docs/NIF11111111H.pdf')
+        self.assertEqual(doc2.tipo_doc_aportado, '07')
+        self.assertEqual(doc2.direccion_url, 'http://eneracme.com/docs/NIF11111111H.pdf')
+        self.assertEqual(len(c.rechazos), 2)
+        rej1 = c.rechazos[0]
+        rej2 = c.rechazos[1]
+        self.assertEqual(rej1.secuencial, '1')
+        self.assertEqual(rej1.codigo_motivo, '01')
+        self.assertEqual(rej1.comentarios, 'Motiu de rebuig 01: No existe Punto de Suministro asociado al CUPS')
+        self.assertEqual(rej2.secuencial, '2')
+        self.assertEqual(rej2.codigo_motivo, '03')
+        self.assertEqual(rej2.comentarios, 'Cuando el CIF-NIF no coincide con el que figura en la base de datos del Distribuidor')
