@@ -74,7 +74,7 @@ class C1(Message, ProcessDeadline):
         else:
             return False
 
-    # Datos paso 02 rechazo y paso 4
+    # Datos paso 02 rechazo y paso 04
     @property
     def rechazos(self):
         obj = getattr(self.obj, 'Rechazos')
@@ -93,6 +93,26 @@ class C1(Message, ProcessDeadline):
             return data.text
         else:
             return False
+
+    # Datos paso 05
+    @property
+    def datos_activacion(self):
+        tree = '{0}.DatosActivacion'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data:
+            return DatosActivacion(data)
+        else:
+            return False
+
+    @property
+    def puntos_medida(self):
+        data = []
+        obj = get_rec_attr(self.obj, self._header, False)
+        if (hasattr(obj, 'PuntosDeMedida') and
+                hasattr(obj.PuntosDeMedida, 'PuntoDeMedida')):
+            for d in obj.PuntosDeMedida.PuntoDeMedida:
+                data.append(PuntoDeMedida(d))
+        return data
 
 
 class DatosSolicitud(object):
@@ -352,6 +372,78 @@ class Contrato(object):
                 data.append(d.text)
         return data
 
+    @property
+    def cod_contrato(self):
+        data = ''
+        try:
+            data = self.contrato.IdContrato.CodContrato.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def tipo_autoconsumo(self):
+        data = ''
+        try:
+            data = self.contrato.TipoAutoconsumo.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def periodicidad_facturacion(self):
+        data = ''
+        try:
+            data = self.contrato.CondicionesContractuales.PeriodicidadFacturacion.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def tipo_de_telegestion(self):
+        data = ''
+        try:
+            data = self.contrato.CondicionesContractuales.TipodeTelegestion.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def marca_medida_con_perdidas(self):
+        data = ''
+        try:
+            data = self.contrato.CondicionesContractuales.MarcaMedidaConPerdidas.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def tension_del_suministro(self):
+        data = ''
+        try:
+            data = self.contrato.CondicionesContractuales.TensionDelSuministro.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def vas_trafo(self):
+        data = ''
+        try:
+            data = self.contrato.CondicionesContractuales.VAsTrafo.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def porcentaje_perdidas(self):
+        data = ''
+        try:
+            data = self.contrato.CondicionesContractuales.PorcentajePerdidas.text
+        except AttributeError:
+            pass
+        return data
+
 
 class Rechazo(object):
 
@@ -381,6 +473,453 @@ class Rechazo(object):
         data = ''
         try:
             data = self.rechazo.Comentarios.text
+        except AttributeError:
+            pass
+        return data
+
+
+class DatosActivacion(object):
+
+    def __init__(self, data):
+        self.datos_activacion = data
+
+    @property
+    def fecha(self):
+        data = ''
+        try:
+            data = self.datos_activacion.Fecha.text
+        except AttributeError:
+            pass
+        return data
+
+
+class PuntoDeMedida(object):
+
+    def __init__(self, data):
+        self.pm = data
+
+    @property
+    def cod_pm(self):
+        data = ''
+        try:
+            data = self.pm.CodPM.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def tipo_movimiento(self):
+        data = ''
+        try:
+            data = self.pm.TipoMovimiento.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def tipo_pm(self):
+        data = ''
+        try:
+            data = self.pm.TipoPM.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def cod_pm_principal(self):
+        data = ''
+        try:
+            data = self.pm.CodPMPrincipal.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def modo_lectura(self):
+        data = ''
+        try:
+            data = self.pm.ModoLectura.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def funcion(self):
+        data = ''
+        try:
+            data = self.pm.Funcion.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def direccion_enlace(self):
+        data = ''
+        try:
+            data = self.pm.DireccionEnlace.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def direccion_punto_medida(self):
+        data = ''
+        try:
+            data = self.pm.DireccionPuntoMedida.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def num_linea(self):
+        data = ''
+        try:
+            data = self.pm.NumLinea.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def telefono_telemedida(self):
+        data = ''
+        try:
+            data = self.pm.TelefonoTelemedida.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def estado_telefono(self):
+        data = ''
+        try:
+            data = self.pm.EstadoTelefono.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def clave_acceso(self):
+        data = ''
+        try:
+            data = self.pm.ClaveAcceso.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def tension_pm(self):
+        data = ''
+        try:
+            data = self.pm.TensionPM.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def fecha_vigor(self):
+        data = ''
+        try:
+            data = self.pm.FechaVigor.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def fecha_alta(self):
+        data = ''
+        try:
+            data = self.pm.FechaAlta.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def fecha_baja(self):
+        data = ''
+        try:
+            data = self.pm.FechaBaja.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def comentarios(self):
+        data = ''
+        try:
+            data = self.pm.Comentarios.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def aparatos(self):
+        data = []
+        obj = get_rec_attr(self.pm, "Aparatos", False)
+        if obj and hasattr(obj, 'Aparato'):
+            for d in obj.Aparato:
+                data.append(Aparato(d))
+        return data
+
+    @property
+    def medidas(self):
+        data = []
+        obj = get_rec_attr(self.pm, "Medidas", False)
+        if obj and hasattr(obj, 'Medida'):
+            for d in obj.Medida:
+                data.append(Medida(d))
+        return data
+
+
+class Aparato(object):
+
+    def __init__(self, data):
+        self.aparato = data
+
+    @property
+    def tipo_aparato(self):
+        data = ''
+        try:
+            data = self.aparato.ModeloAparato.TipoAparato.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def marca_aparato(self):
+        data = ''
+        try:
+            data = self.aparato.ModeloAparato.MarcaAparato.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def modelo_marca(self):
+        data = ''
+        try:
+            data = self.aparato.ModeloAparato.ModeloMarca.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def tipo_movimiento(self):
+        data = ''
+        try:
+            data = self.aparato.TipoMovimiento.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def tipo_equipo_medida(self):
+        data = ''
+        try:
+            data = self.aparato.TipoEquipoMedida.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def tipo_propiedad_aparato(self):
+        data = ''
+        try:
+            data = self.aparato.TipoPropiedadAparato.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def propietario(self):
+        data = ''
+        try:
+            data = self.aparato.Propietario.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def tipo_dhedm(self):
+        data = ''
+        try:
+            data = self.aparato.TipoDHEdM.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def modo_medida_potencia(self):
+        data = ''
+        try:
+            data = self.aparato.ModoMedidaPotencia.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def lectura_directa(self):
+        data = ''
+        try:
+            data = self.aparato.LecturaDirecta.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def cod_precinto(self):
+        data = ''
+        try:
+            data = self.aparato.CodPrecinto.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def periodo_fabricacion(self):
+        data = ''
+        try:
+            data = self.aparato.DatosAparato.PeriodoFabricacion.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def numero_serie(self):
+        data = ''
+        try:
+            data = self.aparato.DatosAparato.NumeroSerie.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def funcion_aparato(self):
+        data = ''
+        try:
+            data = self.aparato.DatosAparato.FuncionAparato.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def num_integradores(self):
+        data = ''
+        try:
+            data = self.aparato.DatosAparato.NumIntegradores.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def constante_energia(self):
+        data = ''
+        try:
+            data = self.aparato.DatosAparato.ConstanteEnergia.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def constante_maximetro(self):
+        data = ''
+        try:
+            data = self.aparato.DatosAparato.ConstanteMaximetro.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def ruedas_enteras(self):
+        data = ''
+        try:
+            data = self.aparato.DatosAparato.RuedasEnteras.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def ruedas_decimales(self):
+        data = ''
+        try:
+            data = self.aparato.DatosAparato.RuedasDecimales.text
+        except AttributeError:
+            pass
+        return data
+
+
+class Medida(object):
+
+    def __init__(self, data):
+        self.medida = data
+
+    @property
+    def tipo_dhedm(self):
+        data = ''
+        try:
+            data = self.medida.TipoDHEdM.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def periodo(self):
+        data = ''
+        try:
+            data = self.medida.Periodo.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def magnitud_medida(self):
+        data = ''
+        try:
+            data = self.medida.MagnitudMedida.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def procedencia(self):
+        data = ''
+        try:
+            data = self.medida.Procedencia.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def ultima_lectura_firme(self):
+        data = ''
+        try:
+            data = self.medida.UltimaLecturaFirme.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def fecha_lectura_firme(self):
+        data = ''
+        try:
+            data = self.medida.FechaLecturaFirme.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def anomalia(self):
+        data = ''
+        try:
+            data = self.medida.Anomalia.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def comentarios(self):
+        data = ''
+        try:
+            data = self.medida.Comentarios.text
         except AttributeError:
             pass
         return data
