@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from . import unittest
 from .utils import get_data
-from gestionatr.input.messages import C1
+from gestionatr.input.messages import C1, C2
 
 
 class test_MessageBase(unittest.TestCase):
@@ -317,3 +317,106 @@ class test_C1(unittest.TestCase):
         c = C1(self.xml_c112)
         c.parse_xml()
         self.assertEqual(c.fecha_rechazo, '2017-02-02')
+
+
+class test_C2(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_c201_completo = open(get_data("c201.xml"), "r")
+
+    def tearDown(self):
+        self.xml_c201_completo.close()
+
+    def test_c201_completo(self):
+        c = C2(self.xml_c201_completo)
+        c.parse_xml()
+        # Datos Solicitud
+        self.assertEqual(c.datos_solicitud.cnae, '2222')
+        self.assertEqual(c.datos_solicitud.contratacion_incondicional_ps, 'S')
+        self.assertEqual(c.datos_solicitud.fecha_prevista_accion, '2016-06-06')
+        self.assertEqual(c.datos_solicitud.ind_activacion, 'L')
+        self.assertEqual(c.datos_solicitud.tipo_modificacion, 'S')
+        self.assertEqual(c.datos_solicitud.tipo_solicitud_administrativa, 'S')
+        # Contrato
+        contrato = c.contrato
+        contacto = contrato.contacto
+        self.assertEqual(contacto.correo_electronico, 'email@host')
+        self.assertEqual(contacto.persona_de_contacto, 'Nombre Inventado')
+        self.assertEqual(contacto.telfono_numero, '666777888')
+        self.assertEqual(contacto.telfono_prefijo_pais, '34')
+        self.assertEqual(contrato.fecha_finalizacion, '2018-01-01')
+        self.assertEqual(contrato.modo_control_potencia, '1')
+        self.assertEqual(contrato.periodicidad_facturacion, '01')
+        pots = contrato.potencias_contratadas
+        self.assertEqual(len(pots), 2)
+        self.assertEqual(pots[0], '1000')
+        self.assertEqual(pots[1], '2000')
+        self.assertEqual(contrato.tarifa_atr, '003')
+        self.assertEqual(contrato.tipo_autoconsumo, '00')
+        self.assertEqual(contrato.tipo_contrato_atr, '02')
+        # Cliente
+        cliente = c.cliente
+        self.assertEqual(cliente.correo_electronico, 'email@host')
+        self.assertEqual(cliente.identificador, 'B36385870')
+        self.assertEqual(cliente.indicador_tipo_direccion, 'F')
+        self.assertEqual(cliente.nombre, 'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
+        self.assertEqual(cliente.razon_social, 'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
+        self.assertEqual(cliente.telfono_numero, '666777888')
+        self.assertEqual(cliente.telfono_prefijo_pais, '34')
+        self.assertEqual(cliente.tipo_identificador, 'NI')
+        self.assertEqual(cliente.tipo_persona, 'J')
+        direccion = cliente.direccion
+        self.assertEqual(direccion.aclarador_finca, 'Bloque de Pisos')
+        self.assertEqual(direccion.calle, 'MELA MUTERMILCH')
+        self.assertEqual(direccion.cod_postal, '17001')
+        self.assertEqual(direccion.duplicador_finca, '')
+        self.assertEqual(direccion.escalera, '')
+        self.assertEqual(direccion.municipio, '17079')
+        self.assertEqual(direccion.numero_finca, '2')
+        self.assertEqual(direccion.pais, 'España')
+        self.assertEqual(direccion.piso, '001')
+        self.assertEqual(direccion.poblacion, '17079')
+        self.assertEqual(direccion.provincia, '17')
+        self.assertEqual(direccion.puerta, '001')
+        self.assertEqual(direccion.tipo_aclarador_finca, 'BI')
+        self.assertEqual(direccion.tipo_via, 'PZ')
+        # Medida
+        medida = c.medida
+        self.assertEqual(medida.propiedad_equipo, 'C')
+        self.assertEqual(medida.tipo_equipo_medida, 'L00')
+        mod = medida.modelos_aparato
+        self.assertEqual(len(mod), 2)
+        mod1 = mod[0]
+        mod2 = mod[1]
+        self.assertEqual(mod1.marca_aparato, '132')
+        self.assertEqual(mod1.modelo_marca, '011')
+        self.assertEqual(mod1.tipo_aparato, 'CG')
+        self.assertEqual(mod2.marca_aparato, '132')
+        self.assertEqual(mod2.modelo_marca, '012')
+        self.assertEqual(mod2.tipo_aparato, 'CG')
+        # Datos CIE
+        datos_cie = c.doc_tecnica.datos_cie
+        self.assertFalse(datos_cie.cie_electronico)
+        self.assertEqual(datos_cie.validez_cie, 'ES')
+        cie_p = datos_cie.cie_papel
+        self.assertEqual(cie_p.codigo_cie, '1234567')
+        self.assertFalse(cie_p.codigo_instalador)
+        self.assertFalse(cie_p.fecha_caducidad_cie)
+        self.assertEqual(cie_p.fecha_emision_cie, '2015-06-04')
+        self.assertEqual(cie_p.nif_instalador, '12345678Z')
+        self.assertEqual(cie_p.potencia_inst_bt, '3500')
+        self.assertEqual(cie_p.potencia_no_interrumpible, '2000')
+        self.assertEqual(cie_p.tension_suministro_cie, '10')
+        self.assertEqual(cie_p.tipo_suministro, 'VI')
+        # Datos APM
+        datos_apm = c.doc_tecnica.datos_apm
+        self.assertEqual(datos_apm.codigo_apm, '1111111111')
+        self.assertEqual(datos_apm.codigo_instalador, '0550')
+        self.assertEqual(datos_apm.fecha_caducidad_apm, '2016-06-04')
+        self.assertEqual(datos_apm.fecha_emision_apm, '2015-06-04')
+        self.assertFalse(datos_apm.nif_instalador)
+        self.assertEqual(datos_apm.potencia_inst_at, '5000')
+        self.assertEqual(datos_apm.tension_suministro_apm, '20')
+        # Comentarios
+        self.assertEqual(c.comentarios, 'Comentario')
+        self.assertFalse(c.registros_documento)
