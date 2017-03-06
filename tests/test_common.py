@@ -555,9 +555,13 @@ class test_B1(unittest.TestCase):
 
     def setUp(self):
         self.xml_b101 = open(get_data("b101.xml"), "r")
+        self.xml_b102_accept = open(get_data("b102_accept.xml"), "r")
+        self.xml_b104_accept = open(get_data("b104_accept.xml"), "r")
 
     def tearDown(self):
         self.xml_b101.close()
+        self.xml_b102_accept.close()
+        self.xml_b104_accept.close()
 
     def test_b101(self):
         b1 = B1(self.xml_b101)
@@ -575,3 +579,19 @@ class test_B1(unittest.TestCase):
         self.assertEqual(cliente.tipo_persona, 'J')
         self.assertEqual(b1.iban, '444555666')
         self.assertFalse(b1.comentarios)
+
+    def test_b102_accept(self):
+        b1 = B1(self.xml_b102_accept)
+        b1.parse_xml()
+        # Datos Aceptacion
+        self.assertEqual(b1.datos_aceptacion.fecha_aceptacion, '2016-06-06')
+        self.assertEqual(b1.datos_aceptacion.actuacion_campo, 'S')
+        self.assertEqual(b1.datos_aceptacion.tipo_activacion_prevista, 'B1')
+        self.assertEqual(b1.datos_aceptacion.fecha_activacion_prevista, '2016-06-08')
+        self.assertEqual(b1.datos_aceptacion.fecha_ultima_lectura, '2016-06-01')
+
+    def test_b104_accept(self):
+        b1 = B1(self.xml_b104_accept)
+        b1.parse_xml()
+        self.assertEqual(b1.fecha_aceptacion, '2017-02-02')
+        self.assertEqual(b1.hora_aceptacion, '20:05:10')

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from C2 import C2, DatosSolicitud
+from C1 import DatosAceptacion
 from Deadlines import ProcessDeadline, DeadLine, Workdays, Naturaldays
 from gestionatr.utils import get_rec_attr
 
@@ -62,6 +63,26 @@ class B1(C2):
         else:
             return False
 
+    # Datos paso 02
+    @property
+    def datos_aceptacion(self):
+        tree = '{0}.DatosAceptacion'.format(self._header)
+        sol = get_rec_attr(self.obj, tree, False)
+        if sol:
+            return DatosAceptacion(sol)
+        else:
+            return False
+
+    # Datos paso 04
+    @property
+    def hora_aceptacion(self):
+        tree = '{0}.HoraAceptacion'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data:
+            return data.text
+        else:
+            return False
+
 
 class DatosSolicitud(DatosSolicitud):
 
@@ -70,6 +91,36 @@ class DatosSolicitud(DatosSolicitud):
         data = ''
         try:
             data = self.datos_solicitud.Motivo.text
+        except AttributeError:
+            pass
+        return data
+
+
+class DatosAceptacion(DatosAceptacion):
+
+    @property
+    def fecha_ultima_lectura(self):
+        data = ''
+        try:
+            data = self.datos_aceptacion.FechaUltimaLectura.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def tipo_activacion_prevista(self):
+        data = ''
+        try:
+            data = self.datos_aceptacion.TipoActivacionPrevista.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def fecha_activacion_prevista(self):
+        data = ''
+        try:
+            data = self.datos_aceptacion.FechaActivacionPrevista.text
         except AttributeError:
             pass
         return data
