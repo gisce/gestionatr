@@ -340,6 +340,24 @@ class DatosAceptacion(object):
             pass
         return data
 
+    @property
+    def potencia_actual(self):
+        data = ''
+        try:
+            data = self.datos_aceptacion.PotenciaActual.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def actuacion_campo(self):
+        data = ''
+        try:
+            data = self.datos_aceptacion.ActuacionCampo.text
+        except AttributeError:
+            pass
+        return data
+
 
 class Contrato(object):
 

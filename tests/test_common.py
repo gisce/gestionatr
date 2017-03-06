@@ -323,9 +323,13 @@ class test_C2(unittest.TestCase):
 
     def setUp(self):
         self.xml_c201_completo = open(get_data("c201.xml"), "r")
+        self.xml_c202_accept = open(get_data("c202_accept.xml"), "r")
+        self.xml_c203 = open(get_data("c203.xml"), "r")
 
     def tearDown(self):
         self.xml_c201_completo.close()
+        self.xml_c202_accept.close()
+        self.xml_c203.close()
 
     def test_c201_completo(self):
         c = C2(self.xml_c201_completo)
@@ -420,3 +424,38 @@ class test_C2(unittest.TestCase):
         # Comentarios
         self.assertEqual(c.comentarios, 'Comentario')
         self.assertFalse(c.registros_documento)
+
+    def test_c202_accept(self):
+        c = C2(self.xml_c202_accept)
+        c.parse_xml()
+        # Datos Aceptacion
+        self.assertEqual(c.datos_aceptacion.fecha_aceptacion, '2016-06-06')
+        self.assertEqual(c.datos_aceptacion.potencia_actual, '5000')
+        self.assertEqual(c.datos_aceptacion.actuacion_campo, 'S')
+        self.assertEqual(c.datos_aceptacion.fecha_ultima_lectura_firme, '2016-06-01')
+        # Contrato
+        self.assertEqual(c.contrato.tipo_contrato_atr, '02')
+        self.assertEqual(c.contrato.tipo_activacion_prevista, 'C0')
+        self.assertEqual(c.contrato.fecha_activacion_prevista, '2016-07-06')
+        self.assertEqual(c.contrato.tarifa_atr, '003')
+        self.assertEqual(c.contrato.modo_control_potencia, '1')
+        pots = c.contrato.potencias_contratadas
+        self.assertEqual(len(pots), 2)
+        self.assertEqual(pots[0], '1000')
+        self.assertEqual(pots[1], '2000')
+
+    def test_c203(self):
+        c = C2(self.xml_c203)
+        c.parse_xml()
+        self.assertEqual(c.fecha_incidencia, '2016-07-21')
+        self.assertEqual(c.fecha_prevista_accion, '2016-07-22')
+        incidencies = c.incidencias
+        self.assertEqual(len(incidencies), 2)
+        i1 = incidencies[0]
+        i2 = incidencies[1]
+        self.assertEqual(i1.codigo_motivo, '01')
+        self.assertEqual(i1.secuencial, '1')
+        self.assertEqual(i1.comentarios, 'Com 1')
+        self.assertEqual(i2.codigo_motivo, '08')
+        self.assertEqual(i2.secuencial, '2')
+        self.assertEqual(i2.comentarios, 'Com 2')

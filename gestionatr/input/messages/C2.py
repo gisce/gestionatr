@@ -17,6 +17,7 @@ class C2(C1):
         DeadLine('08', Workdays(5), '09')
     ]
 
+    # Datos paso 01
     @property
     def datos_solicitud(self):
         tree = '{0}.DatosSolicitud'.format(self._header)
@@ -61,6 +62,36 @@ class C2(C1):
             return DocTecnica(data)
         else:
             return False
+
+    # Datos Paso 03
+    @property
+    def fecha_prevista_accion(self):
+        tree = '{0}.FechaPrevistaAccion'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data:
+            return data.text
+        else:
+            return False
+
+    @property
+    def fecha_incidencia(self):
+        tree = '{0}.FechaIncidencia'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data:
+            return data.text
+        else:
+            return False
+
+    @property
+    def incidencias(self):
+        tree = '{0}.Incidencia'.format(self._header)
+        obj = get_rec_attr(self.obj, tree, False)
+        data = []
+        if obj:
+            for i in obj:
+                data.append(Incidencia(i))
+            return data
+        return data
 
 
 class DatosSolicitud(DatosSolicitud):
@@ -617,6 +648,39 @@ class DatosAPM(object):
         data = ''
         try:
             data = self.datos_apm.CodigoInstalador.text
+        except AttributeError:
+            pass
+        return data
+
+
+class Incidencia(object):
+
+    def __init__(self, data):
+        self.incidencia = data
+
+    @property
+    def secuencial(self):
+        data = ''
+        try:
+            data = self.incidencia.Secuencial.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def codigo_motivo(self):
+        data = ''
+        try:
+            data = self.incidencia.CodigoMotivo.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def comentarios(self):
+        data = ''
+        try:
+            data = self.incidencia.Comentarios.text
         except AttributeError:
             pass
         return data
