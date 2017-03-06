@@ -1,0 +1,34 @@
+<MensajeBajaSuspension xmlns="http://localhost/elegibilidad">
+    <Cabecera>
+        <CodigoREEEmpresaEmisora>1234</CodigoREEEmpresaEmisora>
+        <CodigoREEEmpresaDestino>4321</CodigoREEEmpresaDestino>
+        <CodigoDelProceso>B1</CodigoDelProceso>
+        <CodigoDePaso>01</CodigoDePaso>
+        <CodigoDeSolicitud>201605219497</CodigoDeSolicitud>
+        <SecuencialDeSolicitud>00</SecuencialDeSolicitud>
+        <FechaSolicitud>2016-06-08T04:24:09</FechaSolicitud>
+        <CUPS>ES0116000000011531LK0F</CUPS>
+    </Cabecera>
+    <BajaSuspension>
+        <DatosSolicitud>
+            <IndActivacion>L</IndActivacion>
+            <Motivo>03</Motivo>
+        </DatosSolicitud>
+        <Cliente>
+            <IdCliente>
+              <TipoIdentificador>NI</TipoIdentificador>
+              <Identificador>B36385870</Identificador>
+              <TipoPersona>J</TipoPersona>
+            </IdCliente>
+            <Nombre>
+              <RazonSocial>ACC Y COMP DE COCINA MILLAN Y MUÑOZ</RazonSocial>
+            </Nombre>
+            <Telefono>
+              <PrefijoPais>34</PrefijoPais>
+              <Numero>666777888</Numero>
+            </Telefono>
+            <CorreoElectronico>email@host</CorreoElectronico>
+        </Cliente>
+        <IBAN>444555666</IBAN>
+    </BajaSuspension>
+</MensajeBajaSuspension>

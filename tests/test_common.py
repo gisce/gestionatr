@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from . import unittest
 from .utils import get_data
-from gestionatr.input.messages import C1, C2, A3
+from gestionatr.input.messages import C1, C2, A3, B1
 
 
 class test_MessageBase(unittest.TestCase):
@@ -549,3 +549,29 @@ class test_A3(unittest.TestCase):
         # Comentarios
         self.assertEqual(a3.comentarios, 'Comentario')
         self.assertFalse(a3.registros_documento)
+
+
+class test_B1(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_b101 = open(get_data("b101.xml"), "r")
+
+    def tearDown(self):
+        self.xml_b101.close()
+
+    def test_b101(self):
+        b1 = B1(self.xml_b101)
+        b1.parse_xml()
+        self.assertEqual(b1.datos_solicitud.ind_activacion, 'L')
+        self.assertEqual(b1.datos_solicitud.motivo, '03')
+        cliente = b1.cliente
+        self.assertEqual(cliente.correo_electronico, 'email@host')
+        self.assertEqual(cliente.identificador, 'B36385870')
+        self.assertEqual(cliente.nombre, 'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
+        self.assertEqual(cliente.razon_social, 'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
+        self.assertEqual(cliente.telfono_numero, '666777888')
+        self.assertEqual(cliente.telfono_prefijo_pais, '34')
+        self.assertEqual(cliente.tipo_identificador, 'NI')
+        self.assertEqual(cliente.tipo_persona, 'J')
+        self.assertEqual(b1.iban, '444555666')
+        self.assertFalse(b1.comentarios)
