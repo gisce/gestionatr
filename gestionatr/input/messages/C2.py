@@ -150,7 +150,10 @@ class Contrato(Contrato):
         try:
             data = self.contrato.PeriodicidadFacturacion.text
         except AttributeError:
-            pass
+            try:
+                data = self.contrato.CondicionesContractuales.PeriodicidadFacturacion.text
+            except:
+                pass
         return data
 
 
