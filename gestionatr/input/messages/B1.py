@@ -83,6 +83,17 @@ class B1(C2):
         else:
             return False
 
+    # Datos paso 05
+    @property
+    def datos_activacion_baja(self):
+        tree = '{0}.DatosActivacionBaja'.format(self._header)
+        sol = get_rec_attr(self.obj, tree, False)
+        if sol:
+            return DatosActivacionBaja(sol)
+        else:
+            return False
+
+
 
 class DatosSolicitud(DatosSolicitud):
 
@@ -121,6 +132,21 @@ class DatosAceptacion(DatosAceptacion):
         data = ''
         try:
             data = self.datos_aceptacion.FechaActivacionPrevista.text
+        except AttributeError:
+            pass
+        return data
+
+
+class DatosActivacionBaja(object):
+
+    def __init__(self, data):
+        self.datos_activacion_baja = data
+
+    @property
+    def fecha_activacion(self):
+        data = ''
+        try:
+            data = self.datos_activacion_baja.FechaActivacion.text
         except AttributeError:
             pass
         return data

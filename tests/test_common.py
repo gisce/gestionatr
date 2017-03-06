@@ -557,11 +557,13 @@ class test_B1(unittest.TestCase):
         self.xml_b101 = open(get_data("b101.xml"), "r")
         self.xml_b102_accept = open(get_data("b102_accept.xml"), "r")
         self.xml_b104_accept = open(get_data("b104_accept.xml"), "r")
+        self.xml_b105 = open(get_data("b105.xml"), "r")
 
     def tearDown(self):
         self.xml_b101.close()
         self.xml_b102_accept.close()
         self.xml_b104_accept.close()
+        self.xml_b105.close()
 
     def test_b101(self):
         b1 = B1(self.xml_b101)
@@ -595,3 +597,68 @@ class test_B1(unittest.TestCase):
         b1.parse_xml()
         self.assertEqual(b1.fecha_aceptacion, '2017-02-02')
         self.assertEqual(b1.hora_aceptacion, '20:05:10')
+
+    def test_b105(self):
+        b1 = B1(self.xml_b105)
+        b1.parse_xml()
+        # Datos Activacion Baja
+        self.assertEqual(b1.datos_activacion_baja.fecha_activacion, '2016-08-21')
+        # Contrato
+        self.assertEqual(b1.contrato.cod_contrato, '00001')
+        # Puntos Medida
+        self.assertEqual(len(b1.puntos_medida), 1)
+        pm = b1.puntos_medida[0]
+        self.assertEqual(pm.cod_pm, 'ES1234000000000001JN0F')
+        self.assertEqual(pm.tipo_movimiento, 'A')
+        self.assertEqual(pm.tipo_pm, '03')
+        self.assertEqual(pm.cod_pm_principal, 'ES1234000000000002JN0F')
+        self.assertEqual(pm.modo_lectura, '1')
+        self.assertEqual(pm.funcion, 'P')
+        self.assertEqual(pm.direccion_enlace, '39522')
+        self.assertEqual(pm.direccion_punto_medida, '000000001')
+        self.assertEqual(pm.num_linea, '12')
+        self.assertEqual(pm.telefono_telemedida, '987654321')
+        self.assertEqual(pm.estado_telefono, '1')
+        self.assertEqual(pm.clave_acceso, '0000000007')
+        self.assertEqual(pm.tension_pm, '0')
+        self.assertEqual(pm.fecha_vigor, '2003-01-01')
+        self.assertEqual(pm.fecha_alta, '2003-01-01')
+        self.assertEqual(pm.fecha_baja, '2003-02-01')
+        self.assertEqual(pm.comentarios, 'Comentarios Varios')
+        # Aparatos
+        self.assertEqual(len(pm.aparatos), 1)
+        ap = pm.aparatos[0]
+        self.assertEqual(ap.cod_precinto, '02')
+        self.assertEqual(ap.constante_energia, '1.000')
+        self.assertEqual(ap.constante_maximetro, '1.000')
+        self.assertEqual(ap.funcion_aparato, 'M')
+        self.assertEqual(ap.lectura_directa, 'N')
+        self.assertEqual(ap.marca_aparato, '132')
+        self.assertEqual(ap.modelo_marca, '011')
+        self.assertEqual(ap.modo_medida_potencia, '1')
+        self.assertEqual(ap.num_integradores, '18')
+        self.assertEqual(ap.numero_serie, '0000539522')
+        self.assertEqual(ap.periodo_fabricacion, '2005')
+        self.assertEqual(ap.propietario, 'Desc. Propietario')
+        self.assertEqual(ap.ruedas_decimales, '02')
+        self.assertEqual(ap.ruedas_enteras, '08')
+        self.assertEqual(ap.tipo_aparato, 'CG')
+        self.assertEqual(ap.tipo_dhedm, '6')
+        self.assertEqual(ap.tipo_equipo_medida, 'L03')
+        self.assertEqual(ap.tipo_movimiento, 'CX')
+        self.assertEqual(ap.tipo_propiedad_aparato, '1')
+        # Medidas
+        self.assertEqual(len(pm.medidas), 2)
+        md = pm.medidas[0]
+        self.assertEqual(md.anomalia, '01')
+        self.assertEqual(md.comentarios, 'Comentario sobre anomalia')
+        self.assertEqual(md.fecha_lectura_firme, '2003-01-02')
+        self.assertEqual(md.magnitud_medida, 'PM')
+        self.assertEqual(md.periodo, '65')
+        self.assertEqual(md.procedencia, '30')
+        self.assertEqual(md.tipo_dhedm, '6')
+        self.assertEqual(md.ultima_lectura_firme, '6.00')
+        md2 = pm.medidas[1]
+        self.assertFalse(md2.anomalia)
+        self.assertFalse(md2.comentarios)
+        self.assertEqual(md2.fecha_lectura_firme, '2003-01-03')
