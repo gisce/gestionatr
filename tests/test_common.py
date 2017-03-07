@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from . import unittest
 from .utils import get_data
-from gestionatr.input.messages import C1, C2, A3, B1
+from gestionatr.input.messages import C1, C2, A3, B1, M1
 
 
 class test_MessageBase(unittest.TestCase):
@@ -662,3 +662,61 @@ class test_B1(unittest.TestCase):
         self.assertFalse(md2.anomalia)
         self.assertFalse(md2.comentarios)
         self.assertEqual(md2.fecha_lectura_firme, '2003-01-03')
+
+
+class test_M1(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_m101 = open(get_data("m101.xml"), "r")
+
+    def tearDown(self):
+        self.xml_m101.close()
+
+    def test_m101(self):
+        m1 = M1(self.xml_m101)
+        m1.parse_xml()
+        # Datos Solicitud
+        self.assertEqual(m1.datos_solicitud.cnae, '2222')
+        self.assertEqual(m1.datos_solicitud.fecha_prevista_accion, '2016-06-06')
+        self.assertEqual(m1.datos_solicitud.ind_activacion, 'L')
+        self.assertEqual(m1.datos_solicitud.tipo_modificacion, 'S')
+        self.assertEqual(m1.datos_solicitud.tipo_solicitud_administrativa, 'S')
+        self.assertEqual(m1.datos_solicitud.periodicidad_facturacion, '01')
+        # Contrato
+        contrato = m1.contrato
+        contacto = contrato.contacto
+        self.assertEqual(contacto.persona_de_contacto, 'Nombre Inventado')
+        self.assertEqual(contacto.telfono_numero, '666777888')
+        self.assertEqual(contacto.telfono_prefijo_pais, '34')
+        self.assertEqual(contrato.fecha_finalizacion, '2018-01-01')
+        self.assertEqual(contrato.modo_control_potencia, '1')
+        pots = contrato.potencias_contratadas
+        self.assertEqual(len(pots), 2)
+        self.assertEqual(pots[0], '1000')
+        self.assertEqual(pots[1], '2000')
+        self.assertEqual(contrato.tarifa_atr, '003')
+        self.assertEqual(contrato.tipo_autoconsumo, '00')
+        self.assertEqual(contrato.tipo_contrato_atr, '02')
+        # Cliente
+        cliente = m1.cliente
+        self.assertEqual(cliente.correo_electronico, 'email@host')
+        self.assertEqual(cliente.identificador, 'B36385870')
+        self.assertEqual(cliente.indicador_tipo_direccion, 'S')
+        self.assertEqual(cliente.nombre, 'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
+        self.assertEqual(cliente.razon_social,
+                         'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
+        self.assertEqual(cliente.telfono_numero, '666777888')
+        self.assertEqual(cliente.telfono_prefijo_pais, '34')
+        self.assertEqual(cliente.tipo_identificador, 'NI')
+        self.assertEqual(cliente.tipo_persona, 'J')
+        self.assertFalse(cliente.direccion)
+        # Medida
+        medida = m1.medida
+        self.assertEqual(medida.propiedad_equipo, 'C')
+        self.assertEqual(medida.tipo_equipo_medida, 'L00')
+        mod = medida.modelos_aparato
+        self.assertEqual(len(mod), 0)
+        # DocTec
+        self.assertFalse(m1.doc_tecnica)
+        # Comentarios
+        self.assertFalse(m1.comentarios)
