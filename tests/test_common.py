@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from . import unittest
 from .utils import get_data
-from gestionatr.input.messages import C1, C2, A3, B1, M1, D1, W1
+from gestionatr.input.messages import C1, C2, A3, B1, M1, D1, W1, Q1, R1
 
 
 class test_MessageBase(unittest.TestCase):
@@ -742,9 +742,13 @@ class test_W1(unittest.TestCase):
 
     def setUp(self):
         self.xml_w101 = open(get_data("w101.xml"), "r")
+        self.xml_w102_accept = open(get_data("w102_accept.xml"), "r")
+        self.xml_w102_reject = open(get_data("w102_reject.xml"), "r")
 
     def tearDown(self):
         self.xml_w101.close()
+        self.xml_w102_accept.close()
+        self.xml_w102_reject.close()
 
     def test_w101(self):
         w1 = W1(self.xml_w101)
@@ -763,3 +767,143 @@ class test_W1(unittest.TestCase):
         self.assertEqual(l1.integrador, 'AE')
         self.assertEqual(l1.tipo_codigo_periodo_dh, '22')
         self.assertEqual(l1.lectura_propuesta, '0000003106.00')
+
+
+class test_Q1(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_q101 = open(get_data("q101.xml"), "r")
+
+    def tearDown(self):
+        self.xml_q101.close()
+
+    def test_w101(self):
+        q1 = Q1(self.xml_q101)
+        q1.parse_xml()
+        self.assertEqual(q1.cod_pm, '1112223334445556667779')
+        models = q1.modelos_aparato
+        self.assertEqual(len(models), 2)
+        self.assertEqual(models[1].tipo_aparato, 'CG')
+        self.assertEqual(models[1].marca_aparato, '136')
+        self.assertEqual(models[1].numero_serie, '012')
+        self.assertEqual(models[1].tipo_dhedm, '3')
+        self.assertEqual(len(models[0].integradores), 1)
+        self.assertEqual(len(models[1].integradores), 2)
+        int2 = models[1].integradores[1]
+        self.assertEqual(int2.codigo_periodo, '30')
+        self.assertEqual(int2.constante_multiplicadora, '1')
+        self.assertEqual(int2.consumo_calculado, '5000')
+        self.assertEqual(int2.fecha_hora_maximetro, '2014-05-18T22:13:37')
+        self.assertEqual(int2.magnitud, 'R3')
+        self.assertEqual(int2.numero_ruedas_decimales, '20')
+        self.assertEqual(int2.numero_ruedas_enteras, '10')
+        ld = int2.lectura_desde
+        self.assertEqual(ld.fecha, '2014-04-18')
+        self.assertEqual(ld.lectura, '500')
+        self.assertEqual(ld.procedencia, '30')
+        lh = int2.lectura_hasta
+        self.assertEqual(lh.fecha, '2014-05-18')
+        self.assertEqual(lh.lectura, '1500')
+        self.assertEqual(lh.procedencia, '40')
+        ajuste = int2.ajuste
+        self.assertEqual(ajuste.ajuste_por_integrador, '1500')
+        self.assertEqual(ajuste.codigo_motivo_ajuste, '01')
+        self.assertEqual(ajuste.comentarios, 'Comentario Ajuste')
+        anomalia = int2.anomalia
+        self.assertEqual(anomalia.comentarios, 'Comentarios Anomalia')
+        self.assertEqual(anomalia.tipo_anomalia, '05')
+
+
+class test_R1(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_r101 = open(get_data("r101.xml"), "r")
+
+    def tearDown(self):
+        self.xml_r101.close()
+
+    def test_r101(self):
+        r1 = R1(self.xml_r101)
+        r1.parse_xml()
+        # Datos Solicitud
+        self.assertEqual(r1.datos_solicitud.fecha_limite, '2016-02-22')
+        self.assertEqual(r1.datos_solicitud.prioritario, 'S')
+        self.assertEqual(r1.datos_solicitud.referencia_origen, '01')
+        self.assertEqual(r1.datos_solicitud.subtipo, '003')
+        self.assertEqual(r1.datos_solicitud.tipo, '02')
+        # Variables Detalle Reclamacion
+        vars = r1.variables_detalle_reclamacion
+        self.assertEqual(len(vars), 2)
+        var1 = vars[0]
+        var2 = vars[1]
+        self.assertEqual(var2.num_expediente_acometida, '22222')
+        self.assertEqual(var1.codigo_incidencia, '01')
+        self.assertEqual(var1.codigo_solicitud, '33333')
+        self.assertEqual(var1.codigo_solicitud_reclamacion, '11111')
+        self.assertEqual(var1.concepto_disconformidad, '100')
+        self.assertEqual(var1.fecha_desde, '2017-02-05')
+        self.assertEqual(var1.fecha_hasta, '2017-04-05')
+        self.assertEqual(var1.fecha_incidente, '2016-02-10')
+        self.assertEqual(var1.fecha_lectura, '2016-01-20')
+        self.assertEqual(var1.iban, '4444222211113333')
+        self.assertEqual(var1.importe_reclamado, '5000')
+        self.assertEqual(var1.num_expediente_acometida, '11111')
+        self.assertEqual(var1.num_expediente_fraude, '22222')
+        self.assertEqual(var1.num_factura_atr, '243615')
+        self.assertEqual(var1.parametro_contratacion, '01')
+        self.assertEqual(var1.tipo_concepto_facturado, '01')
+        self.assertEqual(var1.tipo_de_atencion_incorrecta, '05')
+        self.assertEqual(var1.tipo_dhedm, '1')
+        ubi = var1.ubicacion_incidencia
+        self.assertEqual(ubi.cod_postal, '17001')
+        self.assertEqual(ubi.municipio, '17079')
+        self.assertEqual(ubi.poblacion, '17079')
+        self.assertEqual(ubi.provincia, '17')
+        cont = var1.contacto
+        self.assertEqual(cont.correo_electronico, 'perico@acme.com')
+        self.assertEqual(cont.persona_de_contacto, 'Perico Palotes Largos')
+        self.assertEqual(cont.telfono_numero, '55512345')
+        self.assertEqual(cont.telfono_prefijo_pais, '34')
+        self.assertEqual(len(var1.lecturas_aportadas), 2)
+        lect1 = var1.lecturas_aportadas[0]
+        self.assertEqual(lect1.codigo_periodo_dh, '21')
+        self.assertEqual(lect1.integrador, 'AE')
+        self.assertEqual(lect1.lectura_propuesta, '0000001162.00')
+        # Cliente
+        cli = r1.cliente
+        self.assertEqual(cli.correo_electronico, 'email@host')
+        self.assertEqual(cli.identificador, 'B36385870')
+        self.assertEqual(cli.indicador_tipo_direccion, 'F')
+        self.assertEqual(cli.razon_social, 'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
+        self.assertEqual(cli.segundo_apellido, '')
+        self.assertEqual(cli.telfono_numero, '666777888')
+        self.assertEqual(cli.telfono_prefijo_pais, '34')
+        self.assertEqual(cli.tipo_identificador, 'NI')
+        self.assertEqual(cli.tipo_persona, 'J')
+        direccion = cli.direccion
+        self.assertEqual(direccion.aclarador_finca, 'Bloque de Pisos')
+        self.assertEqual(direccion.calle, 'MELA MUTERMILCH')
+        self.assertEqual(direccion.cod_postal, '17001')
+        self.assertEqual(direccion.duplicador_finca, '')
+        self.assertEqual(direccion.escalera, '')
+        self.assertEqual(direccion.municipio, '17079')
+        self.assertEqual(direccion.numero_finca, '2')
+        self.assertEqual(direccion.pais, 'España')
+        self.assertEqual(direccion.piso, '001')
+        self.assertEqual(direccion.poblacion, '17079')
+        self.assertEqual(direccion.provincia, '17')
+        self.assertEqual(direccion.puerta, '001')
+        self.assertEqual(direccion.tipo_aclarador_finca, 'BI')
+        self.assertEqual(direccion.tipo_via, 'PZ')
+        # Reclamante
+        self.assertEqual(r1.tipo_reclamante, '01')
+        rec = r1.reclamante
+        self.assertEqual(rec.correo_electronico, 'email@host')
+        self.assertEqual(rec.identificador, 'B36385870')
+        self.assertEqual(rec.razon_social, 'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
+        self.assertEqual(rec.segundo_apellido, '')
+        self.assertEqual(rec.telfono_numero, '666777888')
+        self.assertEqual(rec.telfono_prefijo_pais, '34')
+        self.assertEqual(rec.tipo_identificador, 'NI')
+        # Comentarios
+        self.assertEqual(r1.comentarios, 'no calcula sus consumos desea revisio y facturas')
