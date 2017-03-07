@@ -1,0 +1,17 @@
+<MensajeNotificacionCambiosATRDesdeDistribuidor xmlns="http://localhost/elegibilidad">
+    <Cabecera>
+        <CodigoREEEmpresaEmisora>1234</CodigoREEEmpresaEmisora>
+        <CodigoREEEmpresaDestino>4321</CodigoREEEmpresaDestino>
+        <CodigoDelProceso>D1</CodigoDelProceso>
+        <CodigoDePaso>01</CodigoDePaso>
+        <CodigoDeSolicitud>201605219497</CodigoDeSolicitud>
+        <SecuencialDeSolicitud>00</SecuencialDeSolicitud>
+        <FechaSolicitud>2016-06-08T04:24:09</FechaSolicitud>
+        <CUPS>ES0116000000011531LK0F</CUPS>
+    </Cabecera>
+    <NotificacionCambiosATRDesdeDistribuidor>
+        <MotivoCambioATRDesdeDistribuidora>01</MotivoCambioATRDesdeDistribuidora>
+        <FechaPrevistaAplicacionCambioATR>2016-06-09</FechaPrevistaAplicacionCambioATR>
+        <PeriodicidadFacturacion>01</PeriodicidadFacturacion>
+    </NotificacionCambiosATRDesdeDistribuidor>
+</MensajeNotificacionCambiosATRDesdeDistribuidor>

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from . import unittest
 from .utils import get_data
-from gestionatr.input.messages import C1, C2, A3, B1, M1
+from gestionatr.input.messages import C1, C2, A3, B1, M1, D1
 
 
 class test_MessageBase(unittest.TestCase):
@@ -720,3 +720,19 @@ class test_M1(unittest.TestCase):
         self.assertFalse(m1.doc_tecnica)
         # Comentarios
         self.assertFalse(m1.comentarios)
+
+
+class test_D1(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_d101 = open(get_data("d101.xml"), "r")
+
+    def tearDown(self):
+        self.xml_d101.close()
+
+    def test_d101(self):
+        d1 = D1(self.xml_d101)
+        d1.parse_xml()
+        self.assertEqual(d1.periodicidad_facturacion, '01')
+        self.assertEqual(d1.fecha_prevista_aplicacion_cambio_atr, '2016-06-09')
+        self.assertEqual(d1.motivo_cambio_atr_desde_distribuidora, '01')
