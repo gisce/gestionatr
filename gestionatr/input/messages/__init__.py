@@ -6,3 +6,4 @@ from A3 import A3
 from B1 import B1
 from M1 import M1
 from D1 import D1
+from W1 import W1

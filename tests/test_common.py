@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from . import unittest
 from .utils import get_data
-from gestionatr.input.messages import C1, C2, A3, B1, M1, D1
+from gestionatr.input.messages import C1, C2, A3, B1, M1, D1, W1
 
 
 class test_MessageBase(unittest.TestCase):
@@ -736,3 +736,30 @@ class test_D1(unittest.TestCase):
         self.assertEqual(d1.periodicidad_facturacion, '01')
         self.assertEqual(d1.fecha_prevista_aplicacion_cambio_atr, '2016-06-09')
         self.assertEqual(d1.motivo_cambio_atr_desde_distribuidora, '01')
+
+
+class test_W1(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_w101 = open(get_data("w101.xml"), "r")
+
+    def tearDown(self):
+        self.xml_w101.close()
+
+    def test_w101(self):
+        w1 = W1(self.xml_w101)
+        w1.parse_xml()
+        datos = w1.datos_solicitud_aportacion_lectura
+        self.assertEqual(datos.fecha_lectura, '2015-02-18')
+        self.assertEqual(datos.tipo_dhedm, '2')
+        # Lecturas
+        lecturas = w1.lecturas_aportadas
+        self.assertEqual(len(lecturas), 2)
+        l0 = lecturas[0]
+        l1 = lecturas[1]
+        self.assertEqual(l0.integrador, 'AE')
+        self.assertEqual(l0.tipo_codigo_periodo_dh, '21')
+        self.assertEqual(l0.lectura_propuesta, '0000001162.00')
+        self.assertEqual(l1.integrador, 'AE')
+        self.assertEqual(l1.tipo_codigo_periodo_dh, '22')
+        self.assertEqual(l1.lectura_propuesta, '0000003106.00')
