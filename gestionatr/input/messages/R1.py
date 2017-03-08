@@ -422,6 +422,15 @@ class UbicacionIncidencia(object):
         self.ubicacion = data
 
     @property
+    def des_ubicacion_incidencia(self):
+        data = ''
+        try:
+            data = self.ubicacion.DesUbicacionIncidencia.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
     def provincia(self):
         data = ''
         try:

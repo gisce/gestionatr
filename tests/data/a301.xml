@@ -28,6 +28,7 @@
                 </PotenciasContratadas>
                 <ModoControlPotencia>1</ModoControlPotencia>
             </CondicionesContractuales>
+            <ConsumoAnualEstimado>5000</ConsumoAnualEstimado>
             <Contacto>
                 <PersonaDeContacto>Nombre Inventado</PersonaDeContacto>
                 <Telefono>

@@ -278,7 +278,6 @@
 			<xs:enumeration value="C6"/>
 			<xs:enumeration value="C7"/>
 			<xs:enumeration value="C8"/>
-			<xs:enumeration value="C9"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="CodPM">
@@ -427,6 +426,13 @@
 		<xs:restriction base="xs:decimal">
 			<xs:totalDigits value="9"/>
 			<xs:fractionDigits value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Decimal11V2">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="13"/>
+			<xs:fractionDigits value="2"/>
+			<xs:minInclusive value="0"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Decimal7">
@@ -1275,7 +1281,7 @@
 			<xs:documentation>Escalera (tabla 13) </xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
-			<xs:pattern value="CTR|DCH|EST|EXT|INT|IZQ|NOR|OES"/>
+			<xs:pattern value="CTR|DCH|EST|EXT|INT|IZQ|NOR|OES|SUR"/>
 			<xs:pattern value="[0-9]{3}"/>
 		</xs:restriction>
 	</xs:simpleType>
@@ -1471,7 +1477,7 @@
 			2 - Maximetro
 			</xs:documentation>
 		</xs:annotation>
-		<xs:restriction base="xs:integer">
+		<xs:restriction base="xs:string">
 			<xs:enumeration value="1"/>
 			<xs:enumeration value="2"/>
 		</xs:restriction>
@@ -2894,6 +2900,12 @@ la reclamacion
 		<xs:restriction base="xs:string">
 			<xs:minLength value="1"/>
 			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="X150">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="150"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="X12">

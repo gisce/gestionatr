@@ -110,15 +110,6 @@ class DatosSolicitud(DatosSolicitud):
 class DatosAceptacion(DatosAceptacion):
 
     @property
-    def fecha_ultima_lectura(self):
-        data = ''
-        try:
-            data = self.datos_aceptacion.FechaUltimaLectura.text
-        except AttributeError:
-            pass
-        return data
-
-    @property
     def tipo_activacion_prevista(self):
         data = ''
         try:

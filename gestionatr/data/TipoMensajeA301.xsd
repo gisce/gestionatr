@@ -52,6 +52,13 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="CondicionesContractuales" type="CondicionesContractuales"/>
+			<xs:element name="ConsumoAnualEstimado" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="Decimal11V2">
+						<xs:minInclusive value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
 			<xs:element name="Contacto" type="Contacto"/>
 		</xs:sequence>
 	</xs:complexType>

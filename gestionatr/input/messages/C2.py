@@ -156,6 +156,15 @@ class Contrato(Contrato):
                 pass
         return data
 
+    @property
+    def consumo_anual_estimado(self):
+        data = ''
+        try:
+            data = self.contrato.ConsumoAnualEstimado.text
+        except AttributeError:
+            pass
+        return data
+
 
 class Contacto(object):
 

@@ -289,6 +289,13 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="CondicionesContractuales" type="CondicionesContractuales"/>
+			<xs:element name="ConsumoAnualEstimado" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="Decimal11V2">
+						<xs:minInclusive value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
 			<xs:element name="Contacto" type="Contacto" minOccurs="0"/>
 		</xs:sequence>
 		<!-- del tipo C -->
@@ -355,7 +362,7 @@
 		<xs:sequence>
 			<xs:element name="PersonaDeContacto">
 				<xs:simpleType>
-					<xs:restriction base="X100">
+					<xs:restriction base="X150">
 						<xs:whiteSpace value="collapse"/>
 					</xs:restriction>
 				</xs:simpleType>
@@ -365,15 +372,9 @@
 	</xs:complexType>
 	<xs:complexType name="Contactoconemail">
 		<xs:sequence>
-			<xs:element name="PersonaDeContacto">
-				<xs:simpleType>
-					<xs:restriction base="X100">
-						<xs:whiteSpace value="collapse"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:element>
+			<xs:element name="PersonaDeContacto" type="X150"/>
 			<xs:element name="Telefono" type="TelefonoInternacional"/>
-			<xs:element name="CorreoElectronico">
+			<xs:element name="CorreoElectronico" minOccurs="0">
 				<xs:simpleType>
 					<xs:restriction base="X60">
 						<xs:whiteSpace value="collapse"/>
@@ -386,13 +387,13 @@
 		<xs:sequence>
 			<xs:element name="PersonaDeContacto">
 				<xs:simpleType>
-					<xs:restriction base="X100">
+					<xs:restriction base="X150">
 						<xs:whiteSpace value="collapse"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
 			<xs:element name="Telefono" type="TelefonoInternacional"/>
-			<xs:element name="CorreoElectronico">
+			<xs:element name="CorreoElectronico" minOccurs="0">
 				<xs:simpleType>
 					<xs:restriction base="X60">
 						<xs:whiteSpace value="collapse"/>
@@ -1100,6 +1101,7 @@
 	</xs:complexType>
 	<xs:complexType name="UbicacionIncidencia">
 		<xs:sequence>
+			<xs:element name="DesUbicacionIncidencia" type="X45"/>
 			<xs:element name="Provincia">
 				<xs:simpleType>
 					<xs:restriction base="X2">

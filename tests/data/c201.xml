@@ -32,6 +32,7 @@
                 <ModoControlPotencia>1</ModoControlPotencia>
             </CondicionesContractuales>
             <PeriodicidadFacturacion>01</PeriodicidadFacturacion>
+            <ConsumoAnualEstimado>5000</ConsumoAnualEstimado>
             <Contacto>
                 <PersonaDeContacto>Nombre Inventado</PersonaDeContacto>
                 <Telefono>

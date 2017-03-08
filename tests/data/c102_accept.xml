@@ -14,6 +14,7 @@
   <AceptacionCambiodeComercializadorSinCambios>
     <DatosAceptacion>
       <FechaAceptacion>2016-06-06</FechaAceptacion>
+      <ActuacionCampo>S</ActuacionCampo>
       <FechaUltimaLecturaFirme>2016-06-01</FechaUltimaLecturaFirme>
     </DatosAceptacion>
     <Contrato>

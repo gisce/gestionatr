@@ -113,6 +113,7 @@ class test_C1(unittest.TestCase):
         # Datos Aceptacion
         self.assertEqual(c.datos_aceptacion.fecha_aceptacion, '2016-06-06')
         self.assertEqual(c.datos_aceptacion.fecha_ultima_lectura_firme, '2016-06-01')
+        self.assertEqual(c.datos_aceptacion.actuacion_campo, 'S')
         # Contrato
         self.assertEqual(c.contrato.tipo_contrato_atr, '02')
         self.assertEqual(c.contrato.tipo_activacion_prevista, 'C0')
@@ -351,6 +352,7 @@ class test_C2(unittest.TestCase):
         self.assertEqual(contrato.fecha_finalizacion, '2018-01-01')
         self.assertEqual(contrato.modo_control_potencia, '1')
         self.assertEqual(contrato.periodicidad_facturacion, '01')
+        self.assertEqual(contrato.consumo_anual_estimado, '5000')
         pots = contrato.potencias_contratadas
         self.assertEqual(len(pots), 2)
         self.assertEqual(pots[0], '1000')
@@ -491,6 +493,7 @@ class test_A3(unittest.TestCase):
         self.assertEqual(contrato.tarifa_atr, '003')
         self.assertEqual(contrato.tipo_autoconsumo, '00')
         self.assertEqual(contrato.tipo_contrato_atr, '02')
+        self.assertEqual(contrato.consumo_anual_estimado, '5000')
         # Cliente
         cliente = a3.cliente
         self.assertEqual(cliente.correo_electronico, 'email@host')
@@ -590,7 +593,7 @@ class test_B1(unittest.TestCase):
         self.assertEqual(b1.datos_aceptacion.actuacion_campo, 'S')
         self.assertEqual(b1.datos_aceptacion.tipo_activacion_prevista, 'B1')
         self.assertEqual(b1.datos_aceptacion.fecha_activacion_prevista, '2016-06-08')
-        self.assertEqual(b1.datos_aceptacion.fecha_ultima_lectura, '2016-06-01')
+        self.assertEqual(b1.datos_aceptacion.fecha_ultima_lectura_firme, '2016-06-01')
 
     def test_b104_accept(self):
         b1 = B1(self.xml_b104_accept)
@@ -885,6 +888,7 @@ class test_R1(unittest.TestCase):
         self.assertEqual(var1.tipo_de_atencion_incorrecta, '05')
         self.assertEqual(var1.tipo_dhedm, '1')
         ubi = var1.ubicacion_incidencia
+        self.assertEqual(ubi.des_ubicacion_incidencia, 'Destino')
         self.assertEqual(ubi.cod_postal, '17001')
         self.assertEqual(ubi.municipio, '17079')
         self.assertEqual(ubi.poblacion, '17079')
@@ -1043,6 +1047,7 @@ class test_R1(unittest.TestCase):
         self.assertEqual(varr1.tipo_de_atencion_incorrecta, '05')
         self.assertEqual(varr1.tipo_dhedm, '1')
         ubi = varr1.ubicacion_incidencia
+        self.assertEqual(ubi.des_ubicacion_incidencia, 'Destino')
         self.assertEqual(ubi.cod_postal, '17001')
         self.assertEqual(ubi.municipio, '17079')
         self.assertEqual(ubi.poblacion, '17079')

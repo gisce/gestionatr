@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia Leon (Comision Nacional de los Mercados y la Competencia) -->
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia León (Comisión Nacional de los Mercados y la Competencia) -->
 <xs:schema xmlns="http://localhost/elegibilidad" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposComplejos.xsd"/>
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
@@ -89,6 +89,7 @@
 	<xs:complexType name="DatosAceptacionC1">
 		<xs:sequence>
 			<xs:element name="FechaAceptacion" type="xs:date"/>
+			<xs:element name="ActuacionCampo" type="Indicativo"/>
 			<xs:element name="FechaUltimaLecturaFirme" type="xs:date"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -127,7 +128,7 @@
 		<xs:sequence>
 			<xs:element name="FechaAceptacion" type="xs:date"/>
 			<xs:element name="ActuacionCampo" type="Indicativo"/>
-			<xs:element name="FechaUltimaLectura" type="xs:date"/>
+			<xs:element name="FechaUltimaLecturaFirme" type="xs:date"/>
 			<xs:element name="TipoActivacionPrevista" type="TipoActivacionPrevista">
 				<xs:annotation>
 					<xs:documentation>Tabla 55</xs:documentation>
