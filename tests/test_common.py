@@ -768,6 +768,26 @@ class test_W1(unittest.TestCase):
         self.assertEqual(l1.tipo_codigo_periodo_dh, '22')
         self.assertEqual(l1.lectura_propuesta, '0000003106.00')
 
+    # def test_w102_accept(self):
+    #     w1 = W1(self.xml_w102_accept)
+    #     w1.parse_xml()
+    #     Datos Aceptacion
+        # self.assertEqual(w1.fecha_aceptacion, '2016-06-06')
+
+    def test_w102_reject(self):
+        w1 = W1(self.xml_w102_reject)
+        w1.parse_xml()
+        self.assertEqual(w1.fecha_rechazo, '2016-07-20')
+        self.assertEqual(len(w1.registros_documento), 1)
+        doc1 = w1.registros_documento[0]
+        self.assertEqual(doc1.tipo_doc_aportado, '08')
+        self.assertEqual(doc1.direccion_url, 'http://eneracme.com/docs/NIF11111111H.pdf')
+        self.assertEqual(len(w1.rechazos), 1)
+        rej1 = w1.rechazos[0]
+        self.assertEqual(rej1.secuencial, '1')
+        self.assertEqual(rej1.codigo_motivo, '01')
+        self.assertEqual(rej1.comentarios,  'Motiu de rebuig 01: No existe Punto de Suministro asociado al CUPS')
+
 
 class test_Q1(unittest.TestCase):
 
@@ -818,9 +838,19 @@ class test_R1(unittest.TestCase):
 
     def setUp(self):
         self.xml_r101 = open(get_data("r101.xml"), "r")
+        self.xml_r102_accept = open(get_data("r102_accept.xml"), "r")
+        self.xml_r103 = open(get_data("r103.xml"), "r")
+        self.xml_r103_intervenciones = open(get_data("r103_intervenciones.xml"), "r")
+        self.xml_r104 = open(get_data("r104.xml"), "r")
+        self.xml_r105 = open(get_data("r105.xml"), "r")
 
     def tearDown(self):
         self.xml_r101.close()
+        self.xml_r102_accept.close()
+        self.xml_r103.close()
+        self.xml_r103_intervenciones.close()
+        self.xml_r104.close()
+        self.xml_r105.close()
 
     def test_r101(self):
         r1 = R1(self.xml_r101)
@@ -907,3 +937,182 @@ class test_R1(unittest.TestCase):
         self.assertEqual(rec.tipo_identificador, 'NI')
         # Comentarios
         self.assertEqual(r1.comentarios, 'no calcula sus consumos desea revisio y facturas')
+
+    def test_r102_accept(self):
+        r1 = R1(self.xml_r102_accept)
+        r1.parse_xml()
+        # Datos Aceptacion
+        self.assertEqual(r1.datos_aceptacion.fecha_aceptacion, '2016-06-06')
+        self.assertEqual(r1.datos_aceptacion.codigo_reclamacion_distribuidora, '1234')
+
+    def test_r103(self):
+        r1 = R1(self.xml_r103)
+        r1.parse_xml()
+        # Datos Informacion
+        di = r1.datos_informacion
+        self.assertEqual(di.codigo_reclamacion_distribuidora, '12345678')
+        self.assertEqual(di.num_expediente_acometida, '1111122222')
+        self.assertEqual(di.tipo_comunicacion, '01')
+        # Informacion Intermedia
+        info = r1.informacion_intermedia
+        self.assertEqual(info.desc_informacion_intermedia, 'Descripcion de la informacion intermedia aportada.')
+        self.assertEqual(len(info.intervenciones), 0)
+        # Retipificacion
+        ret = r1.retipificacion
+        self.assertEqual(ret.desc_retipificacion, 'descripcio de la retipificacio.')
+        self.assertEqual(ret.subtipo, '003')
+        self.assertEqual(ret.tipo, '02')
+        # Solicitudes Informacion Adicional
+        sol = r1.solicitudes_informacion_adicional
+        self.assertEqual(len(sol), 2)
+        sol1 = sol[0]
+        sol2 = sol[1]
+        self.assertEqual(sol1.desc_peticion_informacion, 'Descripcion de la peticion.')
+        self.assertEqual(sol1.fecha_limite_envio, '2016-07-10')
+        self.assertEqual(sol1.tipo_informacion_adicional, '01')
+        self.assertEqual(sol2.desc_peticion_informacion, 'Descripcion de la peticion.')
+        self.assertEqual(sol2.fecha_limite_envio, '2016-07-10')
+        self.assertEqual(sol2.tipo_informacion_adicional, '02')
+        sol_ret = r1.solicitud_informacion_adicional_para_retipificacion
+        self.assertEqual(sol_ret.fecha_limite_envio, '2016-08-10')
+        self.assertEqual(sol_ret.subtipo, '003')
+        self.assertEqual(sol_ret.tipo, '03')
+        # Comentarios
+        self.assertEqual(r1.comentarios, 'R1 03.')
+        # Intervenciones
+        r1_int = R1(self.xml_r103_intervenciones)
+        r1_int.parse_xml()
+        intv = r1_int.informacion_intermedia.intervenciones
+        self.assertEqual(len(intv), 2)
+        intv1 = intv[0]
+        intv2 = intv[1]
+        self.assertEqual(intv1.detalle_resultado, 'Descripcion de los resultados obtenidos.')
+        self.assertEqual(intv1.fecha, '2016-06-10')
+        self.assertEqual(intv1.hora_desde, '08:00:00')
+        self.assertEqual(intv1.hora_hasta, '09:00:00')
+        self.assertEqual(intv1.numero_visita, '10')
+        self.assertEqual(intv1.resultado, '001')
+        self.assertEqual(intv1.tipo_intervencion, '01')
+        self.assertEqual(intv2.detalle_resultado, 'Descripcion de los resultados obtenidos.')
+        self.assertEqual(intv2.fecha, '2016-06-10')
+        self.assertEqual(intv2.hora_desde, '08:00:00')
+        self.assertEqual(intv2.hora_hasta, '09:00:00')
+        self.assertEqual(intv2.numero_visita, '10')
+        self.assertEqual(intv2.resultado, '001')
+        self.assertEqual(intv2.tipo_intervencion, '02')
+
+    def test_r104(self):
+        r1 = R1(self.xml_r104)
+        r1.parse_xml()
+        # Datos Envio Informacion
+        datos_envio = r1.datos_envio_informacion
+        self.assertEqual(datos_envio.fecha_informacion, '2016-01-20')
+        self.assertEqual(datos_envio.num_expediente_acometida, '0123456789ABCD')
+        # Variables Aportacion informacion
+        varsi = r1.variables_aportacion_informacion
+        self.assertEqual(len(varsi), 2)
+        vari1 = varsi[0]
+        vari2 = varsi[1]
+        self.assertEqual(vari1.desc_peticion_informacion, 'Informacio per fer testos.')
+        self.assertEqual(vari1.tipo_informacion, '01')
+        self.assertEqual(vari1.valor, '125')
+        self.assertEqual(vari1.variable, '01')
+        self.assertFalse(vari2.desc_peticion_informacion)
+        self.assertEqual(vari2.tipo_informacion, '02')
+        self.assertFalse(vari2.valor)
+        self.assertFalse(vari2.variable)
+        # Variables Aportacion Informacion Para Retipificacion
+        varsr = r1.variables_aportacion_informacion_para_retipificacion
+        self.assertEqual(len(varsr), 1)
+        varr1 = varsr[0]
+        self.assertEqual(varr1.codigo_incidencia, '01')
+        self.assertEqual(varr1.codigo_solicitud, '33333')
+        self.assertEqual(varr1.codigo_solicitud_reclamacion, '11111')
+        self.assertEqual(varr1.concepto_disconformidad, '100')
+        self.assertEqual(varr1.fecha_desde, '2017-02-05')
+        self.assertEqual(varr1.fecha_hasta, '2017-04-05')
+        self.assertEqual(varr1.fecha_incidente, '2016-02-10')
+        self.assertEqual(varr1.fecha_lectura, '2016-01-20')
+        self.assertEqual(varr1.iban, '4444222211113333')
+        self.assertEqual(varr1.importe_reclamado, '5000')
+        self.assertEqual(varr1.num_expediente_acometida, '11111')
+        self.assertEqual(varr1.num_expediente_fraude, '22222')
+        self.assertEqual(varr1.num_factura_atr, '243615')
+        self.assertEqual(varr1.parametro_contratacion, '01')
+        self.assertEqual(varr1.tipo_concepto_facturado, '01')
+        self.assertEqual(varr1.tipo_de_atencion_incorrecta, '05')
+        self.assertEqual(varr1.tipo_dhedm, '1')
+        ubi = varr1.ubicacion_incidencia
+        self.assertEqual(ubi.cod_postal, '17001')
+        self.assertEqual(ubi.municipio, '17079')
+        self.assertEqual(ubi.poblacion, '17079')
+        self.assertEqual(ubi.provincia, '17')
+        cont = varr1.contacto
+        self.assertEqual(cont.correo_electronico, 'perico@acme.com')
+        self.assertEqual(cont.persona_de_contacto, 'Perico Palotes Largos')
+        self.assertEqual(cont.telfono_numero, '55512345')
+        self.assertEqual(cont.telfono_prefijo_pais, '34')
+        self.assertEqual(len(varr1.lecturas_aportadas), 2)
+        lect1 = varr1.lecturas_aportadas[0]
+        self.assertEqual(lect1.codigo_periodo_dh, '21')
+        self.assertEqual(lect1.integrador, 'AE')
+        self.assertEqual(lect1.lectura_propuesta, '0000001162.00')
+        # Cliente
+        cli = r1.cliente
+        self.assertEqual(cli.correo_electronico, 'email@host')
+        self.assertEqual(cli.identificador, 'B36385870')
+        self.assertEqual(cli.indicador_tipo_direccion, 'F')
+        self.assertEqual(cli.razon_social, 'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
+        self.assertEqual(cli.segundo_apellido, '')
+        self.assertEqual(cli.telfono_numero, '666777888')
+        self.assertEqual(cli.telfono_prefijo_pais, '34')
+        self.assertEqual(cli.tipo_identificador, 'NI')
+        self.assertEqual(cli.tipo_persona, 'J')
+        direccion = cli.direccion
+        self.assertEqual(direccion.aclarador_finca, 'Bloque de Pisos')
+        self.assertEqual(direccion.calle, 'MELA MUTERMILCH')
+        self.assertEqual(direccion.cod_postal, '17001')
+        self.assertEqual(direccion.duplicador_finca, '')
+        self.assertEqual(direccion.escalera, '')
+        self.assertEqual(direccion.municipio, '17079')
+        self.assertEqual(direccion.numero_finca, '2')
+        self.assertEqual(direccion.pais, 'España')
+        self.assertEqual(direccion.piso, '001')
+        self.assertEqual(direccion.poblacion, '17079')
+        self.assertEqual(direccion.provincia, '17')
+        self.assertEqual(direccion.puerta, '001')
+        self.assertEqual(direccion.tipo_aclarador_finca, 'BI')
+        self.assertEqual(direccion.tipo_via, 'PZ')
+        # Comentarios
+        self.assertEqual(r1.comentarios, 'R104 test with VariablesAportacionInformacion.')
+        # Registros Documento
+        self.assertEqual(len(r1.registros_documento), 3)
+        doc1 = r1.registros_documento[0]
+        doc2 = r1.registros_documento[1]
+        doc3 = r1.registros_documento[2]
+        self.assertEqual(doc1.tipo_doc_aportado, '01')
+        self.assertEqual(doc1.direccion_url, 'http://eneracme.com/docs/CIE0100001.pdf')
+        self.assertEqual(doc2.tipo_doc_aportado, '06')
+        self.assertEqual(doc2.direccion_url, 'http://eneracme.com/docs/INV201509161234.pdf')
+        self.assertEqual(doc3.tipo_doc_aportado, '08')
+        self.assertEqual(doc3.direccion_url, 'http://eneracme.com/docs/NIF11111111H.pdf')
+
+    def test_r105(self):
+        r1 = R1(self.xml_r105)
+        r1.parse_xml()
+        # Datos Cierre
+        dc = r1.datos_cierre
+        self.assertEqual(dc.codigo_reclamacion_distribuidora, '3291970')
+        self.assertEqual(dc.detalle_resultado, '0010101')
+        self.assertEqual(dc.fecha, '2016-04-12')
+        self.assertEqual(dc.fecha_movimiento, '2016-04-12')
+        self.assertEqual(dc.hora, '16:02:25')
+        self.assertEqual(dc.indemnizacion_abonada, '0.0')
+        self.assertEqual(dc.num_expediente_acometida, '11111')
+        self.assertEqual(dc.num_expediente_anomalia_fraude, '22222')
+        self.assertEqual(dc.observaciones, 'Observaciones generales')
+        self.assertEqual(dc.resultado_reclamacion, '02')
+        self.assertEqual(dc.subtipo, '013')
+        self.assertEqual(dc.tipo, '03')
+        # Cod Contrato
+        self.assertEqual(r1.cod_contrato, '383922379')

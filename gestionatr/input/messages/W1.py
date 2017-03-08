@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from gestionatr.utils import get_rec_attr
-from message import Message
+from C1 import C1
 from Deadlines import ProcessDeadline, DeadLine, Workdays, Naturaldays
 
 
-class W1(Message, ProcessDeadline):
+class W1(C1):
     """Classe que implementa W1."""
 
     steps = [

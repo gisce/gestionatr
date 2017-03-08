@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<MensajeCierreReclamacion xmlns="http://localhost/elegibilidad">
+    <CabeceraReclamacion>
+        <CodigoREEEmpresaEmisora>1234</CodigoREEEmpresaEmisora>
+        <CodigoREEEmpresaDestino>4321</CodigoREEEmpresaDestino>
+        <CodigoDelProceso>R1</CodigoDelProceso>
+        <CodigoDePaso>05</CodigoDePaso>
+        <CodigoDeSolicitud>201604111738</CodigoDeSolicitud>
+        <SecuencialDeSolicitud>01</SecuencialDeSolicitud>
+        <FechaSolicitud>2014-04-16T22:13:37</FechaSolicitud>
+        <CUPS>ES1234000000000001JN0F</CUPS>
+    </CabeceraReclamacion>
+    <CierreReclamacion>
+        <DatosCierre>
+            <NumExpedienteAcometida>11111</NumExpedienteAcometida>
+            <Fecha>2016-04-12</Fecha>
+            <Hora>16:02:25</Hora>
+            <Tipo>03</Tipo>
+            <Subtipo>013</Subtipo>
+            <CodigoReclamacionDistribuidora>3291970</CodigoReclamacionDistribuidora>
+            <ResultadoReclamacion>02</ResultadoReclamacion>
+            <DetalleResultado>0010101</DetalleResultado>
+            <Observaciones>Observaciones generales</Observaciones>
+            <IndemnizacionAbonada>0.0</IndemnizacionAbonada>
+            <NumExpedienteAnomaliaFraude>22222</NumExpedienteAnomaliaFraude>
+            <FechaMovimiento>2016-04-12</FechaMovimiento>
+        </DatosCierre>
+        <CodContrato>383922379</CodContrato>
+        <Comentarios>Comentarios generales</Comentarios>
+    </CierreReclamacion>
+</MensajeCierreReclamacion>
