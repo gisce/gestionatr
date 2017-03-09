@@ -4,19 +4,20 @@ from libcomxml.core import XmlModel, XmlField
 from gestionatr.output.messages.base import Cabecera
 
 
+# Paso 01
 class MensajeCambiodeComercializadorSinCambios(XmlModel):
-    _sort_order = ('missatge', 'cabecera', 'cambiode_comercializador_sin_cambios')
+    _sort_order = ('mensage', 'cabecera', 'cambiode_comercializador_sin_cambios')
 
     def __init__(self):
         self.doc_root = None
-        self.missatge = XmlField(
+        self.mensage = XmlField(
             'MensajeCambiodeComercializadorSinCambios',
             attributes={'xmlns': 'http://localhost/elegibilidad'}
         )
         self.cabecera = Cabecera()
         self.cambiode_comercializador_sin_cambios = CambiodeComercializadorSinCambios()
         super(MensajeCambiodeComercializadorSinCambios, self).__init__(
-            'MensajeCambiodeComercializadorSinCambios', 'missatge'
+            'MensajeCambiodeComercializadorSinCambios', 'mensage'
         )
 
 
@@ -114,4 +115,121 @@ class RegistroDoc(XmlModel):
         self.tipo_doc_aportado = XmlField('TipoDocAportado')
         self.direccion_url = XmlField('DireccionUrl')
         super(RegistroDoc, self).__init__('RegistroDoc', 'registro_doc')
+
+
+# Paso 02 accept
+class MensajeAceptacionCambiodeComercializadorSinCambios(XmlModel):
+
+    _sort_order = ('mensage', 'cabecera', 'aceptacion_cambiode_comercializador_sin_cambios')
+
+    def __init__(self):
+        self.mensage = XmlField('MensajeAceptacionCambiodeComercializadorSinCambios',
+                                attributes={'xmlns': 'http://localhost/elegibilidad'})
+        self.cabecera = Cabecera()
+        self.aceptacion_cambiode_comercializador_sin_cambios = AceptacionCambiodeComercializadorSinCambios()
+        super(MensajeAceptacionCambiodeComercializadorSinCambios, self).__init__('MensajeAceptacionCambiodeComercializadorSinCambios', 'mensage')
+
+
+class AceptacionCambiodeComercializadorSinCambios(XmlModel):
+
+    _sort_order = ('aceptacion_cambiode_comercializador_sin_cambios', 'datos_aceptacion', 'contrato')
+
+    def __init__(self):
+        self.aceptacion_cambiode_comercializador_sin_cambios = XmlField('AceptacionCambiodeComercializadorSinCambios')
+        self.datos_aceptacion = DatosAceptacion()
+        self.contrato = Contrato()
+        super(AceptacionCambiodeComercializadorSinCambios, self).__init__('AceptacionCambiodeComercializadorSinCambios', 'aceptacion_cambiode_comercializador_sin_cambios')
+
+
+class DatosAceptacion(XmlModel):
+
+    _sort_order = ('datos_aceptacion', 'fecha_aceptacion', 'actuacion_campo', 'fecha_ultima_lectura_firme')
+
+    def __init__(self):
+        self.datos_aceptacion = XmlField('DatosAceptacion')
+        self.fecha_aceptacion = XmlField('FechaAceptacion')
+        self.actuacion_campo = XmlField('ActuacionCampo')
+        self.fecha_ultima_lectura_firme = XmlField('FechaUltimaLecturaFirme')
+        super(DatosAceptacion, self).__init__('DatosAceptacion', 'datos_aceptacion')
+
+
+class Contrato(XmlModel):
+
+    _sort_order = ('contrato', 'tipo_contrato_atr', 'condiciones_contractuales', 'tipo_activacion_prevista', 'fecha_activacion_prevista')
+
+    def __init__(self):
+        self.contrato = XmlField('Contrato')
+        self.tipo_contrato_atr = XmlField('TipoContratoATR')
+        self.condiciones_contractuales = CondicionesContractuales()
+        self.tipo_activacion_prevista = XmlField('TipoActivacionPrevista')
+        self.fecha_activacion_prevista = XmlField('FechaActivacionPrevista')
+        super(Contrato, self).__init__('Contrato', 'contrato')
+
+
+class CondicionesContractuales(XmlModel):
+
+    _sort_order = ('condiciones_contractuales', 'tarifa_atr', 'potencias_contratadas', 'modo_control_potencia')
+
+    def __init__(self):
+        self.condiciones_contractuales = XmlField('CondicionesContractuales')
+        self.tarifa_atr = XmlField('TarifaATR')
+        self.potencias_contratadas = PotenciasContratadas()
+        self.modo_control_potencia = XmlField('ModoControlPotencia')
+        super(CondicionesContractuales, self).__init__('CondicionesContractuales', 'condiciones_contractuales')
+
+
+class PotenciasContratadas(XmlModel):
+    _sort_order = ('potencies', 'p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8',
+                   'p9', 'p10')
+
+    def __init__(self):
+        self.potencies = XmlField('PotenciasContratadas')
+        self.p1 = XmlField('Potencia', attributes={'Periodo': '1'}, rep=lambda x: '%d' % x)
+        self.p2 = XmlField('Potencia', attributes={'Periodo': '2'})
+        self.p3 = XmlField('Potencia', attributes={'Periodo': '3'})
+        self.p4 = XmlField('Potencia', attributes={'Periodo': '4'})
+        self.p5 = XmlField('Potencia', attributes={'Periodo': '5'})
+        self.p6 = XmlField('Potencia', attributes={'Periodo': '6'})
+        self.p7 = XmlField('Potencia', attributes={'Periodo': '7'})
+        self.p8 = XmlField('Potencia', attributes={'Periodo': '8'})
+        self.p9 = XmlField('Potencia', attributes={'Periodo': '9'})
+        self.p10 = XmlField('Potencia', attributes={'Periodo': '10'})
+        super(PotenciasContratadas, self).__init__('PotenciasContratadas', 'potencies')
+
+
+# Paso 02 reject
+class MensajeRechazo(XmlModel):
+
+    _sort_order = ('mensaje_rechazo', 'cabecera', 'rechazos')
+
+    def __init__(self):
+        self.mensaje_rechazo = XmlField('MensajeRechazo',
+                                        attributes={'xmlns': 'http://localhost/elegibilidad'})
+        self.cabecera = Cabecera()
+        self.rechazos = Rechazos()
+        super(MensajeRechazo, self).__init__('MensajeRechazo', 'mensaje_rechazo')
+
+
+class Rechazos(XmlModel):
+
+    _sort_order = ('rechazos', 'fecha_rechazo', 'rechazo_list', 'registros_documento')
+
+    def __init__(self):
+        self.rechazos = XmlField('Rechazos')
+        self.fecha_rechazo = XmlField('FechaRechazo')
+        self.rechazo_list = []
+        self.registros_documento = RegistrosDocumento()
+        super(Rechazos, self).__init__('Rechazos', 'rechazos')
+
+
+class Rechazo(XmlModel):
+
+    _sort_order = ('rechazo', 'secuencial', 'codigo_motivo', 'comentarios')
+
+    def __init__(self):
+        self.rechazo = XmlField('Rechazo')
+        self.secuencial = XmlField('Secuencial')
+        self.codigo_motivo = XmlField('CodigoMotivo')
+        self.comentarios = XmlField('Comentarios')
+        super(Rechazo, self).__init__('Rechazo', 'rechazo')
 
