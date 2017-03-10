@@ -143,11 +143,12 @@ class AceptacionCambiodeComercializadorSinCambios(XmlModel):
 
 class DatosAceptacion(XmlModel):
 
-    _sort_order = ('datos_aceptacion', 'fecha_aceptacion', 'actuacion_campo', 'fecha_ultima_lectura_firme')
+    _sort_order = ('datos_aceptacion', 'fecha_aceptacion', 'potencia_actual', 'actuacion_campo', 'fecha_ultima_lectura_firme')
 
     def __init__(self):
         self.datos_aceptacion = XmlField('DatosAceptacion')
         self.fecha_aceptacion = XmlField('FechaAceptacion')
+        self.potencia_actual = XmlField('PotenciaActual')
         self.actuacion_campo = XmlField('ActuacionCampo')
         self.fecha_ultima_lectura_firme = XmlField('FechaUltimaLecturaFirme')
         super(DatosAceptacion, self).__init__('DatosAceptacion', 'datos_aceptacion')

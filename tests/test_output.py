@@ -661,3 +661,64 @@ class test_C2(unittest.TestCase):
         xml = str(mensage)
         assertXmlEqual(xml, self.xml_c201_completo.read())
 
+    def test_create_pas02(self):
+        # MensajeAceptacionCambiodeComercializadorConCambios
+        mensaje_aceptacion_cambiode_comercializador_con_cambios = c2.MensajeAceptacionCambiodeComercializadorConCambios()
+
+        # Cabecera
+        cabecera = get_header(process='C2', step='02')
+
+        # AceptacionCambiodeComercializadorConCambios
+        aceptacion_cambiode_comercializador_con_cambios = c2.AceptacionCambiodeComercializadorConCambios()
+
+        # DatosAceptacion
+        datos_aceptacion = c2.DatosAceptacion()
+        datos_aceptacion_fields = {
+            'fecha_aceptacion': '2016-06-06',
+            'potencia_actual': '5000',
+            'actuacion_campo': 'S',
+            'fecha_ultima_lectura_firme': '2016-06-01',
+        }
+        datos_aceptacion.feed(datos_aceptacion_fields)
+
+        # Contrato
+        contrato = c2.Contrato()
+
+        # CondicionesContractuales
+        condiciones_contractuales = c2.CondicionesContractuales()
+
+        # PotenciasContratadas
+        potencias_contratadas = c2.PotenciasContratadas()
+        potencias_contratadas.feed({'p1': 1000, 'p2': 2000})
+
+        condiciones_contractuales_fields = {
+            'tarifa_atr': '003',
+            'potencias_contratadas': potencias_contratadas,
+            'modo_control_potencia': '1',
+        }
+        condiciones_contractuales.feed(condiciones_contractuales_fields)
+
+        contrato_fields = {
+            'tipo_contrato_atr': '02',
+            'condiciones_contractuales': condiciones_contractuales,
+            'tipo_activacion_prevista': 'C0',
+            'fecha_activacion_prevista': '2016-07-06',
+        }
+        contrato.feed(contrato_fields)
+
+        aceptacion_cambiode_comercializador_con_cambios_fields = {
+            'datos_aceptacion': datos_aceptacion,
+            'contrato': contrato,
+        }
+        aceptacion_cambiode_comercializador_con_cambios.feed(
+            aceptacion_cambiode_comercializador_con_cambios_fields)
+
+        mensaje_aceptacion_cambiode_comercializador_con_cambios_fields = {
+            'cabecera': cabecera,
+            'aceptacion_cambiode_comercializador_con_cambios': aceptacion_cambiode_comercializador_con_cambios,
+        }
+        mensaje_aceptacion_cambiode_comercializador_con_cambios.feed(
+            mensaje_aceptacion_cambiode_comercializador_con_cambios_fields)
+        mensaje_aceptacion_cambiode_comercializador_con_cambios.build_tree()
+        xml = str(mensaje_aceptacion_cambiode_comercializador_con_cambios)
+        assertXmlEqual(xml, self.xml_c202_accept.read())

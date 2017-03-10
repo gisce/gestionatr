@@ -49,7 +49,7 @@ class DatosSolicitud(DatosSolicitud):
 
 class Contrato(Contrato):
 
-    _sort_order = ('contrato', 'fecha_finalizacion', 'tipo_autoconsumo', 'tipo_contrato_atr', 'condiciones_contractuales', 'periodicidad_facturacion', 'consumo_anual_estimado', 'contacto')
+    _sort_order = ('contrato', 'id_contrato', 'fecha_finalizacion', 'tipo_autoconsumo', 'tipo_contrato_atr', 'condiciones_contractuales', 'periodicidad_facturacion', 'consumo_anual_estimado', 'contacto', 'tipo_activacion_prevista', 'fecha_activacion_prevista')
 
     def __init__(self):
         super(Contrato, self).__init__()
@@ -205,4 +205,28 @@ class DatosAPM(XmlModel):
         self.nif_instalador = XmlField('NifInstalador')
         self.codigo_instalador = XmlField('CodigoInstalador')
         super(DatosAPM, self).__init__('DatosAPM', 'datos_apm')
+
+
+# Paso 02
+class MensajeAceptacionCambiodeComercializadorConCambios(XmlModel):
+
+    _sort_order = ('mensaje', 'cabecera', 'aceptacion_cambiode_comercializador_con_cambios')
+
+    def __init__(self):
+        self.mensaje = XmlField('MensajeAceptacionCambiodeComercializadorConCambios',
+                                attributes={'xmlns': 'http://localhost/elegibilidad'})
+        self.cabecera = Cabecera()
+        self.aceptacion_cambiode_comercializador_con_cambios = AceptacionCambiodeComercializadorConCambios()
+        super(MensajeAceptacionCambiodeComercializadorConCambios, self).__init__('MensajeAceptacionCambiodeComercializadorConCambios', 'mensaje')
+
+
+class AceptacionCambiodeComercializadorConCambios(XmlModel):
+
+    _sort_order = ('aceptacion_cambiode_comercializador_con_cambios', 'datos_aceptacion', 'contrato')
+
+    def __init__(self):
+        self.aceptacion_cambiode_comercializador_con_cambios = XmlField('AceptacionCambiodeComercializadorConCambios')
+        self.datos_aceptacion = DatosAceptacion()
+        self.contrato = Contrato()
+        super(AceptacionCambiodeComercializadorConCambios, self).__init__('AceptacionCambiodeComercializadorConCambios', 'aceptacion_cambiode_comercializador_con_cambios')
 
