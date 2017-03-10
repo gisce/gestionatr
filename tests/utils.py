@@ -29,7 +29,7 @@ def get_header(process='C1', step='01', code='201607211259', date='2016-07-21T12
     return header
 
 
-def get_cliente(dir=False):
+def get_cliente(dir=False, tipo_dir=None):
     # Cliente
     cliente = c2.Cliente()
 
@@ -61,9 +61,10 @@ def get_cliente(dir=False):
     telefono.feed(telefono_fields)
 
     indicador_tipo_direccion = None
+    if tipo_dir:
+        indicador_tipo_direccion = tipo_dir
     direccion = None
     if dir:
-        indicador_tipo_direccion= 'F'
         # Direccion
         direccion = c2.Direccion()
         direccion_fields = {

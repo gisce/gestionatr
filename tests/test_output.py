@@ -5,6 +5,7 @@ from .utils import get_data, assertXmlEqual, get_header, get_cliente, get_contac
 from gestionatr.output.messages import sw_c1 as c1
 from gestionatr.output.messages import sw_c2 as c2
 from gestionatr.output.messages import sw_a3 as a3
+from gestionatr.output.messages import sw_m1 as m1
 
 
 class test_C1(unittest.TestCase):
@@ -564,7 +565,7 @@ class test_C2(unittest.TestCase):
         contrato.feed(contrato_fields)
 
         # Cliente
-        cliente = get_cliente(dir=True)
+        cliente = get_cliente(dir=True, tipo_dir='F')
 
         # Medida
         medida = get_medida()
@@ -794,7 +795,7 @@ class test_A3(unittest.TestCase):
         contrato.feed(contrato_fields)
 
         # Cliente
-        cliente = get_cliente(dir=True)
+        cliente = get_cliente(dir=True, tipo_dir='F')
 
         # Medida
         medida = get_medida()
@@ -856,3 +857,91 @@ class test_A3(unittest.TestCase):
         mensaje_alta.build_tree()
         xml = str(mensaje_alta)
         assertXmlEqual(xml, self.xml_a301.read())
+
+
+class test_M1(unittest.TestCase):
+    def setUp(self):
+        self.xml_m101 = open(get_data("m101.xml"), "r")
+
+    def tearDown(self):
+        self.xml_m101.close()
+
+    def test_create_pas01(self):
+        # MensajeModificacionDeATR
+        mensaje_modificacion_de_atr = m1.MensajeModificacionDeATR()
+
+        # Cabecera
+        cabecera = get_header(process='M1', step='01', date='2014-04-16T22:13:37', code='201412111009')
+
+        # ModificacionDeATR
+        modificacion_de_atr = m1.ModificacionDeATR()
+
+        # DatosSolicitud
+        datos_solicitud = m1.DatosSolicitud()
+        datos_solicitud_fields = {
+            'tipo_modificacion': 'S',
+            'tipo_solicitud_administrativa': 'S',
+            'periodicidad_facturacion': '01',
+            'ind_activacion': 'L',
+            'fecha_prevista_accion': '2016-06-06',
+            'cnae': '2222',
+        }
+        datos_solicitud.feed(datos_solicitud_fields)
+
+        # Contrato
+        contrato = m1.Contrato()
+
+        # CondicionesContractuales
+        condiciones_contractuales = m1.CondicionesContractuales()
+
+        # PotenciasContratadas
+        potencias_contratadas = a3.PotenciasContratadas()
+        potencias_contratadas.feed({'p1': 1000, 'p2': 2000})
+
+        condiciones_contractuales_fields = {
+            'tarifa_atr': '003',
+            'potencias_contratadas': potencias_contratadas,
+            'modo_control_potencia': '1',
+        }
+        condiciones_contractuales.feed(condiciones_contractuales_fields)
+
+
+        # Contacto
+        contacto = get_contacto(email=False)
+
+        contrato_fields = {
+            'fecha_finalizacion': '2018-01-01',
+            'tipo_autoconsumo': '00',
+            'tipo_contrato_atr': '02',
+            'condiciones_contractuales': condiciones_contractuales,
+            'contacto': contacto,
+        }
+        contrato.feed(contrato_fields)
+
+        # Cliente
+        cliente = get_cliente(dir=False, tipo_dir='S')
+
+        # Medida
+        medida = m1.Medida()
+        medida_fields = {
+            'propiedad_equipo': 'C',
+            'tipo_equipo_medida': 'L00',
+        }
+        medida.feed(medida_fields)
+
+        modificacion_de_atr_fields = {
+            'datos_solicitud': datos_solicitud,
+            'contrato': contrato,
+            'cliente': cliente,
+            'medida': medida,
+        }
+        modificacion_de_atr.feed(modificacion_de_atr_fields)
+
+        mensaje_modificacion_de_atr_fields = {
+            'cabecera': cabecera,
+            'modificacion_de_atr': modificacion_de_atr,
+        }
+        mensaje_modificacion_de_atr.feed(mensaje_modificacion_de_atr_fields)
+        mensaje_modificacion_de_atr.build_tree()
+        xml = str(mensaje_modificacion_de_atr)
+        assertXmlEqual(xml, self.xml_m101.read())
