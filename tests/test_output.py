@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from . import unittest
-from .utils import get_data, assertXmlEqual, get_header
+from .utils import get_data, assertXmlEqual, get_header, get_cliente, get_contacto
 from gestionatr.output.messages import sw_c1 as c1
+from gestionatr.output.messages import sw_c2 as c2
 
 
 class test_C1(unittest.TestCase):
@@ -38,43 +39,7 @@ class test_C1(unittest.TestCase):
         }
         self.registros_documento.feed(registros_documento_fields)
 
-        # Cliente
-        self.cliente = c1.Cliente()
-
-        # IdCliente
-        id_cliente = c1.IdCliente()
-        id_cliente_fields = {
-            'tipo_identificador': 'NI',
-            'identificador': 'B36385870',
-            'tipo_persona': 'J',
-        }
-        id_cliente.feed(id_cliente_fields)
-
-        # Nombre
-        nombre = c1.Nombre()
-        nombre_fields = {
-            'nombre_de_pila': '',
-            'primer_apellido': '',
-            'segundo_apellido': '',
-            'razon_social': 'ACC Y COMP DE COCINA MILLAN Y MUÑOZ',
-        }
-        nombre.feed(nombre_fields)
-
-        # Telefono
-        telefono = c1.Telefono()
-        telefono_fields = {
-            'prefijo_pais': '34',
-            'numero': '666777888',
-        }
-        telefono.feed(telefono_fields)
-
-        cliente_fields = {
-            'id_cliente': id_cliente,
-            'nombre': nombre,
-            'telefono': telefono,
-            'correo_electronico': 'email@host',
-        }
-        self.cliente.feed(cliente_fields)
+        self.cliente = get_cliente()
 
         # PuntosDeMedida
         self.puntos_de_medida = c1.PuntosDeMedida()
@@ -224,7 +189,6 @@ class test_C1(unittest.TestCase):
         cambiode_comercializador_sin_cambios_fields = {
             'datos_solicitud': datos_solicitud,
             'cliente': cliente,
-            'comentarios': '',
             'registros_documento': registros_documento,
         }
         cambio_comer.feed(
@@ -270,7 +234,6 @@ class test_C1(unittest.TestCase):
         condiciones_contractuales_fields = {
             'tarifa_atr': '003',
             'potencias_contratadas': potencias_contratadas,
-            'modo_control_potencia': '',
         }
         condiciones_contractuales.feed(condiciones_contractuales_fields)
 
@@ -532,3 +495,169 @@ class test_C1(unittest.TestCase):
         mensaje_rechazo_cambiode_comercializador_saliente.build_tree()
         xml = str(mensaje_rechazo_cambiode_comercializador_saliente)
         assertXmlEqual(xml, self.xml_c112.read())
+
+
+class test_C2(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_c201_completo = open(get_data("c201.xml"), "r")
+        self.xml_c202_accept = open(get_data("c202_accept.xml"), "r")
+        self.xml_c203 = open(get_data("c203.xml"), "r")
+
+    def tearDown(self):
+        self.xml_c201_completo.close()
+        self.xml_c202_accept.close()
+        self.xml_c203.close()
+
+    def test_create_pas01(self):
+        # MensajeCambiodeComercializadorConCambios
+        mensage = c2.MensajeCambiodeComercializadorConCambios()
+
+        # Cabecera
+        cabecera = get_header(process='C2', step='01', date='2014-04-16T22:13:37', code='201412111009')
+
+        # CambiodeComercializadorConCambios
+        cambiode_comercializador_con_cambios = c2.CambiodeComercializadorConCambios()
+
+        # DatosSolicitud
+        datos_solicitud = c2.DatosSolicitud()
+        datos_solicitud_fields = {
+            'tipo_modificacion': 'S',
+            'tipo_solicitud_administrativa': 'S',
+            'cnae': '2222',
+            'ind_activacion': 'L',
+            'fecha_prevista_accion': '2016-06-06',
+            'contratacion_incondicional_ps': 'S',
+        }
+        datos_solicitud.feed(datos_solicitud_fields)
+
+        # Contrato
+        contrato = c2.Contrato()
+
+        # CondicionesContractuales
+        condiciones_contractuales = c2.CondicionesContractuales()
+
+        # PotenciasContratadas
+        potencias_contratadas = c2.PotenciasContratadas()
+        potencias_contratadas.feed({'p1': 1000, 'p2': 2000})
+
+        condiciones_contractuales_fields = {
+            'tarifa_atr': '003',
+            'potencias_contratadas': potencias_contratadas,
+            'modo_control_potencia': '1',
+        }
+        condiciones_contractuales.feed(condiciones_contractuales_fields)
+
+        # Contacto
+        contacto = get_contacto()
+
+        contrato_fields = {
+            'fecha_finalizacion': '2018-01-01',
+            'tipo_autoconsumo': '00',
+            'tipo_contrato_atr': '02',
+            'condiciones_contractuales': condiciones_contractuales,
+            'periodicidad_facturacion': '01',
+            'consumo_anual_estimado': '5000',
+            'contacto': contacto,
+        }
+        contrato.feed(contrato_fields)
+
+        # Cliente
+        cliente = get_cliente(dir=True)
+
+        # Medida
+        medida = c2.Medida()
+
+        # ModelosAparato
+        md1 = c2.ModeloAparato()
+        modelo_aparato_fields = {
+            'tipo_aparato': 'CG',
+            'marca_aparato': '132',
+            'modelo_marca': '011',
+        }
+        md1.feed(modelo_aparato_fields)
+        md2 = c2.ModeloAparato()
+        modelo_aparato_fields = {
+            'tipo_aparato': 'CG',
+            'marca_aparato': '132',
+            'modelo_marca': '012',
+        }
+        md2.feed(modelo_aparato_fields)
+
+        modelos_aparato = c2.ModelosAparato()
+        modelos_aparato_fields = {
+            'modelo_aparato_list': [md1, md2],
+        }
+        modelos_aparato.feed(modelos_aparato_fields)
+
+        medida_fields = {
+            'propiedad_equipo': 'C',
+            'tipo_equipo_medida': 'L00',
+            'modelos_aparato': modelos_aparato,
+        }
+        medida.feed(medida_fields)
+
+        # DocTecnica
+        doc_tecnica = c2.DocTecnica()
+
+        # DatosCie
+        datos_cie = c2.DatosCie()
+
+        # CIEPapel
+        cie_papel = c2.CIEPapel()
+        cie_papel_fields = {
+            'codigo_cie': '1234567',
+            'potencia_inst_bt': '3500',
+            'potencia_no_interrumpible': '2000',
+            'fecha_emision_cie': '2015-06-04',
+            'fecha_caducidad_cie': '',
+            'nif_instalador': '12345678Z',
+            'tension_suministro_cie': '10',
+            'tipo_suministro': 'VI',
+        }
+        cie_papel.feed(cie_papel_fields)
+
+        datos_cie_fields = {
+            'cie_papel': cie_papel,
+            'validez_cie': 'ES',
+        }
+        datos_cie.feed(datos_cie_fields)
+
+        # DatosAPM
+        datos_apm = c2.DatosAPM()
+        datos_apm_fields = {
+            'codigo_apm': '1111111111',
+            'potencia_inst_at': '5000',
+            'fecha_emision_apm': '2015-06-04',
+            'fecha_caducidad_apm': '2016-06-04',
+            'tension_suministro_apm': '20',
+            'codigo_instalador': '0550',
+        }
+        datos_apm.feed(datos_apm_fields)
+
+        doc_tecnica_fields = {
+            'datos_cie': datos_cie,
+            'datos_apm': datos_apm,
+        }
+        doc_tecnica.feed(doc_tecnica_fields)
+
+        cambiode_comercializador_con_cambios_fields = {
+            'datos_solicitud': datos_solicitud,
+            'contrato': contrato,
+            'cliente': cliente,
+            'medida': medida,
+            'doc_tecnica': doc_tecnica,
+            'comentarios': 'Comentario',
+        }
+        cambiode_comercializador_con_cambios.feed(
+            cambiode_comercializador_con_cambios_fields)
+
+        mensaje_fields = {
+            'cabecera': cabecera,
+            'cambiode_comercializador_con_cambios': cambiode_comercializador_con_cambios,
+        }
+        mensage.feed(mensaje_fields)
+        mensage.build_tree()
+        xml = str(mensage)
+        assertXmlEqual(xml, self.xml_c201_completo.read())
+
