@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from gestionatr.output.messages.sw_c1 import *
 
 
@@ -230,3 +229,96 @@ class AceptacionCambiodeComercializadorConCambios(XmlModel):
         self.contrato = Contrato()
         super(AceptacionCambiodeComercializadorConCambios, self).__init__('AceptacionCambiodeComercializadorConCambios', 'aceptacion_cambiode_comercializador_con_cambios')
 
+
+# Paso 03
+class MensajeIncidenciasATRDistribuidor(XmlModel):
+
+    _sort_order = ('mensaje', 'cabecera', 'incidencias_atr_distribuidor')
+
+    def __init__(self):
+        self.mensaje = XmlField('MensajeIncidenciasATRDistribuidor',
+                                attributes={'xmlns': 'http://localhost/elegibilidad'})
+        self.cabecera = Cabecera()
+        self.incidencias_atr_distribuidor = IncidenciasATRDistribuidor()
+        super(MensajeIncidenciasATRDistribuidor, self).__init__('MensajeIncidenciasATRDistribuidor', 'mensaje')
+
+
+class IncidenciasATRDistribuidor(XmlModel):
+
+    _sort_order = ('incidencias_atr_distribuidor', 'fecha_incidencia', 'fecha_prevista_accion', 'incidencia_list')
+
+    def __init__(self):
+        self.incidencias_atr_distribuidor = XmlField('IncidenciasATRDistribuidor')
+        self.fecha_incidencia = XmlField('FechaIncidencia')
+        self.fecha_prevista_accion = XmlField('FechaPrevistaAccion')
+        self.incidencia_list = []
+        super(IncidenciasATRDistribuidor, self).__init__('IncidenciasATRDistribuidor', 'incidencias_atr_distribuidor')
+
+
+class Incidencia(XmlModel):
+
+    _sort_order = ('incidencia', 'secuencial', 'codigo_motivo', 'comentarios')
+
+    def __init__(self):
+        self.incidencia = XmlField('Incidencia')
+        self.secuencial = XmlField('Secuencial')
+        self.codigo_motivo = XmlField('CodigoMotivo')
+        self.comentarios = XmlField('Comentarios')
+        super(Incidencia, self).__init__('Incidencia', 'incidencia')
+
+
+# Paso 04 -> C1
+# Paso 05
+class MensajeActivacionCambiodeComercializadorConCambios(XmlModel):
+
+    _sort_order = ('mensaje', 'cabecera', 'activacion_cambiode_comercializador_con_cambios')
+
+    def __init__(self):
+        self.mensaje = XmlField('MensajeActivacionCambiodeComercializadorConCambios',
+                                attributes={'xmlns': 'http://localhost/elegibilidad'})
+        self.cabecera = Cabecera()
+        self.activacion_cambiode_comercializador_con_cambios = ActivacionCambiodeComercializadorConCambios()
+        super(MensajeActivacionCambiodeComercializadorConCambios, self).__init__('MensajeActivacionCambiodeComercializadorConCambios', 'mensaje')
+
+
+class ActivacionCambiodeComercializadorConCambios(XmlModel):
+
+    _sort_order = ('activacion_cambiode_comercializador_con_cambios', 'datos_activacion', 'contrato', 'puntos_de_medida')
+
+    def __init__(self):
+        self.activacion_cambiode_comercializador_con_cambios = XmlField('ActivacionCambiodeComercializadorConCambios')
+        self.datos_activacion = DatosActivacion()
+        self.contrato = Contrato()
+        self.puntos_de_medida = PuntosDeMedida()
+        super(ActivacionCambiodeComercializadorConCambios, self).__init__('ActivacionCambiodeComercializadorConCambios', 'activacion_cambiode_comercializador_con_cambios')
+
+
+# Paso 06
+class MensajeActivacionComercializadorSaliente(XmlModel):
+
+    _sort_order = ('mensaje', 'cabecera', 'notificacion_comercializador_saliente')
+
+    def __init__(self):
+        self.mensaje = XmlField('MensajeActivacionComercializadorSaliente',
+                                attributes={'xmlns': 'http://localhost/elegibilidad'})
+        self.cabecera = Cabecera()
+        self.notificacion_comercializador_saliente = NotificacionComercializadorSaliente()
+        super(MensajeActivacionComercializadorSaliente, self).__init__('MensajeActivacionComercializadorSaliente', 'mensaje')
+
+
+class NotificacionComercializadorSaliente(XmlModel):
+
+    _sort_order = ('notificacion_comercializador_saliente', 'datos_notificacion', 'contrato', 'puntos_de_medida')
+
+    def __init__(self):
+        self.notificacion_comercializador_saliente = XmlField('NotificacionComercializadorSaliente')
+        self.datos_notificacion = DatosNotificacion()
+        self.contrato = Contrato()
+        self.puntos_de_medida = PuntosDeMedida()
+        super(NotificacionComercializadorSaliente, self).__init__('NotificacionComercializadorSaliente', 'notificacion_comercializador_saliente')
+
+# Paso 08 -> C1 MensajeAnulacionSolicitud
+# Paso 09 -> C1 MensajeAceptacionAnulacion
+# Paso 10 -> C1 MensajeAceptacionAnulacion
+# Paso 11 -> C1 MensajeAceptacionCambiodeComercializadorSaliente
+# Paso 12 -> C1 MensajeRechazoCambiodeComercializadorSaliente

@@ -722,3 +722,43 @@ class test_C2(unittest.TestCase):
         mensaje_aceptacion_cambiode_comercializador_con_cambios.build_tree()
         xml = str(mensaje_aceptacion_cambiode_comercializador_con_cambios)
         assertXmlEqual(xml, self.xml_c202_accept.read())
+
+    def test_create_pas03(self):
+        # MensajeIncidenciasATRDistribuidor
+        mensaje = c2.MensajeIncidenciasATRDistribuidor()
+
+        # Cabecera
+        cabecera = get_header(process='C2', step='03')
+
+        # IncidenciasATRDistribuidor
+        incidencias_atr_distribuidor = c2.IncidenciasATRDistribuidor()
+        i1 = c2.Incidencia()
+        incidencia_fields = {
+            'secuencial': '1',
+            'codigo_motivo': '01',
+            'comentarios': 'Com 1',
+        }
+        i1.feed(incidencia_fields)
+        i2 = c2.Incidencia()
+        incidencia_fields = {
+            'secuencial': '2',
+            'codigo_motivo': '08',
+            'comentarios': 'Com 2',
+        }
+        i2.feed(incidencia_fields)
+
+        incidencias_atr_distribuidor_fields = {
+            'fecha_incidencia': '2016-07-21',
+            'fecha_prevista_accion': '2016-07-22',
+            'incidencia_list': [i1, i2],
+        }
+        incidencias_atr_distribuidor.feed(incidencias_atr_distribuidor_fields)
+
+        mensaje_incidencias_atr_distribuidor_fields = {
+            'cabecera': cabecera,
+            'incidencias_atr_distribuidor': incidencias_atr_distribuidor,
+        }
+        mensaje.feed(mensaje_incidencias_atr_distribuidor_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_c203.read())
