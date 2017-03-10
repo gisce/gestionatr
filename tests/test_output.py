@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from . import unittest
-from .utils import get_data, assertXmlEqual, get_header, get_cliente, get_contacto
+from .utils import get_data, assertXmlEqual, get_header, get_cliente, get_contacto, get_medida
 from gestionatr.output.messages import sw_c1 as c1
 from gestionatr.output.messages import sw_c2 as c2
+from gestionatr.output.messages import sw_a3 as a3
 
 
 class test_C1(unittest.TestCase):
@@ -566,36 +567,7 @@ class test_C2(unittest.TestCase):
         cliente = get_cliente(dir=True)
 
         # Medida
-        medida = c2.Medida()
-
-        # ModelosAparato
-        md1 = c2.ModeloAparato()
-        modelo_aparato_fields = {
-            'tipo_aparato': 'CG',
-            'marca_aparato': '132',
-            'modelo_marca': '011',
-        }
-        md1.feed(modelo_aparato_fields)
-        md2 = c2.ModeloAparato()
-        modelo_aparato_fields = {
-            'tipo_aparato': 'CG',
-            'marca_aparato': '132',
-            'modelo_marca': '012',
-        }
-        md2.feed(modelo_aparato_fields)
-
-        modelos_aparato = c2.ModelosAparato()
-        modelos_aparato_fields = {
-            'modelo_aparato_list': [md1, md2],
-        }
-        modelos_aparato.feed(modelos_aparato_fields)
-
-        medida_fields = {
-            'propiedad_equipo': 'C',
-            'tipo_equipo_medida': 'L00',
-            'modelos_aparato': modelos_aparato,
-        }
-        medida.feed(medida_fields)
+        medida = get_medida()
 
         # DocTecnica
         doc_tecnica = c2.DocTecnica()
@@ -762,3 +734,125 @@ class test_C2(unittest.TestCase):
         mensaje.build_tree()
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_c203.read())
+
+
+class test_A3(unittest.TestCase):
+    def setUp(self):
+        self.xml_a301 = open(get_data("a301.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a301.close()
+
+    def test_create_pas01(self):
+        # MensajeAlta
+        mensaje_alta = a3.MensajeAlta()
+
+        # Cabecera
+        cabecera = get_header(process='A3', step='01', date='2014-04-16T22:13:37', code='201412111009')
+
+        # Alta
+        alta = a3.Alta()
+
+        # DatosSolicitud
+        datos_solicitud = a3.DatosSolicitud()
+        datos_solicitud_fields = {
+            'cnae': '2222',
+            'ind_activacion': 'L',
+            'fecha_prevista_accion': '2016-06-06',
+        }
+        datos_solicitud.feed(datos_solicitud_fields)
+
+
+        # Contrato
+        contrato = a3.Contrato()
+
+        # CondicionesContractuales
+        condiciones_contractuales = a3.CondicionesContractuales()
+
+        # PotenciasContratadas
+        potencias_contratadas = a3.PotenciasContratadas()
+        potencias_contratadas.feed({'p1': 1000, 'p2': 2000})
+
+        condiciones_contractuales_fields = {
+            'tarifa_atr': '003',
+            'potencias_contratadas': potencias_contratadas,
+            'modo_control_potencia': '1'
+        }
+        condiciones_contractuales.feed(condiciones_contractuales_fields)
+
+        # Contacto
+        contacto = get_contacto(email=False)
+
+        contrato_fields = {
+            'fecha_finalizacion': '2018-01-01',
+            'tipo_autoconsumo': '00',
+            'tipo_contrato_atr': '02',
+            'condiciones_contractuales': condiciones_contractuales,
+            'consumo_anual_estimado': '5000',
+            'contacto': contacto,
+        }
+        contrato.feed(contrato_fields)
+
+        # Cliente
+        cliente = get_cliente(dir=True)
+
+        # Medida
+        medida = get_medida()
+
+        # DocTecnica
+        doc_tecnica = a3.DocTecnica()
+
+        # DatosCie
+        datos_cie = a3.DatosCie()
+
+        # CIEElectronico
+        cie_electronico = a3.CIEElectronico()
+        cie_electronico_fields = {
+            'codigo_cie': '1234567',
+            'sello_electronico': '11111',
+        }
+        cie_electronico.feed(cie_electronico_fields)
+
+        datos_cie_fields = {
+            'cie_electronico': cie_electronico,
+            'validez_cie': 'ES',
+        }
+        datos_cie.feed(datos_cie_fields)
+
+
+        # DatosAPM
+        datos_apm = a3.DatosAPM()
+        datos_apm_fields = {
+            'codigo_apm': '1111111111',
+            'potencia_inst_at': '5000',
+            'fecha_emision_apm': '2015-06-04',
+            'fecha_caducidad_apm': '2016-06-04',
+            'tension_suministro_apm': '20',
+            'codigo_instalador': '0550',
+        }
+        datos_apm.feed(datos_apm_fields)
+
+        doc_tecnica_fields = {
+            'datos_cie': datos_cie,
+            'datos_apm': datos_apm,
+        }
+        doc_tecnica.feed(doc_tecnica_fields)
+
+        alta_fields = {
+            'datos_solicitud': datos_solicitud,
+            'contrato': contrato,
+            'cliente': cliente,
+            'medida': medida,
+            'doc_tecnica': doc_tecnica,
+            'comentarios': 'Comentario',
+        }
+        alta.feed(alta_fields)
+
+        mensaje_alta_fields = {
+            'cabecera': cabecera,
+            'alta': alta,
+        }
+        mensaje_alta.feed(mensaje_alta_fields)
+        mensaje_alta.build_tree()
+        xml = str(mensaje_alta)
+        assertXmlEqual(xml, self.xml_a301.read())

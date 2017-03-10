@@ -94,7 +94,7 @@ def get_cliente(dir=False):
     return cliente
 
 
-def get_contacto():
+def get_contacto(email=True):
     # Contacto
     contacto = c2.Contacto()
 
@@ -105,14 +105,51 @@ def get_contacto():
         'numero': '666777888',
     }
     telefono.feed(telefono_fields)
-
+    correo = None
+    if email:
+        correo = 'email@host'
     contacto_fields = {
         'persona_de_contacto': 'Nombre Inventado',
         'telefono': telefono,
-        'correo_electronico': 'email@host',
+        'correo_electronico': correo,
     }
     contacto.feed(contacto_fields)
     return contacto
+
+
+def get_medida():
+    # Medida
+    medida = c2.Medida()
+
+    # ModelosAparato
+    md1 = c2.ModeloAparato()
+    modelo_aparato_fields = {
+        'tipo_aparato': 'CG',
+        'marca_aparato': '132',
+        'modelo_marca': '011',
+    }
+    md1.feed(modelo_aparato_fields)
+    md2 = c2.ModeloAparato()
+    modelo_aparato_fields = {
+        'tipo_aparato': 'CG',
+        'marca_aparato': '132',
+        'modelo_marca': '012',
+    }
+    md2.feed(modelo_aparato_fields)
+
+    modelos_aparato = c2.ModelosAparato()
+    modelos_aparato_fields = {
+        'modelo_aparato_list': [md1, md2],
+    }
+    modelos_aparato.feed(modelos_aparato_fields)
+
+    medida_fields = {
+        'propiedad_equipo': 'C',
+        'tipo_equipo_medida': 'L00',
+        'modelos_aparato': modelos_aparato,
+    }
+    medida.feed(medida_fields)
+    return medida
 
 
 def assertXmlEqual(got, want):
