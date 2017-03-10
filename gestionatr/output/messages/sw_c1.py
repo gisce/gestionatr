@@ -216,7 +216,7 @@ class PotenciasContratadas(XmlModel):
         super(PotenciasContratadas, self).__init__('PotenciasContratadas', 'potencies')
 
 
-# Rechazo
+# Paso 04 (Rechazo)
 class MensajeRechazo(XmlModel):
 
     _sort_order = ('mensaje_rechazo', 'cabecera', 'rechazos')
@@ -411,7 +411,7 @@ class Medida(XmlModel):
         super(Medida, self).__init__('Medida', 'medida')
 
 
-# Datos paso 06
+# Paso 06
 class MensajeActivacionComercializadorSaliente(XmlModel):
 
     _sort_order = ('mensaje', 'cabecera', 'notificacion_comercializador_saliente')
@@ -446,7 +446,19 @@ class DatosNotificacion(XmlModel):
         super(DatosNotificacion, self).__init__('DatosNotificacion', 'datos_notificacion')
 
 
-# Datos paso 09
+# Paso 08
+class MensajeAnulacionSolicitud(XmlModel):
+
+    _sort_order = ('mensaje', 'cabecera')
+
+    def __init__(self):
+        self.mensaje = XmlField('MensajeAnulacionSolicitud',
+                                attributes={'xmlns': 'http://localhost/elegibilidad'})
+        self.cabecera = Cabecera()
+        super(MensajeAnulacionSolicitud, self).__init__('MensajeAnulacionSolicitud', 'mensaje')
+
+
+# Paso 09, 10
 class MensajeAceptacionAnulacion(XmlModel):
 
     _sort_order = ('mensaje', 'cabecera', 'aceptacion_anulacion')
@@ -469,7 +481,7 @@ class AceptacionAnulacion(XmlModel):
         super(AceptacionAnulacion, self).__init__('AceptacionAnulacion', 'aceptacion_anulacion')
 
 
-# Datos paso 11
+# Paso 11
 class MensajeAceptacionCambiodeComercializadorSaliente(XmlModel):
 
     _sort_order = ('mensaje', 'cabecera', 'aceptacion_cambio_comercializador_saliente')
@@ -492,6 +504,7 @@ class AceptacionCambioComercializadorSaliente(XmlModel):
         super(AceptacionCambioComercializadorSaliente, self).__init__('AceptacionCambioComercializadorSaliente', 'aceptacion_cambio_comercializador_saliente')
 
 
+# Paso 12
 class MensajeRechazoCambiodeComercializadorSaliente(XmlModel):
 
     _sort_order = ('mensaje', 'cabecera', 'rechazo_cambio_comercializador_saliente')
