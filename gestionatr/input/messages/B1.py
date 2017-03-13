@@ -94,7 +94,6 @@ class B1(C2):
             return False
 
 
-
 class DatosSolicitud(DatosSolicitud):
 
     @property

@@ -9,6 +9,7 @@ from gestionatr.output.messages import sw_m1 as m1
 from gestionatr.output.messages import sw_d1 as d1
 from gestionatr.output.messages import sw_q1 as q1
 from gestionatr.output.messages import sw_w1 as w1
+from gestionatr.output.messages import sw_b1 as b1
 
 
 class test_C1(unittest.TestCase):
@@ -150,7 +151,6 @@ class test_C1(unittest.TestCase):
         }
         punto_de_medida.feed(punto_de_medida_fields)
 
-        puntos_de_medida = c1.PuntosDeMedida()
         puntos_de_medida_fields = {
             'punto_de_medida_list': [punto_de_medida],
         }
@@ -963,7 +963,6 @@ class test_D1(unittest.TestCase):
         mensaje = d1.MensajeNotificacionCambiosATRDesdeDistribuidor()
 
         # Cabecera
-        # Cabecera
         cabecera = d1.Cabecera()
         cabecera_fields = {
             'codigo_ree_empresa_emisora': '1234',
@@ -1299,3 +1298,275 @@ class test_W1(unittest.TestCase):
         mensaje_rechazo.build_tree()
         xml = str(mensaje_rechazo)
         assertXmlEqual(xml, self.xml_w102_reject.read())
+
+
+class test_B1(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_b101 = open(get_data("b101.xml"), "r")
+        self.xml_b102_accept = open(get_data("b102_accept.xml"), "r")
+        self.xml_b104_accept = open(get_data("b104_accept.xml"), "r")
+        self.xml_b105 = open(get_data("b105.xml"), "r")
+
+    def tearDown(self):
+        self.xml_b101.close()
+        self.xml_b102_accept.close()
+        self.xml_b104_accept.close()
+        self.xml_b105.close()
+
+    def test_create_pas01(self):
+        # MensajeBajaSuspension
+        mensaje_baja_suspension = b1.MensajeBajaSuspension()
+
+        # Cabecera
+        cabecera = d1.Cabecera()
+        cabecera_fields = {
+            'codigo_ree_empresa_emisora': '1234',
+            'codigo_ree_empresa_destino': '4321',
+            'codigo_del_proceso': 'B1',
+            'codigo_del_paso': '01',
+            'codigo_de_solicitud': '201605219497',
+            'secuencial_de_solicitud': '00',
+            'fecha': '2016-06-08T04:24:09',
+            'cups': 'ES0116000000011531LK0F',
+        }
+        cabecera.feed(cabecera_fields)
+
+        # BajaSuspension
+        baja_suspension = b1.BajaSuspension()
+
+        # DatosSolicitud
+        datos_solicitud = b1.DatosSolicitud()
+        datos_solicitud_fields = {
+            'ind_activacion': 'L',
+            'motivo': '03',
+        }
+        datos_solicitud.feed(datos_solicitud_fields)
+
+        # Cliente
+        cliente = get_cliente()
+
+        baja_suspension_fields = {
+            'datos_solicitud': datos_solicitud,
+            'cliente': cliente,
+            'iban': '444555666',
+        }
+        baja_suspension.feed(baja_suspension_fields)
+
+        mensaje_baja_suspension_fields = {
+            'cabecera': cabecera,
+            'baja_suspension': baja_suspension,
+        }
+        mensaje_baja_suspension.feed(mensaje_baja_suspension_fields)
+        mensaje_baja_suspension.build_tree()
+        xml = str(mensaje_baja_suspension)
+        assertXmlEqual(xml, self.xml_b101.read())
+
+    def test_create_pas02(self):
+        # MensajeAceptacionBajaSuspension
+        mensaje_aceptacion_baja_suspension = b1.MensajeAceptacionBajaSuspension()
+
+        # Cabecera
+        cabecera = get_header(process='B1', step='02')
+
+        # AceptacionBajaSuspension
+        aceptacion_baja_suspension = b1.AceptacionBajaSuspension()
+
+        # DatosAceptacion
+        datos_aceptacion = b1.DatosAceptacion()
+        datos_aceptacion_fields = {
+            'fecha_aceptacion': '2016-06-06',
+            'actuacion_campo': 'S',
+            'fecha_ultima_lectura_firme': '2016-06-01',
+            'tipo_activacion_prevista': 'B1',
+            'fecha_activacion_prevista': '2016-06-08',
+        }
+        datos_aceptacion.feed(datos_aceptacion_fields)
+
+        aceptacion_baja_suspension_fields = {
+            'datos_aceptacion': datos_aceptacion,
+        }
+        aceptacion_baja_suspension.feed(aceptacion_baja_suspension_fields)
+
+        mensaje_aceptacion_baja_suspension_fields = {
+            'cabecera': cabecera,
+            'aceptacion_baja_suspension': aceptacion_baja_suspension,
+        }
+        mensaje_aceptacion_baja_suspension.feed(mensaje_aceptacion_baja_suspension_fields)
+        mensaje_aceptacion_baja_suspension.build_tree()
+        xml = str(mensaje_aceptacion_baja_suspension)
+        assertXmlEqual(xml, self.xml_b102_accept.read())
+
+    def test_create_pas04(self):
+        # MensajeAceptacionAnulacionBaja
+        mensaje = b1.MensajeAceptacionAnulacionBaja()
+
+        # Cabecera
+        cabecera = get_header(process='B1', step='04')
+
+        # AceptacionAnulacion
+        aceptacion_anulacion = b1.AceptacionAnulacion()
+        aceptacion_anulacion_fields = {
+            'fecha_aceptacion': '2017-02-02',
+            'hora_aceptacion': '20:05:10',
+        }
+        aceptacion_anulacion.feed(aceptacion_anulacion_fields)
+
+        mensaje_aceptacion_anulacion_baja_fields = {
+            'cabecera': cabecera,
+            'aceptacion_anulacion': aceptacion_anulacion,
+        }
+        mensaje.feed(mensaje_aceptacion_anulacion_baja_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_b104_accept.read())
+
+    def test_create_pas05(self):
+        # MensajeActivacionBajaSuspension
+        mensaje = b1.MensajeActivacionBajaSuspension()
+
+        # Cabecera
+        cabecera = get_header(process='B1', step='05')
+
+        # ActivacionBaja
+        activacion_baja = b1.ActivacionBaja()
+
+        # DatosActivacionBaja
+        datos_activacion_baja = b1.DatosActivacionBaja()
+        datos_activacion_baja_fields = {
+            'fecha_activacion': '2016-08-21',
+        }
+        datos_activacion_baja.feed(datos_activacion_baja_fields)
+
+        # Contrato
+        contrato = b1.Contrato()
+
+        # IdContrato
+        id_contrato = b1.IdContrato()
+        id_contrato.feed({'cod_contrato': '00001'})
+        contrato.feed({'id_contrato': id_contrato})
+
+        # PuntosDeMedida
+        puntos_de_medida = c1.PuntosDeMedida()
+        # PuntoDeMedida
+        punto_de_medida = c1.PuntoDeMedida()
+        # Aparatos
+        aparatos = c1.Aparatos()
+        # Aparato
+        aparato = c1.Aparato()
+
+        # ModeloAparato
+        modelo_aparato = c1.ModeloAparato()
+        modelo_aparato_fields = {
+            'tipo_aparato': 'CG',
+            'marca_aparato': '132',
+            'modelo_marca': '011',
+        }
+        modelo_aparato.feed(modelo_aparato_fields)
+
+        # DatosAparato
+        datos_aparato = c1.DatosAparato()
+        datos_aparato_fields = {
+            'periodo_fabricacion': '2005',
+            'numero_serie': '0000539522',
+            'funcion_aparato': 'M',
+            'num_integradores': '18',
+            'constante_energia': '1.000',
+            'constante_maximetro': '1.000',
+            'ruedas_enteras': '08',
+            'ruedas_decimales': '02',
+        }
+        datos_aparato.feed(datos_aparato_fields)
+
+        aparato_fields = {
+            'modelo_aparato': modelo_aparato,
+            'tipo_movimiento': 'CX',
+            'tipo_equipo_medida': 'L03',
+            'tipo_propiedad_aparato': '1',
+            'propietario': 'Desc. Propietario',
+            'tipo_dhedm': '6',
+            'modo_medida_potencia': '1',
+            'lectura_directa': 'N',
+            'cod_precinto': '02',
+            'datos_aparato': datos_aparato,
+        }
+        aparato.feed(aparato_fields)
+        aparatos_fields = {
+            'aparato_list': [aparato],
+        }
+        aparatos.feed(aparatos_fields)
+
+        # Medidas
+        medidas = c1.Medidas()
+        # Medida 1
+        medida1 = c1.Medida()
+        medida_fields = {
+            'tipo_dhedm': '6',
+            'periodo': '65',
+            'magnitud_medida': 'PM',
+            'procedencia': '30',
+            'ultima_lectura_firme': '6.00',
+            'fecha_lectura_firme': '2003-01-02',
+            'anomalia': '01',
+            'comentarios': 'Comentario sobre anomalia',
+        }
+        medida1.feed(medida_fields)
+        # Medida 2
+        medida2 = c1.Medida()
+        medida_fields = {
+            'tipo_dhedm': '6',
+            'periodo': '66',
+            'magnitud_medida': 'PM',
+            'procedencia': '30',
+            'ultima_lectura_firme': '6.00',
+            'fecha_lectura_firme': '2003-01-03',
+        }
+        medida2.feed(medida_fields)
+        medidas_fields = {
+            'medida_list': [medida1, medida2],
+        }
+        medidas.feed(medidas_fields)
+
+        punto_de_medida_fields = {
+            'cod_pm': 'ES1234000000000001JN0F',
+            'tipo_movimiento': 'A',
+            'tipo_pm': '03',
+            'cod_pm_principal': 'ES1234000000000002JN0F',
+            'modo_lectura': '1',
+            'funcion': 'P',
+            'direccion_enlace': '39522',
+            'direccion_punto_medida': '000000001',
+            'num_linea': '12',
+            'telefono_telemedida': '987654321',
+            'estado_telefono': '1',
+            'clave_acceso': '0000000007',
+            'tension_pm': '0',
+            'fecha_vigor': '2003-01-01',
+            'fecha_alta': '2003-01-01',
+            'fecha_baja': '2003-02-01',
+            'aparatos': aparatos,
+            'medidas': medidas,
+            'comentarios': 'Comentarios Varios',
+        }
+        punto_de_medida.feed(punto_de_medida_fields)
+
+        puntos_de_medida_fields = {
+            'punto_de_medida_list': [punto_de_medida],
+        }
+        puntos_de_medida.feed(puntos_de_medida_fields)
+
+        activacion_baja_fields = {
+            'datos_activacion_baja': datos_activacion_baja,
+            'contrato': contrato,
+            'puntos_de_medida': puntos_de_medida,
+        }
+        activacion_baja.feed(activacion_baja_fields)
+
+        mensaje_activacion_baja_suspension_fields = {
+            'cabecera': cabecera,
+            'activacion_baja': activacion_baja,
+        }
+        mensaje.feed(mensaje_activacion_baja_suspension_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_b105.read())
