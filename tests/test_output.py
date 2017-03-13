@@ -8,6 +8,7 @@ from gestionatr.output.messages import sw_a3 as a3
 from gestionatr.output.messages import sw_m1 as m1
 from gestionatr.output.messages import sw_d1 as d1
 from gestionatr.output.messages import sw_q1 as q1
+from gestionatr.output.messages import sw_w1 as w1
 
 
 class test_C1(unittest.TestCase):
@@ -1169,3 +1170,132 @@ class test_Q1(unittest.TestCase):
         mensaje.build_tree()
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_q101.read())
+
+
+class test_W1(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_w101 = open(get_data("w101.xml"), "r")
+        self.xml_w102_accept = open(get_data("w102_accept.xml"), "r")
+        self.xml_w102_reject = open(get_data("w102_reject.xml"), "r")
+
+    def tearDown(self):
+        self.xml_w101.close()
+        self.xml_w102_accept.close()
+        self.xml_w102_reject.close()
+
+    def test_create_pas01(self):
+        # MensajeAportacionLectura
+        mensaje_aportacion_lectura = w1.SolicitudAportacionLectura()
+
+        # Cabecera
+        cabecera = get_header(process='W1', step='01',  date='2014-04-16T22:13:37', code='201412111009')
+
+        # DatosSolicitudAportacionLectura
+        datos_solicitud = w1.DatosSolicitudAportacionLectura()
+        datos_solicitud_aportacion_lectura_fields = {
+            'fecha_lectura': '2015-02-18',
+            'tipo_dhedm': '2',
+        }
+        datos_solicitud.feed(datos_solicitud_aportacion_lectura_fields)
+
+        # LecturaAportada
+        la1 = w1.LecturaAportada()
+        lectura_aportada_fields = {
+            'integrador': 'AE',
+            'tipo_codigo_periodo_dh': '21',
+            'lectura_propuesta': '0000001162.00',
+        }
+        la1.feed(lectura_aportada_fields)
+
+        la2 = w1.LecturaAportada()
+        lectura_aportada_fields = {
+            'integrador': 'AE',
+            'tipo_codigo_periodo_dh': '22',
+            'lectura_propuesta': '0000003106.00',
+        }
+        la2.feed(lectura_aportada_fields)
+
+        mensaje_aportacion_lectura_fields = {
+            'cabecera': cabecera,
+            'datos_solicitud_aportacion_lectura': datos_solicitud,
+            'lectura_aportada_list': [la1, la2],
+        }
+        mensaje_aportacion_lectura.feed(mensaje_aportacion_lectura_fields)
+        mensaje_aportacion_lectura.build_tree()
+        xml = str(mensaje_aportacion_lectura)
+        assertXmlEqual(xml, self.xml_w101.read())
+
+    def test_create_pas02(self):
+        # AceptacionAportacionLectura
+        mensaje = w1.AceptacionAportacionLectura()
+
+        # Cabecera
+        cabecera = get_header(process='W1', step='02',
+                              date='2014-04-16T22:13:37', code='201412111009')
+        # DatosAceptacionLectura
+        datos_aceptacion_lectura = w1.DatosAceptacionLectura()
+        datos_aceptacion_lectura_fields = {
+            'fecha_aceptacion': '2016-06-06',
+        }
+        datos_aceptacion_lectura.feed(datos_aceptacion_lectura_fields)
+
+        aceptacion_aportacion_lectura_fields = {
+            'cabecera': cabecera,
+            'datos_aceptacion_lectura': datos_aceptacion_lectura,
+        }
+        mensaje.feed(aceptacion_aportacion_lectura_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_w102_accept.read())
+
+    def test_create_pas02_rej(self):
+        # MensajeRechazo
+        mensaje_rechazo = w1.MensajeRechazo()
+
+        # Cabecera
+        cabecera = get_header(process='W1', step='02')
+
+        # Rechazos
+        rechazos = w1.Rechazos()
+
+        # Rechazo
+        r1 = w1.Rechazo()
+        rechazo_fields = {
+            'secuencial': '1',
+            'codigo_motivo': '01',
+            'comentarios': 'Motiu de rebuig 01: No existe Punto de Suministro asociado al CUPS',
+        }
+        r1.feed(rechazo_fields)
+
+        # RegistrosDocumento
+        registros_documento = w1.RegistrosDocumento()
+
+        # RegistroDoc
+        rd1 = w1.RegistroDoc()
+        registro_doc_fields = {
+            'tipo_doc_aportado': '08',
+            'direccion_url': 'http://eneracme.com/docs/NIF11111111H.pdf',
+        }
+        rd1.feed(registro_doc_fields)
+
+        registros_documento_fields = {
+            'registro_doc_list': [rd1],
+        }
+        registros_documento.feed(registros_documento_fields)
+
+        rechazos_fields = {
+            'fecha_rechazo': '2016-07-20',
+            'rechazo_list': [r1],
+            'registros_documento': registros_documento,
+        }
+        rechazos.feed(rechazos_fields)
+
+        mensaje_rechazo_fields = {
+            'cabecera': cabecera,
+            'rechazos': rechazos,
+        }
+        mensaje_rechazo.feed(mensaje_rechazo_fields)
+        mensaje_rechazo.build_tree()
+        xml = str(mensaje_rechazo)
+        assertXmlEqual(xml, self.xml_w102_reject.read())
