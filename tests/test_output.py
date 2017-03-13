@@ -6,6 +6,7 @@ from gestionatr.output.messages import sw_c1 as c1
 from gestionatr.output.messages import sw_c2 as c2
 from gestionatr.output.messages import sw_a3 as a3
 from gestionatr.output.messages import sw_m1 as m1
+from gestionatr.output.messages import sw_d1 as d1
 
 
 class test_C1(unittest.TestCase):
@@ -945,3 +946,49 @@ class test_M1(unittest.TestCase):
         mensaje_modificacion_de_atr.build_tree()
         xml = str(mensaje_modificacion_de_atr)
         assertXmlEqual(xml, self.xml_m101.read())
+
+
+class test_D1(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_d101 = open(get_data("d101.xml"), "r")
+
+    def tearDown(self):
+        self.xml_d101.close()
+
+    def test_create_pas01(self):
+        # MensajeNotificacionCambiosATRDesdeDistribuidor
+        mensaje = d1.MensajeNotificacionCambiosATRDesdeDistribuidor()
+
+        # Cabecera
+        # Cabecera
+        cabecera = d1.Cabecera()
+        cabecera_fields = {
+            'codigo_ree_empresa_emisora': '1234',
+            'codigo_ree_empresa_destino': '4321',
+            'codigo_del_proceso': 'D1',
+            'codigo_del_paso': '01',
+            'codigo_de_solicitud': '201605219497',
+            'secuencial_de_solicitud': '00',
+            'fecha': '2016-06-08T04:24:09',
+            'cups': 'ES0116000000011531LK0F',
+        }
+        cabecera.feed(cabecera_fields)
+
+        # NotificacionCambiosATRDesdeDistribuidor
+        notificacion = d1.NotificacionCambiosATRDesdeDistribuidor()
+        notificacion_cambios_atr_desde_distribuidor_fields = {
+            'motivo_cambio_atr_desde_distribuidora': '01',
+            'fecha_prevista_aplicacion_cambio_atr': '2016-06-09',
+            'periodicidad_facturacion': '01',
+        }
+        notificacion.feed(notificacion_cambios_atr_desde_distribuidor_fields)
+
+        mensaje_notificacion_cambios_atr_desde_distribuidor_fields = {
+            'cabecera': cabecera,
+            'notificacion_cambios_atr_desde_distribuidor': notificacion,
+        }
+        mensaje.feed(mensaje_notificacion_cambios_atr_desde_distribuidor_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_d101.read())
