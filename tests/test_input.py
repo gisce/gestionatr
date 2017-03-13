@@ -800,7 +800,7 @@ class test_Q1(unittest.TestCase):
     def tearDown(self):
         self.xml_q101.close()
 
-    def test_w101(self):
+    def test_q101(self):
         q1 = Q1(self.xml_q101)
         q1.parse_xml()
         self.assertEqual(q1.cod_pm, '1112223334445556667779')

@@ -7,6 +7,7 @@ from gestionatr.output.messages import sw_c2 as c2
 from gestionatr.output.messages import sw_a3 as a3
 from gestionatr.output.messages import sw_m1 as m1
 from gestionatr.output.messages import sw_d1 as d1
+from gestionatr.output.messages import sw_q1 as q1
 
 
 class test_C1(unittest.TestCase):
@@ -992,3 +993,179 @@ class test_D1(unittest.TestCase):
         mensaje.build_tree()
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_d101.read())
+
+
+class test_Q1(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_q101 = open(get_data("q101.xml"), "r")
+
+    def tearDown(self):
+        self.xml_q101.close()
+
+    def test_create_pas01(self):
+        # MensajeSaldoLecturasFacturacion
+        mensaje = q1.MensajeSaldoLecturasFacturacion()
+
+        # Cabecera
+        cabecera = get_header(process='Q1', step='01', date='2014-04-16T22:13:37', code='201412111009')
+
+        # Medidas
+        medidas = q1.Medidas()
+
+        # ModeloAparato 1
+        ma1 = q1.ModeloAparato()
+
+        # Integrador 1
+        i1 = q1.Integrador()
+
+        # LecturaDesde
+        lectura_desde = q1.LecturaDesde()
+        lectura_desde_fields = {
+            'fecha': '2014-04-18',
+            'procedencia': '20',
+            'lectura': '500',
+        }
+        lectura_desde.feed(lectura_desde_fields)
+
+        # LecturaHasta
+        lectura_hasta = q1.LecturaHasta()
+        lectura_hasta_fields = {
+            'fecha': '2014-05-18',
+            'procedencia': '20',
+            'lectura': '1500',
+        }
+        lectura_hasta.feed(lectura_hasta_fields)
+
+        integrador_fields = {
+            'magnitud': 'R2',
+            'codigo_periodo': '20',
+            'constante_multiplicadora': '1',
+            'numero_ruedas_enteras': '10',
+            'numero_ruedas_decimales': '20',
+            'consumo_calculado': '5000',
+            'lectura_desde': lectura_desde,
+            'lectura_hasta': lectura_hasta,
+        }
+        i1.feed(integrador_fields)
+
+        modelo_aparato_fields = {
+            'tipo_aparato': 'CG',
+            'marca_aparato': '135',
+            'numero_serie': '012',
+            'tipo_dhedm': '2',
+            'integrador_list': [i1],
+        }
+        ma1.feed(modelo_aparato_fields)
+
+        # ModeloAparato 2
+        ma2 = q1.ModeloAparato()
+        # Integrador 1
+        i1 = q1.Integrador()
+
+        # LecturaDesde
+        lectura_desde = q1.LecturaDesde()
+        lectura_desde_fields = {
+            'fecha': '2014-04-18',
+            'procedencia': '30',
+            'lectura': '500',
+        }
+        lectura_desde.feed(lectura_desde_fields)
+
+        # LecturaHasta
+        lectura_hasta = q1.LecturaHasta()
+        lectura_hasta_fields = {
+            'fecha': '2014-05-18',
+            'procedencia': '30',
+            'lectura': '1500',
+        }
+        lectura_hasta.feed(lectura_hasta_fields)
+
+        integrador_fields = {
+            'magnitud': 'R3',
+            'codigo_periodo': '30',
+            'constante_multiplicadora': '1',
+            'numero_ruedas_enteras': '10',
+            'numero_ruedas_decimales': '20',
+            'consumo_calculado': '5000',
+            'lectura_desde': lectura_desde,
+            'lectura_hasta': lectura_hasta,
+        }
+        i1.feed(integrador_fields)
+
+        # Integrador 2
+        i2 = q1.Integrador()
+
+        # LecturaDesde
+        lectura_desde = q1.LecturaDesde()
+        lectura_desde_fields = {
+            'fecha': '2014-04-18',
+            'procedencia': '30',
+            'lectura': '500',
+        }
+        lectura_desde.feed(lectura_desde_fields)
+
+        # LecturaHasta
+        lectura_hasta = q1.LecturaHasta()
+        lectura_hasta_fields = {
+            'fecha': '2014-05-18',
+            'procedencia': '40',
+            'lectura': '1500',
+        }
+        lectura_hasta.feed(lectura_hasta_fields)
+
+        # Ajuste
+        ajuste = q1.Ajuste()
+        ajuste_fields = {
+            'codigo_motivo_ajuste': '01',
+            'ajuste_por_integrador': '1500',
+            'comentarios': 'Comentario Ajuste',
+        }
+        ajuste.feed(ajuste_fields)
+
+        # Anomalia
+        anomalia = q1.Anomalia()
+        anomalia_fields = {
+            'tipo_anomalia': '05',
+            'comentarios': 'Comentarios Anomalia',
+        }
+        anomalia.feed(anomalia_fields)
+
+        integrador_fields = {
+            'magnitud': 'R3',
+            'codigo_periodo': '30',
+            'constante_multiplicadora': '1',
+            'numero_ruedas_enteras': '10',
+            'numero_ruedas_decimales': '20',
+            'consumo_calculado': '5000',
+            'lectura_desde': lectura_desde,
+            'lectura_hasta': lectura_hasta,
+            'ajuste': ajuste,
+            'anomalia': anomalia,
+            'fecha_hora_maximetro': '2014-05-18T22:13:37',
+        }
+        i2.feed(integrador_fields)
+
+        modelo_aparato_fields = {
+            'tipo_aparato': 'CG',
+            'marca_aparato': '136',
+            'numero_serie': '012',
+            'tipo_dhedm': '3',
+            'integrador_list': [i1, i2],
+        }
+        ma2.feed(modelo_aparato_fields)
+
+        medidas_fields = {
+            'cod_pm': '1112223334445556667779',
+            'modelo_aparato_list': [ma1, ma2],
+        }
+        medidas.feed(medidas_fields)
+
+        mensaje_saldo_lecturas_facturacion_fields = {
+            'cabecera': cabecera,
+            'medidas': medidas,
+        }
+        mensaje.feed(mensaje_saldo_lecturas_facturacion_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_q101.read())
