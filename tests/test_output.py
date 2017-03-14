@@ -10,6 +10,7 @@ from gestionatr.output.messages import sw_d1 as d1
 from gestionatr.output.messages import sw_q1 as q1
 from gestionatr.output.messages import sw_w1 as w1
 from gestionatr.output.messages import sw_b1 as b1
+from gestionatr.output.messages import sw_r1 as r1
 
 
 class test_C1(unittest.TestCase):
@@ -1570,3 +1571,688 @@ class test_B1(unittest.TestCase):
         mensaje.build_tree()
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_b105.read())
+
+
+class test_R1(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_r101 = open(get_data("r101.xml"), "r")
+        self.xml_r102_accept = open(get_data("r102_accept.xml"), "r")
+        self.xml_r103 = open(get_data("r103.xml"), "r")
+        self.xml_r103_intervenciones = open(get_data("r103_intervenciones.xml"), "r")
+        self.xml_r104 = open(get_data("r104.xml"), "r")
+        self.xml_r105 = open(get_data("r105.xml"), "r")
+
+    def tearDown(self):
+        self.xml_r101.close()
+        self.xml_r102_accept.close()
+        self.xml_r103.close()
+        self.xml_r103_intervenciones.close()
+        self.xml_r104.close()
+        self.xml_r105.close()
+
+    def test_create_pas01(self):
+        # MensajeReclamacionPeticion
+        mensaje_reclamacion_peticion = r1.MensajeReclamacionPeticion()
+
+        # CabeceraReclamacion
+        cabecera_reclamacion = r1.CabeceraReclamacion()
+        cabecera_reclamacion_fields = {
+            'codigo_ree_empresa_emisora': '0321',
+            'codigo_ree_empresa_destino': '0123',
+            'codigo_del_proceso': 'R1',
+            'codigo_del_paso': '01',
+            'codigo_de_solicitud': '201650008314',
+            'secuencial_de_solicitud': '01',
+            'fecha': '2016-01-22T10:09:41',
+            'cups': 'ES1234000000000001JN0F',
+        }
+        cabecera_reclamacion.feed(cabecera_reclamacion_fields)
+
+        # SolicitudReclamacion
+        solicitud_reclamacion = r1.SolicitudReclamacion()
+
+        # DatosSolicitud
+        datos_solicitud = r1.DatosSolicitud()
+        datos_solicitud_fields = {
+            'tipo': '02',
+            'subtipo': '003',
+            'referencia_origen': '01',
+            'fecha_limite': '2016-02-22',
+            'prioritario': 'S',
+        }
+        datos_solicitud.feed(datos_solicitud_fields)
+
+        # VariablesDetalleReclamacion
+        variables_detalle_reclamacion = r1.VariablesDetalleReclamacion()
+
+        # VariableDetalleReclamacion
+        vdr1 = r1.VariableDetalleReclamacion()
+
+        # LecturasAportadas
+        lecturas_aportadas = r1.LecturasAportadas()
+
+        # LecturaAportada
+        la1 = r1.LecturaAportada()
+        lectura_aportada_fields = {
+            'integrador': 'AE',
+            'codigo_periodo_dh': '21',
+            'lectura_propuesta': '0000001162.00',
+        }
+        la1.feed(lectura_aportada_fields)
+
+        la2 = r1.LecturaAportada()
+        lectura_aportada_fields = {
+            'integrador': 'AE',
+            'codigo_periodo_dh': '22',
+            'lectura_propuesta': '0000003106.00',
+        }
+        la2.feed(lectura_aportada_fields)
+
+        lecturas_aportadas_fields = {
+            'lectura_aportada_list': [la1, la2],
+        }
+        lecturas_aportadas.feed(lecturas_aportadas_fields)
+
+        # Contacto
+        contacto = r1.Contacto()
+
+        # Telefono
+        telefono = r1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '34',
+            'numero': '55512345',
+        }
+        telefono.feed(telefono_fields)
+
+        contacto_fields = {
+            'persona_de_contacto': 'Perico Palotes Largos',
+            'telefono': telefono,
+            'correo_electronico': 'perico@acme.com',
+        }
+        contacto.feed(contacto_fields)
+
+        # UbicacionIncidencia
+        ubicacion_incidencia = r1.UbicacionIncidencia()
+        ubicacion_incidencia_fields = {
+            'des_ubicacion_incidencia': 'Destino',
+            'provincia': '17',
+            'municipio': '17079',
+            'poblacion': '17079',
+            'cod_postal': '17001',
+        }
+        ubicacion_incidencia.feed(ubicacion_incidencia_fields)
+
+        variable_detalle_reclamacion_fields = {
+            'num_expediente_acometida': '11111',
+            'num_expediente_fraude': '22222',
+            'fecha_incidente': '2016-02-10',
+            'num_factura_atr': '243615',
+            'tipo_concepto_facturado': '01',
+            'fecha_lectura': '2016-01-20',
+            'tipo_dhedm': '1',
+            'lecturas_aportadas': lecturas_aportadas,
+            'codigo_incidencia': '01',
+            'codigo_solicitud': '33333',
+            'parametro_contratacion': '01',
+            'concepto_disconformidad': '100',
+            'tipo_de_atencion_incorrecta': '05',
+            'iban': '4444222211113333',
+            'contacto': contacto,
+            'codigo_solicitud_reclamacion': '11111',
+            'fecha_desde': '2017-02-05',
+            'fecha_hasta': '2017-04-05',
+            'importe_reclamado': '5000',
+            'ubicacion_incidencia': ubicacion_incidencia,
+        }
+        vdr1.feed(variable_detalle_reclamacion_fields)
+
+        # VariableDetalleReclamacion 2
+        vdr2 = r1.VariableDetalleReclamacion()
+        variable_detalle_reclamacion_fields = {
+            'num_expediente_acometida': '22222',
+        }
+        vdr2.feed(variable_detalle_reclamacion_fields)
+
+        variables_detalle_reclamacion_fields = {
+            'variable_detalle_reclamacion_list': [vdr1, vdr2],
+        }
+        variables_detalle_reclamacion.feed(variables_detalle_reclamacion_fields)
+
+        # Cliente
+        cliente = get_cliente(dir=True, tipo_dir='F')
+
+        # Reclamante
+        reclamante = r1.Reclamante()
+
+        # IdReclamante
+        id_reclamante = r1.IdReclamante()
+        id_reclamante_fields = {
+            'tipo_identificador': 'NI',
+            'identificador': 'B36385870',
+            'tipo_persona': 'J',
+        }
+        id_reclamante.feed(id_reclamante_fields)
+
+        # Nombre
+        nombre = r1.Nombre()
+        nombre_fields = {
+            'nombre_de_pila': '',
+            'primer_apellido': '',
+            'segundo_apellido': '',
+            'razon_social': u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ',
+        }
+        nombre.feed(nombre_fields)
+
+        # Telefono
+        telefono = r1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '34',
+            'numero': '666777888',
+        }
+        telefono.feed(telefono_fields)
+
+        reclamante_fields = {
+            'id_reclamante': id_reclamante,
+            'nombre': nombre,
+            'telefono': telefono,
+            'correo_electronico': 'email@host',
+        }
+        reclamante.feed(reclamante_fields)
+
+        solicitud_reclamacion_fields = {
+            'datos_solicitud': datos_solicitud,
+            'variables_detalle_reclamacion': variables_detalle_reclamacion,
+            'cliente': cliente,
+            'tipo_reclamante': '01',
+            'reclamante': reclamante,
+            'comentarios': 'no calcula sus consumos desea revisio y facturas',
+        }
+        solicitud_reclamacion.feed(solicitud_reclamacion_fields)
+
+        mensaje_reclamacion_peticion_fields = {
+            'cabecera_reclamacion': cabecera_reclamacion,
+            'solicitud_reclamacion': solicitud_reclamacion,
+        }
+        mensaje_reclamacion_peticion.feed(mensaje_reclamacion_peticion_fields)
+        mensaje_reclamacion_peticion.build_tree()
+        xml = str(mensaje_reclamacion_peticion)
+        assertXmlEqual(xml, self.xml_r101.read())
+
+    def test_create_pas02(self):
+        # MensajeAceptacionReclamacion
+        mensaje_aceptacion_reclamacion = r1.MensajeAceptacionReclamacion()
+
+        # CabeceraReclamacion
+        cabecera_reclamacion = r1.CabeceraReclamacion()
+        cabecera_reclamacion_fields = {
+            'codigo_del_proceso': 'R1',
+            'codigo_del_paso': '02',
+            'codigo_de_solicitud': '201607211259',
+            'secuencial_de_solicitud': '01',
+            'cups': 'ES1234000000000001JN0F',
+            'codigo_ree_empresa_emisora': '1234',
+            'codigo_ree_empresa_destino': '4321',
+            'fecha': '2016-07-21T12:59:47',
+        }
+        cabecera_reclamacion.feed(cabecera_reclamacion_fields)
+
+        # AceptacionReclamacion
+        aceptacion_reclamacion = r1.AceptacionReclamacion()
+
+        # DatosAceptacion
+        datos_aceptacion = r1.DatosAceptacion()
+        datos_aceptacion_fields = {
+            'fecha_aceptacion': '2016-06-06',
+            'codigo_reclamacion_distribuidora': '1234',
+        }
+        datos_aceptacion.feed(datos_aceptacion_fields)
+
+        aceptacion_reclamacion_fields = {
+            'datos_aceptacion': datos_aceptacion,
+        }
+        aceptacion_reclamacion.feed(aceptacion_reclamacion_fields)
+
+        mensaje_aceptacion_reclamacion_fields = {
+            'cabecera_reclamacion': cabecera_reclamacion,
+            'aceptacion_reclamacion': aceptacion_reclamacion,
+        }
+        mensaje_aceptacion_reclamacion.feed(
+            mensaje_aceptacion_reclamacion_fields)
+        mensaje_aceptacion_reclamacion.build_tree()
+        xml = str(mensaje_aceptacion_reclamacion)
+        assertXmlEqual(xml, self.xml_r102_accept.read())
+
+    def test_create_pas03(self):
+        # MensajePeticionInformacionAdicionalReclamacion
+        mensaje_peticion_informacion_adicional_reclamacion = r1.MensajePeticionInformacionAdicionalReclamacion()
+
+        # CabeceraReclamacion
+        cabecera_reclamacion = r1.CabeceraReclamacion()
+        cabecera_reclamacion_fields = {
+            'codigo_ree_empresa_emisora': '1234',
+            'codigo_ree_empresa_destino': '4321',
+            'codigo_del_proceso': 'R1',
+            'codigo_del_paso': '03',
+            'codigo_de_solicitud': '201412111009',
+            'secuencial_de_solicitud': '01',
+            'fecha': '2016-06-10T08:50:43',
+            'cups': 'ES1234000000000001JN0F',
+        }
+        cabecera_reclamacion.feed(cabecera_reclamacion_fields)
+
+        # InformacionAdicional
+        informacion_adicional = r1.InformacionAdicional()
+
+        # DatosInformacion
+        datos_informacion = r1.DatosInformacion()
+        datos_informacion_fields = {
+            'num_expediente_acometida': '1111122222',
+            'tipo_comunicacion': '01',
+            'codigo_reclamacion_distribuidora': '12345678',
+        }
+        datos_informacion.feed(datos_informacion_fields)
+
+        # InformacionIntermedia
+        informacion_intermedia = r1.InformacionIntermedia()
+
+        informacion_intermedia_fields = {
+            'desc_informacion_intermedia': 'Descripcion de la informacion intermedia aportada.',
+        }
+        informacion_intermedia.feed(informacion_intermedia_fields)
+
+        # Retipificacion
+        retipificacion = r1.Retipificacion()
+        retipificacion_fields = {
+            'tipo': '02',
+            'subtipo': '003',
+            'desc_retipificacion': 'descripcio de la retipificacio.',
+        }
+        retipificacion.feed(retipificacion_fields)
+
+        # SolicitudesInformacionAdicional
+        solicitudes_informacion_adicional = r1.SolicitudesInformacionAdicional()
+
+        # SolicitudInformacionAdicional 1
+        sia1 = r1.SolicitudInformacionAdicional()
+        solicitud_informacion_adicional_fields = {
+            'tipo_informacion_adicional': '01',
+            'desc_peticion_informacion': 'Descripcion de la peticion.',
+            'fecha_limite_envio': '2016-07-10',
+        }
+        sia1.feed(solicitud_informacion_adicional_fields)
+
+        # SolicitudInformacionAdicional 2
+        sia2 = r1.SolicitudInformacionAdicional()
+        solicitud_informacion_adicional_fields = {
+            'tipo_informacion_adicional': '02',
+            'desc_peticion_informacion': 'Descripcion de la peticion.',
+            'fecha_limite_envio': '2016-07-10',
+        }
+        sia2.feed(solicitud_informacion_adicional_fields)
+
+        # SolicitudInformacionAdicionalparaRetipificacion
+        siar = r1.SolicitudInformacionAdicionalparaRetipificacion()
+        solicitud_informacion_adicionalpara_retipificacion_fields = {
+            'tipo': '03',
+            'subtipo': '003',
+            'fecha_limite_envio': '2016-08-10',
+        }
+        siar.feed(solicitud_informacion_adicionalpara_retipificacion_fields)
+
+        solicitudes_informacion_adicional_fields = {
+            'solicitud_informacion_adicional_list': [sia1, sia2],
+            'solicitud_informacion_adicionalpara_retipificacion': siar
+        }
+        solicitudes_informacion_adicional.feed(solicitudes_informacion_adicional_fields)
+
+        informacion_adicional_fields = {
+            'datos_informacion': datos_informacion,
+            'informacion_intermedia': informacion_intermedia,
+            'retipificacion': retipificacion,
+            'solicitudes_informacion_adicional': solicitudes_informacion_adicional,
+            'comentarios': 'R1 03.',
+        }
+        informacion_adicional.feed(informacion_adicional_fields)
+
+        mensaje_peticion_informacion_adicional_reclamacion_fields = {
+            'cabecera_reclamacion': cabecera_reclamacion,
+            'informacion_adicional': informacion_adicional,
+        }
+        mensaje_peticion_informacion_adicional_reclamacion.feed(mensaje_peticion_informacion_adicional_reclamacion_fields)
+        mensaje_peticion_informacion_adicional_reclamacion.build_tree()
+        xml = str(mensaje_peticion_informacion_adicional_reclamacion)
+        assertXmlEqual(xml, self.xml_r103.read())
+
+    def test_create_pas03_intervenciones(self):
+        # MensajePeticionInformacionAdicionalReclamacion
+        mensaje = r1.MensajePeticionInformacionAdicionalReclamacion()
+
+        # CabeceraReclamacion
+        cabecera_reclamacion = r1.CabeceraReclamacion()
+        cabecera_reclamacion_fields = {
+            'codigo_ree_empresa_emisora': '1234',
+            'codigo_ree_empresa_destino': '4321',
+            'codigo_del_proceso': 'R1',
+            'codigo_del_paso': '03',
+            'codigo_de_solicitud': '201412111009',
+            'secuencial_de_solicitud': '01',
+            'fecha': '2016-06-10T08:50:43',
+            'cups': 'ES1234000000000001JN0F',
+        }
+        cabecera_reclamacion.feed(cabecera_reclamacion_fields)
+
+        # InformacionAdicional
+        informacion_adicional = r1.InformacionAdicional()
+
+        # DatosInformacion
+        datos_informacion = r1.DatosInformacion()
+        datos_informacion_fields = {
+            'num_expediente_acometida': '1111122222',
+            'tipo_comunicacion': '01',
+            'codigo_reclamacion_distribuidora': '12345678',
+        }
+        datos_informacion.feed(datos_informacion_fields)
+
+        # InformacionIntermedia
+        informacion_intermedia = r1.InformacionIntermedia()
+
+        # Intervenciones
+        intervenciones = r1.Intervenciones()
+
+        # Intervencion
+        i1 = r1.Intervencion()
+        intervencion_fields = {
+            'tipo_intervencion': '01',
+            'fecha': '2016-06-10',
+            'hora_desde': '08:00:00',
+            'hora_hasta': '09:00:00',
+            'numero_visita': '10',
+            'resultado': '001',
+            'detalle_resultado': 'Descripcion de los resultados obtenidos.',
+        }
+        i1.feed(intervencion_fields)
+
+        i2 = r1.Intervencion()
+        intervencion_fields = {
+            'tipo_intervencion': '02',
+            'fecha': '2016-06-10',
+            'hora_desde': '08:00:00',
+            'hora_hasta': '09:00:00',
+            'numero_visita': '10',
+            'resultado': '001',
+            'detalle_resultado': 'Descripcion de los resultados obtenidos.',
+        }
+        i2.feed(intervencion_fields)
+
+        intervenciones_fields = {
+            'intervencion_list': [i1, i2],
+        }
+        intervenciones.feed(intervenciones_fields)
+
+        informacion_intermedia_fields = {
+            'intervenciones': intervenciones,
+        }
+        informacion_intermedia.feed(informacion_intermedia_fields)
+
+        informacion_adicional_fields = {
+            'datos_informacion': datos_informacion,
+            'informacion_intermedia': informacion_intermedia,
+            'comentarios': "R1 03 with 'Intervenciones'.",
+        }
+        informacion_adicional.feed(informacion_adicional_fields)
+
+        mensaje_peticion_informacion_adicional_reclamacion_fields = {
+            'cabecera_reclamacion': cabecera_reclamacion,
+            'informacion_adicional': informacion_adicional,
+        }
+        mensaje.feed(mensaje_peticion_informacion_adicional_reclamacion_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_r103_intervenciones.read())
+
+    def test_create_pas04(self):
+        # MensajeEnvioInformacionReclamacion
+        mensaje = r1.MensajeEnvioInformacionReclamacion()
+
+        # CabeceraReclamacion
+        cabecera_reclamacion = r1.CabeceraReclamacion()
+        cabecera_reclamacion_fields = {
+            'codigo_ree_empresa_emisora': '1234',
+            'codigo_ree_empresa_destino': '4321',
+            'codigo_del_proceso': 'R1',
+            'codigo_del_paso': '04',
+            'codigo_de_solicitud': '201650008314',
+            'secuencial_de_solicitud': '01',
+            'fecha': '2016-01-22T10:09:41',
+            'cups': 'ES1234000000000001JN0F',
+        }
+        cabecera_reclamacion.feed(cabecera_reclamacion_fields)
+
+        # EnvioInformacionReclamacion
+        envio_informacion_reclamacion = r1.EnvioInformacionReclamacion()
+
+        # DatosEnvioInformacion
+        datos_envio_informacion = r1.DatosEnvioInformacion()
+        datos_envio_informacion_fields = {
+            'num_expediente_acometida': '0123456789ABCD',
+            'fecha_informacion': '2016-01-20',
+        }
+        datos_envio_informacion.feed(datos_envio_informacion_fields)
+
+        # VariablesAportacionInformacion
+        variables_aportacion_informacion = r1.VariablesAportacionInformacion()
+
+        # VariableAportacionInformacion
+        vai1 = r1.VariableAportacionInformacion()
+        variable_aportacion_informacion_fields = {
+            'tipo_informacion': '01',
+            'desc_peticion_informacion': 'Informacio per fer testos.',
+            'variable': '01',
+            'valor': '125',
+        }
+        vai1.feed(variable_aportacion_informacion_fields)
+
+        vai2 = r1.VariableAportacionInformacion()
+        variable_aportacion_informacion_fields = {
+            'tipo_informacion': '02',
+        }
+        vai2.feed(variable_aportacion_informacion_fields)
+
+        variables_aportacion_informacion_fields = {
+            'variable_aportacion_informacion_list': [vai1, vai2],
+        }
+        variables_aportacion_informacion.feed(variables_aportacion_informacion_fields)
+
+        # VariablesAportacionInformacionparaRetipificacion
+        variables_retipificacion = r1.VariablesAportacionInformacionparaRetipificacion()
+
+        vair1 = r1.VariableAportacionInformacionparaRetipificacion()
+
+        # LecturasAportadas
+        lecturas_aportadas = r1.LecturasAportadas()
+
+        # LecturaAportada
+        la1 = r1.LecturaAportada()
+        lectura_aportada_fields = {
+            'integrador': 'AE',
+            'codigo_periodo_dh': '21',
+            'lectura_propuesta': '0000001162.00',
+        }
+        la1.feed(lectura_aportada_fields)
+
+        la2 = r1.LecturaAportada()
+        lectura_aportada_fields = {
+            'integrador': 'AE',
+            'codigo_periodo_dh': '22',
+            'lectura_propuesta': '0000003106.00',
+        }
+        la2.feed(lectura_aportada_fields)
+
+        lecturas_aportadas_fields = {
+            'lectura_aportada_list': [la1, la2],
+        }
+        lecturas_aportadas.feed(lecturas_aportadas_fields)
+
+        # Contacto
+        contacto = r1.Contacto()
+
+        # Telefono
+        telefono = r1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '34',
+            'numero': '55512345',
+        }
+        telefono.feed(telefono_fields)
+
+        contacto_fields = {
+            'persona_de_contacto': 'Perico Palotes Largos',
+            'telefono': telefono,
+            'correo_electronico': 'perico@acme.com',
+        }
+        contacto.feed(contacto_fields)
+
+        # UbicacionIncidencia
+        ubicacion_incidencia = r1.UbicacionIncidencia()
+        ubicacion_incidencia_fields = {
+            'des_ubicacion_incidencia': 'Destino',
+            'provincia': '17',
+            'municipio': '17079',
+            'poblacion': '17079',
+            'cod_postal': '17001',
+        }
+        ubicacion_incidencia.feed(ubicacion_incidencia_fields)
+
+        vair_fields = {
+            'num_expediente_acometida': '11111',
+            'num_expediente_fraude': '22222',
+            'fecha_incidente': '2016-02-10',
+            'num_factura_atr': '243615',
+            'tipo_concepto_facturado': '01',
+            'fecha_lectura': '2016-01-20',
+            'tipo_dhedm': '1',
+            'lecturas_aportadas': lecturas_aportadas,
+            'codigo_incidencia': '01',
+            'codigo_solicitud': '33333',
+            'parametro_contratacion': '01',
+            'concepto_disconformidad': '100',
+            'tipo_de_atencion_incorrecta': '05',
+            'iban': '4444222211113333',
+            'contacto': contacto,
+            'codigo_solicitud_reclamacion': '11111',
+            'fecha_desde': '2017-02-05',
+            'fecha_hasta': '2017-04-05',
+            'importe_reclamado': '5000',
+            'ubicacion_incidencia': ubicacion_incidencia,
+        }
+        vair1.feed(vair_fields)
+
+        variables_retipificacion_fields = {
+            'variable_aportacion_informacionpara_retipificacion_list': [vair1],
+        }
+        variables_retipificacion.feed(variables_retipificacion_fields)
+
+        # Cliente
+        cliente = get_cliente(dir=True, tipo_dir='F')
+
+        # RegistrosDocumento
+        registros_documento = r1.RegistrosDocumento()
+        # RegistroDoc
+        rd1 = w1.RegistroDoc()
+        registro_doc_fields = {
+            'tipo_doc_aportado': '01',
+            'direccion_url': 'http://eneracme.com/docs/CIE0100001.pdf',
+        }
+        rd1.feed(registro_doc_fields)
+        rd2 = w1.RegistroDoc()
+        registro_doc_fields = {
+            'tipo_doc_aportado': '06',
+            'direccion_url': 'http://eneracme.com/docs/INV201509161234.pdf',
+        }
+        rd2.feed(registro_doc_fields)
+        rd3 = w1.RegistroDoc()
+        registro_doc_fields = {
+            'tipo_doc_aportado': '08',
+            'direccion_url': 'http://eneracme.com/docs/NIF11111111H.pdf',
+        }
+        rd3.feed(registro_doc_fields)
+
+        registros_documento_fields = {
+            'registro_doc_list': [rd1, rd2, rd3],
+        }
+        registros_documento.feed(registros_documento_fields)
+
+        envio_informacion_reclamacion_fields = {
+            'datos_envio_informacion': datos_envio_informacion,
+            'variables_aportacion_informacion': variables_aportacion_informacion,
+            'variables_aportacion_informacionpara_retipificacion': variables_retipificacion,
+            'cliente': cliente,
+            'comentarios': 'R104 test with VariablesAportacionInformacion.',
+            'registros_documento': registros_documento,
+        }
+        envio_informacion_reclamacion.feed(envio_informacion_reclamacion_fields)
+
+        mensaje_envio_informacion_reclamacion_fields = {
+            'cabecera_reclamacion': cabecera_reclamacion,
+            'envio_informacion_reclamacion': envio_informacion_reclamacion,
+        }
+        mensaje.feed(mensaje_envio_informacion_reclamacion_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_r104.read())
+
+
+    def test_create_pas05(self):
+        # MensajeCierreReclamacion
+        mensaje_cierre_reclamacion = r1.MensajeCierreReclamacion()
+
+        # CabeceraReclamacion
+        cabecera_reclamacion = r1.CabeceraReclamacion()
+        cabecera_reclamacion_fields = {
+            'codigo_ree_empresa_emisora': '1234',
+            'codigo_ree_empresa_destino': '4321',
+            'codigo_del_proceso': 'R1',
+            'codigo_del_paso': '05',
+            'codigo_de_solicitud': '201604111738',
+            'secuencial_de_solicitud': '01',
+            'fecha': '2014-04-16T22:13:37',
+            'cups': 'ES1234000000000001JN0F',
+        }
+        cabecera_reclamacion.feed(cabecera_reclamacion_fields)
+
+        # CierreReclamacion
+        cierre_reclamacion = r1.CierreReclamacion()
+
+        # DatosCierre
+        datos_cierre = r1.DatosCierre()
+        datos_cierre_fields = {
+            'num_expediente_acometida': '11111',
+            'fecha': '2016-04-12',
+            'hora': '16:02:25',
+            'tipo': '03',
+            'subtipo': '013',
+            'codigo_reclamacion_distribuidora': '3291970',
+            'resultado_reclamacion': '02',
+            'detalle_resultado': '0010101',
+            'observaciones': 'Observaciones generales',
+            'indemnizacion_abonada': '0.0',
+            'num_expediente_anomalia_fraude': '22222',
+            'fecha_movimiento': '2016-04-12',
+        }
+        datos_cierre.feed(datos_cierre_fields)
+
+        cierre_reclamacion_fields = {
+            'datos_cierre': datos_cierre,
+            'cod_contrato': '383922379',
+            'comentarios': 'Comentarios generales',
+        }
+        cierre_reclamacion.feed(cierre_reclamacion_fields)
+
+        mensaje_cierre_reclamacion_fields = {
+            'cabecera_reclamacion': cabecera_reclamacion,
+            'cierre_reclamacion': cierre_reclamacion,
+        }
+        mensaje_cierre_reclamacion.feed(mensaje_cierre_reclamacion_fields)
+        mensaje_cierre_reclamacion.build_tree()
+        xml = str(mensaje_cierre_reclamacion)
+        assertXmlEqual(xml, self.xml_r105.read())

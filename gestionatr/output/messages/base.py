@@ -29,8 +29,10 @@ class Cabecera(XmlModel):
 
 class CabeceraReclamacion(XmlModel):
 
-    _sort_order = ('cabecera', 'ree_emisora', 'ree_destino', 'proceso', 'paso',
-                   'solicitud', 'secuencia', 'fecha', 'cups')
+    _sort_order = ('cabecera', 'codigo_ree_empresa_emisora',
+                   'codigo_ree_empresa_destino', 'codigo_del_proceso',
+                   'codigo_del_paso', 'codigo_de_solicitud',
+                   'secuencial_de_solicitud', 'fecha', 'cups')
 
     def __init__(self):
         self.cabecera = XmlField('CabeceraReclamacion')
