@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia Leon (Comision Nacional de los Mercados y la Competencia) -->
+<!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End User (free.org) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="TiposComplejos.xsd"/>
+	<xs:include schemaLocation="TiposSencillos.xsd"/>
+	<xs:annotation>
+		<xs:documentation>
+			Version 1.0 CNMC 2016.xx.xx
+		</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="ActivacionCambiodeComercializadorSinCambiosC105">
+		<xs:sequence>
+			<xs:element name="DatosActivacion" type="DatosActivacionCambiodeComercializadorSinCambiosC105"/>
+			<xs:element name="Contrato" type="ContratoActivacionCambiodeComercializadorSinCambiosC105"/>
+			<xs:element name="PuntosDeMedida" type="PuntosDeMedida"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Tipos secundarios de la transaccion actual -->
+	<!-- Datos de la activacion del C1 -->
+	<xs:complexType name="DatosActivacionCambiodeComercializadorSinCambiosC105">
+		<xs:sequence>
+			<xs:element name="Fecha" type="xs:date"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Datos del contrato -->
+	<xs:complexType name="ContratoActivacionCambiodeComercializadorSinCambiosC105">
+		<xs:sequence>
+			<xs:element name="IdContrato" type="IdContrato"/>
+			<xs:element name="TipoAutoconsumo" type="TipoAutoconsumo">
+				<xs:annotation>
+					<xs:documentation>Tabla 113</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TipoContratoATR" type="TipoContratoATR">
+				<xs:annotation>
+					<xs:documentation>Tabla 9</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CondicionesContractuales" type="CondicionesContractualesC"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

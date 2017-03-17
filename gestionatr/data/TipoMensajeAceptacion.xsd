@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia León (Comisión Nacional de los Mercados y la Competencia) -->
+<xs:schema xmlns="http://localhost/elegibilidad" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="TiposComplejos.xsd"/>
+	<xs:include schemaLocation="TiposSencillos.xsd"/>
+	<xs:annotation>
+		<xs:documentation>
+			Version 1.0 CNMC 2016.xx.xx
+		</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="AceptacionC2">
+		<xs:sequence>
+			<xs:element name="DatosAceptacion" type="DatosAceptacionC2"/>
+			<xs:element name="Contrato" type="ContratoAceptacionC1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AceptacionC1">
+		<xs:sequence>
+			<xs:element name="DatosAceptacion" type="DatosAceptacionC1"/>
+			<xs:element name="Contrato" type="ContratoAceptacionC1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AceptacionAlta">
+		<xs:sequence>
+			<xs:element name="DatosAceptacion" type="DatosAceptacionAlta"/>
+			<xs:element name="Contrato" type="ContratoAceptacionC2"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AceptacionM">
+		<xs:sequence>
+			<xs:element name="DatosAceptacion" type="DatosAceptacionAlta"/>
+			<xs:element name="Contrato" type="ContratoAceptacionM"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Tipos secundarios de la transaccion actual -->
+	<!-- Datos contrato aceptacion C1 -->
+	<xs:complexType name="ContratoAceptacionC1">
+		<xs:sequence>
+			<xs:element name="TipoContratoATR" type="TipoContratoATR">
+				<xs:annotation>
+					<xs:documentation>Tabla 9</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CondicionesContractuales" type="CondicionesContractuales"/>
+			<xs:element name="TipoActivacionPrevista" type="TipoActivacionPrevista">
+				<xs:annotation>
+					<xs:documentation>Tabla 55</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaActivacionPrevista" type="xs:date"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Datos contrato aceptacion C2 -->
+	<xs:complexType name="ContratoAceptacionC2">
+		<xs:sequence>
+			<xs:element name="CondicionesContractuales" type="CondicionesContractuales"/>
+			<xs:element name="TipoActivacionPrevista" type="TipoActivacionPrevista">
+				<xs:annotation>
+					<xs:documentation>Tabla 55</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaActivacionPrevista" type="xs:date"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Datos contrato aceptacion M1 -->
+	<xs:complexType name="ContratoAceptacionM">
+		<xs:sequence>
+			<xs:element name="TipoContratoATR" type="TipoContratoATR"/>
+			<xs:element name="CondicionesContractuales" type="CondicionesContractuales"/>
+			<xs:element name="TipoActivacionPrevista" type="TipoActivacionPrevista">
+				<xs:annotation>
+					<xs:documentation>Tabla 55</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaActivacionPrevista" type="xs:date"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DatosAceptacionAlta">
+		<xs:sequence>
+			<xs:element name="FechaAceptacion" type="xs:date"/>
+			<xs:element name="ActuacionCampo" type="Indicativo">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<!-- Datos  aceptacion C1 -->
+	</xs:complexType>
+	<xs:complexType name="DatosAceptacionC1">
+		<xs:sequence>
+			<xs:element name="FechaAceptacion" type="xs:date"/>
+			<xs:element name="ActuacionCampo" type="Indicativo"/>
+			<xs:element name="FechaUltimaLecturaFirme" type="xs:date"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Datos contrato aceptacion C2 -->
+	<xs:complexType name="DatosAceptacionC2">
+		<xs:sequence>
+			<xs:element name="FechaAceptacion" type="xs:date"/>
+			<xs:element name="PotenciaActual" type="Potencia"/>
+			<xs:element name="ActuacionCampo" type="X1">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaUltimaLecturaFirme" type="xs:date"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Datos contrato aceptacion R1 -->
+	<xs:complexType name="DatoAceptacionReclamacion">
+		<xs:sequence>
+			<xs:element name="FechaAceptacion" type="xs:date"/>
+			<xs:element name="CodigoReclamacionDistribuidora" type="X26"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DatosAceptacionReclamacion">
+		<xs:sequence>
+			<xs:element name="DatosAceptacion" type="DatoAceptacionReclamacion"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AceptacionBaja">
+		<xs:sequence>
+			<xs:element name="DatosAceptacion" type="DatosAceptacionBaja"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Datos  aceptacion B1 -->
+	<xs:complexType name="DatosAceptacionBaja">
+		<xs:sequence>
+			<xs:element name="FechaAceptacion" type="xs:date"/>
+			<xs:element name="ActuacionCampo" type="Indicativo"/>
+			<xs:element name="FechaUltimaLecturaFirme" type="xs:date"/>
+			<xs:element name="TipoActivacionPrevista" type="TipoActivacionPrevista">
+				<xs:annotation>
+					<xs:documentation>Tabla 55</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaActivacionPrevista" type="xs:date"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

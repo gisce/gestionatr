@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia León (Comisión Nacional de los Mercados y la Competencia) -->
+<xs:schema xmlns="http://localhost/elegibilidad" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="TiposComplejos.xsd"/>
+	<xs:include schemaLocation="TiposSencillos.xsd"/>
+	<xs:annotation>
+		<xs:documentation>
+			Version 1.0 CNMC 2016.xx.xx
+		</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="InformacionAdicional">
+		<xs:sequence>
+			<xs:element name="DatosInformacion" type="DatosInformacion"/>
+			<xs:element name="InformacionIntermedia" minOccurs="0">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="InformacionIntermedia">
+							<xs:choice>
+								<xs:element name="DescInformacionIntermedia">
+									<xs:simpleType>
+										<xs:restriction base="X255">
+											<xs:whiteSpace value="collapse"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="Intervenciones" type="Intervenciones"/>
+							</xs:choice>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Retipificacion" type="Retipificacion" minOccurs="0"/>
+			<xs:element name="SolicitudesInformacionAdicional" type="SolicitudesInformacionAdicional" minOccurs="0"/>
+			<xs:element name="Comentarios">
+				<xs:simpleType>
+					<xs:restriction base="X4000">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="RegistrosDocumento" type="RegistrosDocs" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Tipos secundarios de la transaccion actual -->
+	<xs:complexType name="DatosInformacion">
+		<xs:sequence>
+			<xs:element name="NumExpedienteAcometida" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X20">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="TipoComunicacion" type="TipoComunicacionReclamacion">
+				<xs:annotation>
+					<xs:documentation>Tabla 84</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CodigoReclamacionDistribuidora">
+				<xs:simpleType>
+					<xs:restriction base="X26">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="InformacionIntermedia"/>
+	<xs:complexType name="Intervenciones">
+		<xs:sequence>
+			<xs:element name="Intervencion" type="Intervencion" maxOccurs="10"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Intervencion">
+		<xs:sequence>
+			<xs:element name="TipoIntervencion" type="TipoIntervencion">
+				<xs:annotation>
+					<xs:documentation>Tabla 74</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Fecha" type="xs:date"/>
+			<xs:element name="HoraDesde" type="xs:time"/>
+			<xs:element name="HoraHasta" type="xs:time"/>
+			<xs:element name="NumeroVisita" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="Decimal2">
+						<xs:minInclusive value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Resultado" type="ResultadoIntervencion">
+				<xs:annotation>
+					<xs:documentation>Tabla 75</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DetalleResultado" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X255">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SolicitudesInformacionAdicional">
+		<xs:sequence>
+			<xs:element name="SolicitudInformacionAdicional" type="SolicitudInformacionAdicional" minOccurs="0" maxOccurs="10"/>
+			<xs:element name="SolicitudInformacionAdicionalparaRetipificacion" type="SolicitudInformacionAdicionalparaRetipificacion" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SolicitudInformacionAdicional">
+		<xs:sequence>
+			<xs:element name="TipoInformacionAdicional" type="TipoInformacionAdicional">
+				<xs:annotation>
+					<xs:documentation>Tabla 85</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DescPeticionInformacion" type="X255" minOccurs="0"/>
+			<xs:element name="FechaLimiteEnvio" type="xs:date"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SolicitudesInformacionAdicionalparaRetipificacion">
+		<xs:sequence>
+			<xs:element name="SolicitudInformacionAdicional" type="SolicitudInformacionAdicionalparaRetipificacion" maxOccurs="10"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SolicitudInformacionAdicionalparaRetipificacion">
+		<xs:sequence>
+			<xs:element name="Tipo" type="TipoInformacionAdicional">
+				<xs:annotation>
+					<xs:documentation>Tabla 81</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Subtipo" type="SubtipoReclamacionPeticion">
+				<xs:annotation>
+					<xs:documentation>Tabla 82</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaLimiteEnvio" type="xs:date"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Retipificacion">
+		<xs:sequence>
+			<xs:element name="Tipo" type="TipoReclamacionPeticion">
+				<xs:annotation>
+					<xs:documentation>Tabla 81</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Subtipo" type="SubtipoReclamacionPeticion">
+				<xs:annotation>
+					<xs:documentation>Tabla 82</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DescRetipificacion" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X255">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VariableAportacionInformacion">
+		<xs:sequence>
+			<xs:element name="TipoInformacion" type="TipoInformacionAdicional">
+				<xs:annotation>
+					<xs:documentation>Tabla 85</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DescPeticionInformacion" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X255">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Variable" type="Variable" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 76</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Valor" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X45">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VariablesAportacionInformacion">
+		<xs:sequence>
+			<xs:element name="VariableAportacionInformacion" type="VariableAportacionInformacion" maxOccurs="10"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VariablesAportacionInformacionparaRetipificacion">
+		<xs:sequence>
+			<xs:element name="VariableAportacionInformacionparaRetipificacion" type="VariableDetalleReclamacion" maxOccurs="10"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EnvioInformacionReclamacion">
+		<xs:sequence>
+			<xs:element name="DatosEnvioInformacion" type="DatosEnvioInformacion"/>
+			<xs:element name="VariablesAportacionInformacion" type="VariablesAportacionInformacion" minOccurs="0"/>
+			<xs:element name="VariablesAportacionInformacionparaRetipificacion" type="VariablesAportacionInformacionparaRetipificacion" minOccurs="0"/>
+			<xs:element name="Cliente" type="ClienteConDireccion" minOccurs="0"/>
+			<xs:element name="Comentarios" type="X4000"/>
+			<xs:element name="RegistrosDocumento" type="RegistrosDocs" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VariableDetalleReclamacion">
+		<xs:sequence>
+			<xs:element name="NumExpedienteAcometida" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X20">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="NumExpedienteFraude" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X16">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="FechaIncidente" type="xs:date" minOccurs="0"/>
+			<xs:element name="NumFacturaATR" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X26">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="TipoConceptoFacturado" type="TipoConceptoFacturado" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 77</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaLectura" type="xs:date" minOccurs="0"/>
+			<xs:element name="TipoDHEdM" type="TipoDHEdM" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 35</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LecturasAportadas" type="LecturasAportadas" minOccurs="0"/>
+			<xs:element name="CodigoIncidencia" type="TipoIncidencia" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 86</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CodigoSolicitud" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X12">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ParametroContratacion" type="ParametroContratacion" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 79</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ConceptoDisconformidad" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X120">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="TipoDeAtencionIncorrecta" type="TipoAtencionIncorrecta" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 87</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IBAN" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X34">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Contacto" type="ContactoRecl" minOccurs="0"/>
+			<xs:element name="CodigoSolicitudReclamacion" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X12">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="FechaDesde" type="xs:date" minOccurs="0"/>
+			<xs:element name="FechaHasta" type="xs:date" minOccurs="0"/>
+			<xs:element name="ImporteReclamado" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="Decimal10V2">
+						<xs:minExclusive value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="UbicacionIncidencia" type="UbicacionIncidencia" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DatosEnvioInformacion">
+		<xs:sequence>
+			<xs:element name="NumExpedienteAcometida" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X20">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="FechaInformacion" type="xs:date"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!--
+		Subsentencias del mensaje CierreReclamancion
+	-->
+	<xs:complexType name="CierreReclamacion">
+		<xs:sequence>
+			<xs:element name="DatosCierre" type="DatosCierre"/>
+			<xs:element name="CodContrato" type="CodigoContrato" minOccurs="0"/>
+			<xs:element name="Comentarios" type="X4000"/>
+			<xs:element name="RegistrosDocumento" type="RegistrosDocs" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DatosCierre">
+		<xs:sequence>
+			<xs:element name="NumExpedienteAcometida" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X20">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Fecha" type="xs:date"/>
+			<xs:element name="Hora" type="xs:time"/>
+			<xs:element name="Tipo" type="TipoReclamacionPeticion">
+				<xs:annotation>
+					<xs:documentation>Tabla 81</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Subtipo" type="SubtipoReclamacionPeticion">
+				<xs:annotation>
+					<xs:documentation>Tabla 82</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CodigoReclamacionDistribuidora">
+				<xs:simpleType>
+					<xs:restriction base="X26">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ResultadoReclamacion" type="ResultadoReclamacion">
+				<xs:annotation>
+					<xs:documentation>Tabla 80</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DetalleResultado" type="DetalleResultado" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 73</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Observaciones" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X400">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="IndemnizacionAbonada" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="Decimal10V2">
+						<xs:minInclusive value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="NumExpedienteAnomaliaFraude" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X20">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="FechaMovimiento" type="xs:date" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia Leon (Comision Nacional de los Mercados y la Competencia) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+		<xs:documentation>
+		
+Version 1.0 CNMC 2016.XX.XX
+
+		</xs:documentation>
+	</xs:annotation>
+	<xs:include schemaLocation="TiposSencillos.xsd"/>
+	<xs:include schemaLocation="TiposComplejos.xsd"/>
+	<xs:element name="SolicitudAportacionLectura">
+		<xs:annotation>
+			<xs:documentation>Version CNMC 1.0</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Cabecera" type="Cabecera"/>
+				<xs:element name="DatosSolicitudAportacionLectura">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="FechaLectura" type="xs:date"/>
+							<xs:element name="TipoDHEdM" type="TipoDHEdM">
+								<xs:annotation>
+									<xs:documentation>Tabla 35</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="LecturaAportada" minOccurs="1" maxOccurs="20">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Integrador" type="MagnitudMedida" minOccurs="1">
+								<xs:annotation>
+									<xs:documentation>Tabla 43</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="TipoCodigoPeriodoDH" type="TipoCodigoPeriodoDH" minOccurs="1">
+								<xs:annotation>
+									<xs:documentation>Tabla 42</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="LecturaPropuesta" type="Decimal10V2" minOccurs="1"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

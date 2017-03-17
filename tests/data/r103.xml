@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MensajePeticionInformacionAdicionalReclamacion xmlns="http://localhost/elegibilidad">
+    <CabeceraReclamacion>
+        <CodigoREEEmpresaEmisora>1234</CodigoREEEmpresaEmisora>
+        <CodigoREEEmpresaDestino>4321</CodigoREEEmpresaDestino>
+        <CodigoDelProceso>R1</CodigoDelProceso>
+        <CodigoDePaso>03</CodigoDePaso>
+        <CodigoDeSolicitud>201412111009</CodigoDeSolicitud>
+        <SecuencialDeSolicitud>01</SecuencialDeSolicitud>
+        <FechaSolicitud>2016-06-10T08:50:43</FechaSolicitud>
+        <CUPS>ES1234000000000001JN0F</CUPS>
+    </CabeceraReclamacion>
+    <InformacionAdicional>
+        <DatosInformacion>
+            <NumExpedienteAcometida>1111122222</NumExpedienteAcometida>
+            <TipoComunicacion>01</TipoComunicacion>
+            <CodigoReclamacionDistribuidora>12345678</CodigoReclamacionDistribuidora>
+        </DatosInformacion>
+        <InformacionIntermedia>
+            <DescInformacionIntermedia>Descripcion de la informacion intermedia aportada.</DescInformacionIntermedia>
+        </InformacionIntermedia>
+        <Retipificacion>
+            <Tipo>02</Tipo>
+            <Subtipo>003</Subtipo>
+            <DescRetipificacion>descripcio de la retipificacio.</DescRetipificacion>
+        </Retipificacion>
+        <SolicitudesInformacionAdicional>
+            <SolicitudInformacionAdicional>
+                <TipoInformacionAdicional>01</TipoInformacionAdicional>
+                <DescPeticionInformacion>Descripcion de la peticion.</DescPeticionInformacion>
+                <FechaLimiteEnvio>2016-07-10</FechaLimiteEnvio>
+            </SolicitudInformacionAdicional>
+            <SolicitudInformacionAdicional>
+                <TipoInformacionAdicional>02</TipoInformacionAdicional>
+                <DescPeticionInformacion>Descripcion de la peticion.</DescPeticionInformacion>
+                <FechaLimiteEnvio>2016-07-10</FechaLimiteEnvio>
+            </SolicitudInformacionAdicional>
+            <SolicitudInformacionAdicionalparaRetipificacion>
+                <Tipo>03</Tipo>
+                <Subtipo>003</Subtipo>
+                <FechaLimiteEnvio>2016-08-10</FechaLimiteEnvio>
+            </SolicitudInformacionAdicionalparaRetipificacion>
+        </SolicitudesInformacionAdicional>
+        <Comentarios>R1 03.</Comentarios>
+    </InformacionAdicional>
+</MensajePeticionInformacionAdicionalReclamacion>

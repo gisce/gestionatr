@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia León (Comisión Nacional de los Mercados y la Competencia) -->
+<xs:schema xmlns="http://localhost/elegibilidad" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="TiposComplejos.xsd"/>
+	<xs:include schemaLocation="TiposSencillos.xsd"/>
+	<xs:annotation>
+		<xs:documentation>
+			Version 1.0 CNMC 2016.xx.xx
+		</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="ModificacionDeATRM101">
+		<xs:sequence>
+			<xs:element name="DatosSolicitud" type="DatosModificacionDeATRM101"/>
+			<xs:element name="Contrato" type="ContratoConModificacion"/>
+			<xs:element name="Cliente" type="ClienteConDireccion"/>
+			<xs:element name="Medida" type="MedidaResto" minOccurs="0"/>
+			<xs:element name="DocTecnica" type="DocTecnica" minOccurs="0"/>
+			<xs:element name="Comentarios" type="X4000" minOccurs="0"/>
+			<xs:element name="RegistrosDocumento" type="RegistrosDocs" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Tipos secundarios de la transaccion actual -->
+	<!-- Datos de la solicitud de modificacion  -->
+	<xs:complexType name="DatosModificacionDeATRM101">
+		<xs:sequence>
+			<xs:element name="TipoModificacion" type="TipoModificacion">
+				<xs:annotation>
+					<xs:documentation>Tabla 7</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TipoSolicitudAdministrativa" type="TipoSolicitudAdministrativa" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 53</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PeriodicidadFacturacion" type="PeriodicidadFacturacion" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 108</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IndActivacion" type="IndActivacionLectura">
+				<xs:annotation>
+					<xs:documentation>Tabla 8 </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaPrevistaAccion" type="xs:date" minOccurs="0"/>
+			<xs:element name="CNAE" type="CNAE" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

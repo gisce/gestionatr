@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia Leon (Comision Nacional de los Mercados y la Competencia) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="TiposComplejos.xsd"/>
+	<xs:include schemaLocation="TiposSencillos.xsd"/>
+	<xs:annotation>
+		<xs:documentation>
+			Version 1.0 CNMC 2016.xx.xx
+		</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="BajaCorteB101">
+		<xs:sequence>
+			<xs:element name="DatosSolicitud" type="DatosBajaATRB101"/>
+			<xs:element name="Cliente" type="Cliente"/>
+			<xs:element name="Contacto" type="Contacto" minOccurs="0"/>
+			<xs:element name="IBAN" type="X34" minOccurs="0"/>
+			<xs:element name="Comentarios" type="X4000" minOccurs="0"/>
+			<xs:element name="RegistrosDocumento" type="RegistrosDocs" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Tipos secundarios de la transaccion actual -->
+	<!-- Datos de la solicitud de baja -->
+	<xs:complexType name="DatosBajaATRB101">
+		<xs:sequence>
+			<xs:element name="IndActivacion" type="IndActivacionLectura">
+				<xs:annotation>
+					<xs:documentation>Tabla 8</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaPrevistaAccion" type="xs:date" minOccurs="0"/>
+			<xs:element name="Motivo" type="MotivoBaja">
+				<xs:annotation>
+					<xs:documentation>Tabla 10</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ClienteBaja">
+		<xs:sequence>
+			<xs:element name="Cliente" type="Cliente"/>
+			<xs:element name="CorreoElectronico" type="X60"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

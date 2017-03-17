@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia Leon (Comision Nacional de los Mercados y la Competencia) -->
+<xs:schema xmlns="http://localhost/elegibilidad" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="TiposComplejos.xsd"/>
+	<xs:include schemaLocation="TiposSencillos.xsd"/>
+	<xs:annotation>
+		<xs:documentation>
+			Version 1.0 CNMC 2016.XX.XX
+		</xs:documentation>
+	</xs:annotation>
+	<xs:element name="MensajeAceptacionAnulacionBaja">
+		<xs:annotation>
+			<xs:documentation>Version CNMC 1.0</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Cabecera" type="Cabecera"/>
+				<xs:element name="AceptacionAnulacion">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="FechaAceptacion" type="xs:date"/>
+							<xs:element name="HoraAceptacion" type="xs:time" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<SolicitudAportacionLectura xmlns="http://localhost/elegibilidad">
+	<Cabecera>
+		<CodigoREEEmpresaEmisora>1234</CodigoREEEmpresaEmisora>
+		<CodigoREEEmpresaDestino>4321</CodigoREEEmpresaDestino>
+		<CodigoDelProceso>W1</CodigoDelProceso>
+		<CodigoDePaso>01</CodigoDePaso>
+		<CodigoDeSolicitud>201412111009</CodigoDeSolicitud>
+		<SecuencialDeSolicitud>01</SecuencialDeSolicitud>
+		<FechaSolicitud>2014-04-16T22:13:37</FechaSolicitud>
+		<CUPS>ES1234000000000001JN0F</CUPS>
+	</Cabecera>
+	<DatosSolicitudAportacionLectura>
+		<FechaLectura>2015-02-18</FechaLectura>
+		<TipoDHEdM>2</TipoDHEdM>
+	</DatosSolicitudAportacionLectura>
+	<LecturaAportada>
+		<Integrador>AE</Integrador>
+		<TipoCodigoPeriodoDH>21</TipoCodigoPeriodoDH>
+		<LecturaPropuesta>0000001162.00</LecturaPropuesta>
+	</LecturaAportada>
+	<LecturaAportada>
+		<Integrador>AE</Integrador>
+		<TipoCodigoPeriodoDH>22</TipoCodigoPeriodoDH>
+		<LecturaPropuesta>0000003106.00</LecturaPropuesta>
+	</LecturaAportada>
+</SolicitudAportacionLectura>
