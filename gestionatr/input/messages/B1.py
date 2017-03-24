@@ -49,7 +49,7 @@ class B1(C2):
     def datos_solicitud(self):
         tree = '{0}.DatosSolicitud'.format(self._header)
         sol = get_rec_attr(self.obj, tree, False)
-        if sol:
+        if sol not in [None, False]:
             return DatosSolicitud(sol)
         else:
             return False
@@ -68,7 +68,7 @@ class B1(C2):
     def datos_aceptacion(self):
         tree = '{0}.DatosAceptacion'.format(self._header)
         sol = get_rec_attr(self.obj, tree, False)
-        if sol:
+        if sol not in [None, False]:
             return DatosAceptacion(sol)
         else:
             return False
@@ -88,7 +88,7 @@ class B1(C2):
     def datos_activacion_baja(self):
         tree = '{0}.DatosActivacionBaja'.format(self._header)
         sol = get_rec_attr(self.obj, tree, False)
-        if sol:
+        if sol not in [None, False]:
             return DatosActivacionBaja(sol)
         else:
             return False

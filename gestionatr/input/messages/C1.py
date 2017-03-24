@@ -20,7 +20,7 @@ class C1(Message, ProcessDeadline):
     def datos_solicitud(self):
         tree = '{0}.DatosSolicitud'.format(self._header)
         sol = get_rec_attr(self.obj, tree, False)
-        if sol:
+        if sol not in [None, False]:
             return DatosSolicitud(sol)
         else:
             return False
@@ -29,7 +29,7 @@ class C1(Message, ProcessDeadline):
     def cliente(self):
         tree = '{0}.Cliente'.format(self._header)
         cli = get_rec_attr(self.obj, tree, False)
-        if cli:
+        if cli not in [None, False]:
             return Cliente(cli)
         else:
             return False
@@ -60,7 +60,7 @@ class C1(Message, ProcessDeadline):
     def datos_aceptacion(self):
         tree = '{0}.DatosAceptacion'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data:
+        if data not in [None, False]:
             return DatosAceptacion(data)
         else:
             return False
@@ -69,7 +69,7 @@ class C1(Message, ProcessDeadline):
     def contrato(self):
         tree = '{0}.Contrato'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data:
+        if data not in [None, False]:
             return Contrato(data)
         else:
             return False
@@ -79,7 +79,7 @@ class C1(Message, ProcessDeadline):
     def rechazos(self):
         obj = getattr(self.obj, 'Rechazos')
         data = []
-        if obj:
+        if obj not in [None, False]:
             for i in obj.Rechazo:
                 data.append(Rechazo(i))
             return data
@@ -99,7 +99,7 @@ class C1(Message, ProcessDeadline):
     def datos_activacion(self):
         tree = '{0}.DatosActivacion'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data:
+        if data not in [None, False]:
             return DatosActivacion(data)
         else:
             return False
@@ -119,7 +119,7 @@ class C1(Message, ProcessDeadline):
     def datos_notificacion(self):
         tree = '{0}.DatosNotificacion'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data:
+        if data not in [None, False]:
             return DatosNotificacion(data)
         else:
             return False
@@ -417,7 +417,7 @@ class Contrato(object):
         if (hasattr(obj, 'PotenciasContratadas') and
                 hasattr(obj.PotenciasContratadas, 'Potencia')):
             for d in obj.PotenciasContratadas.Potencia:
-                data.append(d.text)
+                data.append((int(d.get('Periodo')), int(d.text)))
         return data
 
     @property
@@ -703,7 +703,7 @@ class PuntoDeMedida(object):
     def aparatos(self):
         data = []
         obj = get_rec_attr(self.pm, "Aparatos", False)
-        if obj and hasattr(obj, 'Aparato'):
+        if obj not in [None, False] and hasattr(obj, 'Aparato'):
             for d in obj.Aparato:
                 data.append(Aparato(d))
         return data
@@ -712,7 +712,7 @@ class PuntoDeMedida(object):
     def medidas(self):
         data = []
         obj = get_rec_attr(self.pm, "Medidas", False)
-        if obj and hasattr(obj, 'Medida'):
+        if obj not in [None, False] and hasattr(obj, 'Medida'):
             for d in obj.Medida:
                 data.append(Medida(d))
         return data

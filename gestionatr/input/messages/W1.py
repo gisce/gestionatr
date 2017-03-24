@@ -15,7 +15,7 @@ class W1(C1):
     def datos_solicitud_aportacion_lectura(self):
         tree = 'DatosSolicitudAportacionLectura'
         data = get_rec_attr(self.obj, tree, False)
-        if data:
+        if data not in [None, False]:
             return DatosSolicitudAportacionLectura(data)
         else:
             return False

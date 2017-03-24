@@ -11,8 +11,8 @@ def get_data(path):
 def get_rec_attr(obj, attr, default=None):
     try:
         res = reduce(getattr, attr.split('.'), obj)
-    except AttributeError:
-        if not default is None:
+    except:
+        if default is not None:
             res = default
         else:
             raise
