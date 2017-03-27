@@ -191,7 +191,7 @@ class DatosSolicitud(object):
 
     @property
     def fecha_limite(self):
-        data = ''
+        data = False
         try:
             data = self.datos_solicitud.FechaLimite.text
         except AttributeError:
@@ -254,7 +254,7 @@ class VariableDetalleReclamacion(object):
 
     @property
     def fecha_incidente(self):
-        data = ''
+        data = False
         try:
             data = self.variable.FechaIncidente.text
         except AttributeError:
@@ -281,7 +281,7 @@ class VariableDetalleReclamacion(object):
 
     @property
     def fecha_lectura(self):
-        data = ''
+        data = False
         try:
             data = self.variable.FechaLectura.text
         except AttributeError:
@@ -362,7 +362,7 @@ class VariableDetalleReclamacion(object):
 
     @property
     def fecha_desde(self):
-        data = ''
+        data = False
         try:
             data = self.variable.FechaDesde.text
         except AttributeError:
@@ -371,7 +371,7 @@ class VariableDetalleReclamacion(object):
 
     @property
     def fecha_hasta(self):
-        data = ''
+        data = False
         try:
             data = self.variable.FechaHasta.text
         except AttributeError:
@@ -574,7 +574,7 @@ class Intervencion(object):
 
     @property
     def fecha(self):
-        data = ''
+        data = False
         try:
             data = self.intervencion.Fecha.text
         except AttributeError:
@@ -685,7 +685,7 @@ class SolicitudInformacionAdicional(object):
 
     @property
     def fecha_limite_envio(self):
-        data = ''
+        data = False
         try:
             data = self.sol.FechaLimiteEnvio.text
         except AttributeError:
@@ -718,7 +718,7 @@ class SolicitudInformacionAdicionalparaRetipificacion(object):
 
     @property
     def fecha_limite_envio(self):
-        data = ''
+        data = False
         try:
             data = self.sol.FechaLimiteEnvio.text
         except AttributeError:
@@ -742,7 +742,7 @@ class DatosEnvioInformacion(object):
 
     @property
     def fecha_informacion(self):
-        data = ''
+        data = False
         try:
             data = self.datos.FechaInformacion.text
         except AttributeError:
@@ -808,7 +808,7 @@ class DatosCierre(object):
 
     @property
     def fecha(self):
-        data = ''
+        data = False
         try:
             data = self.datos.Fecha.text
         except AttributeError:
@@ -898,7 +898,7 @@ class DatosCierre(object):
 
     @property
     def fecha_movimiento(self):
-        data = ''
+        data = False
         try:
             data = self.datos.FechaMovimiento.text
         except AttributeError:

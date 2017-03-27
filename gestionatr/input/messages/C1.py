@@ -161,7 +161,7 @@ class DatosSolicitud(object):
 
     @property
     def fecha_prevista_accion(self):
-        data = ''
+        data = False
         try:
             data = self.datos_solicitud.FechaPrevistaAccion.text
         except AttributeError:
@@ -325,7 +325,7 @@ class DatosAceptacion(object):
 
     @property
     def fecha_aceptacion(self):
-        data = ''
+        data = False
         try:
             data = self.datos_aceptacion.FechaAceptacion.text
         except AttributeError:
@@ -334,7 +334,7 @@ class DatosAceptacion(object):
 
     @property
     def fecha_ultima_lectura_firme(self):
-        data = ''
+        data = False
         try:
             data = self.datos_aceptacion.FechaUltimaLecturaFirme.text
         except AttributeError:
@@ -385,7 +385,7 @@ class Contrato(object):
 
     @property
     def fecha_activacion_prevista(self):
-        data = ''
+        data = False
         try:
             data = self.contrato.FechaActivacionPrevista.text
         except AttributeError:
@@ -533,7 +533,7 @@ class DatosActivacion(object):
 
     @property
     def fecha(self):
-        data = ''
+        data = False
         try:
             data = self.datos_activacion.Fecha.text
         except AttributeError:
@@ -665,7 +665,7 @@ class PuntoDeMedida(object):
 
     @property
     def fecha_vigor(self):
-        data = ''
+        data = False
         try:
             data = self.pm.FechaVigor.text
         except AttributeError:
@@ -674,7 +674,7 @@ class PuntoDeMedida(object):
 
     @property
     def fecha_alta(self):
-        data = ''
+        data = False
         try:
             data = self.pm.FechaAlta.text
         except AttributeError:
@@ -683,7 +683,7 @@ class PuntoDeMedida(object):
 
     @property
     def fecha_baja(self):
-        data = ''
+        data = False
         try:
             data = self.pm.FechaBaja.text
         except AttributeError:
@@ -947,7 +947,7 @@ class Medida(object):
 
     @property
     def fecha_lectura_firme(self):
-        data = ''
+        data = False
         try:
             data = self.medida.FechaLecturaFirme.text
         except AttributeError:
@@ -980,7 +980,7 @@ class DatosNotificacion(object):
 
     @property
     def fecha_activacion(self):
-        data = ''
+        data = False
         try:
             data = self.datos_notificacion.FechaActivacion.text
         except AttributeError:

@@ -35,7 +35,7 @@ class DatosSolicitudAportacionLectura(object):
 
     @property
     def fecha_lectura(self):
-        data = ''
+        data = False
         try:
             data = self.datos.FechaLectura.text
         except AttributeError:

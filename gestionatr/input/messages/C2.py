@@ -127,7 +127,7 @@ class Contrato(Contrato):
 
     @property
     def fecha_finalizacion(self):
-        data = ''
+        data = False
         try:
             data = self.contrato.FechaFinalizacion.text
         except AttributeError:
@@ -518,7 +518,7 @@ class CIEPapel(object):
 
     @property
     def fecha_emision_cie(self):
-        data = ''
+        data = False
         try:
             data = self.cie_papel.FechaEmisionCie.text
         except AttributeError:
@@ -527,7 +527,7 @@ class CIEPapel(object):
 
     @property
     def fecha_caducidad_cie(self):
-        data = ''
+        data = False
         try:
             data = self.cie_papel.FechaCaducidadCie.text
         except AttributeError:
@@ -620,7 +620,7 @@ class DatosAPM(object):
 
     @property
     def fecha_emision_apm(self):
-        data = ''
+        data = False
         try:
             data = self.datos_apm.FechaEmisionApm.text
         except AttributeError:
@@ -629,7 +629,7 @@ class DatosAPM(object):
 
     @property
     def fecha_caducidad_apm(self):
-        data = ''
+        data = False
         try:
             data = self.datos_apm.FechaCaducidadApm.text
         except AttributeError:

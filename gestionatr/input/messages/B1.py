@@ -119,7 +119,7 @@ class DatosAceptacion(DatosAceptacion):
 
     @property
     def fecha_activacion_prevista(self):
-        data = ''
+        data = False
         try:
             data = self.datos_aceptacion.FechaActivacionPrevista.text
         except AttributeError:
@@ -134,7 +134,7 @@ class DatosActivacionBaja(object):
 
     @property
     def fecha_activacion(self):
-        data = ''
+        data = False
         try:
             data = self.datos_activacion_baja.FechaActivacion.text
         except AttributeError:
