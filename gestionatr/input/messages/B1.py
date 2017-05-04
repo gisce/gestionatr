@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from C2 import C2, DatosSolicitud
+from C2 import C2, DatosSolicitud, Contacto
 from C1 import DatosAceptacion
 from Deadlines import ProcessDeadline, DeadLine, Workdays, Naturaldays
 from gestionatr.utils import get_rec_attr
@@ -60,6 +60,15 @@ class B1(C2):
         data = get_rec_attr(self.obj, tree, False)
         if data:
             return data.text
+        else:
+            return False
+
+    @property
+    def contacto(self):
+        tree = '{0}.Contacto'.format(self._header)
+        cli = get_rec_attr(self.obj, tree, False)
+        if cli not in [None, False]:
+            return Contacto(cli)
         else:
             return False
 
