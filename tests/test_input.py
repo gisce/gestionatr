@@ -771,11 +771,11 @@ class test_W1(unittest.TestCase):
         self.assertEqual(l1.tipo_codigo_periodo_dh, '22')
         self.assertEqual(l1.lectura_propuesta, '0000003106.00')
 
-    # def test_w102_accept(self):
-    #     w1 = W1(self.xml_w102_accept)
-    #     w1.parse_xml()
-    #     Datos Aceptacion
-        # self.assertEqual(w1.fecha_aceptacion, '2016-06-06')
+    def test_w102_accept(self):
+        w1 = W1(self.xml_w102_accept)
+        w1.parse_xml()
+        # Datos Aceptacion
+        self.assertEqual(w1.datos_aceptacion_lectura.fecha_aceptacion, '2016-06-06')
 
     def test_w102_reject(self):
         w1 = W1(self.xml_w102_reject)

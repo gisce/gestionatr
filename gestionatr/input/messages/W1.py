@@ -27,6 +27,16 @@ class W1(C1):
             data.append(LecturaAportada(i))
         return data
 
+    # Datos Paso 2 aceptacion
+    @property
+    def datos_aceptacion_lectura(self):
+        tree = 'DatosAceptacionLectura'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data not in [None, False]:
+            return DatosAceptacionLectura(data)
+        else:
+            return False
+
 
 class DatosSolicitudAportacionLectura(object):
 
@@ -80,6 +90,21 @@ class LecturaAportada(object):
         data = ''
         try:
             data = self.lectura.LecturaPropuesta.text
+        except AttributeError:
+            pass
+        return data
+
+
+class DatosAceptacionLectura(object):
+
+    def __init__(self, data):
+        self.datos = data
+
+    @property
+    def fecha_aceptacion(self):
+        data = False
+        try:
+            data = self.datos.FechaAceptacion.text
         except AttributeError:
             pass
         return data
