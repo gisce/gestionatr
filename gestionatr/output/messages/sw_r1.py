@@ -28,7 +28,7 @@ class SolicitudReclamacion(XmlModel):
         self.tipo_reclamante = XmlField('TipoReclamante')
         self.reclamante = Reclamante()
         self.comentarios = XmlField('Comentarios')
-        self.registros_documento = XmlField('RegistrosDocumento')
+        self.registros_documento = RegistrosDocumento()
         super(SolicitudReclamacion, self).__init__('SolicitudReclamacion', 'solicitud_reclamacion')
 
 
