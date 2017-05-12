@@ -179,6 +179,19 @@ class DatosAceptacion(XmlModel):
         super(DatosAceptacion, self).__init__('DatosAceptacion', 'datos_aceptacion')
 
 
+# Rechazo Reclamacion
+class MensajeRechazoReclamacion(XmlModel):
+
+    _sort_order = ('mensaje_rechazo_reclamacion', 'cabecera_reclamacion', 'rechazos')
+
+    def __init__(self):
+        self.mensaje_rechazo_reclamacion = XmlField('MensajeRechazoReclamacion',
+                                        attributes={'xmlns': 'http://localhost/elegibilidad'})
+        self.cabecera_reclamacion = CabeceraReclamacion()
+        self.rechazos = Rechazos()
+        super(MensajeRechazoReclamacion, self).__init__('MensajeRechazoReclamacion', 'mensaje_rechazo_reclamacion')
+
+
 # Paso 03
 class MensajePeticionInformacionAdicionalReclamacion(XmlModel):
 
