@@ -96,8 +96,9 @@ class R1(C2):
         data = []
         tree = '{0}.SolicitudesInformacionAdicional'.format(self._header)
         obj = get_rec_attr(self.obj, tree, False)
-        for d in obj.SolicitudInformacionAdicional:
-            data.append(SolicitudInformacionAdicional(d))
+        if obj:
+            for d in obj.SolicitudInformacionAdicional:
+                data.append(SolicitudInformacionAdicional(d))
         return data
 
     @property
@@ -124,8 +125,9 @@ class R1(C2):
         data = []
         tree = '{0}.VariablesAportacionInformacion'.format(self._header)
         obj = get_rec_attr(self.obj, tree, False)
-        for d in obj.VariableAportacionInformacion:
-            data.append(VariableAportacionInformacion(d))
+        if obj:
+            for d in obj.VariableAportacionInformacion:
+                data.append(VariableAportacionInformacion(d))
         return data
 
     @property
@@ -133,8 +135,9 @@ class R1(C2):
         data = []
         tree = '{0}.VariablesAportacionInformacionparaRetipificacion'.format(self._header)
         obj = get_rec_attr(self.obj, tree, False)
-        for d in obj.VariableAportacionInformacionparaRetipificacion:
-            data.append(VariableDetalleReclamacion(d))
+        if obj:
+            for d in obj.VariableAportacionInformacionparaRetipificacion:
+                data.append(VariableDetalleReclamacion(d))
         return data
 
     # Datos paso 5
