@@ -300,7 +300,7 @@ class PuntosDeMedida(XmlModel):
 
 class PuntoDeMedida(XmlModel):
 
-    _sort_order = ('punto_de_medida', 'cod_pm', 'tipo_movimiento', 'tipo_pm', 'cod_pm_principal', 'modo_lectura', 'funcion', 'direccion_enlace', 'direccion_punto_medida', 'num_linea', 'telefono_telemedida', 'estado_telefono', 'clave_acceso', 'tension_pm', 'fecha_vigor', 'fecha_alta', 'fecha_baja', 'aparatos', 'medidas', 'comentarios')
+    _sort_order = ('punto_de_medida', 'cod_pm', 'tipo_movimiento', 'tipo_pm', 'cod_pm_principal', 'modo_lectura', 'funcion', 'direccion_enlace', 'direccion_punto_medida', 'num_linea', 'telefono_telemedida', 'estado_telefono', 'clave_acceso', 'tension_pm', 'fecha_vigor', 'fecha_alta', 'fecha_baja', 'aparatos', 'comentarios')
 
     def __init__(self):
         self.punto_de_medida = XmlField('PuntoDeMedida')
@@ -321,7 +321,6 @@ class PuntoDeMedida(XmlModel):
         self.fecha_alta = XmlField('FechaAlta')
         self.fecha_baja = XmlField('FechaBaja')
         self.aparatos = Aparatos()
-        self.medidas = Medidas()
         self.comentarios = XmlField('Comentarios')
         super(PuntoDeMedida, self).__init__('PuntoDeMedida', 'punto_de_medida')
 
@@ -338,7 +337,7 @@ class Aparatos(XmlModel):
 
 class Aparato(XmlModel):
 
-    _sort_order = ('aparato', 'modelo_aparato', 'tipo_movimiento', 'tipo_equipo_medida', 'tipo_propiedad_aparato', 'propietario', 'tipo_dhedm', 'modo_medida_potencia', 'lectura_directa', 'cod_precinto', 'datos_aparato')
+    _sort_order = ('aparato', 'modelo_aparato', 'tipo_movimiento', 'tipo_equipo_medida', 'tipo_propiedad_aparato', 'propietario', 'tipo_dhedm', 'modo_medida_potencia', 'lectura_directa', 'cod_precinto', 'datos_aparato', 'medidas')
 
     def __init__(self):
         self.aparato = XmlField('Aparato')
@@ -352,6 +351,7 @@ class Aparato(XmlModel):
         self.lectura_directa = XmlField('LecturaDirecta')
         self.cod_precinto = XmlField('CodPrecinto')
         self.datos_aparato = DatosAparato()
+        self.medidas = Medidas()
         super(Aparato, self).__init__('Aparato', 'aparato')
 
 

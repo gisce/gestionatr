@@ -708,15 +708,6 @@ class PuntoDeMedida(object):
                 data.append(Aparato(d))
         return data
 
-    @property
-    def medidas(self):
-        data = []
-        obj = get_rec_attr(self.pm, "Medidas", False)
-        if obj and hasattr(obj, 'Medida'):
-            for d in obj.Medida:
-                data.append(Medida(d))
-        return data
-
 
 class Aparato(object):
 
@@ -892,6 +883,15 @@ class Aparato(object):
             data = self.aparato.DatosAparato.RuedasDecimales.text
         except AttributeError:
             pass
+        return data
+
+    @property
+    def medidas(self):
+        data = []
+        obj = get_rec_attr(self.aparato, "Medidas", False)
+        if obj and hasattr(obj, 'Medida'):
+            for d in obj.Medida:
+                data.append(Medida(d))
         return data
 
 
