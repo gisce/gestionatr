@@ -949,7 +949,8 @@ class MinimumFieldsChecker(object):
         return get_rec_attr(self.r1, "cliente.identificador", False)
 
     def check_nombre_cliente(self):
-        return get_rec_attr(self.r1, "cliente.nombre_de_pila", False)
+        return get_rec_attr(self.r1, "cliente.nombre_de_pila", False) or \
+               get_rec_attr(self.r1, "cliente.razon_social", False)
 
     def check_telefono_contacto(self):
         for var in self.r1.variables_detalle_reclamacion:
@@ -1067,7 +1068,7 @@ class MinimumFieldsChecker(object):
 
     def check_tipo_atencion_incorrecta(self):
         for var in self.r1.variables_detalle_reclamacion:
-            if not var.tipus_atencio_incorrecte:
+            if not var.tipo_de_atencion_incorrecta:
                 return False
         return len(self.r1.variables_detalle_reclamacion) > 0
 
