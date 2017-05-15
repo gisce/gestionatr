@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from libcomxml.core import XmlModel, XmlField
-from gestionatr.output.messages.base import Cabecera, rep_fecha
+from gestionatr.output.messages.base import Cabecera, rep_fecha, \
+    rep_fecha_sin_hora, rep_decimal
 from gestionatr.output.messages.sw_c1 import IdCliente
 from gestionatr.output.messages.sw_c2 import Direccion
 
@@ -52,7 +53,7 @@ class FacturaATR(XmlModel):
         self.impuesto_electrico = ImpuestoElectrico()
         self.alquileres = Alquileres()
         self.importe_intereses = XmlField('ImporteIntereses')
-        self.concepto_repercutible = XmlField('ConceptoRepercutible')
+        self.concepto_repercutible = ConceptoRepercutible()
         self.iva = IVA()
         self.iva_reducido = IVAReducido()
         self.medidas = Medidas()
@@ -68,7 +69,7 @@ class DatosGeneralesFacturaATR(XmlModel):
 
     def __init__(self):
         self.datos_generales_factura_atr = XmlField('DatosGeneralesFacturaATR')
-        self.direccion_suministro = Direccion()
+        self.direccion_suministro = DireccionSuministro()
         self.cliente = IdCliente()
         self.cod_contrato = XmlField('CodContrato')
         self.datos_generales_factura = DatosGeneralesFactura()
@@ -84,18 +85,19 @@ class DatosGeneralesFactura(XmlModel):
         'datos_generales_factura', 'codigo_fiscal_factura', 'tipo_factura',
         'motivo_facturacion', 'codigo_factura_rectificada_anulada',
         'expediente', 'fecha_factura', 'identificador_emisora', 'comentarios',
-        'importe_total_facutra', 'saldo_factura', 'tipo_moneda'
+        'importe_total_factura', 'saldo_factura', 'tipo_moneda'
     )
 
     def __init__(self):
         self.datos_generales_factura = XmlField('DatosGeneralesFactura')
-        self.codigo_fiscal_factura = XmlField('TipoFactura')
-        self.motivo_facturacio = XmlField('MotivoFacturacion')
+        self.codigo_fiscal_factura = XmlField('CodigoFiscalFactura')
+        self.tipo_factura = XmlField('TipoFactura')
+        self.motivo_facturacion = XmlField('MotivoFacturacion')
         self.codigo_factura_rectificada_anulada = XmlField(
             'CodigoFacturaRectificadaAnuldada'
         )
         self.expediente = Expediente()
-        self.fecha_factura = XmlField('FechaFactura', rep=rep_fecha)
+        self.fecha_factura = XmlField('FechaFactura')
         self.identificador_emisora = XmlField('IdentificadorEmisora')
         self.comentarios = XmlField('Comentarios')
         self.importe_total_factura = XmlField('ImporteTotalFactura')
@@ -128,7 +130,7 @@ class DatosFacturaATR(XmlModel):
 
     def __init__(self):
         self.datos_factura_atr = XmlField('DatosFacturaATR')
-        self.fecha_boe = XmlField('FechaBOE', rep=rep_fecha)
+        self.fecha_boe = XmlField('FechaBOE', rep=rep_fecha_sin_hora)
         self.tarifa_atr_fact = XmlField('TarifaATRFact')
         self.modo_control_potencia = XmlField('ModoControlPotencia')
         self.marca_medida_con_perdidas = XmlField('MarcaMedidaConPerdidas')
@@ -148,8 +150,8 @@ class PeriodoCCH(XmlModel):
 
     def __init__(self):
         self.periodo_cch = XmlField('PeriodoCCH')
-        self.fecha_desde_cch = XmlField('FechaDesdeCCH', rep=rep_fecha)
-        self.fecha_hasta_cch = XmlField('FechaHastaCCH', rep=rep_fecha)
+        self.fecha_desde_cch = XmlField('FechaDesdeCCH', rep=rep_fecha_sin_hora)
+        self.fecha_hasta_cch = XmlField('FechaHastaCCH', rep=rep_fecha_sin_hora)
         super(PeriodoCCH, self).__init__('PeriodoCCH', 'periodo_cch')
 
 
@@ -161,8 +163,12 @@ class Periodo(XmlModel):
 
     def __init__(self):
         self.periodo = XmlField('Periodo')
-        self.fecha_desde_factura = XmlField('FechaDesdeFactura', rep=rep_fecha)
-        self.fecha_hasta_factura = XmlField('FechaHastaFactura', rep=rep_fecha)
+        self.fecha_desde_factura = XmlField(
+            'FechaDesdeFactura', rep=rep_fecha_sin_hora
+        )
+        self.fecha_hasta_factura = XmlField(
+            'FechaHastaFactura', rep=rep_fecha_sin_hora
+        )
         self.numero_dias = XmlField('NumeroDias')
         super(Periodo, self).__init__('Periodo', 'periodo')
 
@@ -190,8 +196,8 @@ class TerminoPotencia(XmlModel):
 
     def __init__(self):
         self.termino_potencia = XmlField('TerminoPotencia')
-        self.fecha_desde = XmlField('FechaDesde', rep=rep_fecha)
-        self.fehca_hasta = XmlField('FechaHasta', rep=rep_fecha)
+        self.fecha_desde = XmlField('FechaDesde', rep=rep_fecha_sin_hora)
+        self.fecha_hasta = XmlField('FechaHasta', rep=rep_fecha_sin_hora)
         self.periodo = PeriodoPotencia()
         super(TerminoPotencia, self).__init__(
             'TerminoPotencia', 'termino_potencia'
@@ -261,9 +267,9 @@ class TerminoEnergiaActiva(XmlModel):
 
     def __init__(self):
         self.termino_energia_activa = XmlField('TerminoEnergiaActiva')
-        self.fecha_desde = XmlField('FechaDesde', rep=rep_fecha)
-        self.fehca_hasta = XmlField('FechaHasta', rep=rep_fecha)
-        self.periodo = PeriodoEnergiaActiva()
+        self.fecha_desde = XmlField('FechaDesde', rep=rep_fecha_sin_hora)
+        self.fehca_hasta = XmlField('FechaHasta', rep=rep_fecha_sin_hora)
+        self.periodos = PeriodoEnergiaActiva()
         super(TerminoEnergiaActiva, self).__init__(
             'TerminoEnergiaActiva', 'termino_energia_activa'
         )
@@ -288,7 +294,7 @@ class EnergiaReactiva(XmlModel):
     )
 
     def __init__(self):
-        self.energia_activa = XmlField('EnergiaReactiva')
+        self.energia_reactiva = XmlField('EnergiaReactiva')
         self.termino_energia_reactiva = TerminoEnergiaReactiva()
         self.importe_total_energia_reactiva = XmlField(
             'ImporteTotalEnergiaReactiva'
@@ -306,8 +312,8 @@ class TerminoEnergiaReactiva(XmlModel):
 
     def __init__(self):
         self.termino_energia_reactiva = XmlField('TerminoEnergiaReactiva')
-        self.fecha_desde = XmlField('FechaDesde', rep=rep_fecha)
-        self.fehca_hasta = XmlField('FechaHasta', rep=rep_fecha)
+        self.fecha_desde = XmlField('FechaDesde', rep=rep_fecha_sin_hora)
+        self.fehca_hasta = XmlField('FechaHasta', rep=rep_fecha_sin_hora)
         self.periodo = PeriodoEnergiaActiva()
         super(TerminoEnergiaReactiva, self).__init__(
             'TerminoEnergiaReactiva', 'termino_energia_reactiva'
@@ -320,7 +326,7 @@ class PeriodoEnergiaReactiva(XmlModel):
 
     def __init__(self):
         self.periodo = XmlField('Periodo')
-        self.valor_energia_activa = XmlField('ValorEnergiaReactiva')
+        self.valor_energia_reactiva = XmlField('ValorEnergiaReactiva')
         self.precio_energia = XmlField('PrecioEnergiaReactiva')
         super(PeriodoEnergiaReactiva, self).__init__('Periodo', 'periodo')
 
@@ -333,9 +339,9 @@ class ImpuestoElectrico(XmlModel):
 
     def __init__(self):
         self.impuesto_electrico = XmlField('ImpuestoElectrico')
-        self.base_imponible = XmlField('BaseImponible')
-        self.porcentaje = XmlField('Porcentaje')
-        self.importe = XmlField('Importe')
+        self.base_imponible = XmlField('BaseImponible', rep=rep_decimal(2))
+        self.porcentaje = XmlField('Porcentaje', rep=rep_decimal(8))
+        self.importe = XmlField('Importe', rep=rep_decimal(2))
         super(ImpuestoElectrico, self).__init__(
             'ImpuestoElectrico', 'impuesto_electrico'
         )
@@ -371,12 +377,13 @@ class PrecioDiarioAlquiler(XmlModel):
 
 class IVA(XmlModel):
 
-    _sort_order = ('iva', 'base_imponible', 'porcentaje')
+    _sort_order = ('iva', 'base_imponible', 'porcentaje', 'importe')
 
     def __init__(self):
         self.iva = XmlField('IVA')
-        self.base_imponible = XmlField('BaseImponible')
-        self.porcentaje = XmlField('Porcentaje')
+        self.base_imponible = XmlField('BaseImponible', rep=rep_decimal(2))
+        self.porcentaje = XmlField('Porcentaje', rep=rep_decimal(2))
+        self.importe = XmlField('Importe', rep=rep_decimal(2))
         super(IVA, self).__init__('IVA', 'iva')
 
 
@@ -582,7 +589,7 @@ class RegistroFin(XmlModel):
         self.saldo_total_facturacio = XmlField('SaldoTotalFacturacion')
         self.total_recibos = XmlField('TotalRecibos')
         self.tipo_moneda = XmlField('TipoMoneda')
-        self.fecha_valor = XmlField('FechaValor', rep=rep_fecha)
+        self.fecha_valor = XmlField('FechaValor', rep=rep_fecha_sin_hora)
         self.iban = XmlField('IBAN')
         self.id_remesa = XmlField('Idremesa')
         super(RegistroFin, self).__init__('RegistroFin', 'registro_fin')
