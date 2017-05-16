@@ -1186,8 +1186,8 @@ class test_W1(unittest.TestCase):
         self.xml_w102_reject.close()
 
     def test_create_pas01(self):
-        # MensajeAportacionLectura
-        mensaje_aportacion_lectura = w1.SolicitudAportacionLectura()
+        # MensajeSolicitudAportacionLectura
+        mensaje_aportacion_lectura = w1.MensajeSolicitudAportacionLectura()
 
         # Cabecera
         cabecera = get_header(process='W1', step='01',  date='2014-04-16T22:13:37', code='201412111009')
