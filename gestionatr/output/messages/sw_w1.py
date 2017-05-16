@@ -3,17 +3,17 @@ from gestionatr.output.messages.sw_c1 import *
 
 
 # Paso 01
-class SolicitudAportacionLectura(XmlModel):
+class MensajeSolicitudAportacionLectura(XmlModel):
 
     _sort_order = ('mensaje', 'cabecera', 'datos_solicitud_aportacion_lectura', 'lectura_aportada_list')
 
     def __init__(self):
-        self.mensaje = XmlField('SolicitudAportacionLectura',
+        self.mensaje = XmlField('MensajeSolicitudAportacionLectura',
                                 attributes={'xmlns': 'http://localhost/elegibilidad'})
         self.cabecera = Cabecera()
         self.datos_solicitud_aportacion_lectura = DatosSolicitudAportacionLectura()
         self.lectura_aportada_list = []
-        super(SolicitudAportacionLectura, self).__init__('SolicitudAportacionLectura', 'mensaje')
+        super(MensajeSolicitudAportacionLectura, self).__init__('MensajeSolicitudAportacionLectura', 'mensaje')
 
 
 class DatosSolicitudAportacionLectura(XmlModel):
