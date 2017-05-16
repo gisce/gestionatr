@@ -6,18 +6,18 @@ from gestionatr.output.messages.base import Cabecera
 
 # Paso 01
 class MensajeCambiodeComercializadorSinCambios(XmlModel):
-    _sort_order = ('mensage', 'cabecera', 'cambiode_comercializador_sin_cambios')
+    _sort_order = ('mensaje', 'cabecera', 'cambiode_comercializador_sin_cambios')
 
     def __init__(self):
         self.doc_root = None
-        self.mensage = XmlField(
+        self.mensaje = XmlField(
             'MensajeCambiodeComercializadorSinCambios',
             attributes={'xmlns': 'http://localhost/elegibilidad'}
         )
         self.cabecera = Cabecera()
         self.cambiode_comercializador_sin_cambios = CambiodeComercializadorSinCambios()
         super(MensajeCambiodeComercializadorSinCambios, self).__init__(
-            'MensajeCambiodeComercializadorSinCambios', 'mensage'
+            'MensajeCambiodeComercializadorSinCambios', 'mensaje'
         )
 
 
@@ -120,14 +120,14 @@ class RegistroDoc(XmlModel):
 # Paso 02 accept
 class MensajeAceptacionCambiodeComercializadorSinCambios(XmlModel):
 
-    _sort_order = ('mensage', 'cabecera', 'aceptacion_cambiode_comercializador_sin_cambios')
+    _sort_order = ('mensaje', 'cabecera', 'aceptacion_cambiode_comercializador_sin_cambios')
 
     def __init__(self):
-        self.mensage = XmlField('MensajeAceptacionCambiodeComercializadorSinCambios',
+        self.mensaje = XmlField('MensajeAceptacionCambiodeComercializadorSinCambios',
                                 attributes={'xmlns': 'http://localhost/elegibilidad'})
         self.cabecera = Cabecera()
         self.aceptacion_cambiode_comercializador_sin_cambios = AceptacionCambiodeComercializadorSinCambios()
-        super(MensajeAceptacionCambiodeComercializadorSinCambios, self).__init__('MensajeAceptacionCambiodeComercializadorSinCambios', 'mensage')
+        super(MensajeAceptacionCambiodeComercializadorSinCambios, self).__init__('MensajeAceptacionCambiodeComercializadorSinCambios', 'mensaje')
 
 
 class AceptacionCambiodeComercializadorSinCambios(XmlModel):

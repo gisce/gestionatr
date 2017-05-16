@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from C2 import C2, DatosSolicitud
+from C2 import C2, DatosSolicitud, Contacto
 from C1 import DatosAceptacion
 from Deadlines import ProcessDeadline, DeadLine, Workdays, Naturaldays
 from gestionatr.utils import get_rec_attr
@@ -49,7 +49,7 @@ class B1(C2):
     def datos_solicitud(self):
         tree = '{0}.DatosSolicitud'.format(self._header)
         sol = get_rec_attr(self.obj, tree, False)
-        if sol:
+        if sol not in [None, False]:
             return DatosSolicitud(sol)
         else:
             return False
@@ -63,12 +63,21 @@ class B1(C2):
         else:
             return False
 
+    @property
+    def contacto(self):
+        tree = '{0}.Contacto'.format(self._header)
+        cli = get_rec_attr(self.obj, tree, False)
+        if cli not in [None, False]:
+            return Contacto(cli)
+        else:
+            return False
+
     # Datos paso 02
     @property
     def datos_aceptacion(self):
         tree = '{0}.DatosAceptacion'.format(self._header)
         sol = get_rec_attr(self.obj, tree, False)
-        if sol:
+        if sol not in [None, False]:
             return DatosAceptacion(sol)
         else:
             return False
@@ -88,7 +97,7 @@ class B1(C2):
     def datos_activacion_baja(self):
         tree = '{0}.DatosActivacionBaja'.format(self._header)
         sol = get_rec_attr(self.obj, tree, False)
-        if sol:
+        if sol not in [None, False]:
             return DatosActivacionBaja(sol)
         else:
             return False
@@ -119,7 +128,7 @@ class DatosAceptacion(DatosAceptacion):
 
     @property
     def fecha_activacion_prevista(self):
-        data = ''
+        data = False
         try:
             data = self.datos_aceptacion.FechaActivacionPrevista.text
         except AttributeError:
@@ -134,7 +143,7 @@ class DatosActivacionBaja(object):
 
     @property
     def fecha_activacion(self):
-        data = ''
+        data = False
         try:
             data = self.datos_activacion_baja.FechaActivacion.text
         except AttributeError:

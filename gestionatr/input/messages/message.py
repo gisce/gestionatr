@@ -191,7 +191,7 @@ class Message(MessageBase):
             self.pas = self.head.CodigoDePaso.text
         except:
             msg = u'No se puede identificar el código de proceso ' \
-                  'o código de paso'
+                  u'o código de paso'
             raise except_f1('Error', msg)
 
     def set_xsd(self):

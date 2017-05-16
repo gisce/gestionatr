@@ -170,7 +170,7 @@ class Integrador(object):
 
     @property
     def fecha_hora_maximetro(self):
-        data = ''
+        data = False
         try:
             data = self.integrador.FechaHoraMaximetro.text
         except AttributeError:
@@ -185,7 +185,7 @@ class LecturaInfo(object):
 
     @property
     def fecha(self):
-        data = ''
+        data = False
         try:
             data = self.lect.Fecha.text
         except AttributeError:
