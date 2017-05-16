@@ -22,7 +22,7 @@ class M1(C2):
     def datos_solicitud(self):
         tree = '{0}.DatosSolicitud'.format(self._header)
         sol = get_rec_attr(self.obj, tree, False)
-        if sol:
+        if sol not in [None, False]:
             return DatosSolicitud(sol)
         else:
             return False

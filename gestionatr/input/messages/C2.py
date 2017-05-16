@@ -22,16 +22,15 @@ class C2(C1):
     def datos_solicitud(self):
         tree = '{0}.DatosSolicitud'.format(self._header)
         sol = get_rec_attr(self.obj, tree, False)
-        if sol:
+        if sol not in [None, False]:
             return DatosSolicitud(sol)
-        else:
-            return False
+        return False
 
     @property
     def cliente(self):
         tree = '{0}.Cliente'.format(self._header)
         cli = get_rec_attr(self.obj, tree, False)
-        if cli:
+        if cli not in [None, False]:
             return Cliente(cli)
         else:
             return False
@@ -40,7 +39,7 @@ class C2(C1):
     def contrato(self):
         tree = '{0}.Contrato'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data:
+        if data not in [None, False]:
             return Contrato(data)
         else:
             return False
@@ -49,7 +48,7 @@ class C2(C1):
     def medida(self):
         tree = '{0}.Medida'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data:
+        if data not in [None, False]:
             return Medida(data)
         else:
             return False
@@ -58,7 +57,7 @@ class C2(C1):
     def doc_tecnica(self):
         tree = '{0}.DocTecnica'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data:
+        if data not in [None, False]:
             return DocTecnica(data)
         else:
             return False
@@ -87,7 +86,7 @@ class C2(C1):
         tree = '{0}.Incidencia'.format(self._header)
         obj = get_rec_attr(self.obj, tree, False)
         data = []
-        if obj:
+        if obj not in [None, False]:
             for i in obj:
                 data.append(Incidencia(i))
             return data
@@ -128,7 +127,7 @@ class Contrato(Contrato):
 
     @property
     def fecha_finalizacion(self):
-        data = ''
+        data = False
         try:
             data = self.contrato.FechaFinalizacion.text
         except AttributeError:
@@ -519,7 +518,7 @@ class CIEPapel(object):
 
     @property
     def fecha_emision_cie(self):
-        data = ''
+        data = False
         try:
             data = self.cie_papel.FechaEmisionCie.text
         except AttributeError:
@@ -528,7 +527,7 @@ class CIEPapel(object):
 
     @property
     def fecha_caducidad_cie(self):
-        data = ''
+        data = False
         try:
             data = self.cie_papel.FechaCaducidadCie.text
         except AttributeError:
@@ -621,7 +620,7 @@ class DatosAPM(object):
 
     @property
     def fecha_emision_apm(self):
-        data = ''
+        data = False
         try:
             data = self.datos_apm.FechaEmisionApm.text
         except AttributeError:
@@ -630,7 +629,7 @@ class DatosAPM(object):
 
     @property
     def fecha_caducidad_apm(self):
-        data = ''
+        data = False
         try:
             data = self.datos_apm.FechaCaducidadApm.text
         except AttributeError:
