@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Teresa Rodriguez-Losada Marco (Comisión Nacional de los Mercados y la Competencia) -->
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia León (Comisión Nacional de los Mercados y la Competencia) -->
 <!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End User (free.org) -->
 <!-- edited with XML Spy v4.3 U (http://www.xmlspy.com)  -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
@@ -70,7 +70,7 @@
 			<xs:element name="ImporteTotalFactura" type="ImporteFact"/>
 			<xs:element name="SaldoFactura" minOccurs="0">
 				<xs:simpleType>
-					<xs:restriction base="xs:decimal">
+					<xs:restriction base="ImporteFact">
 						<xs:totalDigits value="12"/>
 						<xs:fractionDigits value="2"/>
 					</xs:restriction>
@@ -219,14 +219,7 @@
 										<xs:element name="Periodo" maxOccurs="6">
 											<xs:complexType>
 												<xs:sequence>
-													<xs:element name="ValorExcesoPotencia">
-														<xs:simpleType>
-															<xs:restriction base="xs:integer">
-																<xs:totalDigits value="9"/>
-																<xs:minInclusive value="0"/>
-															</xs:restriction>
-														</xs:simpleType>
-													</xs:element>
+													<xs:element name="ValorExcesoPotencia" type="ImporteFact"/>
 												</xs:sequence>
 											</xs:complexType>
 										</xs:element>
@@ -253,6 +246,8 @@
 																		<xs:restriction base="xs:decimal">
 																			<xs:totalDigits value="13"/>
 																			<xs:fractionDigits value="2"/>
+																			<xs:maxInclusive value="99999999999.99"/>
+																			<xs:minInclusive value="-99999999999.99"/>
 																		</xs:restriction>
 																	</xs:simpleType>
 																</xs:element>
@@ -283,6 +278,8 @@
 																		<xs:restriction base="xs:decimal">
 																			<xs:totalDigits value="13"/>
 																			<xs:fractionDigits value="2"/>
+																			<xs:minInclusive value="-99999999999.99"/>
+																			<xs:maxInclusive value="99999999999.99"/>
 																		</xs:restriction>
 																	</xs:simpleType>
 																</xs:element>
@@ -305,6 +302,8 @@
 												<xs:restriction base="xs:decimal">
 													<xs:totalDigits value="12"/>
 													<xs:fractionDigits value="2"/>
+													<xs:minInclusive value="-9999999999.99"/>
+													<xs:maxInclusive value="9999999999.99"/>
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -314,6 +313,7 @@
 													<xs:totalDigits value="13"/>
 													<xs:fractionDigits value="8"/>
 													<xs:minInclusive value="0"/>
+													<xs:maxInclusive value="99999.99999999"/>
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -366,6 +366,8 @@
 								<xs:restriction base="xs:decimal">
 									<xs:totalDigits value="15"/>
 									<xs:fractionDigits value="2"/>
+									<xs:maxInclusive value="9999999999999.99"/>
+									<xs:minInclusive value="-9999999999999.99"/>
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:element>
@@ -374,6 +376,8 @@
 								<xs:restriction base="xs:decimal">
 									<xs:totalDigits value="15"/>
 									<xs:fractionDigits value="2"/>
+									<xs:maxInclusive value="9999999999999.99"/>
+									<xs:minInclusive value="-9999999999999.99"/>
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:element>
@@ -435,6 +439,8 @@
 					<xs:restriction base="xs:decimal">
 						<xs:totalDigits value="12"/>
 						<xs:fractionDigits value="2"/>
+						<xs:minInclusive value="-9999999999.99"/>
+						<xs:maxInclusive value="9999999999.99"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -444,6 +450,7 @@
 						<xs:totalDigits value="6"/>
 						<xs:fractionDigits value="2"/>
 						<xs:minInclusive value="0"/>
+						<xs:maxInclusive value="9999.99"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -507,7 +514,13 @@
 				</xs:sequence>
 				<xs:element name="FechaOperacion" type="xs:date"/>
 			</xs:choice>
-			<xs:element name="UnidadesConceptoRepercutible" type="Decimal10V2"/>
+			<xs:element name="UnidadesConceptoRepercutible">
+				<xs:simpleType>
+					<xs:restriction base="Decimal10V2">
+						<xs:minInclusive value="-9999999999.99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
 			<xs:element name="PrecioUnidadConceptoRepercutible" type="PrecioFact"/>
 			<xs:element name="ImporteTotalConceptoRepercutible" type="ImporteFact"/>
 			<xs:element name="Comentarios" type="X4000" minOccurs="0"/>
@@ -559,7 +572,7 @@
 			<xs:element name="ImporteTotalFactura" type="ImporteFact"/>
 			<xs:element name="SaldoFactura" minOccurs="0">
 				<xs:simpleType>
-					<xs:restriction base="xs:decimal">
+					<xs:restriction base="ImporteFact">
 						<xs:totalDigits value="12"/>
 						<xs:fractionDigits value="2"/>
 					</xs:restriction>

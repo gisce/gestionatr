@@ -60,6 +60,7 @@
 				</xs:simpleType>
 			</xs:element>
 			<xs:element name="DatosAparato" type="DatosAparatoICP"/>
+			<xs:element name="Medidas" type="MedidasAparato" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="AparatosActivacion">
@@ -705,7 +706,9 @@
 						</xs:element>
 						<xs:element name="LecturaPropuesta">
 							<xs:simpleType>
-								<xs:restriction base="Decimal10V2"/>
+								<xs:restriction base="Decimal10V2">
+									<xs:minInclusive value="-9999999999.99"/>
+								</xs:restriction>
 							</xs:simpleType>
 						</xs:element>
 					</xs:sequence>
@@ -806,6 +809,7 @@
 												<xs:totalDigits value="9"/>
 												<xs:fractionDigits value="3"/>
 												<xs:minInclusive value="0"/>
+												<xs:maxInclusive value="999999.999"/>
 											</xs:restriction>
 										</xs:simpleType>
 									</xs:element>
@@ -828,8 +832,10 @@
 									<xs:element name="ConsumoCalculado">
 										<xs:simpleType>
 											<xs:restriction base="xs:decimal">
-												<xs:totalDigits value="12"/>
+												<xs:totalDigits value="13"/>
 												<xs:fractionDigits value="2"/>
+												<xs:maxInclusive value="99999999999.99"/>
+												<xs:minInclusive value="-99999999999.99"/>
 											</xs:restriction>
 										</xs:simpleType>
 									</xs:element>
@@ -848,6 +854,8 @@
 														<xs:restriction base="xs:decimal">
 															<xs:totalDigits value="11"/>
 															<xs:fractionDigits value="2"/>
+															<xs:maxInclusive value="999999999.99"/>
+															<xs:minInclusive value="-999999999.99"/>
 														</xs:restriction>
 													</xs:simpleType>
 												</xs:element>
@@ -1035,7 +1043,6 @@
 			<xs:element name="FechaAlta" type="xs:date"/>
 			<xs:element name="FechaBaja" type="xs:date" minOccurs="0"/>
 			<xs:element name="Aparatos" type="AparatosActivacion" minOccurs="0"/>
-			<xs:element name="Medidas" type="MedidasAparato" minOccurs="0"/>
 			<xs:element name="Comentarios" type="X4000" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -1094,6 +1101,7 @@
 						<xs:totalDigits value="12"/>
 						<xs:fractionDigits value="2"/>
 						<xs:minInclusive value="0"/>
+						<xs:maxInclusive value="9999999999.99"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
