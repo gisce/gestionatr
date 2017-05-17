@@ -1,0 +1,22 @@
+sudo: false
+language: python
+python:
+  - "2.7"
+install:
+  - "pip install ."
+  - if [[ $TRAVIS_PYTHON_VERSION == 2.6 ]]; then pip install unittest2; fi
+  - "pip install coveralls"
+script:
+  - coverage run setup.py test
+after_success:
+  - coveralls
+  - coverage report
+deploy:
+  provider: pypi
+  user: gisce
+  password:
+    secure:
+OYLboUsOphMa+q9g8oEmJPciAhV/XZqPw753q2mAwR0adrlq9NeE6dGZbYOPxvoZY4nVbgACCWFg/l49L2loZYrvcKNgxLZDeBv0Q8wIl8ajVAe6KFnqxDsDDyUAWnP50dfEJkw0vjM9ZX3poQy7nwMTwJPxP0hVxY2W2T9qQUTQT55IRgxI+MJ8mjlQqgHoXqjNZhm+3GhutkcSNgQ65pi3niDY+1cv/eRMmAeDTcfEOAXMVbAxz3uUNuNXx4V5bYPjCQxB2812Dqj7VtN1utkdMc4611o8oC+nvVLZ5MXBvkq1c+yo3TJQhp1fd1Nuhk6TAS0wZ+wGqP8gukRv6jHMQBtfFiBQ1po3q9BQuRPTqz/eTRUlauVuNH+TjdU3cMwNKCf0xvEfqEv1mdvAYpfL9mfWiXr19KbXKJIgv3FCY/yIZYOYyAfDc5vXlYLa3lz7bEP1NQif/R4dEFHNsAwe0FmM28Kv4StAS7oLUHfAfg0Xr+bsjGMHarD47WV+rw70Dsi/6tXtRLEbppHSoZOn2EwlcmCsZR3G+IQPbds2GMa+UDNdr7YSAqIuibYkn82kGP75N2L68XbLWZ1lEPCSnovdCfAhWfrPqP8qXe2dnnTt4zK6lxMVTygMT6bnXPxeY+onw0GZok0kpS2b/SNUCu+1oKssGi2m2cVxGuQ=
+  on:
+    tags: true
+    repo: gisce/gestionatr
