@@ -379,7 +379,7 @@ class test_C2(unittest.TestCase):
         self.assertEqual(direccion.escalera, '')
         self.assertEqual(direccion.municipio, '17079')
         self.assertEqual(direccion.numero_finca, '2')
-        self.assertEqual(direccion.pais, 'España')
+        self.assertEqual(direccion.pais, u'España')
         self.assertEqual(direccion.piso, '001')
         self.assertEqual(direccion.poblacion, '17079')
         self.assertEqual(direccion.provincia, '17')
@@ -471,7 +471,7 @@ class test_A3(unittest.TestCase):
     def tearDown(self):
         self.xml_a301.close()
 
-    def test_c201_completo(self):
+    def test_a301_completo(self):
         a3 = A3(self.xml_a301)
         a3.parse_xml()
         # Datos Solicitud
@@ -513,7 +513,7 @@ class test_A3(unittest.TestCase):
         self.assertEqual(direccion.escalera, '')
         self.assertEqual(direccion.municipio, '17079')
         self.assertEqual(direccion.numero_finca, '2')
-        self.assertEqual(direccion.pais, 'España')
+        self.assertEqual(direccion.pais, u'España')
         self.assertEqual(direccion.piso, '001')
         self.assertEqual(direccion.poblacion, '17079')
         self.assertEqual(direccion.provincia, '17')
@@ -922,7 +922,7 @@ class test_R1(unittest.TestCase):
         self.assertEqual(direccion.escalera, '')
         self.assertEqual(direccion.municipio, '17079')
         self.assertEqual(direccion.numero_finca, '2')
-        self.assertEqual(direccion.pais, 'España')
+        self.assertEqual(direccion.pais, u'España')
         self.assertEqual(direccion.piso, '001')
         self.assertEqual(direccion.poblacion, '17079')
         self.assertEqual(direccion.provincia, '17')
@@ -1081,7 +1081,7 @@ class test_R1(unittest.TestCase):
         self.assertEqual(direccion.escalera, '')
         self.assertEqual(direccion.municipio, '17079')
         self.assertEqual(direccion.numero_finca, '2')
-        self.assertEqual(direccion.pais, 'España')
+        self.assertEqual(direccion.pais, u'España')
         self.assertEqual(direccion.piso, '001')
         self.assertEqual(direccion.poblacion, '17079')
         self.assertEqual(direccion.provincia, '17')
