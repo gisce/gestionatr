@@ -23,12 +23,12 @@ def get_rec_attr(obj, attr, default=None):
 def get_description(code, table_name):
     table = getattr(defs, table_name, None)
     if not table:
-        raise Exception(
+        raise ValueError(
             "The table with the name '{}' doesn't exist".format(table_name)
         )
     res = dict(table).get(code, None)
     if not res:
-        raise Exception(
+        raise ValueError(
             "The key '{}' in the table '{}' doesn't exist".format(
                 code, table_name
             )
