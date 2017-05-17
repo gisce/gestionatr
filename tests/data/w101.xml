@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<SolicitudAportacionLectura xmlns="http://localhost/elegibilidad">
+<MensajeSolicitudAportacionLectura xmlns="http://localhost/elegibilidad">
 	<Cabecera>
 		<CodigoREEEmpresaEmisora>1234</CodigoREEEmpresaEmisora>
 		<CodigoREEEmpresaDestino>4321</CodigoREEEmpresaDestino>
@@ -24,4 +24,4 @@
 		<TipoCodigoPeriodoDH>22</TipoCodigoPeriodoDH>
 		<LecturaPropuesta>0000003106.00</LecturaPropuesta>
 	</LecturaAportada>
-</SolicitudAportacionLectura>
+</MensajeSolicitudAportacionLectura>

@@ -67,7 +67,7 @@ XSD_DATA = {'F1': {'01': 'Facturacion.xsd'},
                    '04': 'EnvioInformacionReclamacion.xsd',
                    '05': 'CierreReclamacion.xsd',
                    },
-            'W1': {'01': 'MensajeAportacionLectura.xsd',
+            'W1': {'01': 'SolicitudAportacionLectura.xsd',
                    '02': ('AceptacionAportacionLectura.xsd',
                           'Rechazo.xsd'),
                    },
@@ -102,7 +102,7 @@ MAIN_MESSAGE_XSD = {
     'PeticionInformacionAdicionalReclamacion': 'InformacionAdicional',
     'EnvioInformacionReclamacion': 'EnvioInformacionReclamacion',
     'CierreReclamacion': 'CierreReclamacion',
-    'MensajeAportacionLectura': ['DatosSolicitudAportacionLectura', 'LecturaAportada'],
+    'MensajeSolicitudAportacionLectura': ['DatosSolicitudAportacionLectura', 'LecturaAportada'],
     'AceptacionAportacionLectura': 'DatosAceptacionLectura',
     'Facturacion': ['Facturas',  'OtrosDatosFactura'],
 }
@@ -191,7 +191,7 @@ class Message(MessageBase):
             self.pas = self.head.CodigoDePaso.text
         except:
             msg = u'No se puede identificar el código de proceso ' \
-                  'o código de paso'
+                  u'o código de paso'
             raise except_f1('Error', msg)
 
     def set_xsd(self):

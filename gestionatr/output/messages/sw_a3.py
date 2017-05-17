@@ -66,15 +66,25 @@ class AceptacionAlta(XmlModel):
 # Paso 05
 class MensajeActivacionAlta(XmlModel):
 
-    _sort_order = ('mensaje', 'datos_activacion', 'contrato', 'puntos_de_medida')
+    _sort_order = ('mensaje', 'cabecera', 'activacion_alta')
 
     def __init__(self):
         self.mensaje = XmlField('MensajeActivacionAlta',
                                 attributes={'xmlns': 'http://localhost/elegibilidad'})
+        self.cabecera = Cabecera()
+        self.activacion_alta = ActivacionAlta()
+        super(MensajeActivacionAlta, self).__init__('MensajeActivacionAlta', 'mensaje')
+
+
+class ActivacionAlta(XmlModel):
+    _sort_order = ('activacion_alta', 'datos_activacion', 'contrato', 'puntos_de_medida')
+
+    def __init__(self):
+        self.activacion_alta = XmlField('ActivacionAlta')
         self.datos_activacion = DatosActivacion()
         self.contrato = Contrato()
         self.puntos_de_medida = PuntosDeMedida()
-        super(MensajeActivacionAlta, self).__init__('MensajeActivacionAlta', 'mensaje')
+        super(ActivacionAlta, self).__init__('ActivacionAlta', 'activacion_alta')
 
 # Paso 06 -> C1 MensajeAnulacionSolicitud
 # Paso 07 -> C1 MensajeAceptacionAnulacion

@@ -28,7 +28,7 @@ class SolicitudReclamacion(XmlModel):
         self.tipo_reclamante = XmlField('TipoReclamante')
         self.reclamante = Reclamante()
         self.comentarios = XmlField('Comentarios')
-        self.registros_documento = XmlField('RegistrosDocumento')
+        self.registros_documento = RegistrosDocumento()
         super(SolicitudReclamacion, self).__init__('SolicitudReclamacion', 'solicitud_reclamacion')
 
 
@@ -177,6 +177,19 @@ class DatosAceptacion(XmlModel):
         self.fecha_aceptacion = XmlField('FechaAceptacion')
         self.codigo_reclamacion_distribuidora = XmlField('CodigoReclamacionDistribuidora')
         super(DatosAceptacion, self).__init__('DatosAceptacion', 'datos_aceptacion')
+
+
+# Rechazo Reclamacion
+class MensajeRechazoReclamacion(XmlModel):
+
+    _sort_order = ('mensaje_rechazo_reclamacion', 'cabecera_reclamacion', 'rechazos')
+
+    def __init__(self):
+        self.mensaje_rechazo_reclamacion = XmlField('MensajeRechazoReclamacion',
+                                        attributes={'xmlns': 'http://localhost/elegibilidad'})
+        self.cabecera_reclamacion = CabeceraReclamacion()
+        self.rechazos = Rechazos()
+        super(MensajeRechazoReclamacion, self).__init__('MensajeRechazoReclamacion', 'mensaje_rechazo_reclamacion')
 
 
 # Paso 03
