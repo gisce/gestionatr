@@ -63,28 +63,28 @@
               <RuedasEnteras>08</RuedasEnteras>
               <RuedasDecimales>02</RuedasDecimales>
             </DatosAparato>
+            <Medidas>
+              <Medida>
+                <TipoDHEdM>6</TipoDHEdM>
+                <Periodo>65</Periodo>
+                <MagnitudMedida>PM</MagnitudMedida>
+                <Procedencia>30</Procedencia>
+                <UltimaLecturaFirme>6.00</UltimaLecturaFirme>
+                <FechaLecturaFirme>2003-01-02</FechaLecturaFirme>
+                <Anomalia>01</Anomalia>
+                <Comentarios>Comentario sobre anomalia</Comentarios>
+              </Medida>
+              <Medida>
+                <TipoDHEdM>6</TipoDHEdM>
+                <Periodo>66</Periodo>
+                <MagnitudMedida>PM</MagnitudMedida>
+                <Procedencia>30</Procedencia>
+                <UltimaLecturaFirme>6.00</UltimaLecturaFirme>
+                <FechaLecturaFirme>2003-01-03</FechaLecturaFirme>
+              </Medida>
+            </Medidas>
           </Aparato>
         </Aparatos>
-        <Medidas>
-          <Medida>
-            <TipoDHEdM>6</TipoDHEdM>
-            <Periodo>65</Periodo>
-            <MagnitudMedida>PM</MagnitudMedida>
-            <Procedencia>30</Procedencia>
-            <UltimaLecturaFirme>6.00</UltimaLecturaFirme>
-            <FechaLecturaFirme>2003-01-02</FechaLecturaFirme>
-            <Anomalia>01</Anomalia>
-            <Comentarios>Comentario sobre anomalia</Comentarios>
-          </Medida>
-          <Medida>
-            <TipoDHEdM>6</TipoDHEdM>
-            <Periodo>66</Periodo>
-            <MagnitudMedida>PM</MagnitudMedida>
-            <Procedencia>30</Procedencia>
-            <UltimaLecturaFirme>6.00</UltimaLecturaFirme>
-            <FechaLecturaFirme>2003-01-03</FechaLecturaFirme>
-          </Medida>
-        </Medidas>
         <Comentarios>Comentarios Varios</Comentarios>
       </PuntoDeMedida>
     </PuntosDeMedida>

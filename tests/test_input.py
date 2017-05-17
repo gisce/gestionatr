@@ -220,8 +220,8 @@ class test_C1(unittest.TestCase):
         self.assertEqual(ap.tipo_movimiento, 'CX')
         self.assertEqual(ap.tipo_propiedad_aparato, '1')
         # Medidas
-        self.assertEqual(len(pm.medidas), 2)
-        md = pm.medidas[0]
+        self.assertEqual(len(ap.medidas), 2)
+        md = ap.medidas[0]
         self.assertEqual(md.anomalia, '01')
         self.assertEqual(md.comentarios, 'Comentario sobre anomalia')
         self.assertEqual(md.fecha_lectura_firme, '2003-01-02')
@@ -230,7 +230,7 @@ class test_C1(unittest.TestCase):
         self.assertEqual(md.procedencia, '30')
         self.assertEqual(md.tipo_dhedm, '6')
         self.assertEqual(md.ultima_lectura_firme, '6.00')
-        md2 = pm.medidas[1]
+        md2 = ap.medidas[1]
         self.assertFalse(md2.anomalia)
         self.assertFalse(md2.comentarios)
         self.assertEqual(md2.fecha_lectura_firme, '2003-01-03')
@@ -284,8 +284,8 @@ class test_C1(unittest.TestCase):
         self.assertEqual(ap.tipo_movimiento, 'CX')
         self.assertEqual(ap.tipo_propiedad_aparato, '1')
         # Medidas
-        self.assertEqual(len(pm.medidas), 2)
-        md = pm.medidas[0]
+        self.assertEqual(len(ap.medidas), 2)
+        md = ap.medidas[0]
         self.assertEqual(md.anomalia, '01')
         self.assertEqual(md.comentarios, 'Comentario sobre anomalia')
         self.assertEqual(md.fecha_lectura_firme, '2003-01-02')
@@ -294,7 +294,7 @@ class test_C1(unittest.TestCase):
         self.assertEqual(md.procedencia, '30')
         self.assertEqual(md.tipo_dhedm, '6')
         self.assertEqual(md.ultima_lectura_firme, '6.00')
-        md2 = pm.medidas[1]
+        md2 = ap.medidas[1]
         self.assertFalse(md2.anomalia)
         self.assertFalse(md2.comentarios)
         self.assertEqual(md2.fecha_lectura_firme, '2003-01-03')
@@ -651,8 +651,8 @@ class test_B1(unittest.TestCase):
         self.assertEqual(ap.tipo_movimiento, 'CX')
         self.assertEqual(ap.tipo_propiedad_aparato, '1')
         # Medidas
-        self.assertEqual(len(pm.medidas), 2)
-        md = pm.medidas[0]
+        self.assertEqual(len(ap.medidas), 2)
+        md = ap.medidas[0]
         self.assertEqual(md.anomalia, '01')
         self.assertEqual(md.comentarios, 'Comentario sobre anomalia')
         self.assertEqual(md.fecha_lectura_firme, '2003-01-02')
@@ -661,7 +661,7 @@ class test_B1(unittest.TestCase):
         self.assertEqual(md.procedencia, '30')
         self.assertEqual(md.tipo_dhedm, '6')
         self.assertEqual(md.ultima_lectura_firme, '6.00')
-        md2 = pm.medidas[1]
+        md2 = ap.medidas[1]
         self.assertFalse(md2.anomalia)
         self.assertFalse(md2.comentarios)
         self.assertEqual(md2.fecha_lectura_firme, '2003-01-03')
