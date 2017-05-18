@@ -1845,6 +1845,24 @@ TABLA_103 = [
     ('47', u'Derechos de acometida de generación'),
 ]
 
+CONCEPTOS_CON_FECHA_OPERACION = [
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '09',
+    '12',
+    '13',
+    '15',
+    '19',
+    '20',
+    '33',
+]
+
 TABLA_104 = [('02', u'Euro')]
 
 TABLA_106 = [('01', u'Verificación equipo de medida'),
