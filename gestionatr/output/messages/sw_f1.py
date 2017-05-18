@@ -556,8 +556,7 @@ class DatosGeneralesOtrasFacturas(XmlModel):
 
 class DireccionSuministro(Direccion):
     def __init__(self):
-        super(DireccionSuministro, self).__init__()
-        self.direccion = XmlField('DireccionSuministro')
+        super(DireccionSuministro, self).__init__(name='DireccionSuministro')
 
 
 class ConceptoRepercutible(XmlModel):
