@@ -71,3 +71,11 @@ def rep_fecha_sin_hora(fecha):
 def rep_decimal(n_decimal):
     dec_format = '{0:.' + str(n_decimal) + 'f}'
     return lambda decimal: dec_format.format(decimal)
+
+
+def rep_entera(decimal):
+    return int(decimal)
+
+
+def rep_ruedas(n_rodes):
+    return '{:d}'.format(n_rodes)
