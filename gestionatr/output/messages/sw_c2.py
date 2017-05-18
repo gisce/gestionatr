@@ -85,8 +85,8 @@ class Direccion(XmlModel):
 
     _sort_order = ('direccion', 'pais', 'provincia', 'municipio', 'poblacion', 'tipo_via', 'cod_postal', 'calle', 'numero_finca', 'duplicador_finca', 'escalera', 'piso', 'puerta', 'tipo_aclarador_finca', 'aclarador_finca')
 
-    def __init__(self):
-        self.direccion = XmlField('Direccion')
+    def __init__(self, name='Direccion'):
+        self.direccion = XmlField(name)
         self.pais = XmlField('Pais')
         self.provincia = XmlField('Provincia')
         self.municipio = XmlField('Municipio')
@@ -101,7 +101,7 @@ class Direccion(XmlModel):
         self.puerta = XmlField('Puerta')
         self.tipo_aclarador_finca = XmlField('TipoAclaradorFinca')
         self.aclarador_finca = XmlField('AclaradorFinca')
-        super(Direccion, self).__init__('Direccion', 'direccion')
+        super(Direccion, self).__init__(name, 'direccion')
 
 
 class Medida(XmlModel):
