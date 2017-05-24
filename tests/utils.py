@@ -48,7 +48,7 @@ def get_cliente(dir=False, tipo_dir=None):
         'nombre_de_pila': '',
         'primer_apellido': '',
         'segundo_apellido': '',
-        'razon_social': u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ',
+        'razon_social': u'ACC Y COMP DE COCINA MILLAN Y MUNOZ',
     }
     nombre.feed(nombre_fields)
 
