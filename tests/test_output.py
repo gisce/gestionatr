@@ -11,6 +11,7 @@ from gestionatr.output.messages import sw_q1 as q1
 from gestionatr.output.messages import sw_w1 as w1
 from gestionatr.output.messages import sw_b1 as b1
 from gestionatr.output.messages import sw_r1 as r1
+from gestionatr.output.messages import sw_f1 as f1
 
 
 class test_C1(unittest.TestCase):
@@ -2256,3 +2257,315 @@ class test_R1(unittest.TestCase):
         mensaje_cierre_reclamacion.build_tree()
         xml = str(mensaje_cierre_reclamacion)
         assertXmlEqual(xml, self.xml_r105.read())
+
+
+class test_F1(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_f101_factura_atr = open(get_data("f101_factura_atr.xml"), "r")
+
+        direccion_suministro = f1.DireccionSuministro()
+
+        direccion_suministro.feed(
+            {
+                'pais': u'España',
+                'provincia': '17',
+                'municipio': '17079',
+                'poblacion': None,
+                'tipo_via': None,
+                'cod_postal': '17003',
+                'calle': 'Nom carrer',
+                'numero_finca': '3',
+                'duplicador_finca': None,
+                'escalera': None,
+                'piso': None,
+                'puerta': None,
+                'tipo_aclarador_finca': None,
+                'alcarador_finca': None,
+            }
+        )
+
+        datos_generales_factura_atr = f1.DatosGeneralesFacturaATR()
+
+        cliente = f1.Cliente()
+
+        cliente.feed(
+            {
+                'tipo_identificador': 'NI',
+                'identificador': '70876712G',
+                'tipo_persona': 'F',
+            }
+        )
+
+        datos_generales_factura = f1.DatosGeneralesFactura()
+
+        datos_generales_factura.feed(
+            {
+                'codigo_fiscal_factura': 'F0001',
+                'tipo_factura': 'N',
+                'motivo_facturacion': '01',
+                'codigo_factura_rectificada_anulada': None,
+                'expediente': None,
+                'fecha_factura': '2017-05-01',
+                'identificador_emisora': 'B11254455',
+                'comentarios': '. ',
+                'importe_total_factura': 100,
+                'saldo_factura': 100,
+                'tipo_moneda': '02',
+            }
+        )
+
+        periodo = f1.Periodo()
+
+        periodo.feed(
+            {
+                'fecha_desde_factura': '2017-03-31',
+                'fecha_hasta_factura': '2017-04-30',
+                'numero_dias': 30,
+            }
+        )
+
+        atr_data = f1.DatosFacturaATR()
+
+        atr_data.feed(
+            {
+                'fecha_boe': '2017-01-01',
+                'tarifa_atr_fact': '001',
+                'modo_control_potencia': 1,
+                'marca_medida_con_perdidas': 'N',
+                'vas_trafo': None,
+                'porcentaje_perdidas': None,
+                'indicativo_curva_carga': '02',
+                'periodo_cch': None,
+                'periodo': periodo,
+            }
+        )
+
+        datos_generales_factura_atr.feed(
+            {
+                'direccion_suministro': direccion_suministro,
+                'cliente': cliente,
+                'cod_contrato': '111111',
+                'datos_generales_factura': datos_generales_factura,
+                'datos_factura_atr': atr_data,
+            }
+        )
+
+        periodo_pot = f1.PeriodoPotencia()
+
+        periodo_pot.feed(
+            {
+                'potencia_contratada': 1000,
+                'potencia_max_demandada': 1000,
+                'potencia_a_facturar': 1000,
+                'precio_potencia': 0.05,
+            }
+        )
+
+        periodos_potencia = [periodo_pot]
+
+        term_potencia = f1.TerminoPotencia()
+
+        term_potencia.feed(
+            {
+                'fecha_desde': '2017-03-31',
+                'fecha_hasta': '2017-04-30',
+                'periodo': periodos_potencia,
+            }
+        )
+
+        terminos_potencia = [term_potencia]
+
+        power = f1.Potencia()
+
+        power.feed(
+            {
+                'termino_potencia': terminos_potencia,
+                'penalizacion_no_icp': 'N',
+                'importe_total_termino_potencia': 50,
+            }
+        )
+
+        periodo_act = f1.PeriodoEnergiaActiva()
+
+        periodo_act.feed(
+            {
+                'valor_energia_activa': 300,
+                'precio_energia': 0.044027,
+            }
+        )
+
+        periodos_activa = [periodo_act]
+
+        term_activa = f1.TerminoEnergiaActiva()
+
+        term_activa.feed(
+            {
+                'fecha_desde': '2017-03-31',
+                'fecha_hasta': '2017-04-30',
+                'periodos': periodos_activa,
+            }
+        )
+
+        terminos_activa = [term_activa]
+
+        energia_activa = f1.EnergiaActiva()
+
+        energia_activa.feed(
+            {
+                'termino_energia_activa': terminos_activa,
+                'importe_total_energia_activa': 13.21,
+            }
+        )
+
+        impuesto_electrico = f1.ImpuestoElectrico()
+
+        impuesto_electrico.feed(
+            {
+                'base_imponible': 0,
+                'porcentaje': 0,
+                'importe': 0,
+            }
+        )
+
+        iva = f1.IVA()
+
+        iva.feed(
+            {
+                'base_imponible': 63.21,
+                'porcentaje': 21,
+                'importe': 13.27,
+            }
+        )
+
+        lectura_desde = f1.LecturaDesde()
+
+        lectura_desde.feed(
+            {
+                'fecha': '2017-03-31',
+                'procedencia': '30',
+                'lectura': 100,
+            }
+        )
+
+        lectura_hasta = f1.LecturaHasta()
+
+        lectura_hasta.feed(
+            {
+                'fecha': '2017-04-30',
+                'procedencia': '30',
+                'lectura': 400,
+            }
+        )
+
+        ivas = [iva]
+
+        integrador = f1.Integrador()
+
+        integrador.feed(
+            {
+                'magnitud': 'AE',
+                'codigo_periodo': '10',
+                'constante_multiplicadora': 1.0,
+                'numero_ruedas_enteras': 5,
+                'numero_ruedas_decimales': 0,
+                'consumo_calculado': 300,
+                'lectura_desde': lectura_desde,
+                'lectura_hasta': lectura_hasta,
+                'ajuste': None,
+                'anomalia': None,
+                'fecha_hora_maximetro': None,
+            }
+        )
+
+        integradores = [integrador]
+
+        aparato = f1.ModeloAparato()
+
+        aparato.feed(
+            {
+                'tipo_aparato': 'CC',
+                'marca_aparato': 199,
+                'numero_serie': 'C99999',
+                'tipo_dhedm': 1,
+                'integrador': integradores
+            }
+        )
+
+        aparatos = [aparato]
+
+        medidas = f1.Medidas()
+
+        medidas.feed(
+            {
+                'cod_pm': 'ES1234000000000001JN0F',
+                'modelo_aparato': aparatos
+            }
+        )
+
+        self.factura_atr = f1.FacturaATR()
+
+        self.factura_atr.feed(
+            {
+                'datos_generales_factura_atr': datos_generales_factura_atr,
+                'potencia': power,
+                'exceso_potencia': None,
+                'energia_activa': energia_activa,
+                'energia_reactiva': None,
+                'impuesto_electrico': impuesto_electrico,
+                'alquileres': None,
+                'importe_intereses': None,
+                'concepto_repercutible': None,
+                'iva': ivas,
+                'iva_reducido': None,
+                'medidas': medidas,
+            }
+        )
+
+    def tearDown(self):
+        self.xml_f101_factura_atr.close()
+
+    def with_factura_atr(self):
+        cabecera = get_header(process='F1', step='01')
+
+        facturacion = f1.Facturacion()
+
+        facturas = f1.Facturas()
+
+        registo_fin = f1.RegistroFin()
+        registo_fin.feed(
+            {
+                'importe_total': 76.48,
+                'saldo_total_facturacion': 76.48,
+                'total_recibos': 1,
+                'tipo_moneda': '02',
+                'fecha_valor': '2017-05-01',
+                'fecha_limite_pago': '2017-06-01',
+                'iban': 'ES7712341234161234567890',
+                'id_remesa': '0',
+            }
+        )
+
+        facturas.feed(
+            {
+                'factura_atr': self.factura_atr,
+                'registro_fin': registo_fin
+            }
+        )
+
+        facturacion.feed(
+            {
+                'cabecera': cabecera,
+                'facturas': facturas,
+            }
+        )
+
+        return facturacion
+
+    def test_create_pas01(self):
+        mensaje = self.with_factura_atr()
+
+        mensaje.build_tree()
+
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_f101_factura_atr.read())
