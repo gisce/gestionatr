@@ -15,7 +15,7 @@ class Clean(_clean):
         """Comença la tasca de neteja."""
         _clean.run(self)
         if os.path.exists(self.build_base):
-            print "Cleaning %s dir" % self.build_base
+            print("Cleaning {} dir".format(self.build_base))
             shutil.rmtree(self.build_base)
 
 setup(name='gestionatr',
