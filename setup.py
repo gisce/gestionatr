@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 """Setup per la llibreria de gestionatr"""
+from __future__ import print_function
+
 import os
 import shutil
 from distutils.command.clean import clean as _clean
@@ -11,12 +13,14 @@ PACKAGES_DATA = {'gestionatr': ['data/*.xsd']}
 
 class Clean(_clean):
     """Eliminem el directory build i els bindings creats."""
+
     def run(self):
         """Comença la tasca de neteja."""
         _clean.run(self)
         if os.path.exists(self.build_base):
             print("Cleaning {} dir".format(self.build_base))
             shutil.rmtree(self.build_base)
+
 
 setup(name='gestionatr',
       description='Llibreria de Gestió ATR',
@@ -33,5 +37,4 @@ setup(name='gestionatr',
       scripts=[],
       cmdclass={'clean': Clean},
       test_suite='tests',
-)
-
+      )
