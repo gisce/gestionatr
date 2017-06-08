@@ -549,6 +549,10 @@ class DatosGeneralesOtrasFacturas(XmlModel):
             'DatosGeneralesOtrasFacturas'
         )
         self.direccion_suministro = DireccionSuministro()
+        self.cliente = Cliente()
+        self.cod_contrato = XmlField('CodContrato')
+        self.datos_generales_factura = DatosGeneralesFactura()
+        self.fecha_boe = XmlField('FechaBOE', rep=rep_fecha_sin_hora)
         super(DatosGeneralesOtrasFacturas, self).__init__(
             'DatosGeneralesOtrasFacturas', 'datos_generales_otras_facturas'
         )
