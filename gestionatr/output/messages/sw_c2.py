@@ -4,18 +4,18 @@ from gestionatr.output.messages.sw_c1 import *
 
 # Paso 01
 class MensajeCambiodeComercializadorConCambios(XmlModel):
-    _sort_order = ('mensage', 'cabecera', 'cambiode_comercializador_con_cambios')
+    _sort_order = ('mensaje', 'cabecera', 'cambiode_comercializador_con_cambios')
 
     def __init__(self):
         self.doc_root = None
-        self.mensage = XmlField(
+        self.mensaje = XmlField(
             'MensajeCambiodeComercializadorConCambios',
             attributes={'xmlns': 'http://localhost/elegibilidad'}
         )
         self.cabecera = Cabecera()
         self.cambiode_comercializador_con_cambios = CambiodeComercializadorConCambios()
         super(MensajeCambiodeComercializadorConCambios, self).__init__(
-            'MensajeCambiodeComercializadorConCambios', 'mensage'
+            'MensajeCambiodeComercializadorConCambios', 'mensaje'
         )
 
 

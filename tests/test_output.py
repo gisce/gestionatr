@@ -81,24 +81,6 @@ class test_C1(unittest.TestCase):
         }
         datos_aparato.feed(datos_aparato_fields)
 
-        aparato_fields = {
-            'modelo_aparato': modelo_aparato,
-            'tipo_movimiento': 'CX',
-            'tipo_equipo_medida': 'L03',
-            'tipo_propiedad_aparato': '1',
-            'propietario': 'Desc. Propietario',
-            'tipo_dhedm': '6',
-            'modo_medida_potencia': '1',
-            'lectura_directa': 'N',
-            'cod_precinto': '02',
-            'datos_aparato': datos_aparato,
-        }
-        aparato.feed(aparato_fields)
-        aparatos_fields = {
-            'aparato_list': [aparato],
-        }
-        aparatos.feed(aparatos_fields)
-
         # Medidas
         medidas = c1.Medidas()
         # Medida 1
@@ -130,6 +112,26 @@ class test_C1(unittest.TestCase):
         }
         medidas.feed(medidas_fields)
 
+        aparato_fields = {
+            'modelo_aparato': modelo_aparato,
+            'tipo_movimiento': 'CX',
+            'tipo_equipo_medida': 'L03',
+            'tipo_propiedad_aparato': '1',
+            'propietario': 'Desc. Propietario',
+            'tipo_dhedm': '6',
+            'modo_medida_potencia': '1',
+            'lectura_directa': 'N',
+            'cod_precinto': '02',
+            'datos_aparato': datos_aparato,
+            'medidas': medidas
+        }
+
+        aparato.feed(aparato_fields)
+        aparatos_fields = {
+            'aparato_list': [aparato],
+        }
+        aparatos.feed(aparatos_fields)
+
         punto_de_medida_fields = {
             'cod_pm': 'ES1234000000000001JN0F',
             'tipo_movimiento': 'A',
@@ -148,7 +150,6 @@ class test_C1(unittest.TestCase):
             'fecha_alta': '2003-01-01',
             'fecha_baja': '2003-02-01',
             'aparatos': aparatos,
-            'medidas': medidas,
             'comentarios': 'Comentarios Varios',
         }
         punto_de_medida.feed(punto_de_medida_fields)
@@ -1186,8 +1187,8 @@ class test_W1(unittest.TestCase):
         self.xml_w102_reject.close()
 
     def test_create_pas01(self):
-        # MensajeAportacionLectura
-        mensaje_aportacion_lectura = w1.SolicitudAportacionLectura()
+        # MensajeSolicitudAportacionLectura
+        mensaje_aportacion_lectura = w1.MensajeSolicitudAportacionLectura()
 
         # Cabecera
         cabecera = get_header(process='W1', step='01',  date='2014-04-16T22:13:37', code='201412111009')
@@ -1480,24 +1481,6 @@ class test_B1(unittest.TestCase):
         }
         datos_aparato.feed(datos_aparato_fields)
 
-        aparato_fields = {
-            'modelo_aparato': modelo_aparato,
-            'tipo_movimiento': 'CX',
-            'tipo_equipo_medida': 'L03',
-            'tipo_propiedad_aparato': '1',
-            'propietario': 'Desc. Propietario',
-            'tipo_dhedm': '6',
-            'modo_medida_potencia': '1',
-            'lectura_directa': 'N',
-            'cod_precinto': '02',
-            'datos_aparato': datos_aparato,
-        }
-        aparato.feed(aparato_fields)
-        aparatos_fields = {
-            'aparato_list': [aparato],
-        }
-        aparatos.feed(aparatos_fields)
-
         # Medidas
         medidas = c1.Medidas()
         # Medida 1
@@ -1529,6 +1512,25 @@ class test_B1(unittest.TestCase):
         }
         medidas.feed(medidas_fields)
 
+        aparato_fields = {
+            'modelo_aparato': modelo_aparato,
+            'tipo_movimiento': 'CX',
+            'tipo_equipo_medida': 'L03',
+            'tipo_propiedad_aparato': '1',
+            'propietario': 'Desc. Propietario',
+            'tipo_dhedm': '6',
+            'modo_medida_potencia': '1',
+            'lectura_directa': 'N',
+            'cod_precinto': '02',
+            'datos_aparato': datos_aparato,
+            'medidas': medidas,
+        }
+        aparato.feed(aparato_fields)
+        aparatos_fields = {
+            'aparato_list': [aparato],
+        }
+        aparatos.feed(aparatos_fields)
+
         punto_de_medida_fields = {
             'cod_pm': 'ES1234000000000001JN0F',
             'tipo_movimiento': 'A',
@@ -1547,7 +1549,6 @@ class test_B1(unittest.TestCase):
             'fecha_alta': '2003-01-01',
             'fecha_baja': '2003-02-01',
             'aparatos': aparatos,
-            'medidas': medidas,
             'comentarios': 'Comentarios Varios',
         }
         punto_de_medida.feed(punto_de_medida_fields)
