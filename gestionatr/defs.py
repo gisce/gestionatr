@@ -443,7 +443,7 @@ SUBTYPES_R101 = [
     ({
         'min_fields': ['cups', 'codigo_de_solicitud', 'concepto_contratacion'],
         'code': '066',
-        'name': u'INFORMACIÓN/VALIDACIÓN SOBRE FATOS DEL CONTRATAO ATR/PEAJE',
+        'name': u'INFORMACIÓN/VALIDACIÓN SOBRE DATOS DEL CONTRATO ATR/PEAJE',
         'type': '03',
     }),
     ({
