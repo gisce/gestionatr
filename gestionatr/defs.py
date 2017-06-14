@@ -592,7 +592,7 @@ TABLA_9 = [('01', 'Anual'),
            ('12', 'De reserva')]
 
 TABLA_10 = [('01', u"Cese Actividad"),
-            ('02', u"Fin de contracto de energía"),
+            ('02', u"Fin de contrato de energía"),
             ('03', u"Corte de subministro"),
             ('04', u"Baja por impago")]
 
