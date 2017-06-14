@@ -1663,7 +1663,8 @@ TABLA_77 = [
         ('19', u'Derechos de actuación en equipo de medida'),
         ('20', u'Derechos de supervisión'),
         ('21', u'Tarifa'),
-        ('22', u'Impuesto Eléctrico')
+        ('22', u'Impuesto Eléctrico'),
+        ('23', u'Desglose Suplemento Territorial')
 ]
 
 TABLA_79 = [
