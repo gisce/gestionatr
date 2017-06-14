@@ -1462,7 +1462,7 @@ TABLA_73 = [
     ('0350203', 'Deficiencias en la instalación'),
     ('0350204', 'Falta documentación (CIE)'),
     ('0350205', 'Error de formato'),
-    ('0350205', 'Datos ATR incoherentes'),
+    ('0350206', 'Datos ATR incoherentes'),
     ('0350207', 'Error en el cliente/NIF'),
     ('0350208', 'Improcedente. Se adjunta explicación en comentarios'),
     ('0350209', 'No existe solicitud'),
