@@ -2264,6 +2264,9 @@ class test_F1(unittest.TestCase):
 
     def setUp(self):
         self.xml_f101_factura_atr = open(get_data("f101_factura_atr.xml"), "r")
+        self.xml_f101_factura_otros = open(
+            get_data("f101_factura_otros.xml"), "r"
+        )
 
         direccion_suministro = f1.DireccionSuministro()
 
@@ -2278,9 +2281,9 @@ class test_F1(unittest.TestCase):
                 'calle': 'Nom carrer',
                 'numero_finca': '3',
                 'duplicador_finca': None,
-                'escalera': None,
-                'piso': None,
-                'puerta': None,
+                'escalera': 1,
+                'piso': 1,
+                'puerta': 1,
                 'tipo_aclarador_finca': None,
                 'alcarador_finca': None,
             }
@@ -2298,9 +2301,9 @@ class test_F1(unittest.TestCase):
             }
         )
 
-        datos_generales_factura = f1.DatosGeneralesFactura()
+        datos_generales_factura_for_atr = f1.DatosGeneralesFactura()
 
-        datos_generales_factura.feed(
+        datos_generales_factura_for_atr.feed(
             {
                 'codigo_fiscal_factura': 'F0001',
                 'tipo_factura': 'N',
@@ -2312,6 +2315,24 @@ class test_F1(unittest.TestCase):
                 'comentarios': '. ',
                 'importe_total_factura': 100,
                 'saldo_factura': 100,
+                'tipo_moneda': '02',
+            }
+        )
+
+        datos_generales_factura_for_otros = f1.DatosGeneralesFactura()
+
+        datos_generales_factura_for_otros.feed(
+            {
+                'codigo_fiscal_factura': 'F0001',
+                'tipo_factura': 'N',
+                'motivo_facturacion': '01',
+                'codigo_factura_rectificada_anulada': None,
+                'expediente': None,
+                'fecha_factura': '2017-05-01',
+                'identificador_emisora': 'B11254455',
+                'comentarios': '. ',
+                'importe_total_factura': 20.63,
+                'saldo_factura': 20.63,
                 'tipo_moneda': '02',
             }
         )
@@ -2330,7 +2351,7 @@ class test_F1(unittest.TestCase):
 
         atr_data.feed(
             {
-                'fecha_boe': '2017-01-01',
+                'fecha_boe': '2016-01-01',
                 'tarifa_atr_fact': '001',
                 'modo_control_potencia': 1,
                 'marca_medida_con_perdidas': 'N',
@@ -2347,7 +2368,7 @@ class test_F1(unittest.TestCase):
                 'direccion_suministro': direccion_suministro,
                 'cliente': cliente,
                 'cod_contrato': '111111',
-                'datos_generales_factura': datos_generales_factura,
+                'datos_generales_factura': datos_generales_factura_for_atr,
                 'datos_factura_atr': atr_data,
             }
         )
@@ -2429,9 +2450,9 @@ class test_F1(unittest.TestCase):
             }
         )
 
-        iva = f1.IVA()
+        iva_atr = f1.IVA()
 
-        iva.feed(
+        iva_atr.feed(
             {
                 'base_imponible': 63.21,
                 'porcentaje': 21,
@@ -2459,7 +2480,7 @@ class test_F1(unittest.TestCase):
             }
         )
 
-        ivas = [iva]
+        ivas_atr = [iva_atr]
 
         integrador = f1.Integrador()
 
@@ -2517,9 +2538,75 @@ class test_F1(unittest.TestCase):
                 'alquileres': None,
                 'importe_intereses': None,
                 'concepto_repercutible': None,
-                'iva': ivas,
+                'iva': ivas_atr,
                 'iva_reducido': None,
                 'medidas': medidas,
+            }
+        )
+
+        datos_gen_otras_facturas = f1.DatosGeneralesOtrasFacturas()
+
+        datos_gen_otras_facturas.feed(
+            {
+                'direccion_suministro': direccion_suministro,
+                'cliente': cliente,
+                'cod_contrato': '111111',
+                'datos_generales_factura': datos_generales_factura_for_otros,
+                'fecha_boe': '2016-01-01',
+            }
+        )
+
+        concepto_repercutible_enganche = f1.ConceptoRepercutible()
+
+        concepto_repercutible_enganche.feed(
+            {
+                'concepto_repercutible': '04',
+                'tipo_impositivo_concepto_repercutible': 1,
+                'fecha_operacion': '2016-09-01',
+                'unidades_concepto_repercutible': 1.0,
+                'precio_unidad_concepto_repercutible': 9.04476,
+                'importe_total_concepto_repercutible': 9.04,
+                'comentarios': 'Cuota de enganche / Act. en equipos BT',
+            }
+        )
+
+        concepto_repercutible_verificacion = f1.ConceptoRepercutible()
+
+        concepto_repercutible_verificacion.feed(
+            {
+                'concepto_repercutible': '05',
+                'tipo_impositivo_concepto_repercutible': 1,
+                'fecha_operacion': '2016-09-01',
+                'unidades_concepto_repercutible': 1.0,
+                'precio_unidad_concepto_repercutible': 8.011716,
+                'importe_total_concepto_repercutible': 8.01,
+                'comentarios': 'Cuota de verificación BT',
+            }
+        )
+
+        conceptos_repercutibles = [
+            concepto_repercutible_enganche, concepto_repercutible_verificacion
+        ]
+
+        iva_otros = f1.IVA()
+
+        iva_otros.feed(
+            {
+                'base_imponible': 17.05,
+                'porcentaje': 21,
+                'importe': 3.58,
+            }
+        )
+
+        ivas_otros = [iva_otros]
+
+        self.factura_otros = f1.OtrasFacturas()
+        self.factura_otros.feed(
+            {
+                'datos_generales_otras_facturas': datos_gen_otras_facturas,
+                'concepto_repercutible': conceptos_repercutibles,
+                'iva': ivas_otros,
+                'iva_reducido': None,
             }
         )
 
@@ -2563,10 +2650,55 @@ class test_F1(unittest.TestCase):
 
         return facturacion
 
-    def test_create_pas01(self):
+    def with_factura_otros(self):
+        cabecera = get_header(process='F1', step='01')
+
+        facturacion = f1.Facturacion()
+
+        facturas = f1.Facturas()
+
+        registo_fin = f1.RegistroFin()
+        registo_fin.feed(
+            {
+                'importe_total': 20.63,
+                'saldo_total_facturacion': 20.63,
+                'total_recibos': 1,
+                'tipo_moneda': '02',
+                'fecha_valor': '2016-11-01',
+                'fecha_limite_pago': '2016-11-21',
+                'iban': 'ES7712341234161234567890',
+                'id_remesa': '0',
+            }
+        )
+
+        facturas.feed(
+            {
+                'otras_facturas': self.factura_otros,
+                'registro_fin': registo_fin
+            }
+        )
+
+        facturacion.feed(
+            {
+                'cabecera': cabecera,
+                'facturas': facturas,
+            }
+        )
+
+        return facturacion
+
+    def test_create_pas01_atr_invoice(self):
         mensaje = self.with_factura_atr()
 
         mensaje.build_tree()
 
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_f101_factura_atr.read())
+
+    def test_create_pas01_other_invoice(self):
+        mensaje = self.with_factura_otros()
+
+        mensaje.build_tree()
+
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_f101_factura_otros.read())
