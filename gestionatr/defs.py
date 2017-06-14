@@ -1844,6 +1844,7 @@ TABLA_103 = [
     ('45', u'Exención Cargo Fijo Autoconsumo'),
     ('46', u'Exención Cargo Variable Autoconsumo'),
     ('47', u'Derechos de acometida de generación'),
+    ('48', u'Suplemento territorial por tributos económicos del año 2013 según la Orden ETU/35/2017')
 ]
 
 TABLA_104 = [('02', u'Euro')]
