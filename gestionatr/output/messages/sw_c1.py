@@ -64,12 +64,12 @@ class IdCliente(XmlModel):
 
     _sort_order = ('id_cliente', 'tipo_identificador', 'identificador', 'tipo_persona')
 
-    def __init__(self):
-        self.id_cliente = XmlField('IdCliente')
+    def __init__(self, name='IdCliente'):
+        self.id_cliente = XmlField(name)
         self.tipo_identificador = XmlField('TipoIdentificador')
         self.identificador = XmlField('Identificador')
         self.tipo_persona = XmlField('TipoPersona')
-        super(IdCliente, self).__init__('IdCliente', 'id_cliente')
+        super(IdCliente, self).__init__(name, 'id_cliente')
 
 
 class Nombre(XmlModel):
