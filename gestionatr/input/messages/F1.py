@@ -669,6 +669,18 @@ class ConceptoRepercutible(object):
         return None
 
     @property
+    def fecha_desde(self):
+        if hasattr(self.concepto, 'FechaDesde'):
+            return self.concepto.FechaDesde.text
+        return None
+
+    @property
+    def fecha_hasta(self):
+        if hasattr(self.concepto, 'FechaHasta'):
+            return self.concepto.FechaHasta.text
+        return None
+
+    @property
     def unidades(self):
         if hasattr(self.concepto, 'UnidadesConceptoRepercutible'):
             return self.concepto.UnidadesConceptoRepercutible
