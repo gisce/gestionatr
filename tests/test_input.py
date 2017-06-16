@@ -1362,29 +1362,29 @@ class test_F1(unittest.TestCase):
             concepto_verificacion.comentarios, 'Cuota de verificación BT'
         )
 
-        self.assertEqual(concepto_verificacion.concepto_repercutible, '05')
-        self.assertEqual(concepto_verificacion.tipo_impositivo, '1')
-        self.assertEqual(concepto_verificacion.fecha_desde, '2016-09-01')
-        self.assertEqual(concepto_verificacion.fecha_hasta, '2016-10-01')
-        self.assertEqual(concepto_verificacion.unidades, 1)
-        self.assertEqual(concepto_verificacion.precio_unidad, 1.0)
-        self.assertEqual(concepto_verificacion.importe, 1.0)
+        self.assertEqual(concepto_demora.concepto_repercutible, '11')
+        self.assertEqual(concepto_demora.tipo_impositivo, '1')
+        self.assertEqual(concepto_demora.fecha_desde, '2016-09-01')
+        self.assertEqual(concepto_demora.fecha_hasta, '2016-10-01')
+        self.assertEqual(concepto_demora.unidades, 1)
+        self.assertEqual(concepto_demora.precio_unidad, 1.0)
+        self.assertEqual(concepto_demora.importe, 1.0)
         self.assertEqual(
-            concepto_verificacion.comentarios, 'Intereses de demora'
+            concepto_demora.comentarios, 'Intereses de demora'
         )
 
         ivas = fact.ivas
         self.assertEqual(len(ivas), 1)
         iva = ivas[0]
 
-        self.assertEqual(iva.base, 17.05)
+        self.assertEqual(iva.base, 18.05)
         self.assertEqual(iva.porcentaje, 21)
-        self.assertEqual(iva.importe, 3.58)
+        self.assertEqual(iva.importe, 3.79)
 
         registro = f1.registro
 
-        self.assertEqual(registro.importe_total, 20.63)
-        self.assertEqual(registro.saldo_total, 20.63)
+        self.assertEqual(registro.importe_total, 21.84)
+        self.assertEqual(registro.saldo_total, 21.84)
         self.assertEqual(registro.total_recibos, 1)
         self.assertEqual(registro.tipo_moneda, '02')
         self.assertEqual(registro.fecha_valor, '2016-11-01')
