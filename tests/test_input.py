@@ -1359,7 +1359,7 @@ class test_F1(unittest.TestCase):
         self.assertEqual(concepto_verificacion.precio_unidad, 8.011716)
         self.assertEqual(concepto_verificacion.importe, 8.01)
         self.assertEqual(
-            concepto_verificacion.comentarios, 'Cuota de verificación BT'
+            concepto_verificacion.comentarios, u'Cuota de verificación BT'
         )
 
         self.assertEqual(concepto_demora.concepto_repercutible, '11')

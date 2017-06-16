@@ -2580,7 +2580,7 @@ class test_F1(unittest.TestCase):
                 'unidades_concepto_repercutible': 1.0,
                 'precio_unidad_concepto_repercutible': 8.011716,
                 'importe_total_concepto_repercutible': 8.01,
-                'comentarios': 'Cuota de verificación BT',
+                'comentarios': u'Cuota de verificación BT',
             }
         )
 
