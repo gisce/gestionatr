@@ -36,8 +36,8 @@
           <FechaFactura>2017-05-01</FechaFactura>
           <IdentificadorEmisora>B11254455</IdentificadorEmisora>
           <Comentarios>. </Comentarios>
-          <ImporteTotalFactura>20.63</ImporteTotalFactura>
-          <SaldoFactura>20.63</SaldoFactura>
+          <ImporteTotalFactura>21.84</ImporteTotalFactura>
+          <SaldoFactura>21.84</SaldoFactura>
           <TipoMoneda>02</TipoMoneda>
         </DatosGeneralesFactura>
         <FechaBOE>2016-01-01</FechaBOE>
@@ -60,15 +60,25 @@
         <ImporteTotalConceptoRepercutible>8.01</ImporteTotalConceptoRepercutible>
         <Comentarios>Cuota de verificación BT</Comentarios>
       </ConceptoRepercutible>
+      <ConceptoRepercutible>
+        <ConceptoRepercutible>11</ConceptoRepercutible>
+        <TipoImpositivoConceptoRepercutible>1</TipoImpositivoConceptoRepercutible>
+        <FechaDesde>2016-09-01</FechaDesde>
+        <FechaHasta>2016-10-01</FechaHasta>
+        <UnidadesConceptoRepercutible>1.0</UnidadesConceptoRepercutible>
+        <PrecioUnidadConceptoRepercutible>1.0</PrecioUnidadConceptoRepercutible>
+        <ImporteTotalConceptoRepercutible>1.0</ImporteTotalConceptoRepercutible>
+        <Comentarios>Intereses de demora</Comentarios>
+      </ConceptoRepercutible>
       <IVA>
-        <BaseImponible>17.05</BaseImponible>
+        <BaseImponible>18.05</BaseImponible>
         <Porcentaje>21.00</Porcentaje>
-        <Importe>3.58</Importe>
+        <Importe>3.79</Importe>
       </IVA>
     </OtrasFacturas>
     <RegistroFin>
-      <ImporteTotal>20.63</ImporteTotal>
-      <SaldoTotalFacturacion>20.63</SaldoTotalFacturacion>
+      <ImporteTotal>21.84</ImporteTotal>
+      <SaldoTotalFacturacion>21.84</SaldoTotalFacturacion>
       <TotalRecibos>1</TotalRecibos>
       <TipoMoneda>02</TipoMoneda>
       <FechaValor>2016-11-01</FechaValor>

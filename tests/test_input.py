@@ -1330,15 +1330,16 @@ class test_F1(unittest.TestCase):
         self.assertEqual(datos_factura.fecha_factura, '2017-05-01')
         self.assertEqual(datos_factura.identificador_emisora, 'B11254455')
         self.assertEqual(datos_factura.comentarios, '. ')
-        self.assertEqual(datos_factura.importe_total_factura, 20.63)
-        self.assertEqual(datos_factura.saldo_factura, 20.63)
+        self.assertEqual(datos_factura.importe_total_factura, 21.84)
+        self.assertEqual(datos_factura.saldo_factura, 21.84)
         self.assertEqual(datos_factura.tipo_moneda, '02')
         self.assertEqual(datos_factura.fecha_boe, '2016-01-01')
 
         conceptos_repercutibles = fact.conceptos_repercutibles
-        self.assertEqual(len(conceptos_repercutibles), 2)
+        self.assertEqual(len(conceptos_repercutibles), 3)
         concepto_enganche = conceptos_repercutibles[0]
         concepto_verificacion = conceptos_repercutibles[1]
+        concepto_demora = conceptos_repercutibles[2]
 
         self.assertEqual(concepto_enganche.concepto_repercutible, '04')
         self.assertEqual(concepto_enganche.tipo_impositivo, '1')
@@ -1359,6 +1360,17 @@ class test_F1(unittest.TestCase):
         self.assertEqual(concepto_verificacion.importe, 8.01)
         self.assertEqual(
             concepto_verificacion.comentarios, 'Cuota de verificación BT'
+        )
+
+        self.assertEqual(concepto_verificacion.concepto_repercutible, '05')
+        self.assertEqual(concepto_verificacion.tipo_impositivo, '1')
+        self.assertEqual(concepto_verificacion.fecha_desde, '2016-09-01')
+        self.assertEqual(concepto_verificacion.fecha_hasta, '2016-10-01')
+        self.assertEqual(concepto_verificacion.unidades, 1)
+        self.assertEqual(concepto_verificacion.precio_unidad, 1.0)
+        self.assertEqual(concepto_verificacion.importe, 1.0)
+        self.assertEqual(
+            concepto_verificacion.comentarios, 'Intereses de demora'
         )
 
         ivas = fact.ivas

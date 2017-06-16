@@ -2331,8 +2331,8 @@ class test_F1(unittest.TestCase):
                 'fecha_factura': '2017-05-01',
                 'identificador_emisora': 'B11254455',
                 'comentarios': '. ',
-                'importe_total_factura': 20.63,
-                'saldo_factura': 20.63,
+                'importe_total_factura': 21.84,
+                'saldo_factura': 21.84,
                 'tipo_moneda': '02',
             }
         )
@@ -2584,17 +2584,33 @@ class test_F1(unittest.TestCase):
             }
         )
 
+        concepto_repercutible_demora = f1.ConceptoRepercutible()
+
+        concepto_repercutible_demora.feed(
+            {
+                'concepto_repercutible': '11',
+                'tipo_impositivo_concepto_repercutible': 1,
+                'fecha_desde': '2016-09-01',
+                'fecha_hasta': '2016-10-01',
+                'unidades_concepto_repercutible': 1.0,
+                'precio_unidad_concepto_repercutible': 1.0,
+                'importe_total_concepto_repercutible': 1.0,
+                'comentarios': 'Intereses de demora',
+            }
+        )
+
         conceptos_repercutibles = [
-            concepto_repercutible_enganche, concepto_repercutible_verificacion
+            concepto_repercutible_enganche, concepto_repercutible_verificacion,
+            concepto_repercutible_demora
         ]
 
         iva_otros = f1.IVA()
 
         iva_otros.feed(
             {
-                'base_imponible': 17.05,
+                'base_imponible': 18.05,
                 'porcentaje': 21,
-                'importe': 3.58,
+                'importe': 3.79,
             }
         )
 
@@ -2660,8 +2676,8 @@ class test_F1(unittest.TestCase):
         registo_fin = f1.RegistroFin()
         registo_fin.feed(
             {
-                'importe_total': 20.63,
-                'saldo_total_facturacion': 20.63,
+                'importe_total': 21.84,
+                'saldo_total_facturacion': 21.84,
                 'total_recibos': 1,
                 'tipo_moneda': '02',
                 'fecha_valor': '2016-11-01',
