@@ -96,7 +96,7 @@ class R1(C2):
         data = []
         tree = '{0}.SolicitudesInformacionAdicional'.format(self._header)
         obj = get_rec_attr(self.obj, tree, False)
-        if obj is not None:
+        if obj:
             for d in obj.SolicitudInformacionAdicional:
                 data.append(SolicitudInformacionAdicional(d))
         return data
@@ -125,7 +125,7 @@ class R1(C2):
         data = []
         tree = '{0}.VariablesAportacionInformacion'.format(self._header)
         obj = get_rec_attr(self.obj, tree, False)
-        if obj is not None:
+        if obj:
             for d in obj.VariableAportacionInformacion:
                 data.append(VariableAportacionInformacion(d))
         return data
@@ -135,7 +135,7 @@ class R1(C2):
         data = []
         tree = '{0}.VariablesAportacionInformacionparaRetipificacion'.format(self._header)
         obj = get_rec_attr(self.obj, tree, False)
-        if obj is not None:
+        if obj:
             for d in obj.VariableAportacionInformacionparaRetipificacion:
                 data.append(VariableDetalleReclamacion(d))
         return data
@@ -949,8 +949,9 @@ class MinimumFieldsChecker(object):
         return get_rec_attr(self.r1, "cliente.identificador", False)
 
     def check_nombre_cliente(self):
-        return get_rec_attr(self.r1, "cliente.nombre_de_pila", False) or \
-               get_rec_attr(self.r1, "cliente.razon_social", False)
+        return (get_rec_attr(self.r1, "cliente.nombre_de_pila", False) and
+                get_rec_attr(self.r1, "cliente.primer_apellido", False)) \
+               or get_rec_attr(self.r1, "cliente.razon_social", False)
 
     def check_telefono_contacto(self):
         for var in self.r1.variables_detalle_reclamacion:

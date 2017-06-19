@@ -443,7 +443,7 @@ SUBTYPES_R101 = [
     ({
         'min_fields': ['cups', 'codigo_de_solicitud', 'concepto_contratacion'],
         'code': '066',
-        'name': u'INFORMACIÓN/VALIDACIÓN SOBRE FATOS DEL CONTRATAO ATR/PEAJE',
+        'name': u'INFORMACIÓN/VALIDACIÓN SOBRE DATOS DEL CONTRATO ATR/PEAJE',
         'type': '03',
     }),
     ({
@@ -592,7 +592,7 @@ TABLA_9 = [('01', 'Anual'),
            ('12', 'De reserva')]
 
 TABLA_10 = [('01', u"Cese Actividad"),
-            ('02', u"Fin de contracto de energía"),
+            ('02', u"Fin de contrato de energía"),
             ('03', u"Corte de subministro"),
             ('04', u"Baja por impago")]
 
@@ -1462,7 +1462,7 @@ TABLA_73 = [
     ('0350203', 'Deficiencias en la instalación'),
     ('0350204', 'Falta documentación (CIE)'),
     ('0350205', 'Error de formato'),
-    ('0350205', 'Datos ATR incoherentes'),
+    ('0350206', 'Datos ATR incoherentes'),
     ('0350207', 'Error en el cliente/NIF'),
     ('0350208', 'Improcedente. Se adjunta explicación en comentarios'),
     ('0350209', 'No existe solicitud'),
@@ -1663,7 +1663,8 @@ TABLA_77 = [
         ('19', u'Derechos de actuación en equipo de medida'),
         ('20', u'Derechos de supervisión'),
         ('21', u'Tarifa'),
-        ('22', u'Impuesto Eléctrico')
+        ('22', u'Impuesto Eléctrico'),
+        ('23', u'Desglose Suplemento Territorial')
 ]
 
 TABLA_79 = [
@@ -1843,6 +1844,25 @@ TABLA_103 = [
     ('45', u'Exención Cargo Fijo Autoconsumo'),
     ('46', u'Exención Cargo Variable Autoconsumo'),
     ('47', u'Derechos de acometida de generación'),
+    ('48', u'Suplemento territorial por tributos económicos del año 2013 según la Orden ETU/35/2017')
+]
+
+CONCEPTOS_CON_FECHA_OPERACION = [
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '09',
+    '12',
+    '13',
+    '15',
+    '19',
+    '20',
+    '33',
 ]
 
 TABLA_104 = [('02', u'Euro')]
