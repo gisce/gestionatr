@@ -10,8 +10,8 @@ class R1(C2):
     """Clase que implementa R1."""
 
     steps = [
-        DeadLine('01', Workdays(5), '02'),
-        DeadLine('03', Naturaldays(20), '04'),
+        DeadLine('01', Workdays(5)),
+        DeadLine('03', Naturaldays(20)),
     ]
 
     # Datos paso 01
