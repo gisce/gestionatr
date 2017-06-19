@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from workdays import workday
 
 
-class DeadLine(namedtuple('Deadline', "step, days, next_step")):
+class DeadLine(namedtuple('Deadline', "step, days")):
     def limit(self, date=None):
         if not date:
             date = datetime.today()
@@ -25,9 +25,11 @@ class Naturaldays(int):
 
 class ProcessDeadline(object):
     @classmethod
-    def get_deadline(cls, step, activation=False):
-        if activation:
-            step = '{0}_activation'.format(step)
-        for s in cls.steps:
+    def get_deadline(cls, step, modifier=None):
+        if modifier:
+            steps = getattr(cls, 'steps_{0}'.format(modifier))
+        else:
+            steps = cls.steps
+        for s in steps:
             if s.step == step:
                 return s
