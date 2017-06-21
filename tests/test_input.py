@@ -1127,6 +1127,8 @@ class test_F1(unittest.TestCase):
     def setUp(self):
         with open(get_data("f101_factura_atr.xml"), "r") as f:
             self.xml_f101_atr_invoice = f.read()
+        with open(get_data("f101_factura_atr_30A.xml"), "r") as f:
+            self.xml_f101_atr_invoice_30A = f.read()
         with open(get_data("f101_factura_otros.xml"), "r") as f:
             self.xml_f101_other_invoice = f.read()
 
@@ -1390,3 +1392,42 @@ class test_F1(unittest.TestCase):
         self.assertEqual(registro.fecha_limite_pago, '2016-11-21')
         self.assertEqual(registro.iban, 'ES7712341234161234567890')
         self.assertEqual(registro.id_remesa, '0')
+
+    def test_specific_get_lectures_returns_correct_readings(self):
+        f1 = F1(self.xml_f101_atr_invoice_30A)
+        f1.set_xsd()
+        f1.parse_xml()
+
+        invoice = f1.facturas_atr[0]
+        meter = invoice.get_comptadors()[0]
+        readings = meter.get_lectures()
+        expected_lectures_activa = {
+            read.integrador for read in readings if read.tipus == 'A'
+        }
+        expected_lectures_reactiva = {
+            read.integrador for read in readings if read.tipus == 'R'
+        }
+        expected_lectures_max = {
+            read.integrador for read in readings if read.tipus == 'M'
+        }
+        expected_lectures_energia = {
+            read.integrador for read in readings if read.tipus in ('A', 'R')
+        }
+
+        lectures_activa = {
+            read.integrador for read in meter.get_lectures_activa()
+        }
+        lectures_reactiva = {
+            read.integrador for read in meter.get_lectures_reactiva()
+        }
+        lectures_max = {
+            read.integrador for read in meter.get_lectures_maximetre()
+        }
+        lectures_energia = {
+            read.integrador for read in meter.get_lectures_energia()
+        }
+
+        self.assertEqual(expected_lectures_activa, lectures_activa)
+        self.assertEqual(expected_lectures_reactiva, lectures_reactiva)
+        self.assertEqual(expected_lectures_max, lectures_max)
+        self.assertEqual(expected_lectures_energia, lectures_energia)

@@ -641,6 +641,30 @@ class ModeloAparato(object):
                 data.append(Integrador(d))
         return data
 
+    def get_lectures(self, tipus=None):
+        """Retorna totes les lectures en una llista de Lectura"""
+        lectures = []
+        try:
+            for integrador in self.integradores:
+                # If we don't have any type requirements or the current
+                # reading is in them
+                if not tipus or integrador.tipus in tipus:
+                    lectures.append(integrador)
+        except AttributeError:
+            pass
+        return lectures
+
+    def get_lectures_activa(self):
+        return self.get_lectures(['A'])
+
+    def get_lectures_reactiva(self):
+        return self.get_lectures(['R'])
+
+    def get_lectures_energia(self):
+        return self.get_lectures(['A', 'R'])
+
+    def get_lectures_maximetre(self):
+        return self.get_lectures(['M'])
 
 
 class Medida(object):
