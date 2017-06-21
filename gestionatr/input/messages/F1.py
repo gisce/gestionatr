@@ -332,10 +332,17 @@ class Factura(object):
         return data
 
 
-class PeriodoPotencia(object):
-
-    def __init__(self, data):
+class Periodo(object):
+    def __init__(self, data, name):
         self.periodo = data
+        self._name = name
+
+    @property
+    def nombre(self):
+        return self._name
+
+
+class PeriodoPotencia(Periodo):
 
     @property
     def potencia_contratada(self):
@@ -362,29 +369,39 @@ class PeriodoPotencia(object):
         return None
 
 
-class TerminoPotencia(object):
+class Termino(object):
+
+    PERIODO_TYPE = Periodo
 
     def __init__(self, data):
-        self.termino_potencia = data
+        self.termino = data
 
     @property
     def periodos(self):
         data = []
-        if hasattr(self.termino_potencia, 'Periodo'):
-            for d in self.termino_potencia.Periodo:
-                data.append(PeriodoPotencia(d))
+        if hasattr(self.termino, 'Periodo'):
+            period_name = 0
+
+            for d in self.termino.Periodo:
+                period_name += 1
+                data.append(self.PERIODO_TYPE(d, 'P{0}'.format(period_name)))
         return data
+
+
+class TerminoPotencia(Termino):
+
+    PERIODO_TYPE = PeriodoPotencia
 
     @property
     def fecha_desde(self):
-        if hasattr(self.termino_potencia, 'FechaDesde'):
-            return self.termino_potencia.FechaDesde.text
+        if hasattr(self.termino, 'FechaDesde'):
+            return self.termino.FechaDesde.text
         return None
 
     @property
     def fecha_hasta(self):
-        if hasattr(self.termino_potencia, 'FechaHasta'):
-            return self.termino_potencia.FechaHasta.text
+        if hasattr(self.termino, 'FechaHasta'):
+            return self.termino.FechaHasta.text
         return None
 
 
@@ -414,10 +431,7 @@ class Potencia(object):
         return None
 
 
-class PeriodoEnergiaActiva(object):
-
-    def __init__(self, data):
-        self.periodo = data
+class PeriodoEnergiaActiva(Periodo):
 
     @property
     def valor_energia_activa(self):
@@ -432,29 +446,20 @@ class PeriodoEnergiaActiva(object):
         return None
 
 
-class TerminoEnergiaActiva(object):
+class TerminoEnergiaActiva(Termino):
 
-    def __init__(self, data):
-        self.termino_energia_activa = data
-
-    @property
-    def periodos(self):
-        data = []
-        if hasattr(self.termino_energia_activa, 'Periodo'):
-            for d in self.termino_energia_activa.Periodo:
-                data.append(PeriodoEnergiaActiva(d))
-        return data
+    PERIODO_TYPE = PeriodoEnergiaActiva
 
     @property
     def fecha_desde(self):
-        if hasattr(self.termino_energia_activa, 'FechaDesde'):
-            return self.termino_energia_activa.FechaDesde.text
+        if hasattr(self.termino, 'FechaDesde'):
+            return self.termino.FechaDesde.text
         return None
 
     @property
     def fecha_hasta(self):
-        if hasattr(self.termino_energia_activa, 'FechaHasta'):
-            return self.termino_energia_activa.FechaHasta.text
+        if hasattr(self.termino, 'FechaHasta'):
+            return self.termino.FechaHasta.text
         return None
 
 
