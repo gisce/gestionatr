@@ -1348,7 +1348,6 @@ class test_F1(unittest.TestCase):
 
         self.assertEqual(alquiler.importe_total, 10.36)
 
-
     def testOtherInvoice(self):
         f1 = F1(self.xml_f101_other_invoice)
         f1.parse_xml()
