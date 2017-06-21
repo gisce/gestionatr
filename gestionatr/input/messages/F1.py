@@ -333,6 +333,9 @@ class Factura(object):
 
 
 class Periodo(object):
+
+    NOMBRE_PRECIO = None
+
     def __init__(self, data, name):
         self.periodo = data
         self._name = name
@@ -341,8 +344,16 @@ class Periodo(object):
     def nombre(self):
         return self._name
 
+    @property
+    def precio(self):
+        if self.NOMBRE_PRECIO:
+            return getattr(self.periodo, self.NOMBRE_PRECIO, None)
+        return None
+
 
 class PeriodoPotencia(Periodo):
+
+    NOMBRE_PRECIO = 'PrecioPotencia'
 
     @property
     def potencia_contratada(self):
@@ -360,12 +371,6 @@ class PeriodoPotencia(Periodo):
     def potencia_a_facturar(self):
         if hasattr(self.periodo, 'PotenciaAFacturar'):
             return self.periodo.PotenciaAFacturar
-        return None
-
-    @property
-    def precio_potencia(self):
-        if hasattr(self.periodo, 'PrecioPotencia'):
-            return self.periodo.PrecioPotencia
         return None
 
 
@@ -433,16 +438,12 @@ class Potencia(object):
 
 class PeriodoEnergiaActiva(Periodo):
 
+    NOMBRE_PRECIO = 'PrecioEnergia'
+
     @property
     def valor_energia_activa(self):
         if hasattr(self.periodo, 'ValorEnergiaActiva'):
             return self.periodo.ValorEnergiaActiva
-        return None
-
-    @property
-    def precio_energia(self):
-        if hasattr(self.periodo, 'PrecioEnergia'):
-            return self.periodo.PrecioEnergia
         return None
 
 

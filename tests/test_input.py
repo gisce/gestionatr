@@ -1196,7 +1196,7 @@ class test_F1(unittest.TestCase):
         self.assertEqual(periodo_potencia.potencia_contratada, 1000)
         self.assertEqual(periodo_potencia.potencia_max_demandada, 1000)
         self.assertEqual(periodo_potencia.potencia_a_facturar, 1000)
-        self.assertEqual(periodo_potencia.precio_potencia, 0.05)
+        self.assertEqual(periodo_potencia.precio, 0.05)
         self.assertEqual(periodo_potencia.nombre, 'P1')
 
         self.assertEqual(potencia.penalizacion_no_icp, 'N')
@@ -1218,7 +1218,7 @@ class test_F1(unittest.TestCase):
         periodo_energia = periodos_energia[0]
 
         self.assertEqual(periodo_energia.valor_energia_activa, 300)
-        self.assertEqual(periodo_energia.precio_energia, 0.044027)
+        self.assertEqual(periodo_energia.precio, 0.044027)
         self.assertEqual(periodo_energia.nombre, 'P1')
 
         self.assertEqual(energia_activa.importe_total, 13.21)
