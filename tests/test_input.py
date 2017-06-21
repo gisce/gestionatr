@@ -1125,14 +1125,10 @@ class test_R1(unittest.TestCase):
 
 class test_F1(unittest.TestCase):
     def setUp(self):
-        self.xml_f101_atr_invoice = open(get_data("f101_factura_atr.xml"), "r")
-        self.xml_f101_other_invoice = open(
-            get_data("f101_factura_otros.xml"), "r"
-        )
-
-    def tearDown(self):
-        self.xml_f101_atr_invoice.close()
-        self.xml_f101_other_invoice.close()
+        with open(get_data("f101_factura_atr.xml"), "r") as f:
+            self.xml_f101_atr_invoice = f.read()
+        with open(get_data("f101_factura_otros.xml"), "r") as f:
+            self.xml_f101_other_invoice = f.read()
 
     def testATRInvoice(self):
         f1 = F1(self.xml_f101_atr_invoice)
