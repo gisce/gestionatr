@@ -1129,6 +1129,8 @@ class test_F1(unittest.TestCase):
             self.xml_f101_atr_invoice = f.read()
         with open(get_data("f101_factura_atr_30A.xml"), "r") as f:
             self.xml_f101_atr_invoice_30A = f.read()
+        with open(get_data("f101_factura_atr_empty_periods.xml"), "r") as f:
+            self.xml_f101_atr_invoice_empty_periods = f.read()
         with open(get_data("f101_factura_otros.xml"), "r") as f:
             self.xml_f101_other_invoice = f.read()
 
@@ -1198,6 +1200,7 @@ class test_F1(unittest.TestCase):
         self.assertEqual(periodo_potencia.potencia_a_facturar, 1000)
         self.assertEqual(periodo_potencia.precio, 0.05)
         self.assertEqual(periodo_potencia.nombre, 'P1')
+        self.assertEqual(periodo_potencia.es_facturable(), True)
 
         self.assertEqual(potencia.penalizacion_no_icp, 'N')
         self.assertEqual(potencia.importe_total, 50)
@@ -1220,6 +1223,7 @@ class test_F1(unittest.TestCase):
         self.assertEqual(periodo_energia.valor_energia_activa, 300)
         self.assertEqual(periodo_energia.precio, 0.044027)
         self.assertEqual(periodo_energia.nombre, 'P1')
+        self.assertEqual(periodo_energia.es_facturable(), True)
 
         self.assertEqual(energia_activa.importe_total, 13.21)
 
@@ -1489,3 +1493,14 @@ class test_F1(unittest.TestCase):
         self.assertEqual(expected_lectures_reactiva, lectures_reactiva)
         self.assertEqual(expected_lectures_max, lectures_max)
         self.assertEqual(expected_lectures_energia, lectures_energia)
+
+    def test_get_periods_ignores_empty_periods(self):
+        f1 = F1(self.xml_f101_atr_invoice_empty_periods)
+        f1.parse_xml()
+
+        fact = f1.facturas_atr[0]
+
+        self.assertEqual(len(fact.potencia.terminos_potencia[0].periodos), 1)
+        self.assertEqual(
+            len(fact.energia_activa.terminos_energia_activa[0].periodos), 1
+        )

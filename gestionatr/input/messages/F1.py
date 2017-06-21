@@ -350,6 +350,9 @@ class Periodo(object):
             return getattr(self.periodo, self.NOMBRE_PRECIO, None)
         return None
 
+    def es_facturable(self):
+        "Algunas empresas envian periodos que no se deben facturar con precio 0"
+        return bool(self.precio)
 
 class PeriodoPotencia(Periodo):
 
@@ -385,11 +388,13 @@ class Termino(object):
     def periodos(self):
         data = []
         if hasattr(self.termino, 'Periodo'):
-            period_name = 0
+            period_name = 1
 
             for d in self.termino.Periodo:
-                period_name += 1
-                data.append(self.PERIODO_TYPE(d, 'P{0}'.format(period_name)))
+                period = self.PERIODO_TYPE(d, 'P{0}'.format(period_name))
+                if period.es_facturable():
+                    data.append(period)
+                    period_name += 1
         return data
 
 
