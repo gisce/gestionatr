@@ -1393,6 +1393,21 @@ class test_F1(unittest.TestCase):
         self.assertEqual(registro.iban, 'ES7712341234161234567890')
         self.assertEqual(registro.id_remesa, '0')
 
+    def test_get_remesa(self):
+        f1 = F1(self.xml_f101_atr_invoice)
+        f1.parse_xml()
+
+        self.assertEqual(
+            f1.registro.get_remesa(),
+            {
+                'id_remesa': '0',
+                'fecha_valor_remesa': '2017-05-01',
+                'data_limit_pagament': '2017-06-01',
+                'total_importe_remesa': 76.48,
+                'total_recibos_remesa': 1,
+            }
+        )
+
     def test_get_comptadors(self):
         f1 = F1(self.xml_f101_atr_invoice)
         f1.parse_xml()

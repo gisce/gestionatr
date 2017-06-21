@@ -866,3 +866,13 @@ class RegistroFin(object):
         if hasattr(self.registro, 'IdRemesa'):
             return self.registro.IdRemesa.text
         return None
+
+    def get_remesa(self):
+        vals = {
+           'id_remesa': self.id_remesa,
+           'fecha_valor_remesa': self.fecha_valor,
+           'data_limit_pagament': self.fecha_limite_pago,
+           'total_importe_remesa': self.importe_total,
+           'total_recibos_remesa': self.total_recibos,
+        }
+        return vals
