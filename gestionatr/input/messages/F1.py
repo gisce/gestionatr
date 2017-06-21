@@ -561,6 +561,44 @@ class ImpuestoElectrico(Impuesto):
     pass
 
 
+class PrecioAlquiler(object):
+
+    def __init__(self, data):
+        self.precio_alquiler = data
+
+    @property
+    def precio_dia(self):
+        if hasattr(self.precio_alquiler, 'PrecioDia'):
+            return self.precio_alquiler.PrecioDia
+        return None
+
+    @property
+    def numero_dias(self):
+        if hasattr(self.precio_alquiler, 'NumeroDias'):
+            return self.precio_alquiler.NumeroDias
+        return None
+
+
+class Alquiler(object):
+
+    def __init__(self, data):
+        self.alquiler = data
+
+    @property
+    def precios_alquiler(self):
+        data = []
+        if hasattr(self.alquiler, 'PrecioDiarioAlquiler'):
+            for d in self.alquiler.PrecioDiarioAlquiler:
+                data.append(PrecioAlquiler(d))
+        return data
+
+    @property
+    def importe_total(self):
+        if hasattr(self.alquiler, 'ImporteFacturacionAlquileres'):
+            return self.alquiler.ImporteFacturacionAlquileres
+        return None
+
+
 class IVA(Impuesto):
 
     pass
@@ -787,6 +825,12 @@ class FacturaATR(Factura):
     def impuesto_electrico(self):
         if hasattr(self.factura, 'ImpuestoElectrico'):
             return ImpuestoElectrico(self.factura.ImpuestoElectrico)
+        return None
+
+    @property
+    def alquiler(self):
+        if hasattr(self.factura, 'Alquileres'):
+            return Alquiler(self.factura.Alquileres)
         return None
 
     @property

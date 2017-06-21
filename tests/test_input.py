@@ -1333,7 +1333,21 @@ class test_F1(unittest.TestCase):
 
         self.assertEqual(energia_reactiva.importe_total, 30.34)
 
-        # TODO: Alquileres
+        alquiler = fact.alquiler
+
+        precios_alquileres = alquiler.precios_alquiler
+        self.assertEqual(len(precios_alquileres), 2)
+        alquiler0 = precios_alquileres[0]
+        alquiler1 = precios_alquileres[1]
+
+        self.assertEqual(alquiler0.precio_dia, 0.345205)
+        self.assertEqual(alquiler0.numero_dias, 17)
+
+        self.assertEqual(alquiler1.precio_dia, 0.345205)
+        self.assertEqual(alquiler1.numero_dias, 13)
+
+        self.assertEqual(alquiler.importe_total, 10.36)
+
 
     def testOtherInvoice(self):
         f1 = F1(self.xml_f101_other_invoice)
