@@ -1177,7 +1177,7 @@ class test_F1(unittest.TestCase):
         self.assertEqual(datos_factura.tarifa_atr_fact, '001')
         self.assertEqual(datos_factura.modo_control_potencia, '1')
         self.assertEqual(datos_factura.marca_medida_con_perdidas, 'N')
-        self.assertEqual(datos_factura.identificativo_curva_carga, '02')
+        self.assertEqual(datos_factura.indicativo_curva_carga, '02')
         self.assertEqual(datos_factura.fecha_desde_factura, '2017-03-31')
         self.assertEqual(datos_factura.fecha_hasta_factura, '2017-04-30')
         self.assertEqual(datos_factura.numero_dias, 30)

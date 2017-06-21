@@ -193,7 +193,7 @@ class DatosGeneralesATR(DatosGenerales):
         return None
 
     @property
-    def identificativo_curva_carga(self):
+    def indicativo_curva_carga(self):
         if hasattr(self._datos_factura_atr, 'IndicativoCurvaCarga'):
             return self._datos_factura_atr.IndicativoCurvaCarga.text
         return None
