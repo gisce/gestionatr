@@ -496,6 +496,42 @@ class EnergiaActiva(object):
         return None
 
 
+class PeriodoEnergiaReactiva(Periodo):
+
+    NOMBRE_PRECIO = 'PrecioEnergiaReactiva'
+
+    @property
+    def valor_energia_reactiva(self):
+        if hasattr(self.periodo, 'ValorEnergiaReactiva'):
+            return self.periodo.ValorEnergiaReactiva
+        return None
+
+
+class TerminoEnergiaReactiva(TerminoEnergiaActiva):
+
+    PERIODO_TYPE = PeriodoEnergiaReactiva
+
+
+class EnergiaReactiva(object):
+
+    def __init__(self, data):
+        self.energia_reactiva = data
+
+    @property
+    def terminos_energia_reactiva(self):
+        data = []
+        if hasattr(self.energia_reactiva, 'TerminoEnergiaReactiva'):
+            for d in self.energia_reactiva.TerminoEnergiaReactiva:
+                data.append(TerminoEnergiaReactiva(d))
+        return data
+
+    @property
+    def importe_total(self):
+        if hasattr(self.energia_reactiva, 'ImporteTotalEnergiaReactiva'):
+            return self.energia_reactiva.ImporteTotalEnergiaReactiva
+        return None
+
+
 class Impuesto(object):
 
     def __init__(self, data):
@@ -741,7 +777,11 @@ class FacturaATR(Factura):
             return EnergiaActiva(self.factura.EnergiaActiva)
         return None
 
-    # TODO: EnergiaReactiva
+    @property
+    def energia_reactiva(self):
+        if hasattr(self.factura, 'EnergiaReactiva'):
+            return EnergiaReactiva(self.factura.EnergiaReactiva)
+        return None
 
     @property
     def impuesto_electrico(self):

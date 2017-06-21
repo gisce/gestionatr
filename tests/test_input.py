@@ -1227,8 +1227,6 @@ class test_F1(unittest.TestCase):
 
         self.assertEqual(energia_activa.importe_total, 13.21)
 
-        # TODO: EnergiaReactiva
-
         impuesto_electrico = fact.impuesto_electrico
 
         self.assertEqual(impuesto_electrico.base, 0)
@@ -1300,6 +1298,42 @@ class test_F1(unittest.TestCase):
         self.assertEqual(registro.fecha_limite_pago, '2017-06-01')
         self.assertEqual(registro.iban, 'ES7712341234161234567890')
         self.assertEqual(registro.id_remesa, '0')
+
+    def test_factura_atr_30A(self):
+        f1 = F1(self.xml_f101_atr_invoice_30A)
+        f1.parse_xml()
+
+        self.assertEqual(len(f1.facturas_atr), 1)
+
+        fact = f1.facturas_atr[0]
+
+        energia_reactiva = fact.energia_reactiva
+
+        terminos_energia_reactiva = energia_reactiva.terminos_energia_reactiva
+        self.assertEqual(len(terminos_energia_reactiva), 2)
+        termino_energia_reactiva0 = terminos_energia_reactiva[0]
+        termino_energia_reactiva1 = terminos_energia_reactiva[1]
+
+        self.assertEqual(termino_energia_reactiva0.fecha_desde, '2017-03-31')
+        self.assertEqual(termino_energia_reactiva0.fecha_hasta, '2017-04-17')
+
+        periodos_reactiva0 = termino_energia_reactiva0.periodos
+        self.assertEqual(len(periodos_reactiva0), 1)
+        periodo_reactiva0 = periodos_reactiva0[0]
+
+        self.assertEqual(periodo_reactiva0.valor_energia_reactiva, 15.55)
+        self.assertEqual(periodo_reactiva0.precio, 0.041554)
+
+        periodos_reactiva1 = termino_energia_reactiva1.periodos
+        self.assertEqual(len(periodos_reactiva1), 1)
+        periodo_reactiva1 = periodos_reactiva1[0]
+
+        self.assertEqual(periodo_reactiva1.valor_energia_reactiva, 714.46)
+        self.assertEqual(periodo_reactiva1.precio, 0.041554)
+
+        self.assertEqual(energia_reactiva.importe_total, 30.34)
+
+        # TODO: Alquileres
 
     def testOtherInvoice(self):
         f1 = F1(self.xml_f101_other_invoice)
