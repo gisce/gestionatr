@@ -1504,3 +1504,26 @@ class test_F1(unittest.TestCase):
         self.assertEqual(
             len(fact.energia_activa.terminos_energia_activa[0].periodos), 1
         )
+
+    def test_sin_base_imponible(self):
+        f1_atr = F1(self.xml_f101_atr_invoice)
+        f1_atr.parse_xml()
+
+        f1_otros = F1(self.xml_f101_other_invoice)
+        f1_otros.parse_xml()
+
+        f1_sin_base = F1(
+            self.xml_f101_atr_invoice.replace(
+                '<BaseImponible>63.21</BaseImponible>',
+                '<BaseImponible>0.0</BaseImponible>'
+            )
+        )
+        f1_sin_base.parse_xml()
+
+        fact_atr = f1_atr.facturas_atr[0]
+        fact_oth = f1_otros.otras_facturas[0]
+        fact_sin = f1_sin_base.facturas_atr[0]
+
+        self.assertEqual(fact_atr.sin_base_imponible(), False)
+        self.assertEqual(fact_oth.sin_base_imponible(), False)
+        self.assertEqual(fact_sin.sin_base_imponible(), True)

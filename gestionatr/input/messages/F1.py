@@ -331,6 +331,13 @@ class Factura(object):
                 data.append(ConceptoRepercutible(d))
         return data
 
+    def sin_base_imponible(self):
+        for iva in self.ivas:
+            if iva.base != 0:
+                return False
+
+        return True
+
 
 class Periodo(object):
 
