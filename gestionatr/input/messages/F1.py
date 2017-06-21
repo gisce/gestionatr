@@ -292,6 +292,14 @@ class Factura(object):
                 data.append(IVA(d))
         return data
 
+    @property
+    def conceptos_repercutibles(self):
+        data = []
+        if hasattr(self.factura, 'ConceptoRepercutible'):
+            for d in self.factura.ConceptoRepercutible:
+                data.append(ConceptoRepercutible(d))
+        return data
+
 
 class PeriodoPotencia(object):
 
@@ -708,14 +716,6 @@ class ConceptoRepercutible(object):
 class OtraFactura(Factura):
     DATOS_GENERALES_NAME = 'DatosGeneralesOtrasFacturas'
     DATOS_GENERALES_OBJECT = DatosGeneralesOtras
-
-    @property
-    def conceptos_repercutibles(self):
-        data = []
-        if hasattr(self.factura, 'ConceptoRepercutible'):
-            for d in self.factura.ConceptoRepercutible:
-                data.append(ConceptoRepercutible(d))
-        return data
 
 
 class RegistroFin(object):
