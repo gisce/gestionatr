@@ -1266,6 +1266,9 @@ class test_F1(unittest.TestCase):
         self.assertEqual(integrador.numero_ruedas_enteras, 5)
         self.assertEqual(integrador.numero_ruedas_decimales, 0)
         self.assertEqual(integrador.consumo_calculado, 300)
+        self.assertEqual(integrador.tipus, 'A')
+        self.assertEqual(integrador.periode, 'P1')
+        self.assertEqual(integrador.gir_comptador, 10 ** 5)
 
         lectura_desde = integrador.lectura_desde
 

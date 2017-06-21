@@ -1,6 +1,37 @@
 # -*- coding: utf-8 -*-
 from message import Message
 from gestionatr.input.messages.C2 import Direccion
+from datetime import datetime
+
+# Magnituds d'OCSUM
+MAGNITUDS_OCSUM = {
+    'AE': 'A',
+    'R1': 'R',
+    'PM': 'M',
+    'EP': 'EP'
+}
+
+# Retorna el nom de periode segons el periode d'OCSUM
+PERIODE_OCSUM = {
+    '01': 'P1',  # Punta + Llano
+    '03': 'P2',  # Valle
+    '10': 'P1',  # Totalizador
+    '21': 'P1',  # P1 Tarifes: 004, 006
+    '22': 'P2',  # P2 Tarifes: 004, 006
+    '31': 'P1',  # P1 Tarifa 011
+    '32': 'P2',  # P2 Tarifa 011
+    '33': 'P3',  # P3 Tarifa 011
+    '61': 'P1',  # Periodo 1 Tarifes: 003, 011, 012 - 017
+    '62': 'P2',  # Periodo 2 Tarifes: 003, 011, 012 - 017
+    '63': 'P3',  # Periodo 3 Tarifes: 003, 011, 012 - 017
+    '64': 'P4',  # Periodo 4 Tarifes: 003, 011, 012 - 017
+    '65': 'P5',  # Periodo 5 Tarifes: 003, 011, 012 - 017
+    '66': 'P6',  # Periodo 6 Tarifes: 003, 011, 012 - 017
+    '81': 'P1',  # P1 Tarifa 007
+    '82': 'P2',  # P2 Tarifa 007
+    '83': 'P3',  # P3 Tarifa 007
+}
+
 
 
 class F1(Message):
@@ -557,6 +588,20 @@ class Integrador(object):
         if hasattr(self.integrador, 'LecturaHasta'):
             return Lectura(self.integrador.LecturaHasta)
         return None
+
+    @property
+    def tipus(self):
+        return MAGNITUDS_OCSUM.get(self.magnitud)
+
+    @property
+    def periode(self):
+        return PERIODE_OCSUM.get(self.codigo_periodo, None)
+
+    @property
+    def gir_comptador(self):
+        if self.numero_ruedas_enteras == 99:
+            return 10
+        return 10 ** self.numero_ruedas_enteras
 
 
 class ModeloAparato(object):
