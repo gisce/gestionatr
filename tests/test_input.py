@@ -1393,6 +1393,47 @@ class test_F1(unittest.TestCase):
         self.assertEqual(registro.iban, 'ES7712341234161234567890')
         self.assertEqual(registro.id_remesa, '0')
 
+    def test_get_comptadors(self):
+        f1 = F1(self.xml_f101_atr_invoice)
+        f1.parse_xml()
+
+        fact = f1.facturas_atr[0]
+
+        comptadors = fact.get_comptadors()
+        self.assertEqual(len(comptadors), 1)
+        comptador = comptadors[0]
+
+        self.assertEqual(comptador.tipo_aparato, 'CC')
+        self.assertEqual(comptador.marca_aparato, '199')
+        self.assertEqual(comptador.numero_serie, 'C99999')
+        self.assertEqual(comptador.tipo_dhedm, '1')
+
+        integradores = comptador.integradores
+        self.assertEqual(len(integradores), 1)
+        integrador = integradores[0]
+
+        self.assertEqual(integrador.magnitud, 'AE')
+        self.assertEqual(integrador.codigo_periodo, '10')
+        self.assertEqual(integrador.constante_multiplicadora, 1)
+        self.assertEqual(integrador.numero_ruedas_enteras, 5)
+        self.assertEqual(integrador.numero_ruedas_decimales, 0)
+        self.assertEqual(integrador.consumo_calculado, 300)
+        self.assertEqual(integrador.tipus, 'A')
+        self.assertEqual(integrador.periode, 'P1')
+        self.assertEqual(integrador.gir_comptador, 10 ** 5)
+
+        lectura_desde = integrador.lectura_desde
+
+        self.assertEqual(lectura_desde.fecha, '2017-03-31')
+        self.assertEqual(lectura_desde.procedencia, '30')
+        self.assertEqual(lectura_desde.lectura, 100)
+
+        lectura_hasta = integrador.lectura_hasta
+
+        self.assertEqual(lectura_hasta.fecha, '2017-04-30')
+        self.assertEqual(lectura_hasta.procedencia, '30')
+        self.assertEqual(lectura_hasta.lectura, 400)
+
     def test_specific_get_lectures_returns_correct_readings(self):
         f1 = F1(self.xml_f101_atr_invoice_30A)
         f1.set_xsd()

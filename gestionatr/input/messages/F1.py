@@ -641,6 +641,24 @@ class ModeloAparato(object):
                 data.append(Integrador(d))
         return data
 
+    def get_dates_inici_i_final(self):
+        data_inici = ''
+        data_final = ''
+        for lect in self.get_lectures():
+            data_in_compt = datetime.strptime(
+                lect.lectura_desde.fecha, '%Y-%m-%d'
+            )
+            data_fi_compt = datetime.strptime(
+                lect.lectura_hasta.fecha, '%Y-%m-%d'
+            )
+
+            if not data_inici or data_in_compt < data_inici:
+                data_inici = data_in_compt
+            if not data_final or data_in_compt > data_final:
+                data_final = data_fi_compt
+
+        return data_inici, data_final
+
     def get_lectures(self, tipus=None):
         """Retorna totes les lectures en una llista de Lectura"""
         lectures = []
@@ -720,6 +738,15 @@ class FacturaATR(Factura):
             for d in self.factura.Medidas:
                 data.append(Medida(d))
         return data
+
+    def get_comptadors(self):
+        """Retorna totes les lectures en una llista de comptadors"""
+        comptadors = []
+        for medida in self.medidas:
+            for aparell in medida.modelos_aparatos:
+                di, df = aparell.get_dates_inici_i_final()
+                comptadors.append((di, df, aparell))
+        return [a[2] for a in sorted(comptadors, lambda x,y: cmp(x[0], y[0]))]
 
 
 class ConceptoRepercutible(object):
