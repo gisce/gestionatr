@@ -995,16 +995,23 @@ class FacturaATR(Factura):
 
     def get_info_reactiva(self):
         periodes = []
-        total = self.energia_reactiva.importe_total
+        total = 0
 
-        for reactiva in self.energia_reactiva.terminos_energia_reactiva:
-            periodes += reactiva.periodos
+        if self.energia_reactiva:
+            total = self.energia_reactiva.importe_total
+
+            for reactiva in self.energia_reactiva.terminos_energia_reactiva:
+                periodes += reactiva.periodos
 
         return periodes, total
 
     def get_info_lloguer(self):
-        lloguers = self.alquiler.precios_alquiler
-        total = self.alquiler.importe_total
+        lloguers = []
+        total = 0
+
+        if self.alquiler:
+            lloguers = self.alquiler.precios_alquiler
+            total = self.alquiler.importe_total
 
         return lloguers, total
 
