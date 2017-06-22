@@ -507,6 +507,42 @@ class Potencia(object):
         return None
 
 
+class PeriodoExcesoPotencia(object):
+
+    def __init__(self, data, name):
+        self.periodo = data
+
+    @property
+    def valor_exceso_potencia(self):
+        if hasattr(self.periodo, 'ValorExcesoPotencia'):
+            return self.periodo.ValorExcesoPotencia
+        return None
+
+
+class ExcesoPotencia(object):
+
+    def __init__(self, data):
+        self.exceso_potencia = data
+
+    @property
+    def periodos(self):
+        data = []
+        if hasattr(self.exceso_potencia, 'Periodo'):
+            period_name = 1
+
+            for d in self.exceso_potencia.Periodo:
+                period = PeriodoExcesoPotencia(d, 'P{0}'.format(period_name))
+                data.append(period)
+                period_name += 1
+        return data
+
+    @property
+    def importe_total(self):
+        if hasattr(self.exceso_potencia, 'ImporteTotalExcesos'):
+            return self.exceso_potencia.ImporteTotalExcesos
+        return None
+
+
 class PeriodoEnergiaActiva(Periodo):
 
     NOMBRE_PRECIO = 'PrecioEnergia'
@@ -877,7 +913,11 @@ class FacturaATR(Factura):
             return Potencia(self.factura.Potencia)
         return None
 
-    # TODO: ExcesoPotencia
+    @property
+    def exceso_potencia(self):
+        if hasattr(self.factura, 'ExcesoPotencia'):
+            return ExcesoPotencia(self.factura.ExcesoPotencia)
+        return None
 
     @property
     def energia_activa(self):

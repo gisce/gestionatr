@@ -1129,6 +1129,8 @@ class test_F1(unittest.TestCase):
             self.xml_f101_atr_invoice = f.read()
         with open(get_data("f101_factura_atr_30A.xml"), "r") as f:
             self.xml_f101_atr_invoice_30A = f.read()
+        with open(get_data("f101_factura_atr_61B_exceso.xml"), "r") as f:
+            self.xml_f101_atr_invoice_61B = f.read()
         with open(get_data("f101_factura_atr_empty_periods.xml"), "r") as f:
             self.xml_f101_atr_invoice_empty_periods = f.read()
         with open(get_data("f101_factura_otros.xml"), "r") as f:
@@ -1357,6 +1359,24 @@ class test_F1(unittest.TestCase):
         self.assertEqual(alquiler1.numero_dias, 13)
 
         self.assertEqual(alquiler.importe_total, 10.36)
+
+    def test_factura_atr_61B(self):
+        f1 = F1(self.xml_f101_atr_invoice_61B)
+        f1.parse_xml()
+
+        self.assertEqual(len(f1.facturas_atr), 1)
+
+        fact = f1.facturas_atr[0]
+
+        exceso_potencia = fact.exceso_potencia
+
+        periodos_exceso_potencia = exceso_potencia.periodos
+        self.assertEqual(len(periodos_exceso_potencia), 1)
+        periodo_exceso_potencia = periodos_exceso_potencia[0]
+
+        self.assertEqual(periodo_exceso_potencia.valor_exceso_potencia, 186.29)
+
+        self.assertEqual(exceso_potencia.importe_total, 186.29)
 
     def testOtherInvoice(self):
         f1 = F1(self.xml_f101_other_invoice)
