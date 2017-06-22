@@ -965,9 +965,10 @@ class FacturaATR(Factura):
         periodes = []
         total = 0
         try:
-            for pot in self.potencia.terminos_potencia:
-                periodes += pot.periodos
-            total = self.potencia.importe_total
+            if self.potencia:
+                for pot in self.potencia.terminos_potencia:
+                    periodes += pot.periodos
+                total = self.potencia.importe_total
         except AttributeError:
             pass
         return periodes, total
@@ -986,10 +987,13 @@ class FacturaATR(Factura):
 
     def get_info_activa(self):
         periodes = []
-        total = self.energia_activa.importe_total
+        total = 0
 
-        for activa in self.energia_activa.terminos_energia_activa:
-            periodes += activa.periodos
+        if self.energia_activa:
+            total = self.energia_activa.importe_total
+
+            for activa in self.energia_activa.terminos_energia_activa:
+                periodes += activa.periodos
 
         return periodes, total
 
