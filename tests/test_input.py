@@ -1299,6 +1299,18 @@ class test_F1(unittest.TestCase):
         self.assertEqual(registro.iban, 'ES7712341234161234567890')
         self.assertEqual(registro.id_remesa, '0')
 
+        self.assertDictEqual(
+            fact.get_create_invoice_params(),
+            {
+                'tipo_rectificadora': 'N',
+                'tipo_factura': '01',
+                'date_invoice': '2017-05-01',
+                'check_total': 100,
+                'origin': 'B11254455',
+                'reference': 'B11254455',
+            }
+        )
+
     def test_factura_atr_30A(self):
         f1 = F1(self.xml_f101_atr_invoice_30A)
         f1.parse_xml()

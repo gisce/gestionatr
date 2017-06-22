@@ -338,6 +338,16 @@ class Factura(object):
 
         return True
 
+    def get_create_invoice_params(self):
+        return {
+            'tipo_rectificadora': self.datos_factura.tipo_factura,
+            'tipo_factura': self.datos_factura.motivo_facturacion,
+            'date_invoice': self.datos_factura.fecha_factura,
+            'check_total': abs(self.datos_factura.importe_total_factura),
+            'origin': self.datos_factura.identificador_emisora,
+            'reference': self.datos_factura.identificador_emisora,
+        }
+
 
 class Periodo(object):
 
