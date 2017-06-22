@@ -901,7 +901,7 @@ class FacturaATR(Factura):
 
         self.GETTERS_LINEAS_FACTURA += [
             ('potencia', self.get_info_potencia),
-            # TODO: ExcesoPotencia
+            ('exces', self.get_info_exces),
             ('activa', self.get_info_activa),
             ('reactiva', self.get_info_reactiva),
             ('lloguer', self.get_info_lloguer),
@@ -968,6 +968,18 @@ class FacturaATR(Factura):
             for pot in self.potencia.terminos_potencia:
                 periodes += pot.periodos
             total = self.potencia.importe_total
+        except AttributeError:
+            pass
+        return periodes, total
+
+    def get_info_exces(self):
+        """Retorna els periodes de potència"""
+        periodes = []
+        total = 0
+        try:
+            if self.exceso_potencia:
+                periodes += self.exceso_potencia.periodos
+                total = self.exceso_potencia.importe_total
         except AttributeError:
             pass
         return periodes, total

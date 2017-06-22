@@ -1630,6 +1630,32 @@ class test_F1(unittest.TestCase):
         self.assertEqual(len(lines_rea['lines']), 2)
         self.assertEqual(len(lines_llo['lines']), 2)
 
+    def test_get_linies_factura_on_atr_with_exces(self):
+        f1_atr = F1(self.xml_f101_atr_invoice_61B)
+        f1_atr.parse_xml()
+
+        lines_atr = f1_atr.facturas_atr[0].get_linies_factura_by_type()
+
+        self.assertItemsEqual(
+            lines_atr.keys(),
+            ['potencia', 'exces', 'activa', 'lloguer']
+        )
+
+        lines_pot = lines_atr['potencia']
+        lines_exc = lines_atr['exces']
+        lines_act = lines_atr['activa']
+        lines_llo = lines_atr['lloguer']
+
+        self.assertEqual(lines_pot['total'], 3611.37)
+        self.assertEqual(lines_exc['total'], 186.29)
+        self.assertEqual(lines_act['total'], 535.64)
+        self.assertEqual(lines_llo['total'], 41.25)
+
+        self.assertEqual(len(lines_pot['lines']), 6)
+        self.assertEqual(len(lines_exc['lines']), 1)
+        self.assertEqual(len(lines_act['lines']), 6)
+        self.assertEqual(len(lines_llo['lines']), 1)
+
     def test_get_linies_factura_on_other(self):
         f1_oth = F1(self.xml_f101_other_invoice)
         f1_oth.parse_xml()
