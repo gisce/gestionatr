@@ -32,6 +32,12 @@ PERIODE_OCSUM = {
     '83': 'P3',  # P3 Tarifa 007
 }
 
+CODIS_REG_REFACT = {
+    'RGT42011': '40',
+    'RGT12012': '41',
+    'RGM42012': '42',
+}
+
 
 
 class F1(Message):
@@ -307,6 +313,10 @@ class Factura(object):
     def __init__(self, data):
         self.factura = data
 
+        self.GETTERS_LINEAS_FACTURA = [
+            ('altres', self.get_info_conceptes_repercutibles),
+        ]
+
     @property
     def datos_factura(self):
         if self.DATOS_GENERALES_NAME:
@@ -330,6 +340,44 @@ class Factura(object):
             for d in self.factura.ConceptoRepercutible:
                 data.append(ConceptoRepercutible(d))
         return data
+
+    def get_info_conceptes_repercutibles(self):
+        conceptes = []
+        total = 0
+        try:
+            for concepte in self.conceptos_repercutibles:
+                # Si és una regularització refacturació 40, 41 i 42 el valor
+                # només pot ser negatiu.
+                # Es comprova ja que hi ha empreses que envien la refacturació
+                # i també el ConceptoIVA i s'importaria dues vegades.
+                codigo = concepte.concepto_repercutible
+                if codigo is None:
+                    continue
+                regulating_concept = codigo in CODIS_REG_REFACT.values()
+                if regulating_concept and concepte.total >= 0:
+                    continue
+                elif concepte.importe:
+                    total += concepte.importe
+                    conceptes.append(concepte)
+        except AttributeError:
+            # We might not have any "ConceptoIVA"
+            pass
+        return conceptes, total
+
+    def get_linies_factura_by_type(self):
+        res = {}
+
+        for type, method in self.GETTERS_LINEAS_FACTURA:
+            lines, sub_total = method()
+
+            if lines:
+                res.setdefault(type, {'total': 0.0, 'lines': []})
+
+                res[type]['lines'] += lines
+                new_total = res[type]['total'] + sub_total
+                res[type]['total'] = round(new_total, 2)
+
+        return res
 
     def sin_base_imponible(self):
         for iva in self.ivas:
@@ -370,6 +418,7 @@ class Periodo(object):
     def es_facturable(self):
         "Algunas empresas envian periodos que no se deben facturar con precio 0"
         return bool(self.precio)
+
 
 class PeriodoPotencia(Periodo):
 
@@ -811,6 +860,17 @@ class FacturaATR(Factura):
     DATOS_GENERALES_NAME = 'DatosGeneralesFacturaATR'
     DATOS_GENERALES_OBJECT = DatosGeneralesATR
 
+    def __init__(self, data):
+        super(FacturaATR, self).__init__(data)
+
+        self.GETTERS_LINEAS_FACTURA += [
+            ('potencia', self.get_info_potencia),
+            # TODO: ExcesoPotencia
+            ('activa', self.get_info_activa),
+            ('reactiva', self.get_info_reactiva),
+            ('lloguer', self.get_info_lloguer),
+        ]
+
     @property
     def potencia(self):
         if hasattr(self.factura, 'Potencia'):
@@ -859,6 +919,42 @@ class FacturaATR(Factura):
                 di, df = aparell.get_dates_inici_i_final()
                 comptadors.append((di, df, aparell))
         return [a[2] for a in sorted(comptadors, lambda x,y: cmp(x[0], y[0]))]
+
+    def get_info_potencia(self):
+        """Retorna els periodes de potència"""
+        periodes = []
+        total = 0
+        try:
+            for pot in self.potencia.terminos_potencia:
+                periodes += pot.periodos
+            total = self.potencia.importe_total
+        except AttributeError:
+            pass
+        return periodes, total
+
+    def get_info_activa(self):
+        periodes = []
+        total = self.energia_activa.importe_total
+
+        for activa in self.energia_activa.terminos_energia_activa:
+            periodes += activa.periodos
+
+        return periodes, total
+
+    def get_info_reactiva(self):
+        periodes = []
+        total = self.energia_reactiva.importe_total
+
+        for reactiva in self.energia_reactiva.terminos_energia_reactiva:
+            periodes += reactiva.periodos
+
+        return periodes, total
+
+    def get_info_lloguer(self):
+        lloguers = self.alquiler.precios_alquiler
+        total = self.alquiler.importe_total
+
+        return lloguers, total
 
 
 class ConceptoRepercutible(object):

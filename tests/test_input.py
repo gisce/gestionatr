@@ -1233,8 +1233,6 @@ class test_F1(unittest.TestCase):
         self.assertEqual(impuesto_electrico.porcentaje, 0)
         self.assertEqual(impuesto_electrico.importe, 0)
 
-        # TODO: Alquileres
-
         # TODO: ConceptoRepercutible
 
         ivas = fact.ivas
@@ -1586,3 +1584,78 @@ class test_F1(unittest.TestCase):
         self.assertEqual(fact_atr.sin_base_imponible(), False)
         self.assertEqual(fact_oth.sin_base_imponible(), False)
         self.assertEqual(fact_sin.sin_base_imponible(), True)
+
+    def test_get_linies_factura_on_atr(self):
+        f1_atr = F1(self.xml_f101_atr_invoice_30A)
+        f1_atr.parse_xml()
+
+        lines_atr = f1_atr.facturas_atr[0].get_linies_factura_by_type()
+
+        self.assertItemsEqual(
+            lines_atr.keys(), ['potencia', 'activa', 'reactiva', 'lloguer']
+        )
+
+        lines_pot = lines_atr['potencia']
+        lines_act = lines_atr['activa']
+        lines_rea = lines_atr['reactiva']
+        lines_llo = lines_atr['lloguer']
+
+        self.assertEqual(lines_pot['total'], 245.95)
+        self.assertEqual(lines_act['total'], 124.25)
+        self.assertEqual(lines_rea['total'], 30.34)
+        self.assertEqual(lines_llo['total'], 10.36)
+
+        self.assertEqual(len(lines_pot['lines']), 3)
+        self.assertEqual(len(lines_act['lines']), 3)
+        self.assertEqual(len(lines_rea['lines']), 2)
+        self.assertEqual(len(lines_llo['lines']), 2)
+
+    def test_get_linies_factura_on_other(self):
+        f1_oth = F1(self.xml_f101_other_invoice)
+        f1_oth.parse_xml()
+
+        lines_oth = f1_oth.otras_facturas[0].get_linies_factura_by_type()
+
+        self.assertItemsEqual(
+            lines_oth.keys(), ['altres']
+        )
+        line_oth = lines_oth['altres']
+
+        self.assertEqual(len(line_oth['lines']), 3)
+        self.assertEqual(line_oth['total'], 18.05)
+
+        line_eng = line_oth['lines'][0]
+        line_ver = line_oth['lines'][1]
+        line_dem = line_oth['lines'][2]
+
+        self.assertEqual(line_eng.concepto_repercutible, '04')
+        self.assertEqual(line_eng.tipo_impositivo, '1')
+        self.assertEqual(line_eng.fecha_operacion, '2016-09-01')
+        self.assertEqual(line_eng.unidades, 1)
+        self.assertEqual(line_eng.precio_unidad, 9.04476)
+        self.assertEqual(line_eng.importe, 9.04)
+        self.assertEqual(
+            line_eng.comentarios,
+            'Cuota de enganche / Act. en equipos BT'
+        )
+
+        self.assertEqual(line_ver.concepto_repercutible, '05')
+        self.assertEqual(line_ver.tipo_impositivo, '1')
+        self.assertEqual(line_ver.fecha_operacion, '2016-09-01')
+        self.assertEqual(line_ver.unidades, 1)
+        self.assertEqual(line_ver.precio_unidad, 8.011716)
+        self.assertEqual(line_ver.importe, 8.01)
+        self.assertEqual(
+            line_ver.comentarios, u'Cuota de verificación BT'
+        )
+
+        self.assertEqual(line_dem.concepto_repercutible, '11')
+        self.assertEqual(line_dem.tipo_impositivo, '1')
+        self.assertEqual(line_dem.fecha_desde, '2016-09-01')
+        self.assertEqual(line_dem.fecha_hasta, '2016-10-01')
+        self.assertEqual(line_dem.unidades, 1)
+        self.assertEqual(line_dem.precio_unidad, 1.0)
+        self.assertEqual(line_dem.importe, 1.0)
+        self.assertEqual(
+            line_dem.comentarios, 'Intereses de demora'
+        )
