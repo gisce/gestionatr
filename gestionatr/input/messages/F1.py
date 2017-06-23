@@ -471,11 +471,6 @@ class Termino(object):
                     period_name += 1
         return data
 
-
-class TerminoPotencia(Termino):
-
-    PERIODO_TYPE = PeriodoPotencia
-
     @property
     def fecha_desde(self):
         if hasattr(self.termino, 'FechaDesde'):
@@ -487,6 +482,11 @@ class TerminoPotencia(Termino):
         if hasattr(self.termino, 'FechaHasta'):
             return self.termino.FechaHasta.text
         return None
+
+
+class TerminoPotencia(Termino):
+
+    PERIODO_TYPE = PeriodoPotencia
 
 
 class Potencia(object):
@@ -566,18 +566,6 @@ class PeriodoEnergiaActiva(Periodo):
 class TerminoEnergiaActiva(Termino):
 
     PERIODO_TYPE = PeriodoEnergiaActiva
-
-    @property
-    def fecha_desde(self):
-        if hasattr(self.termino, 'FechaDesde'):
-            return self.termino.FechaDesde.text
-        return None
-
-    @property
-    def fecha_hasta(self):
-        if hasattr(self.termino, 'FechaHasta'):
-            return self.termino.FechaHasta.text
-        return None
 
 
 class EnergiaActiva(object):
