@@ -400,6 +400,7 @@ class Factura(object):
 class Periodo(object):
 
     NOMBRE_PRECIO = None
+    NOMBRE_CANTIDAD = None
 
     def __init__(self, data, name):
         self.periodo = data
@@ -415,6 +416,12 @@ class Periodo(object):
             return getattr(self.periodo, self.NOMBRE_PRECIO, None)
         return None
 
+    @property
+    def cantidad(self):
+        if self.NOMBRE_CANTIDAD:
+            return getattr(self.periodo, self.NOMBRE_CANTIDAD, None)
+        return None
+
     def es_facturable(self):
         "Algunas empresas envian periodos que no se deben facturar con precio 0"
         return bool(self.precio)
@@ -423,6 +430,7 @@ class Periodo(object):
 class PeriodoPotencia(Periodo):
 
     NOMBRE_PRECIO = 'PrecioPotencia'
+    NOMBRE_CANTIDAD = 'PotenciaAFacturar'
 
     @property
     def potencia_contratada(self):
@@ -546,6 +554,7 @@ class ExcesoPotencia(object):
 class PeriodoEnergiaActiva(Periodo):
 
     NOMBRE_PRECIO = 'PrecioEnergia'
+    NOMBRE_CANTIDAD = 'ValorEnergiaActiva'
 
     @property
     def valor_energia_activa(self):
@@ -594,6 +603,7 @@ class EnergiaActiva(object):
 class PeriodoEnergiaReactiva(Periodo):
 
     NOMBRE_PRECIO = 'PrecioEnergiaReactiva'
+    NOMBRE_CANTIDAD = 'ValorEnergiaReactiva'
 
     @property
     def valor_energia_reactiva(self):

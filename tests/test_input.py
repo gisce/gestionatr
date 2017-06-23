@@ -1200,14 +1200,13 @@ class test_F1(unittest.TestCase):
         self.assertEqual(periodo_potencia.potencia_contratada, 1000)
         self.assertEqual(periodo_potencia.potencia_max_demandada, 1000)
         self.assertEqual(periodo_potencia.potencia_a_facturar, 1000)
+        self.assertEqual(periodo_potencia.cantidad, 1000)
         self.assertEqual(periodo_potencia.precio, 0.05)
         self.assertEqual(periodo_potencia.nombre, 'P1')
         self.assertEqual(periodo_potencia.es_facturable(), True)
 
         self.assertEqual(potencia.penalizacion_no_icp, 'N')
         self.assertEqual(potencia.importe_total, 50)
-
-        # TODO: ExcesoPotencia
 
         energia_activa = fact.energia_activa
 
@@ -1223,6 +1222,7 @@ class test_F1(unittest.TestCase):
         periodo_energia = periodos_energia[0]
 
         self.assertEqual(periodo_energia.valor_energia_activa, 300)
+        self.assertEqual(periodo_energia.cantidad, 300)
         self.assertEqual(periodo_energia.precio, 0.044027)
         self.assertEqual(periodo_energia.nombre, 'P1')
         self.assertEqual(periodo_energia.es_facturable(), True)
@@ -1334,6 +1334,7 @@ class test_F1(unittest.TestCase):
         periodo_reactiva0 = periodos_reactiva0[0]
 
         self.assertEqual(periodo_reactiva0.valor_energia_reactiva, 15.55)
+        self.assertEqual(periodo_reactiva0.cantidad, 15.55)
         self.assertEqual(periodo_reactiva0.precio, 0.041554)
 
         periodos_reactiva1 = termino_energia_reactiva1.periodos
@@ -1341,6 +1342,7 @@ class test_F1(unittest.TestCase):
         periodo_reactiva1 = periodos_reactiva1[0]
 
         self.assertEqual(periodo_reactiva1.valor_energia_reactiva, 714.46)
+        self.assertEqual(periodo_reactiva1.cantidad, 714.46)
         self.assertEqual(periodo_reactiva1.precio, 0.041554)
 
         self.assertEqual(energia_reactiva.importe_total, 30.34)
