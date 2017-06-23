@@ -169,7 +169,7 @@ class DatosGenerales(object):
     @property
     def importe_total_factura(self):
         if hasattr(self._datos_generales_factura, 'ImporteTotalFactura'):
-            return self._datos_generales_factura.ImporteTotalFactura
+            return float(self._datos_generales_factura.ImporteTotalFactura.text)
         return None
 
     @property
@@ -415,7 +415,8 @@ class Periodo(object):
     @property
     def precio(self):
         if self.NOMBRE_PRECIO:
-            return getattr(self.periodo, self.NOMBRE_PRECIO, None)
+            if hasattr(self.periodo, self.NOMBRE_PRECIO):
+                return float(getattr(self.periodo, self.NOMBRE_PRECIO).text)
         return None
 
     @property
