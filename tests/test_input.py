@@ -1625,11 +1625,11 @@ class test_F1(unittest.TestCase):
         lines_atr = f1_atr.facturas_atr[0].get_linies_factura_by_type()
 
         self.assertItemsEqual(
-            lines_atr.keys(), ['potencia', 'activa', 'reactiva', 'lloguer']
+            lines_atr.keys(), ['potencia', 'energia', 'reactiva', 'lloguer']
         )
 
         lines_pot = lines_atr['potencia']
-        lines_act = lines_atr['activa']
+        lines_act = lines_atr['energia']
         lines_rea = lines_atr['reactiva']
         lines_llo = lines_atr['lloguer']
 
@@ -1651,12 +1651,12 @@ class test_F1(unittest.TestCase):
 
         self.assertItemsEqual(
             lines_atr.keys(),
-            ['potencia', 'exces', 'activa', 'lloguer']
+            ['potencia', 'exces_potencia', 'energia', 'lloguer']
         )
 
         lines_pot = lines_atr['potencia']
-        lines_exc = lines_atr['exces']
-        lines_act = lines_atr['activa']
+        lines_exc = lines_atr['exces_potencia']
+        lines_act = lines_atr['energia']
         lines_llo = lines_atr['lloguer']
 
         self.assertEqual(lines_pot['total'], 3611.37)

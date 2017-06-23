@@ -904,8 +904,8 @@ class FacturaATR(Factura):
 
         self.GETTERS_LINEAS_FACTURA += [
             ('potencia', self.get_info_potencia),
-            ('exces', self.get_info_exces),
-            ('activa', self.get_info_activa),
+            ('exces_potencia', self.get_info_exces),
+            ('energia', self.get_info_activa),
             ('reactiva', self.get_info_reactiva),
             ('lloguer', self.get_info_lloguer),
         ]
