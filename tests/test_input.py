@@ -1204,6 +1204,8 @@ class test_F1(unittest.TestCase):
         self.assertEqual(periodo_potencia.precio, 0.05)
         self.assertEqual(periodo_potencia.nombre, 'P1')
         self.assertEqual(periodo_potencia.es_facturable(), True)
+        self.assertEqual(periodo_potencia.fecha_desde, '2017-03-31')
+        self.assertEqual(periodo_potencia.fecha_hasta, '2017-04-30')
 
         self.assertEqual(potencia.penalizacion_no_icp, 'N')
         self.assertEqual(potencia.importe_total, 50)
@@ -1226,6 +1228,8 @@ class test_F1(unittest.TestCase):
         self.assertEqual(periodo_energia.precio, 0.044027)
         self.assertEqual(periodo_energia.nombre, 'P1')
         self.assertEqual(periodo_energia.es_facturable(), True)
+        self.assertEqual(periodo_energia.fecha_desde, '2017-03-31')
+        self.assertEqual(periodo_energia.fecha_hasta, '2017-04-30')
 
         self.assertEqual(energia_activa.importe_total, 13.21)
 
@@ -1336,6 +1340,11 @@ class test_F1(unittest.TestCase):
         self.assertEqual(periodo_reactiva0.valor_energia_reactiva, 15.55)
         self.assertEqual(periodo_reactiva0.cantidad, 15.55)
         self.assertEqual(periodo_reactiva0.precio, 0.041554)
+        self.assertEqual(periodo_reactiva0.fecha_desde, '2017-03-31')
+        self.assertEqual(periodo_reactiva0.fecha_hasta, '2017-04-17')
+
+        self.assertEqual(termino_energia_reactiva1.fecha_desde, '2017-03-31')
+        self.assertEqual(termino_energia_reactiva1.fecha_hasta, '2017-04-30')
 
         periodos_reactiva1 = termino_energia_reactiva1.periodos
         self.assertEqual(len(periodos_reactiva1), 1)
@@ -1344,6 +1353,8 @@ class test_F1(unittest.TestCase):
         self.assertEqual(periodo_reactiva1.valor_energia_reactiva, 714.46)
         self.assertEqual(periodo_reactiva1.cantidad, 714.46)
         self.assertEqual(periodo_reactiva1.precio, 0.041554)
+        self.assertEqual(periodo_reactiva1.fecha_desde, '2017-03-31')
+        self.assertEqual(periodo_reactiva1.fecha_hasta, '2017-04-30')
 
         self.assertEqual(energia_reactiva.importe_total, 30.34)
 

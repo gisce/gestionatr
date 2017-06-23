@@ -402,9 +402,11 @@ class Periodo(object):
     NOMBRE_PRECIO = None
     NOMBRE_CANTIDAD = None
 
-    def __init__(self, data, name):
+    def __init__(self, data, name, fecha_desde=None, fecha_hasta=None):
         self.periodo = data
         self._name = name
+        self.fecha_desde = fecha_desde
+        self.fecha_hasta = fecha_hasta
 
     @property
     def nombre(self):
@@ -462,13 +464,16 @@ class Termino(object):
     def periodos(self):
         data = []
         if hasattr(self.termino, 'Periodo'):
-            period_name = 1
+            period_number = 1
 
             for d in self.termino.Periodo:
-                period = self.PERIODO_TYPE(d, 'P{0}'.format(period_name))
+                period_name = 'P{0}'.format(period_number)
+                period = self.PERIODO_TYPE(
+                    d, period_name, self.fecha_desde, self.fecha_hasta
+                )
                 if period.es_facturable():
                     data.append(period)
-                    period_name += 1
+                    period_number += 1
         return data
 
     @property
