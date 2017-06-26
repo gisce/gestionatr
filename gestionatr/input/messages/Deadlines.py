@@ -24,6 +24,9 @@ class Naturaldays(int):
 
 
 class ProcessDeadline(object):
+
+    steps = []
+
     @classmethod
     def get_deadline(cls, step, modifier=None):
         if modifier:
