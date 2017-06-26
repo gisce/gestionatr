@@ -175,7 +175,7 @@ class DatosGenerales(object):
     @property
     def saldo_factura(self):
         if hasattr(self._datos_generales_factura, 'SaldoFactura'):
-            return self._datos_generales_factura.SaldoFactura
+            return float(self._datos_generales_factura.SaldoFactura.text)
         return None
 
     @property
@@ -220,13 +220,13 @@ class DatosGeneralesATR(DatosGenerales):
     @property
     def vas_trafo(self):
         if hasattr(self._datos_factura_atr, 'VAsTrafo'):
-            return self._datos_factura_atr.VAsTrafo
+            return float(self._datos_factura_atr.VAsTrafo.text)
         return None
 
     @property
     def porcentaje_perdidas(self):
         if hasattr(self._datos_factura_atr, 'PorcentajePerdidas'):
-            return self._datos_factura_atr.PorcentajePerdidas
+            return float(self._datos_factura_atr.PorcentajePerdidas.text)
         return None
 
     @property
@@ -274,7 +274,7 @@ class DatosGeneralesATR(DatosGenerales):
     @property
     def numero_dias(self):
         if hasattr(self._periodo, 'NumeroDias'):
-            return self._periodo.NumeroDias
+            return int(self._periodo.NumeroDias.text)
         return None
 
 
@@ -422,7 +422,8 @@ class Periodo(object):
     @property
     def cantidad(self):
         if self.NOMBRE_CANTIDAD:
-            return getattr(self.periodo, self.NOMBRE_CANTIDAD, None)
+            if hasattr(self.periodo, self.NOMBRE_CANTIDAD):
+                return float(getattr(self.periodo, self.NOMBRE_CANTIDAD).text)
         return None
 
     def es_facturable(self):
@@ -438,19 +439,19 @@ class PeriodoPotencia(Periodo):
     @property
     def potencia_contratada(self):
         if hasattr(self.periodo, 'PotenciaContratada'):
-            return self.periodo.PotenciaContratada
+            return int(self.periodo.PotenciaContratada.text)
         return None
 
     @property
     def potencia_max_demandada(self):
         if hasattr(self.periodo, 'PotenciaMaxDemandada'):
-            return self.periodo.PotenciaMaxDemandada
+            return int(self.periodo.PotenciaMaxDemandada.text)
         return None
 
     @property
     def potencia_a_facturar(self):
         if hasattr(self.periodo, 'PotenciaAFacturar'):
-            return self.periodo.PotenciaAFacturar
+            return int(self.periodo.PotenciaAFacturar.text)
         return None
 
 
@@ -517,7 +518,7 @@ class Potencia(object):
     @property
     def importe_total(self):
         if hasattr(self.potencia, 'ImporteTotalTerminoPotencia'):
-            return self.potencia.ImporteTotalTerminoPotencia
+            return float(self.potencia.ImporteTotalTerminoPotencia.text)
         return None
 
 
@@ -529,7 +530,7 @@ class PeriodoExcesoPotencia(object):
     @property
     def valor_exceso_potencia(self):
         if hasattr(self.periodo, 'ValorExcesoPotencia'):
-            return self.periodo.ValorExcesoPotencia
+            return float(self.periodo.ValorExcesoPotencia.text)
         return None
 
 
@@ -553,7 +554,7 @@ class ExcesoPotencia(object):
     @property
     def importe_total(self):
         if hasattr(self.exceso_potencia, 'ImporteTotalExcesos'):
-            return self.exceso_potencia.ImporteTotalExcesos
+            return float(self.exceso_potencia.ImporteTotalExcesos.text)
         return None
 
 
@@ -590,7 +591,7 @@ class EnergiaActiva(object):
     @property
     def importe_total(self):
         if hasattr(self.energia_activa, 'ImporteTotalEnergiaActiva'):
-            return self.energia_activa.ImporteTotalEnergiaActiva
+            return float(self.energia_activa.ImporteTotalEnergiaActiva.text)
         return None
 
 
@@ -627,7 +628,7 @@ class EnergiaReactiva(object):
     @property
     def importe_total(self):
         if hasattr(self.energia_reactiva, 'ImporteTotalEnergiaReactiva'):
-            return self.energia_reactiva.ImporteTotalEnergiaReactiva
+            return float(self.energia_reactiva.ImporteTotalEnergiaReactiva.text)
         return None
 
 
@@ -668,13 +669,13 @@ class PrecioAlquiler(object):
     @property
     def precio_dia(self):
         if hasattr(self.precio_alquiler, 'PrecioDia'):
-            return self.precio_alquiler.PrecioDia
+            return float(self.precio_alquiler.PrecioDia.text)
         return None
 
     @property
     def numero_dias(self):
         if hasattr(self.precio_alquiler, 'NumeroDias'):
-            return self.precio_alquiler.NumeroDias
+            return int(self.precio_alquiler.NumeroDias.text)
         return None
 
 
@@ -694,7 +695,7 @@ class Alquiler(object):
     @property
     def importe_total(self):
         if hasattr(self.alquiler, 'ImporteFacturacionAlquileres'):
-            return self.alquiler.ImporteFacturacionAlquileres
+            return float(self.alquiler.ImporteFacturacionAlquileres.text)
         return None
 
 
@@ -723,7 +724,7 @@ class Lectura(object):
     @property
     def lectura(self):
         if hasattr(self.lectura_data, 'Lectura'):
-            return self.lectura_data.Lectura
+            return float(self.lectura_data.Lectura.text)
         return None
 
 
@@ -1097,7 +1098,7 @@ class RegistroFin(object):
     @property
     def importe_total(self):
         if hasattr(self.registro, 'ImporteTotal'):
-            return self.registro.ImporteTotal
+            return float(self.registro.ImporteTotal.text)
         return None
 
     @property
