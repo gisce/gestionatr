@@ -728,6 +728,30 @@ class Lectura(object):
         return None
 
 
+class Ajuste(object):
+
+    def __init__(self, data):
+        self.ajuste = data
+
+    @property
+    def codigo_motivo(self):
+        if hasattr(self.ajuste, 'CodigoMotivoAjuste'):
+            return self.ajuste.CodigoMotivoAjuste.text
+        return None
+
+    @property
+    def ajuste_por_integrador(self):
+        if hasattr(self.ajuste, 'AjustePorIntegrador'):
+            return float(self.ajuste.AjustePorIntegrador.text)
+        return None
+
+    @property
+    def comentario(self):
+        if hasattr(self.ajuste, 'Comentarios'):
+            return self.ajuste.Comentarios.text
+        return None
+
+
 class Integrador(object):
 
     def __init__(self, data):
@@ -794,6 +818,12 @@ class Integrador(object):
         if self.numero_ruedas_enteras == 99:
             return 10
         return 10 ** self.numero_ruedas_enteras
+
+    @property
+    def ajuste(self):
+        if hasattr(self.integrador, 'Ajuste'):
+            return Ajuste(self.integrador.Ajuste)
+        return None
 
 
 class ModeloAparato(object):
