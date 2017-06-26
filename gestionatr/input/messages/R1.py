@@ -6,11 +6,13 @@ from Deadlines import DeadLine, Workdays, Naturaldays
 from gestionatr.utils import get_rec_attr
 from gestionatr.defs import SUBTYPES_R101
 
+
 class R1(C2):
     """Clase que implementa R1."""
 
     steps = [
         DeadLine('01', Workdays(5)),
+        DeadLine('02', Workdays(15)),
         DeadLine('03', Naturaldays(20)),
     ]
 
