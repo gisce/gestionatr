@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from message import Message
 from gestionatr.input.messages.C2 import Direccion
+from gestionatr.defs import TARIFES_SEMPRE_MAX
 from datetime import datetime
 
 # Magnituds d'OCSUM
@@ -1053,6 +1054,28 @@ class FacturaATR(Factura):
             total = self.alquiler.importe_total
 
         return lloguers, total
+
+    def get_info_facturacio_potencia(self):
+        """
+        Retorna el mode de control de potència en funció de la tarifa,
+        el mode control potencia y penalització NO ICP
+        :return:
+          'max': per maxímetre
+          'icp': per icp
+          'recarrec': recàrrec per no ICP
+        """
+        if self.datos_factura.tarifa_atr_fact in TARIFES_SEMPRE_MAX:
+            return 'max'
+
+        if self.datos_factura.modo_control_potencia == '2':
+            mode = 'max'
+        else:
+            mode = 'icp'
+
+        if self.potencia.penalizacion_no_icp == 'S':
+            return 'recarrec'
+
+        return mode
 
 
 class ConceptoRepercutible(object):

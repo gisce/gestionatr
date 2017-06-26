@@ -1321,6 +1321,8 @@ class test_F1(unittest.TestCase):
             }
         )
 
+        self.assertEqual(fact.get_info_facturacio_potencia(), 'icp')
+
     def test_factura_atr_30A(self):
         f1 = F1(self.xml_f101_atr_invoice_30A)
         f1.parse_xml()
@@ -1378,6 +1380,8 @@ class test_F1(unittest.TestCase):
         self.assertEqual(alquiler1.numero_dias, 13)
 
         self.assertEqual(alquiler.importe_total, 10.36)
+
+        self.assertEqual(fact.get_info_facturacio_potencia(), 'max')
 
     def test_factura_atr_61B(self):
         f1 = F1(self.xml_f101_atr_invoice_61B)
