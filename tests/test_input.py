@@ -1199,6 +1199,11 @@ class test_F1(unittest.TestCase):
         self.assertEqual(len(periodos_potencia), 1)
         periodo_potencia = periodos_potencia[0]
 
+        self.assertDictEqual(
+            termino_potencia.get_contracted_periods_by_period(),
+            {'P1': 1000}
+        )
+
         self.assertEqual(periodo_potencia.potencia_contratada, 1000)
         self.assertEqual(periodo_potencia.potencia_max_demandada, 1000)
         self.assertEqual(periodo_potencia.potencia_a_facturar, 1000)
@@ -1331,6 +1336,21 @@ class test_F1(unittest.TestCase):
 
         fact = f1.facturas_atr[0]
 
+        potencia = fact.potencia
+
+        self.assertEqual(len(potencia.terminos_potencia), 1)
+
+        termino_potencia = potencia.terminos_potencia[0]
+
+        self.assertDictEqual(
+            termino_potencia.get_contracted_periods_by_period(),
+            {
+                'P1': 35000,
+                'P2': 35000,
+                'P3': 35000,
+            }
+        )
+
         energia_reactiva = fact.energia_reactiva
 
         terminos_energia_reactiva = energia_reactiva.terminos_energia_reactiva
@@ -1390,6 +1410,24 @@ class test_F1(unittest.TestCase):
         self.assertEqual(len(f1.facturas_atr), 1)
 
         fact = f1.facturas_atr[0]
+
+        potencia = fact.potencia
+
+        self.assertEqual(len(potencia.terminos_potencia), 1)
+
+        termino_potencia = potencia.terminos_potencia[0]
+
+        self.assertDictEqual(
+            termino_potencia.get_contracted_periods_by_period(),
+            {
+                'P1': 450000,
+                'P2': 500000,
+                'P3': 500000,
+                'P4': 500000,
+                'P5': 500000,
+                'P6': 725000,
+            }
+        )
 
         exceso_potencia = fact.exceso_potencia
 

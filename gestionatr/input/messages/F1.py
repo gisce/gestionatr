@@ -496,6 +496,14 @@ class TerminoPotencia(Termino):
 
     PERIODO_TYPE = PeriodoPotencia
 
+    def get_contracted_periods_by_period(self):
+        cont_per = {}
+
+        for period in self.periodos:
+            cont_per[period.nombre] = period.potencia_contratada
+
+        return cont_per
+
 
 class Potencia(object):
 
