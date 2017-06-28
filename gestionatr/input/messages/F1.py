@@ -649,19 +649,19 @@ class Impuesto(object):
     @property
     def base(self):
         if hasattr(self.impuesto, 'BaseImponible'):
-            return self.impuesto.BaseImponible
+            return float(self.impuesto.BaseImponible.text)
         return None
 
     @property
     def porcentaje(self):
         if hasattr(self.impuesto, 'Porcentaje'):
-            return self.impuesto.Porcentaje
+            return float(self.impuesto.Porcentaje.text)
         return None
 
     @property
     def importe(self):
         if hasattr(self.impuesto, 'Importe'):
-            return self.impuesto.Importe
+            return float(self.impuesto.Importe.text)
         return None
 
 
