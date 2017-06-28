@@ -2,7 +2,7 @@
 from message import Message
 from gestionatr.input.messages.C2 import Direccion
 from gestionatr.defs import TARIFES_SEMPRE_MAX
-from datetime import datetime
+from datetime import datetime, date
 
 # Magnituds d'OCSUM
 MAGNITUDS_OCSUM = {
@@ -1213,3 +1213,31 @@ class RegistroFin(object):
            'total_recibos_remesa': self.total_recibos,
         }
         return vals
+
+
+def agrupar_lectures_per_data(lectures):
+    """Retorna un diccionari de llistes en què les
+       claus són les dates inicial i final de les lectures
+    """
+    lect = {}
+    for i in lectures:
+        key = (i.data_lectura_inicial, i.data_lectura_final)
+        if key not in lect:
+            lect[key] = []
+        lect[key].append(i)
+    return lect
+
+
+def obtenir_data_inici_i_final(dic):
+    """Retorna la data inicial i final del diccionari retornat
+       per la funció agrupar_lectures_per_data()
+    """
+    inici_conjunt = None
+    final_conjunt = None
+    for keys in dic.keys():
+        if not inici_conjunt or inici_conjunt > keys[0]:
+            inici_conjunt = keys[0]
+        if not final_conjunt or final_conjunt < keys[1]:
+            final_conjunt = keys[1]
+
+    return inici_conjunt, final_conjunt
