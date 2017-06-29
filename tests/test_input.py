@@ -3,6 +3,8 @@
 from . import unittest
 from .utils import get_data
 from gestionatr.input.messages import C1, C2, A3, B1, M1, D1, W1, Q1, R1, F1
+from gestionatr.input.messages.F1 \
+    import agrupar_lectures_per_data, obtenir_data_inici_i_final
 
 
 class test_MessageBase(unittest.TestCase):
@@ -1792,3 +1794,27 @@ class test_F1(unittest.TestCase):
         self.assertEqual(
             line_dem.comentarios, 'Intereses de demora'
         )
+
+    def test_agrupar_i_obtenir_dates(self):
+        f1 = F1(self.xml_f101_atr_invoice)
+        f1.parse_xml()
+
+        fact = f1.facturas_atr[0]
+        compt = fact.get_comptadors()[0]
+        lectures = compt.get_lectures()
+
+        lectures_agrupades = agrupar_lectures_per_data(lectures)
+
+        lectura = lectures[0]
+
+        self.assertDictEqual(
+            lectures_agrupades,
+            {
+                ('2017-03-31', '2017-04-30'):
+                    [lectura]
+            }
+        )
+
+        data_inici, data_fi = obtenir_data_inici_i_final(lectures_agrupades)
+        self.assertEqual(data_inici, '2017-03-31')
+        self.assertEqual(data_fi, '2017-04-30')

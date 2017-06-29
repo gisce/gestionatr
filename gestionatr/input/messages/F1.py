@@ -1221,7 +1221,7 @@ def agrupar_lectures_per_data(lectures):
     """
     lect = {}
     for i in lectures:
-        key = (i.data_lectura_inicial, i.data_lectura_final)
+        key = (i.lectura_desde.fecha, i.lectura_hasta.fecha)
         if key not in lect:
             lect[key] = []
         lect[key].append(i)
