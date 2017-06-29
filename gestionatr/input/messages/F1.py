@@ -39,6 +39,8 @@ CODIS_REG_REFACT = {
     'RGM42012': '42',
 }
 
+# Totalitzadors a ignorar
+SKIP_TOTALITZADORS = ('00', '60')
 
 
 class F1(Message):
@@ -833,6 +835,10 @@ class Integrador(object):
         if hasattr(self.integrador, 'Ajuste'):
             return Ajuste(self.integrador.Ajuste)
         return None
+
+    @property
+    def ometre(self):
+        return self.codigo_periodo in SKIP_TOTALITZADORS
 
 
 class ModeloAparato(object):

@@ -1288,6 +1288,7 @@ class test_F1(unittest.TestCase):
         self.assertEqual(integrador.tipus, 'A')
         self.assertEqual(integrador.periode, 'P1')
         self.assertEqual(integrador.gir_comptador, 10 ** 5)
+        self.assertEqual(integrador.ometre, False)
 
         lectura_desde = integrador.lectura_desde
 
