@@ -1274,6 +1274,7 @@ class test_F1(unittest.TestCase):
         self.assertEqual(modelo_aparato.marca_aparato, '199')
         self.assertEqual(modelo_aparato.numero_serie, 'C99999')
         self.assertEqual(modelo_aparato.tipo_dhedm, '1')
+        self.assertEqual(modelo_aparato.gir_comptador, 10 ** 5)
 
         integradores = modelo_aparato.integradores
         self.assertEqual(len(integradores), 1)

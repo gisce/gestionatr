@@ -878,6 +878,14 @@ class ModeloAparato(object):
                 data.append(Integrador(d))
         return data
 
+    @property
+    def gir_comptador(self):
+        giros_lect = [
+            int.gir_comptador for int in self.integradores
+        ]
+
+        return max(giros_lect)
+
     def get_dates_inici_i_final(self):
         data_inici = ''
         data_final = ''
