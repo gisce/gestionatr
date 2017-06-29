@@ -7,6 +7,8 @@ class DeadLine(namedtuple('Deadline', "step, days")):
     def limit(self, date=None):
         if not date:
             date = datetime.today()
+        # cut microseconds
+        date = date.replace(microsecond=0)
         if isinstance(self.days, Naturaldays):
             return date + timedelta(self.days)
         else:
