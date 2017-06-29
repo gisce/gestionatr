@@ -8,7 +8,7 @@ class W1(C1):
     """Classe que implementa W1."""
 
     steps = [
-        DeadLine('01', Workdays(5), '02'),
+        DeadLine('01', Workdays(5)),
     ]
 
     @property
