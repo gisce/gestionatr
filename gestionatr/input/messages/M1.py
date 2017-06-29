@@ -8,14 +8,25 @@ from gestionatr.utils import get_rec_attr
 class M1(C2):
     """Classe que implementa M1."""
 
-    steps = [
-        DeadLine('01', Workdays(5), '02'),
-        DeadLine('02_activation', Workdays(1), '05'),
-        DeadLine('02', Naturaldays(60), '05'),
-        DeadLine('03', Naturaldays(30), '05'),
-        DeadLine('05_activation', Workdays(1), '05'),
-        DeadLine('06', Workdays(5), '07'),
+    steps_T = [
+        DeadLine('01', Workdays(5)),
+        DeadLine('02', Workdays(1)),
+        DeadLine('03', Naturaldays(30)),
+        DeadLine('05', Workdays(1)),
+        DeadLine('06', Workdays(5)),
     ]
+
+    steps_S = [
+        DeadLine('01', Workdays(5)),
+        DeadLine('02', Workdays(5)),
+        DeadLine('06', Workdays(5)),
+    ]
+    steps_A = steps_S
+    steps_C = steps_S
+
+    steps_P = steps_T
+
+    steps = steps_T
 
     # Datos paso 01
     @property

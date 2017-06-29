@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 from . import unittest
 from .utils import get_data
-from gestionatr.input.messages import C1, C2, A3, B1, M1, D1, W1, Q1, R1, F1
+from gestionatr.input.messages \
+    import C1, C2, A3, B1, M1, D1, W1, Q1, R1, F1, Deadlines
 from gestionatr.input.messages.F1 \
     import agrupar_lectures_per_data, obtenir_data_inici_i_final
 
@@ -27,6 +28,21 @@ class test_MessageBase(unittest.TestCase):
         self.assertEqual(c.codi_sollicitud, '201607211259')
         self.assertEqual(c.seq_sollicitud, '01')
         self.assertEqual(c.data_sollicitud, '2016-07-21 12:59:47')
+
+
+class test_Deadline(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_c101_completo = open(get_data("c101.xml"), "r")
+
+    def test_limit(self):
+        c = C1(self.xml_c101_completo)
+        c.parse_xml()
+        res = c.get_deadline('01')
+        self.assertEqual(res, Deadlines.DeadLine(step='01', days=5))
+
+    def tearDown(self):
+        self.xml_c101_completo.close()
 
 
 class test_C1(unittest.TestCase):

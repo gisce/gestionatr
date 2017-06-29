@@ -9,40 +9,31 @@ from gestionatr.utils import get_rec_attr
 class B1(C2):
     """Classe que implementa B1."""
 
-    steps = None
-
     steps_01 = [
-        DeadLine('01', Workdays(5), '02'),
-        DeadLine('02_activation', Workdays(1), '05'),
-        DeadLine('02',  Workdays(6), '05'),
-        DeadLine('03', Workdays(5), '04'),
-        DeadLine('05_activation', Workdays(1), '05'),
+        DeadLine('00', Workdays(-5)),
+        DeadLine('01', Workdays(5)),
+        DeadLine('02', Workdays(1)),
+        DeadLine('03', Workdays(5)),
+        DeadLine('05', Workdays(1)),
     ]
 
     steps_02 = [
-        DeadLine('01', Workdays(5), '02'),
-        DeadLine('02_activation', Workdays(1), '05'),
-        DeadLine('02', Naturaldays(60), '05'),
-        DeadLine('03', Workdays(5), '04'),
-        DeadLine('05_activation', Workdays(1), '05'),
+        DeadLine('00', Workdays(-15)),
+        DeadLine('01', Workdays(5)),
+        DeadLine('02', Workdays(1)),
+        DeadLine('03', Workdays(5)),
+        DeadLine('05', Workdays(1)),
     ]
 
     steps_03 = [
-        DeadLine('02_activation', Workdays(1), '05'),
-        DeadLine('02', Naturaldays(60), '05'),
-        DeadLine('05_activation', Workdays(1), '05'),
+        DeadLine('02', Naturaldays(60)),
+        DeadLine('03', Workdays(1)),
+        DeadLine('05', Naturaldays(60)),
     ]
 
     steps_04 = steps_01
 
-    @classmethod
-    def get_deadline(cls, step, activation=False, motiu='01'):
-        steps = getattr(cls, 'steps_{0}'.format(motiu))
-        if activation:
-            step = '{0}_activation'.format(step)
-        for s in steps:
-            if s.step == step:
-                return s
+    steps = steps_01
 
     # Datos paso 01
     @property

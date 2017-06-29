@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from message import Message
 from gestionatr.utils import get_rec_attr
+from Deadlines import ProcessDeadline
 
 
-class Q1(Message):
+class Q1(Message, ProcessDeadline):
     """Clase que implementa Q1."""
 
     @property

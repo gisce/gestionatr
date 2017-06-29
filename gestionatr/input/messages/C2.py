@@ -8,13 +8,12 @@ class C2(C1):
     """Clase que implementa C2."""
 
     steps = [
-        DeadLine('01', Workdays(5), '02'),
-        DeadLine('02_activation', Workdays(1), '05'),
-        DeadLine('02', Naturaldays(60), '05'),
-        DeadLine('03', Naturaldays(30), '05'),
-        DeadLine('05_activation', Workdays(1), '05'),
-        DeadLine('07_activation', Workdays(1), '05'),
-        DeadLine('08', Workdays(5), '09')
+        DeadLine('01', Workdays(5)),
+        DeadLine('02', Workdays(1)),
+        DeadLine('03', Naturaldays(30)),
+        DeadLine('05', Workdays(1)),
+        DeadLine('06', Workdays(1)),
+        DeadLine('08', Workdays(5))
     ]
 
     # Datos paso 01
