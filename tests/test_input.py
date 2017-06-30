@@ -1342,6 +1342,7 @@ class test_F1(unittest.TestCase):
                 'date_invoice': '2017-05-01',
                 'check_total': 100,
                 'origin': 'F0001',
+                'origin_date_invoice': '2017-05-01',
                 'reference': 'B11254455',
             }
         )
