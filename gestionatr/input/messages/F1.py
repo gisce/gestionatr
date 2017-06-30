@@ -801,7 +801,7 @@ class Integrador(object):
     @property
     def consumo_calculado(self):
         if hasattr(self.integrador, 'ConsumoCalculado'):
-            return self.integrador.ConsumoCalculado
+            return float(self.integrador.ConsumoCalculado.text)
         return None
 
     @property
