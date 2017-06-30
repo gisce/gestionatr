@@ -395,7 +395,7 @@ class Factura(object):
             'tipo_factura': self.datos_factura.motivo_facturacion,
             'date_invoice': self.datos_factura.fecha_factura,
             'check_total': abs(self.datos_factura.importe_total_factura),
-            'origin': self.datos_factura.identificador_emisora,
+            'origin': self.datos_factura.codigo_fiscal_factura,
             'reference': self.datos_factura.identificador_emisora,
         }
 
