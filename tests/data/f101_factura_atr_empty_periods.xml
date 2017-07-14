@@ -63,6 +63,12 @@
                         <PotenciaAFacturar>1000</PotenciaAFacturar>
                         <PrecioPotencia>0.050000000</PrecioPotencia>
                     </Periodo>
+                    <Periodo>
+                        <PotenciaContratada>0</PotenciaContratada>
+                        <PotenciaMaxDemandada>0</PotenciaMaxDemandada>
+                        <PotenciaAFacturar>0</PotenciaAFacturar>
+                        <PrecioPotencia>0.0</PrecioPotencia>
+                    </Periodo>
                 </TerminoPotencia>
                 <PenalizacionNoICP>N</PenalizacionNoICP>
                 <ImporteTotalTerminoPotencia>50</ImporteTotalTerminoPotencia>
@@ -74,6 +80,10 @@
                     <Periodo>
                         <ValorEnergiaActiva>300.00</ValorEnergiaActiva>
                         <PrecioEnergia>0.044027</PrecioEnergia>
+                    </Periodo>
+                    <Periodo>
+                        <ValorEnergiaActiva>0.0</ValorEnergiaActiva>
+                        <PrecioEnergia>0.0</PrecioEnergia>
                     </Periodo>
                 </TerminoEnergiaActiva>
                 <ImporteTotalEnergiaActiva>13.21</ImporteTotalEnergiaActiva>

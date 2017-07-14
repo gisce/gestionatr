@@ -112,6 +112,11 @@
                             <Procedencia>30</Procedencia>
                             <Lectura>400.00</Lectura>
                         </LecturaHasta>
+                        <Ajuste>
+                            <CodigoMotivoAjuste>01</CodigoMotivoAjuste>
+                            <AjustePorIntegrador>12.0</AjustePorIntegrador>
+                            <Comentarios>Ajuste</Comentarios>
+                        </Ajuste>
                     </Integrador>
                 </ModeloAparato>
             </Medidas>
