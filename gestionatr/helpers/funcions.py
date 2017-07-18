@@ -3,6 +3,10 @@
 """Helper functions for libComXml
 """
 
+CODIS_REFACT = {'RT42011': '40',
+                'RT12012': '41',
+                'RM42012': '42'}
+
 CODIS_REG_REFACT = {'RGT42011': '40',
                     'RGT12012': '41',
                     'RGM42012': '42'}
