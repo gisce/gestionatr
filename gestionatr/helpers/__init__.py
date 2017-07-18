@@ -1,2 +1,2 @@
 # -*- coding: utf-8 -*-
-import funcions
+from funcions import *
