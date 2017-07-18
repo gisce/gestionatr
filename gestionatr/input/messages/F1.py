@@ -19,9 +19,12 @@ PERIODE_OCSUM = {
     '10': 'P1',  # Totalizador
     '21': 'P1',  # P1 Tarifes: 004, 006
     '22': 'P2',  # P2 Tarifes: 004, 006
-    '31': 'P1',  # P1 Tarifa 011
-    '32': 'P2',  # P2 Tarifa 011
-    '33': 'P3',  # P3 Tarifa 011
+    '31': 'P1',  # P1 Tarifa 003
+    '32': 'P2',  # P2 Tarifa 003
+    '33': 'P3',  # P3 Tarifa 003
+    '41': 'P1',  # P1 Tarifa 011
+    '42': 'P2',  # P2 Tarifa 011
+    '43': 'P3',  # P3 Tarifa 011
     '61': 'P1',  # Periodo 1 Tarifes: 003, 011, 012 - 017
     '62': 'P2',  # Periodo 2 Tarifes: 003, 011, 012 - 017
     '63': 'P3',  # Periodo 3 Tarifes: 003, 011, 012 - 017
