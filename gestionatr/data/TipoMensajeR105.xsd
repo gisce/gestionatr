@@ -126,7 +126,7 @@
 	</xs:complexType>
 	<xs:complexType name="SolicitudInformacionAdicionalparaRetipificacion">
 		<xs:sequence>
-			<xs:element name="Tipo" type="TipoInformacionAdicional">
+			<xs:element name="Tipo" type="TipoReclamacionPeticion">
 				<xs:annotation>
 					<xs:documentation>Tabla 81</xs:documentation>
 				</xs:annotation>
@@ -193,7 +193,7 @@
 			<xs:element name="VariableAportacionInformacion" type="VariableAportacionInformacion" maxOccurs="10"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="VariablesAportacionInformacionparaRetipificacion">
+	<xs:complexType name="VariablesAportacionInformacionParaRetipificacion">
 		<xs:sequence>
 			<xs:element name="VariableAportacionInformacionparaRetipificacion" type="VariableDetalleReclamacion" maxOccurs="10"/>
 		</xs:sequence>
@@ -202,7 +202,7 @@
 		<xs:sequence>
 			<xs:element name="DatosEnvioInformacion" type="DatosEnvioInformacion"/>
 			<xs:element name="VariablesAportacionInformacion" type="VariablesAportacionInformacion" minOccurs="0"/>
-			<xs:element name="VariablesAportacionInformacionparaRetipificacion" type="VariablesAportacionInformacionparaRetipificacion" minOccurs="0"/>
+			<xs:element name="VariablesAportacionInformacionparaRetipificacion" type="VariablesAportacionInformacionParaRetipificacion" minOccurs="0"/>
 			<xs:element name="Cliente" type="ClienteConDireccion" minOccurs="0"/>
 			<xs:element name="Comentarios" type="X4000"/>
 			<xs:element name="RegistrosDocumento" type="RegistrosDocs" minOccurs="0"/>

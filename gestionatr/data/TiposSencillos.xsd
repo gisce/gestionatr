@@ -317,6 +317,7 @@
 			45 	Exencion cargo fijo autoconsumo
 			46 	Exencion cargo variable autoconsumo
 			47	Derechos de acometida de generacion
+			48	Suplemento territorial por tributos económicos del año 2013 según la Orden ETU/35/2017
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -347,6 +348,7 @@
 			<xs:enumeration value="45"/>
 			<xs:enumeration value="46"/>
 			<xs:enumeration value="47"/>
+			<xs:enumeration value="48"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Decimal10">
@@ -914,7 +916,6 @@
 			<xs:enumeration value="0040208"/>
 			<xs:enumeration value="0040209"/>
 			<xs:enumeration value="0040210"/>
-			<xs:enumeration value="0040211"/>
 			<xs:enumeration value="0040301"/>
 			<xs:enumeration value="0040302"/>
 			<xs:enumeration value="0040303"/>
@@ -1098,6 +1099,7 @@
 			<xs:enumeration value="0320203"/>
 			<xs:enumeration value="0320204"/>
 			<xs:enumeration value="0320205"/>
+			<xs:enumeration value="0320206"/>
 			<xs:enumeration value="0340101"/>
 			<xs:enumeration value="0340102"/>
 			<xs:enumeration value="0340103"/>
@@ -1163,11 +1165,11 @@
 			<xs:enumeration value="0430201"/>
 			<xs:enumeration value="0430202"/>
 			<xs:enumeration value="0430203"/>
+			<xs:enumeration value="0430204"/>
 			<xs:enumeration value="0430301"/>
 			<xs:enumeration value="0430302"/>
 			<xs:enumeration value="0440101"/>
 			<xs:enumeration value="0440201"/>
-			<xs:enumeration value="0440202"/>
 			<xs:enumeration value="0450101"/>
 			<xs:enumeration value="0450201"/>
 			<xs:enumeration value="0460101"/>
@@ -1986,6 +1988,17 @@
 			37	132000
 			38	220000
 			39	400000	
+			40	1200
+			41	2000
+			42	5500
+			43	55000
+			44	130000
+			45	100
+			46	150
+			47	3x100
+			48	3x150/260
+			49	3x260
+			
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2028,6 +2041,16 @@
 			<xs:enumeration value="37"/>
 			<xs:enumeration value="38"/>
 			<xs:enumeration value="39"/>
+			<xs:enumeration value="40"/>
+			<xs:enumeration value="41"/>
+			<xs:enumeration value="42"/>
+			<xs:enumeration value="43"/>
+			<xs:enumeration value="44"/>
+			<xs:enumeration value="45"/>
+			<xs:enumeration value="46"/>
+			<xs:enumeration value="47"/>
+			<xs:enumeration value="48"/>
+			<xs:enumeration value="49"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TipoAclaradorFinca">
@@ -2254,6 +2277,7 @@ la reclamacion
 			20	Derechos de supervision
 			21	Tarifa
 			22	Impuesto Electrico
+			23	Desglose Suplemento Territorial
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2277,6 +2301,7 @@ la reclamacion
 			<xs:enumeration value="20"/>
 			<xs:enumeration value="21"/>
 			<xs:enumeration value="22"/>
+			<xs:enumeration value="23"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TipoContratoATR">
