@@ -583,9 +583,9 @@ TABLA_8 = [('A', u"La activación se debe producir cuanto antes"),
 TABLA_9 = [('01', 'Anual'),
            ('02', 'Eventual medido'),
            ('03', 'Temporada'),
-           ('05', 'Subministro Régimen especial'),
-           ('07', 'Subministro de Obras'),
-           ('08', 'Subministro de Socorro'),
+           ('05', 'Suministro Régimen especial'),
+           ('07', 'Suministro de Obras'),
+           ('08', 'Suministro de Socorro'),
            ('09', 'Eventual a tanto alzado'),
            ('10', 'Pruebas'),
            ('11', 'Duplicado'),
@@ -593,13 +593,13 @@ TABLA_9 = [('01', 'Anual'),
 
 TABLA_10 = [('01', u"Cese Actividad"),
             ('02', u"Fin de contrato de energía"),
-            ('03', u"Corte de subministro"),
+            ('03', u"Corte de suministro"),
             ('04', u"Baja por impago")]
 
 TABLA_11 = [('S', u"(S) Si el domicilio fiscal coincide "
-                  u"con el de subministro"),
+                  u"con el de suministro"),
             ('F', u"(F) Si el domicilio fiscal no coincide "
-                  u"con el de subministro")]
+                  u"con el de suministro")]
 
 # TABLA_12 TIPO VIA Optional , thus not implemented
 
