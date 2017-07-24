@@ -101,7 +101,7 @@ class DatosGeneralesFactura(XmlModel):
         self.tipo_factura = XmlField('TipoFactura')
         self.motivo_facturacion = XmlField('MotivoFacturacion')
         self.codigo_factura_rectificada_anulada = XmlField(
-            'CodigoFacturaRectificadaAnuldada'
+            'CodigoFacturaRectificadaAnulada'
         )
         self.expediente = Expediente()
         self.fecha_factura = XmlField('FechaFactura')
