@@ -1154,7 +1154,7 @@ class ConceptoRepercutible(object):
     @property
     def importe(self):
         if hasattr(self.concepto, 'ImporteTotalConceptoRepercutible'):
-            return self.concepto.ImporteTotalConceptoRepercutible
+            return float(self.concepto.ImporteTotalConceptoRepercutible.text)
         return None
 
     @property
