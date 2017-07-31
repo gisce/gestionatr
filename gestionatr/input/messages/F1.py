@@ -581,7 +581,7 @@ class PeriodoEnergiaActiva(Periodo):
     @property
     def valor_energia_activa(self):
         if hasattr(self.periodo, 'ValorEnergiaActiva'):
-            return self.periodo.ValorEnergiaActiva
+            return float(self.periodo.ValorEnergiaActiva.text)
         return None
 
 
@@ -618,7 +618,7 @@ class PeriodoEnergiaReactiva(Periodo):
     @property
     def valor_energia_reactiva(self):
         if hasattr(self.periodo, 'ValorEnergiaReactiva'):
-            return self.periodo.ValorEnergiaReactiva
+            return float(self.periodo.ValorEnergiaReactiva.text)
         return None
 
 
@@ -787,19 +787,19 @@ class Integrador(object):
     @property
     def constante_multiplicadora(self):
         if hasattr(self.integrador, 'ConstanteMultiplicadora'):
-            return self.integrador.ConstanteMultiplicadora
+            return float(self.integrador.ConstanteMultiplicadora.text)
         return None
 
     @property
     def numero_ruedas_enteras(self):
         if hasattr(self.integrador, 'NumeroRuedasEnteras'):
-            return self.integrador.NumeroRuedasEnteras
+            return float(self.integrador.NumeroRuedasEnteras.text)
         return None
 
     @property
     def numero_ruedas_decimales(self):
         if hasattr(self.integrador, 'NumeroRuedasDecimales'):
-            return self.integrador.NumeroRuedasDecimales
+            return float(self.integrador.NumeroRuedasDecimales.text)
         return None
 
     @property
@@ -942,7 +942,7 @@ class Medida(object):
     @property
     def cod_pm(self):
         if hasattr(self.medida, 'CodPM'):
-            return self.medida.CodPM
+            return self.medida.CodPM.text
         return None
 
     @property
@@ -1142,13 +1142,13 @@ class ConceptoRepercutible(object):
     @property
     def unidades(self):
         if hasattr(self.concepto, 'UnidadesConceptoRepercutible'):
-            return self.concepto.UnidadesConceptoRepercutible
+            return float(self.concepto.UnidadesConceptoRepercutible.text)
         return None
 
     @property
     def precio_unidad(self):
         if hasattr(self.concepto, 'PrecioUnidadConceptoRepercutible'):
-            return self.concepto.PrecioUnidadConceptoRepercutible
+            return float(self.concepto.PrecioUnidadConceptoRepercutible.text)
         return None
 
     @property
@@ -1183,13 +1183,13 @@ class RegistroFin(object):
     @property
     def saldo_total(self):
         if hasattr(self.registro, 'SaldoTotalFacturacion'):
-            return self.registro.SaldoTotalFacturacion
+            return float(self.registro.SaldoTotalFacturacion.text)
         return None
 
     @property
     def total_recibos(self):
         if hasattr(self.registro, 'TotalRecibos'):
-            return self.registro.TotalRecibos
+            return float(self.registro.TotalRecibos.text)
         return None
 
     @property
