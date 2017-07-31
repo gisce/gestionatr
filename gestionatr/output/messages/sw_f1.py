@@ -347,8 +347,12 @@ class PeriodoEnergiaReactiva(XmlModel):
 
     def __init__(self):
         self.periodo = XmlField('Periodo')
-        self.valor_energia_reactiva = XmlField('ValorEnergiaReactiva')
-        self.precio_energia = XmlField('PrecioEnergiaReactiva')
+        self.valor_energia_reactiva = XmlField(
+            'ValorEnergiaReactiva', rep=rep_decimal(2)
+        )
+        self.precio_energia = XmlField(
+            'PrecioEnergiaReactiva', rep=rep_decimal(9)
+        )
         super(PeriodoEnergiaReactiva, self).__init__('Periodo', 'periodo')
 
 
