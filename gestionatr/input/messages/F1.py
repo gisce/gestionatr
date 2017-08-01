@@ -83,13 +83,13 @@ class Expediente(object):
     @property
     def numero_expediente(self):
         if hasattr(self.expediente, 'NumeroExpediente'):
-            return self.expediente.NumeroExpediente.text
+            return self.expediente.NumeroExpediente.text.strip()
         return None
 
     @property
     def codigo_solicitud(self):
         if hasattr(self.expediente, 'CodigoSolicitud'):
-            return self.expediente.CodigoSolicitud.text
+            return self.expediente.CodigoSolicitud.text.strip()
         return None
 
 
@@ -111,7 +111,7 @@ class DatosGenerales(object):
     @property
     def cod_contrato(self):
         if hasattr(self.datos_generales, 'CodContrato'):
-            return self.datos_generales.CodContrato.text
+            return self.datos_generales.CodContrato.text.strip()
         return None
 
     @property
@@ -123,19 +123,19 @@ class DatosGenerales(object):
     @property
     def codigo_fiscal_factura(self):
         if hasattr(self._datos_generales_factura, 'CodigoFiscalFactura'):
-            return self._datos_generales_factura.CodigoFiscalFactura.text
+            return self._datos_generales_factura.CodigoFiscalFactura.text.strip()
         return None
 
     @property
     def tipo_factura(self):
         if hasattr(self._datos_generales_factura, 'TipoFactura'):
-            return self._datos_generales_factura.TipoFactura.text
+            return self._datos_generales_factura.TipoFactura.text.strip()
         return None
 
     @property
     def motivo_facturacion(self):
         if hasattr(self._datos_generales_factura, 'MotivoFacturacion'):
-            return self._datos_generales_factura.MotivoFacturacion.text
+            return self._datos_generales_factura.MotivoFacturacion.text.strip()
         return None
 
     @property
@@ -145,7 +145,7 @@ class DatosGenerales(object):
         )
         if has_attr:
             datos_generales_fact = self._datos_generales_factura
-            return datos_generales_fact.CodigoFacturaRectificadaAnulada.text
+            return datos_generales_fact.CodigoFacturaRectificadaAnulada.text.strip()
         return None
 
     @property
@@ -157,37 +157,37 @@ class DatosGenerales(object):
     @property
     def fecha_factura(self):
         if hasattr(self._datos_generales_factura, 'FechaFactura'):
-            return self._datos_generales_factura.FechaFactura.text
+            return self._datos_generales_factura.FechaFactura.text.strip()
         return None
 
     @property
     def identificador_emisora(self):
         if hasattr(self._datos_generales_factura, 'IdentificadorEmisora'):
-            return self._datos_generales_factura.IdentificadorEmisora.text
+            return self._datos_generales_factura.IdentificadorEmisora.text.strip()
         return None
 
     @property
     def comentarios(self):
         if hasattr(self._datos_generales_factura, 'Comentarios'):
-            return self._datos_generales_factura.Comentarios.text
+            return self._datos_generales_factura.Comentarios.text.strip()
         return None
 
     @property
     def importe_total_factura(self):
         if hasattr(self._datos_generales_factura, 'ImporteTotalFactura'):
-            return float(self._datos_generales_factura.ImporteTotalFactura.text)
+            return float(self._datos_generales_factura.ImporteTotalFactura.text.strip())
         return None
 
     @property
     def saldo_factura(self):
         if hasattr(self._datos_generales_factura, 'SaldoFactura'):
-            return float(self._datos_generales_factura.SaldoFactura.text)
+            return float(self._datos_generales_factura.SaldoFactura.text.strip())
         return None
 
     @property
     def tipo_moneda(self):
         if hasattr(self._datos_generales_factura, 'TipoMoneda'):
-            return self._datos_generales_factura.TipoMoneda.text
+            return self._datos_generales_factura.TipoMoneda.text.strip()
         return None
 
 
@@ -202,43 +202,43 @@ class DatosGeneralesATR(DatosGenerales):
     @property
     def fecha_boe(self):
         if hasattr(self._datos_factura_atr, 'FechaBOE'):
-            return self._datos_factura_atr.FechaBOE.text
+            return self._datos_factura_atr.FechaBOE.text.strip()
         return None
 
     @property
     def tarifa_atr_fact(self):
         if hasattr(self._datos_factura_atr, 'TarifaATRFact'):
-            return self._datos_factura_atr.TarifaATRFact.text
+            return self._datos_factura_atr.TarifaATRFact.text.strip()
         return None
 
     @property
     def modo_control_potencia(self):
         if hasattr(self._datos_factura_atr, 'ModoControlPotencia'):
-            return self._datos_factura_atr.ModoControlPotencia.text
+            return self._datos_factura_atr.ModoControlPotencia.text.strip()
         return None
 
     @property
     def marca_medida_con_perdidas(self):
         if hasattr(self._datos_factura_atr, 'MarcaMedidaConPerdidas'):
-            return self._datos_factura_atr.MarcaMedidaConPerdidas.text
+            return self._datos_factura_atr.MarcaMedidaConPerdidas.text.strip()
         return None
 
     @property
     def vas_trafo(self):
         if hasattr(self._datos_factura_atr, 'VAsTrafo'):
-            return float(self._datos_factura_atr.VAsTrafo.text)
+            return float(self._datos_factura_atr.VAsTrafo.text.strip())
         return None
 
     @property
     def porcentaje_perdidas(self):
         if hasattr(self._datos_factura_atr, 'PorcentajePerdidas'):
-            return float(self._datos_factura_atr.PorcentajePerdidas.text)
+            return float(self._datos_factura_atr.PorcentajePerdidas.text.strip())
         return None
 
     @property
     def indicativo_curva_carga(self):
         if hasattr(self._datos_factura_atr, 'IndicativoCurvaCarga'):
-            return self._datos_factura_atr.IndicativoCurvaCarga.text
+            return self._datos_factura_atr.IndicativoCurvaCarga.text.strip()
         return None
 
     @property
@@ -250,13 +250,13 @@ class DatosGeneralesATR(DatosGenerales):
     @property
     def _fecha_desde_cch(self):
         if hasattr(self._periodo_cch, 'FechaDesdeCCH'):
-            return self._periodo.FechaDesdeCCH.text
+            return self._periodo.FechaDesdeCCH.text.strip()
         return None
 
     @property
     def _fecha_hasta_cch(self):
         if hasattr(self._periodo_cch, 'FechaHastaCCH'):
-            return self._periodo.FechaHastaCCH.text
+            return self._periodo.FechaHastaCCH.text.strip()
         return None
 
     @property
@@ -268,19 +268,19 @@ class DatosGeneralesATR(DatosGenerales):
     @property
     def fecha_desde_factura(self):
         if hasattr(self._periodo, 'FechaDesdeFactura'):
-            return self._periodo.FechaDesdeFactura.text
+            return self._periodo.FechaDesdeFactura.text.strip()
         return None
 
     @property
     def fecha_hasta_factura(self):
         if hasattr(self._periodo, 'FechaHastaFactura'):
-            return self._periodo.FechaHastaFactura.text
+            return self._periodo.FechaHastaFactura.text.strip()
         return None
 
     @property
     def numero_dias(self):
         if hasattr(self._periodo, 'NumeroDias'):
-            return int(self._periodo.NumeroDias.text)
+            return int(self._periodo.NumeroDias.text.strip())
         return None
 
 
@@ -289,7 +289,7 @@ class DatosGeneralesOtras(DatosGenerales):
     @property
     def fecha_boe(self):
         if hasattr(self.datos_generales, 'FechaBOE'):
-            return self.datos_generales.FechaBOE.text
+            return self.datos_generales.FechaBOE.text.strip()
         return None
 
 
@@ -423,14 +423,14 @@ class Periodo(object):
     def precio(self):
         if self.NOMBRE_PRECIO:
             if hasattr(self.periodo, self.NOMBRE_PRECIO):
-                return float(getattr(self.periodo, self.NOMBRE_PRECIO).text)
+                return float(getattr(self.periodo, self.NOMBRE_PRECIO).text.strip())
         return None
 
     @property
     def cantidad(self):
         if self.NOMBRE_CANTIDAD:
             if hasattr(self.periodo, self.NOMBRE_CANTIDAD):
-                return float(getattr(self.periodo, self.NOMBRE_CANTIDAD).text)
+                return float(getattr(self.periodo, self.NOMBRE_CANTIDAD).text.strip())
         return None
 
     def es_facturable(self):
@@ -446,19 +446,19 @@ class PeriodoPotencia(Periodo):
     @property
     def potencia_contratada(self):
         if hasattr(self.periodo, 'PotenciaContratada'):
-            return int(self.periodo.PotenciaContratada.text)
+            return int(self.periodo.PotenciaContratada.text.strip())
         return None
 
     @property
     def potencia_max_demandada(self):
         if hasattr(self.periodo, 'PotenciaMaxDemandada'):
-            return int(self.periodo.PotenciaMaxDemandada.text)
+            return int(self.periodo.PotenciaMaxDemandada.text.strip())
         return None
 
     @property
     def potencia_a_facturar(self):
         if hasattr(self.periodo, 'PotenciaAFacturar'):
-            return int(self.periodo.PotenciaAFacturar.text)
+            return int(self.periodo.PotenciaAFacturar.text.strip())
         return None
 
 
@@ -488,13 +488,13 @@ class Termino(object):
     @property
     def fecha_desde(self):
         if hasattr(self.termino, 'FechaDesde'):
-            return self.termino.FechaDesde.text
+            return self.termino.FechaDesde.text.strip()
         return None
 
     @property
     def fecha_hasta(self):
         if hasattr(self.termino, 'FechaHasta'):
-            return self.termino.FechaHasta.text
+            return self.termino.FechaHasta.text.strip()
         return None
 
 
@@ -527,13 +527,13 @@ class Potencia(object):
     @property
     def penalizacion_no_icp(self):
         if hasattr(self.potencia, 'PenalizacionNoICP'):
-            return self.potencia.PenalizacionNoICP.text
+            return self.potencia.PenalizacionNoICP.text.strip()
         return None
 
     @property
     def importe_total(self):
         if hasattr(self.potencia, 'ImporteTotalTerminoPotencia'):
-            return float(self.potencia.ImporteTotalTerminoPotencia.text)
+            return float(self.potencia.ImporteTotalTerminoPotencia.text.strip())
         return None
 
 
@@ -545,7 +545,7 @@ class PeriodoExcesoPotencia(object):
     @property
     def valor_exceso_potencia(self):
         if hasattr(self.periodo, 'ValorExcesoPotencia'):
-            return float(self.periodo.ValorExcesoPotencia.text)
+            return float(self.periodo.ValorExcesoPotencia.text.strip())
         return None
 
 
@@ -569,7 +569,7 @@ class ExcesoPotencia(object):
     @property
     def importe_total(self):
         if hasattr(self.exceso_potencia, 'ImporteTotalExcesos'):
-            return float(self.exceso_potencia.ImporteTotalExcesos.text)
+            return float(self.exceso_potencia.ImporteTotalExcesos.text.strip())
         return None
 
 
@@ -581,7 +581,7 @@ class PeriodoEnergiaActiva(Periodo):
     @property
     def valor_energia_activa(self):
         if hasattr(self.periodo, 'ValorEnergiaActiva'):
-            return float(self.periodo.ValorEnergiaActiva.text)
+            return float(self.periodo.ValorEnergiaActiva.text.strip())
         return None
 
 
@@ -606,7 +606,7 @@ class EnergiaActiva(object):
     @property
     def importe_total(self):
         if hasattr(self.energia_activa, 'ImporteTotalEnergiaActiva'):
-            return float(self.energia_activa.ImporteTotalEnergiaActiva.text)
+            return float(self.energia_activa.ImporteTotalEnergiaActiva.text.strip())
         return None
 
 
@@ -618,7 +618,7 @@ class PeriodoEnergiaReactiva(Periodo):
     @property
     def valor_energia_reactiva(self):
         if hasattr(self.periodo, 'ValorEnergiaReactiva'):
-            return float(self.periodo.ValorEnergiaReactiva.text)
+            return float(self.periodo.ValorEnergiaReactiva.text.strip())
         return None
 
 
@@ -643,7 +643,7 @@ class EnergiaReactiva(object):
     @property
     def importe_total(self):
         if hasattr(self.energia_reactiva, 'ImporteTotalEnergiaReactiva'):
-            return float(self.energia_reactiva.ImporteTotalEnergiaReactiva.text)
+            return float(self.energia_reactiva.ImporteTotalEnergiaReactiva.text.strip())
         return None
 
 
@@ -655,19 +655,19 @@ class Impuesto(object):
     @property
     def base(self):
         if hasattr(self.impuesto, 'BaseImponible'):
-            return float(self.impuesto.BaseImponible.text)
+            return float(self.impuesto.BaseImponible.text.strip())
         return None
 
     @property
     def porcentaje(self):
         if hasattr(self.impuesto, 'Porcentaje'):
-            return float(self.impuesto.Porcentaje.text)
+            return float(self.impuesto.Porcentaje.text.strip())
         return None
 
     @property
     def importe(self):
         if hasattr(self.impuesto, 'Importe'):
-            return float(self.impuesto.Importe.text)
+            return float(self.impuesto.Importe.text.strip())
         return None
 
 
@@ -684,13 +684,13 @@ class PrecioAlquiler(object):
     @property
     def precio_dia(self):
         if hasattr(self.precio_alquiler, 'PrecioDia'):
-            return float(self.precio_alquiler.PrecioDia.text)
+            return float(self.precio_alquiler.PrecioDia.text.strip())
         return None
 
     @property
     def numero_dias(self):
         if hasattr(self.precio_alquiler, 'NumeroDias'):
-            return int(self.precio_alquiler.NumeroDias.text)
+            return int(self.precio_alquiler.NumeroDias.text.strip())
         return None
 
 
@@ -710,7 +710,7 @@ class Alquiler(object):
     @property
     def importe_total(self):
         if hasattr(self.alquiler, 'ImporteFacturacionAlquileres'):
-            return float(self.alquiler.ImporteFacturacionAlquileres.text)
+            return float(self.alquiler.ImporteFacturacionAlquileres.text.strip())
         return None
 
 
@@ -727,19 +727,19 @@ class Lectura(object):
     @property
     def fecha(self):
         if hasattr(self.lectura_data, 'Fecha'):
-            return self.lectura_data.Fecha.text
+            return self.lectura_data.Fecha.text.strip()
         return None
 
     @property
     def procedencia(self):
         if hasattr(self.lectura_data, 'Procedencia'):
-            return self.lectura_data.Procedencia.text
+            return self.lectura_data.Procedencia.text.strip()
         return None
 
     @property
     def lectura(self):
         if hasattr(self.lectura_data, 'Lectura'):
-            return float(self.lectura_data.Lectura.text)
+            return float(self.lectura_data.Lectura.text.strip())
         return None
 
 
@@ -751,19 +751,19 @@ class Ajuste(object):
     @property
     def codigo_motivo(self):
         if hasattr(self.ajuste, 'CodigoMotivoAjuste'):
-            return self.ajuste.CodigoMotivoAjuste.text
+            return self.ajuste.CodigoMotivoAjuste.text.strip()
         return None
 
     @property
     def ajuste_por_integrador(self):
         if hasattr(self.ajuste, 'AjustePorIntegrador'):
-            return float(self.ajuste.AjustePorIntegrador.text)
+            return float(self.ajuste.AjustePorIntegrador.text.strip())
         return None
 
     @property
     def comentario(self):
         if hasattr(self.ajuste, 'Comentarios'):
-            return self.ajuste.Comentarios.text
+            return self.ajuste.Comentarios.text.strip()
         return None
 
 
@@ -775,37 +775,37 @@ class Integrador(object):
     @property
     def magnitud(self):
         if hasattr(self.integrador, 'Magnitud'):
-            return self.integrador.Magnitud.text
+            return self.integrador.Magnitud.text.strip()
         return None
 
     @property
     def codigo_periodo(self):
         if hasattr(self.integrador, 'CodigoPeriodo'):
-            return self.integrador.CodigoPeriodo.text
+            return self.integrador.CodigoPeriodo.text.strip()
         return None
 
     @property
     def constante_multiplicadora(self):
         if hasattr(self.integrador, 'ConstanteMultiplicadora'):
-            return float(self.integrador.ConstanteMultiplicadora.text)
+            return float(self.integrador.ConstanteMultiplicadora.text.strip())
         return None
 
     @property
     def numero_ruedas_enteras(self):
         if hasattr(self.integrador, 'NumeroRuedasEnteras'):
-            return float(self.integrador.NumeroRuedasEnteras.text)
+            return float(self.integrador.NumeroRuedasEnteras.text.strip())
         return None
 
     @property
     def numero_ruedas_decimales(self):
         if hasattr(self.integrador, 'NumeroRuedasDecimales'):
-            return float(self.integrador.NumeroRuedasDecimales.text)
+            return float(self.integrador.NumeroRuedasDecimales.text.strip())
         return None
 
     @property
     def consumo_calculado(self):
         if hasattr(self.integrador, 'ConsumoCalculado'):
-            return float(self.integrador.ConsumoCalculado.text)
+            return float(self.integrador.ConsumoCalculado.text.strip())
         return None
 
     @property
@@ -853,25 +853,25 @@ class ModeloAparato(object):
     @property
     def tipo_aparato(self):
         if hasattr(self.modelo_aparato, 'TipoAparato'):
-            return self.modelo_aparato.TipoAparato.text
+            return self.modelo_aparato.TipoAparato.text.strip()
         return None
 
     @property
     def marca_aparato(self):
         if hasattr(self.modelo_aparato, 'MarcaAparato'):
-            return self.modelo_aparato.MarcaAparato.text
+            return self.modelo_aparato.MarcaAparato.text.strip()
         return None
 
     @property
     def numero_serie(self):
         if hasattr(self.modelo_aparato, 'NumeroSerie'):
-            return self.modelo_aparato.NumeroSerie.text
+            return self.modelo_aparato.NumeroSerie.text.strip()
         return None
 
     @property
     def tipo_dhedm(self):
         if hasattr(self.modelo_aparato, 'TipoDHEdM'):
-            return self.modelo_aparato.TipoDHEdM.text
+            return self.modelo_aparato.TipoDHEdM.text.strip()
         return None
 
     @property
@@ -942,7 +942,7 @@ class Medida(object):
     @property
     def cod_pm(self):
         if hasattr(self.medida, 'CodPM'):
-            return self.medida.CodPM.text
+            return self.medida.CodPM.text.strip()
         return None
 
     @property
@@ -1112,55 +1112,55 @@ class ConceptoRepercutible(object):
     @property
     def concepto_repercutible(self):
         if hasattr(self.concepto, 'ConceptoRepercutible'):
-            return self.concepto.ConceptoRepercutible.text
+            return self.concepto.ConceptoRepercutible.text.strip()
         return None
 
     @property
     def tipo_impositivo(self):
         if hasattr(self.concepto, 'TipoImpositivoConceptoRepercutible'):
-            return self.concepto.TipoImpositivoConceptoRepercutible.text
+            return self.concepto.TipoImpositivoConceptoRepercutible.text.strip()
         return None
 
     @property
     def fecha_operacion(self):
         if hasattr(self.concepto, 'FechaOperacion'):
-            return self.concepto.FechaOperacion.text
+            return self.concepto.FechaOperacion.text.strip()
         return None
 
     @property
     def fecha_desde(self):
         if hasattr(self.concepto, 'FechaDesde'):
-            return self.concepto.FechaDesde.text
+            return self.concepto.FechaDesde.text.strip()
         return None
 
     @property
     def fecha_hasta(self):
         if hasattr(self.concepto, 'FechaHasta'):
-            return self.concepto.FechaHasta.text
+            return self.concepto.FechaHasta.text.strip()
         return None
 
     @property
     def unidades(self):
         if hasattr(self.concepto, 'UnidadesConceptoRepercutible'):
-            return float(self.concepto.UnidadesConceptoRepercutible.text)
+            return float(self.concepto.UnidadesConceptoRepercutible.text.strip())
         return None
 
     @property
     def precio_unidad(self):
         if hasattr(self.concepto, 'PrecioUnidadConceptoRepercutible'):
-            return float(self.concepto.PrecioUnidadConceptoRepercutible.text)
+            return float(self.concepto.PrecioUnidadConceptoRepercutible.text.strip())
         return None
 
     @property
     def importe(self):
         if hasattr(self.concepto, 'ImporteTotalConceptoRepercutible'):
-            return float(self.concepto.ImporteTotalConceptoRepercutible.text)
+            return float(self.concepto.ImporteTotalConceptoRepercutible.text.strip())
         return None
 
     @property
     def comentarios(self):
         if hasattr(self.concepto, 'Comentarios'):
-            return self.concepto.Comentarios.text
+            return self.concepto.Comentarios.text.strip()
         return None
 
 
@@ -1177,49 +1177,49 @@ class RegistroFin(object):
     @property
     def importe_total(self):
         if hasattr(self.registro, 'ImporteTotal'):
-            return float(self.registro.ImporteTotal.text)
+            return float(self.registro.ImporteTotal.text.strip())
         return None
 
     @property
     def saldo_total(self):
         if hasattr(self.registro, 'SaldoTotalFacturacion'):
-            return float(self.registro.SaldoTotalFacturacion.text)
+            return float(self.registro.SaldoTotalFacturacion.text.strip())
         return None
 
     @property
     def total_recibos(self):
         if hasattr(self.registro, 'TotalRecibos'):
-            return float(self.registro.TotalRecibos.text)
+            return float(self.registro.TotalRecibos.text.strip())
         return None
 
     @property
     def tipo_moneda(self):
         if hasattr(self.registro, 'TipoMoneda'):
-            return self.registro.TipoMoneda.text
+            return self.registro.TipoMoneda.text.strip()
         return None
 
     @property
     def fecha_valor(self):
         if hasattr(self.registro, 'FechaValor'):
-            return self.registro.FechaValor.text
+            return self.registro.FechaValor.text.strip()
         return None
 
     @property
     def fecha_limite_pago(self):
         if hasattr(self.registro, 'FechaLimitePago'):
-            return self.registro.FechaLimitePago.text
+            return self.registro.FechaLimitePago.text.strip()
         return None
 
     @property
     def iban(self):
         if hasattr(self.registro, 'IBAN'):
-            return self.registro.IBAN.text
+            return self.registro.IBAN.text.strip()
         return None
 
     @property
     def id_remesa(self):
         if hasattr(self.registro, 'IdRemesa'):
-            return self.registro.IdRemesa.text
+            return self.registro.IdRemesa.text.strip()
         return None
 
     def get_remesa(self):
