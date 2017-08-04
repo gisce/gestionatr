@@ -79,3 +79,7 @@ def rep_entera(decimal):
 
 def rep_ruedas(n_rodes):
     return '{:d}'.format(n_rodes)
+
+
+def rep_cut(length):
+    return lambda text: str(text)[:length].strip()
