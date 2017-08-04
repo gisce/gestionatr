@@ -2267,6 +2267,9 @@ class test_F1(unittest.TestCase):
         self.xml_f101_factura_otros = open(
             get_data("f101_factura_otros.xml"), "r"
         )
+        self.xml_f101_factura_atr_direccion_suministro = open(
+            get_data("f101_factura_atr_direccion_suministro.xml"), "r"
+        )
 
         direccion_suministro = f1.DireccionSuministro()
 
@@ -2281,9 +2284,30 @@ class test_F1(unittest.TestCase):
                 'calle': 'Nom carrer',
                 'numero_finca': '3',
                 'duplicador_finca': None,
-                'escalera': 1,
+                'escalera': '1',
                 'piso': 1,
                 'puerta': 1,
+                'tipo_aclarador_finca': None,
+                'alcarador_finca': None,
+            }
+        )
+
+        self.direccion_suministro_bad_lengths = f1.DireccionSuministro()
+
+        self.direccion_suministro_bad_lengths.feed(
+            {
+                'pais': u'España',
+                'provincia': '17',
+                'municipio': '17079',
+                'poblacion': None,
+                'tipo_via': None,
+                'cod_postal': '17003',
+                'calle': 'Virgen Serenisima del Santo Socorro',
+                'numero_finca': '1234567890',
+                'duplicador_finca': '1',
+                'escalera': '1234567890',
+                'piso': '1234567890',
+                'puerta': '12 4567890',
                 'tipo_aclarador_finca': None,
                 'alcarador_finca': None,
             }
@@ -2710,6 +2734,16 @@ class test_F1(unittest.TestCase):
 
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_f101_factura_atr.read())
+
+    def test_create_pas01_atr_invoice_direccion_suministro(self):
+        mensaje = self.with_factura_atr()
+
+        mensaje.facturas.factura_atr.datos_generales_factura_atr.direccion_suministro = self.direccion_suministro_bad_lengths
+
+        mensaje.build_tree()
+
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_f101_factura_atr_direccion_suministro.read())
 
     def test_create_pas01_other_invoice(self):
         mensaje = self.with_factura_otros()
