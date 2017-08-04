@@ -304,7 +304,9 @@ class Cliente(object):
 
     @property
     def identificador(self):
-        return getattr(self.cliente, 'Identificador', None)
+        if hasattr(self.cliente, 'Identificador'):
+            return self.cliente.Identificador.text.strip()
+        return None
 
     @property
     def tipo_persona(self):
