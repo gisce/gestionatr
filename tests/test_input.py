@@ -1155,6 +1155,8 @@ class test_F1(unittest.TestCase):
             self.xml_f101_atr_invoice_empty_periods = f.read()
         with open(get_data("f101_factura_otros.xml"), "r") as f:
             self.xml_f101_other_invoice = f.read()
+        with open(get_data("f101_spaces.xml"), "r") as f:
+            self.xml_f101_spaces = f.read()
 
     def testATRInvoice(self):
         f1 = F1(self.xml_f101_atr_invoice)
@@ -1457,6 +1459,8 @@ class test_F1(unittest.TestCase):
         periodo_exceso_potencia = periodos_exceso_potencia[0]
 
         self.assertEqual(periodo_exceso_potencia.valor_exceso_potencia, 186.29)
+        self.assertEqual(periodo_exceso_potencia.name, 'P1')
+        self.assertEqual(periodo_exceso_potencia.nombre, 'P1')
 
         self.assertEqual(exceso_potencia.importe_total, 186.29)
 
@@ -1837,3 +1841,198 @@ class test_F1(unittest.TestCase):
         data_inici, data_fi = obtenir_data_inici_i_final(lectures_agrupades)
         self.assertEqual(data_inici, '2017-03-31')
         self.assertEqual(data_fi, '2017-04-30')
+
+    def test_spaces_are_deleted(self):
+        f1 = F1(self.xml_f101_spaces)
+        f1.parse_xml()
+
+        # Everything should work just as where we don't have spaces
+
+        self.assertEqual(f1.otras_facturas, [])
+        self.assertEqual(len(f1.facturas_atr), 1)
+
+        fact = f1.facturas_atr[0]
+
+        datos_factura = fact.datos_factura
+
+        direccion_suministro = datos_factura.direccion_suministro
+
+        self.assertEqual(direccion_suministro.pais, u'España')
+        self.assertEqual(direccion_suministro.provincia, '17')
+        self.assertEqual(direccion_suministro.municipio, '17079')
+        self.assertEqual(direccion_suministro.cod_postal, '17003')
+        self.assertEqual(direccion_suministro.calle, 'Nom carrer')
+        self.assertEqual(direccion_suministro.numero_finca, '3')
+        self.assertEqual(direccion_suministro.escalera, '1')
+        self.assertEqual(direccion_suministro.piso, '1')
+        self.assertEqual(direccion_suministro.puerta, '1')
+
+        cliente = datos_factura.cliente
+
+        self.assertEqual(cliente.tipo_identificador, 'NI')
+        self.assertEqual(cliente.identificador, '70876712G')
+        self.assertEqual(cliente.tipo_persona, 'F')
+
+        self.assertEqual(datos_factura.cod_contrato, '111111')
+        self.assertEqual(datos_factura.codigo_fiscal_factura, 'F0001')
+        self.assertEqual(datos_factura.tipo_factura, 'N')
+        self.assertEqual(datos_factura.motivo_facturacion, '01')
+        self.assertEqual(datos_factura.fecha_factura, '2017-05-01')
+        self.assertEqual(datos_factura.identificador_emisora, 'B11254455')
+        self.assertEqual(datos_factura.comentarios, '.')
+        self.assertEqual(datos_factura.importe_total_factura, 100)
+        self.assertEqual(datos_factura.saldo_factura, 100)
+        self.assertEqual(datos_factura.tipo_moneda, '02')
+        self.assertEqual(datos_factura.fecha_boe, '2016-01-01')
+        self.assertEqual(datos_factura.tarifa_atr_fact, '001')
+        self.assertEqual(datos_factura.modo_control_potencia, '1')
+        self.assertEqual(datos_factura.marca_medida_con_perdidas, 'N')
+        self.assertEqual(datos_factura.indicativo_curva_carga, '02')
+        self.assertEqual(datos_factura.fecha_desde_factura, '2017-03-31')
+        self.assertEqual(datos_factura.fecha_hasta_factura, '2017-04-30')
+        self.assertEqual(datos_factura.numero_dias, 30)
+
+        potencia = fact.potencia
+
+        terminos_potencia = potencia.terminos_potencia
+        self.assertEqual(len(terminos_potencia), 1)
+        termino_potencia = terminos_potencia[0]
+
+        self.assertEqual(termino_potencia.fecha_desde, '2017-03-31')
+        self.assertEqual(termino_potencia.fecha_hasta, '2017-04-30')
+
+        periodos_potencia = termino_potencia.periodos
+        self.assertEqual(len(periodos_potencia), 1)
+        periodo_potencia = periodos_potencia[0]
+
+        self.assertDictEqual(
+            termino_potencia.get_contracted_periods_by_period(),
+            {'P1': 1000}
+        )
+
+        self.assertEqual(periodo_potencia.potencia_contratada, 1000)
+        self.assertEqual(periodo_potencia.potencia_max_demandada, 1000)
+        self.assertEqual(periodo_potencia.potencia_a_facturar, 1000)
+        self.assertEqual(periodo_potencia.cantidad, 1000)
+        self.assertEqual(periodo_potencia.precio, 0.05)
+        self.assertEqual(periodo_potencia.nombre, 'P1')
+        self.assertEqual(periodo_potencia.es_facturable(), True)
+        self.assertEqual(periodo_potencia.fecha_desde, '2017-03-31')
+        self.assertEqual(periodo_potencia.fecha_hasta, '2017-04-30')
+
+        self.assertEqual(potencia.penalizacion_no_icp, 'N')
+        self.assertEqual(potencia.importe_total, 50)
+
+        energia_activa = fact.energia_activa
+
+        terminos_energia_activa = energia_activa.terminos_energia_activa
+        self.assertEqual(len(terminos_energia_activa), 1)
+        termino_energia_activa = terminos_energia_activa[0]
+
+        self.assertEqual(termino_energia_activa.fecha_desde, '2017-03-31')
+        self.assertEqual(termino_energia_activa.fecha_hasta, '2017-04-30')
+
+        periodos_energia = termino_energia_activa.periodos
+        self.assertEqual(len(periodos_energia), 1)
+        periodo_energia = periodos_energia[0]
+
+        self.assertEqual(periodo_energia.valor_energia_activa, 300)
+        self.assertEqual(periodo_energia.cantidad, 300)
+        self.assertEqual(periodo_energia.precio, 0.044027)
+        self.assertEqual(periodo_energia.nombre, 'P1')
+        self.assertEqual(periodo_energia.es_facturable(), True)
+        self.assertEqual(periodo_energia.fecha_desde, '2017-03-31')
+        self.assertEqual(periodo_energia.fecha_hasta, '2017-04-30')
+
+        self.assertEqual(energia_activa.importe_total, 13.21)
+
+        impuesto_electrico = fact.impuesto_electrico
+
+        self.assertEqual(impuesto_electrico.base, 0)
+        self.assertEqual(impuesto_electrico.porcentaje, 0)
+        self.assertEqual(impuesto_electrico.importe, 0)
+
+        # TODO: ConceptoRepercutible
+
+        ivas = fact.ivas
+        self.assertEqual(len(ivas), 1)
+        iva = ivas[0]
+
+        self.assertEqual(iva.base, 63.21)
+        self.assertEqual(iva.porcentaje, 21)
+        self.assertEqual(iva.importe, 13.27)
+
+        # TODO: IVAReducido
+
+        medidas = fact.medidas
+        self.assertEqual(len(medidas), 1)
+        medida = medidas[0]
+
+        self.assertEqual(medida.cod_pm, 'ES1234000000000001JN0F')
+
+        modelos_aparatos = medida.modelos_aparatos
+        self.assertEqual(len(modelos_aparatos), 1)
+        modelo_aparato = modelos_aparatos[0]
+
+        self.assertEqual(modelo_aparato.tipo_aparato, 'CC')
+        self.assertEqual(modelo_aparato.marca_aparato, '199')
+        self.assertEqual(modelo_aparato.numero_serie, 'C99999')
+        self.assertEqual(modelo_aparato.tipo_dhedm, '1')
+        self.assertEqual(modelo_aparato.gir_comptador, 10 ** 5)
+
+        integradores = modelo_aparato.integradores
+        self.assertEqual(len(integradores), 1)
+        integrador = integradores[0]
+
+        self.assertEqual(integrador.magnitud, 'AE')
+        self.assertEqual(integrador.codigo_periodo, '10')
+        self.assertEqual(integrador.constante_multiplicadora, 1)
+        self.assertEqual(integrador.numero_ruedas_enteras, 5)
+        self.assertEqual(integrador.numero_ruedas_decimales, 0)
+        self.assertEqual(integrador.consumo_calculado, 300)
+        self.assertEqual(integrador.tipus, 'A')
+        self.assertEqual(integrador.periode, 'P1')
+        self.assertEqual(integrador.gir_comptador, 10 ** 5)
+        self.assertEqual(integrador.ometre, False)
+
+        lectura_desde = integrador.lectura_desde
+
+        self.assertEqual(lectura_desde.fecha, '2017-03-31')
+        self.assertEqual(lectura_desde.procedencia, '30')
+        self.assertEqual(lectura_desde.lectura, 100)
+
+        lectura_hasta = integrador.lectura_hasta
+
+        ajuste = integrador.ajuste
+
+        self.assertEqual(ajuste, None)
+
+        self.assertEqual(lectura_hasta.fecha, '2017-04-30')
+        self.assertEqual(lectura_hasta.procedencia, '30')
+        self.assertEqual(lectura_hasta.lectura, 400)
+
+        registro = f1.registro
+
+        self.assertEqual(registro.importe_total, 76.48)
+        self.assertEqual(registro.saldo_total, 76.48)
+        self.assertEqual(registro.total_recibos, 1)
+        self.assertEqual(registro.tipo_moneda, '02')
+        self.assertEqual(registro.fecha_valor, '2017-05-01')
+        self.assertEqual(registro.fecha_limite_pago, '2017-06-01')
+        self.assertEqual(registro.iban, 'ES7712341234161234567890')
+        self.assertEqual(registro.id_remesa, '0')
+
+        self.assertDictEqual(
+            fact.get_create_invoice_params(),
+            {
+                'tipo_rectificadora': 'N',
+                'tipo_factura': '01',
+                'date_invoice': '2017-05-01',
+                'check_total': 100,
+                'origin': 'F0001',
+                'origin_date_invoice': '2017-05-01',
+                'reference': 'B11254455',
+            }
+        )
+
+        self.assertEqual(fact.get_info_facturacio_potencia(), 'icp')
