@@ -1459,6 +1459,8 @@ class test_F1(unittest.TestCase):
         periodo_exceso_potencia = periodos_exceso_potencia[0]
 
         self.assertEqual(periodo_exceso_potencia.valor_exceso_potencia, 186.29)
+        self.assertEqual(periodo_exceso_potencia.name, 'P1')
+        self.assertEqual(periodo_exceso_potencia.nombre, 'P1')
 
         self.assertEqual(exceso_potencia.importe_total, 186.29)
 
