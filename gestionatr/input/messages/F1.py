@@ -543,12 +543,21 @@ class PeriodoExcesoPotencia(object):
 
     def __init__(self, data, name):
         self.periodo = data
+        self._name = name
 
     @property
     def valor_exceso_potencia(self):
         if hasattr(self.periodo, 'ValorExcesoPotencia'):
             return float(self.periodo.ValorExcesoPotencia.text.strip())
         return None
+
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def nombre(self):
+        return self._name
 
 
 class ExcesoPotencia(object):
