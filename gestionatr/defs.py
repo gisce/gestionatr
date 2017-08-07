@@ -1826,6 +1826,10 @@ TABLA_102 = [
     ('G', u'Regularizadora'),
 ]
 
+REQUIRE_REFERENCE_TYPES = [
+    'A', 'R'
+]
+
 TABLA_103 = [
     ('01', u'Indemnización'),
     ('02', u'Derechos de extensión'),
