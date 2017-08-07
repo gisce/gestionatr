@@ -2302,7 +2302,7 @@ class test_F1(unittest.TestCase):
                 'poblacion': None,
                 'tipo_via': None,
                 'cod_postal': '17003',
-                'calle': 'Virgen Serenisima del Santo Socorro',
+                'calle': u'Virgen Serenísima del Santo Socorro',
                 'numero_finca': '1234567890',
                 'duplicador_finca': '1',
                 'escalera': '1234567890',
