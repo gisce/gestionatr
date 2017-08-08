@@ -1078,11 +1078,19 @@ class FacturaATR(Factura):
 
     def get_comptadors(self):
         """Retorna totes les lectures en una llista de comptadors"""
-        comptadors = []
+        comptadors_agrupats = {}
         for medida in self.medidas:
             for aparell in medida.modelos_aparatos:
-                di, df = aparell.get_dates_inici_i_final()
-                comptadors.append((di, df, aparell))
+                comptadors_agrupats.setdefault(
+                    aparell.numero_serie, []
+                ).append(aparell)
+
+        comptadors = []
+        for llista_aparells in comptadors_agrupats.values():
+            aparell_multi = MultiModeloAparato(llista_aparells)
+
+            di, df = aparell_multi.get_dates_inici_i_final()
+            comptadors.append((di, df, aparell_multi))
         return [a[2] for a in sorted(comptadors, lambda x,y: cmp(x[0], y[0]))]
 
     def get_info_potencia(self):
