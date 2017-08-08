@@ -141,7 +141,7 @@ class DatosFacturaATR(XmlModel):
         self.tarifa_atr_fact = XmlField('TarifaATRFact')
         self.modo_control_potencia = XmlField('ModoControlPotencia')
         self.marca_medida_con_perdidas = XmlField('MarcaMedidaConPerdidas')
-        self.vas_trafo = XmlField('VAsTrafo')
+        self.vas_trafo = XmlField('VAsTrafo', rep=rep_entera)
         self.porcentaje_perdidas = XmlField(
             'PorcentajePerdidas', rep=rep_decimal(2)
         )
