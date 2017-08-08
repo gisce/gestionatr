@@ -945,6 +945,58 @@ class ModeloAparato(object):
         return self.get_lectures(['M'])
 
 
+class MultiModeloAparato(ModeloAparato):
+    """This is to solve the perfectly reasonable decision made by a certain
+    company in their exportation of F1. Namely, the fact that they decided to
+    repeat both the field Medidas and ModeloAparato despite the fact that they
+    are only providing two different periods for the same meter"""
+
+    def __init__(self, meter_list):
+        self.meters = meter_list
+        super(MultiModeloAparato, self).__init__(meter_list[0])
+
+    def _get_single_attribute(self, attribute):
+        for meter in self.meters:
+            attr_val = getattr(meter, attribute, None)
+            if attr_val is not None:
+                return attr_val
+
+        return None
+
+    def _get_list_attribute(self, attribute):
+        res = []
+
+        for meter in self.meters:
+            if hasattr(meter, attribute):
+                res += getattr(meter, attribute)
+
+        return res
+
+    @property
+    def tipo_aparato(self):
+        return self._get_single_attribute('tipo_aparato')
+
+    @property
+    def marca_aparato(self):
+        return self._get_single_attribute('marca_aparato')
+
+    @property
+    def numero_serie(self):
+        return self._get_single_attribute('numero_serie')
+
+    @property
+    def tipo_dhedm(self):
+        return self._get_single_attribute('tipo_dhedm')
+
+    @property
+    def integradores(self):
+        return self._get_list_attribute('integradores')
+
+    @property
+    def gir_comptador(self):
+        return self._get_single_attribute('gir_comptador')
+
+
 class Medida(object):
 
     def __init__(self, data):
@@ -1026,11 +1078,19 @@ class FacturaATR(Factura):
 
     def get_comptadors(self):
         """Retorna totes les lectures en una llista de comptadors"""
-        comptadors = []
+        comptadors_agrupats = {}
         for medida in self.medidas:
             for aparell in medida.modelos_aparatos:
-                di, df = aparell.get_dates_inici_i_final()
-                comptadors.append((di, df, aparell))
+                comptadors_agrupats.setdefault(
+                    aparell.numero_serie, []
+                ).append(aparell)
+
+        comptadors = []
+        for llista_aparells in comptadors_agrupats.values():
+            aparell_multi = MultiModeloAparato(llista_aparells)
+
+            di, df = aparell_multi.get_dates_inici_i_final()
+            comptadors.append((di, df, aparell_multi))
         return [a[2] for a in sorted(comptadors, lambda x,y: cmp(x[0], y[0]))]
 
     def get_info_potencia(self):

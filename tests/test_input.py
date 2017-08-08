@@ -1157,6 +1157,8 @@ class test_F1(unittest.TestCase):
             self.xml_f101_other_invoice = f.read()
         with open(get_data("f101_spaces.xml"), "r") as f:
             self.xml_f101_spaces = f.read()
+        with open(get_data("f101_factura_atr_free_interpretation.xml"), "r") as f:
+            self.xml_f101_free_interpretation = f.read()
 
     def testATRInvoice(self):
         f1 = F1(self.xml_f101_atr_invoice)
@@ -2036,3 +2038,71 @@ class test_F1(unittest.TestCase):
         )
 
         self.assertEqual(fact.get_info_facturacio_potencia(), 'icp')
+
+    def test_free_interpretation(self):
+        f1 = F1(self.xml_f101_free_interpretation)
+        f1.parse_xml()
+
+        # We should be able to input free interpretations as well...
+
+        fact = f1.facturas_atr[0]
+
+        comptadors = fact.get_comptadors()
+        self.assertEqual(len(comptadors), 1)
+        comptador = comptadors[0]
+
+        # We will assume that the correct values for the meter are the first one
+        self.assertEqual(comptador.tipo_aparato, 'TG')
+        self.assertEqual(comptador.marca_aparato, '199')
+        self.assertEqual(comptador.numero_serie, '202459701')
+        self.assertEqual(comptador.tipo_dhedm, '2')
+
+        # If we get "integradores" we should be getting all of them though
+        integradores = comptador.integradores
+        self.assertEqual(len(integradores), 2)
+        integrador_p1 = integradores[0]
+        integrador_p2 = integradores[1]
+
+        self.assertEqual(integrador_p1.magnitud, 'AE')
+        self.assertEqual(integrador_p1.codigo_periodo, '21')
+        self.assertEqual(integrador_p1.constante_multiplicadora, 1)
+        self.assertEqual(integrador_p1.numero_ruedas_enteras, 6)
+        self.assertEqual(integrador_p1.numero_ruedas_decimales, 0)
+        self.assertEqual(integrador_p1.consumo_calculado, 259)
+        self.assertEqual(integrador_p1.tipus, 'A')
+        self.assertEqual(integrador_p1.periode, 'P1')
+        self.assertEqual(integrador_p1.gir_comptador, 10 ** 6)
+
+        lectura_desde_p1 = integrador_p1.lectura_desde
+
+        self.assertEqual(lectura_desde_p1.fecha, '2017-06-29')
+        self.assertEqual(lectura_desde_p1.procedencia, '60')
+        self.assertEqual(lectura_desde_p1.lectura, 5730)
+
+        lectura_hasta_p1 = integrador_p1.lectura_hasta
+
+        self.assertEqual(lectura_hasta_p1.fecha, '2017-07-27')
+        self.assertEqual(lectura_hasta_p1.procedencia, '60')
+        self.assertEqual(lectura_hasta_p1.lectura, 5989)
+
+        self.assertEqual(integrador_p2.magnitud, 'AE')
+        self.assertEqual(integrador_p2.codigo_periodo, '22')
+        self.assertEqual(integrador_p2.constante_multiplicadora, 1)
+        self.assertEqual(integrador_p2.numero_ruedas_enteras, 6)
+        self.assertEqual(integrador_p2.numero_ruedas_decimales, 0)
+        self.assertEqual(integrador_p2.consumo_calculado, 153)
+        self.assertEqual(integrador_p2.tipus, 'A')
+        self.assertEqual(integrador_p2.periode, 'P2')
+        self.assertEqual(integrador_p2.gir_comptador, 10 ** 6)
+
+        lectura_desde_p2 = integrador_p2.lectura_desde
+
+        self.assertEqual(lectura_desde_p2.fecha, '2017-06-29')
+        self.assertEqual(lectura_desde_p2.procedencia, '60')
+        self.assertEqual(lectura_desde_p2.lectura, 3656)
+
+        lectura_hasta_p2 = integrador_p2.lectura_hasta
+
+        self.assertEqual(lectura_hasta_p2.fecha, '2017-07-27')
+        self.assertEqual(lectura_hasta_p2.procedencia, '60')
+        self.assertEqual(lectura_hasta_p2.lectura, 3809)
