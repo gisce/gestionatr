@@ -27,12 +27,16 @@ setup(name='gestionatr',
       license='General Public Licence 2',
       long_description='''Long description''',
       provides=['gestionatr'],
-      install_requires=['lxml', 'libcomxml', 'workdays'],
+      install_requires=['lxml', 'libcomxml', 'workdays', 'click'],
       tests_require=['expects'],
       packages=find_packages(),
       package_data=PACKAGES_DATA,
       scripts=[],
       cmdclass={'clean': Clean},
       test_suite='tests',
+      entry_points='''
+          [console_scripts]
+          atr=gestionatr.cli:atr
+      '''
 )
 
