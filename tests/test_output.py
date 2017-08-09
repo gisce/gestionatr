@@ -2311,7 +2311,7 @@ class test_F1(unittest.TestCase):
                 'escalera': '1234567890',
                 'piso': '1234567890',
                 'puerta': '12 4567890',
-                'tipo_aclarador_finca': None,
+                'tipo_aclarador_finca': False,
                 'alcarador_finca': None,
             }
         )
