@@ -1844,6 +1844,28 @@ class test_F1(unittest.TestCase):
         self.assertEqual(data_inici, '2017-03-31')
         self.assertEqual(data_fi, '2017-04-30')
 
+    def test_agrupar_i_obtenir_dates_maximetre(self):
+        f1 = F1(self.xml_f101_atr_invoice_30A)
+        f1.parse_xml()
+
+        fact = f1.facturas_atr[0]
+        compt = fact.get_comptadors()[0]
+        lectures = compt.get_lectures()
+
+        lectures_agrupades = agrupar_lectures_per_data(lectures)
+
+        self.assertEqual(
+            lectures_agrupades.keys(),
+            [
+                ('2017-03-31', '2017-04-17'),  # Energy readings
+                ('2017-04-30', '2017-04-30')   # Maximeter readings
+            ]
+        )
+
+        data_inici, data_fi = obtenir_data_inici_i_final(lectures_agrupades)
+        self.assertEqual(data_inici, '2017-03-31')
+        self.assertEqual(data_fi, '2017-04-30')
+
     def test_spaces_are_deleted(self):
         f1 = F1(self.xml_f101_spaces)
         f1.parse_xml()
