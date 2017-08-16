@@ -1310,7 +1310,10 @@ def agrupar_lectures_per_data(lectures):
     """
     lect = {}
     for i in lectures:
-        key = (i.lectura_desde.fecha, i.lectura_hasta.fecha)
+        if i.magnitud == 'PM':
+            key = (i.lectura_hasta.fecha, i.lectura_hasta.fecha)
+        else:
+            key = (i.lectura_desde.fecha, i.lectura_hasta.fecha)
         if key not in lect:
             lect[key] = []
         lect[key].append(i)
