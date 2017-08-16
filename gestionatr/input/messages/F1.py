@@ -436,8 +436,11 @@ class Periodo(object):
         return None
 
     def es_facturable(self):
-        "Algunas empresas envian periodos que no se deben facturar con precio 0"
-        return bool(self.precio)
+        """Algunas empresas envian periodos que no se deben facturar.
+        Esos tienen precio 0. Pese a eso, si tienen cantidad los facturaremos
+        igual ya que tambien hay empresas que quieren facturar lineas pero dejan
+        el precio a 0"""
+        return bool(self.precio) or bool(self.cantidad)
 
 
 class PeriodoPotencia(Periodo):
