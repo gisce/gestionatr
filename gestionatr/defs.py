@@ -443,7 +443,7 @@ SUBTYPES_R101 = [
     ({
         'min_fields': ['cups', 'codigo_de_solicitud', 'concepto_contratacion'],
         'code': '066',
-        'name': u'INFORMACIÓN/VALIDACIÓN SOBRE FATOS DEL CONTRATAO ATR/PEAJE',
+        'name': u'INFORMACIÓN/VALIDACIÓN SOBRE DATOS DEL CONTRATO ATR/PEAJE',
         'type': '03',
     }),
     ({
@@ -583,23 +583,23 @@ TABLA_8 = [('A', u"La activación se debe producir cuanto antes"),
 TABLA_9 = [('01', 'Anual'),
            ('02', 'Eventual medido'),
            ('03', 'Temporada'),
-           ('05', 'Subministro Régimen especial'),
-           ('07', 'Subministro de Obras'),
-           ('08', 'Subministro de Socorro'),
+           ('05', 'Suministro Régimen especial'),
+           ('07', 'Suministro de Obras'),
+           ('08', 'Suministro de Socorro'),
            ('09', 'Eventual a tanto alzado'),
            ('10', 'Pruebas'),
            ('11', 'Duplicado'),
            ('12', 'De reserva')]
 
 TABLA_10 = [('01', u"Cese Actividad"),
-            ('02', u"Fin de contracto de energía"),
-            ('03', u"Corte de subministro"),
+            ('02', u"Fin de contrato de energía"),
+            ('03', u"Corte de suministro"),
             ('04', u"Baja por impago")]
 
 TABLA_11 = [('S', u"(S) Si el domicilio fiscal coincide "
-                  u"con el de subministro"),
+                  u"con el de suministro"),
             ('F', u"(F) Si el domicilio fiscal no coincide "
-                  u"con el de subministro")]
+                  u"con el de suministro")]
 
 # TABLA_12 TIPO VIA Optional , thus not implemented
 
@@ -1214,6 +1214,16 @@ TABLA_64 = [
     ('37', u'132.000'),
     ('38', u'220.000'),
     ('39', u'400.000'),
+    ('40', u'1200'),
+    ('41', u'2000'),
+    ('42', u'5500'),
+    ('43', u'55000'),
+    ('44', u'130000'),
+    ('45', u'100'),
+    ('46', u'150'),
+    ('47', u'3x100'),
+    ('48', u'3x150/260'),
+    ('49', u'3x260')
 ]
 
 TABLA_65 = [
@@ -1462,7 +1472,7 @@ TABLA_73 = [
     ('0350203', 'Deficiencias en la instalación'),
     ('0350204', 'Falta documentación (CIE)'),
     ('0350205', 'Error de formato'),
-    ('0350205', 'Datos ATR incoherentes'),
+    ('0350206', 'Datos ATR incoherentes'),
     ('0350207', 'Error en el cliente/NIF'),
     ('0350208', 'Improcedente. Se adjunta explicación en comentarios'),
     ('0350209', 'No existe solicitud'),
@@ -1663,7 +1673,8 @@ TABLA_77 = [
         ('19', u'Derechos de actuación en equipo de medida'),
         ('20', u'Derechos de supervisión'),
         ('21', u'Tarifa'),
-        ('22', u'Impuesto Eléctrico')
+        ('22', u'Impuesto Eléctrico'),
+        ('23', u'Desglose Suplemento Territorial')
 ]
 
 TABLA_79 = [
@@ -1815,6 +1826,10 @@ TABLA_102 = [
     ('G', u'Regularizadora'),
 ]
 
+REQUIRE_REFERENCE_TYPES = [
+    'A', 'R'
+]
+
 TABLA_103 = [
     ('01', u'Indemnización'),
     ('02', u'Derechos de extensión'),
@@ -1843,6 +1858,25 @@ TABLA_103 = [
     ('45', u'Exención Cargo Fijo Autoconsumo'),
     ('46', u'Exención Cargo Variable Autoconsumo'),
     ('47', u'Derechos de acometida de generación'),
+    ('48', u'Suplemento territorial por tributos económicos del año 2013 según la Orden ETU/35/2017')
+]
+
+CONCEPTOS_CON_FECHA_OPERACION = [
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '09',
+    '12',
+    '13',
+    '15',
+    '19',
+    '20',
+    '33',
 ]
 
 TABLA_104 = [('02', u'Euro')]
@@ -1920,3 +1954,5 @@ TABLA_114 = [
 ]
 
 TABLA_115 = PERSONA
+
+REQUIRE_PERSON_TYPE = ['NV', 'OT']

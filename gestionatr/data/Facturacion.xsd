@@ -20,6 +20,7 @@
 			<xs:element name="Cabecera" type="Cabecera"/>
 			<xs:element name="Facturas" type="Facturas"/>
 			<xs:element name="OtrosDatosFactura" type="OtrosDatosFactura" minOccurs="0"/>
+			<xs:any namespace="##other" processContents="skip" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute name="Firmar" type="xs:string" use="optional"/>
 	</xs:complexType>

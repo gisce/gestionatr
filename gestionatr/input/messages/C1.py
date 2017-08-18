@@ -8,11 +8,11 @@ class C1(Message, ProcessDeadline):
     """Clase que implementa C1."""
 
     steps = [
-        DeadLine('01', Workdays(5), '02'),
-        DeadLine('02_activation', Workdays(1), '05'),
-        DeadLine('02', Naturaldays(60), '05'),
-        DeadLine('05_activation', Workdays(1), '05'),
-        DeadLine('08', Workdays(5), '09')
+        DeadLine('01', Workdays(5)),
+        DeadLine('02', Workdays(1)),
+        DeadLine('05', Workdays(1)),
+        DeadLine('06', Workdays(1)),
+        DeadLine('08', Workdays(5)),
     ]
 
     # Datos paso 01
@@ -703,7 +703,7 @@ class PuntoDeMedida(object):
     def aparatos(self):
         data = []
         obj = get_rec_attr(self.pm, "Aparatos", False)
-        if obj is not None and hasattr(obj, 'Aparato'):
+        if obj and hasattr(obj, 'Aparato'):
             for d in obj.Aparato:
                 data.append(Aparato(d))
         return data
@@ -889,7 +889,7 @@ class Aparato(object):
     def medidas(self):
         data = []
         obj = get_rec_attr(self.aparato, "Medidas", False)
-        if obj is not None and hasattr(obj, 'Medida'):
+        if obj and hasattr(obj, 'Medida'):
             for d in obj.Medida:
                 data.append(Medida(d))
         return data

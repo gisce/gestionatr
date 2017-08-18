@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from gestionatr.output.messages.sw_c1 import *
+from gestionatr.output.messages.base import rep_cut
 
 
 # Paso 01
@@ -85,23 +86,25 @@ class Direccion(XmlModel):
 
     _sort_order = ('direccion', 'pais', 'provincia', 'municipio', 'poblacion', 'tipo_via', 'cod_postal', 'calle', 'numero_finca', 'duplicador_finca', 'escalera', 'piso', 'puerta', 'tipo_aclarador_finca', 'aclarador_finca')
 
-    def __init__(self):
-        self.direccion = XmlField('Direccion')
+    def __init__(self, name='Direccion'):
+        self.direccion = XmlField(name)
         self.pais = XmlField('Pais')
         self.provincia = XmlField('Provincia')
         self.municipio = XmlField('Municipio')
         self.poblacion = XmlField('Poblacion')
         self.tipo_via = XmlField('TipoVia')
         self.cod_postal = XmlField('CodPostal')
-        self.calle = XmlField('Calle')
-        self.numero_finca = XmlField('NumeroFinca')
-        self.duplicador_finca = XmlField('DuplicadorFinca')
-        self.escalera = XmlField('Escalera')
-        self.piso = XmlField('Piso')
-        self.puerta = XmlField('Puerta')
-        self.tipo_aclarador_finca = XmlField('TipoAclaradorFinca')
-        self.aclarador_finca = XmlField('AclaradorFinca')
-        super(Direccion, self).__init__('Direccion', 'direccion')
+        self.calle = XmlField('Calle', rep=rep_cut(30))
+        self.numero_finca = XmlField('NumeroFinca', rep=rep_cut(5))
+        self.duplicador_finca = XmlField('DuplicadorFinca', rep=rep_cut(3))
+        self.escalera = XmlField('Escalera', rep=rep_cut(3))
+        self.piso = XmlField('Piso', rep=rep_cut(3))
+        self.puerta = XmlField('Puerta', rep=rep_cut(3))
+        self.tipo_aclarador_finca = XmlField(
+            'TipoAclaradorFinca', rep=rep_cut(2)
+        )
+        self.aclarador_finca = XmlField('AclaradorFinca', rep=rep_cut(40))
+        super(Direccion, self).__init__(name, 'direccion')
 
 
 class Medida(XmlModel):

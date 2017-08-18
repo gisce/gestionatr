@@ -8,13 +8,12 @@ class C2(C1):
     """Clase que implementa C2."""
 
     steps = [
-        DeadLine('01', Workdays(5), '02'),
-        DeadLine('02_activation', Workdays(1), '05'),
-        DeadLine('02', Naturaldays(60), '05'),
-        DeadLine('03', Naturaldays(30), '05'),
-        DeadLine('05_activation', Workdays(1), '05'),
-        DeadLine('07_activation', Workdays(1), '05'),
-        DeadLine('08', Workdays(5), '09')
+        DeadLine('01', Workdays(5)),
+        DeadLine('02', Workdays(1)),
+        DeadLine('03', Naturaldays(30)),
+        DeadLine('05', Workdays(1)),
+        DeadLine('06', Workdays(1)),
+        DeadLine('08', Workdays(5))
     ]
 
     # Datos paso 01
@@ -238,7 +237,7 @@ class Direccion(object):
     def pais(self):
         data = ''
         try:
-            data = self.direccion.Pais.text
+            data = self.direccion.Pais.text.strip()
         except AttributeError:
             pass
         return data
@@ -247,7 +246,7 @@ class Direccion(object):
     def provincia(self):
         data = ''
         try:
-            data = self.direccion.Provincia.text
+            data = self.direccion.Provincia.text.strip()
         except AttributeError:
             pass
         return data
@@ -256,7 +255,7 @@ class Direccion(object):
     def municipio(self):
         data = ''
         try:
-            data = self.direccion.Municipio.text
+            data = self.direccion.Municipio.text.strip()
         except AttributeError:
             pass
         return data
@@ -265,7 +264,7 @@ class Direccion(object):
     def poblacion(self):
         data = ''
         try:
-            data = self.direccion.Poblacion.text
+            data = self.direccion.Poblacion.text.strip()
         except AttributeError:
             pass
         return data
@@ -274,7 +273,7 @@ class Direccion(object):
     def tipo_via(self):
         data = ''
         try:
-            data = self.direccion.TipoVia.text
+            data = self.direccion.TipoVia.text.strip()
         except AttributeError:
             pass
         return data
@@ -283,7 +282,7 @@ class Direccion(object):
     def cod_postal(self):
         data = ''
         try:
-            data = self.direccion.CodPostal.text
+            data = self.direccion.CodPostal.text.strip()
         except AttributeError:
             pass
         return data
@@ -292,7 +291,7 @@ class Direccion(object):
     def calle(self):
         data = ''
         try:
-            data = self.direccion.Calle.text
+            data = self.direccion.Calle.text.strip()
         except AttributeError:
             pass
         return data
@@ -301,7 +300,7 @@ class Direccion(object):
     def numero_finca(self):
         data = ''
         try:
-            data = self.direccion.NumeroFinca.text
+            data = self.direccion.NumeroFinca.text.strip()
         except AttributeError:
             pass
         return data
@@ -310,7 +309,7 @@ class Direccion(object):
     def duplicador_finca(self):
         data = ''
         try:
-            data = self.direccion.DuplicadorFinca.text
+            data = self.direccion.DuplicadorFinca.text.strip()
         except AttributeError:
             pass
         return data
@@ -319,7 +318,7 @@ class Direccion(object):
     def escalera(self):
         data = ''
         try:
-            data = self.direccion.Escalera.text
+            data = self.direccion.Escalera.text.strip()
         except AttributeError:
             pass
         return data
@@ -328,7 +327,7 @@ class Direccion(object):
     def piso(self):
         data = ''
         try:
-            data = self.direccion.Piso.text
+            data = self.direccion.Piso.text.strip()
         except AttributeError:
             pass
         return data
@@ -337,7 +336,7 @@ class Direccion(object):
     def puerta(self):
         data = ''
         try:
-            data = self.direccion.Puerta.text
+            data = self.direccion.Puerta.text.strip()
         except AttributeError:
             pass
         return data
@@ -346,7 +345,7 @@ class Direccion(object):
     def tipo_aclarador_finca(self):
         data = ''
         try:
-            data = self.direccion.TipoAclaradorFinca.text
+            data = self.direccion.TipoAclaradorFinca.text.strip()
         except AttributeError:
             pass
         return data
@@ -355,7 +354,7 @@ class Direccion(object):
     def aclarador_finca(self):
         data = ''
         try:
-            data = self.direccion.AclaradorFinca.text
+            data = self.direccion.AclaradorFinca.text.strip()
         except AttributeError:
             pass
         return data

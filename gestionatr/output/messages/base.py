@@ -59,3 +59,28 @@ def rep_fecha(fecha):
         # We do not have time so add it
         fecha += ' 00:00:00'
     return 'T'.join(fecha.split(' '))
+
+
+def rep_fecha_sin_hora(fecha):
+    if len(fecha) > 10:
+        return fecha[:10]
+    else:
+        return fecha
+
+
+def rep_decimal(n_decimal):
+    dec_format = '{0:.' + str(n_decimal) + 'f}'
+    return lambda decimal: dec_format.format(decimal)
+
+
+def rep_entera(decimal):
+    return int(decimal)
+
+
+def rep_ruedas(n_rodes):
+    return '{:d}'.format(n_rodes)
+
+
+def rep_cut(length):
+    # if empty return text to avoid False
+    return lambda text: text and unicode(text)[:length].strip() or text
