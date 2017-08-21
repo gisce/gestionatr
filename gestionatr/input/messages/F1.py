@@ -707,6 +707,9 @@ class PrecioAlquiler(object):
             return int(self.precio_alquiler.NumeroDias.text.strip())
         return None
 
+    def es_facturable(self):
+        return self.precio_dia or self.numero_dias
+
 
 class Alquiler(object):
 
@@ -718,7 +721,9 @@ class Alquiler(object):
         data = []
         if hasattr(self.alquiler, 'PrecioDiarioAlquiler'):
             for d in self.alquiler.PrecioDiarioAlquiler:
-                data.append(PrecioAlquiler(d))
+                precio = PrecioAlquiler(d)
+                if precio.es_facturable():
+                    data.append(precio)
         return data
 
     @property
