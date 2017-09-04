@@ -265,6 +265,12 @@ class Message(MessageBase):
 
     @property
     def cups(self):
+        if self.tipus == 'R1':
+            if utils.get_rec_attr(self, "head.CUPS", False):
+                return utils.get_rec_attr(self, "head.CUPS", "").text.strip()
+            else:
+                return False
+
         ref = self.head.CUPS.text.strip()
         if not ref:
             raise except_f1('Error', u'Documento sin código')
