@@ -34,3 +34,13 @@ def get_description(code, table_name):
             )
         )
     return res
+
+
+def validate_xml(data):
+    try:
+        from gestionatr.input.messages import Message
+        m = Message(data)
+        m.parse_xml()
+        return u'Correct File'
+    except Exception, e:
+        return u'WARNING: Invalid File: {0}'.format(str(e.value))
