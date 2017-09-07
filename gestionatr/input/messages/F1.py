@@ -402,7 +402,7 @@ class Factura(object):
             'check_total': abs(self.datos_factura.importe_total_factura),
             'origin': self.datos_factura.codigo_fiscal_factura,
             'origin_date_invoice': self.datos_factura.fecha_factura,
-            'reference': self.datos_factura.identificador_emisora,
+            'reference': self.datos_factura.codigo_fiscal_factura,
         }
 
 
