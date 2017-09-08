@@ -46,5 +46,5 @@ def validate_xml(data):
         m = Message(data)
         m.parse_xml()
         return ValidationResult(True, None)
-    except Exception, e:
+    except Exception as e:
         return ValidationResult(False, u'Invalid File: {0}'.format(str(e.value)))
