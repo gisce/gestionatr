@@ -1,5 +1,6 @@
 from gestionatr import defs
 import os
+from collections import namedtuple
 
 _ROOT = os.path.abspath(os.path.dirname(__file__))
 
@@ -36,11 +37,14 @@ def get_description(code, table_name):
     return res
 
 
+ValidationResult = namedtuple('ValidationResult', ['valid', 'error'])
+
+
 def validate_xml(data):
     try:
         from gestionatr.input.messages import Message
         m = Message(data)
         m.parse_xml()
-        return u'Correct File'
+        return ValidationResult(True, None)
     except Exception, e:
-        return u'WARNING: Invalid File: {0}'.format(str(e.value))
+        return ValidationResult(False, u'Invalid File: {0}'.format(str(e.value)))
