@@ -33,4 +33,4 @@ class TestsHelpers(unittest.TestCase):
         xml_c101_minim = open(get_data("c101_minim.xml"), "r")
         xml_c101_ok = xml_c101_minim.read()
         res = validate_xml(xml_c101_ok)
-        self.assertEqual(res, "Correct File")
+        self.assertTrue(res.valid)
