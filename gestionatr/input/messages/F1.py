@@ -16,7 +16,8 @@ MAGNITUDS_OCSUM = {
 PERIODE_OCSUM = {
     '01': 'P1',  # Punta + Llano
     '03': 'P2',  # Valle
-    '10': 'P1',  # Totalizador
+    '10': 'P1',  # Totalizador (2.0A y 2.1A)
+    '20': 'P1',  # Totalizador (2.1DHA y 2.0DHA)
     '21': 'P1',  # P1 Tarifes: 004, 006
     '22': 'P2',  # P2 Tarifes: 004, 006
     '31': 'P1',  # P1 Tarifa 003
