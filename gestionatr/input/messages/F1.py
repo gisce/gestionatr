@@ -32,6 +32,7 @@ PERIODE_OCSUM = {
     '64': 'P4',  # Periodo 4 Tarifes: 003, 011, 012 - 017
     '65': 'P5',  # Periodo 5 Tarifes: 003, 011, 012 - 017
     '66': 'P6',  # Periodo 6 Tarifes: 003, 011, 012 - 017
+    '80': 'P1',  # Totalizador Maximetro Tarifa 007
     '81': 'P1',  # P1 Tarifa 007
     '82': 'P2',  # P2 Tarifa 007
     '83': 'P3',  # P3 Tarifa 007
