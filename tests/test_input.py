@@ -1159,6 +1159,8 @@ class test_F1(unittest.TestCase):
             self.xml_f101_spaces = f.read()
         with open(get_data("f101_factura_atr_free_interpretation.xml"), "r") as f:
             self.xml_f101_free_interpretation = f.read()
+        with open(get_data("f101_factura_empty_rent.xml"), "r") as f:
+            self.xml_f101_empty_rent = f.read()
 
     def testATRInvoice(self):
         f1 = F1(self.xml_f101_atr_invoice)
@@ -1347,7 +1349,7 @@ class test_F1(unittest.TestCase):
                 'check_total': 100,
                 'origin': 'F0001',
                 'origin_date_invoice': '2017-05-01',
-                'reference': 'B11254455',
+                'reference': 'F0001',
             }
         )
 
@@ -1844,6 +1846,28 @@ class test_F1(unittest.TestCase):
         self.assertEqual(data_inici, '2017-03-31')
         self.assertEqual(data_fi, '2017-04-30')
 
+    def test_agrupar_i_obtenir_dates_maximetre(self):
+        f1 = F1(self.xml_f101_atr_invoice_30A)
+        f1.parse_xml()
+
+        fact = f1.facturas_atr[0]
+        compt = fact.get_comptadors()[0]
+        lectures = compt.get_lectures()
+
+        lectures_agrupades = agrupar_lectures_per_data(lectures)
+
+        self.assertEqual(
+            lectures_agrupades.keys(),
+            [
+                ('2017-03-31', '2017-04-17'),  # Energy readings
+                ('2017-04-30', '2017-04-30')   # Maximeter readings
+            ]
+        )
+
+        data_inici, data_fi = obtenir_data_inici_i_final(lectures_agrupades)
+        self.assertEqual(data_inici, '2017-03-31')
+        self.assertEqual(data_fi, '2017-04-30')
+
     def test_spaces_are_deleted(self):
         f1 = F1(self.xml_f101_spaces)
         f1.parse_xml()
@@ -2033,7 +2057,7 @@ class test_F1(unittest.TestCase):
                 'check_total': 100,
                 'origin': 'F0001',
                 'origin_date_invoice': '2017-05-01',
-                'reference': 'B11254455',
+                'reference': 'F0001',
             }
         )
 
@@ -2106,3 +2130,18 @@ class test_F1(unittest.TestCase):
         self.assertEqual(lectura_hasta_p2.fecha, '2017-07-27')
         self.assertEqual(lectura_hasta_p2.procedencia, '60')
         self.assertEqual(lectura_hasta_p2.lectura, 3809)
+
+    def test_empty_rents_dont_return(self):
+        f1 = F1(self.xml_f101_empty_rent)
+        f1.parse_xml()
+
+        # We should be able to input free interpretations as well...
+
+        fact = f1.facturas_atr[0]
+
+        llog, total = fact.get_info_lloguer()
+
+        # Despite having lines with 0 they shouldn't be returned since they
+        # are empty
+        self.assertEqual(llog, [])
+        self.assertEqual(total, 0)

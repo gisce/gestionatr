@@ -82,4 +82,5 @@ def rep_ruedas(n_rodes):
 
 
 def rep_cut(length):
-    return lambda text: unicode(text)[:length].strip()
+    # if empty return text to avoid False
+    return lambda text: text and unicode(text)[:length].strip() or text

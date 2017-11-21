@@ -962,7 +962,7 @@ class MinimumFieldsChecker(object):
         return len(self.r1.variables_detalle_reclamacion) > 0
 
     def check_cups(self):
-        return self.r1.cups
+        return get_rec_attr(self.r1, "cups", False)
 
     def check_fecha_incidente(self):
         for var in self.r1.variables_detalle_reclamacion:
@@ -1029,7 +1029,7 @@ class MinimumFieldsChecker(object):
 
     def check_codigo_de_solicitud(self):
         for var in self.r1.variables_detalle_reclamacion:
-            if not var.codigo_solicitud_reclamacion:
+            if not var.codigo_solicitud:
                 return False
         return len(self.r1.variables_detalle_reclamacion) > 0
 

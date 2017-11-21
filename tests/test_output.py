@@ -2270,6 +2270,9 @@ class test_F1(unittest.TestCase):
         self.xml_f101_factura_atr_direccion_suministro = open(
             get_data("f101_factura_atr_direccion_suministro.xml"), "r"
         )
+        self.xml_f101_factura_atr_medidas_baja = open(
+            get_data("f101_factura_atr_medidas_baja.xml"), "r"
+        )
 
         direccion_suministro = f1.DireccionSuministro()
 
@@ -2308,7 +2311,7 @@ class test_F1(unittest.TestCase):
                 'escalera': '1234567890',
                 'piso': '1234567890',
                 'puerta': '12 4567890',
-                'tipo_aclarador_finca': None,
+                'tipo_aclarador_finca': False,
                 'alcarador_finca': None,
             }
         )
@@ -2381,6 +2384,22 @@ class test_F1(unittest.TestCase):
                 'marca_medida_con_perdidas': 'N',
                 'vas_trafo': None,
                 'porcentaje_perdidas': None,
+                'indicativo_curva_carga': '02',
+                'periodo_cch': None,
+                'periodo': periodo,
+            }
+        )
+
+        self.atr_data_lb = f1.DatosFacturaATR()
+
+        self.atr_data_lb.feed(
+            {
+                'fecha_boe': '2016-01-01',
+                'tarifa_atr_fact': '001',
+                'modo_control_potencia': 1,
+                'marca_medida_con_perdidas': 'S',
+                'vas_trafo': 50000.0,
+                'porcentaje_perdidas': 4.00,
                 'indicativo_curva_carga': '02',
                 'periodo_cch': None,
                 'periodo': periodo,
@@ -2744,6 +2763,16 @@ class test_F1(unittest.TestCase):
 
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_f101_factura_atr_direccion_suministro.read())
+
+    def test_create_pas01_atr_invoice_medidas_baja(self):
+        mensaje = self.with_factura_atr()
+
+        mensaje.facturas.factura_atr.datos_generales_factura_atr.datos_factura_atr = self.atr_data_lb
+
+        mensaje.build_tree()
+
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_f101_factura_atr_medidas_baja.read())
 
     def test_create_pas01_other_invoice(self):
         mensaje = self.with_factura_otros()
