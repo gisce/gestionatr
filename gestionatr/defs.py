@@ -1956,3 +1956,10 @@ TABLA_114 = [
 TABLA_115 = PERSONA
 
 REQUIRE_PERSON_TYPE = ['NV', 'OT']
+
+# Bono Social
+TABLA_116 = [
+   ('00', 'No Bono Social – Retirada del BS'),
+   ('01', 'Bono Social'),
+   ('02', 'Bono Social – Esencial (Según Art. 4 RD 897/2017)'),
+]
