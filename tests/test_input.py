@@ -1159,6 +1159,8 @@ class test_F1(unittest.TestCase):
             self.xml_f101_spaces = f.read()
         with open(get_data("f101_factura_atr_free_interpretation.xml"), "r") as f:
             self.xml_f101_free_interpretation = f.read()
+        with open(get_data("f101_factura_empty_rent.xml"), "r") as f:
+            self.xml_f101_empty_rent = f.read()
 
     def testATRInvoice(self):
         f1 = F1(self.xml_f101_atr_invoice)
@@ -1347,7 +1349,7 @@ class test_F1(unittest.TestCase):
                 'check_total': 100,
                 'origin': 'F0001',
                 'origin_date_invoice': '2017-05-01',
-                'reference': 'B11254455',
+                'reference': 'F0001',
             }
         )
 
@@ -2055,7 +2057,7 @@ class test_F1(unittest.TestCase):
                 'check_total': 100,
                 'origin': 'F0001',
                 'origin_date_invoice': '2017-05-01',
-                'reference': 'B11254455',
+                'reference': 'F0001',
             }
         )
 
@@ -2128,3 +2130,18 @@ class test_F1(unittest.TestCase):
         self.assertEqual(lectura_hasta_p2.fecha, '2017-07-27')
         self.assertEqual(lectura_hasta_p2.procedencia, '60')
         self.assertEqual(lectura_hasta_p2.lectura, 3809)
+
+    def test_empty_rents_dont_return(self):
+        f1 = F1(self.xml_f101_empty_rent)
+        f1.parse_xml()
+
+        # We should be able to input free interpretations as well...
+
+        fact = f1.facturas_atr[0]
+
+        llog, total = fact.get_info_lloguer()
+
+        # Despite having lines with 0 they shouldn't be returned since they
+        # are empty
+        self.assertEqual(llog, [])
+        self.assertEqual(total, 0)

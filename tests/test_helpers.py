@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 from . import unittest
 from gestionatr.helpers import *
+from .utils import get_data
+from gestionatr.input.messages import Message
 
 
 class TestsHelpers(unittest.TestCase):
@@ -25,3 +27,10 @@ class TestsHelpers(unittest.TestCase):
 
         self.assertEqual(total1, 1740.0)
         self.assertEqual(total2, 48.96)
+
+    def test_validate_xml(self):
+        from gestionatr.utils import validate_xml
+        xml_c101_minim = open(get_data("c101_minim.xml"), "r")
+        xml_c101_ok = xml_c101_minim.read()
+        res = validate_xml(xml_c101_ok)
+        self.assertTrue(res.valid)

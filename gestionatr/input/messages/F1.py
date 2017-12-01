@@ -16,7 +16,8 @@ MAGNITUDS_OCSUM = {
 PERIODE_OCSUM = {
     '01': 'P1',  # Punta + Llano
     '03': 'P2',  # Valle
-    '10': 'P1',  # Totalizador
+    '10': 'P1',  # Totalizador (2.0A y 2.1A)
+    '20': 'P1',  # Totalizador (2.1DHA y 2.0DHA)
     '21': 'P1',  # P1 Tarifes: 004, 006
     '22': 'P2',  # P2 Tarifes: 004, 006
     '31': 'P1',  # P1 Tarifa 003
@@ -31,6 +32,7 @@ PERIODE_OCSUM = {
     '64': 'P4',  # Periodo 4 Tarifes: 003, 011, 012 - 017
     '65': 'P5',  # Periodo 5 Tarifes: 003, 011, 012 - 017
     '66': 'P6',  # Periodo 6 Tarifes: 003, 011, 012 - 017
+    '80': 'P1',  # Totalizador Maximetro Tarifa 007
     '81': 'P1',  # P1 Tarifa 007
     '82': 'P2',  # P2 Tarifa 007
     '83': 'P3',  # P3 Tarifa 007
@@ -402,7 +404,7 @@ class Factura(object):
             'check_total': abs(self.datos_factura.importe_total_factura),
             'origin': self.datos_factura.codigo_fiscal_factura,
             'origin_date_invoice': self.datos_factura.fecha_factura,
-            'reference': self.datos_factura.identificador_emisora,
+            'reference': self.datos_factura.codigo_fiscal_factura,
         }
 
 
@@ -707,6 +709,9 @@ class PrecioAlquiler(object):
             return int(self.precio_alquiler.NumeroDias.text.strip())
         return None
 
+    def es_facturable(self):
+        return self.precio_dia or self.numero_dias
+
 
 class Alquiler(object):
 
@@ -718,7 +723,9 @@ class Alquiler(object):
         data = []
         if hasattr(self.alquiler, 'PrecioDiarioAlquiler'):
             for d in self.alquiler.PrecioDiarioAlquiler:
-                data.append(PrecioAlquiler(d))
+                precio = PrecioAlquiler(d)
+                if precio.es_facturable():
+                    data.append(precio)
         return data
 
     @property
