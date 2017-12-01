@@ -303,7 +303,7 @@ class PeriodoEnergiaActiva(XmlModel):
         self.valor_energia_activa = XmlField(
             'ValorEnergiaActiva', rep=rep_decimal(2)
         )
-        self.precio_energia = XmlField('PrecioEnergia')
+        self.precio_energia = XmlField('PrecioEnergia', rep=rep_decimal(9))
         super(PeriodoEnergiaActiva, self).__init__('Periodo', 'periodo')
 
 
