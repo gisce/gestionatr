@@ -73,6 +73,12 @@ def rep_decimal(n_decimal):
     return lambda decimal: dec_format.format(decimal)
 
 
+def rep_entera2(decimal):
+    # This rep makes the fields with value '0' appear in the XML
+    # instead of avoid generating the label
+    return str(int(decimal))
+
+
 def rep_entera(decimal):
     return int(decimal)
 
