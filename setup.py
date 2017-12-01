@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 """Setup per la llibreria de gestionatr"""
+from __future__ import print_function
+
 import os
 import shutil
 from distutils.command.clean import clean as _clean
@@ -22,7 +24,7 @@ class Clean(_clean):
         """Comença la tasca de neteja."""
         _clean.run(self)
         if os.path.exists(self.build_base):
-            print "Cleaning %s dir" % self.build_base
+            print("Cleaning {} dir".format(self.build_base))
             shutil.rmtree(self.build_base)
 
 
