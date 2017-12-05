@@ -79,7 +79,7 @@
                     <FechaHasta>2017-04-30</FechaHasta>
                     <Periodo>
                         <ValorEnergiaActiva>300.00</ValorEnergiaActiva>
-                        <PrecioEnergia>0.044027</PrecioEnergia>
+                        <PrecioEnergia>0.044027000</PrecioEnergia>
                     </Periodo>
                     <Periodo>
                         <ValorEnergiaActiva>0.0</ValorEnergiaActiva>
