@@ -90,7 +90,7 @@ class test_C1(unittest.TestCase):
             'periodo': '65',
             'magnitud_medida': 'PM',
             'procedencia': '30',
-            'ultima_lectura_firme': '6.00',
+            'ultima_lectura_firme': '0.00',
             'fecha_lectura_firme': '2003-01-02',
             'anomalia': '01',
             'comentarios': 'Comentario sobre anomalia',
