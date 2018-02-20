@@ -247,7 +247,7 @@ class test_C1(unittest.TestCase):
         self.assertEqual(md.periodo, '65')
         self.assertEqual(md.procedencia, '30')
         self.assertEqual(md.tipo_dhedm, '6')
-        self.assertEqual(md.ultima_lectura_firme, '6.00')
+        self.assertEqual(md.ultima_lectura_firme, '0.00')
         md2 = ap.medidas[1]
         self.assertFalse(md2.anomalia)
         self.assertFalse(md2.comentarios)
@@ -311,7 +311,7 @@ class test_C1(unittest.TestCase):
         self.assertEqual(md.periodo, '65')
         self.assertEqual(md.procedencia, '30')
         self.assertEqual(md.tipo_dhedm, '6')
-        self.assertEqual(md.ultima_lectura_firme, '6.00')
+        self.assertEqual(md.ultima_lectura_firme, '0.00')
         md2 = ap.medidas[1]
         self.assertFalse(md2.anomalia)
         self.assertFalse(md2.comentarios)

@@ -398,7 +398,7 @@ class Medida(XmlModel):
 
     _sort_order = ('medida', 'tipo_dhedm', 'periodo', 'magnitud_medida', 'procedencia', 'ultima_lectura_firme', 'fecha_lectura_firme', 'anomalia', 'comentarios')
 
-    def __init__(self):
+    def __init__(self, drop_empty=False):
         self.medida = XmlField('Medida')
         self.tipo_dhedm = XmlField('TipoDHEdM')
         self.periodo = XmlField('Periodo')
