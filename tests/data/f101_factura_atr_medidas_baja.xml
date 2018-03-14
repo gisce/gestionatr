@@ -44,7 +44,9 @@
                     <FechaBOE>2016-01-01</FechaBOE>
                     <TarifaATRFact>001</TarifaATRFact>
                     <ModoControlPotencia>1</ModoControlPotencia>
-                    <MarcaMedidaConPerdidas>N</MarcaMedidaConPerdidas>
+                    <MarcaMedidaConPerdidas>S</MarcaMedidaConPerdidas>
+                    <VAsTrafo>50000</VAsTrafo>
+                    <PorcentajePerdidas>4.00</PorcentajePerdidas>
                     <IndicativoCurvaCarga>02</IndicativoCurvaCarga>
                     <Periodo>
                         <FechaDesdeFactura>2017-03-31</FechaDesdeFactura>
@@ -63,12 +65,6 @@
                         <PotenciaAFacturar>1000</PotenciaAFacturar>
                         <PrecioPotencia>0.050000000</PrecioPotencia>
                     </Periodo>
-                    <Periodo>
-                        <PotenciaContratada>0</PotenciaContratada>
-                        <PotenciaMaxDemandada>0</PotenciaMaxDemandada>
-                        <PotenciaAFacturar>0</PotenciaAFacturar>
-                        <PrecioPotencia>0.0</PrecioPotencia>
-                    </Periodo>
                 </TerminoPotencia>
                 <PenalizacionNoICP>N</PenalizacionNoICP>
                 <ImporteTotalTerminoPotencia>50</ImporteTotalTerminoPotencia>
@@ -80,10 +76,6 @@
                     <Periodo>
                         <ValorEnergiaActiva>300.00</ValorEnergiaActiva>
                         <PrecioEnergia>0.044027000</PrecioEnergia>
-                    </Periodo>
-                    <Periodo>
-                        <ValorEnergiaActiva>0.0</ValorEnergiaActiva>
-                        <PrecioEnergia>0.0</PrecioEnergia>
                     </Periodo>
                 </TerminoEnergiaActiva>
                 <ImporteTotalEnergiaActiva>13.21</ImporteTotalEnergiaActiva>
