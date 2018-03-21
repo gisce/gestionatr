@@ -1893,18 +1893,18 @@ class test_R1(unittest.TestCase):
         }
         sia2.feed(solicitud_informacion_adicional_fields)
 
-        # SolicitudInformacionAdicionalparaRetipificacion
-        siar = r1.SolicitudInformacionAdicionalparaRetipificacion()
-        solicitud_informacion_adicionalpara_retipificacion_fields = {
+        # SolicitudInformacionAdicionalParaRetipificacion
+        siar = r1.SolicitudInformacionAdicionalParaRetipificacion()
+        solicitud_informacion_adicional_para_retipificacion_fields = {
             'tipo': '03',
             'subtipo': '003',
             'fecha_limite_envio': '2016-08-10',
         }
-        siar.feed(solicitud_informacion_adicionalpara_retipificacion_fields)
+        siar.feed(solicitud_informacion_adicional_para_retipificacion_fields)
 
         solicitudes_informacion_adicional_fields = {
             'solicitud_informacion_adicional_list': [sia1, sia2],
-            'solicitud_informacion_adicionalpara_retipificacion': siar
+            'solicitud_informacion_adicional_para_retipificacion': siar
         }
         solicitudes_informacion_adicional.feed(solicitudes_informacion_adicional_fields)
 

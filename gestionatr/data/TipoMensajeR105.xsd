@@ -105,7 +105,7 @@
 	<xs:complexType name="SolicitudesInformacionAdicional">
 		<xs:sequence>
 			<xs:element name="SolicitudInformacionAdicional" type="SolicitudInformacionAdicional" minOccurs="0" maxOccurs="10"/>
-			<xs:element name="SolicitudInformacionAdicionalParaRetipificacion" type="SolicitudInformacionAdicionalparaRetipificacion" minOccurs="0"/>
+			<xs:element name="SolicitudInformacionAdicionalParaRetipificacion" type="SolicitudInformacionAdicionalParaRetipificacion" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="SolicitudInformacionAdicional">
@@ -121,10 +121,10 @@
 	</xs:complexType>
 	<xs:complexType name="SolicitudesInformacionAdicionalparaRetipificacion">
 		<xs:sequence>
-			<xs:element name="SolicitudInformacionAdicional" type="SolicitudInformacionAdicionalparaRetipificacion" maxOccurs="10"/>
+			<xs:element name="SolicitudInformacionAdicional" type="SolicitudInformacionAdicionalParaRetipificacion" maxOccurs="10"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="SolicitudInformacionAdicionalparaRetipificacion">
+	<xs:complexType name="SolicitudInformacionAdicionalParaRetipificacion">
 		<xs:sequence>
 			<xs:element name="Tipo" type="TipoReclamacionPeticion">
 				<xs:annotation>

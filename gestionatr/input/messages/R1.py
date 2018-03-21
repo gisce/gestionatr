@@ -105,10 +105,10 @@ class R1(C2):
 
     @property
     def solicitud_informacion_adicional_para_retipificacion(self):
-        tree = '{0}.SolicitudesInformacionAdicional.SolicitudInformacionAdicionalparaRetipificacion'.format(self._header)
+        tree = '{0}.SolicitudesInformacionAdicional.SolicitudInformacionAdicionalParaRetipificacion'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data not in [None, False]:
-            return SolicitudInformacionAdicionalparaRetipificacion(data)
+            return SolicitudInformacionAdicionalParaRetipificacion(data)
         else:
             return False
 
@@ -721,7 +721,7 @@ class SolicitudInformacionAdicional(object):
         return data
 
 
-class SolicitudInformacionAdicionalparaRetipificacion(object):
+class SolicitudInformacionAdicionalParaRetipificacion(object):
 
     def __init__(self, data):
         self.sol = data

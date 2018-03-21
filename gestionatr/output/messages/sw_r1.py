@@ -283,12 +283,12 @@ class Retipificacion(XmlModel):
 
 class SolicitudesInformacionAdicional(XmlModel):
 
-    _sort_order = ('solicitudes_informacion_adicional', 'solicitud_informacion_adicional_list', 'solicitud_informacion_adicionalpara_retipificacion')
+    _sort_order = ('solicitudes_informacion_adicional', 'solicitud_informacion_adicional_list', 'solicitud_informacion_adicional_para_retipificacion')
 
     def __init__(self):
         self.solicitudes_informacion_adicional = XmlField('SolicitudesInformacionAdicional')
         self.solicitud_informacion_adicional_list = []
-        self.solicitud_informacion_adicionalpara_retipificacion = SolicitudInformacionAdicionalparaRetipificacion()
+        self.solicitud_informacion_adicional_para_retipificacion = SolicitudInformacionAdicionalParaRetipificacion()
         super(SolicitudesInformacionAdicional, self).__init__('SolicitudesInformacionAdicional', 'solicitudes_informacion_adicional')
 
 
@@ -304,16 +304,16 @@ class SolicitudInformacionAdicional(XmlModel):
         super(SolicitudInformacionAdicional, self).__init__('SolicitudInformacionAdicional', 'solicitud_informacion_adicional')
 
 
-class SolicitudInformacionAdicionalparaRetipificacion(XmlModel):
+class SolicitudInformacionAdicionalParaRetipificacion(XmlModel):
 
-    _sort_order = ('solicitud_informacion_adicionalpara_retipificacion', 'tipo', 'subtipo', 'fecha_limite_envio')
+    _sort_order = ('solicitud_informacion_adicional_para_retipificacion', 'tipo', 'subtipo', 'fecha_limite_envio')
 
     def __init__(self):
-        self.solicitud_informacion_adicionalpara_retipificacion = XmlField('SolicitudInformacionAdicionalparaRetipificacion')
+        self.solicitud_informacion_adicional_para_retipificacion = XmlField('SolicitudInformacionAdicionalParaRetipificacion')
         self.tipo = XmlField('Tipo')
         self.subtipo = XmlField('Subtipo')
         self.fecha_limite_envio = XmlField('FechaLimiteEnvio')
-        super(SolicitudInformacionAdicionalparaRetipificacion, self).__init__('SolicitudInformacionAdicionalparaRetipificacion', 'solicitud_informacion_adicionalpara_retipificacion')
+        super(SolicitudInformacionAdicionalParaRetipificacion, self).__init__('SolicitudInformacionAdicionalParaRetipificacion', 'solicitud_informacion_adicional_para_retipificacion')
 
 
 # Paso 04
