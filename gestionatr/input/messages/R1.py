@@ -135,10 +135,10 @@ class R1(C2):
     @property
     def variables_aportacion_informacion_para_retipificacion(self):
         data = []
-        tree = '{0}.VariablesAportacionInformacionparaRetipificacion'.format(self._header)
+        tree = '{0}.VariablesAportacionInformacionParaRetipificacion'.format(self._header)
         obj = get_rec_attr(self.obj, tree, False)
         if obj:
-            for d in obj.VariableAportacionInformacionparaRetipificacion:
+            for d in obj.VariableAportacionInformacionParaRetipificacion:
                 data.append(VariableDetalleReclamacion(d))
         return data
 

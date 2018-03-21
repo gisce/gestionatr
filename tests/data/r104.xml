@@ -26,8 +26,8 @@
                 <TipoInformacion>02</TipoInformacion>
             </VariableAportacionInformacion>
         </VariablesAportacionInformacion>
-        <VariablesAportacionInformacionparaRetipificacion>
-            <VariableAportacionInformacionparaRetipificacion>
+        <VariablesAportacionInformacionParaRetipificacion>
+            <VariableAportacionInformacionParaRetipificacion>
                 <NumExpedienteAcometida>11111</NumExpedienteAcometida>
                 <NumExpedienteFraude>22222</NumExpedienteFraude>
                 <FechaIncidente>2016-02-10</FechaIncidente>
@@ -72,8 +72,8 @@
                     <Poblacion>17079</Poblacion>
                     <CodPostal>17001</CodPostal>
                 </UbicacionIncidencia>
-            </VariableAportacionInformacionparaRetipificacion>
-        </VariablesAportacionInformacionparaRetipificacion>
+            </VariableAportacionInformacionParaRetipificacion>
+        </VariablesAportacionInformacionParaRetipificacion>
         <Cliente>
             <IdCliente>
               <TipoIdentificador>NI</TipoIdentificador>

@@ -2066,10 +2066,10 @@ class test_R1(unittest.TestCase):
         }
         variables_aportacion_informacion.feed(variables_aportacion_informacion_fields)
 
-        # VariablesAportacionInformacionparaRetipificacion
-        variables_retipificacion = r1.VariablesAportacionInformacionparaRetipificacion()
+        # VariablesAportacionInformacionParaRetipificacion
+        variables_retipificacion = r1.VariablesAportacionInformacionParaRetipificacion()
 
-        vair1 = r1.VariableAportacionInformacionparaRetipificacion()
+        vair1 = r1.VariableAportacionInformacionParaRetipificacion()
 
         # LecturasAportadas
         lecturas_aportadas = r1.LecturasAportadas()
@@ -2150,7 +2150,7 @@ class test_R1(unittest.TestCase):
         vair1.feed(vair_fields)
 
         variables_retipificacion_fields = {
-            'variable_aportacion_informacionpara_retipificacion_list': [vair1],
+            'variable_aportacion_informacion_para_retipificacion_list': [vair1],
         }
         variables_retipificacion.feed(variables_retipificacion_fields)
 
@@ -2187,7 +2187,7 @@ class test_R1(unittest.TestCase):
         envio_informacion_reclamacion_fields = {
             'datos_envio_informacion': datos_envio_informacion,
             'variables_aportacion_informacion': variables_aportacion_informacion,
-            'variables_aportacion_informacionpara_retipificacion': variables_retipificacion,
+            'variables_aportacion_informacion_para_retipificacion': variables_retipificacion,
             'cliente': cliente,
             'comentarios': 'R104 test with VariablesAportacionInformacion.',
             'registros_documento': registros_documento,

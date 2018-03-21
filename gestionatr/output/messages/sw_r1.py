@@ -331,13 +331,13 @@ class MensajeEnvioInformacionReclamacion(XmlModel):
 
 class EnvioInformacionReclamacion(XmlModel):
 
-    _sort_order = ('envio_informacion_reclamacion', 'datos_envio_informacion', 'variables_aportacion_informacion', 'variables_aportacion_informacionpara_retipificacion', 'cliente', 'comentarios', 'registros_documento')
+    _sort_order = ('envio_informacion_reclamacion', 'datos_envio_informacion', 'variables_aportacion_informacion', 'variables_aportacion_informacion_para_retipificacion', 'cliente', 'comentarios', 'registros_documento')
 
     def __init__(self):
         self.envio_informacion_reclamacion = XmlField('EnvioInformacionReclamacion')
         self.datos_envio_informacion = DatosEnvioInformacion()
         self.variables_aportacion_informacion = VariablesAportacionInformacion()
-        self.variables_aportacion_informacionpara_retipificacion = VariablesAportacionInformacionparaRetipificacion()
+        self.variables_aportacion_informacion_para_retipificacion = VariablesAportacionInformacionParaRetipificacion()
         self.cliente = Cliente()
         self.comentarios = XmlField('Comentarios')
         self.registros_documento = RegistrosDocumento()
@@ -378,22 +378,22 @@ class VariableAportacionInformacion(XmlModel):
         super(VariableAportacionInformacion, self).__init__('VariableAportacionInformacion', 'variable_aportacion_informacion')
 
 
-class VariablesAportacionInformacionparaRetipificacion(XmlModel):
+class VariablesAportacionInformacionParaRetipificacion(XmlModel):
 
-    _sort_order = ('variables_aportacion_informacionpara_retipificacion', 'variable_aportacion_informacionpara_retipificacion_list')
-
-    def __init__(self):
-        self.variables_aportacion_informacionpara_retipificacion = XmlField('VariablesAportacionInformacionparaRetipificacion')
-        self.variable_aportacion_informacionpara_retipificacion_list = []
-        super(VariablesAportacionInformacionparaRetipificacion, self).__init__('VariablesAportacionInformacionparaRetipificacion', 'variables_aportacion_informacionpara_retipificacion')
-
-
-class VariableAportacionInformacionparaRetipificacion(XmlModel):
-
-    _sort_order = ('variable_aportacion_informacionpara_retipificacion', 'num_expediente_acometida', 'num_expediente_fraude', 'fecha_incidente', 'num_factura_atr', 'tipo_concepto_facturado', 'fecha_lectura', 'tipo_dhedm', 'lecturas_aportadas', 'codigo_incidencia', 'codigo_solicitud', 'parametro_contratacion', 'concepto_disconformidad', 'tipo_de_atencion_incorrecta', 'iban', 'contacto', 'codigo_solicitud_reclamacion', 'fecha_desde', 'fecha_hasta', 'importe_reclamado', 'ubicacion_incidencia')
+    _sort_order = ('variables_aportacion_informacion_para_retipificacion', 'variable_aportacion_informacion_para_retipificacion_list')
 
     def __init__(self):
-        self.variable_aportacion_informacionpara_retipificacion = XmlField('VariableAportacionInformacionparaRetipificacion')
+        self.variables_aportacion_informacion_para_retipificacion = XmlField('VariablesAportacionInformacionParaRetipificacion')
+        self.variable_aportacion_informacion_para_retipificacion_list = []
+        super(VariablesAportacionInformacionParaRetipificacion, self).__init__('VariablesAportacionInformacionParaRetipificacion', 'variables_aportacion_informacion_para_retipificacion')
+
+
+class VariableAportacionInformacionParaRetipificacion(XmlModel):
+
+    _sort_order = ('variable_aportacion_informacion_para_retipificacion', 'num_expediente_acometida', 'num_expediente_fraude', 'fecha_incidente', 'num_factura_atr', 'tipo_concepto_facturado', 'fecha_lectura', 'tipo_dhedm', 'lecturas_aportadas', 'codigo_incidencia', 'codigo_solicitud', 'parametro_contratacion', 'concepto_disconformidad', 'tipo_de_atencion_incorrecta', 'iban', 'contacto', 'codigo_solicitud_reclamacion', 'fecha_desde', 'fecha_hasta', 'importe_reclamado', 'ubicacion_incidencia')
+
+    def __init__(self):
+        self.variable_aportacion_informacion_para_retipificacion = XmlField('VariableAportacionInformacionParaRetipificacion')
         self.num_expediente_acometida = XmlField('NumExpedienteAcometida')
         self.num_expediente_fraude = XmlField('NumExpedienteFraude')
         self.fecha_incidente = XmlField('FechaIncidente')
@@ -414,7 +414,7 @@ class VariableAportacionInformacionparaRetipificacion(XmlModel):
         self.fecha_hasta = XmlField('FechaHasta')
         self.importe_reclamado = XmlField('ImporteReclamado')
         self.ubicacion_incidencia = UbicacionIncidencia()
-        super(VariableAportacionInformacionparaRetipificacion, self).__init__('VariableAportacionInformacionparaRetipificacion', 'variable_aportacion_informacionpara_retipificacion')
+        super(VariableAportacionInformacionParaRetipificacion, self).__init__('VariableAportacionInformacionParaRetipificacion', 'variable_aportacion_informacion_para_retipificacion')
 
 
 # Paso 05
