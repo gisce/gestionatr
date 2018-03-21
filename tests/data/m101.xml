@@ -14,10 +14,10 @@
         <DatosSolicitud>
             <TipoModificacion>S</TipoModificacion>
             <TipoSolicitudAdministrativa>S</TipoSolicitudAdministrativa>
+            <CNAE>2222</CNAE>
             <PeriodicidadFacturacion>01</PeriodicidadFacturacion>
             <IndActivacion>L</IndActivacion>
             <FechaPrevistaAccion>2016-06-06</FechaPrevistaAccion>
-            <CNAE>2222</CNAE>
         </DatosSolicitud>
         <Contrato>
             <FechaFinalizacion>2018-01-01</FechaFinalizacion>
