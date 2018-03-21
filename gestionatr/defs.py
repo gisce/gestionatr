@@ -459,6 +459,18 @@ SUBTYPES_R101 = [
         'type': '02',
     }),
     ({
+        'min_fields': ['cups', 'comentarios', 'num_factura'],
+        'code': '069',
+        'name': u'COPIA F1 EN PDF',
+        'type': '02',
+    }),
+    ({
+        'min_fields': ['comentarios', 'cod_reclam_anterior'],
+        'code': '070',
+        'name': u'RETRASO EN LA ATENCIÓN A RECLAMACIONES NO SUJETAS A ATENCIÓN REGLAMENTARIA',
+        'type': '01',
+    }),
+    ({
         'min_fields': [],
         'code': '100',
         'name': u'INCIDENCIAS CONTRATACIÓN BONO SOCIAL',
@@ -1630,6 +1642,11 @@ TABLA_73 = [
     ('0670303', 'Cliente no aporta información adicional.'),
     ('0670304', 'Acceso denegado'),
     ('0670305', 'Visita anulada por cliente'),
+    ('0690101', 'Procedente. Se envía copia del F1 en PDF.'),
+    ('0690201', 'Improcedente. Se adjunta explicación en comentarios.'),
+    ('0700101', 'Procedente. Se agiliza trámite de reclamación.'),
+    ('0700201', 'Retraso imputable al cliente/comercializador'),
+    ('0700202', 'Improcedente. Se adjunta explicación en comentarios.'),
 
 ]
 
