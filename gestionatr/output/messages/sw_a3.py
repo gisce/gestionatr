@@ -30,12 +30,6 @@ class Alta(XmlModel):
         self.registros_documento = RegistrosDocumento()
         super(Alta, self).__init__('Alta', 'alta')
 
-
-class DatosSolicitud(DatosSolicitud):
-
-    _sort_order = ('datos_solicitud', 'tipo_modificacion', 'tipo_solicitud_administrativa', 'ind_activacion', 'fecha_prevista_accion', 'cnae', 'contratacion_incondicional_ps')
-
-
 # Paso 02
 class MensajeAceptacionAlta(XmlModel):
 
