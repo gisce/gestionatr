@@ -169,7 +169,6 @@ class Contacto(object):
     def __init__(self, data):
         self.contacto = data
 
-
     @property
     def persona_de_contacto(self):
         data = ''
@@ -180,19 +179,11 @@ class Contacto(object):
         return data
 
     @property
-    def telfono_numero(self):
-        data = ''
+    def telefonos(self):
+        data = []
         try:
-            data = self.contacto.Telefono.Numero.text
-        except AttributeError:
-            pass
-        return data
-
-    @property
-    def telfono_prefijo_pais(self):
-        data = ''
-        try:
-            data = self.contacto.Telefono.PrefijoPais.text
+            for tel in self.contacto.Telefono:
+                data.append((tel.PrefijoPais.text, tel.Numero.text))
         except AttributeError:
             pass
         return data

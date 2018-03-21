@@ -1660,16 +1660,23 @@ class test_R1(unittest.TestCase):
         contacto = r1.Contacto()
 
         # Telefono
-        telefono = r1.Telefono()
+        telefono1 = r1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '34',
+            'numero': '666777888',
+        }
+        telefono1.feed(telefono_fields)
+        telefono2 = r1.Telefono()
         telefono_fields = {
             'prefijo_pais': '34',
             'numero': '55512345',
         }
-        telefono.feed(telefono_fields)
+        telefono2.feed(telefono_fields)
+        telefonos = [telefono1, telefono2]
 
         contacto_fields = {
             'persona_de_contacto': 'Perico Palotes Largos',
-            'telefono': telefono,
+            'telefonos': telefonos,
             'correo_electronico': 'perico@acme.com',
         }
         contacto.feed(contacto_fields)
@@ -1747,17 +1754,30 @@ class test_R1(unittest.TestCase):
         nombre.feed(nombre_fields)
 
         # Telefono
-        telefono = r1.Telefono()
+        telefono1 = r1.Telefono()
         telefono_fields = {
             'prefijo_pais': '34',
             'numero': '666777888',
         }
-        telefono.feed(telefono_fields)
+        telefono1.feed(telefono_fields)
+        telefono2 = r1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '34',
+            'numero': '666777999',
+        }
+        telefono2.feed(telefono_fields)
+        telefono3 = r1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '34',
+            'numero': '666777555',
+        }
+        telefono3.feed(telefono_fields)
+        telefonos = [telefono1, telefono2, telefono3]
 
         reclamante_fields = {
             'id_reclamante': id_reclamante,
             'nombre': nombre,
-            'telefono': telefono,
+            'telefonos': telefonos,
             'correo_electronico': 'email@host',
         }
         reclamante.feed(reclamante_fields)
@@ -2100,16 +2120,23 @@ class test_R1(unittest.TestCase):
         contacto = r1.Contacto()
 
         # Telefono
-        telefono = r1.Telefono()
+        telefono1 = r1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '34',
+            'numero': '666777888',
+        }
+        telefono1.feed(telefono_fields)
+        telefono2 = r1.Telefono()
         telefono_fields = {
             'prefijo_pais': '34',
             'numero': '55512345',
         }
-        telefono.feed(telefono_fields)
+        telefono2.feed(telefono_fields)
+        telefonos = [telefono1, telefono2]
 
         contacto_fields = {
             'persona_de_contacto': 'Perico Palotes Largos',
-            'telefono': telefono,
+            'telefonos': telefonos,
             'correo_electronico': 'perico@acme.com',
         }
         contacto.feed(contacto_fields)

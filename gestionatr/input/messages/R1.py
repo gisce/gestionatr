@@ -956,11 +956,11 @@ class MinimumFieldsChecker(object):
                or get_rec_attr(self.r1, "cliente.razon_social", False)
 
     def check_telefono_contacto(self):
-        if get_rec_attr(self.r1, "cliente.telfono_numero", False):
+        if self.r1.cliente and len(self.r1.cliente.telefonos) > 0:
             return True
         for var in self.r1.variables_detalle_reclamacion:
-            if not get_rec_attr(var, "contacto.telfono_numero", False):
-                return False
+            if var.contacto and len(var.contacto.telefonos) > 0:
+                return True
         return len(self.r1.variables_detalle_reclamacion) > 0
 
     def check_cups(self):

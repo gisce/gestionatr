@@ -267,19 +267,11 @@ class Cliente(object):
         return nom
 
     @property
-    def telfono_numero(self):
-        data = ''
+    def telefonos(self):
+        data = []
         try:
-            data = self.cliente.Telefono.Numero.text
-        except AttributeError:
-            pass
-        return data
-
-    @property
-    def telfono_prefijo_pais(self):
-        data = ''
-        try:
-            data = self.cliente.Telefono.PrefijoPais.text
+            for tel in self.cliente.Telefono:
+                data.append((tel.PrefijoPais.text, tel.Numero.text))
         except AttributeError:
             pass
         return data

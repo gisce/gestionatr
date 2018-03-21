@@ -30,6 +30,7 @@ class Alta(XmlModel):
         self.registros_documento = RegistrosDocumento()
         super(Alta, self).__init__('Alta', 'alta')
 
+
 # Paso 02
 class MensajeAceptacionAlta(XmlModel):
 

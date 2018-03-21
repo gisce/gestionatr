@@ -62,19 +62,19 @@ class Contrato(Contrato):
 
 class Contacto(XmlModel):
 
-    _sort_order = ('contacto', 'persona_de_contacto', 'telefono', 'correo_electronico')
+    _sort_order = ('contacto', 'persona_de_contacto', 'telefonos', 'correo_electronico')
 
     def __init__(self):
         self.contacto = XmlField('Contacto')
         self.persona_de_contacto = XmlField('PersonaDeContacto')
-        self.telefono = Telefono()
+        self.telefonos = []
         self.correo_electronico = XmlField('CorreoElectronico')
         super(Contacto, self).__init__('Contacto', 'contacto')
 
 
 class Cliente(Cliente):
 
-    _sort_order = ('cliente', 'id_cliente', 'nombre', 'telefono', 'correo_electronico', 'indicador_tipo_direccion', 'direccion')
+    _sort_order = ('cliente', 'id_cliente', 'nombre', 'telefonos', 'correo_electronico', 'indicador_tipo_direccion', 'direccion')
 
     def __init__(self):
         super(Cliente, self).__init__()

@@ -49,13 +49,13 @@ class DatosSolicitud(XmlModel):
 
 class Cliente(XmlModel):
 
-    _sort_order = ('cliente', 'id_cliente', 'nombre', 'telefono', 'correo_electronico')
+    _sort_order = ('cliente', 'id_cliente', 'nombre', 'telefonos', 'correo_electronico')
 
     def __init__(self):
         self.cliente = XmlField('Cliente')
         self.id_cliente = IdCliente()
         self.nombre = Nombre()
-        self.telefono = Telefono()
+        self.telefonos = []
         self.correo_electronico = XmlField('CorreoElectronico')
         super(Cliente, self).__init__('Cliente', 'cliente')
 

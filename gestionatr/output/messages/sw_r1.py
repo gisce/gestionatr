@@ -123,13 +123,13 @@ class UbicacionIncidencia(XmlModel):
 
 class Reclamante(XmlModel):
 
-    _sort_order = ('reclamante', 'id_reclamante', 'nombre', 'telefono', 'correo_electronico')
+    _sort_order = ('reclamante', 'id_reclamante', 'nombre', 'telefonos', 'correo_electronico')
 
     def __init__(self):
         self.reclamante = XmlField('Reclamante')
         self.id_reclamante = IdReclamante()
         self.nombre = Nombre()
-        self.telefono = Telefono()
+        self.telefonos = []
         self.correo_electronico = XmlField('CorreoElectronico')
         super(Reclamante, self).__init__('Reclamante', 'reclamante')
 
