@@ -18,6 +18,7 @@
             <PeriodicidadFacturacion>01</PeriodicidadFacturacion>
             <IndActivacion>L</IndActivacion>
             <FechaPrevistaAccion>2016-06-06</FechaPrevistaAccion>
+            <BonoSocial>1</BonoSocial>
         </DatosSolicitud>
         <Contrato>
             <FechaFinalizacion>2018-01-01</FechaFinalizacion>

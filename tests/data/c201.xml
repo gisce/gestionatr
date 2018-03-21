@@ -18,6 +18,8 @@
             <IndActivacion>L</IndActivacion>
             <FechaPrevistaAccion>2016-06-06</FechaPrevistaAccion>
             <ContratacionIncondicionalPS>S</ContratacionIncondicionalPS>
+            <ContratacionIncondicionalBS>N</ContratacionIncondicionalBS>
+            <BonoSocial>0</BonoSocial>
         </DatosSolicitud>
         <Contrato>
             <FechaFinalizacion>2018-01-01</FechaFinalizacion>

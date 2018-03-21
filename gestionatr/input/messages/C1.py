@@ -136,6 +136,15 @@ class C1(Message, ProcessDeadline):
 
     # Datos paso 11
     @property
+    def ind_bono_social(self):
+        tree = '{0}.IndBonoSocial'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data:
+            return data.text
+        else:
+                return False
+
+    @property
     def fecha_activacion_prevista(self):
         tree = '{0}.FechaActivacionPrevista'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
@@ -173,6 +182,24 @@ class DatosSolicitud(object):
         data = ''
         try:
             data = self.datos_solicitud.ContratacionIncondicionalPS.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def contratacion_incondicional_bs(self):
+        data = ''
+        try:
+            data = self.datos_solicitud.ContratacionIncondicionalBS.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def bono_social(self):
+        data = ''
+        try:
+            data = self.datos_solicitud.BonoSocial.text
         except AttributeError:
             pass
         return data
@@ -975,6 +1002,15 @@ class DatosNotificacion(object):
         data = False
         try:
             data = self.datos_notificacion.FechaActivacion.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def ind_bono_social(self):
+        data = False
+        try:
+            data = self.datos_notificacion.IndBonoSocial.text
         except AttributeError:
             pass
         return data

@@ -80,6 +80,8 @@ class test_C1(unittest.TestCase):
         self.assertEqual(c.datos_solicitud.ind_activacion, 'L')
         self.assertEqual(c.datos_solicitud.fecha_prevista_accion, '2016-06-06')
         self.assertEqual(c.datos_solicitud.contratacion_incondicional_ps, 'S')
+        self.assertEqual(c.datos_solicitud.bono_social, '0')
+        self.assertEqual(c.datos_solicitud.contratacion_incondicional_bs, 'S')
         # Cliente
         self.assertEqual(c.cliente.tipo_identificador, 'NI')
         self.assertEqual(c.cliente.identificador, 'B36385870')
@@ -88,7 +90,7 @@ class test_C1(unittest.TestCase):
         self.assertEqual(c.cliente.nombre, u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
         self.assertFalse(c.cliente.nombre_de_pila)
         self.assertEqual(c.cliente.telefonos[2][1], '666777888')
-        self.assertEqual(c.cliente.telefonos[2][0], '34')
+        self.assertEqual(c.cliente.telefonos[2][0], '38')
         self.assertEqual(c.cliente.correo_electronico, 'email@host')
         # Comentarios
         self.assertFalse(c.comentarios)
@@ -256,6 +258,7 @@ class test_C1(unittest.TestCase):
         c = C1(self.xml_c106)
         c.parse_xml()
         self.assertEqual(c.datos_notificacion.fecha_activacion, '2016-08-21')
+        self.assertEqual(c.datos_notificacion.ind_bono_social, 'S')
         # Contrato
         self.assertEqual(c.contrato.cod_contrato, '00001')
         # Puntos Medida
@@ -330,6 +333,7 @@ class test_C1(unittest.TestCase):
         c = C1(self.xml_c111)
         c.parse_xml()
         self.assertEqual(c.fecha_activacion_prevista, '2017-02-02')
+        self.assertEqual(c.ind_bono_social, 'N')
 
     def test_c112(self):
         c = C1(self.xml_c112)
@@ -359,14 +363,16 @@ class test_C2(unittest.TestCase):
         self.assertEqual(c.datos_solicitud.ind_activacion, 'L')
         self.assertEqual(c.datos_solicitud.tipo_modificacion, 'S')
         self.assertEqual(c.datos_solicitud.tipo_solicitud_administrativa, 'S')
+        self.assertEqual(c.datos_solicitud.contratacion_incondicional_bs, 'N')
+        self.assertEqual(c.datos_solicitud.bono_social, '0')
         # Contrato
         contrato = c.contrato
         contacto = contrato.contacto
         self.assertEqual(contacto.correo_electronico, 'email@host')
         self.assertEqual(contacto.persona_de_contacto, 'Nombre Inventado')
-        self.assertEqual(len(contacto.telefonos), 1)
-        self.assertEqual(contacto.telefonos[0][1], '666777999')
-        self.assertEqual(contacto.telefonos[0][0], '34')
+        self.assertEqual(len(contacto.telefonos), 2)
+        self.assertEqual(contacto.telefonos[1][1], '666777999')
+        self.assertEqual(contacto.telefonos[1][0], '34')
         self.assertEqual(contrato.fecha_finalizacion, '2018-01-01')
         self.assertEqual(contrato.modo_control_potencia, '1')
         self.assertEqual(contrato.periodicidad_facturacion, '01')
@@ -713,6 +719,7 @@ class test_M1(unittest.TestCase):
         self.assertEqual(m1.datos_solicitud.tipo_modificacion, 'S')
         self.assertEqual(m1.datos_solicitud.tipo_solicitud_administrativa, 'S')
         self.assertEqual(m1.datos_solicitud.periodicidad_facturacion, '01')
+        self.assertEqual(m1.datos_solicitud.bono_social, '1')
         # Contrato
         contrato = m1.contrato
         contacto = contrato.contacto

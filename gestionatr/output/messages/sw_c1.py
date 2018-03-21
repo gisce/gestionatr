@@ -37,13 +37,15 @@ class CambiodeComercializadorSinCambios(XmlModel):
 
 class DatosSolicitud(XmlModel):
 
-    _sort_order = ('datos_solicitud', 'ind_activacion', 'fecha_prevista_accion', 'contratacion_incondicional_ps')
+    _sort_order = ('datos_solicitud', 'ind_activacion', 'fecha_prevista_accion', 'contratacion_incondicional_ps', 'contratacion_incondicional_bs', 'bono_social')
 
     def __init__(self):
         self.datos_solicitud = XmlField('DatosSolicitud')
         self.ind_activacion = XmlField('IndActivacion')
         self.fecha_prevista_accion = XmlField('FechaPrevistaAccion')
         self.contratacion_incondicional_ps = XmlField('ContratacionIncondicionalPS')
+        self.contratacion_incondicional_bs = XmlField('ContratacionIncondicionalBS')
+        self.bono_social = XmlField('BonoSocial')
         super(DatosSolicitud, self).__init__('DatosSolicitud', 'datos_solicitud')
 
 
@@ -438,11 +440,12 @@ class NotificacionComercializadorSaliente(XmlModel):
 
 class DatosNotificacion(XmlModel):
 
-    _sort_order = ('datos_notificacion', 'fecha_activacion')
+    _sort_order = ('datos_notificacion', 'fecha_activacion', 'ind_bono_social')
 
     def __init__(self):
         self.datos_notificacion = XmlField('DatosNotificacion')
         self.fecha_activacion = XmlField('FechaActivacion')
+        self.ind_bono_social = XmlField('IndBonoSocial')
         super(DatosNotificacion, self).__init__('DatosNotificacion', 'datos_notificacion')
 
 
@@ -496,11 +499,12 @@ class MensajeAceptacionCambiodeComercializadorSaliente(XmlModel):
 
 class AceptacionCambioComercializadorSaliente(XmlModel):
 
-    _sort_order = ('aceptacion_cambio_comercializador_saliente', 'fecha_activacion_prevista')
+    _sort_order = ('aceptacion_cambio_comercializador_saliente', 'fecha_activacion_prevista', 'ind_bono_social')
 
     def __init__(self):
         self.aceptacion_cambio_comercializador_saliente = XmlField('AceptacionCambioComercializadorSaliente')
         self.fecha_activacion_prevista = XmlField('FechaActivacionPrevista')
+        self.ind_bono_social = XmlField('IndBonoSocial')
         super(AceptacionCambioComercializadorSaliente, self).__init__('AceptacionCambioComercializadorSaliente', 'aceptacion_cambio_comercializador_saliente')
 
 

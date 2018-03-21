@@ -937,6 +937,7 @@ TABLA_27 = [
     ('C7', 'Impedimento del Titular. Iniciar si procede, el proceso de fraude'),
     ('C8', 'Rechazo de la suspensión del suministro por concurrencia con baja por impago'),
     ('C9', 'El tipo de activación solicitada no es coherente con el tipo de solicitud'),
+    ('D1', 'Suministro acogido a bono social'),
     ('D2', 'No es posible anulación ya que no existe solicitud previa'),
     ('99', 'Otros'),
 
@@ -1957,8 +1958,8 @@ TABLA_114 = [
 TABLA_115 = PERSONA
 
 TABLA_116 = [
-    ('00', u'No Bono Social – Retirada del BS'),
-    ('01', u'Bono Social'),
+    ('0', u'No Bono Social – Retirada del BS'),
+    ('1', u'Bono Social'),
 #    ('02', u'Bono Social – Esencial (Según Art. 4 RD 897/2017)'),
 ]
 

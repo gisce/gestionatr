@@ -185,6 +185,8 @@ class test_C1(unittest.TestCase):
             'ind_activacion': 'L',
             'fecha_prevista_accion': '2016-06-06',
             'contratacion_incondicional_ps': 'S',
+            'contratacion_incondicional_bs': 'S',
+            'bono_social': '0',
         }
         datos_solicitud.feed(datos_solicitud_fields)
 
@@ -403,6 +405,7 @@ class test_C1(unittest.TestCase):
         datos_notificacion = c1.DatosNotificacion()
         datos_notificacion_fields = {
             'fecha_activacion': '2016-08-21',
+            'ind_bono_social': 'S'
         }
         datos_notificacion.feed(datos_notificacion_fields)
 
@@ -467,6 +470,7 @@ class test_C1(unittest.TestCase):
         aceptacion_cambio_comercializador_saliente = c1.AceptacionCambioComercializadorSaliente()
         aceptacion_cambio_comercializador_saliente_fields = {
             'fecha_activacion_prevista': '2017-02-02',
+            'ind_bono_social': 'N'
         }
         aceptacion_cambio_comercializador_saliente.feed(aceptacion_cambio_comercializador_saliente_fields)
 
@@ -536,6 +540,8 @@ class test_C2(unittest.TestCase):
             'ind_activacion': 'L',
             'fecha_prevista_accion': '2016-06-06',
             'contratacion_incondicional_ps': 'S',
+            'contratacion_incondicional_bs': 'N',
+            'bono_social': '0',
         }
         datos_solicitud.feed(datos_solicitud_fields)
 
@@ -891,6 +897,7 @@ class test_M1(unittest.TestCase):
             'ind_activacion': 'L',
             'fecha_prevista_accion': '2016-06-06',
             'cnae': '2222',
+            'bono_social': '1'
         }
         datos_solicitud.feed(datos_solicitud_fields)
 

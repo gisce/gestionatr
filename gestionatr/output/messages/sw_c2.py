@@ -38,7 +38,7 @@ class CambiodeComercializadorConCambios(XmlModel):
 
 class DatosSolicitud(DatosSolicitud):
 
-    _sort_order = ('datos_solicitud', 'tipo_modificacion', 'tipo_solicitud_administrativa', 'cnae', 'ind_activacion', 'fecha_prevista_accion', 'contratacion_incondicional_ps')
+    _sort_order = ('datos_solicitud', 'tipo_modificacion', 'tipo_solicitud_administrativa', 'cnae', 'ind_activacion', 'fecha_prevista_accion', 'contratacion_incondicional_ps', 'contratacion_incondicional_bs', 'bono_social')
 
     def __init__(self):
         super(DatosSolicitud, self).__init__()

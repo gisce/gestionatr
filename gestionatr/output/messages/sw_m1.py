@@ -33,7 +33,7 @@ class ModificacionDeATR(XmlModel):
 
 class DatosSolicitud(DatosSolicitud):
 
-    _sort_order = ('datos_solicitud', 'tipo_modificacion', 'tipo_solicitud_administrativa', 'cnae', 'periodicidad_facturacion', 'ind_activacion', 'fecha_prevista_accion', 'contratacion_incondicional_ps')
+    _sort_order = ('datos_solicitud', 'tipo_modificacion', 'tipo_solicitud_administrativa', 'cnae', 'periodicidad_facturacion', 'ind_activacion', 'fecha_prevista_accion', 'contratacion_incondicional_ps', 'bono_social')
 
     def __init__(self):
         super(DatosSolicitud, self).__init__()
