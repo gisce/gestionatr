@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia León (Comisión Nacional de los Mercados y la Competencia) -->
-<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Teresa Rodriguez Losada (Comision Nacional de los Mercados y la Competencia) -->
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Teresa Rodriguez-Losada Marco (Comisión Nacional de los Mercados y la Competencia) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:annotation>
 		<xs:documentation>
-			Version 1.0 CNMC 2016.xx.xx
+			Version 1.1 CNMC 2016.12.20
 		</xs:documentation>
 	</xs:annotation>
 	<xs:simpleType name="AltaBajaModificacion">
@@ -279,6 +278,8 @@
 			<xs:enumeration value="C7"/>
 			<xs:enumeration value="C8"/>
 			<xs:enumeration value="C9"/>
+			<xs:enumeration value="D1"/>
+			<xs:enumeration value="D2"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="CodPM">
@@ -397,6 +398,13 @@
 			<xs:totalDigits value="6"/>
 			<xs:fractionDigits value="4"/>
 			<xs:maxInclusive value="99.9999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Decimal3V2">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="5"/>
+			<xs:fractionDigits value="2"/>
+			<xs:maxInclusive value="999.99"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Decimal3">
@@ -876,6 +884,12 @@
 			0670303	Cliente no aporta informacion adicional
 			0670304	Acceso denegado
 			0670305	Visita anulada por cliente
+			0690101	Procedente. Se envía copia del F1 en PDF.
+			0690201	Improcedente. Se adjunta explicación en comentarios. 
+			0700101	Procedente. Se agiliza trámite de reclamación. 
+			0700201	Retraso imputable al cliente/comercializador
+			0700202	Improcedente. Se adjunta explicación en comentarios.
+
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -1230,7 +1244,7 @@
 			<xs:enumeration value="0620203"/>
 			<xs:enumeration value="0630101"/>
 			<xs:enumeration value="0630102"/>
-			<xs:enumeration value="630201"/>
+			<xs:enumeration value="0630201"/>
 			<xs:enumeration value="0630202"/>
 			<xs:enumeration value="0630203"/>
 			<xs:enumeration value="0630204"/>
@@ -1273,6 +1287,11 @@
 			<xs:enumeration value="0670303"/>
 			<xs:enumeration value="0670304"/>
 			<xs:enumeration value="0670305"/>
+			<xs:enumeration value="0690101"/>
+			<xs:enumeration value="0690201"/>
+			<xs:enumeration value="0700101"/>
+			<xs:enumeration value="0700201"/>
+			<xs:enumeration value="0700202"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="EnergiaFact">
@@ -1808,6 +1827,9 @@
 			065	RETRASO EN PLAZO ACTIVAcion DE UNA BAJA DE UN SUMINISTRO
 			066 	INFORMACIÓN/VALIDACIÓN SOBRE FATOS DEL CONTRATAO ATR/PEAJE
 			067	VERIFICACIÓN DE CONTADOR
+			069	COPIA F1 EN PDF
+			070	RETRASO EN LA ATENCIÓN A RECLAMACIONES NO SUJETAS A ATENCIÓN REGLAMENTARIA
+
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -1870,6 +1892,8 @@
 			<xs:enumeration value="065"/>
 			<xs:enumeration value="066"/>
 			<xs:enumeration value="067"/>
+			<xs:enumeration value="069"/>
+			<xs:enumeration value="070"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TarifaATR">
@@ -2581,6 +2605,18 @@ la reclamacion
 			<xs:enumeration value="J"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="BonoSocial">
+		<xs:annotation>
+			<xs:documentation> Bono Social (tabla 116)
+			0	No Bono Social - Retirada
+			1	Bono Social
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="0"/>
+			<xs:enumeration value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="TipoPM">
 		<xs:annotation>
 			<xs:documentation>tipo de punto de medida (tabla 30)
@@ -2781,6 +2817,7 @@ la reclamacion
 		<xs:annotation>
 			<xs:documentation>Tipo de Identificador de la via de los datos del usuario (tabla 12)
 			AC	ACCESO
+			AD 	ALDEA
 			AF	AFUERAS
 			AG	AGRUPACIÓN
 			AL	ALAMEDA
@@ -2793,7 +2830,9 @@ la reclamacion
 			BO	BARRIO
 			CA	COLONIA
 			CF	CALLEJÓN
-			CI	CARRIL
+			CH 	CHALET
+			CI	    CARRIL
+			CJ 	CALLEJA
 			CL	CALLE
 			CM	COMPLEJO
 			CN	CAMINO
@@ -2801,22 +2840,24 @@ la reclamacion
 			CR	CARRETERA
 			CS	CASA
 			CT	CUESTA
-			DI	DISEMINADO EXTRARRADIO
+			DI		DISEMINADO EXTRARRADIO
 			ED	EDIFICIO
 			EN	ENTRADA
 			FC	FINCA
-			FI	FICTICIO
+			FI		FICTICIO
 			GL	GLORIETA
 			GR	GRUPO
+			LG	LUGAR
 			MA	MASÍA
 			MU	MUELLE
 			MZ	MANZANA
 			NU	NUCLEO
+			OV	OTROS
 			PA	PARQUE
 			PB	POBLADO
 			PD	PARTIDA
 			PE	PASEO
-			PI	POL.INDUSTRIAL
+			PI		POL.INDUSTRIAL
 			PJ	PARAJE
 			PL	PANTALAN
 			PO	POLÍGONO
@@ -2834,10 +2875,19 @@ la reclamacion
 			UR	URBANIZACIÓN
 			VI	VIAL
 			ZN	ZONA
+			AD	ALDEA
+			AO	APARTADO DE CORREOS
+			CJ	CALLEJA
+			CH	CHALET
+			CT	CUESTA
+			LG	LUGAR
+			OV	OTROS
+
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="AC"/>
+			<xs:enumeration value="AD"/>
 			<xs:enumeration value="AF"/>
 			<xs:enumeration value="AG"/>
 			<xs:enumeration value="AL"/>
@@ -2850,7 +2900,9 @@ la reclamacion
 			<xs:enumeration value="BO"/>
 			<xs:enumeration value="CA"/>
 			<xs:enumeration value="CF"/>
+			<xs:enumeration value="CH"/>
 			<xs:enumeration value="CI"/>
+			<xs:enumeration value="CJ"/>
 			<xs:enumeration value="CL"/>
 			<xs:enumeration value="CM"/>
 			<xs:enumeration value="CN"/>
@@ -2865,10 +2917,12 @@ la reclamacion
 			<xs:enumeration value="FI"/>
 			<xs:enumeration value="GL"/>
 			<xs:enumeration value="GR"/>
+			<xs:enumeration value="LG"/>
 			<xs:enumeration value="MA"/>
 			<xs:enumeration value="MU"/>
 			<xs:enumeration value="MZ"/>
 			<xs:enumeration value="NU"/>
+			<xs:enumeration value="OV"/>
 			<xs:enumeration value="PA"/>
 			<xs:enumeration value="PB"/>
 			<xs:enumeration value="PD"/>
@@ -2891,6 +2945,13 @@ la reclamacion
 			<xs:enumeration value="UR"/>
 			<xs:enumeration value="VI"/>
 			<xs:enumeration value="ZN"/>
+			<xs:enumeration value="AD"/>
+			<xs:enumeration value="AO"/>
+			<xs:enumeration value="CJ"/>
+			<xs:enumeration value="CH"/>
+			<xs:enumeration value="CT"/>
+			<xs:enumeration value="LG"/>
+			<xs:enumeration value="OV"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Variable">
@@ -3132,5 +3193,13 @@ la reclamacion
 			<xs:enumeration value="1"/>
 			<xs:enumeration value="2"/>
 		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="empty-string">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="date-or-nothing">
+		<xs:union memberTypes="xs:date empty-string"/>
 	</xs:simpleType>
 </xs:schema>

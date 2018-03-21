@@ -4,7 +4,7 @@
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
 	<xs:annotation>
 		<xs:documentation>
-			Version 1.0 CNMC 2016.xx.xx
+			Version 1.1 CNMC 2016.12.20
 		</xs:documentation>
 	</xs:annotation>
 	<xs:complexType name="AparatoActivacion">
@@ -246,7 +246,7 @@
 		<xs:sequence>
 			<xs:element name="IdCliente" type="IdCliente"/>
 			<xs:element name="Nombre" type="NombreCliente"/>
-			<xs:element name="Telefono" type="TelefonoInternacional" minOccurs="0"/>
+			<xs:element name="Telefono" type="TelefonoInternacional" minOccurs="0" maxOccurs="5"/>
 			<xs:element name="CorreoElectronico" minOccurs="0">
 				<xs:simpleType>
 					<xs:restriction base="X60">
@@ -260,7 +260,7 @@
 		<xs:sequence>
 			<xs:element name="IdCliente" type="IdCliente"/>
 			<xs:element name="Nombre" type="NombreCliente"/>
-			<xs:element name="Telefono" type="TelefonoInternacional" minOccurs="0"/>
+			<xs:element name="Telefono" type="TelefonoInternacional" minOccurs="0" maxOccurs="5"/>
 			<xs:element name="CorreoElectronico" minOccurs="0">
 				<xs:simpleType>
 					<xs:restriction base="X60">
@@ -368,13 +368,13 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element name="Telefono" type="TelefonoInternacional"/>
+			<xs:element name="Telefono" type="TelefonoInternacional" maxOccurs="5"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Contactoconemail">
 		<xs:sequence>
 			<xs:element name="PersonaDeContacto" type="X150"/>
-			<xs:element name="Telefono" type="TelefonoInternacional"/>
+			<xs:element name="Telefono" type="TelefonoInternacional" maxOccurs="5"/>
 			<xs:element name="CorreoElectronico" minOccurs="0">
 				<xs:simpleType>
 					<xs:restriction base="X60">
@@ -393,7 +393,7 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element name="Telefono" type="TelefonoInternacional"/>
+			<xs:element name="Telefono" type="TelefonoInternacional" maxOccurs="5"/>
 			<xs:element name="CorreoElectronico" minOccurs="0">
 				<xs:simpleType>
 					<xs:restriction base="X60">
@@ -522,7 +522,7 @@
 		<xs:sequence>
 			<xs:element name="IdReclamante" type="IdReclamante"/>
 			<xs:element name="Nombre" type="NombreCliente"/>
-			<xs:element name="Telefono" type="TelefonoInternacional" minOccurs="0"/>
+			<xs:element name="Telefono" type="TelefonoInternacional" minOccurs="0" maxOccurs="5"/>
 			<xs:element name="CorreoElectronico" minOccurs="0">
 				<xs:simpleType>
 					<xs:restriction base="X60">
@@ -977,7 +977,15 @@
 				<xs:complexType>
 					<xs:simpleContent>
 						<xs:extension base="Potencia">
-							<xs:attribute name="Periodo" type="xs:integer" use="required"/>
+							<xs:attribute name="Periodo" use="required">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:minLength value="1"/>
+										<xs:maxLength value="1"/>
+										<xs:pattern value="[0-9]"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:attribute>
 						</xs:extension>
 					</xs:simpleContent>
 				</xs:complexType>

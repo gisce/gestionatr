@@ -5,7 +5,7 @@
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
 	<xs:element name="MensajeAlta">
 		<xs:annotation>
-			<xs:documentation>Version CNMC 1.0</xs:documentation>
+			<xs:documentation>Version 1.1 CNMC 2016.12.20</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>

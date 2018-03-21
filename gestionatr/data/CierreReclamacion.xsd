@@ -6,12 +6,12 @@
 	<xs:include schemaLocation="TipoMensajeR105.xsd"/>
 	<xs:annotation>
 		<xs:documentation>
-			Version 1.0 CNMC 2016.xx.xx
+			Version 1.1 CNMC 2016.12.20
 		</xs:documentation>
 	</xs:annotation>
 	<xs:element name="MensajeCierreReclamacion">
 		<xs:annotation>
-			<xs:documentation>Version CNMC 1.0</xs:documentation>
+			<xs:documentation>Version CNMC 1.1</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
