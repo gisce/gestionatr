@@ -17,6 +17,7 @@
       <PotenciaActual>5000</PotenciaActual>
       <ActuacionCampo>S</ActuacionCampo>
       <FechaUltimaLecturaFirme>2016-06-01</FechaUltimaLecturaFirme>
+      <BonoSocial>1</BonoSocial>
     </DatosAceptacion>
     <Contrato>
       <TipoContratoATR>02</TipoContratoATR>

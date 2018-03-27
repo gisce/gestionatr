@@ -231,6 +231,7 @@ class test_C1(unittest.TestCase):
             'fecha_aceptacion': '2016-06-06',
             'actuacion_campo': 'S',
             'fecha_ultima_lectura_firme': '2016-06-01',
+            'bono_social': '0',
         }
         datos_aceptacion.feed(datos_aceptacion_fields)
 
@@ -330,6 +331,7 @@ class test_C1(unittest.TestCase):
         datos_activacion = c1.DatosActivacion()
         datos_activacion_fields = {
             'fecha': '2016-08-21',
+            'bono_social': '1',
         }
         datos_activacion.feed(datos_activacion_fields)
 
@@ -663,6 +665,7 @@ class test_C2(unittest.TestCase):
             'potencia_actual': '5000',
             'actuacion_campo': 'S',
             'fecha_ultima_lectura_firme': '2016-06-01',
+            'bono_social': '1',
         }
         datos_aceptacion.feed(datos_aceptacion_fields)
 

@@ -145,7 +145,7 @@ class AceptacionCambiodeComercializadorSinCambios(XmlModel):
 
 class DatosAceptacion(XmlModel):
 
-    _sort_order = ('datos_aceptacion', 'fecha_aceptacion', 'potencia_actual', 'actuacion_campo', 'fecha_ultima_lectura_firme')
+    _sort_order = ('datos_aceptacion', 'fecha_aceptacion', 'potencia_actual', 'actuacion_campo', 'fecha_ultima_lectura_firme', 'bono_social')
 
     def __init__(self):
         self.datos_aceptacion = XmlField('DatosAceptacion')
@@ -153,6 +153,7 @@ class DatosAceptacion(XmlModel):
         self.potencia_actual = XmlField('PotenciaActual')
         self.actuacion_campo = XmlField('ActuacionCampo')
         self.fecha_ultima_lectura_firme = XmlField('FechaUltimaLecturaFirme')
+        self.bono_social = XmlField('BonoSocial')
         super(DatosAceptacion, self).__init__('DatosAceptacion', 'datos_aceptacion')
 
 
@@ -282,11 +283,12 @@ class ActivacionCambiodeComercializadorSinCambios(XmlModel):
 
 class DatosActivacion(XmlModel):
 
-    _sort_order = ('datos_activacion', 'fecha')
+    _sort_order = ('datos_activacion', 'fecha', 'bono_social')
 
     def __init__(self):
         self.datos_activacion = XmlField('DatosActivacion')
         self.fecha = XmlField('Fecha')
+        self.bono_social = XmlField('BonoSocial')
         super(DatosActivacion, self).__init__('DatosActivacion', 'datos_activacion')
 
 

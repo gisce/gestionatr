@@ -378,6 +378,15 @@ class DatosAceptacion(object):
             pass
         return data
 
+    @property
+    def bono_social(self):
+        data = ''
+        try:
+            data = self.datos_aceptacion.BonoSocial.text
+        except AttributeError:
+            pass
+        return data
+
 
 class Contrato(object):
 
@@ -555,6 +564,15 @@ class DatosActivacion(object):
         data = False
         try:
             data = self.datos_activacion.Fecha.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def bono_social(self):
+        data = ''
+        try:
+            data = self.datos_activacion.BonoSocial.text
         except AttributeError:
             pass
         return data

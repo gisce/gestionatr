@@ -138,6 +138,7 @@ class test_C1(unittest.TestCase):
         self.assertEqual(c.contrato.tipo_activacion_prevista, 'C0')
         self.assertEqual(c.contrato.fecha_activacion_prevista, '2016-07-06')
         self.assertEqual(c.contrato.tarifa_atr, '003')
+        self.assertEqual(c.datos_aceptacion.bono_social, '0')
         pots = c.contrato.potencias_contratadas
         self.assertEqual(len(pots), 2)
         self.assertEqual(pots[0][1], 1000)
@@ -191,6 +192,7 @@ class test_C1(unittest.TestCase):
         self.assertEqual(c.contrato.tension_del_suministro, '10')
         self.assertEqual(c.contrato.vas_trafo, '50')
         self.assertEqual(c.contrato.porcentaje_perdidas, '05')
+        self.assertEqual(c.datos_activacion.bono_social, '1')
         self.assertEqual(len(c.contrato.potencias_contratadas), 2)
         pot1 = c.contrato.potencias_contratadas[0]
         pot2 = c.contrato.potencias_contratadas[1]
@@ -462,6 +464,7 @@ class test_C2(unittest.TestCase):
         self.assertEqual(c.datos_aceptacion.potencia_actual, '5000')
         self.assertEqual(c.datos_aceptacion.actuacion_campo, 'S')
         self.assertEqual(c.datos_aceptacion.fecha_ultima_lectura_firme, '2016-06-01')
+        self.assertEqual(c.datos_aceptacion.bono_social, '1')
         # Contrato
         self.assertEqual(c.contrato.tipo_contrato_atr, '02')
         self.assertEqual(c.contrato.tipo_activacion_prevista, 'C0')
