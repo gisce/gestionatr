@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia Leon (Comision Nacional de los Mercados y la Competencia) -->
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia León (Comisión Nacional de los Mercados y la Competencia) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposComplejos.xsd"/>
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
 	<xs:annotation>
 		<xs:documentation>
-			Version 1.0 CNMC 2016.xx.xx
+			Version 1.1 CNMC 2016.12.20
 		</xs:documentation>
 	</xs:annotation>
 	<xs:complexType name="ActivacionComercializadorSalienteD">
@@ -20,6 +20,11 @@
 	<xs:complexType name="DatosActivacionComercializadorSaliente">
 		<xs:sequence>
 			<xs:element name="FechaActivacion" type="xs:date"/>
+			<xs:element name="IndBonoSocial" type="Indicativo">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<!--Datos del contrato a la saliente -->

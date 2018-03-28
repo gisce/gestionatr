@@ -5,7 +5,7 @@
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
 	<xs:annotation>
 		<xs:documentation>
-			Version 1.0 CNMC 2016.xx.xx
+			Version 1.1 CNMC 2016.12.20
 		</xs:documentation>
 	</xs:annotation>
 	<xs:complexType name="ModificacionDeATRM101">
@@ -33,6 +33,7 @@
 					<xs:documentation>Tabla 53</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="CNAE" type="CNAE" minOccurs="0"/>
 			<xs:element name="PeriodicidadFacturacion" type="PeriodicidadFacturacion" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Tabla 108</xs:documentation>
@@ -43,8 +44,12 @@
 					<xs:documentation>Tabla 8 </xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="FechaPrevistaAccion" type="xs:date" minOccurs="0"/>
-			<xs:element name="CNAE" type="CNAE" minOccurs="0"/>
+			<xs:element name="FechaPrevistaAccion" type="date-or-nothing" minOccurs="0"/>
+			<xs:element name="BonoSocial" type="BonoSocial" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 116</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 </xs:schema>

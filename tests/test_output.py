@@ -185,6 +185,8 @@ class test_C1(unittest.TestCase):
             'ind_activacion': 'L',
             'fecha_prevista_accion': '2016-06-06',
             'contratacion_incondicional_ps': 'S',
+            'contratacion_incondicional_bs': 'S',
+            'bono_social': '0',
         }
         datos_solicitud.feed(datos_solicitud_fields)
 
@@ -229,6 +231,7 @@ class test_C1(unittest.TestCase):
             'fecha_aceptacion': '2016-06-06',
             'actuacion_campo': 'S',
             'fecha_ultima_lectura_firme': '2016-06-01',
+            'bono_social': '0',
         }
         datos_aceptacion.feed(datos_aceptacion_fields)
 
@@ -328,6 +331,7 @@ class test_C1(unittest.TestCase):
         datos_activacion = c1.DatosActivacion()
         datos_activacion_fields = {
             'fecha': '2016-08-21',
+            'bono_social': '1',
         }
         datos_activacion.feed(datos_activacion_fields)
 
@@ -403,6 +407,7 @@ class test_C1(unittest.TestCase):
         datos_notificacion = c1.DatosNotificacion()
         datos_notificacion_fields = {
             'fecha_activacion': '2016-08-21',
+            'ind_bono_social': 'S'
         }
         datos_notificacion.feed(datos_notificacion_fields)
 
@@ -467,6 +472,7 @@ class test_C1(unittest.TestCase):
         aceptacion_cambio_comercializador_saliente = c1.AceptacionCambioComercializadorSaliente()
         aceptacion_cambio_comercializador_saliente_fields = {
             'fecha_activacion_prevista': '2017-02-02',
+            'ind_bono_social': 'N'
         }
         aceptacion_cambio_comercializador_saliente.feed(aceptacion_cambio_comercializador_saliente_fields)
 
@@ -536,6 +542,8 @@ class test_C2(unittest.TestCase):
             'ind_activacion': 'L',
             'fecha_prevista_accion': '2016-06-06',
             'contratacion_incondicional_ps': 'S',
+            'contratacion_incondicional_bs': 'N',
+            'bono_social': '0',
         }
         datos_solicitud.feed(datos_solicitud_fields)
 
@@ -657,6 +665,7 @@ class test_C2(unittest.TestCase):
             'potencia_actual': '5000',
             'actuacion_campo': 'S',
             'fecha_ultima_lectura_firme': '2016-06-01',
+            'bono_social': '1',
         }
         datos_aceptacion.feed(datos_aceptacion_fields)
 
@@ -891,6 +900,7 @@ class test_M1(unittest.TestCase):
             'ind_activacion': 'L',
             'fecha_prevista_accion': '2016-06-06',
             'cnae': '2222',
+            'bono_social': '1'
         }
         datos_solicitud.feed(datos_solicitud_fields)
 
@@ -1660,16 +1670,23 @@ class test_R1(unittest.TestCase):
         contacto = r1.Contacto()
 
         # Telefono
-        telefono = r1.Telefono()
+        telefono1 = r1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '34',
+            'numero': '666777888',
+        }
+        telefono1.feed(telefono_fields)
+        telefono2 = r1.Telefono()
         telefono_fields = {
             'prefijo_pais': '34',
             'numero': '55512345',
         }
-        telefono.feed(telefono_fields)
+        telefono2.feed(telefono_fields)
+        telefonos = [telefono1, telefono2]
 
         contacto_fields = {
             'persona_de_contacto': 'Perico Palotes Largos',
-            'telefono': telefono,
+            'telefonos': telefonos,
             'correo_electronico': 'perico@acme.com',
         }
         contacto.feed(contacto_fields)
@@ -1747,17 +1764,30 @@ class test_R1(unittest.TestCase):
         nombre.feed(nombre_fields)
 
         # Telefono
-        telefono = r1.Telefono()
+        telefono1 = r1.Telefono()
         telefono_fields = {
             'prefijo_pais': '34',
             'numero': '666777888',
         }
-        telefono.feed(telefono_fields)
+        telefono1.feed(telefono_fields)
+        telefono2 = r1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '34',
+            'numero': '666777999',
+        }
+        telefono2.feed(telefono_fields)
+        telefono3 = r1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '34',
+            'numero': '666777555',
+        }
+        telefono3.feed(telefono_fields)
+        telefonos = [telefono1, telefono2, telefono3]
 
         reclamante_fields = {
             'id_reclamante': id_reclamante,
             'nombre': nombre,
-            'telefono': telefono,
+            'telefonos': telefonos,
             'correo_electronico': 'email@host',
         }
         reclamante.feed(reclamante_fields)
@@ -1893,18 +1923,18 @@ class test_R1(unittest.TestCase):
         }
         sia2.feed(solicitud_informacion_adicional_fields)
 
-        # SolicitudInformacionAdicionalparaRetipificacion
-        siar = r1.SolicitudInformacionAdicionalparaRetipificacion()
-        solicitud_informacion_adicionalpara_retipificacion_fields = {
+        # SolicitudInformacionAdicionalParaRetipificacion
+        siar = r1.SolicitudInformacionAdicionalParaRetipificacion()
+        solicitud_informacion_adicional_para_retipificacion_fields = {
             'tipo': '03',
             'subtipo': '003',
             'fecha_limite_envio': '2016-08-10',
         }
-        siar.feed(solicitud_informacion_adicionalpara_retipificacion_fields)
+        siar.feed(solicitud_informacion_adicional_para_retipificacion_fields)
 
         solicitudes_informacion_adicional_fields = {
             'solicitud_informacion_adicional_list': [sia1, sia2],
-            'solicitud_informacion_adicionalpara_retipificacion': siar
+            'solicitud_informacion_adicional_para_retipificacion': siar
         }
         solicitudes_informacion_adicional.feed(solicitudes_informacion_adicional_fields)
 
@@ -2066,10 +2096,10 @@ class test_R1(unittest.TestCase):
         }
         variables_aportacion_informacion.feed(variables_aportacion_informacion_fields)
 
-        # VariablesAportacionInformacionparaRetipificacion
-        variables_retipificacion = r1.VariablesAportacionInformacionparaRetipificacion()
+        # VariablesAportacionInformacionParaRetipificacion
+        variables_retipificacion = r1.VariablesAportacionInformacionParaRetipificacion()
 
-        vair1 = r1.VariableAportacionInformacionparaRetipificacion()
+        vair1 = r1.VariableAportacionInformacionParaRetipificacion()
 
         # LecturasAportadas
         lecturas_aportadas = r1.LecturasAportadas()
@@ -2100,16 +2130,23 @@ class test_R1(unittest.TestCase):
         contacto = r1.Contacto()
 
         # Telefono
-        telefono = r1.Telefono()
+        telefono1 = r1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '34',
+            'numero': '666777888',
+        }
+        telefono1.feed(telefono_fields)
+        telefono2 = r1.Telefono()
         telefono_fields = {
             'prefijo_pais': '34',
             'numero': '55512345',
         }
-        telefono.feed(telefono_fields)
+        telefono2.feed(telefono_fields)
+        telefonos = [telefono1, telefono2]
 
         contacto_fields = {
             'persona_de_contacto': 'Perico Palotes Largos',
-            'telefono': telefono,
+            'telefonos': telefonos,
             'correo_electronico': 'perico@acme.com',
         }
         contacto.feed(contacto_fields)
@@ -2150,7 +2187,7 @@ class test_R1(unittest.TestCase):
         vair1.feed(vair_fields)
 
         variables_retipificacion_fields = {
-            'variable_aportacion_informacionpara_retipificacion_list': [vair1],
+            'variable_aportacion_informacion_para_retipificacion_list': [vair1],
         }
         variables_retipificacion.feed(variables_retipificacion_fields)
 
@@ -2187,7 +2224,7 @@ class test_R1(unittest.TestCase):
         envio_informacion_reclamacion_fields = {
             'datos_envio_informacion': datos_envio_informacion,
             'variables_aportacion_informacion': variables_aportacion_informacion,
-            'variables_aportacion_informacionpara_retipificacion': variables_retipificacion,
+            'variables_aportacion_informacion_para_retipificacion': variables_retipificacion,
             'cliente': cliente,
             'comentarios': 'R104 test with VariablesAportacionInformacion.',
             'registros_documento': registros_documento,

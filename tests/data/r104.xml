@@ -26,8 +26,8 @@
                 <TipoInformacion>02</TipoInformacion>
             </VariableAportacionInformacion>
         </VariablesAportacionInformacion>
-        <VariablesAportacionInformacionparaRetipificacion>
-            <VariableAportacionInformacionparaRetipificacion>
+        <VariablesAportacionInformacionParaRetipificacion>
+            <VariableAportacionInformacionParaRetipificacion>
                 <NumExpedienteAcometida>11111</NumExpedienteAcometida>
                 <NumExpedienteFraude>22222</NumExpedienteFraude>
                 <FechaIncidente>2016-02-10</FechaIncidente>
@@ -57,6 +57,10 @@
                     <PersonaDeContacto>Perico Palotes Largos</PersonaDeContacto>
                     <Telefono>
                         <PrefijoPais>34</PrefijoPais>
+                        <Numero>666777888</Numero>
+                    </Telefono>
+                    <Telefono>
+                        <PrefijoPais>34</PrefijoPais>
                         <Numero>55512345</Numero>
                     </Telefono>
                     <CorreoElectronico>perico@acme.com</CorreoElectronico>
@@ -72,8 +76,8 @@
                     <Poblacion>17079</Poblacion>
                     <CodPostal>17001</CodPostal>
                 </UbicacionIncidencia>
-            </VariableAportacionInformacionparaRetipificacion>
-        </VariablesAportacionInformacionparaRetipificacion>
+            </VariableAportacionInformacionParaRetipificacion>
+        </VariablesAportacionInformacionParaRetipificacion>
         <Cliente>
             <IdCliente>
               <TipoIdentificador>NI</TipoIdentificador>
@@ -84,8 +88,16 @@
               <RazonSocial>ACC Y COMP DE COCINA MILLAN Y MUÑOZ</RazonSocial>
             </Nombre>
             <Telefono>
-              <PrefijoPais>34</PrefijoPais>
-              <Numero>666777888</Numero>
+                <PrefijoPais>36</PrefijoPais>
+                <Numero>666777666</Numero>
+            </Telefono>
+            <Telefono>
+                <PrefijoPais>37</PrefijoPais>
+                <Numero>666777777</Numero>
+            </Telefono>
+            <Telefono>
+                <PrefijoPais>38</PrefijoPais>
+                <Numero>666777888</Numero>
             </Telefono>
             <CorreoElectronico>email@host</CorreoElectronico>
             <IndicadorTipoDireccion>F</IndicadorTipoDireccion>

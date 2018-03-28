@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia León (Comisión Nacional de los Mercados y la Competencia) -->
-<!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End User (free.org) -->
-<!-- edited with XML Spy v4.3 U (http://www.xmlspy.com)  -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
 	<xs:include schemaLocation="TiposComplejos.xsd"/>
 	<xs:annotation>
 		<xs:documentation>
-			Version 1.0 CNMC 2016.xx.xx
+			Version 1.1 CNMC 2016.12.20
 		</xs:documentation>
 	</xs:annotation>
 	<xs:element name="MensajeFacturacion" type="MensajeFacturacion">
 		<xs:annotation>
-			<xs:documentation>Version CNMC 1.0</xs:documentation>
+			<xs:documentation>Version CNMC 1.1</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 	<xs:complexType name="MensajeFacturacion">
@@ -109,7 +107,7 @@
 															<xs:documentation>Tabla 107</xs:documentation>
 														</xs:annotation>
 													</xs:element>
-													<xs:element name="ModoControlPotencia" type="ModoControlPotencia" minOccurs="0">
+													<xs:element name="ModoControlPotencia" type="ModoControlPotencia">
 														<xs:annotation>
 															<xs:documentation> Tabla 51</xs:documentation>
 														</xs:annotation>
@@ -122,7 +120,7 @@
 													<xs:element name="VAsTrafo" type="Potencia" minOccurs="0"/>
 													<xs:element name="PorcentajePerdidas" minOccurs="0">
 														<xs:simpleType>
-															<xs:restriction base="Decimal4V2">
+															<xs:restriction base="Decimal3V2">
 																<xs:minInclusive value="0"/>
 															</xs:restriction>
 														</xs:simpleType>

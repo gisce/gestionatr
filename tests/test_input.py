@@ -80,6 +80,8 @@ class test_C1(unittest.TestCase):
         self.assertEqual(c.datos_solicitud.ind_activacion, 'L')
         self.assertEqual(c.datos_solicitud.fecha_prevista_accion, '2016-06-06')
         self.assertEqual(c.datos_solicitud.contratacion_incondicional_ps, 'S')
+        self.assertEqual(c.datos_solicitud.bono_social, '0')
+        self.assertEqual(c.datos_solicitud.contratacion_incondicional_bs, 'S')
         # Cliente
         self.assertEqual(c.cliente.tipo_identificador, 'NI')
         self.assertEqual(c.cliente.identificador, 'B36385870')
@@ -87,8 +89,8 @@ class test_C1(unittest.TestCase):
         self.assertEqual(c.cliente.razon_social, u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
         self.assertEqual(c.cliente.nombre, u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
         self.assertFalse(c.cliente.nombre_de_pila)
-        self.assertEqual(c.cliente.telfono_numero, '666777888')
-        self.assertEqual(c.cliente.telfono_prefijo_pais, '34')
+        self.assertEqual(c.cliente.telefonos[2][1], '666777888')
+        self.assertEqual(c.cliente.telefonos[2][0], '38')
         self.assertEqual(c.cliente.correo_electronico, 'email@host')
         # Comentarios
         self.assertFalse(c.comentarios)
@@ -117,8 +119,7 @@ class test_C1(unittest.TestCase):
         self.assertFalse(c.cliente.segundo_apellido)
         self.assertEqual(c.cliente.nombre, 'APELLIDO1, NOMBRE')
         self.assertFalse(c.cliente.razon_social)
-        self.assertFalse(c.cliente.telfono_numero)
-        self.assertFalse(c.cliente.telfono_prefijo_pais)
+        self.assertFalse(len(c.cliente.telefonos))
         self.assertFalse(c.cliente.correo_electronico)
         # Comentarios
         self.assertFalse(c.comentarios)
@@ -137,6 +138,7 @@ class test_C1(unittest.TestCase):
         self.assertEqual(c.contrato.tipo_activacion_prevista, 'C0')
         self.assertEqual(c.contrato.fecha_activacion_prevista, '2016-07-06')
         self.assertEqual(c.contrato.tarifa_atr, '003')
+        self.assertEqual(c.datos_aceptacion.bono_social, '0')
         pots = c.contrato.potencias_contratadas
         self.assertEqual(len(pots), 2)
         self.assertEqual(pots[0][1], 1000)
@@ -190,6 +192,7 @@ class test_C1(unittest.TestCase):
         self.assertEqual(c.contrato.tension_del_suministro, '10')
         self.assertEqual(c.contrato.vas_trafo, '50')
         self.assertEqual(c.contrato.porcentaje_perdidas, '05')
+        self.assertEqual(c.datos_activacion.bono_social, '1')
         self.assertEqual(len(c.contrato.potencias_contratadas), 2)
         pot1 = c.contrato.potencias_contratadas[0]
         pot2 = c.contrato.potencias_contratadas[1]
@@ -257,6 +260,7 @@ class test_C1(unittest.TestCase):
         c = C1(self.xml_c106)
         c.parse_xml()
         self.assertEqual(c.datos_notificacion.fecha_activacion, '2016-08-21')
+        self.assertEqual(c.datos_notificacion.ind_bono_social, 'S')
         # Contrato
         self.assertEqual(c.contrato.cod_contrato, '00001')
         # Puntos Medida
@@ -331,6 +335,7 @@ class test_C1(unittest.TestCase):
         c = C1(self.xml_c111)
         c.parse_xml()
         self.assertEqual(c.fecha_activacion_prevista, '2017-02-02')
+        self.assertEqual(c.ind_bono_social, 'N')
 
     def test_c112(self):
         c = C1(self.xml_c112)
@@ -360,13 +365,16 @@ class test_C2(unittest.TestCase):
         self.assertEqual(c.datos_solicitud.ind_activacion, 'L')
         self.assertEqual(c.datos_solicitud.tipo_modificacion, 'S')
         self.assertEqual(c.datos_solicitud.tipo_solicitud_administrativa, 'S')
+        self.assertEqual(c.datos_solicitud.contratacion_incondicional_bs, 'N')
+        self.assertEqual(c.datos_solicitud.bono_social, '0')
         # Contrato
         contrato = c.contrato
         contacto = contrato.contacto
         self.assertEqual(contacto.correo_electronico, 'email@host')
         self.assertEqual(contacto.persona_de_contacto, 'Nombre Inventado')
-        self.assertEqual(contacto.telfono_numero, '666777888')
-        self.assertEqual(contacto.telfono_prefijo_pais, '34')
+        self.assertEqual(len(contacto.telefonos), 2)
+        self.assertEqual(contacto.telefonos[1][1], '666777999')
+        self.assertEqual(contacto.telefonos[1][0], '34')
         self.assertEqual(contrato.fecha_finalizacion, '2018-01-01')
         self.assertEqual(contrato.modo_control_potencia, '1')
         self.assertEqual(contrato.periodicidad_facturacion, '01')
@@ -385,8 +393,11 @@ class test_C2(unittest.TestCase):
         self.assertEqual(cliente.indicador_tipo_direccion, 'F')
         self.assertEqual(cliente.nombre, u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
         self.assertEqual(cliente.razon_social, u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
-        self.assertEqual(cliente.telfono_numero, '666777888')
-        self.assertEqual(cliente.telfono_prefijo_pais, '34')
+        self.assertEqual(len(cliente.telefonos), 3)
+        self.assertEqual(cliente.telefonos[0][1], '666777666')
+        self.assertEqual(cliente.telefonos[0][0], '36')
+        self.assertEqual(cliente.telefonos[2][1], '666777888')
+        self.assertEqual(cliente.telefonos[2][0], '38')
         self.assertEqual(cliente.tipo_identificador, 'NI')
         self.assertEqual(cliente.tipo_persona, 'J')
         direccion = cliente.direccion
@@ -453,6 +464,7 @@ class test_C2(unittest.TestCase):
         self.assertEqual(c.datos_aceptacion.potencia_actual, '5000')
         self.assertEqual(c.datos_aceptacion.actuacion_campo, 'S')
         self.assertEqual(c.datos_aceptacion.fecha_ultima_lectura_firme, '2016-06-01')
+        self.assertEqual(c.datos_aceptacion.bono_social, '1')
         # Contrato
         self.assertEqual(c.contrato.tipo_contrato_atr, '02')
         self.assertEqual(c.contrato.tipo_activacion_prevista, 'C0')
@@ -500,8 +512,9 @@ class test_A3(unittest.TestCase):
         contrato = a3.contrato
         contacto = contrato.contacto
         self.assertEqual(contacto.persona_de_contacto, 'Nombre Inventado')
-        self.assertEqual(contacto.telfono_numero, '666777888')
-        self.assertEqual(contacto.telfono_prefijo_pais, '34')
+        self.assertEqual(len(contacto.telefonos), 2)
+        self.assertEqual(contacto.telefonos[1][1], '666777999')
+        self.assertEqual(contacto.telefonos[1][0], '34')
         self.assertEqual(contrato.fecha_finalizacion, '2018-01-01')
         self.assertEqual(contrato.modo_control_potencia, '1')
         pots = contrato.potencias_contratadas
@@ -519,8 +532,11 @@ class test_A3(unittest.TestCase):
         self.assertEqual(cliente.indicador_tipo_direccion, 'F')
         self.assertEqual(cliente.nombre, u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
         self.assertEqual(cliente.razon_social, u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
-        self.assertEqual(cliente.telfono_numero, '666777888')
-        self.assertEqual(cliente.telfono_prefijo_pais, '34')
+        self.assertEqual(len(cliente.telefonos), 3)
+        self.assertEqual(cliente.telefonos[0][1], '666777666')
+        self.assertEqual(cliente.telefonos[0][0], '36')
+        self.assertEqual(cliente.telefonos[2][1], '666777888')
+        self.assertEqual(cliente.telefonos[2][0], '38')
         self.assertEqual(cliente.tipo_identificador, 'NI')
         self.assertEqual(cliente.tipo_persona, 'J')
         direccion = cliente.direccion
@@ -596,8 +612,11 @@ class test_B1(unittest.TestCase):
         self.assertEqual(cliente.identificador, 'B36385870')
         self.assertEqual(cliente.nombre, u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
         self.assertEqual(cliente.razon_social, u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
-        self.assertEqual(cliente.telfono_numero, '666777888')
-        self.assertEqual(cliente.telfono_prefijo_pais, '34')
+        self.assertEqual(len(cliente.telefonos), 3)
+        self.assertEqual(cliente.telefonos[0][1], '666777666')
+        self.assertEqual(cliente.telefonos[0][0], '36')
+        self.assertEqual(cliente.telefonos[2][1], '666777888')
+        self.assertEqual(cliente.telefonos[2][0], '38')
         self.assertEqual(cliente.tipo_identificador, 'NI')
         self.assertEqual(cliente.tipo_persona, 'J')
         self.assertEqual(b1.iban, '444555666')
@@ -703,12 +722,14 @@ class test_M1(unittest.TestCase):
         self.assertEqual(m1.datos_solicitud.tipo_modificacion, 'S')
         self.assertEqual(m1.datos_solicitud.tipo_solicitud_administrativa, 'S')
         self.assertEqual(m1.datos_solicitud.periodicidad_facturacion, '01')
+        self.assertEqual(m1.datos_solicitud.bono_social, '1')
         # Contrato
         contrato = m1.contrato
         contacto = contrato.contacto
         self.assertEqual(contacto.persona_de_contacto, 'Nombre Inventado')
-        self.assertEqual(contacto.telfono_numero, '666777888')
-        self.assertEqual(contacto.telfono_prefijo_pais, '34')
+        self.assertEqual(len(contacto.telefonos), 2)
+        self.assertEqual(contacto.telefonos[1][1], '666777999')
+        self.assertEqual(contacto.telefonos[1][0], '34')
         self.assertEqual(contrato.fecha_finalizacion, '2018-01-01')
         self.assertEqual(contrato.modo_control_potencia, '1')
         pots = contrato.potencias_contratadas
@@ -726,8 +747,11 @@ class test_M1(unittest.TestCase):
         self.assertEqual(cliente.nombre, u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
         self.assertEqual(cliente.razon_social,
                          u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
-        self.assertEqual(cliente.telfono_numero, '666777888')
-        self.assertEqual(cliente.telfono_prefijo_pais, '34')
+        self.assertEqual(len(cliente.telefonos), 3)
+        self.assertEqual(cliente.telefonos[0][1], '666777666')
+        self.assertEqual(cliente.telefonos[0][0], '36')
+        self.assertEqual(cliente.telefonos[2][1], '666777888')
+        self.assertEqual(cliente.telefonos[2][0], '38')
         self.assertEqual(cliente.tipo_identificador, 'NI')
         self.assertEqual(cliente.tipo_persona, 'J')
         self.assertFalse(cliente.direccion)
@@ -914,8 +938,8 @@ class test_R1(unittest.TestCase):
         cont = var1.contacto
         self.assertEqual(cont.correo_electronico, 'perico@acme.com')
         self.assertEqual(cont.persona_de_contacto, 'Perico Palotes Largos')
-        self.assertEqual(cont.telfono_numero, '55512345')
-        self.assertEqual(cont.telfono_prefijo_pais, '34')
+        self.assertEqual(cont.telefonos[1][1], '55512345')
+        self.assertEqual(cont.telefonos[1][0], '34')
         self.assertEqual(len(var1.lecturas_aportadas), 2)
         lect1 = var1.lecturas_aportadas[0]
         self.assertEqual(lect1.codigo_periodo_dh, '21')
@@ -928,8 +952,8 @@ class test_R1(unittest.TestCase):
         self.assertEqual(cli.indicador_tipo_direccion, 'F')
         self.assertEqual(cli.razon_social, u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
         self.assertEqual(cli.segundo_apellido, '')
-        self.assertEqual(cli.telfono_numero, '666777888')
-        self.assertEqual(cli.telfono_prefijo_pais, '34')
+        self.assertEqual(cli.telefonos[0][1], '666777666')
+        self.assertEqual(cli.telefonos[0][0], '36')
         self.assertEqual(cli.tipo_identificador, 'NI')
         self.assertEqual(cli.tipo_persona, 'J')
         direccion = cli.direccion
@@ -954,8 +978,8 @@ class test_R1(unittest.TestCase):
         self.assertEqual(rec.identificador, 'B36385870')
         self.assertEqual(rec.razon_social, u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
         self.assertEqual(rec.segundo_apellido, '')
-        self.assertEqual(rec.telfono_numero, '666777888')
-        self.assertEqual(rec.telfono_prefijo_pais, '34')
+        self.assertEqual(rec.telefonos[2][1], '666777555')
+        self.assertEqual(rec.telefonos[2][0], '34')
         self.assertEqual(rec.tipo_identificador, 'NI')
         # Comentarios
         self.assertEqual(r1.comentarios, 'no calcula sus consumos desea revisio y facturas')
@@ -1073,8 +1097,8 @@ class test_R1(unittest.TestCase):
         cont = varr1.contacto
         self.assertEqual(cont.correo_electronico, 'perico@acme.com')
         self.assertEqual(cont.persona_de_contacto, 'Perico Palotes Largos')
-        self.assertEqual(cont.telfono_numero, '55512345')
-        self.assertEqual(cont.telfono_prefijo_pais, '34')
+        self.assertEqual(cont.telefonos[1][1], '55512345')
+        self.assertEqual(cont.telefonos[1][0], '34')
         self.assertEqual(len(varr1.lecturas_aportadas), 2)
         lect1 = varr1.lecturas_aportadas[0]
         self.assertEqual(lect1.codigo_periodo_dh, '21')
@@ -1087,8 +1111,8 @@ class test_R1(unittest.TestCase):
         self.assertEqual(cli.indicador_tipo_direccion, 'F')
         self.assertEqual(cli.razon_social, u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
         self.assertEqual(cli.segundo_apellido, '')
-        self.assertEqual(cli.telfono_numero, '666777888')
-        self.assertEqual(cli.telfono_prefijo_pais, '34')
+        self.assertEqual(cli.telefonos[0][1], '666777666')
+        self.assertEqual(cli.telefonos[0][0], '36')
         self.assertEqual(cli.tipo_identificador, 'NI')
         self.assertEqual(cli.tipo_persona, 'J')
         direccion = cli.direccion
