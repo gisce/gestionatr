@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace"
+            schemaLocation="xml.xsd"/>
+
+    <xs:simpleType name="AgenteType">
+    	<xs:restriction base="xs:string">
+    		<xs:minLength value="1"></xs:minLength>
+    		<xs:maxLength value="4"></xs:maxLength>
+			<xs:pattern value="([0-9])*"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CupsType">
+    	<xs:restriction base="xs:string">
+    		<xs:length value="20"></xs:length>
+			<xs:pattern value="[a-zA-Z0-9]*"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CodProvinciaType">
+    	<xs:annotation>
+    		<xs:documentation>Código INE de Provincia</xs:documentation>
+    	</xs:annotation>
+    	<xs:restriction base="xs:string">
+    		<xs:length value="2"></xs:length>
+    		<xs:enumeration value="00"></xs:enumeration>
+    		<xs:enumeration value="01"></xs:enumeration>
+    		<xs:enumeration value="02"></xs:enumeration>
+    		<xs:enumeration value="03"></xs:enumeration>
+    		<xs:enumeration value="04"></xs:enumeration>
+    		<xs:enumeration value="05"></xs:enumeration>
+    		<xs:enumeration value="06"></xs:enumeration>
+    		<xs:enumeration value="07"></xs:enumeration>
+    		<xs:enumeration value="08"></xs:enumeration>
+    		<xs:enumeration value="09"></xs:enumeration>
+    		<xs:enumeration value="10"></xs:enumeration>
+    		<xs:enumeration value="11"></xs:enumeration>
+    		<xs:enumeration value="12"></xs:enumeration>
+    		<xs:enumeration value="13"></xs:enumeration>
+    		<xs:enumeration value="14"></xs:enumeration>
+    		<xs:enumeration value="15"></xs:enumeration>
+    		<xs:enumeration value="16"></xs:enumeration>
+    		<xs:enumeration value="17"></xs:enumeration>
+    		<xs:enumeration value="18"></xs:enumeration>
+    		<xs:enumeration value="19"></xs:enumeration>
+    		<xs:enumeration value="20"></xs:enumeration>
+    		<xs:enumeration value="21"></xs:enumeration>
+    		<xs:enumeration value="22"></xs:enumeration>
+    		<xs:enumeration value="23"></xs:enumeration>
+    		<xs:enumeration value="24"></xs:enumeration>
+    		<xs:enumeration value="25"></xs:enumeration>
+    		<xs:enumeration value="26"></xs:enumeration>
+    		<xs:enumeration value="27"></xs:enumeration>
+    		<xs:enumeration value="28"></xs:enumeration>
+    		<xs:enumeration value="29"></xs:enumeration>
+    		<xs:enumeration value="30"></xs:enumeration>
+    		<xs:enumeration value="31"></xs:enumeration>
+    		<xs:enumeration value="32"></xs:enumeration>
+    		<xs:enumeration value="33"></xs:enumeration>
+    		<xs:enumeration value="34"></xs:enumeration>
+    		<xs:enumeration value="35"></xs:enumeration>
+    		<xs:enumeration value="36"></xs:enumeration>
+    		<xs:enumeration value="37"></xs:enumeration>
+    		<xs:enumeration value="38"></xs:enumeration>
+    		<xs:enumeration value="39"></xs:enumeration>
+    		<xs:enumeration value="40"></xs:enumeration>
+    		<xs:enumeration value="41"></xs:enumeration>
+    		<xs:enumeration value="42"></xs:enumeration>
+    		<xs:enumeration value="43"></xs:enumeration>
+    		<xs:enumeration value="44"></xs:enumeration>
+    		<xs:enumeration value="45"></xs:enumeration>
+    		<xs:enumeration value="46"></xs:enumeration>
+    		<xs:enumeration value="47"></xs:enumeration>
+    		<xs:enumeration value="48"></xs:enumeration>
+    		<xs:enumeration value="49"></xs:enumeration>
+    		<xs:enumeration value="50"></xs:enumeration>
+    		<xs:enumeration value="51"></xs:enumeration>
+    		<xs:enumeration value="52"></xs:enumeration>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CodAlpha5Type">
+    	<xs:restriction base="xs:string">
+    		<xs:minLength value="1"></xs:minLength>
+    		<xs:maxLength value="5"></xs:maxLength>
+			<xs:whiteSpace value="collapse"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CodAlpha5TypeNoCollapse">
+    	<xs:restriction base="xs:string">
+    		<xs:minLength value="0"></xs:minLength>
+    		<xs:maxLength value="5"></xs:maxLength>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="CodAlpha5PreserveSpaceType">
+    	<xs:simpleContent>
+    		<xs:extension base="CodAlpha5TypeNoCollapse">
+    			<xs:attribute ref="xml:space"/>
+    		</xs:extension>
+    	</xs:simpleContent>
+    </xs:complexType>
+
+    <xs:simpleType name="TipoViaType">
+    	<xs:restriction base="xs:string">
+    		<xs:minLength value="1"></xs:minLength>
+    		<xs:maxLength value="5"></xs:maxLength>
+			<xs:whiteSpace value="collapse"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CalleType">
+    	<xs:restriction base="xs:string">
+    		<xs:minLength value="1"></xs:minLength>
+    		<xs:maxLength value="60"></xs:maxLength>
+			<xs:whiteSpace value="collapse"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="NumFincaType">
+    	<xs:restriction base="xs:string">
+    		<xs:minLength value="1"></xs:minLength>
+    		<xs:maxLength value="4"></xs:maxLength>
+			<xs:whiteSpace value="collapse"/>
+    	</xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="NumFincaTypeNoCollapse">
+    	<xs:restriction base="xs:string">
+    		<xs:minLength value="0"></xs:minLength>
+    		<xs:maxLength value="4"></xs:maxLength>
+    	</xs:restriction>
+    </xs:simpleType>
+    
+    <xs:complexType name="NumFincaPreserveSpaceType">
+    	<xs:simpleContent>
+    		<xs:extension base="NumFincaTypeNoCollapse">
+    			<xs:attribute ref="xml:space"/>
+    		</xs:extension>
+    	</xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="ConceptListType">
+    	<xs:sequence>
+    		<xs:element name="concept" type="ConceptType"
+    			maxOccurs="unbounded" minOccurs="1">
+    		</xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ConceptType">
+    	<xs:sequence>
+    		<xs:element name="level" maxOccurs="1" minOccurs="1">
+                <xs:annotation>
+                	<xs:documentation>Nivel del Concepto</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+    				<xs:restriction base="xs:integer">
+    					<xs:enumeration value="0"></xs:enumeration>
+    					<xs:enumeration value="1"></xs:enumeration>
+    					<xs:enumeration value="2"></xs:enumeration>
+    					<xs:enumeration value="3"></xs:enumeration>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="code" maxOccurs="1" minOccurs="1">
+                <xs:annotation>
+                	<xs:documentation>Código de Concepto</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                	<xs:restriction base="xs:string">
+                		<xs:length value="4"></xs:length>
+                	</xs:restriction>
+                </xs:simpleType>
+    		</xs:element>
+    		<xs:element name="description" maxOccurs="1" minOccurs="1">
+                <xs:annotation>
+                	<xs:documentation>Descripción Concepto</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+    				<xs:restriction base="xs:string">
+    					<xs:minLength value="1"></xs:minLength>
+    					<xs:maxLength value="100"></xs:maxLength>
+						<xs:whiteSpace value="collapse"/>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="periodicity" maxOccurs="1" minOccurs="1">
+    			<xs:annotation>
+    				<xs:documentation>Periodicidad Facturación</xs:documentation>
+    			</xs:annotation>
+    			<xs:simpleType>
+    				<xs:restriction base="xs:string">
+    					<xs:length value="2"></xs:length>
+    					<xs:enumeration value="01"></xs:enumeration>
+    					<xs:enumeration value="02"></xs:enumeration>
+    					<xs:enumeration value="03"></xs:enumeration>
+    					<xs:enumeration value="04"></xs:enumeration>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="units" maxOccurs="1" minOccurs="1">
+                <xs:annotation>
+                	<xs:documentation>Unidades</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                	<xs:restriction base="xs:integer">
+                		<xs:totalDigits value="3"></xs:totalDigits>
+                		<xs:minInclusive value="0"></xs:minInclusive>
+                	</xs:restriction>
+                </xs:simpleType>
+    		</xs:element>
+    		<xs:element name="unitimport" maxOccurs="1" minOccurs="1">
+                <xs:annotation>
+                	<xs:documentation>Importe Unitario</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                	<xs:restriction base="xs:decimal">
+                		<xs:totalDigits value="7"></xs:totalDigits>
+                		<xs:fractionDigits value="2"></xs:fractionDigits>
+                		<xs:maxInclusive value="99999.99"></xs:maxInclusive>
+                		<xs:minInclusive value="0"></xs:minInclusive>
+                	</xs:restriction>
+                </xs:simpleType>
+    		</xs:element>
+    		<xs:element name="import" maxOccurs="1" minOccurs="1">
+                <xs:annotation>
+                	<xs:documentation>Importe Total</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                	<xs:restriction base="xs:decimal">
+                		<xs:totalDigits value="9"></xs:totalDigits>
+                		<xs:fractionDigits value="2"></xs:fractionDigits>
+                		<xs:maxInclusive value="9999999.99"></xs:maxInclusive>
+                		<xs:minInclusive value="0"></xs:minInclusive>
+                	</xs:restriction>
+                </xs:simpleType>
+    		</xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+</xs:schema>

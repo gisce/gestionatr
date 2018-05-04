@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<schema targetNamespace="http://localhost/sctd/A2136"
+	xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://localhost/sctd/A2136" elementFormDefault="qualified">
+	<include schemaLocation="CommonTagsPETS.xsd"></include>
+	<element name="sctdapplication" type="tns:SctdApplicationA21Type"></element>
+
+	<complexType name="SctdApplicationA21Type">
+		<sequence>
+			<element name="heading" type="tns:HeadingA21Type"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="a21" type="tns:A21Type" maxOccurs="unbounded"
+				minOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="HeadingA21Type">
+		<sequence>
+			<element name="dispatchingcode" maxOccurs="1"
+    			minOccurs="1">
+    			<simpleType>
+    				<restriction base="string">
+
+    					<length value="3"></length>
+    					<enumeration value="GML"></enumeration>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="dispatchingcompany" type="tns:AgenteType"
+    			maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="destinycompany" type="tns:AgenteType"
+    			maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="communicationsdate" type="date" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="communicationshour" type="time" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="processcode" maxOccurs="1" minOccurs="1">
+    			<simpleType>
+    				<restriction base="string">
+
+    					<length value="2"></length>
+    					<enumeration value="36"></enumeration>
+    					<enumeration value="37"></enumeration>
+    				</restriction>
+    			</simpleType>
+    		</element> 
+    		<element name="messagetype" maxOccurs="1" minOccurs="1">
+    			<simpleType>
+    				<restriction base="string">
+
+    					<length value="3"></length>
+    					<enumeration value="A21"></enumeration>
+    				</restriction>
+    			</simpleType>
+    		</element>    		   		
+		</sequence>
+	</complexType>
+
+	<complexType name="A21Type">
+		<sequence>
+			<element name="solcode" maxOccurs="1" minOccurs="0">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"></minLength>
+						<maxLength value="10"></maxLength>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="reqdate" type="date" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="reqhour" type="time" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="cups" type="tns:CupsType" maxOccurs="1"
+				minOccurs="0">
+			</element>
+			<element name="result" maxOccurs="1" minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+
+						<length value="2"></length>
+						<enumeration value="01"></enumeration>
+						<enumeration value="05"></enumeration>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="resultdescr" maxOccurs="1" minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"></minLength>
+						<maxLength value="100"></maxLength>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="reason" maxOccurs="1" minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"></minLength>
+						<maxLength value="3"></maxLength>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="reasondescr" maxOccurs="1" minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"></minLength>
+						<maxLength value="250"></maxLength>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="permissionreq" maxOccurs="1" minOccurs="0">
+				<simpleType>
+					<restriction base="string">
+
+						<length value="1"></length>
+						<enumeration value="S"></enumeration>
+						<enumeration value="N"></enumeration>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="province" type="tns:CodProvinciaType"
+				maxOccurs="1" minOccurs="0">
+			</element>
+			<element name="city" type="tns:CodAlpha5Type" maxOccurs="1"
+				minOccurs="0">
+			</element>
+			<element name="streettype" type="tns:CodAlpha5Type"
+				maxOccurs="1" minOccurs="0">
+			</element>
+			<element name="street" type="tns:CalleType" maxOccurs="1"
+				minOccurs="0">
+			</element>
+			<element name="streetnumber" type="tns:NumFincaType"
+				maxOccurs="1" minOccurs="0">
+			</element>
+			<element name="portal" type="tns:CodAlpha5Type"
+				maxOccurs="1" minOccurs="0">
+			</element>
+			<element name="staircase" type="tns:CodAlpha5Type"
+				maxOccurs="1" minOccurs="0">
+			</element>
+			<element name="floor" type="tns:CodAlpha5Type" maxOccurs="1"
+				minOccurs="0">
+			</element>
+			<element name="door" type="tns:CodAlpha5Type" maxOccurs="1"
+				minOccurs="0">
+			</element>
+			<element name="zipcode" type="tns:CodAlpha5Type"
+				maxOccurs="1" minOccurs="0">
+			</element>
+			<element name="comunitypressure" maxOccurs="1"
+				minOccurs="0">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"></minLength>
+						<maxLength value="3"></maxLength>
+						<enumeration value="A12"></enumeration>
+						<enumeration value="A16"></enumeration>
+						<enumeration value="AP"></enumeration>
+						<enumeration value="B5"></enumeration>
+						<enumeration value="BB"></enumeration>
+						<enumeration value="BC"></enumeration>
+						<enumeration value="BP"></enumeration>
+						<enumeration value="BV"></enumeration>
+						<enumeration value="MA"></enumeration>
+						<enumeration value="MAB"></enumeration>
+						<enumeration value="MB"></enumeration>
+						<enumeration value="MP"></enumeration>
+						<enumeration value="MPA"></enumeration>
+						<enumeration value="MPB"></enumeration>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="aptransind" maxOccurs="1" minOccurs="0">
+				<simpleType>
+					<restriction base="string">
+
+						<length value="1"></length>
+						<enumeration value="S"></enumeration>
+						<enumeration value="N"></enumeration>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="aptransnumber" maxOccurs="1" minOccurs="0">
+				<simpleType>
+					<restriction base="integer">
+
+						<minInclusive value="0"></minInclusive>
+						<maxInclusive value="9999"></maxInclusive>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="reig" maxOccurs="1" minOccurs="0">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"></minLength>
+						<maxLength value="6"></maxLength>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="iricertificateneeded" maxOccurs="1"
+				minOccurs="0">
+				<simpleType>
+					<restriction base="string">
+
+						<length value="1"></length>
+						<enumeration value="S"></enumeration>
+						<enumeration value="N"></enumeration>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="iricertificatedate" type="date" maxOccurs="1"
+				minOccurs="0">
+			</element>
+			<element name="designpower" maxOccurs="1" minOccurs="0">
+				<simpleType>
+					<restriction base="integer">
+
+
+						<maxInclusive value="99999"></maxInclusive>
+						<minInclusive value="0"></minInclusive>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="terminstexist" maxOccurs="1" minOccurs="0">
+				<simpleType>
+					<restriction base="string">
+
+						<length value="1"></length>
+						<enumeration value="S"></enumeration>
+						<enumeration value="N"></enumeration>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="conceptnumber" maxOccurs="1" minOccurs="0">
+				<simpleType>
+					<restriction base="integer">
+
+						<minInclusive value="0"></minInclusive>
+						<maxInclusive value="99"></maxInclusive>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="conceptlist" type="tns:ConceptListType"
+				maxOccurs="1" minOccurs="0">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

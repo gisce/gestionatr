@@ -1,0 +1,2283 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia León (Comisión Nacional de los Mercados y la Competencia) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:simpleType name="ActivationType">
+		<xs:restriction base="xs:string">
+			<xs:length value="3"/>
+			<xs:enumeration value="001"/>
+			<xs:enumeration value="002"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="AddressType">
+		<xs:sequence>
+			<xs:element name="province" type="CodProvinciaType">
+				<xs:annotation>
+					<xs:documentation>Código de Provincia</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="city" type="CityType">
+				<xs:annotation>
+					<xs:documentation>Código INE de Municipio</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="zipcode" type="CodAlpha5Type">
+				<xs:annotation>
+					<xs:documentation>Código Postal</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="streettype" type="TipoViaType">
+				<xs:annotation>
+					<xs:documentation>Tipo INE de Vía</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="street" type="CalleType">
+				<xs:annotation>
+					<xs:documentation>Nombre de Vía</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="streetnumber" type="NumFincaType">
+				<xs:annotation>
+					<xs:documentation>Número de Finca</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="portal" type="CodAlpha5Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Portal</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="staircase" type="CodAlpha5Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Escalera</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="floor" type="CodAlpha5Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Piso</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="door" type="CodAlpha5Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Puerta</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="AgenteType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AtrcodeType">
+		<xs:restriction base="xs:string">
+			<xs:length value="24"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CalleType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="60"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CityType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="5"/>
+			<xs:maxLength value="6"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ClaimedCompensationType">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="11"/>
+			<xs:fractionDigits value="2"/>
+			<xs:maxInclusive value="999999999.99"/>
+			<xs:minInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Claimer">
+		<xs:sequence>
+			<xs:element name="claimerid" type="ClaimerDocumentType"/>
+			<xs:element name="claimername" type="ClaimerName"/>
+			<xs:element name="claimertelephone" type="ClaimerTelephone" minOccurs="0"/>
+			<xs:element name="claimeremail" type="EmailType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ClaimerDocumentType">
+		<xs:sequence>
+			<xs:element name="claimerdocumenttype" type="IdDocumentType">
+				<xs:annotation>
+					<xs:documentation>Tipo de Documento</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="claimerdocumentnum" type="DocumentnumType">
+				<xs:annotation>
+					<xs:documentation>Número de Documento</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ClaimerName">
+		<xs:choice>
+			<xs:sequence>
+				<xs:element name="claimerfirstname" type="FirstnameType">
+					<xs:annotation>
+						<xs:documentation>
+	    					Nombre. Elegir entre nombre o razón social.
+	    				</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="claimerlastname" type="FamilynameType">
+					<xs:annotation>
+						<xs:documentation>
+	    					Apellido 1. Elegir entre nombre o razón social.
+	    				</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="claimersecondname" type="FamilynameType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>
+	    					Apellido 2. Elegir entre nombre o razón social.
+	    				</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:element name="claimerbusinessname" type="FirstnameType">
+				<xs:annotation>
+					<xs:documentation>
+    					Razón Social. Elegir entre nombre o razón
+    					social.
+    				</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="ClaimerTelephone">
+		<xs:sequence>
+			<xs:element name="claimerprefixtel1" type="PrefixTelType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Prefijo de Teléfono Internacional. No informar con ceros delante del prefijo.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="claimertelephone1" type="TelephoneNumberType">
+				<xs:annotation>
+					<xs:documentation>Número Teléfono</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ClaimerType">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="06"/>
+			<xs:enumeration value="07"/>
+			<xs:enumeration value="08"/>
+			<xs:enumeration value="09"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ClaimReferenceListType">
+		<xs:sequence>
+			<xs:element name="claimreference" type="ClaimReferenceType" maxOccurs="10"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ClaimReferenceType">
+		<xs:sequence>
+			<xs:element name="wrongattentiontype" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tipo de Atención Incorrecta</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:length value="2"/>
+						<xs:enumeration value="01"/>
+						<xs:enumeration value="02"/>
+						<xs:enumeration value="03"/>
+						<xs:enumeration value="04"/>
+						<xs:enumeration value="05"/>
+						<xs:enumeration value="06"/>
+						<xs:enumeration value="07"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="comreferencenum" type="ComreferencenumType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Cod. de sol. de comercializadora (solicitud origen reclamada o reclamacion anterior)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="targetclaimcomreferencenum" type="ComreferencenumType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Referencia de la Reclamación previa del Comercializador sobre la que se reclama</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="conceptcontract" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Concepto de contratación</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:length value="2"/>
+						<xs:enumeration value="01"/>
+						<xs:enumeration value="02"/>
+						<xs:enumeration value="03"/>
+						<xs:enumeration value="04"/>
+						<xs:enumeration value="05"/>
+						<xs:enumeration value="06"/>
+						<xs:enumeration value="07"/>
+						<xs:enumeration value="08"/>
+						<xs:enumeration value="09"/>
+						<xs:enumeration value="10"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="conceptfacturation" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Concepto de facturación</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:length value="2"/>
+						<xs:enumeration value="01"/>
+						<xs:enumeration value="02"/>
+						<xs:enumeration value="03"/>
+						<xs:enumeration value="04"/>
+						<xs:enumeration value="05"/>
+						<xs:enumeration value="06"/>
+						<xs:enumeration value="07"/>
+						<xs:enumeration value="08"/>
+						<xs:enumeration value="09"/>
+						<xs:enumeration value="10"/>
+						<xs:enumeration value="11"/>
+						<xs:enumeration value="12"/>
+						<xs:enumeration value="13"/>
+						<xs:enumeration value="14"/>
+						<xs:enumeration value="16"/>
+						<xs:enumeration value="17"/>
+						<xs:enumeration value="18"/>
+						<xs:enumeration value="19"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="contact" type="ContactType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Estructura de datos de la persona de Contacto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nnssexpedient" type="ExpedienteNnssType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Código de expediente de NNSS</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fraudrecordnum" type="FraudRecordNumType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Código de expediente de Fraude</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="incidentperiod" type="PeriodoIncidenciaType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Intervalo de fechas dentro del cual se produce la incidencia</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="invoicenumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Número de Factura</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="17"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="incidentlocation" type="UbicacionIncidenciaType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Campos que describen la localización de la incidencia</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="reading" type="LecturaType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Datos de Lectura Facilitada</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="incident" type="IncidentType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Datos de la Incidencia</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="client" type="ClientType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Datos del Cliente Asociado a la Reclamación</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="claimedcompensation" type="ClaimedCompensationType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indemnización Solicitada</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="iban" type="IbanType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Número de Cuenta IBAN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ClaimSubtype">
+		<xs:restriction base="xs:string">
+			<xs:length value="3"/>
+			<xs:enumeration value="001"/>
+			<xs:enumeration value="002"/>
+			<xs:enumeration value="003"/>
+			<xs:enumeration value="004"/>
+			<xs:enumeration value="005"/>
+			<xs:enumeration value="006"/>
+			<xs:enumeration value="007"/>
+			<xs:enumeration value="008"/>
+			<xs:enumeration value="009"/>
+			<xs:enumeration value="010"/>
+			<xs:enumeration value="011"/>
+			<xs:enumeration value="012"/>
+			<xs:enumeration value="013"/>
+			<xs:enumeration value="014"/>
+			<xs:enumeration value="015"/>
+			<xs:enumeration value="018"/>
+			<xs:enumeration value="019"/>
+			<xs:enumeration value="021"/>
+			<xs:enumeration value="022"/>
+			<xs:enumeration value="023"/>
+			<xs:enumeration value="024"/>
+			<xs:enumeration value="025"/>
+			<xs:enumeration value="026"/>
+			<xs:enumeration value="027"/>
+			<xs:enumeration value="028"/>
+			<xs:enumeration value="029"/>
+			<xs:enumeration value="030"/>
+			<xs:enumeration value="031"/>
+			<xs:enumeration value="032"/>
+			<xs:enumeration value="033"/>
+			<xs:enumeration value="034"/>
+			<xs:enumeration value="035"/>
+			<xs:enumeration value="036"/>
+			<xs:enumeration value="037"/>
+			<xs:enumeration value="038"/>
+			<xs:enumeration value="040"/>
+			<xs:enumeration value="045"/>
+			<xs:enumeration value="046"/>
+			<xs:enumeration value="048"/>
+			<xs:enumeration value="049"/>
+			<xs:enumeration value="050"/>
+			<xs:enumeration value="051"/>
+			<xs:enumeration value="052"/>
+			<xs:enumeration value="053"/>
+			<xs:enumeration value="054"/>
+			<xs:enumeration value="057"/>
+			<xs:enumeration value="058"/>
+			<xs:enumeration value="059"/>
+			<xs:enumeration value="060"/>
+			<xs:enumeration value="061"/>
+			<xs:enumeration value="062"/>
+			<xs:enumeration value="063"/>
+			<xs:enumeration value="064"/>
+			<xs:enumeration value="065"/>
+			<xs:enumeration value="066"/>
+			<xs:enumeration value="067"/>
+			<xs:enumeration value="068"/>
+			<xs:enumeration value="101"/>
+			<xs:enumeration value="102"/>
+			<xs:enumeration value="103"/>
+			<xs:enumeration value="104"/>
+			<xs:enumeration value="105"/>
+			<xs:enumeration value="106"/>
+			<xs:enumeration value="107"/>
+			<xs:enumeration value="108"/>
+			<xs:enumeration value="109"/>
+			<xs:enumeration value="110"/>
+			<xs:enumeration value="111"/>
+			<xs:enumeration value="112"/>
+			<xs:enumeration value="113"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ClaimType">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
+			<xs:enumeration value="07"/>
+			<xs:enumeration value="08"/>
+			<xs:enumeration value="09"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ClientType">
+		<xs:sequence>
+			<xs:element name="document" type="DocumentType">
+				<xs:annotation>
+					<xs:documentation>Documento de Identificación del Cliente</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="titulartype" type="TitularType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tipo de Titular. Solo es obligatorio informar este campo si  el tipo de documento es "NIVA" u "OTROS".</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="NameType">
+				<xs:annotation>
+					<xs:documentation>Nombre</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="telephone" type="TelephoneType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Teléfono</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="email" type="EmailType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Dirección de correo electrónico.
+Deberá estar formada por un texto seguido del carácter @ y un nombre de dominio.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="clientAddress" type="AddressType">
+				<xs:annotation>
+					<xs:documentation>Dirección del Cliente</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ClosingCodeType">
+		<xs:restriction base="xs:string">
+			<xs:length value="3"/>
+			<xs:enumeration value="001"/>
+			<xs:enumeration value="002"/>
+			<xs:enumeration value="003"/>
+			<xs:enumeration value="004"/>
+			<xs:enumeration value="005"/>
+			<xs:enumeration value="006"/>
+			<xs:enumeration value="007"/>
+			<xs:enumeration value="008"/>
+			<xs:enumeration value="009"/>
+			<xs:enumeration value="010"/>
+			<xs:enumeration value="011"/>
+			<xs:enumeration value="012"/>
+			<xs:enumeration value="013"/>
+			<xs:enumeration value="014"/>
+			<xs:enumeration value="015"/>
+			<xs:enumeration value="016"/>
+			<xs:enumeration value="017"/>
+			<xs:enumeration value="018"/>
+			<xs:enumeration value="019"/>
+			<xs:enumeration value="020"/>
+			<xs:enumeration value="021"/>
+			<xs:enumeration value="022"/>
+			<xs:enumeration value="023"/>
+			<xs:enumeration value="024"/>
+			<xs:enumeration value="025"/>
+			<xs:enumeration value="026"/>
+			<xs:enumeration value="027"/>
+			<xs:enumeration value="028"/>
+			<xs:enumeration value="029"/>
+			<xs:enumeration value="030"/>
+			<xs:enumeration value="031"/>
+			<xs:enumeration value="032"/>
+			<xs:enumeration value="033"/>
+			<xs:enumeration value="034"/>
+			<xs:enumeration value="035"/>
+			<xs:enumeration value="036"/>
+			<xs:enumeration value="037"/>
+			<xs:enumeration value="038"/>
+			<xs:enumeration value="039"/>
+			<xs:enumeration value="040"/>
+			<xs:enumeration value="041"/>
+			<xs:enumeration value="042"/>
+			<xs:enumeration value="043"/>
+			<xs:enumeration value="044"/>
+			<xs:enumeration value="045"/>
+			<xs:enumeration value="046"/>
+			<xs:enumeration value="047"/>
+			<xs:enumeration value="048"/>
+			<xs:enumeration value="049"/>
+			<xs:enumeration value="050"/>
+			<xs:enumeration value="051"/>
+			<xs:enumeration value="052"/>
+			<xs:enumeration value="053"/>
+			<xs:enumeration value="054"/>
+			<xs:enumeration value="055"/>
+			<xs:enumeration value="056"/>
+			<xs:enumeration value="057"/>
+			<xs:enumeration value="058"/>
+			<xs:enumeration value="059"/>
+			<xs:enumeration value="060"/>
+			<xs:enumeration value="061"/>
+			<xs:enumeration value="062"/>
+			<xs:enumeration value="063"/>
+			<xs:enumeration value="064"/>
+			<xs:enumeration value="065"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CodAlpha2Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="2"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CodAlpha5Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="5"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CodProvinciaType">
+		<xs:annotation>
+			<xs:documentation>Código INE de Provincia</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
+			<xs:enumeration value="07"/>
+			<xs:enumeration value="08"/>
+			<xs:enumeration value="09"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="14"/>
+			<xs:enumeration value="15"/>
+			<xs:enumeration value="16"/>
+			<xs:enumeration value="17"/>
+			<xs:enumeration value="18"/>
+			<xs:enumeration value="19"/>
+			<xs:enumeration value="20"/>
+			<xs:enumeration value="21"/>
+			<xs:enumeration value="22"/>
+			<xs:enumeration value="23"/>
+			<xs:enumeration value="24"/>
+			<xs:enumeration value="25"/>
+			<xs:enumeration value="26"/>
+			<xs:enumeration value="27"/>
+			<xs:enumeration value="28"/>
+			<xs:enumeration value="29"/>
+			<xs:enumeration value="30"/>
+			<xs:enumeration value="31"/>
+			<xs:enumeration value="32"/>
+			<xs:enumeration value="33"/>
+			<xs:enumeration value="34"/>
+			<xs:enumeration value="35"/>
+			<xs:enumeration value="36"/>
+			<xs:enumeration value="37"/>
+			<xs:enumeration value="38"/>
+			<xs:enumeration value="39"/>
+			<xs:enumeration value="40"/>
+			<xs:enumeration value="41"/>
+			<xs:enumeration value="42"/>
+			<xs:enumeration value="43"/>
+			<xs:enumeration value="44"/>
+			<xs:enumeration value="45"/>
+			<xs:enumeration value="46"/>
+			<xs:enumeration value="47"/>
+			<xs:enumeration value="48"/>
+			<xs:enumeration value="49"/>
+			<xs:enumeration value="50"/>
+			<xs:enumeration value="51"/>
+			<xs:enumeration value="52"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ComreferencenumType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{1,12}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ConceptListType">
+		<xs:sequence>
+			<xs:element name="concept" type="ConceptType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ConceptType">
+		<xs:sequence>
+			<xs:element name="level">
+				<xs:annotation>
+					<xs:documentation>Nivel del Concepto</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:enumeration value="0"/>
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="code">
+				<xs:annotation>
+					<xs:documentation>Código de Concepto</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:length value="4"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="description">
+				<xs:annotation>
+					<xs:documentation>Descripción Concepto</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="100"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="periodicity">
+				<xs:annotation>
+					<xs:documentation>Periodicidad Facturación</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:length value="2"/>
+						<xs:enumeration value="01"/>
+						<xs:enumeration value="02"/>
+						<xs:enumeration value="03"/>
+						<xs:enumeration value="04"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="units">
+				<xs:annotation>
+					<xs:documentation>Unidades</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:totalDigits value="3"/>
+						<xs:minInclusive value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="unitimport">
+				<xs:annotation>
+					<xs:documentation>Importe Unitario</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="7"/>
+						<xs:fractionDigits value="2"/>
+						<xs:maxInclusive value="99999.99"/>
+						<xs:minInclusive value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="import">
+				<xs:annotation>
+					<xs:documentation>Importe Total</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2"/>
+						<xs:maxInclusive value="9999999.99"/>
+						<xs:minInclusive value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ContactType">
+		<xs:sequence>
+			<xs:element name="contactname" type="NombreContactoType">
+				<xs:annotation>
+					<xs:documentation>Nombre Completo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contacttelephone" type="TelephoneType">
+				<xs:annotation>
+					<xs:documentation>Número de Teléfono</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contactemail" type="EmailType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Dirección de Correo Electrónico.
+Deberá estar formada por un texto seguido del carácter @ y un nombre de dominio.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CounterListType">
+		<xs:sequence>
+			<xs:element name="counter" type="CounterType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CounterType">
+		<xs:sequence>
+			<xs:element name="countermodel">
+				<xs:annotation>
+					<xs:documentation>Marca de Contador</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="50"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="countertype">
+				<xs:annotation>
+					<xs:documentation>Tipo de Contador</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="7"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="counternumber">
+				<xs:annotation>
+					<xs:documentation>Número de Serie de Contador</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="18"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="counterproperty" type="PropiedadEquipoType">
+				<xs:annotation>
+					<xs:documentation>
+    					Propiedad del Contador
+    				</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="reallecture" type="LectureType">
+				<xs:annotation>
+					<xs:documentation>Lectura Bruta (m3)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="counterpressure" type="PressureType">
+				<xs:annotation>
+					<xs:documentation>Presión del Contador</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="CupsType">
+		<xs:restriction base="xs:string">
+			<xs:length value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DefectListType">
+		<xs:sequence>
+			<xs:element name="defect" type="DefectType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DefectType">
+		<xs:sequence>
+			<xs:element name="code">
+				<xs:annotation>
+					<xs:documentation>Código de Anomalía</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="3"/>
+						<xs:enumeration value="001"/>
+						<xs:enumeration value="002"/>
+						<xs:enumeration value="003"/>
+						<xs:enumeration value="004"/>
+						<xs:enumeration value="005"/>
+						<xs:enumeration value="006"/>
+						<xs:enumeration value="007"/>
+						<xs:enumeration value="008"/>
+						<xs:enumeration value="009"/>
+						<xs:enumeration value="010"/>
+						<xs:enumeration value="011"/>
+						<xs:enumeration value="012"/>
+						<xs:enumeration value="013"/>
+						<xs:enumeration value="014"/>
+						<xs:enumeration value="015"/>
+						<xs:enumeration value="016"/>
+						<xs:enumeration value="017"/>
+						<xs:enumeration value="018"/>
+						<xs:enumeration value="019"/>
+						<xs:enumeration value="020"/>
+						<xs:enumeration value="021"/>
+						<xs:enumeration value="022"/>
+						<xs:enumeration value="023"/>
+						<xs:enumeration value="024"/>
+						<xs:enumeration value="025"/>
+						<xs:enumeration value="026"/>
+						<xs:enumeration value="027"/>
+						<xs:enumeration value="028"/>
+						<xs:enumeration value="029"/>
+						<xs:enumeration value="030"/>
+						<xs:enumeration value="031"/>
+						<xs:enumeration value="032"/>
+						<xs:enumeration value="033"/>
+						<xs:enumeration value="034"/>
+						<xs:enumeration value="035"/>
+						<xs:enumeration value="036"/>
+						<xs:enumeration value="037"/>
+						<xs:enumeration value="038"/>
+						<xs:enumeration value="039"/>
+						<xs:enumeration value="040"/>
+						<xs:enumeration value="041"/>
+						<xs:enumeration value="042"/>
+						<xs:enumeration value="043"/>
+						<xs:enumeration value="044"/>
+						<xs:enumeration value="045"/>
+						<xs:enumeration value="046"/>
+						<xs:enumeration value="047"/>
+						<xs:enumeration value="048"/>
+						<xs:enumeration value="053"/>
+						<xs:enumeration value="064"/>
+						<xs:enumeration value="065"/>
+						<xs:enumeration value="066"/>
+						<xs:enumeration value="067"/>
+						<xs:enumeration value="068"/>
+						<xs:enumeration value="074"/>
+						<xs:enumeration value="075"/>
+						<xs:enumeration value="079"/>
+						<xs:enumeration value="080"/>
+						<xs:enumeration value="081"/>
+						<xs:enumeration value="082"/>
+						<xs:enumeration value="083"/>
+						<xs:enumeration value="R1"/>
+						<xs:enumeration value="R10"/>
+						<xs:enumeration value="R11"/>
+						<xs:enumeration value="R12"/>
+						<xs:enumeration value="R13"/>
+						<xs:enumeration value="R14"/>
+						<xs:enumeration value="R15"/>
+						<xs:enumeration value="R16"/>
+						<xs:enumeration value="R17"/>
+						<xs:enumeration value="R18"/>
+						<xs:enumeration value="R19"/>
+						<xs:enumeration value="R2"/>
+						<xs:enumeration value="R20"/>
+						<xs:enumeration value="R21"/>
+						<xs:enumeration value="R22"/>
+						<xs:enumeration value="R23"/>
+						<xs:enumeration value="R24"/>
+						<xs:enumeration value="R25"/>
+						<xs:enumeration value="R26"/>
+						<xs:enumeration value="R27"/>
+						<xs:enumeration value="R28"/>
+						<xs:enumeration value="R29"/>
+						<xs:enumeration value="R3"/>
+						<xs:enumeration value="R30"/>
+						<xs:enumeration value="R31"/>
+						<xs:enumeration value="R32"/>
+						<xs:enumeration value="R33"/>
+						<xs:enumeration value="R34"/>
+						<xs:enumeration value="R35"/>
+						<xs:enumeration value="R36"/>
+						<xs:enumeration value="R37"/>
+						<xs:enumeration value="R38"/>
+						<xs:enumeration value="R39"/>
+						<xs:enumeration value="R4"/>
+						<xs:enumeration value="R40"/>
+						<xs:enumeration value="R41"/>
+						<xs:enumeration value="R42"/>
+						<xs:enumeration value="R43"/>
+						<xs:enumeration value="R44"/>
+						<xs:enumeration value="R45"/>
+						<xs:enumeration value="R46"/>
+						<xs:enumeration value="R47"/>
+						<xs:enumeration value="R48"/>
+						<xs:enumeration value="R49"/>
+						<xs:enumeration value="R5"/>
+						<xs:enumeration value="R50"/>
+						<xs:enumeration value="R51"/>
+						<xs:enumeration value="R52"/>
+						<xs:enumeration value="R53"/>
+						<xs:enumeration value="R54"/>
+						<xs:enumeration value="R55"/>
+						<xs:enumeration value="R56"/>
+						<xs:enumeration value="R57"/>
+						<xs:enumeration value="R58"/>
+						<xs:enumeration value="R59"/>
+						<xs:enumeration value="R6"/>
+						<xs:enumeration value="R60"/>
+						<xs:enumeration value="R61"/>
+						<xs:enumeration value="R62"/>
+						<xs:enumeration value="R63"/>
+						<xs:enumeration value="R64"/>
+						<xs:enumeration value="R65"/>
+						<xs:enumeration value="R66"/>
+						<xs:enumeration value="R67"/>
+						<xs:enumeration value="R68"/>
+						<xs:enumeration value="R69"/>
+						<xs:enumeration value="R7"/>
+						<xs:enumeration value="R70"/>
+						<xs:enumeration value="R71"/>
+						<xs:enumeration value="R8"/>
+						<xs:enumeration value="R9"/>
+						<xs:enumeration value="A01"/>
+						<xs:enumeration value="A02"/>
+						<xs:enumeration value="A03"/>
+						<xs:enumeration value="A04"/>
+						<xs:enumeration value="A05"/>
+						<xs:enumeration value="A06"/>
+						<xs:enumeration value="A07"/>
+						<xs:enumeration value="A08"/>
+						<xs:enumeration value="A09"/>
+						<xs:enumeration value="A10"/>
+						<xs:enumeration value="A11"/>
+						<xs:enumeration value="A12"/>
+						<xs:enumeration value="A13"/>
+						<xs:enumeration value="A14"/>
+						<xs:enumeration value="A15"/>
+						<xs:enumeration value="A16"/>
+						<xs:enumeration value="A17"/>
+						<xs:enumeration value="A18"/>
+						<xs:enumeration value="A19"/>
+						<xs:enumeration value="A20"/>
+						<xs:enumeration value="A21"/>
+						<xs:enumeration value="A22"/>
+						<xs:enumeration value="A23"/>
+						<xs:enumeration value="A24"/>
+						<xs:enumeration value="A36"/>
+						<xs:enumeration value="A37"/>
+						<xs:enumeration value="A38"/>
+						<xs:enumeration value="A39"/>
+						<xs:enumeration value="A40"/>
+						<xs:enumeration value="A41"/>
+						<xs:enumeration value="A42"/>
+						<xs:enumeration value="A43"/>
+						<xs:enumeration value="A44"/>
+						<xs:enumeration value="A45"/>
+						<xs:enumeration value="A46"/>
+						<xs:enumeration value="A47"/>
+						<xs:enumeration value="A48"/>
+						<xs:enumeration value="A51"/>
+						<xs:enumeration value="A52"/>
+						<xs:enumeration value="A53"/>
+						<xs:enumeration value="A54"/>
+						<xs:enumeration value="A55"/>
+						<xs:enumeration value="A56"/>
+						<xs:enumeration value="A57"/>
+						<xs:enumeration value="A60"/>
+						<xs:enumeration value="A64"/>
+						<xs:enumeration value="A65"/>
+						<xs:enumeration value="A66"/>
+						<xs:enumeration value="A67"/>
+						<xs:enumeration value="A68"/>
+						<xs:enumeration value="A69"/>
+						<xs:enumeration value="A70"/>
+						<xs:enumeration value="A71"/>
+						<xs:enumeration value="A72"/>
+						<xs:enumeration value="A73"/>
+						<xs:enumeration value="A74"/>
+						<xs:enumeration value="A75"/>
+						<xs:enumeration value="A79"/>
+						<xs:enumeration value="A80"/>
+						<xs:enumeration value="A81"/>
+						<xs:enumeration value="A82"/>
+						<xs:enumeration value="A83"/>
+						<xs:enumeration value="D11"/>
+						<xs:enumeration value="D12"/>
+						<xs:enumeration value="D13"/>
+						<xs:enumeration value="D14"/>
+						<xs:enumeration value="D15"/>
+						<xs:enumeration value="D16"/>
+						<xs:enumeration value="D17"/>
+						<xs:enumeration value="D18"/>
+						<xs:enumeration value="D21"/>
+						<xs:enumeration value="D22"/>
+						<xs:enumeration value="D23"/>
+						<xs:enumeration value="D24"/>
+						<xs:enumeration value="D25"/>
+						<xs:enumeration value="D26"/>
+						<xs:enumeration value="D31"/>
+						<xs:enumeration value="D32"/>
+						<xs:enumeration value="D33"/>
+						<xs:enumeration value="D34"/>
+						<xs:enumeration value="D35"/>
+						<xs:enumeration value="D36"/>
+						<xs:enumeration value="D41"/>
+						<xs:enumeration value="D42"/>
+						<xs:enumeration value="D43"/>
+						<xs:enumeration value="D44"/>
+						<xs:enumeration value="D51"/>
+						<xs:enumeration value="D52"/>
+						<xs:enumeration value="D53"/>
+						<xs:enumeration value="D54"/>
+						<xs:enumeration value="D55"/>
+						<xs:enumeration value="D56"/>
+						<xs:enumeration value="D57"/>
+						<xs:enumeration value="D60"/>
+						<xs:enumeration value="D81"/>
+						<xs:enumeration value="D82"/>
+						<xs:enumeration value="D83"/>
+						<xs:enumeration value="D84"/>
+						<xs:enumeration value="D85"/>
+						<xs:enumeration value="D86"/>
+						<xs:enumeration value="B01"/>
+						<xs:enumeration value="B02"/>
+						<xs:enumeration value="B03"/>
+						<xs:enumeration value="B04"/>
+						<xs:enumeration value="B05"/>
+						<xs:enumeration value="B10"/>
+						<xs:enumeration value="B11"/>
+						<xs:enumeration value="B12"/>
+						<xs:enumeration value="B13"/>
+						<xs:enumeration value="B14"/>
+						<xs:enumeration value="B15"/>
+						<xs:enumeration value="B16"/>
+						<xs:enumeration value="B17"/>
+						<xs:enumeration value="B18"/>
+						<xs:enumeration value="B19"/>
+						<xs:enumeration value="B21"/>
+						<xs:enumeration value="B22"/>
+						<xs:enumeration value="B23"/>
+						<xs:enumeration value="B24"/>
+						<xs:enumeration value="B25"/>
+						<xs:enumeration value="B26"/>
+						<xs:enumeration value="B27"/>
+						<xs:enumeration value="B30"/>
+						<xs:enumeration value="B31"/>
+						<xs:enumeration value="B32"/>
+						<xs:enumeration value="B33"/>
+						<xs:enumeration value="B34"/>
+						<xs:enumeration value="B35"/>
+						<xs:enumeration value="B36"/>
+						<xs:enumeration value="B37"/>
+						<xs:enumeration value="B38"/>
+						<xs:enumeration value="B39"/>
+						<xs:enumeration value="B40"/>
+						<xs:enumeration value="B41"/>
+						<xs:enumeration value="B42"/>
+						<xs:enumeration value="B43"/>
+						<xs:enumeration value="B44"/>
+						<xs:enumeration value="B45"/>
+						<xs:enumeration value="B46"/>
+						<xs:enumeration value="B50"/>
+						<xs:enumeration value="B51"/>
+						<xs:enumeration value="B52"/>
+						<xs:enumeration value="B53"/>
+						<xs:enumeration value="B54"/>
+						<xs:enumeration value="B55"/>
+						<xs:enumeration value="B56"/>
+						<xs:enumeration value="B57"/>
+						<xs:enumeration value="B58"/>
+						<xs:enumeration value="B60"/>
+						<xs:enumeration value="B61"/>
+						<xs:enumeration value="B62"/>
+						<xs:enumeration value="B63"/>
+						<xs:enumeration value="B70"/>
+						<xs:enumeration value="B71"/>
+						<xs:enumeration value="B72"/>
+						<xs:enumeration value="B73"/>
+						<xs:enumeration value="B74"/>
+						<xs:enumeration value="B75"/>
+						<xs:enumeration value="B76"/>
+						<xs:enumeration value="B77"/>
+						<xs:enumeration value="B90"/>
+						<xs:enumeration value="B95"/>
+						<xs:enumeration value="B96"/>
+						<xs:enumeration value="B97"/>
+						<xs:enumeration value="B99"/>
+						<xs:enumeration value="E00"/>
+						<xs:enumeration value="E01"/>
+						<xs:enumeration value="E02"/>
+						<xs:enumeration value="E03"/>
+						<xs:enumeration value="E04"/>
+						<xs:enumeration value="E05"/>
+						<xs:enumeration value="E06"/>
+						<xs:enumeration value="E07"/>
+						<xs:enumeration value="E08"/>
+						<xs:enumeration value="C10"/>
+						<xs:enumeration value="C11"/>
+						<xs:enumeration value="C12"/>
+						<xs:enumeration value="C13"/>
+						<xs:enumeration value="C14"/>
+						<xs:enumeration value="C15"/>
+						<xs:enumeration value="C16"/>
+						<xs:enumeration value="C20"/>
+						<xs:enumeration value="C21"/>
+						<xs:enumeration value="C24"/>
+						<xs:enumeration value="C30"/>
+						<xs:enumeration value="C31"/>
+						<xs:enumeration value="C32"/>
+						<xs:enumeration value="C33"/>
+						<xs:enumeration value="C34"/>
+						<xs:enumeration value="C35"/>
+						<xs:enumeration value="C36"/>
+						<xs:enumeration value="C40"/>
+						<xs:enumeration value="C41"/>
+						<xs:enumeration value="C42"/>
+						<xs:enumeration value="C43"/>
+						<xs:enumeration value="C44"/>
+						<xs:enumeration value="C45"/>
+						<xs:enumeration value="C50"/>
+						<xs:enumeration value="C55"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="description">
+				<xs:annotation>
+					<xs:documentation>Descripción de Anomalía</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="240"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="Desc255Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="255"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DocumentnumType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DocumentType">
+		<xs:sequence>
+			<xs:element name="documenttype" type="IdDocumentType">
+				<xs:annotation>
+					<xs:documentation>Tipo de Documento</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="documentnum" type="DocumentnumType">
+				<xs:annotation>
+					<xs:documentation>Número de Documento</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="EmailType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="100"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ExpedienteNnssType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ExtraInfoBigType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="4000"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ExtrainfoType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="400"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FamilynameType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="30"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FirstnameType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="40"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FlagType">
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:enumeration value="S"/>
+			<xs:enumeration value="N"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FraudRecordNumType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="IbanType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="34"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="IdDocumentType">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="07"/>
+			<xs:enumeration value="08"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="IncidentType">
+		<xs:sequence>
+			<xs:element name="incidentdate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Fecha de la Incidencia</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="InformationCodeType">
+		<xs:restriction base="xs:string">
+			<xs:length value="3"/>
+			<xs:enumeration value="002"/>
+			<xs:enumeration value="005"/>
+			<xs:enumeration value="031"/>
+			<xs:enumeration value="041"/>
+			<xs:enumeration value="050"/>
+			<xs:enumeration value="051"/>
+			<xs:enumeration value="907"/>
+			<xs:enumeration value="909"/>
+			<xs:enumeration value="910"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="InformationListType">
+		<xs:sequence>
+			<xs:element name="information" type="InformationType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="InformationType">
+		<xs:sequence>
+			<xs:element name="moreinformation" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="600"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="moreinformationtype" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="01"/>
+						<xs:enumeration value="02"/>
+						<xs:enumeration value="03"/>
+						<xs:enumeration value="04"/>
+						<xs:enumeration value="05"/>
+						<xs:enumeration value="06"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="limitsenddate" type="xs:date" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="InterventionType">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="LecturaType">
+		<xs:annotation>
+			<xs:documentation>Fecha de Lectura Actual</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="readingdate" type="xs:date"/>
+			<xs:element name="readingvalue">
+				<xs:annotation>
+					<xs:documentation>Lectura Actual Contador</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="16"/>
+						<xs:fractionDigits value="2"/>
+						<xs:maxInclusive value="99999999999999.99"/>
+						<xs:minInclusive value="-99999999999999.99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="LectureType">
+		<xs:restriction base="xs:long">
+			<xs:totalDigits value="11"/>
+			<xs:minInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MoreInformationType">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MotivoRechazoType">
+		<xs:restriction base="xs:string">
+			<xs:length value="3"/>
+			<xs:enumeration value="R01"/>
+			<xs:enumeration value="R03"/>
+			<xs:enumeration value="R04"/>
+			<xs:enumeration value="R07"/>
+			<xs:enumeration value="R08"/>
+			<xs:enumeration value="R11"/>
+			<xs:enumeration value="R12"/>
+			<xs:enumeration value="R14"/>
+			<xs:enumeration value="R19"/>
+			<xs:enumeration value="R24"/>
+			<xs:enumeration value="R26"/>
+			<xs:enumeration value="R28"/>
+			<xs:enumeration value="R29"/>
+			<xs:enumeration value="R32"/>
+			<xs:enumeration value="R34"/>
+			<xs:enumeration value="R35"/>
+			<xs:enumeration value="R36"/>
+			<xs:enumeration value="R37"/>
+			<xs:enumeration value="R38"/>
+			<xs:enumeration value="R39"/>
+			<xs:enumeration value="R40"/>
+			<xs:enumeration value="R41"/>
+			<xs:enumeration value="R42"/>
+			<xs:enumeration value="R43"/>
+			<xs:enumeration value="R44"/>
+			<xs:enumeration value="R45"/>
+			<xs:enumeration value="R46"/>
+			<xs:enumeration value="R47"/>
+			<xs:enumeration value="R48"/>
+			<xs:enumeration value="R49"/>
+			<xs:enumeration value="R51"/>
+			<xs:enumeration value="R61"/>
+			<xs:enumeration value="R62"/>
+			<xs:enumeration value="R64"/>
+			<xs:enumeration value="R70"/>
+			<xs:enumeration value="R73"/>
+			<xs:enumeration value="R74"/>
+			<xs:enumeration value="R75"/>
+			<xs:enumeration value="R76"/>
+			<xs:enumeration value="R77"/>
+			<xs:enumeration value="R78"/>
+			<xs:enumeration value="R79"/>
+			<xs:enumeration value="R80"/>
+			<xs:enumeration value="R81"/>
+			<xs:enumeration value="R82"/>
+			<xs:enumeration value="R83"/>
+			<xs:enumeration value="R84"/>
+			<xs:enumeration value="R85"/>
+			<xs:enumeration value="R86"/>
+			<xs:enumeration value="R87"/>
+			<xs:enumeration value="R88"/>
+			<xs:enumeration value="R89"/>
+			<xs:enumeration value="R90"/>
+			<xs:enumeration value="R91"/>
+			<xs:enumeration value="R92"/>
+			<xs:enumeration value="R93"/>
+			<xs:enumeration value="R94"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="NameType">
+		<xs:choice>
+			<xs:sequence>
+				<xs:element name="firstname" type="FirstnameType">
+					<xs:annotation>
+						<xs:documentation>
+	    					Nombre. Elegir entre nombre o razón social.
+	    				</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="familyname1" type="FamilynameType">
+					<xs:annotation>
+						<xs:documentation>
+	    					Apellido 1. Elegir entre nombre o razón social.
+	    				</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="familyname2" type="FamilynameType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>
+	    					Apellido 2. Elegir entre nombre o razón social.
+	    				</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:element name="businessName" type="FirstnameType">
+				<xs:annotation>
+					<xs:documentation>
+    					Razón Social. Elegir entre nombre o razón
+    					social.
+    				</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:simpleType name="NetType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="14"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NombreContactoType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="100"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NumFincaType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="4"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OperationType">
+		<xs:restriction base="xs:string">
+			<xs:length value="6"/>
+			<xs:enumeration value="A10001"/>
+			<xs:enumeration value="A10002"/>
+			<xs:enumeration value="A10003"/>
+			<xs:enumeration value="A10004"/>
+			<xs:enumeration value="A10005"/>
+			<xs:enumeration value="A10006"/>
+			<xs:enumeration value="A10007"/>
+			<xs:enumeration value="A10008"/>
+			<xs:enumeration value="A10009"/>
+			<xs:enumeration value="A10010"/>
+			<xs:enumeration value="A10011"/>
+			<xs:enumeration value="A10012"/>
+			<xs:enumeration value="A10013"/>
+			<xs:enumeration value="A10014"/>
+			<xs:enumeration value="A10015"/>
+			<xs:enumeration value="A10016"/>
+			<xs:enumeration value="A10017"/>
+			<xs:enumeration value="A10018"/>
+			<xs:enumeration value="A10019"/>
+			<xs:enumeration value="A10020"/>
+			<xs:enumeration value="A10021"/>
+			<xs:enumeration value="A10022"/>
+			<xs:enumeration value="A10023"/>
+			<xs:enumeration value="A10024"/>
+			<xs:enumeration value="A10025"/>
+			<xs:enumeration value="A10026"/>
+			<xs:enumeration value="A10027"/>
+			<xs:enumeration value="A10028"/>
+			<xs:enumeration value="A10029"/>
+			<xs:enumeration value="A10030"/>
+			<xs:enumeration value="A20001"/>
+			<xs:enumeration value="A20002"/>
+			<xs:enumeration value="A20003"/>
+			<xs:enumeration value="A20004"/>
+			<xs:enumeration value="A20006"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="PeriodoIncidenciaType">
+		<xs:sequence>
+			<xs:element name="datefrom" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Fecha desde</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dateto" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Fecha hasta.
+Para un incidente en un día concreto, la fecha hasta será igual a la fecha desde.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="PrefixTelType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="4"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PressureType">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="8"/>
+			<xs:fractionDigits value="3"/>
+			<xs:maxInclusive value="99999.999"/>
+			<xs:minInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PropiedadEquipoType">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="06"/>
+			<xs:enumeration value="08"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ReadingType">
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:enumeration value="0"/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="RegisterdocListType">
+		<xs:sequence>
+			<xs:element name="registerdoc" type="RegisterdocType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RegisterdocType">
+		<xs:sequence>
+			<xs:element name="date" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Fecha del Documento</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="doctype">
+				<xs:annotation>
+					<xs:documentation>Tipo de Documento</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="3"/>
+						<xs:enumeration value="CC"/>
+						<xs:enumeration value="01"/>
+						<xs:enumeration value="02"/>
+						<xs:enumeration value="03"/>
+						<xs:enumeration value="04"/>
+						<xs:enumeration value="05"/>
+						<xs:enumeration value="06"/>
+						<xs:enumeration value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="url">
+				<xs:annotation>
+					<xs:documentation>URL de descarga del documento</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="255"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="extrainfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Información adicional</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="255"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ReqcodeType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ResolutionDetailDescType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="100"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ResolutionDetailType">
+		<xs:restriction base="xs:string">
+			<xs:length value="7"/>
+			<xs:enumeration value="0010101"/>
+			<xs:enumeration value="0010201"/>
+			<xs:enumeration value="0020101"/>
+			<xs:enumeration value="0020102"/>
+			<xs:enumeration value="0020201"/>
+			<xs:enumeration value="0020202"/>
+			<xs:enumeration value="0020203"/>
+			<xs:enumeration value="0030101"/>
+			<xs:enumeration value="0030102"/>
+			<xs:enumeration value="0030103"/>
+			<xs:enumeration value="0030201"/>
+			<xs:enumeration value="0030202"/>
+			<xs:enumeration value="0030203"/>
+			<xs:enumeration value="0030204"/>
+			<xs:enumeration value="0030205"/>
+			<xs:enumeration value="0030206"/>
+			<xs:enumeration value="0030207"/>
+			<xs:enumeration value="0030301"/>
+			<xs:enumeration value="0030302"/>
+			<xs:enumeration value="0030303"/>
+			<xs:enumeration value="0030304"/>
+			<xs:enumeration value="0030305"/>
+			<xs:enumeration value="0040101"/>
+			<xs:enumeration value="0040201"/>
+			<xs:enumeration value="0040202"/>
+			<xs:enumeration value="0040203"/>
+			<xs:enumeration value="0040204"/>
+			<xs:enumeration value="0040205"/>
+			<xs:enumeration value="0040206"/>
+			<xs:enumeration value="0040207"/>
+			<xs:enumeration value="0040208"/>
+			<xs:enumeration value="0040209"/>
+			<xs:enumeration value="0040210"/>
+			<xs:enumeration value="0040301"/>
+			<xs:enumeration value="0040302"/>
+			<xs:enumeration value="0040303"/>
+			<xs:enumeration value="0040304"/>
+			<xs:enumeration value="0050101"/>
+			<xs:enumeration value="0050102"/>
+			<xs:enumeration value="0050103"/>
+			<xs:enumeration value="0050104"/>
+			<xs:enumeration value="0050201"/>
+			<xs:enumeration value="0050202"/>
+			<xs:enumeration value="0050203"/>
+			<xs:enumeration value="0050301"/>
+			<xs:enumeration value="0050302"/>
+			<xs:enumeration value="0050303"/>
+			<xs:enumeration value="0060101"/>
+			<xs:enumeration value="0060102"/>
+			<xs:enumeration value="0060103"/>
+			<xs:enumeration value="0060104"/>
+			<xs:enumeration value="0060105"/>
+			<xs:enumeration value="0060201"/>
+			<xs:enumeration value="0060202"/>
+			<xs:enumeration value="0060203"/>
+			<xs:enumeration value="0060204"/>
+			<xs:enumeration value="0060205"/>
+			<xs:enumeration value="0060206"/>
+			<xs:enumeration value="0060207"/>
+			<xs:enumeration value="0060208"/>
+			<xs:enumeration value="0060209"/>
+			<xs:enumeration value="0060210"/>
+			<xs:enumeration value="0060211"/>
+			<xs:enumeration value="0070101"/>
+			<xs:enumeration value="0070201"/>
+			<xs:enumeration value="0070202"/>
+			<xs:enumeration value="0080101"/>
+			<xs:enumeration value="0080102"/>
+			<xs:enumeration value="0080201"/>
+			<xs:enumeration value="0080202"/>
+			<xs:enumeration value="0080203"/>
+			<xs:enumeration value="0090101"/>
+			<xs:enumeration value="0090102"/>
+			<xs:enumeration value="0090103"/>
+			<xs:enumeration value="0090104"/>
+			<xs:enumeration value="0090105"/>
+			<xs:enumeration value="0090106"/>
+			<xs:enumeration value="0090107"/>
+			<xs:enumeration value="0090108"/>
+			<xs:enumeration value="0090109"/>
+			<xs:enumeration value="0090201"/>
+			<xs:enumeration value="0090202"/>
+			<xs:enumeration value="0090203"/>
+			<xs:enumeration value="0090204"/>
+			<xs:enumeration value="0090205"/>
+			<xs:enumeration value="0090206"/>
+			<xs:enumeration value="0090207"/>
+			<xs:enumeration value="0090208"/>
+			<xs:enumeration value="0090209"/>
+			<xs:enumeration value="0090210"/>
+			<xs:enumeration value="0090211"/>
+			<xs:enumeration value="0090301"/>
+			<xs:enumeration value="0100101"/>
+			<xs:enumeration value="0100102"/>
+			<xs:enumeration value="0100201"/>
+			<xs:enumeration value="0100202"/>
+			<xs:enumeration value="0100203"/>
+			<xs:enumeration value="0110101"/>
+			<xs:enumeration value="0110102"/>
+			<xs:enumeration value="0110103"/>
+			<xs:enumeration value="0110201"/>
+			<xs:enumeration value="0110202"/>
+			<xs:enumeration value="0120101"/>
+			<xs:enumeration value="0120201"/>
+			<xs:enumeration value="0120202"/>
+			<xs:enumeration value="0120203"/>
+			<xs:enumeration value="0130101"/>
+			<xs:enumeration value="0130201"/>
+			<xs:enumeration value="0130202"/>
+			<xs:enumeration value="0130203"/>
+			<xs:enumeration value="0140101"/>
+			<xs:enumeration value="0140102"/>
+			<xs:enumeration value="0140201"/>
+			<xs:enumeration value="0140202"/>
+			<xs:enumeration value="0140203"/>
+			<xs:enumeration value="0150101"/>
+			<xs:enumeration value="0150201"/>
+			<xs:enumeration value="0150202"/>
+			<xs:enumeration value="0150203"/>
+			<xs:enumeration value="0150204"/>
+			<xs:enumeration value="0150301"/>
+			<xs:enumeration value="0150302"/>
+			<xs:enumeration value="0180101"/>
+			<xs:enumeration value="0180102"/>
+			<xs:enumeration value="0180201"/>
+			<xs:enumeration value="0180202"/>
+			<xs:enumeration value="0180203"/>
+			<xs:enumeration value="0190101"/>
+			<xs:enumeration value="0190102"/>
+			<xs:enumeration value="0190103"/>
+			<xs:enumeration value="0190104"/>
+			<xs:enumeration value="0190105"/>
+			<xs:enumeration value="0190201"/>
+			<xs:enumeration value="0190202"/>
+			<xs:enumeration value="0190203"/>
+			<xs:enumeration value="0190204"/>
+			<xs:enumeration value="0190205"/>
+			<xs:enumeration value="0190301"/>
+			<xs:enumeration value="0210101"/>
+			<xs:enumeration value="0210201"/>
+			<xs:enumeration value="0210202"/>
+			<xs:enumeration value="0210203"/>
+			<xs:enumeration value="0210204"/>
+			<xs:enumeration value="0210205"/>
+			<xs:enumeration value="0210206"/>
+			<xs:enumeration value="0210207"/>
+			<xs:enumeration value="0210208"/>
+			<xs:enumeration value="0210209"/>
+			<xs:enumeration value="0210210"/>
+			<xs:enumeration value="0210301"/>
+			<xs:enumeration value="0210302"/>
+			<xs:enumeration value="0210303"/>
+			<xs:enumeration value="0220101"/>
+			<xs:enumeration value="0220201"/>
+			<xs:enumeration value="0220202"/>
+			<xs:enumeration value="0220203"/>
+			<xs:enumeration value="0220204"/>
+			<xs:enumeration value="0220205"/>
+			<xs:enumeration value="0220206"/>
+			<xs:enumeration value="0220207"/>
+			<xs:enumeration value="0220208"/>
+			<xs:enumeration value="0220209"/>
+			<xs:enumeration value="0220301"/>
+			<xs:enumeration value="0230101"/>
+			<xs:enumeration value="0230201"/>
+			<xs:enumeration value="0230202"/>
+			<xs:enumeration value="0230301"/>
+			<xs:enumeration value="0240101"/>
+			<xs:enumeration value="0240201"/>
+			<xs:enumeration value="0240202"/>
+			<xs:enumeration value="0240203"/>
+			<xs:enumeration value="0250101"/>
+			<xs:enumeration value="0250201"/>
+			<xs:enumeration value="0250202"/>
+			<xs:enumeration value="0250203"/>
+			<xs:enumeration value="0250204"/>
+			<xs:enumeration value="0250301"/>
+			<xs:enumeration value="0260101"/>
+			<xs:enumeration value="0260201"/>
+			<xs:enumeration value="0260202"/>
+			<xs:enumeration value="0260203"/>
+			<xs:enumeration value="0260204"/>
+			<xs:enumeration value="0260205"/>
+			<xs:enumeration value="0270101"/>
+			<xs:enumeration value="0270201"/>
+			<xs:enumeration value="0270202"/>
+			<xs:enumeration value="0270203"/>
+			<xs:enumeration value="0280101"/>
+			<xs:enumeration value="0280102"/>
+			<xs:enumeration value="0280201"/>
+			<xs:enumeration value="0280202"/>
+			<xs:enumeration value="0280203"/>
+			<xs:enumeration value="0280204"/>
+			<xs:enumeration value="0290101"/>
+			<xs:enumeration value="0290201"/>
+			<xs:enumeration value="0290202"/>
+			<xs:enumeration value="0290203"/>
+			<xs:enumeration value="0300101"/>
+			<xs:enumeration value="0300201"/>
+			<xs:enumeration value="0300202"/>
+			<xs:enumeration value="0310101"/>
+			<xs:enumeration value="0310201"/>
+			<xs:enumeration value="0310202"/>
+			<xs:enumeration value="0320101"/>
+			<xs:enumeration value="0320201"/>
+			<xs:enumeration value="0320202"/>
+			<xs:enumeration value="0320203"/>
+			<xs:enumeration value="0320204"/>
+			<xs:enumeration value="0320205"/>
+			<xs:enumeration value="0320206"/>
+			<xs:enumeration value="0330101"/>
+			<xs:enumeration value="0330201"/>
+			<xs:enumeration value="0330202"/>
+			<xs:enumeration value="0330301"/>
+			<xs:enumeration value="0330302"/>
+			<xs:enumeration value="0340101"/>
+			<xs:enumeration value="0340102"/>
+			<xs:enumeration value="0340103"/>
+			<xs:enumeration value="0340104"/>
+			<xs:enumeration value="0340105"/>
+			<xs:enumeration value="0340106"/>
+			<xs:enumeration value="0340107"/>
+			<xs:enumeration value="0340108"/>
+			<xs:enumeration value="0340201"/>
+			<xs:enumeration value="0340202"/>
+			<xs:enumeration value="0340203"/>
+			<xs:enumeration value="0350101"/>
+			<xs:enumeration value="0350201"/>
+			<xs:enumeration value="0350202"/>
+			<xs:enumeration value="0350203"/>
+			<xs:enumeration value="0350204"/>
+			<xs:enumeration value="0350205"/>
+			<xs:enumeration value="0350206"/>
+			<xs:enumeration value="0350207"/>
+			<xs:enumeration value="0350208"/>
+			<xs:enumeration value="0350209"/>
+			<xs:enumeration value="0360101"/>
+			<xs:enumeration value="0360201"/>
+			<xs:enumeration value="0360202"/>
+			<xs:enumeration value="0360203"/>
+			<xs:enumeration value="0360204"/>
+			<xs:enumeration value="0360205"/>
+			<xs:enumeration value="0360206"/>
+			<xs:enumeration value="0360207"/>
+			<xs:enumeration value="0360208"/>
+			<xs:enumeration value="0370101"/>
+			<xs:enumeration value="0370201"/>
+			<xs:enumeration value="0370202"/>
+			<xs:enumeration value="0380101"/>
+			<xs:enumeration value="0380201"/>
+			<xs:enumeration value="0380202"/>
+			<xs:enumeration value="0400101"/>
+			<xs:enumeration value="0400201"/>
+			<xs:enumeration value="0400202"/>
+			<xs:enumeration value="0400203"/>
+			<xs:enumeration value="0450101"/>
+			<xs:enumeration value="0450201"/>
+			<xs:enumeration value="0460101"/>
+			<xs:enumeration value="0460201"/>
+			<xs:enumeration value="0480101"/>
+			<xs:enumeration value="0480201"/>
+			<xs:enumeration value="0480202"/>
+			<xs:enumeration value="0480203"/>
+			<xs:enumeration value="0490101"/>
+			<xs:enumeration value="0490201"/>
+			<xs:enumeration value="0490202"/>
+			<xs:enumeration value="0500101"/>
+			<xs:enumeration value="0500201"/>
+			<xs:enumeration value="0500202"/>
+			<xs:enumeration value="0500203"/>
+			<xs:enumeration value="0510101"/>
+			<xs:enumeration value="0510201"/>
+			<xs:enumeration value="0520101"/>
+			<xs:enumeration value="0520102"/>
+			<xs:enumeration value="0520201"/>
+			<xs:enumeration value="0520202"/>
+			<xs:enumeration value="0530101"/>
+			<xs:enumeration value="0530102"/>
+			<xs:enumeration value="0530201"/>
+			<xs:enumeration value="0530202"/>
+			<xs:enumeration value="0540101"/>
+			<xs:enumeration value="0540201"/>
+			<xs:enumeration value="0540202"/>
+			<xs:enumeration value="0570101"/>
+			<xs:enumeration value="0570102"/>
+			<xs:enumeration value="0570103"/>
+			<xs:enumeration value="0570104"/>
+			<xs:enumeration value="0570105"/>
+			<xs:enumeration value="0570201"/>
+			<xs:enumeration value="0570202"/>
+			<xs:enumeration value="0570203"/>
+			<xs:enumeration value="0570204"/>
+			<xs:enumeration value="0570205"/>
+			<xs:enumeration value="0580101"/>
+			<xs:enumeration value="0580102"/>
+			<xs:enumeration value="0580201"/>
+			<xs:enumeration value="0580202"/>
+			<xs:enumeration value="0580203"/>
+			<xs:enumeration value="0590101"/>
+			<xs:enumeration value="0590102"/>
+			<xs:enumeration value="0590201"/>
+			<xs:enumeration value="0590202"/>
+			<xs:enumeration value="0590203"/>
+			<xs:enumeration value="0590204"/>
+			<xs:enumeration value="0600101"/>
+			<xs:enumeration value="0600102"/>
+			<xs:enumeration value="0600201"/>
+			<xs:enumeration value="0600202"/>
+			<xs:enumeration value="0600203"/>
+			<xs:enumeration value="0610101"/>
+			<xs:enumeration value="0610102"/>
+			<xs:enumeration value="0610201"/>
+			<xs:enumeration value="0610202"/>
+			<xs:enumeration value="0610203"/>
+			<xs:enumeration value="0610204"/>
+			<xs:enumeration value="0620101"/>
+			<xs:enumeration value="0620102"/>
+			<xs:enumeration value="0620201"/>
+			<xs:enumeration value="0620202"/>
+			<xs:enumeration value="0620203"/>
+			<xs:enumeration value="0630101"/>
+			<xs:enumeration value="0630102"/>
+			<xs:enumeration value="0630201"/>
+			<xs:enumeration value="0630202"/>
+			<xs:enumeration value="0630203"/>
+			<xs:enumeration value="0630204"/>
+			<xs:enumeration value="0640101"/>
+			<xs:enumeration value="0640102"/>
+			<xs:enumeration value="0640201"/>
+			<xs:enumeration value="0640202"/>
+			<xs:enumeration value="0640203"/>
+			<xs:enumeration value="0650101"/>
+			<xs:enumeration value="0650102"/>
+			<xs:enumeration value="0650201"/>
+			<xs:enumeration value="0650202"/>
+			<xs:enumeration value="0650203"/>
+			<xs:enumeration value="0650204"/>
+			<xs:enumeration value="0660101"/>
+			<xs:enumeration value="0660102"/>
+			<xs:enumeration value="0660103"/>
+			<xs:enumeration value="0660104"/>
+			<xs:enumeration value="0660105"/>
+			<xs:enumeration value="0660106"/>
+			<xs:enumeration value="0660107"/>
+			<xs:enumeration value="0660108"/>
+			<xs:enumeration value="0660201"/>
+			<xs:enumeration value="0660202"/>
+			<xs:enumeration value="0670101"/>
+			<xs:enumeration value="0670102"/>
+			<xs:enumeration value="0670103"/>
+			<xs:enumeration value="0670104"/>
+			<xs:enumeration value="0670105"/>
+			<xs:enumeration value="0670106"/>
+			<xs:enumeration value="0670201"/>
+			<xs:enumeration value="0670202"/>
+			<xs:enumeration value="0670203"/>
+			<xs:enumeration value="0670204"/>
+			<xs:enumeration value="0670205"/>
+			<xs:enumeration value="0670206"/>
+			<xs:enumeration value="0670207"/>
+			<xs:enumeration value="0670301"/>
+			<xs:enumeration value="0670302"/>
+			<xs:enumeration value="0670303"/>
+			<xs:enumeration value="0670304"/>
+			<xs:enumeration value="0670305"/>
+			<xs:enumeration value="0680101"/>
+			<xs:enumeration value="0680201"/>
+			<xs:enumeration value="0680202"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ResultadoA19Type">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="09"/>
+			<xs:enumeration value="13"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ResultadoA2Type">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="05"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ResultadoA348Type">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="05"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ResultadoA3Type">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="09"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ResultadoA4Type">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="13"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ResultdescType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="100"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ResultInspectionType">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
+			<xs:enumeration value="07"/>
+			<xs:enumeration value="08"/>
+			<xs:enumeration value="09"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="14"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ResultreasondescType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="250"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ResultreasonType">
+		<xs:restriction base="xs:string">
+			<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ResultType">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ServiceStatusCodeType">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="00"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
+			<xs:enumeration value="07"/>
+			<xs:enumeration value="08"/>
+			<xs:enumeration value="09"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="20"/>
+			<xs:enumeration value="21"/>
+			<xs:enumeration value="30"/>
+			<xs:enumeration value="31"/>
+			<xs:enumeration value="40"/>
+			<xs:enumeration value="50"/>
+			<xs:enumeration value="60"/>
+			<xs:enumeration value="70"/>
+			<xs:enumeration value="80"/>
+			<xs:enumeration value="95"/>
+			<xs:enumeration value="96"/>
+			<xs:enumeration value="97"/>
+			<xs:enumeration value="98"/>
+			<xs:enumeration value="99"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SinglenominationType">
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:enumeration value="S"/>
+			<xs:enumeration value="N"/>
+			<xs:enumeration value="A"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StreetnameType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="60"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StreetnumberType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SupplyStatusCodeType">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="00"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
+			<xs:enumeration value="07"/>
+			<xs:enumeration value="08"/>
+			<xs:enumeration value="09"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="18"/>
+			<xs:enumeration value="20"/>
+			<xs:enumeration value="30"/>
+			<xs:enumeration value="50"/>
+			<xs:enumeration value="99"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TelephoneNumberType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="TelephoneType">
+		<xs:sequence>
+			<xs:element name="telephoneprefix" type="PrefixTelType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Prefijo de Teléfono Internacional. No informar con ceros delante del prefijo.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="telephonenumber" type="TelephoneNumberType">
+				<xs:annotation>
+					<xs:documentation>Número Teléfono</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="TipoViaType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="5"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TitularType">
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:enumeration value="F"/>
+			<xs:enumeration value="J"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="UbicacionIncidenciaType">
+		<xs:annotation>
+			<xs:documentation>Código de Provincia</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="incidentlocationdesc">
+				<xs:annotation>
+					<xs:documentation>Descripción de la ubicación de la incidencia (ej. calle y número)
+        			</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="45"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="incidentlocationprovince" type="CodProvinciaType">
+				<xs:annotation>
+					<xs:documentation>Código INE de Provincia</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="incidentlocationcity" type="CityType">
+				<xs:annotation>
+					<xs:documentation>Código INE de Municipio (5 ó 6 posiciones)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="incidentlocationcitysubdivision" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Código INE de Población (Entidad Colectiva o Singular cuando aplique)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="9"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="incidentlocationzipcode" type="CodAlpha5Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Código Postal</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VariableInfListType">
+		<xs:sequence>
+			<xs:element name="variableinf" type="VariableType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VariableType">
+		<xs:sequence>
+			<xs:element name="moreinformationtype" type="MoreInformationType">
+				<xs:annotation>
+					<xs:documentation>Tipo de la información adicional que se proporciona</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="Desc255Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Descripción de la información adicional aportada</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="variabletype" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tipo de la variable</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:length value="2"/>
+						<xs:enumeration value="01"/>
+						<xs:enumeration value="02"/>
+						<xs:enumeration value="03"/>
+						<xs:enumeration value="04"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="variablevalue" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Valor de la variable</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="45"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

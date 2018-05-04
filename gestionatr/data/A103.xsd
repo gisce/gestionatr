@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://localhost/sctd/A103"
+	xmlns:tns="http://localhost/sctd/A103"
+	elementFormDefault="qualified" >
+
+	<include schemaLocation="CommonTagsCONT.xsd"></include>
+	<element name="sctdapplication"
+		type="tns:SctdapplicationA103Type">
+	</element>
+
+	<complexType name="SctdapplicationA103Type">
+		<sequence>
+			<element name="heading" type="tns:HeadingA103Type" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="a103" type="tns:A103Type"
+				maxOccurs="unbounded" minOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="HeadingA103Type">
+		<sequence>
+			<element name="dispatchingcode" maxOccurs="1"
+				minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="GML"></enumeration>
+						<length value="3"></length>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dispatchingcompany" type="tns:AgenteType"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="destinycompany" type="tns:AgenteType"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="communicationsdate" type="date" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="communicationshour" type="time" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="processcode" maxOccurs="1" minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"></length>
+						<enumeration value="03"></enumeration>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="messagetype" maxOccurs="1" minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="A1"></enumeration>
+						<minLength value="1"></minLength>
+						<maxLength value="3"></maxLength>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="A103Type">
+		<sequence>
+			<element name="comreferencenum"
+				type="tns:ComreferencenumType" maxOccurs="1" minOccurs="1">
+                <annotation>
+                	<documentation>Nº Referencia Solicitud Comercializadora</documentation>
+                </annotation>
+			</element>
+			<element name="reqdate" type="date" maxOccurs="1"
+				minOccurs="1">
+                <annotation>
+                	<documentation>Fecha de Solicitud</documentation></annotation>
+			</element>
+			<element name="reqhour" type="time" maxOccurs="1"
+				minOccurs="1">
+                <annotation>
+                	<documentation>Hora de Solicitud</documentation></annotation>
+			</element>
+			<element name="titulartype" type="tns:TitularType"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Tipo de Titular</documentation></annotation>
+			</element>
+			<element name="nationality" type="tns:NationalityType"
+				maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Nacionalidad</documentation>
+				</annotation>
+			</element>
+			<element name="documenttype" type="tns:IdDocumentType"
+				maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Tipo Documento de Identificación</documentation>
+				</annotation>
+			</element>
+			<element name="documentnum" type="tns:DocumentnumType"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Nº Documento</documentation></annotation>
+			</element>
+			<element name="cups" type="tns:CupsType" maxOccurs="1"
+				minOccurs="1">
+                <annotation>
+                	<documentation>CUPS Solicitud</documentation></annotation>
+			</element>
+            <element name="annulmentreason"
+            	type="tns:MotivoAnulacionType" maxOccurs="1"
+            	minOccurs="1">
+            	<annotation>
+            		<documentation>Motivo de Anulación</documentation>
+            	</annotation>
+            </element>
+            <element name="extrainfo" type="tns:ExtrainfoType"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Observaciones de la Solicitud</documentation>
+                </annotation>
+            </element>
+		</sequence>
+	</complexType>
+</schema>

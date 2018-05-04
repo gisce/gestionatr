@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A2036" targetNamespace="http://localhost/sctd/A2036" elementFormDefault="qualified">
+	<include schemaLocation="CommonTagsPETS.xsd"></include>
+
+    <element name="sctdapplication" type="tns:SctdApplicationA20Type"></element>
+    
+    <complexType name="SctdApplicationA20Type">
+    	<sequence>
+    		<element name="heading" type="tns:HeadingA20Type"
+    			maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="a20" type="tns:A20Type" maxOccurs="unbounded"
+    			minOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="HeadingA20Type">
+    	<sequence>
+    		<element name="dispatchingcode" maxOccurs="1"
+    			minOccurs="1">
+    			<simpleType>
+    				<restriction base="string">
+
+    					<length value="3"></length>
+    					<enumeration value="GML"></enumeration>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="dispatchingcompany" type="tns:AgenteType"
+    			maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="destinycompany" type="tns:AgenteType"
+    			maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="communicationsdate" type="date" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="communicationshour" type="time" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="processcode" maxOccurs="1" minOccurs="1">
+    			<simpleType>
+    				<restriction base="string">
+
+    					<length value="2"></length>
+    					<enumeration value="36"></enumeration>
+    					<enumeration value="37"></enumeration>
+    				</restriction>
+    			</simpleType>
+    		</element>    
+    		<element name="messagetype" maxOccurs="1" minOccurs="1">
+    			<simpleType>
+    				<restriction base="string">
+
+    					<length value="3"></length>
+    					<enumeration value="A20"></enumeration>
+    				</restriction>
+    			</simpleType>
+    		</element>    				
+    	</sequence>
+    </complexType>
+    
+    <complexType name="A20Type">
+    	<sequence>
+    		<element name="reqdate" type="date" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="reqhour" type="time" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="cups" type="tns:CupsType" maxOccurs="1"
+    			minOccurs="0">
+    		</element>
+    		<element name="province" type="tns:CodProvinciaType"
+    			maxOccurs="1" minOccurs="0">
+    		</element>
+    		<element name="city" maxOccurs="1" minOccurs="0"
+    			type="tns:CodAlpha5Type">
+
+    		</element>
+    		<element name="zipcode" maxOccurs="1" minOccurs="0"
+    			type="tns:CodAlpha5Type">
+
+    		</element>
+    		<element name="streettype" type="tns:TipoViaType"
+    			maxOccurs="1" minOccurs="0">
+    		</element>
+    		<element name="street" maxOccurs="1" minOccurs="0"
+    			type="tns:CalleType">
+
+    		</element>
+    		<element name="streetnumber" type="tns:NumFincaPreserveSpaceType"
+    			maxOccurs="1" minOccurs="0">
+    		</element>
+    		<element name="portal" type="tns:CodAlpha5PreserveSpaceType"
+    			maxOccurs="1" minOccurs="0">
+    			<annotation>
+    				<documentation>Portal</documentation>
+    			</annotation>
+    		</element>
+    		<element name="staircase" type="tns:CodAlpha5PreserveSpaceType"
+    			maxOccurs="1" minOccurs="0">
+    			<annotation>
+    				<documentation>Escalera</documentation>
+    			</annotation>
+    		</element>
+    		<element name="floor" type="tns:CodAlpha5PreserveSpaceType" maxOccurs="1"
+    			minOccurs="0">
+    			<annotation>
+    				<documentation>Piso</documentation>
+    			</annotation>
+    		</element>
+    		<element name="door" type="tns:CodAlpha5PreserveSpaceType" maxOccurs="1"
+    			minOccurs="0">
+    			<annotation>
+    				<documentation>Puerta</documentation>
+    			</annotation>
+    		</element>
+    	</sequence>
+    </complexType>
+
+</schema>

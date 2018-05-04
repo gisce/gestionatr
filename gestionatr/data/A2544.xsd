@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://localhost/sctd/A2544"
+	xmlns:tns="http://localhost/sctd/A2544"
+	elementFormDefault="qualified" >
+	<include schemaLocation="CommonTagsATCOM.xsd"></include>
+
+	<element name="sctdapplication"
+		type="tns:SctdApplicationA2544Type">
+	</element>
+
+	<complexType name="SctdApplicationA2544Type">
+		<sequence>
+			<element name="heading" type="tns:HeadingA2544Type" maxOccurs="1" minOccurs="1"></element>
+			<element name="a25" type="tns:A2544Type"
+				maxOccurs="unbounded" minOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+    <complexType name="HeadingA2544Type">
+		<sequence>
+			<element name="dispatchingcode" maxOccurs="1"
+				minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="GML"></enumeration>
+						<length value="3"></length>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dispatchingcompany" type="tns:AgenteType"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="destinycompany" type="tns:AgenteType"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="communicationsdate" type="date" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="communicationshour" type="time" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="processcode" maxOccurs="1" minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"></length>
+						<enumeration value="44"></enumeration>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="messagetype" maxOccurs="1" minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="A25"></enumeration>
+						<minLength value="1"></minLength>
+						<maxLength value="3"></maxLength>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>    
+    </complexType>
+
+    <complexType name="A2544Type">
+    	<sequence>
+    		<element name="reqcode" type="tns:ReqcodeType"
+    			maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Código de Solicitud</documentation>
+                </annotation>
+    		</element>
+    		<element name="comreferencenum"
+    			type="tns:ComreferencenumType" maxOccurs="1" minOccurs="1">
+                <annotation>
+                	<documentation>Num Referencia Solicitud Comercializadora</documentation>
+                </annotation>
+    		</element>
+    		<element name="cups" type="tns:CupsType" maxOccurs="1"
+    			minOccurs="1">
+                <annotation>
+                	<documentation>CUPS</documentation>
+                </annotation>
+    		</element>
+    		<element name="operationtype" type="tns:OperationType"
+    			maxOccurs="1" minOccurs="1">
+                <annotation>
+                	<documentation>Tipo de Actuación</documentation>
+                </annotation>
+    		</element>
+    		<element name="interventiontype"
+    			type="tns:InterventionType" maxOccurs="1" minOccurs="1">
+                <annotation>
+                	<documentation>Tipo de Intervención</documentation>
+                </annotation>
+    		</element>
+    		<element name="newoperationtype" type="tns:OperationType"
+    			maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Nuevo Tipo Actuación</documentation>
+                </annotation>
+    		</element>
+    		<element name="moreinformation" maxOccurs="1"
+    			minOccurs="0">
+                <annotation>
+                	<documentation>Más Información</documentation>
+                </annotation>
+                <simpleType>
+    				<restriction base="string">
+    					<minLength value="1"></minLength>
+    					<maxLength value="400"></maxLength>
+						<whiteSpace value="collapse"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="operationnum" maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Número de Operación Generado</documentation>
+                </annotation>
+                <simpleType>
+    				<restriction base="string">
+    					<minLength value="1"></minLength>
+    					<maxLength value="40"></maxLength>
+						<whiteSpace value="collapse"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="visitdate" type="date" maxOccurs="1"
+    			minOccurs="0">
+                <annotation>
+                	<documentation>Fecha Generación Información Visita</documentation></annotation>
+    		</element>
+    		<element name="visithour" type="time" maxOccurs="1"
+    			minOccurs="0">
+                <annotation>
+                	<documentation>Hora Generación Información Visita</documentation></annotation>
+    		</element>
+    		<element name="informationtype"
+    			type="tns:InformationCodeType" maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Tipo de Información o Incidencia</documentation>
+                </annotation>
+    		</element>
+    		<element name="informationtypedesc" maxOccurs="1"
+    			minOccurs="0">
+                <annotation>
+                	<documentation>Descripción de Tipo de Información o Incidencia</documentation></annotation>
+                <simpleType>
+    				<restriction base="string">
+    					<minLength value="1"></minLength>
+    					<maxLength value="100"></maxLength>
+						<whiteSpace value="collapse"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="interventiondate" type="date" maxOccurs="1"
+    			minOccurs="0">
+                <annotation>
+                	<documentation>Fecha Intervención</documentation>
+                </annotation>
+    		</element>
+    		<element name="interventionhourfrom" type="time"
+    			maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Hora de inicio de intervención</documentation>
+                </annotation>
+    		</element>
+    		<element name="interventionhourto" type="time" maxOccurs="1"
+    			minOccurs="0">
+                <annotation>
+                	<documentation>Hora de fin de intervención</documentation>
+                </annotation>
+    		</element>
+    		<element name="resultinspection"
+    			type="tns:ResultInspectionType" maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Resultado Inspección</documentation>
+                </annotation>
+    		</element>
+    		<element name="resultinspectiondesc" maxOccurs="1"
+    			minOccurs="0">
+                <annotation>
+                	<documentation>Descripción de Resultado Inspección</documentation>
+                </annotation>
+                <simpleType>
+    				<restriction base="string">
+    					<minLength value="1"></minLength>
+    					<maxLength value="250"></maxLength>
+						<whiteSpace value="collapse"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="visitnumber" maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Número de Visita</documentation>
+                </annotation>
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="0"></minInclusive>
+						<maxInclusive value="999"></maxInclusive>
+					</restriction>
+				</simpleType>
+    		</element>
+    		<element name="extrainfo" type="tns:ExtrainfoType"
+    			maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Observaciones de la Intervención</documentation>
+                </annotation>
+    		</element>
+    		<element name="conceptnumber" maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Número de Conceptos</documentation>
+                </annotation>
+                <simpleType>
+    				<restriction base="decimal">
+    					<minInclusive value="0"></minInclusive>
+    					<maxInclusive value="99"></maxInclusive>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="conceptlist" type="tns:ConceptListType"
+    			maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Lista de Conceptos de Facturación</documentation>
+                </annotation>
+    		</element>
+    		<element name="defectlist" type="tns:DefectListType"
+    			maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Lista de Anomalías</documentation>
+                </annotation>
+    		</element>
+    	</sequence>
+    </complexType>
+</schema>

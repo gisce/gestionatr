@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://localhost/sctd/A248"
+	xmlns:tns="http://localhost/sctd/A248"
+	elementFormDefault="qualified" >
+
+	<include schemaLocation="CommonTagsATCOM.xsd"></include>
+	<complexType name="HeadingA248Type">
+		<sequence>
+			<element name="dispatchingcode" maxOccurs="1"
+				minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="GML"></enumeration>
+						<length value="3"></length>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dispatchingcompany" type="tns:AgenteType"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="destinycompany" type="tns:AgenteType"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="communicationsdate" type="date" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="communicationshour" type="time" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="processcode" maxOccurs="1" minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"></length>
+						<enumeration value="48"></enumeration>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="messagetype" maxOccurs="1" minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="A2"></enumeration>
+						<minLength value="1"></minLength>
+						<maxLength value="3"></maxLength>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+
+
+	<element name="sctdapplication"
+		type="tns:SctdApplicationA248Type">
+	</element>
+
+	<complexType name="SctdApplicationA248Type">
+		<sequence>
+			<element name="heading" type="tns:HeadingA248Type"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="a2" type="tns:A248Type" maxOccurs="unbounded"
+				minOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="A248Type">
+		<sequence>
+			<element name="reqcode" type="tns:ReqcodeType"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Código Solicitud</documentation>
+                </annotation>
+			</element>
+			<element name="reqdate" type="date" maxOccurs="1"
+				minOccurs="1">
+                <annotation>
+                	<documentation>Fecha de Solicitud</documentation>
+                </annotation>
+			</element>
+			<element name="reqhour" type="time" maxOccurs="1"
+				minOccurs="1">
+                <annotation>
+                	<documentation>Hora de Solicitud</documentation>
+                </annotation>
+			</element>
+			<element name="responsedate" type="date" maxOccurs="1"
+				minOccurs="1">
+                <annotation>
+                	<documentation>Fecha Respuesta</documentation>
+                </annotation>
+			</element>
+			<element name="responsehour" type="time" maxOccurs="1"
+				minOccurs="1">
+                <annotation>
+                	<documentation>Hora Respuesta</documentation>
+                </annotation>
+			</element>
+			<element name="comreferencenum"
+				type="tns:ComreferencenumType" maxOccurs="1" minOccurs="1">
+                <annotation>
+                	<documentation>Num Referencia Solicitud Comercializadora</documentation>
+                </annotation>
+			</element>
+			<element name="claimtype" type="tns:ClaimType"
+				maxOccurs="1" minOccurs="1">
+                <annotation>
+                	<documentation>Tipo de Reclamación</documentation>
+                </annotation>
+			</element>
+			<element name="claimsubtype" type="tns:ClaimSubtype"
+				maxOccurs="1" minOccurs="1">
+                <annotation>
+                	<documentation>Subtipo de Reclamación</documentation>
+                </annotation>
+			</element>
+			<element name="cups" type="tns:CupsType" maxOccurs="1"
+				minOccurs="0">
+                <annotation>
+                	<documentation>CUPS</documentation>
+                </annotation>
+			</element>
+			<element name="result" type="tns:ResultadoA2Type"
+				maxOccurs="1" minOccurs="1">
+                <annotation>
+                	<documentation>Códiog de Resultado</documentation>
+                </annotation>
+			</element>
+			<element name="resultdesc" type="tns:ResultdescType"
+				maxOccurs="1" minOccurs="1">
+                <annotation>
+                	<documentation>Descripción de Resultado</documentation>
+                </annotation>
+			</element>
+			<element name="resultreason" type="tns:MotivoRechazoType"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Código Motivo Resultado</documentation>
+                </annotation>
+			</element>
+			<element name="resultreasondesc"
+				type="tns:ResultreasondescType" maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Descripción Motivo Resultado</documentation>
+                </annotation>
+			</element>
+			<element name="srcode" type="tns:SrCodeType" maxOccurs="1"
+				minOccurs="0">
+                <annotation>
+                	<documentation>Código de Petición del Distribuidor.
+Si es una aceptación este código es obligatorio.</documentation>
+                </annotation>
+			</element>
+			<element name="extrainfo" type="tns:ExtrainfoType"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Observaciones de la aceptación/rechazo de la reclamación</documentation>
+                </annotation>
+			</element>
+		</sequence>
+	</complexType>
+
+	<simpleType name="SrCodeType">
+		<restriction base="string">
+			<minLength value="1"></minLength>
+			<maxLength value="20"></maxLength>
+			<whiteSpace value="collapse"/>
+		</restriction>
+	</simpleType>
+</schema>
