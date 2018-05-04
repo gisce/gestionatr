@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sctdapplication xmlns="http://localhost/sctd/A141">
+    <heading>
+        <dispatchingcode>GML</dispatchingcode>
+        <dispatchingcompany>1234</dispatchingcompany>
+        <destinycompany>4321</destinycompany>
+        <communicationsdate>2018-05-01</communicationsdate>
+        <communicationshour>12:00:00</communicationshour>
+        <processcode>41</processcode>
+        <messagetype>A1</messagetype>
+    </heading>
+    <a141>
+        <comreferencenum>000123456789</comreferencenum>
+        <reqdate>2018-05-01</reqdate>
+        <reqhour>13:00:00</reqhour>
+        <nationality>ES</nationality>
+        <documenttype>01</documenttype>
+        <documentnum>11111111H</documentnum>
+        <cups>ES1234000000000001JN</cups>
+        <modeffectdate>05</modeffectdate>
+        <reqtransferdate>2018-06-01</reqtransferdate>
+        <updatereason>01</updatereason>
+        <surrogacy>S</surrogacy>
+        <newnationality>AF</newnationality>
+        <newdocumenttype>03</newdocumenttype>
+        <newdocumentnum>00000000T</newdocumentnum>
+        <newfirstname>Gas</newfirstname>
+        <newfamilyname1>Al</newfamilyname1>
+        <newfamilyname2>Matalas</newfamilyname2>
+        <newtitulartype>F</newtitulartype>
+        <newregularaddress>S</newregularaddress>
+        <newtelephone1>999888777</newtelephone1>
+        <newtelephone2>666555444</newtelephone2>
+        <newemail>gasalmatalas@atr</newemail>
+        <newlanguage>02</newlanguage>
+        <newprovinceowner>17</newprovinceowner>
+        <newcityowner>17001</newcityowner>
+        <newzipcodeowner>17002</newzipcodeowner>
+        <newstreettypeowner>ACCE</newstreettypeowner>
+        <newstreetowner>Carrer inventat</newstreetowner>
+        <newstreetnumberowner>1</newstreetnumberowner>
+        <newportal>2</newportal>
+        <newstaircase>3</newstaircase>
+        <newfloor>4</newfloor>
+        <newdoor>5</newdoor>
+        <newreqqd>987654321.1234567</newreqqd>
+        <disconnectedserviceaccepted>N</disconnectedserviceaccepted>
+        <extrainfo>comentarios extras
+            linea 1
+            linea2
+        </extrainfo>
+        <registerdoclist>
+            <registerdoc>
+                <date>2018-05-02</date>
+                <doctype>CC</doctype>
+                <url>http://www.gasalmatalas.com</url>
+                <extrainfo>404 page not found</extrainfo>
+            </registerdoc>
+            <registerdoc>
+                <date>2018-05-03</date>
+                <doctype>01</doctype>
+                <url>http://www.gasalmatalas.com</url>
+                <extrainfo>404 page not found</extrainfo>
+            </registerdoc>
+        </registerdoclist>
+    </a141>
+</sctdapplication>

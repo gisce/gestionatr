@@ -12,6 +12,7 @@ from gestionatr.output.messages import sw_w1 as w1
 from gestionatr.output.messages import sw_b1 as b1
 from gestionatr.output.messages import sw_r1 as r1
 from gestionatr.output.messages import sw_f1 as f1
+from gestionatr.output.messages import sw_a1_41 as a1_41
 
 
 class test_C1(unittest.TestCase):
@@ -2818,3 +2819,104 @@ class test_F1(unittest.TestCase):
 
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_f101_factura_otros.read())
+
+
+class test_A1_41(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a141 = open(get_data("a141.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a141.close()
+
+    def test_create_a141(self):
+        # MensajeA141
+        mensaje_a141 = a1_41.MensajeA141()
+
+        # Heading
+        heading = a1_41.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '41',
+            'messagetype': 'A1'
+        }
+        heading.feed(heading_fields)
+
+        # A141
+        a141 = a1_41.A141()
+
+        # RegistrosDocumento
+        registros_documento = a1_41.Registerdoclist()
+        rd1 = a1_41.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-02',
+            'doctype': 'CC',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd1.feed(registro_doc_fields)
+        rd2 = a1_41.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-03',
+            'doctype': '01',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd2.feed(registro_doc_fields)
+        registros_documento.feed({
+            'registerdoc_list': [rd1, rd2],
+        })
+
+        a141_fields = {
+            'comreferencenum': '000123456789',
+            'reqdate': '2018-05-01',
+            'reqhour': '13:00:00',
+            'nationality': 'ES',
+            'documenttype': '01',
+            'documentnum': '11111111H',
+            'cups': 'ES1234000000000001JN0F',
+            'modeffectdate': '05',
+            'reqtransferdate': '2018-06-01',
+            'updatereason': '01',
+            'surrogacy': 'S',
+            'newnationality': 'AF',
+            'newdocumenttype': '03',
+            'newdocumentnum': '00000000T',
+            'newfirstname': 'Gas',
+            'newfamilyname1': 'Al',
+            'newfamilyname2': 'Matalas',
+            'newtitulartype': 'F',
+            'newregularaddress': 'S',
+            'newtelephone1': '999888777',
+            'newtelephone2': '666555444',
+            'newemail': 'gasalmatalas@atr',
+            'newlanguage': '02',
+            'newprovinceowner': '17',
+            'newcityowner': '17001',
+            'newzipcodeowner': '17002',
+            'newstreettypeowner': 'ACCE',
+            'newstreetowner': 'Carrer inventat',
+            'newstreetnumberowner': '1',
+            'newportal': '2',
+            'newstaircase': '3',
+            'newfloor': '4',
+            'newdoor': '5',
+            'newreqqd': '987654321.1234567',
+            'disconnectedserviceaccepted': 'N',
+            'extrainfo': 'comentarios extras\nlinea 1\nlinea2',
+            'registerdoclis': registros_documento,
+        }
+        a141.feed(a141_fields)
+
+        mensaje_a141_fields = {
+            'heading': heading,
+            'a141': a141,
+        }
+        mensaje_a141.feed(mensaje_a141_fields)
+        mensaje_a141.build_tree()
+        xml = str(mensaje_a141)
+        assertXmlEqual(xml, self.xml_a141.read())
