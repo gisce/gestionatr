@@ -3,7 +3,7 @@
 from . import unittest
 from .utils import get_data
 from gestionatr.input.messages \
-    import C1, C2, A3, B1, M1, D1, W1, Q1, R1, F1, Deadlines
+    import C1, C2, A3, B1, M1, D1, W1, Q1, R1, F1, Deadlines, A1_41
 from gestionatr.input.messages.F1 \
     import agrupar_lectures_per_data, obtenir_data_inici_i_final
 
@@ -2169,3 +2169,58 @@ class test_F1(unittest.TestCase):
         # are empty
         self.assertEqual(llog, [])
         self.assertEqual(total, 0)
+
+
+class test_MessageGas(unittest.TestCase):
+    def setUp(self):
+        self.xml_a241 = open(get_data("a241.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a241.close()
+
+    def test_gas_header(self):
+        a1_41 = A1_41(self.xml_a241)
+        a1_41.parse_xml()
+        self.assertEqual(a1_41.get_codi_emisor, '1234')
+        self.assertEqual(a1_41.get_codi_destinatari, '4321')
+        self.assertEqual(a1_41.cups, 'ES1234000000000001JN')
+        self.assertEqual(a1_41.codi_sollicitud, '000123456789')
+        self.assertEqual(a1_41.data_sollicitud, '2018-05-01 12:00:00')
+
+
+class test_A1_41(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a241 = open(get_data("a241.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a241.close()
+
+    def test_a241(self):
+        a1_41 = A1_41(self.xml_a241)
+        a1_41.parse_xml()
+        self.assertEqual(a1_41.StatusPS, '1')
+        self.assertEqual(a1_41.comreferencenum, '000123456789')
+        self.assertEqual(a1_41.cups, 'ES1234000000000001JN')
+        self.assertEqual(a1_41.documentnum, '11111111H')
+        self.assertEqual(a1_41.documenttype, '01')
+        self.assertEqual(a1_41.extrainfo, 'comentarios extras')
+        self.assertEqual(a1_41.foreseentransferdate, '2018-06-01')
+        self.assertEqual(a1_41.nationality, 'ES')
+        self.assertEqual(a1_41.netsituation, 'red municipio')
+        self.assertEqual(a1_41.newmodeffectdate, '04')
+        self.assertEqual(a1_41.qdgranted, '987654321.1234567')
+        self.assertEqual(a1_41.reqcode, '0123456789')
+        self.assertEqual(a1_41.reqestimatedqa, '665544332211')
+        self.assertEqual(a1_41.reqoutgoingpressure, '54321.123')
+        self.assertEqual(a1_41.reqqd, '987654321.1234567')
+        self.assertEqual(a1_41.reqqh, '987654321')
+        self.assertEqual(a1_41.responsedate, '2018-05-01')
+        self.assertEqual(a1_41.responsehour, '13:00:00')
+        self.assertEqual(a1_41.result, '01')
+        self.assertEqual(a1_41.resultdesc, 'Aceptada')
+        self.assertEqual(a1_41.resultreason, 'R32')
+        self.assertEqual(a1_41.resultreasondesc, 'Fecha efecto solicitada anterior al día actual.')
+        self.assertEqual(a1_41.singlenomination, 'S')
+        self.assertEqual(a1_41.tolltype, '31')
+        self.assertEqual(a1_41.updatereason, '01')

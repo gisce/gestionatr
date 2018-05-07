@@ -45,10 +45,7 @@
         <newdoor>5</newdoor>
         <newreqqd>987654321.1234567</newreqqd>
         <disconnectedserviceaccepted>N</disconnectedserviceaccepted>
-        <extrainfo>comentarios extras
-            linea 1
-            linea2
-        </extrainfo>
+        <extrainfo>comentarios extras</extrainfo>
         <registerdoclist>
             <registerdoc>
                 <date>2018-05-02</date>

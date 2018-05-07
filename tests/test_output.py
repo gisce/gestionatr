@@ -2878,7 +2878,7 @@ class test_A1_41(unittest.TestCase):
             'nationality': 'ES',
             'documenttype': '01',
             'documentnum': '11111111H',
-            'cups': 'ES1234000000000001JN0F',
+            'cups': 'ES1234000000000001JN',
             'modeffectdate': '05',
             'reqtransferdate': '2018-06-01',
             'updatereason': '01',
@@ -2907,7 +2907,7 @@ class test_A1_41(unittest.TestCase):
             'newdoor': '5',
             'newreqqd': '987654321.1234567',
             'disconnectedserviceaccepted': 'N',
-            'extrainfo': 'comentarios extras\nlinea 1\nlinea2',
+            'extrainfo': 'comentarios extras',
             'registerdoclis': registros_documento,
         }
         a141.feed(a141_fields)
