@@ -6,14 +6,18 @@ from gestionatr.utils import get_rec_attr
 
 XSD_DATA.update({
     '41': {
+        'A1': 'A131.xsd',
         'A2': 'A241.xsd',
-        'A3': 'A341.xsd'
+        'A3': 'A341.xsd',
+        'A4': 'A441.xsd',
     },
 })
 
 MAIN_MESSAGE_XSD.update({
+    'A141': 'a141',
     'A241': 'a241',
-    'A341': 'a341'
+    'A341': 'a341',
+    'A441': 'a441',
 })
 
 

@@ -721,3 +721,6 @@ class corrector(object):
             return data.text
         else:
             return False
+
+    # Datos paso a441
+    # Ya está soportado con los atributos que tenemos
