@@ -34,7 +34,6 @@ def test(filename):
             sys.stdout.write(u'Correct File\n')
         except Exception, e:
             try:
-                data = xml_file.read()
                 m = message_gas.MessageGas(data)
                 m.parse_xml()
                 sys.stdout.write(u'Correct File\n')
