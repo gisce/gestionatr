@@ -5,9 +5,15 @@ from message import XSD_DATA, MAIN_MESSAGE_XSD, Message, except_f1
 from gestionatr.utils import get_rec_attr
 
 XSD_DATA.update({
+    '41': {
+        'A2': 'A241.xsd',
+        'A3': 'A341.xsd'
+    },
 })
 
 MAIN_MESSAGE_XSD.update({
+    'A241': 'a241',
+    'A341': 'a341'
 })
 
 

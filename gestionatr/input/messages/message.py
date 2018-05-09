@@ -71,8 +71,6 @@ XSD_DATA = {'F1': {'01': 'Facturacion.xsd'},
                    '02': ('AceptacionAportacionLectura.xsd',
                           'Rechazo.xsd'),
                    },
-            '41': {'A2': 'A241.xsd',
-                  }
             }
 
 MAIN_MESSAGE_XSD = {
@@ -107,7 +105,6 @@ MAIN_MESSAGE_XSD = {
     'MensajeSolicitudAportacionLectura': ['DatosSolicitudAportacionLectura', 'LecturaAportada'],
     'AceptacionAportacionLectura': 'DatosAceptacionLectura',
     'Facturacion': ['Facturas',  'OtrosDatosFactura'],
-    'A241': 'a241'
 }
 
 
