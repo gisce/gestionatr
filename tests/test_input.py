@@ -2193,10 +2193,12 @@ class test_A1_41(unittest.TestCase):
     def setUp(self):
         self.xml_a241 = open(get_data("a241.xml"), "r")
         self.xml_a341 = open(get_data("a341.xml"), "r")
+        self.xml_a441 = open(get_data("a441.xml"), "r")
 
     def tearDown(self):
         self.xml_a241.close()
         self.xml_a341.close()
+        self.xml_a441.close()
 
     def test_a241(self):
         a1_41 = A1_41(self.xml_a241)
@@ -2297,3 +2299,27 @@ class test_A1_41(unittest.TestCase):
         self.assertEqual(counter.counterproperty, '06')
         self.assertEqual(counter.countertype, 'tipo2')
         self.assertEqual(counter.reallecture, '3000')
+
+    def test_a441(self):
+        a1_41 = A1_41(self.xml_a441)
+        a1_41.parse_xml()
+        self.assertEqual(a1_41.comreferencenum, '000123456789')
+        self.assertEqual(a1_41.cups, 'ES1234000000000001JN')
+        self.assertEqual(a1_41.documentnum, '11111111H')
+        self.assertEqual(a1_41.documenttype, '01')
+        self.assertEqual(a1_41.extrainfo, 'comentarios extras')
+        self.assertEqual(a1_41.nationality, 'ES')
+        self.assertEqual(a1_41.reqcode, '0123456789')
+        self.assertEqual(a1_41.responsedate, '2018-05-01')
+        self.assertEqual(a1_41.responsehour, '13:00:00')
+        self.assertEqual(a1_41.result, '13')
+        self.assertEqual(a1_41.resultdesc, 'No Realizada')
+        self.assertEqual(a1_41.resultreason, 'R32')
+        self.assertEqual(a1_41.resultreasondesc, 'Fecha efecto solicitada anterior al día actual.')
+        self.assertEqual(a1_41.updatereason, '01')
+        self.assertEqual(a1_41.closingtype, '064')
+        self.assertEqual(a1_41.closingtypedesc, 'No quiere gas')
+        self.assertEqual(a1_41.interventiondate, '2016-01-01')
+        self.assertEqual(a1_41.interventionhourfrom, '09:00:00')
+        self.assertEqual(a1_41.interventionhourto, '12:00:00')
+        self.assertEqual(a1_41.visitnumber, '987')
