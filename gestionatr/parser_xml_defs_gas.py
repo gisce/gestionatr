@@ -22,7 +22,7 @@ def parser(frommxl, tofile):
                     for super_text in cell['{{{0}}}p'.format(cell.nsmap['text'])]:
                         try:
                             cell_text = super_text.span.text
-                            pyfile.write('\'' + cell_text + '\',')
+                            pyfile.write('\'' + cell_text + '\', ')
                         except:
                             continue
                 pyfile.write('),\n')
