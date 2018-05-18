@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia León (Comisión Nacional de los Mercados y la Competencia) -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/B7032" targetNamespace="http://localhost/sctd/B7032" elementFormDefault="qualified">
+	<include schemaLocation="CommonTagsFACT.xsd"/>
+	<element name="facturasctd" type="tns:FacturaSctdB7032Type"/>
+	<complexType name="FacturaSctdB7032Type">
+		<sequence>
+			<element name="cabecera" type="tns:HeadingB7032Type" minOccurs="1" maxOccurs="1"/>
+			<element name="datosempresaemisora" type="tns:DatosEmpresaEmisoraType" minOccurs="1" maxOccurs="1"/>
+			<element name="datosempresadestino" type="tns:DatosEmpresaDestinoType" minOccurs="1" maxOccurs="1"/>
+			<element name="factura" type="tns:FacturaB7032Type" minOccurs="1" maxOccurs="unbounded"/>
+			<any namespace="##other" processContents="skip" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="HeadingB7032Type">
+		<sequence>
+			<element name="codenvio" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="3"/>
+						<enumeration value="GML"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="empresaemisora" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="empresadestino" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="fechacomunic" type="date" minOccurs="1" maxOccurs="1"/>
+			<element name="horacomunic" type="time" minOccurs="1" maxOccurs="1"/>
+			<element name="codproceso" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"/>
+						<enumeration value="32"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="codtipomensaje" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="3"/>
+						<enumeration value="B70"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="FacturaB7032Type">
+		<sequence>
+			<element name="cups" type="tns:CupsType" minOccurs="1" maxOccurs="1"/>
+			<element name="provincia" type="tns:CodProvinciaType" minOccurs="1" maxOccurs="1"/>
+			<element name="municipio" type="tns:CodAlpha5Type" minOccurs="0" maxOccurs="1"/>
+			<element name="codpostal" type="tns:CodAlpha5Type" minOccurs="1" maxOccurs="1"/>
+			<element name="tipovia" type="tns:TipoViaType" minOccurs="1" maxOccurs="1"/>
+			<element name="descalle" type="tns:CalleType" minOccurs="1" maxOccurs="1"/>
+			<element name="numfinca" type="tns:NumFincaType" minOccurs="1" maxOccurs="1"/>
+			<element name="portal" type="tns:CodAlpha5Type" minOccurs="0" maxOccurs="1"/>
+			<element name="escalera" type="tns:CodAlpha5Type" minOccurs="0" maxOccurs="1"/>
+			<element name="piso" type="tns:CodAlpha5Type" minOccurs="0" maxOccurs="1"/>
+			<element name="puerta" type="tns:CodAlpha5Type" minOccurs="0" maxOccurs="1"/>
+			<element name="municipioRed" type="tns:CodAlpha5Type" minOccurs="1" maxOccurs="1"/>
+			<element name="tipodocumento" type="tns:TipoDocumentoType" minOccurs="0" maxOccurs="1"/>
+			<element name="numdocumento" type="tns:NumDocumentoType" minOccurs="0" maxOccurs="1"/>
+			<element name="nombre" type="tns:CodAlpha30Type" minOccurs="0" maxOccurs="1"/>
+			<element name="apellido1" type="tns:CodAlpha40Type" minOccurs="0" maxOccurs="1"/>
+			<element name="apellido2" type="tns:CodAlpha30Type" minOccurs="0" maxOccurs="1"/>
+			<element name="numpseudofactura" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="26"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="tipofactura" type="tns:TipoFacturaType" minOccurs="1" maxOccurs="1"/>
+			<element name="clasefact" type="tns:ClaseFacturaType" minOccurs="1" maxOccurs="1"/>
+			<element name="numfactorigen" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="26"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="fecfactura" type="date" minOccurs="1" maxOccurs="1"/>
+			<element name="numfactura" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="17"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="tipofacturacion" type="tns:TipoFacturacionType" minOccurs="0" maxOccurs="1"/>
+			<element name="tipopeaje" type="tns:TipoPeajeType" minOccurs="1" maxOccurs="1"/>
+			<element name="importetotal" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="decimal">
+						<totalDigits value="11"/>
+						<fractionDigits value="2"/>
+						<minInclusive value="-999999999.99"/>
+						<maxInclusive value="999999999.99"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="SaldoTotalACobrar" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="decimal">
+						<totalDigits value="11"/>
+						<fractionDigits value="2"/>
+						<minInclusive value="-999999999.99"/>
+						<maxInclusive value="999999999.99"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="tipopenalizacion" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="1"/>
+						<enumeration value="S"/>
+						<enumeration value="N"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="observaciones1" type="tns:CodAlpha100Type" minOccurs="0" maxOccurs="1"/>
+			<element name="observaciones2" type="tns:CodAlpha100Type" minOccurs="0" maxOccurs="1"/>
+			<element name="telefurgencias" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="20"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="listaboe" type="tns:ListaBoeType" minOccurs="1" maxOccurs="1"/>
+			<element name="listaconceptos" type="tns:ListaConceptosType" minOccurs="1" maxOccurs="1"/>
+			<element name="listamedidores" type="tns:ListaMedidoresType" minOccurs="0" maxOccurs="1"/>
+			<element name="listafacturasinspeccion" type="tns:ListaFacturasInspecType" minOccurs="0" maxOccurs="1"/>
+			<element name="listaContactos" type="tns:ListaContactosType" minOccurs="0" maxOccurs="1"/>
+			<element name="historialConsumos" type="tns:ListaHistorialConsumosType" minOccurs="0" maxOccurs="1"/>
+			<element name="imputacionCostes" type="tns:ImputacionCostesType" minOccurs="1" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+</schema>

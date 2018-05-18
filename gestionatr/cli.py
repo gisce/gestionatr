@@ -3,11 +3,11 @@ import sys
 import click
 
 from gestionatr.input.messages import message
-from gestionatr.input.messages.message import except_f1 
+from gestionatr.input.messages import message_gas
 from gestionatr import __version__
 
 
-VERSION_TEXT =  u'ATR library version (gestionatr) : {0}'.format(__version__)
+VERSION_TEXT = u'ATR library version (gestionatr) : {0}'.format(__version__)
 
 
 def get_gestionatr_version(ctx, param, value):
@@ -33,7 +33,11 @@ def test(filename):
             m.parse_xml()
             sys.stdout.write(u'Correct File\n')
         except Exception, e:
-            sys.stdout.write(
-                u'WARNING: Invalid File: {0}\n'.format(str(e.value))
-            )
-
+            try:
+                m = message_gas.MessageGas(data)
+                m.parse_xml()
+                sys.stdout.write(u'Correct File\n')
+            except Exception, e:
+                sys.stdout.write(
+                    u'WARNING: Invalid File: {0}\n'.format(str(e.value))
+                )
