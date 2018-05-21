@@ -2498,7 +2498,7 @@ TAULA_TIPO_PEAJE = [
     ('M2', 'M2', 'Materia Prima 2', '04'),
     ('99', '99', 'Factura agregada D-C'),
 ]
-TAULA_TIPOS_DE_USO_DEL_GAS = [
+TAULA_TIPOS_DE_USO_DEL_GAS_EXTENDED = [
     ('01', '05', 'Combustible', '01/01/2002', 'NO'),
     ('02', '05', 'Carburantes', '01/01/2002', 'NO'),
     ('03', '05', 'Motores Estacionarios', '01/01/2002', 'SI'),
@@ -2534,6 +2534,11 @@ TAULA_TIPOS_DE_USO_DEL_GAS = [
     ('17', 'TODOS', 'Carburante motores no estacionarios para vehículos industriales', 'Pendiente directiva', 'Pendiente directiva', 'NO'),
     ('18', 'TODOS', 'Carburante motores no estacionarios para vehículos comerciales', 'Pendiente directiva', 'Pendiente directiva', 'NO'),
 ]
+
+TAULA_TIPOS_DE_USO_DEL_GAS = [
+    (tipo[0], tipo[2]) for tipo in TAULA_TIPOS_DE_USO_DEL_GAS_EXTENDED
+]
+
 TAULA_TIPO_CORRECTOR = [
     ('01', 'PT'),
     ('02', 'PTZ'),
