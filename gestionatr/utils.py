@@ -48,8 +48,8 @@ def validate_xml(data, is_gas=False):
         return ValidationResult(True, None)
     except Exception as e:
         try:
-            from gestionatr.input.messages import Message
-            m = Message(data)
+            from gestionatr.input.messages import MessageGas
+            m = MessageGas(data)
             m.parse_xml()
             return ValidationResult(True, None)
         except Exception as e2:
