@@ -2908,7 +2908,7 @@ class test_A1_41(unittest.TestCase):
             'newreqqd': '987654321.1234567',
             'disconnectedserviceaccepted': 'N',
             'extrainfo': 'comentarios extras',
-            'registerdoclis': registros_documento,
+            'registerdoclist': registros_documento,
         }
         a141.feed(a141_fields)
 
