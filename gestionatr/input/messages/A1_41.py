@@ -602,7 +602,7 @@ class A1_41(MessageGas, ProcessDeadline):
         return data
 
     @property
-    def correctorlis(self):
+    def correctorlist(self):
         data = []
         obj = get_rec_attr(self.obj, self._header, False)
         if (hasattr(obj, 'correctorlist') and
