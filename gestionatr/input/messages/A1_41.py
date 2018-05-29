@@ -611,6 +611,19 @@ class A1_41(MessageGas, ProcessDeadline):
                 data.append(corrector(d))
         return data
 
+    # Datos paso a441
+    # Ya está soportado con los atributos que tenemos
+
+    # Datos paso a3s41
+    @property
+    def previousatrcode(self):
+        tree = '{0}.previousatrcode'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data not in [None, False]:
+            return data.text
+        else:
+            return False
+
 
 class counter(object):
 
@@ -721,6 +734,3 @@ class corrector(object):
             return data.text
         else:
             return False
-
-    # Datos paso a441
-    # Ya está soportado con los atributos que tenemos
