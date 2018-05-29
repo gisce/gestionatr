@@ -2447,7 +2447,7 @@ TAULA_MODELO_FECHA_EFECTO_PREVISTA = [
     ('15', 'Fecha Fija por actuación de reapertura del PS '),
     ('16', 'Fecha fija por incumplimiento del plazo mínimo de preaviso'),
 ]
-TAULA_TIPO_PEAJE = [
+TAULA_TIPO_PEAJE_EXTENDED = [
     ('1.1', '11', 'Presión > 60 bares y Consumo <= 200 GWh/año', '05', '01'),
     ('1.2', '12', 'Presión > de 60 bares y ', '05', '01'),
     ('1.3', '13', 'Presión > 60 bares y ', '05', '01'),
@@ -2498,6 +2498,8 @@ TAULA_TIPO_PEAJE = [
     ('M2', 'M2', 'Materia Prima 2', '04'),
     ('99', '99', 'Factura agregada D-C'),
 ]
+TAULA_TIPO_PEAJE = [(x[1], x[2]) for x in TAULA_TIPO_PEAJE_EXTENDED]
+
 TAULA_TIPOS_DE_USO_DEL_GAS_EXTENDED = [
     ('01', '05', 'Combustible', '01/01/2002', 'NO'),
     ('02', '05', 'Carburantes', '01/01/2002', 'NO'),
