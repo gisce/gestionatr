@@ -2058,7 +2058,7 @@ TAULA_TIPO_DE_INFORMACION_INCIDENCIA = [
 ]
 TAULA_TIPO_DE_ACTIVACION = [
     ('001', 'Realizada puesta en servicio'),
-    ('002', 'No realizada técnicamente en campo', 'Solo aplica para informar la activación de una baja administrativa en los procesos de baja.'),
+    ('002', 'No realizada técnicamente en campo'),
 ]
 TAULA_ANOMALIA_INSTALACION = [
     ('001', 'FUGA DE GAS'),
@@ -2447,58 +2447,50 @@ TAULA_MODELO_FECHA_EFECTO_PREVISTA = [
     ('15', 'Fecha Fija por actuación de reapertura del PS '),
     ('16', 'Fecha fija por incumplimiento del plazo mínimo de preaviso'),
 ]
+
 TAULA_TIPO_PEAJE = [
-    ('1.1', '11', 'Presión > 60 bares y Consumo <= 200 GWh/año', '05', '01'),
-    ('1.2', '12', 'Presión > de 60 bares y ', '05', '01'),
-    ('1.3', '13', 'Presión > 60 bares y ', '05', '01'),
-    ('2.1', '21', '4 bares < Presión <= 60 bares y '
-                  'Consumo <= 500 MWh/año', '01', '02'),
-    ('2.2', '22', '4 bares < Presión <= 60 bares y '
-                  '500 MWh/año < Consumo <= 5000 MWh/año', '01', '02'),
-    ('2.3', '23', '4 bares < Presión <= 60 bares y '
-                  '5000 MWh/año < Consumo <= 30000 MWh/año', '01', '02'),
-    ('2.4', '24', '4 bares < Presión <= 60 bares y '
-                  '30000 MWh/año < Consumo <= 100000 MWh/año', '01', '02'),
-    ('2.5', '25', '4 bares < Presión <= 60 bares y ', '05', '02'),
-    ('2.6', '26', '4 bares < Presión <= 60 bares y ', '05', '02'),
-    ('2.1 bis', '1B', 'Presión <= 4 bares y ', '02'),
-    ('2.2 bis', '2B', 'Presión <= 4 bares y ', '02'),
-    ('2.3 bis', '3B', 'Presión <= 4 bares y ', '02'),
-    ('2.4 bis', '4B', 'Presión <= 4 bares y ', '02'),
-    ('2.5 bis', '5B', 'Presión <= 4 bares y ', '02'),
-    ('2.6 bis', '6B', 'Presión <= 4 bares y ', '02'),
-    ('3.1', '31', 'Presión <= 4 bares y ', '02', '03'),
-    ('3.2', '32', 'Presión <= 4 bares y ', '02', '03'),
-    ('3.3', '33', 'Presión <= 4 bares y ', '02', '03'),
-    ('3.4', '34', 'Presión <= 4 bares y 100000 Kwh/año < Consumo <= 100 Gwh/año', '03'),
-    ('3.5', '35', 'Presión <= 4 bares y 100 GWh/año < Consumo', '03'),
-    ('4.1', '41', 'Presión > 60 bares y consumo <= 200 GWh/año', '01'),
-    ('4.2', '42', 'Presión > 60 bares y ', '01'),
-    ('4.3', '43', 'Presión > 60 bares y consumo > 1.000 ', '01'),
-    ('4.4', '44', '4 bares < Presión <= 60 bares y '
-                  '10 GWh/año < Consumo <= 30 GWh/año', '02'),
-    ('4.5', '45', '4 bares < Presión <= 60 bares y '
-                  '30 GWh/año < Consumo <= 100 GWh/año', '02'),
-    ('4.6', '46', '4 bares < Presión <= 60 bares y '
-                  '100 GWh/año < Consumo <= 500 GWh/año', '02'),
-    ('4.7', '47', '4 bares < Presión <= 60 bares y Consumo > 500 GWh/año', '02'),
-    ('A1', 'A1', 'Presión > 60 bares y Consumo <= 200 GWh/año', '01'),
-    ('A2', 'A2', 'Presión > de 60 bares y '
-                 '200 GWh/año < Consumo <= 1000 GWh/año ', '01'),
-    ('A3', 'A3', 'Presión > 60 bares y Consumo > 1000 GWh/año ', '01'),
-    ('B1', 'B1', '4 bares < Presión <= 60 bares y '
-                 '100000 MWh/año < Consumo <= 500000 MWh/año', '02'),
-    ('B2', 'B2', '4 bares < Presión <= 60 bares y '
-                 '500000 MWh/año < Consumo ', '02'),
-    ('C1', 'C1', 'Centrales de generación eléctrica (grupo 4) ', '02'),
-    ('C2', 'C2', 'Centrales de generación eléctrica (grupo 4), ', '01'),
-    ('D1', 'D1', 'Resto clientes (grupo 4), 4 ', '02'),
-    ('D2', 'D2', 'Resto clientes (grupo 4), Presión > ', '01'),
-    ('M1', 'M1', 'Materia Prima 1', '04'),
-    ('M2', 'M2', 'Materia Prima 2', '04'),
-    ('99', '99', 'Factura agregada D-C'),
+    ('11', 'Presión > 60 bares y Consumo <= 200 GWh/año'),
+    ('12', 'Presión > de 60 bares y  200 GWh/año < Consumo <= 1000 GWh/año'),
+    ('13', 'Presión > 60 bares y  Consumo > 1000 GWh/año'),
+    ('21', '4 bares < Presión <= 60 bares y Consumo <= 500 MWh/año'),
+    ('22', '4 bares < Presión <= 60 bares y 500 MWh/año < Consumo <= 5000 MWh/año'),
+    ('23', '4 bares < Presión <= 60 bares y 5000 MWh/año < Consumo <= 30000 MWh/año'),
+    ('24', '4 bares < Presión <= 60 bares y 30000 MWh/año < Consumo <= 100000 MWh/año'),
+    ('25', '4 bares < Presión <= 60 bares y  100000 MWh/año < Consumo <= 500000 MWh/año'),
+    ('26', '4 bares < Presión <= 60 bares y  500000 MWh/año < Consumo'),
+    ('1B', 'Presión <= 4 bares y  Consumo <= 500 MWh/año'),
+    ('2B', 'Presión <= 4 bares y  500 MWh/año < Consumo <= 5000 MWh/año'),
+    ('3B', 'Presión <= 4 bares y  5000 MWh/año < Consumo <= 30000 MWh/año'),
+    ('4B', 'Presión <= 4 bares y  30000 MWh/año < Consumo <= 100000 MWh/año'),
+    ('5B', 'Presión <= 4 bares y  100000 MWh/año < Consumo <= 500000 MWh/año'),
+    ('6B', 'Presión <= 4 bares y  500000 MWh/año < Consumo'),
+    ('31', 'Presión <= 4 bares y  Consumo <= 5000 kWh/año'),
+    ('32', 'Presión <= 4 bares y  5000 kWh/año < Consumo <= 50000 kWh/año'),
+    ('33', 'Presión <= 4 bares y  50000 kWh/año < Consumo <= 100000 kWh/año'),
+    ('34', 'Presión <= 4 bares y 100000 Kwh/año < Consumo <= 100 Gwh/año'),
+    ('35', 'Presión <= 4 bares y 100 GWh/año < Consumo'),
+    ('41', 'Presión > 60 bares y consumo <= 200 GWh/año'),
+    ('42', 'Presión > 60 bares y  200 GWh/año < Consumo <=1.000 GWh/año'),
+    ('43', 'Presión > 60 bares y consumo > 1.000  GWh/año  '),
+    ('44', '4 bares < Presión <= 60 bares y 10 GWh/año < Consumo <= 30 GWh/año'),
+    ('45', '4 bares < Presión <= 60 bares y 30 GWh/año < Consumo <= 100 GWh/año'),
+    ('46', '4 bares < Presión <= 60 bares y 100 GWh/año < Consumo <= 500 GWh/año'),
+    ('47', '4 bares < Presión <= 60 bares y Consumo > 500 GWh/año'),
+    ('A1', 'Presión > 60 bares y Consumo <= 200 GWh/año'),
+    ('A2', 'Presión > de 60 bares y 200 GWh/año < Consumo <= 1000 GWh/año '),
+    ('A3', 'Presión > 60 bares y Consumo > 1000 GWh/año '),
+    ('B1', '4 bares < Presión <= 60 bares y 100000 MWh/año < Consumo <= 500000 MWh/año'),
+    ('B2', '4 bares < Presión <= 60 bares y 500000 MWh/año < Consumo '),
+    ('C1', 'Centrales de generación eléctrica (grupo 4)  con  4 bar < Presión  <= 60 bar'),
+    ('C2', 'Centrales de generación eléctrica (grupo 4),  Presión >  60 bar'),
+    ('D1', 'Resto clientes (grupo 4), 4  bar < Presión  <= 60 bar'),
+    ('D2', 'Resto clientes (grupo 4), Presión >  60 bar'),
+    ('M1', 'Materia Prima 1'),
+    ('M2', 'Materia Prima 2'),
+    ('99', 'Factura agregada D-C'),
 ]
-TAULA_TIPOS_DE_USO_DEL_GAS = [
+
+TAULA_TIPOS_DE_USO_DEL_GAS_EXTENDED = [
     ('01', '05', 'Combustible', '01/01/2002', 'NO'),
     ('02', '05', 'Carburantes', '01/01/2002', 'NO'),
     ('03', '05', 'Motores Estacionarios', '01/01/2002', 'SI'),
@@ -2533,6 +2525,9 @@ TAULA_TIPOS_DE_USO_DEL_GAS = [
     ('16', 'TODOS', 'Carburante motores no estacionarios para vehículos particulares', 'Pendiente directiva', 'Pendiente directiva', 'NO'),
     ('17', 'TODOS', 'Carburante motores no estacionarios para vehículos industriales', 'Pendiente directiva', 'Pendiente directiva', 'NO'),
     ('18', 'TODOS', 'Carburante motores no estacionarios para vehículos comerciales', 'Pendiente directiva', 'Pendiente directiva', 'NO'),
+]
+TAULA_TIPOS_DE_USO_DEL_GAS = [
+    (tipo[0], tipo[2]) for tipo in TAULA_TIPOS_DE_USO_DEL_GAS_EXTENDED
 ]
 TAULA_TIPO_CORRECTOR = [
     ('01', 'PT'),

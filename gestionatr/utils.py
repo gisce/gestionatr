@@ -40,11 +40,20 @@ def get_description(code, table_name):
 ValidationResult = namedtuple('ValidationResult', ['valid', 'error'])
 
 
-def validate_xml(data):
+def validate_xml(data, is_gas=False):
     try:
         from gestionatr.input.messages import Message
         m = Message(data)
         m.parse_xml()
         return ValidationResult(True, None)
     except Exception as e:
-        return ValidationResult(False, u'Invalid File: {0}'.format(str(e.value)))
+        try:
+            from gestionatr.input.messages import MessageGas
+            m = MessageGas(data)
+            m.parse_xml()
+            return ValidationResult(True, None)
+        except Exception as e2:
+            if is_gas:
+                return ValidationResult(False, u'Invalid File: {0}'.format(str(e2.value)))
+            else:
+                return ValidationResult(False, u'Invalid File: {0}'.format(str(e.value)))

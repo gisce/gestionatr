@@ -6,7 +6,7 @@ from gestionatr.utils import get_rec_attr
 
 XSD_DATA.update({
     '41': {
-        'A1': 'A131.xsd',
+        'A1': 'A141.xsd',
         'A2': 'A241.xsd',
         'A3': 'A341.xsd',
         'A4': 'A441.xsd',

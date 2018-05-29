@@ -30,7 +30,7 @@ class A141(XmlModel):
         'newprovinceowner', 'newcityowner', 'newzipcodeowner',
         'newstreettypeowner', 'newstreetowner', 'newstreetnumberowner',
         'newportal', 'newstaircase', 'newfloor', 'newdoor', 'newreqqd',
-        'disconnectedserviceaccepted', 'extrainfo', 'registerdoclis'
+        'disconnectedserviceaccepted', 'extrainfo', 'registerdoclist'
     )
 
     def __init__(self):
@@ -71,7 +71,7 @@ class A141(XmlModel):
         self.newreqqd = XmlField('newreqqd')
         self.disconnectedserviceaccepted = XmlField('disconnectedserviceaccepted')
         self.extrainfo = XmlField('extrainfo')
-        self.registerdoclis = Registerdoclist()
+        self.registerdoclist = Registerdoclist()
         super(A141, self).__init__('a141', 'a141')
 
 
