@@ -10,6 +10,7 @@ XSD_DATA.update({
         'A2': 'A241.xsd',
         'A3': 'A341.xsd',
         'A4': 'A441.xsd',
+        'A3S': 'A3S41.xsd',
     },
 })
 
@@ -18,6 +19,7 @@ MAIN_MESSAGE_XSD.update({
     'A241': 'a241',
     'A341': 'a341',
     'A441': 'a441',
+    'A3S41': 'a3s41',
 })
 
 
@@ -81,6 +83,10 @@ class MessageGas(Message):
         if data not in [None, False]:
             return data.text
         else:
+            tree = '{0}.reqcode'.format(self._header)
+            data = get_rec_attr(self.obj, tree, False)
+            if data not in [None, False]:
+                return data.text
             raise except_f1('Error', u'Documento sin código de solicitud')
 
     @property
