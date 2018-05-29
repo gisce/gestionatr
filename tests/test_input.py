@@ -2194,11 +2194,13 @@ class test_A1_41(unittest.TestCase):
         self.xml_a241 = open(get_data("a241.xml"), "r")
         self.xml_a341 = open(get_data("a341.xml"), "r")
         self.xml_a441 = open(get_data("a441.xml"), "r")
+        self.xml_a3s41 = open(get_data("a3s41.xml"), "r")
 
     def tearDown(self):
         self.xml_a241.close()
         self.xml_a341.close()
         self.xml_a441.close()
+        self.xml_a3s41.close()
 
     def test_a241(self):
         a1_41 = A1_41(self.xml_a241)
@@ -2303,6 +2305,7 @@ class test_A1_41(unittest.TestCase):
     def test_a441(self):
         a1_41 = A1_41(self.xml_a441)
         a1_41.parse_xml()
+        self.assertEqual(a1_41.codi_sollicitud, u'000123456789')
         self.assertEqual(a1_41.comreferencenum, u'000123456789')
         self.assertEqual(a1_41.cups, u'ES1234000000000001JN')
         self.assertEqual(a1_41.documentnum, u'11111111H')
@@ -2323,3 +2326,34 @@ class test_A1_41(unittest.TestCase):
         self.assertEqual(a1_41.interventionhourfrom, u'09:00:00')
         self.assertEqual(a1_41.interventionhourto, u'12:00:00')
         self.assertEqual(a1_41.visitnumber, u'987')
+
+    def test_a3s41(self):
+        a1_41 = A1_41(self.xml_a3s41)
+        a1_41.parse_xml()
+        self.assertEqual(a1_41.previousatrcode, u'000111222333444555666777')
+        self.assertEqual(a1_41.nationality, u'ES')
+        self.assertEqual(a1_41.readingtype, u'1')
+        self.assertEqual(a1_41.cups, u'ES1234000000000001JN')
+        self.assertEqual(a1_41.documentnum, u'11111111H')
+        self.assertEqual(a1_41.documenttype, u'01')
+        self.assertEqual(a1_41.extrainfo, u'comentarios extras')
+        self.assertEqual(a1_41.reqcode, u'0123456789')
+        self.assertEqual(a1_41.responsedate, u'2018-05-01')
+        self.assertEqual(a1_41.responsehour, u'13:00:00')
+        self.assertEqual(a1_41.transfereffectivedate, u'2018-07-01')
+        self.assertEqual(a1_41.codi_sollicitud, u'0123456789')
+        self.assertEqual(len(a1_41.correctorlis), 2)
+        corrector = a1_41.correctorlis[0]
+        self.assertEqual(corrector.correctedlecture, u'2200')
+        self.assertEqual(corrector.correctormodel, u'modelo1')
+        self.assertEqual(corrector.correctornumber, u'D123456')
+        self.assertEqual(corrector.correctorproperty, u'01')
+        self.assertEqual(corrector.correctortype, u'01')
+        self.assertEqual(len(a1_41.counterlist), 2)
+        counter = a1_41.counterlist[1]
+        self.assertEqual(counter.countermodel, u'marca2')
+        self.assertEqual(counter.counternumber, u'C123456')
+        self.assertEqual(counter.counterpressure, u'13245.321')
+        self.assertEqual(counter.counterproperty, u'06')
+        self.assertEqual(counter.countertype, u'tipo2')
+        self.assertEqual(counter.reallecture, u'3000')
