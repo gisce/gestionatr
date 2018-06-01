@@ -32,3 +32,4 @@ class A1_02(A1_41):
             return False
 
     # Paso a3s02 ya soportado con los datos que tenemos
+    # Paso a402 ya soportado con los datos que tenemos
