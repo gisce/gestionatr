@@ -5,7 +5,7 @@ from gestionatr.utils import get_rec_attr
 
 
 class A1_41(MessageGas, ProcessDeadline):
-    """Clase que implementa C1."""
+    """Clase que implementa C2."""
 
     steps = []
 
