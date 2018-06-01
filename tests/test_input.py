@@ -2364,10 +2364,12 @@ class test_A1_02(unittest.TestCase):
     def setUp(self):
         self.xml_a202 = open(get_data("a202.xml"), "r")
         self.xml_a302 = open(get_data("a302.xml"), "r")
+        self.xml_a3s02 = open(get_data("a3s02.xml"), "r")
 
     def tearDown(self):
         self.xml_a202.close()
         self.xml_a302.close()
+        self.xml_a3s02.close()
 
     def test_a241(self):
         a202 = A1_02(self.xml_a202)
@@ -2428,6 +2430,37 @@ class test_A1_02(unittest.TestCase):
         self.assertEqual(corrector.correctortype, u'01')
         self.assertEqual(len(a302.counterlist), 2)
         counter = a302.counterlist[1]
+        self.assertEqual(counter.countermodel, u'marca2')
+        self.assertEqual(counter.counternumber, u'C123456')
+        self.assertEqual(counter.counterpressure, u'13245.321')
+        self.assertEqual(counter.counterproperty, u'06')
+        self.assertEqual(counter.countertype, u'tipo2')
+        self.assertEqual(counter.reallecture, u'3000')
+
+    def test_a3s02(self):
+        a3s02 = A1_02(self.xml_a3s02)
+        a3s02.parse_xml()
+        self.assertEqual(a3s02.previousatrcode, u'000111222333444555666777')
+        self.assertEqual(a3s02.nationality, u'ES')
+        self.assertEqual(a3s02.readingtype, u'1')
+        self.assertEqual(a3s02.cups, u'ES1234000000000001JN')
+        self.assertEqual(a3s02.documentnum, u'11111111H')
+        self.assertEqual(a3s02.documenttype, u'01')
+        self.assertEqual(a3s02.extrainfo, u'comentarios extras')
+        self.assertEqual(a3s02.reqcode, u'0123456789')
+        self.assertEqual(a3s02.responsedate, u'2018-05-01')
+        self.assertEqual(a3s02.responsehour, u'13:00:00')
+        self.assertEqual(a3s02.transfereffectivedate, u'2018-07-01')
+        self.assertEqual(a3s02.codi_sollicitud, u'0123456789')
+        self.assertEqual(len(a3s02.correctorlist), 2)
+        corrector = a3s02.correctorlist[0]
+        self.assertEqual(corrector.correctedlecture, u'2200')
+        self.assertEqual(corrector.correctormodel, u'modelo1')
+        self.assertEqual(corrector.correctornumber, u'D123456')
+        self.assertEqual(corrector.correctorproperty, u'01')
+        self.assertEqual(corrector.correctortype, u'01')
+        self.assertEqual(len(a3s02.counterlist), 2)
+        counter = a3s02.counterlist[1]
         self.assertEqual(counter.countermodel, u'marca2')
         self.assertEqual(counter.counternumber, u'C123456')
         self.assertEqual(counter.counterpressure, u'13245.321')

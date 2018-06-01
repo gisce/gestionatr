@@ -21,7 +21,7 @@ class A1_02(A1_41):
         else:
             return False
 
-    # Dateos paso a302
+    # Datos paso a302
     @property
     def caecode(self):
         tree = '{0}.caecode'.format(self._header)
@@ -30,3 +30,5 @@ class A1_02(A1_41):
             return data.text
         else:
             return False
+
+    # Paso a3s02 ya soportado con los datos que tenemos
