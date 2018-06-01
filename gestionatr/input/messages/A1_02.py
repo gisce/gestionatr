@@ -20,3 +20,13 @@ class A1_02(A1_41):
             return data.text
         else:
             return False
+
+    # Dateos paso a302
+    @property
+    def caecode(self):
+        tree = '{0}.caecode'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data not in [None, False]:
+            return data.text
+        else:
+            return False
