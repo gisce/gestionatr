@@ -3,7 +3,7 @@
 from . import unittest
 from .utils import get_data
 from gestionatr.input.messages \
-    import C1, C2, A3, B1, M1, D1, W1, Q1, R1, F1, Deadlines, A1_41
+    import C1, C2, A3, B1, M1, D1, W1, Q1, R1, F1, Deadlines, A1_41, A1_02
 from gestionatr.input.messages.F1 \
     import agrupar_lectures_per_data, obtenir_data_inici_i_final
 
@@ -2357,3 +2357,37 @@ class test_A1_41(unittest.TestCase):
         self.assertEqual(counter.counterproperty, u'06')
         self.assertEqual(counter.countertype, u'tipo2')
         self.assertEqual(counter.reallecture, u'3000')
+
+
+class test_A1_02(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a202 = open(get_data("a202.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a202.close()
+
+    def test_a241(self):
+        a102 = A1_02(self.xml_a202)
+        a102.parse_xml()
+        self.assertEqual(a102.reqcode, u'0123456789')
+        self.assertEqual(a102.comreferencenum, u'000123456789')
+        self.assertEqual(a102.responsedate, u'2018-05-01')
+        self.assertEqual(a102.responsehour, u'13:00:00')
+        self.assertEqual(a102.result, u'01')
+        self.assertEqual(a102.resultdesc, u'Aceptada')
+        self.assertEqual(a102.resultreason, u'R32')
+        self.assertEqual(a102.resultreasondesc, u'Fecha efecto solicitada anterior al día actual.')
+        self.assertEqual(a102.documentnum, u'11111111H')
+        self.assertEqual(a102.nationality, u'ES')
+        self.assertEqual(a102.documenttype, u'01')
+        self.assertEqual(a102.cups, u'ES1234000000000001JN')
+        self.assertEqual(a102.tolltype, u'31')
+        self.assertEqual(a102.qdgranted, u'654321.1234')
+        self.assertEqual(a102.outgoingpressuregranted, u'12345.123')
+        self.assertEqual(a102.singlenomination, u'S')
+        self.assertEqual(a102.netsituation, u'red municipio')
+        self.assertEqual(a102.newmodeffectdate, u'04')
+        self.assertEqual(a102.foreseentransferdate, u'2018-06-01')
+        self.assertEqual(a102.StatusPS, u'1')
+        self.assertEqual(a102.extrainfo, u'comentarios extras')
