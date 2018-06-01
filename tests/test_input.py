@@ -2365,11 +2365,13 @@ class test_A1_02(unittest.TestCase):
         self.xml_a202 = open(get_data("a202.xml"), "r")
         self.xml_a302 = open(get_data("a302.xml"), "r")
         self.xml_a3s02 = open(get_data("a3s02.xml"), "r")
+        self.xml_a402 = open(get_data("a402.xml"), "r")
 
     def tearDown(self):
         self.xml_a202.close()
         self.xml_a302.close()
         self.xml_a3s02.close()
+        self.xml_a402.close()
 
     def test_a241(self):
         a202 = A1_02(self.xml_a202)
@@ -2467,3 +2469,21 @@ class test_A1_02(unittest.TestCase):
         self.assertEqual(counter.counterproperty, u'06')
         self.assertEqual(counter.countertype, u'tipo2')
         self.assertEqual(counter.reallecture, u'3000')
+
+    def test_a402(self):
+        a402 = A1_02(self.xml_a402)
+        a402.parse_xml()
+        self.assertEqual(a402.reqcode, u'0123456789')
+        self.assertEqual(a402.comreferencenum, u'000123456789')
+        self.assertEqual(a402.responsedate, u'2018-05-01')
+        self.assertEqual(a402.responsehour, u'13:00:00')
+        self.assertEqual(a402.result, u'13')
+        self.assertEqual(a402.resultdesc, u'No Realizada')
+        self.assertEqual(a402.resultreason, u'R32')
+        self.assertEqual(a402.resultreasondesc, u'Fecha efecto solicitada anterior al día actual.')
+        self.assertEqual(a402.titulartype, u'F')
+        self.assertEqual(a402.nationality, u'ES')
+        self.assertEqual(a402.documenttype, u'01')
+        self.assertEqual(a402.documentnum, u'11111111H')
+        self.assertEqual(a402.cups, u'ES1234000000000001JN')
+        self.assertEqual(a402.extrainfo, u'comentarios extras')
