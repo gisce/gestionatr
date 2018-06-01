@@ -13,6 +13,7 @@ from gestionatr.output.messages import sw_b1 as b1
 from gestionatr.output.messages import sw_r1 as r1
 from gestionatr.output.messages import sw_f1 as f1
 from gestionatr.output.messages import sw_a1_41 as a1_41
+from gestionatr.output.messages import sw_a1_02 as a1_02
 
 
 class test_C1(unittest.TestCase):
@@ -2920,3 +2921,57 @@ class test_A1_41(unittest.TestCase):
         mensaje_a141.build_tree()
         xml = str(mensaje_a141)
         assertXmlEqual(xml, self.xml_a141.read())
+
+
+class test_A1_02(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a102 = open(get_data("a102.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a102.close()
+
+    def test_create_a102(self):
+        # MensajeA102
+        mensaje_a102 = a1_02.MensajeA102()
+
+        # Heading
+        heading = a1_02.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '02',
+            'messagetype': 'A1'
+        }
+        heading.feed(heading_fields)
+
+        # A102
+        a102 = a1_02.A102()
+        a102_fields = {
+            'comreferencenum': '000123456789',
+            'reqdate': '2018-05-01',
+            'reqhour': '13:00:00',
+            'titulartype': 'F',
+            'nationality': 'ES',
+            'documenttype': '01',
+            'documentnum': '11111111H',
+            'cups': 'ES1234000000000001JN',
+            'modeffectdate': '05',
+            'reqtransferdate': '2018-06-01',
+            'disconnectedserviceaccepted': 'N',
+            'extrainfo': 'comentarios extras',
+            'reqqd': 654321.1234,
+            'reqestimatedqa': 987654,
+        }
+        a102.feed(a102_fields)
+        mensaje_a102_fields = {
+            'heading': heading,
+            'a102': a102,
+        }
+        mensaje_a102.feed(mensaje_a102_fields)
+        mensaje_a102.build_tree()
+        xml = str(mensaje_a102)
+        assertXmlEqual(xml, self.xml_a102.read())
