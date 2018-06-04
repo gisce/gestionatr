@@ -3,7 +3,7 @@
 from . import unittest
 from .utils import get_data
 from gestionatr.input.messages \
-    import C1, C2, A3, B1, M1, D1, W1, Q1, R1, F1, Deadlines, A1_41, A1_02
+    import C1, C2, A3, B1, M1, D1, W1, Q1, R1, F1, Deadlines, A1_41, A1_02, A1_05
 from gestionatr.input.messages.F1 \
     import agrupar_lectures_per_data, obtenir_data_inici_i_final
 
@@ -2487,3 +2487,108 @@ class test_A1_02(unittest.TestCase):
         self.assertEqual(a402.documentnum, u'11111111H')
         self.assertEqual(a402.cups, u'ES1234000000000001JN')
         self.assertEqual(a402.extrainfo, u'comentarios extras')
+
+
+class test_A1_05(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a205 = open(get_data("a205.xml"), "r")
+        self.xml_a305 = open(get_data("a305.xml"), "r")
+        self.xml_a405 = open(get_data("a405.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a205.close()
+        self.xml_a305.close()
+        self.xml_a405.close()
+
+    def test_a205(self):
+        a205 = A1_05(self.xml_a205)
+        a205.parse_xml()
+        self.assertEqual(a205.reqcode, u'0123456789')
+        self.assertEqual(a205.comreferencenum, u'000123456789')
+        self.assertEqual(a205.responsedate, u'2018-05-01')
+        self.assertEqual(a205.responsehour, u'13:00:00')
+        self.assertEqual(a205.result, u'01')
+        self.assertEqual(a205.resultdesc, u'Aceptada')
+        self.assertEqual(a205.resultreason, u'R32')
+        self.assertEqual(a205.resultreasondesc, u'Fecha efecto solicitada anterior al día actual.')
+        self.assertEqual(a205.nationality, u'ES')
+        self.assertEqual(a205.documentnum, u'11111111H')
+        self.assertEqual(a205.documenttype, u'01')
+        self.assertEqual(a205.cups, u'ES1234000000000001JN')
+        self.assertEqual(a205.updatereason, u'01')
+        self.assertEqual(a205.finaltolltypegranted, u'31')
+        self.assertEqual(a205.qdgranted, u'987654321.1234567')
+        self.assertEqual(a205.newmodeffectdate, u'04')
+        self.assertEqual(a205.foreseentransferdate, u'2018-06-01')
+        self.assertEqual(a205.extrainfo, u'comentarios extras')
+
+    def test_a305(self):
+        a305 = A1_05(self.xml_a305)
+        a305.parse_xml()
+        self.assertEqual(a305.tolltype, u'31')
+        self.assertEqual(a305.caecode, u'9988')
+        self.assertEqual(a305.atrcode, u'000111222333444555666777')
+        self.assertEqual(a305.cityowner, u'17001')
+        self.assertEqual(a305.comreferencenum, u'000123456789')
+        self.assertEqual(a305.cups, u'ES1234000000000001JN')
+        self.assertEqual(a305.documentnum, u'11111111H')
+        self.assertEqual(a305.documenttype, u'01')
+        self.assertEqual(a305.doorowner, u'v')
+        self.assertEqual(a305.email, u'gasalmatalas@atr.cat')
+        self.assertEqual(a305.extrainfo, u'comentarios extras')
+        self.assertEqual(a305.familyname1, u'Al')
+        self.assertEqual(a305.familyname2, u'Matalas')
+        self.assertEqual(a305.qdgranted, u'987654321.1234567')
+        self.assertEqual(a305.firstname, u'Gas')
+        self.assertEqual(a305.floorowner, u'4')
+        self.assertEqual(a305.nationality, u'ES')
+        self.assertEqual(a305.portalowner, u'2')
+        self.assertEqual(a305.provinceowner, u'17')
+        self.assertEqual(a305.regularaddress, u'S')
+        self.assertEqual(a305.reqcode, u'0123456789')
+        self.assertEqual(a305.responsedate, u'2018-05-01')
+        self.assertEqual(a305.responsehour, u'13:00:00')
+        self.assertEqual(a305.result, u'09')
+        self.assertEqual(a305.resultdesc, u'Realizada')
+        self.assertEqual(a305.staircaseowner, u'3')
+        self.assertEqual(a305.streetnumberowner, u'1')
+        self.assertEqual(a305.streetowner, u'Carrer inventat')
+        self.assertEqual(a305.streettypeowner, u'ACCE')
+        self.assertEqual(a305.telephone, u'999888777')
+        self.assertEqual(a305.fax, u'666555444')
+        self.assertEqual(a305.titulartype, u'F')
+        self.assertEqual(a305.transfereffectivedate, u'2018-07-01')
+        self.assertEqual(a305.updatereason, u'01')
+        self.assertEqual(a305.zipcodeowner, u'17002')
+        self.assertEqual(len(a305.correctorlist), 2)
+        corrector = a305.correctorlist[0]
+        self.assertEqual(corrector.correctedlecture, u'2200')
+        self.assertEqual(corrector.correctormodel, u'modelo1')
+        self.assertEqual(corrector.correctornumber, u'D123456')
+        self.assertEqual(corrector.correctorproperty, u'01')
+        self.assertEqual(corrector.correctortype, u'01')
+        self.assertEqual(len(a305.counterlist), 2)
+        counter = a305.counterlist[1]
+        self.assertEqual(counter.countermodel, u'marca2')
+        self.assertEqual(counter.counternumber, u'C123456')
+        self.assertEqual(counter.counterpressure, u'13245.321')
+        self.assertEqual(counter.counterproperty, u'06')
+        self.assertEqual(counter.countertype, u'tipo2')
+        self.assertEqual(counter.reallecture, u'3000')
+
+    def test_a405(self):
+        a405 = A1_05(self.xml_a405)
+        a405.parse_xml()
+        self.assertEqual(a405.codi_sollicitud, u'000123456789')
+        self.assertEqual(a405.comreferencenum, u'000123456789')
+        self.assertEqual(a405.cups, u'ES1234000000000001JN')
+        self.assertEqual(a405.extrainfo, u'comentarios extras')
+        self.assertEqual(a405.reqcode, u'0123456789')
+        self.assertEqual(a405.responsedate, u'2018-05-01')
+        self.assertEqual(a405.responsehour, u'13:00:00')
+        self.assertEqual(a405.result, u'13')
+        self.assertEqual(a405.resultdesc, u'No Realizada')
+        self.assertEqual(a405.resultreason, u'R32')
+        self.assertEqual(a405.resultreasondesc, u'Fecha efecto solicitada anterior al día actual.')
+        self.assertEqual(a405.updatereason, u'01')
