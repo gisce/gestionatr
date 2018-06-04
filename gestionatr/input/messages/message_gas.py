@@ -19,6 +19,12 @@ XSD_DATA.update({
         'A4': 'A402.xsd',
         'A3S': 'A3S02.xsd',
     },
+    '05': {
+        'A1': 'A105.xsd',
+        'A2': 'A205.xsd',
+        'A3': 'A305.xsd',
+        'A4': 'A405.xsd',
+    },
 })
 
 MAIN_MESSAGE_XSD.update({
@@ -34,6 +40,11 @@ MAIN_MESSAGE_XSD.update({
     'A302': 'a302',
     'A402': 'a402',
     'A3S02': 'a3s02',
+    # 05
+    'A105': 'a105',
+    'A205': 'a205',
+    'A305': 'a305',
+    'A405': 'a405',
 })
 
 
