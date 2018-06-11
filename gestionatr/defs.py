@@ -8,6 +8,7 @@ conv_dict_5 = {
     '00313': '0120',  # Aragonesa actividades
     '00315': '0288',  # Balears: Gas y electricidad
     '00316': '0363',  # Unión Eléctrica Canárias SUP
+    '02240': '0224',  # Elèctrica de Jafre
     # FENOSA
     '03900': '0022',
 }
