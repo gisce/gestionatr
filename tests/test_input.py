@@ -2342,8 +2342,8 @@ class test_A1_41(unittest.TestCase):
         self.assertEqual(a1_41.responsehour, u'13:00:00')
         self.assertEqual(a1_41.transfereffectivedate, u'2018-07-01')
         self.assertEqual(a1_41.codi_sollicitud, u'0123456789')
-        self.assertEqual(len(a1_41.correctorlis), 2)
-        corrector = a1_41.correctorlis[0]
+        self.assertEqual(len(a1_41.correctorlist), 2)
+        corrector = a1_41.correctorlist[0]
         self.assertEqual(corrector.correctedlecture, u'2200')
         self.assertEqual(corrector.correctormodel, u'modelo1')
         self.assertEqual(corrector.correctornumber, u'D123456')
