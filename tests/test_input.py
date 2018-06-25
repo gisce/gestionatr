@@ -3,7 +3,7 @@
 from . import unittest
 from .utils import get_data
 from gestionatr.input.messages \
-    import C1, C2, A3, B1, M1, D1, W1, Q1, R1, F1, Deadlines, A1_41
+    import C1, C2, A3, B1, M1, D1, W1, Q1, R1, F1, Deadlines, A1_41, B7031
 from gestionatr.input.messages.F1 \
     import agrupar_lectures_per_data, obtenir_data_inici_i_final
 
@@ -2357,3 +2357,187 @@ class test_A1_41(unittest.TestCase):
         self.assertEqual(counter.counterproperty, u'06')
         self.assertEqual(counter.countertype, u'tipo2')
         self.assertEqual(counter.reallecture, u'3000')
+
+
+class test_B70(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_b7031 = open(get_data("b7031.xml"), "r")
+        # self.xml_b7032 = open(get_data("xml_b7032.xml"), "r")
+
+    def tearDown(self):
+        self.xml_b7031.close()
+        # self.xml_b7032.close()
+
+    def test_b7031(self):
+        b7031 = B7031(self.xml_b7031)
+        b7031.parse_xml()
+
+        # cabecera
+        self.assertEqual(b7031.get_codi_emisor, u'1234')
+        self.assertEqual(b7031.get_codi_destinatari, u'4321')
+        self.assertEqual(b7031.cups, u'ES1234000000000001JN')
+        self.assertEqual(b7031.codi_sollicitud, u'')
+        self.assertEqual(b7031.data_sollicitud, u'2018-01-19 06:49:55')
+
+        dest = b7031.datosempresadestino
+        # Datosempresadestino
+        self.assertEqual(dest.numdocumento, 'B24291833')
+        self.assertEqual(dest.razonsocial, 'Destino, S.L.')
+        self.assertEqual(dest.direccion, 'C inventat 1')
+        self.assertEqual(dest.municipio, '28290 LAS ROZAS DE MADRID')
+
+        em = b7031.datosempresaemisora
+        # Datosempresaemisora
+        self.assertEqual(em.numdocumento, 'B11254455')
+        self.assertEqual(em.razonsocial, 'Emisora, S.A')
+        self.assertEqual(em.direccion, 'C inventat 2')
+        self.assertEqual(em.municipio, '28043 MADRID')
+        self.assertEqual(em.regmercantil, 'Emisora, S.A. INSCRITA EM EL R. M. DE Coruscant')
+
+        fact = b7031.facturas[0]
+        # Factura
+        self.assertEqual(fact.cups, 'ES1234000000000001JN')
+        self.assertEqual(fact.provincia, '22')
+        self.assertEqual(fact.municipio, '22158')
+        self.assertEqual(fact.codpostal, '22400')
+        self.assertEqual(fact.tipovia, 'AV')
+        self.assertEqual(fact.descalle, 'LERIDA')
+        self.assertEqual(fact.numfinca, '53')
+        self.assertEqual(fact.portal, '1')
+        self.assertEqual(fact.escalera, '2')
+        self.assertEqual(fact.piso, '3')
+        self.assertEqual(fact.puerta, '4')
+        self.assertEqual(fact.municipio_red, '22158')
+        self.assertEqual(fact.tipodocumento, '01')
+        self.assertEqual(fact.numdocumento, '11111111H')
+        self.assertEqual(fact.nombre, 'Gas')
+        self.assertEqual(fact.apellido1, 'Al')
+        self.assertEqual(fact.apellido2, 'Matalas')
+        self.assertEqual(fact.tipofactura, '01')
+        self.assertEqual(fact.clasefact, 'N')
+        self.assertEqual(fact.numfactorigen, '20180101')
+        self.assertEqual(fact.fecfactura, '2018-01-19')
+        self.assertEqual(fact.numfactura, 'RG01A18N00136042')
+        self.assertEqual(fact.tipofacturacion, '1')
+        self.assertEqual(fact.tipopeaje, '32')
+        self.assertEqual(fact.feccontable, '2018-01-01')
+        self.assertEqual(fact.fecpago, '2015-02-01')
+        self.assertEqual(fact.importetotal, '70.20')
+        self.assertEqual(fact.saldo_total_a_cobrar, '60.20')
+        self.assertEqual(fact.idremesa, '0035194')
+        self.assertEqual(fact.tipopenalizacion, 'N')
+        self.assertEqual(fact.observaciones1, 'Obs1')
+        self.assertEqual(fact.observaciones2, 'Obs2')
+        self.assertEqual(fact.telefurgencias, '900900900')
+
+        boe = fact.listaboe[1]
+        # BOE
+        self.assertEqual(boe.numboe, 'BOE NQM')
+        self.assertEqual(boe.fecboe, '2013-12-31')
+
+        self.assertEqual(len(fact.listaconceptos), 10)
+        concepto = fact.listaconceptos[9]
+        # Concepto
+        self.assertEqual(concepto.fecdesde, '2017-12-01')
+        self.assertEqual(concepto.fechasta, '2017-12-31')
+        self.assertEqual(concepto.unidad, '1746.4800')
+        self.assertEqual(concepto.precunidad, '0.02241300')
+        self.assertEqual(concepto.importe, '39.14')
+        self.assertEqual(concepto.codconcepto, '0017')
+        self.assertEqual(concepto.desconcepto, 'Término inventado')
+        self.assertEqual(concepto.porcentajeconcepto, '2')
+        self.assertEqual(concepto.impuestoconcepto, 'N')
+        self.assertEqual(concepto.codtipoimpuesto, '01')
+        self.assertEqual(concepto.porcentajeimpcto, '0')
+        self.assertEqual(concepto.umconcepto, '02')
+        self.assertEqual(concepto.aparatoconcepto, 'CO')
+        self.assertEqual(concepto.observaciones, 'ObsCon')
+        self.assertEqual(concepto.fec_desde_prorrateo, '2018-01-02')
+        self.assertEqual(concepto.tipo_interes_demora, '12')
+
+        self.assertEqual(len(fact.listamedidores), 2)
+        medidor = fact.listamedidores[1]
+        # Medidor
+        self.assertEqual(medidor.um, 'M3')
+        self.assertEqual(medidor.feclecant, '2017-12-01')
+        self.assertEqual(medidor.horalecant, '20:00:00')
+        self.assertEqual(medidor.feclecact, '2018-01-16')
+        self.assertEqual(medidor.horalecact, '20:00:00')
+        self.assertEqual(medidor.serializada, 'N')
+        self.assertEqual(medidor.restadeserializada, '11')
+        self.assertEqual(medidor.cupsresta, 'ES1234000000000001JN')
+        self.assertEqual(medidor.aparato, 'CO')
+        self.assertEqual(medidor.medicion, '06')
+        self.assertEqual(medidor.modelomedidor, '20')
+        self.assertEqual(medidor.numseriemedidor, '704414207')
+        self.assertEqual(medidor.unipres, '2')
+        self.assertEqual(medidor.presatm, '100')
+        self.assertEqual(medidor.presionsuministro, '0.0500')
+        self.assertEqual(medidor.temp, '28')
+        self.assertEqual(medidor.factorconver, '11.462870')
+        self.assertEqual(medidor.factork, '0.979900')
+        self.assertEqual(medidor.pcs, '11.698000')
+        self.assertEqual(medidor.zeta, '1')
+        self.assertEqual(medidor.densidad, '2')
+        self.assertEqual(medidor.n2, '3')
+        self.assertEqual(medidor.co2, '4')
+        self.assertEqual(medidor.h2, '5')
+        self.assertEqual(medidor.consumokwh, '2647.92297')
+        self.assertEqual(medidor.consumoereal, '2600')
+        self.assertEqual(medidor.consumoreg, '2650')
+        self.assertEqual(medidor.codajuste, '01')
+        self.assertEqual(medidor.ajuste, '50')
+        self.assertEqual(medidor.qdaplicado, '10')
+        self.assertEqual(medidor.qdmaximo, '20')
+        self.assertEqual(medidor.fecqdmax, '2018-01-03')
+        self.assertEqual(medidor.dqmedio, '5')
+        self.assertEqual(medidor.qdcontratado, '55')
+        self.assertEqual(medidor.motivolec, '02')
+        self.assertEqual(medidor.tipo_dh, '01')
+        self.assertEqual(medidor.perlec, 'M')
+        self.assertEqual(medidor.capacidadcontador, '2000')
+        self.assertEqual(medidor.observaciones1, 'Obs1')
+        self.assertEqual(medidor.observaciones2, 'Obs2')
+
+        self.assertEqual(len(medidor.listanumeradores), 2)
+        num = medidor.listanumeradores[1]
+        # Numerador
+        self.assertEqual(num.num, '2')
+        self.assertEqual(num.digmed, '05')
+        self.assertEqual(num.digdecmed, '02')
+        self.assertEqual(num.factmulmed, '1.00')
+        self.assertEqual(num.lectant, '9832.00')
+        self.assertEqual(num.lecact, '10063.00')
+        self.assertEqual(num.tipolec, '1')
+        self.assertEqual(num.consumo, '231.00')
+        self.assertEqual(num.tipolecnum, 'BR')
+        self.assertEqual(num.aparatorelevante, 'S')
+        self.assertEqual(num.observaciones, 'Obs1')
+
+        self.assertEqual(len(fact.listafacturasinspeccion), 2)
+        fins = fact.listafacturasinspeccion[1]
+        # Facturasinspeccion
+        self.assertEqual(fins.numdocumentoinstalador, '20')
+        self.assertEqual(fins.razonsocialinstalador, 'Inspectora SA')
+        self.assertEqual(fins.numfacturainspeccion, '20155152')
+
+        self.assertEqual(len(fact.lista_contactos), 2)
+        cont = fact.lista_contactos[1]
+        # Contacto
+        self.assertEqual(cont.denominacion, 'GTS')
+        self.assertEqual(cont.url, 'WWW.ENAGAS.ES')
+        self.assertEqual(cont.email, 'GTS@ENAGAS.ES')
+        self.assertEqual(cont.telefono, '902443700')
+
+        self.assertEqual(len(fact.historial_consumos), 2)
+        cons = fact.historial_consumos[1]
+        # Consumo
+        self.assertEqual(cons.fecinicioperiodo, '2017-10-01')
+        self.assertEqual(cons.fecfinperiodo, '2017-12-01')
+        self.assertEqual(cons.consumoperiodo, '2000.92')
+
+        impc = fact.imputacion_costes
+        # Imputacioncostes
+        self.assertEqual(impc.pcttasacnmc, '0.140')
+        self.assertEqual(impc.pctcuotagts, '0.797')
