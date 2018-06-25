@@ -7,18 +7,18 @@ class B7031(MessageGas):
 
     @property
     def datosempresaemisora(self):
-        tree = '{0}.datosempresaemisora'.format(self._header)
+        tree = 'datosempresaemisora'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return Datosempresaemisora(data)
         else:
             return False
 
     @property
     def datosempresadestino(self):
-        tree = '{0}.datosempresadestino'.format(self._header)
+        tree = 'datosempresadestino'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return Datosempresadestino(data)
         else:
             return False
@@ -26,11 +26,38 @@ class B7031(MessageGas):
     @property
     def facturas(self):
         data = []
-        obj = get_rec_attr(self.obj, 'factura', False)
-        if obj not in [None, False]:
-            for d in obj.factura:
-                data.append(Factura(d))
+        for d in get_rec_attr(self.obj, 'factura', []):
+            data.append(Factura(d))
         return data
+
+    def get_datosempresaemisora(self):
+        tree = 'datosempresaemisora'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            aux = Datosempresaemisora(data)
+            return {
+                'numdocumento': aux.numdocumento,
+                'razonsocial': aux.razonsocial,
+                'direccion': aux.direccion,
+                'municipio': aux.municipio,
+                'regmercantil': aux.regmercantil,
+            }
+        else:
+            return False
+
+    def get_datosempresadestino(self):
+        tree = 'datosempresaemisora'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            aux = Datosempresadestino(data)
+            return {
+                'numdocumento': aux.numdocumento,
+                'razonsocial': aux.razonsocial,
+                'direccion': aux.direccion,
+                'municipio': aux.municipio,
+            }
+        else:
+            return False
 
 
 class Datosempresadestino(object):
@@ -41,7 +68,7 @@ class Datosempresadestino(object):
     def numdocumento(self):
         tree = 'numdocumento'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -50,7 +77,7 @@ class Datosempresadestino(object):
     def razonsocial(self):
         tree = 'razonsocial'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -59,7 +86,7 @@ class Datosempresadestino(object):
     def direccion(self):
         tree = 'direccion'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -68,7 +95,7 @@ class Datosempresadestino(object):
     def municipio(self):
         tree = 'municipio'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -77,10 +104,10 @@ class Datosempresadestino(object):
 class Datosempresaemisora(Datosempresadestino):
 
     @property
-    def regmercanti(self):
-        tree = 'regmercanti'
+    def regmercantil(self):
+        tree = 'regmercantil'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -94,7 +121,7 @@ class Factura(object):
     def cups(self):
         tree = 'cups'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -103,7 +130,7 @@ class Factura(object):
     def provincia(self):
         tree = 'provincia'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -112,7 +139,7 @@ class Factura(object):
     def municipio(self):
         tree = 'municipio'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -121,7 +148,7 @@ class Factura(object):
     def codpostal(self):
         tree = 'codpostal'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -130,7 +157,7 @@ class Factura(object):
     def tipovia(self):
         tree = 'tipovia'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -139,7 +166,7 @@ class Factura(object):
     def descalle(self):
         tree = 'descalle'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -148,7 +175,7 @@ class Factura(object):
     def numfinca(self):
         tree = 'numfinca'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -157,7 +184,7 @@ class Factura(object):
     def portal(self):
         tree = 'portal'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -166,7 +193,7 @@ class Factura(object):
     def escalera(self):
         tree = 'escalera'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -175,7 +202,7 @@ class Factura(object):
     def piso(self):
         tree = 'piso'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -184,16 +211,16 @@ class Factura(object):
     def puerta(self):
         tree = 'puerta'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
 
     @property
     def municipio_red(self):
-        tree = 'municipio_red'
+        tree = 'municipioRed'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -202,7 +229,7 @@ class Factura(object):
     def tipodocumento(self):
         tree = 'tipodocumento'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -211,7 +238,7 @@ class Factura(object):
     def numdocumento(self):
         tree = 'numdocumento'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -220,7 +247,7 @@ class Factura(object):
     def nombre(self):
         tree = 'nombre'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -229,7 +256,7 @@ class Factura(object):
     def apellido1(self):
         tree = 'apellido1'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -238,7 +265,7 @@ class Factura(object):
     def apellido2(self):
         tree = 'apellido2'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -247,7 +274,7 @@ class Factura(object):
     def tipofactura(self):
         tree = 'tipofactura'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -256,7 +283,7 @@ class Factura(object):
     def clasefact(self):
         tree = 'clasefact'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -265,7 +292,7 @@ class Factura(object):
     def numfactorigen(self):
         tree = 'numfactorigen'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -274,7 +301,7 @@ class Factura(object):
     def fecfactura(self):
         tree = 'fecfactura'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -283,7 +310,7 @@ class Factura(object):
     def numfactura(self):
         tree = 'numfactura'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -292,7 +319,7 @@ class Factura(object):
     def tipofacturacion(self):
         tree = 'tipofacturacion'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -301,7 +328,7 @@ class Factura(object):
     def tipopeaje(self):
         tree = 'tipopeaje'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -310,7 +337,7 @@ class Factura(object):
     def feccontable(self):
         tree = 'feccontable'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -319,7 +346,7 @@ class Factura(object):
     def fecpago(self):
         tree = 'fecpago'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -328,16 +355,16 @@ class Factura(object):
     def importetotal(self):
         tree = 'importetotal'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
 
     @property
     def saldo_total_a_cobrar(self):
-        tree = 'saldo_total_a_cobrar'
+        tree = 'SaldoTotalACobrar'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -346,7 +373,7 @@ class Factura(object):
     def idremesa(self):
         tree = 'idremesa'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -355,7 +382,7 @@ class Factura(object):
     def tipopenalizacion(self):
         tree = 'tipopenalizacion'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -364,7 +391,7 @@ class Factura(object):
     def observaciones1(self):
         tree = 'observaciones1'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -373,7 +400,7 @@ class Factura(object):
     def observaciones2(self):
         tree = 'observaciones2'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -382,7 +409,7 @@ class Factura(object):
     def telefurgencias(self):
         tree = 'telefurgencias'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -390,7 +417,7 @@ class Factura(object):
     @property
     def listaboe(self):
         data = []
-        obj = get_rec_attr(self.obj, 'listaboe', False)
+        obj = self.obj
         if (hasattr(obj, 'listaboe') and
                 hasattr(obj.listaboe, 'boe')):
             for d in obj.listaboe.boe:
@@ -400,7 +427,7 @@ class Factura(object):
     @property
     def listaconceptos(self):
         data = []
-        obj = get_rec_attr(self.obj, 'listaconceptos', False)
+        obj = self.obj
         if (hasattr(obj, 'listaconceptos') and
                 hasattr(obj.listaconceptos, 'concepto')):
             for d in obj.listaconceptos.concepto:
@@ -410,7 +437,7 @@ class Factura(object):
     @property
     def listamedidores(self):
         data = []
-        obj = get_rec_attr(self.obj, 'listamedidores', False)
+        obj = self.obj
         if (hasattr(obj, 'listamedidores') and
                 hasattr(obj.listamedidores, 'medidor')):
             for d in obj.listamedidores.medidor:
@@ -420,19 +447,19 @@ class Factura(object):
     @property
     def listafacturasinspeccion(self):
         data = []
-        obj = get_rec_attr(self.obj, 'listafacturasinspeccion', False)
+        obj = self.obj
         if (hasattr(obj, 'listafacturasinspeccion') and
-                hasattr(obj.listafacturasinspeccion, 'facturasinspeccion')):
-            for d in obj.listafacturasinspeccion.facturasinspeccion:
+                hasattr(obj.listafacturasinspeccion, 'facturainspeccion')):
+            for d in obj.listafacturasinspeccion.facturainspeccion:
                 data.append(Facturasinspeccion(d))
         return data
 
     @property
     def lista_contactos(self):
         data = []
-        obj = get_rec_attr(self.obj, 'listaContactos', False)
+        obj = self.obj
         if (hasattr(obj, 'listaContactos') and
-                hasattr(obj.lista_contactos, 'contacto')):
+                hasattr(obj.listaContactos, 'contacto')):
             for d in obj.listaContactos.contacto:
                 data.append(Contacto(d))
         return data
@@ -440,18 +467,18 @@ class Factura(object):
     @property
     def historial_consumos(self):
         data = []
-        obj = get_rec_attr(self.obj, 'historialConsumos', False)
+        obj = self.obj
         if (hasattr(obj, 'historialConsumos') and
-                hasattr(obj.historialConsumos, 'Consumo')):
-            for d in obj.historialConsumos.Consumo:
+                hasattr(obj.historialConsumos, 'consumo')):
+            for d in obj.historialConsumos.consumo:
                 data.append(Consumo(d))
         return data
 
     @property
     def imputacion_costes(self):
-        tree = 'imputacion_costes'
+        tree = 'imputacionCostes'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return Imputacioncostes(data)
         else:
             return False
@@ -465,7 +492,7 @@ class Boe(object):
     def numboe(self):
         tree = 'numboe'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -474,7 +501,7 @@ class Boe(object):
     def fecboe(self):
         tree = 'fecboe'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -488,7 +515,7 @@ class Concepto(object):
     def fecdesde(self):
         tree = 'fecdesde'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -497,7 +524,7 @@ class Concepto(object):
     def fechasta(self):
         tree = 'fechasta'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -506,7 +533,7 @@ class Concepto(object):
     def unidad(self):
         tree = 'unidad'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -515,7 +542,7 @@ class Concepto(object):
     def precunidad(self):
         tree = 'precunidad'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -524,7 +551,7 @@ class Concepto(object):
     def importe(self):
         tree = 'importe'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -533,7 +560,7 @@ class Concepto(object):
     def codconcepto(self):
         tree = 'codconcepto'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -542,7 +569,7 @@ class Concepto(object):
     def desconcepto(self):
         tree = 'desconcepto'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -551,7 +578,7 @@ class Concepto(object):
     def porcentajeconcepto(self):
         tree = 'porcentajeconcepto'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -560,7 +587,7 @@ class Concepto(object):
     def impuestoconcepto(self):
         tree = 'impuestoconcepto'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -569,7 +596,7 @@ class Concepto(object):
     def codtipoimpuesto(self):
         tree = 'codtipoimpuesto'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -578,7 +605,7 @@ class Concepto(object):
     def porcentajeimpcto(self):
         tree = 'porcentajeimpcto'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -587,7 +614,7 @@ class Concepto(object):
     def umconcepto(self):
         tree = 'umconcepto'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -596,7 +623,7 @@ class Concepto(object):
     def aparatoconcepto(self):
         tree = 'aparatoconcepto'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -605,7 +632,7 @@ class Concepto(object):
     def observaciones(self):
         tree = 'observaciones'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -614,7 +641,7 @@ class Concepto(object):
     def fec_desde_prorrateo(self):
         tree = 'fecDesdeProrrateo'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -623,7 +650,7 @@ class Concepto(object):
     def tipo_interes_demora(self):
         tree = 'tipoInteresDemora'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -637,7 +664,7 @@ class Medidor(object):
     def um(self):
         tree = 'um'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -646,7 +673,7 @@ class Medidor(object):
     def feclecant(self):
         tree = 'feclecant'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -655,7 +682,7 @@ class Medidor(object):
     def horalecant(self):
         tree = 'horalecant'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -664,7 +691,7 @@ class Medidor(object):
     def feclecact(self):
         tree = 'feclecact'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -673,7 +700,7 @@ class Medidor(object):
     def horalecact(self):
         tree = 'horalecact'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -682,7 +709,7 @@ class Medidor(object):
     def serializada(self):
         tree = 'serializada'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -691,7 +718,7 @@ class Medidor(object):
     def restadeserializada(self):
         tree = 'restadeserializada'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -700,7 +727,7 @@ class Medidor(object):
     def cupsresta(self):
         tree = 'cupsresta'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -709,7 +736,7 @@ class Medidor(object):
     def aparato(self):
         tree = 'aparato'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -718,7 +745,7 @@ class Medidor(object):
     def medicion(self):
         tree = 'medicion'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -727,7 +754,7 @@ class Medidor(object):
     def modelomedidor(self):
         tree = 'modelomedidor'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -736,7 +763,7 @@ class Medidor(object):
     def numseriemedidor(self):
         tree = 'numseriemedidor'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -745,7 +772,7 @@ class Medidor(object):
     def unipres(self):
         tree = 'unipres'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -754,7 +781,7 @@ class Medidor(object):
     def presatm(self):
         tree = 'presatm'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -763,7 +790,7 @@ class Medidor(object):
     def presionsuministro(self):
         tree = 'presionsuministro'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -772,7 +799,7 @@ class Medidor(object):
     def temp(self):
         tree = 'temp'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -781,7 +808,7 @@ class Medidor(object):
     def factorconver(self):
         tree = 'factorconver'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -790,7 +817,7 @@ class Medidor(object):
     def factork(self):
         tree = 'factork'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -799,7 +826,7 @@ class Medidor(object):
     def pcs(self):
         tree = 'pcs'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -808,7 +835,7 @@ class Medidor(object):
     def zeta(self):
         tree = 'zeta'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -817,7 +844,7 @@ class Medidor(object):
     def densidad(self):
         tree = 'densidad'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -826,7 +853,7 @@ class Medidor(object):
     def n2(self):
         tree = 'n2'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -835,16 +862,16 @@ class Medidor(object):
     def co2(self):
         tree = 'co2'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
 
     @property
     def h2(self):
-        tree = 'h2 '
+        tree = 'h2'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -853,7 +880,7 @@ class Medidor(object):
     def consumokwh(self):
         tree = 'consumokwh'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -862,7 +889,7 @@ class Medidor(object):
     def consumoereal(self):
         tree = 'consumoereal'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -871,7 +898,7 @@ class Medidor(object):
     def consumoreg(self):
         tree = 'consumoreg'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -880,7 +907,7 @@ class Medidor(object):
     def codajuste(self):
         tree = 'codajuste'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -889,7 +916,7 @@ class Medidor(object):
     def ajuste(self):
         tree = 'ajuste'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -898,7 +925,7 @@ class Medidor(object):
     def qdaplicado(self):
         tree = 'qdaplicado'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -907,7 +934,7 @@ class Medidor(object):
     def qdmaximo(self):
         tree = 'qdmaximo'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -916,7 +943,7 @@ class Medidor(object):
     def fecqdmax(self):
         tree = 'fecqdmax'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -925,7 +952,7 @@ class Medidor(object):
     def dqmedio(self):
         tree = 'dqmedio'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -934,7 +961,7 @@ class Medidor(object):
     def qdcontratado(self):
         tree = 'qdcontratado'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -943,16 +970,16 @@ class Medidor(object):
     def motivolec(self):
         tree = 'motivolec'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
 
     @property
-    def tipo_d_h(self):
+    def tipo_dh(self):
         tree = 'tipoDH'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -961,7 +988,7 @@ class Medidor(object):
     def perlec(self):
         tree = 'perlec'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -970,7 +997,7 @@ class Medidor(object):
     def capacidadcontador(self):
         tree = 'capacidadcontador'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -979,7 +1006,7 @@ class Medidor(object):
     def observaciones1(self):
         tree = 'observaciones1'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -988,7 +1015,7 @@ class Medidor(object):
     def observaciones2(self):
         tree = 'observaciones2'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -996,13 +1023,12 @@ class Medidor(object):
     @property
     def listanumeradores(self):
         data = []
-        obj = get_rec_attr(self.obj, 'listanumeradores', False)
+        obj = self.obj
         if (hasattr(obj, 'listanumeradores') and
                 hasattr(obj.listanumeradores, 'numerador')):
             for d in obj.listanumeradores.numerador:
                 data.append(Numerador(d))
         return data
-
 
 
 class Numerador(object):
@@ -1013,7 +1039,7 @@ class Numerador(object):
     def num(self):
         tree = 'num'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -1022,7 +1048,7 @@ class Numerador(object):
     def digmed(self):
         tree = 'digmed'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -1031,7 +1057,7 @@ class Numerador(object):
     def digdecmed(self):
         tree = 'digdecmed'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -1040,7 +1066,7 @@ class Numerador(object):
     def factmulmed(self):
         tree = 'factmulmed'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -1049,7 +1075,7 @@ class Numerador(object):
     def lectant(self):
         tree = 'lectant'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -1058,7 +1084,7 @@ class Numerador(object):
     def lecact(self):
         tree = 'lecact'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -1067,7 +1093,7 @@ class Numerador(object):
     def tipolec(self):
         tree = 'tipolec'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -1076,7 +1102,7 @@ class Numerador(object):
     def consumo(self):
         tree = 'consumo'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -1085,7 +1111,7 @@ class Numerador(object):
     def tipolecnum(self):
         tree = 'tipolecnum'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -1094,7 +1120,7 @@ class Numerador(object):
     def aparatorelevante(self):
         tree = 'aparatorelevante'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -1103,7 +1129,7 @@ class Numerador(object):
     def observaciones(self):
         tree = 'observaciones'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -1117,7 +1143,7 @@ class Facturasinspeccion(object):
     def numdocumentoinstalador(self):
         tree = 'numdocumentoinstalador'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -1126,7 +1152,7 @@ class Facturasinspeccion(object):
     def razonsocialinstalador(self):
         tree = 'razonsocialinstalador'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -1135,7 +1161,7 @@ class Facturasinspeccion(object):
     def numfacturainspeccion(self):
         tree = 'numfacturainspeccion'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -1149,7 +1175,7 @@ class Contacto(object):
     def denominacion(self):
         tree = 'denominacion'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -1158,7 +1184,7 @@ class Contacto(object):
     def url(self):
         tree = 'url'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -1167,7 +1193,7 @@ class Contacto(object):
     def email(self):
         tree = 'email'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -1176,7 +1202,7 @@ class Contacto(object):
     def telefono(self):
         tree = 'telefono'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -1190,7 +1216,7 @@ class Consumo(object):
     def fecinicioperiodo(self):
         tree = 'fecinicioperiodo'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -1199,7 +1225,7 @@ class Consumo(object):
     def fecfinperiodo(self):
         tree = 'fecfinperiodo'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -1208,7 +1234,7 @@ class Consumo(object):
     def consumoperiodo(self):
         tree = 'consumoperiodo'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -1222,7 +1248,7 @@ class Imputacioncostes(object):
     def pcttasacnmc(self):
         tree = 'pcttasacnmc'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -1231,7 +1257,7 @@ class Imputacioncostes(object):
     def pctcuotagts(self):
         tree = 'pctcuotagts'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False

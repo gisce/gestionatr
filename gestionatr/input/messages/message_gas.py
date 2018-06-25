@@ -12,6 +12,11 @@ XSD_DATA.update({
         'A4': 'A441.xsd',
         'A3S': 'A3S41.xsd',
     },
+    'B70': {
+        '31': 'B7031.xsd',
+        '32': 'B7032.xsd',
+        '33': 'B7033.xsd',
+    },
 })
 
 MAIN_MESSAGE_XSD.update({
@@ -20,6 +25,9 @@ MAIN_MESSAGE_XSD.update({
     'A341': 'a341',
     'A441': 'a441',
     'A3S41': 'a3s41',
+    'B7031': 'factura',
+    'B7032': 'factura',
+    'B7033': 'factura',
 })
 
 
@@ -30,11 +38,16 @@ class MessageGas(Message):
         super(Message, self).__init__(xml, force_tipus=force_tipus)
         self.processcode = self.tipus
         self.messagetype = self.pas
+        self.codtipomensaje = self.tipus
+        self.codproceso = self.pas
         self.main_message = ''
 
     def set_head(self):
         obj = objectify.fromstring(self.str_xml)
-        self.head = obj.heading
+        try:
+            self.head = obj.heading
+        except Exception as e:
+            self.head = obj.cabecera
 
     def set_tipus(self):
         """Definir tipo del mensaje"""
@@ -47,22 +60,40 @@ class MessageGas(Message):
             self.pas = self.head.messagetype.text
             self.messagetype = self.pas
         except:
-            msg = u'No se puede identificar el código de proceso ' \
-                  u'o código de paso'
-            raise except_f1('Error', msg)
+            try:
+                self.tipus = self.head.codtipomensaje.text
+                self.codtipomensaje = self.tipus
+                self.pas = self.head.codproceso.text
+                self.codproceso = self.pas
+            except:
+                msg = u'No se puede identificar el código de proceso ' \
+                      u'o código de paso'
+                raise except_f1('Error', msg)
 
 
     # Funcions relacionades amb la capçalera del XML
     @property
     def get_codi_emisor(self):
-        ref = self.head.dispatchingcompany.text
+        try:
+            ref = self.head.dispatchingcompany.text
+        except:
+            try:
+                ref = self.head.empresaemisora.text
+            except:
+                pass
         if not ref:
             raise except_f1('Error', u'Documento sin emisor')
         return ref
 
     @property
     def get_codi_destinatari(self):
-        ref = self.head.destinycompany.text
+        try:
+            ref = self.head.destinycompany.text
+        except:
+            try:
+                ref = self.head.empresadestino.text
+            except:
+                pass
         if not ref:
             raise except_f1('Error', u'Documento sin destinatario')
         return ref
@@ -78,6 +109,8 @@ class MessageGas(Message):
 
     @property
     def codi_sollicitud(self):
+        if self.tipus == 'B70':
+            return ""
         tree = '{0}.comreferencenum'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data not in [None, False]:
@@ -91,7 +124,15 @@ class MessageGas(Message):
 
     @property
     def data_sollicitud(self):
-        ref = self.head.communicationsdate.text
+        try:
+            ref = self.head.communicationsdate.text
+            ref2 = self.head.communicationshour.text
+        except:
+            try:
+                ref = self.head.fechacomunic.text
+                ref2 = self.head.horacomunic.text
+            except:
+                pass
         if not ref:
             raise except_f1('Error', u'Documento sin fecha de solicitud')
-        return ref + " " + self.head.communicationshour.text
+        return ref + " " + ref2
