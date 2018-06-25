@@ -1261,3 +1261,20 @@ class Imputacioncostes(object):
             return data.text
         else:
             return False
+
+
+# Datos para B7021
+class B7032(B7031):
+    pass
+
+
+class Factura(Factura):
+
+    @property
+    def numpseudofactura(self):
+        tree = 'numpseudofactura'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
