@@ -136,3 +136,10 @@ class MessageGas(Message):
         if not ref:
             raise except_f1('Error', u'Documento sin fecha de solicitud')
         return ref + " " + ref2
+
+
+class except_b70(except_f1):
+    def __init__(self, name, value, values_dict=None):
+        self.name = name
+        self.value = value
+        self.values_dict = values_dict or {}

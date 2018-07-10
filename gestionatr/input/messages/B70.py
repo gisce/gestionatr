@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from message_gas import MessageGas
 from gestionatr.utils import get_rec_attr
+from gestionatr.defs_gas import TIPUS_CONCEPTES
+from datetime import datetime
 
 
 class B7031(MessageGas):
@@ -58,6 +60,12 @@ class B7031(MessageGas):
             }
         else:
             return False
+
+    def get_facturas_atr(self):
+        return [f for f in self.facturas if not f.is_only_conceptes()]
+
+    def get_facturas_otros(self):
+        return [f for f in self.facturas if f.is_only_conceptes()]
 
 
 class Datosempresadestino(object):
@@ -356,7 +364,7 @@ class Factura(object):
         tree = 'importetotal'
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
-            return data.text
+            return float(data.text)
         else:
             return False
 
@@ -365,7 +373,7 @@ class Factura(object):
         tree = 'SaldoTotalACobrar'
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
-            return data.text
+            return float(data.text)
         else:
             return False
 
@@ -483,6 +491,70 @@ class Factura(object):
         else:
             return False
 
+    def get_periode_factura(self):
+        """Retorna tupla amb (data inici,  data fi) de la factura:
+            - data inici: la mes antiga de les fecdesde dels conceptes
+            - data fi: la mes nova de les fechasta dels conceptes
+        """
+        return (
+            min([x.fecdesde for x in self.listaconceptos]),
+            max([x.fechasta for x in self.listaconceptos])
+        )
+
+    def is_only_conceptes(self):
+        has_only_conceptes = True
+        for type in self.get_linies_factura_by_type():
+            if type not in ['informacio', 'altres']:
+                has_only_conceptes = False
+        return has_only_conceptes
+
+    def get_create_invoice_params(self):
+        return {
+            'tipo_rectificadora': self.clasefact,
+            'date_invoice': self.fecfactura,
+            'check_total': abs(self.importetotal),
+            'origin': self.numfactura,
+            'origin_date_invoice': self.fecfactura,
+            'reference': self.numfactura,
+        }
+
+    def get_linies_factura_by_type(self):
+        res = {}
+        for concepte in self.listaconceptos:
+            tipus = TIPUS_CONCEPTES.get(concepte.codconcepto, "altres")
+            if tipus == "impost":
+                continue
+            res.setdefault(tipus, {'total': 0.0, 'lines': []})
+            res[tipus]['lines'] += [concepte]
+            new_total = res[tipus]['total'] + concepte.importe
+            res[tipus]['total'] = round(new_total, 2)
+        return res
+
+    def get_comptadors(self):
+        """Retorna totes les lectures en una llista de comptadors"""
+        comptadors_agrupats = {}
+        for medidor in self.listamedidores:
+            comptadors_agrupats.setdefault(
+                medidor.numseriemedidor, []
+            ).append(medidor)
+
+        comptadors = []
+        for llista_aparells in comptadors_agrupats.values():
+            aparell_multi = MultiModeloAparato(llista_aparells)
+
+            di, df = aparell_multi.get_dates_inici_i_final()
+            comptadors.append((di, df, aparell_multi))
+        return [a[2] for a in sorted(comptadors, lambda x,y: cmp(x[0], y[0]))]
+
+    def get_info_lloguer(self):
+        lloguers = []
+        total = 0
+        info = self.get_linies_factura_by_type().get('lloguer', False)
+        if info:
+            lloguers = info['lines']
+            total = info['total']
+        return lloguers, total
+
 
 class Boe(object):
     def __init__(self, data):
@@ -534,7 +606,7 @@ class Concepto(object):
         tree = 'unidad'
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
-            return data.text
+            return float(data.text)
         else:
             return False
 
@@ -543,7 +615,7 @@ class Concepto(object):
         tree = 'precunidad'
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
-            return data.text
+            return float(data.text)
         else:
             return False
 
@@ -552,7 +624,7 @@ class Concepto(object):
         tree = 'importe'
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
-            return data.text
+            return float(data.text)
         else:
             return False
 
@@ -579,7 +651,7 @@ class Concepto(object):
         tree = 'porcentajeconcepto'
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
-            return data.text
+            return float(data.text)
         else:
             return False
 
@@ -606,7 +678,7 @@ class Concepto(object):
         tree = 'porcentajeimpcto'
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
-            return data.text
+            return float(data.text)
         else:
             return False
 
@@ -809,7 +881,7 @@ class Medidor(object):
         tree = 'factorconver'
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
-            return data.text
+            return float(data.text)
         else:
             return False
 
@@ -818,7 +890,7 @@ class Medidor(object):
         tree = 'factork'
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
-            return data.text
+            return float(data.text)
         else:
             return False
 
@@ -827,7 +899,7 @@ class Medidor(object):
         tree = 'pcs'
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
-            return data.text
+            return float(data.text)
         else:
             return False
 
@@ -881,7 +953,7 @@ class Medidor(object):
         tree = 'consumokwh'
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
-            return data.text
+            return float(data.text)
         else:
             return False
 
@@ -890,7 +962,7 @@ class Medidor(object):
         tree = 'consumoereal'
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
-            return data.text
+            return float(data.text)
         else:
             return False
 
@@ -899,7 +971,7 @@ class Medidor(object):
         tree = 'consumoreg'
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
-            return data.text
+            return float(data.text)
         else:
             return False
 
@@ -917,7 +989,7 @@ class Medidor(object):
         tree = 'ajuste'
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
-            return data.text
+            return float(data.text)
         else:
             return False
 
@@ -926,7 +998,7 @@ class Medidor(object):
         tree = 'qdaplicado'
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
-            return data.text
+            return float(data.text)
         else:
             return False
 
@@ -935,7 +1007,7 @@ class Medidor(object):
         tree = 'qdmaximo'
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
-            return data.text
+            return float(data.text)
         else:
             return False
 
@@ -962,7 +1034,7 @@ class Medidor(object):
         tree = 'qdcontratado'
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
-            return data.text
+            return float(data.text)
         else:
             return False
 
@@ -1029,6 +1101,51 @@ class Medidor(object):
             for d in obj.listanumeradores.numerador:
                 data.append(Numerador(d))
         return data
+
+    def get_lectures_info(self):
+        res = []
+        fecha_desde = self.feclecant
+        fecha_actual = self.feclecact
+        comptador = self.numseriemedidor
+        periode = self.tipo_dh
+        ajust = float(self.ajuste)
+        motiu = self.codajuste
+        factor_k = float(self.factork)
+        pcs = float(self.pcs)
+
+        for numerador in self.listanumeradores:
+            lectura_desde_m3 = float(numerador.lectant)
+            lectura_actual_m3 = float(numerador.lecact)
+            origen_desde = numerador.tipolec
+            origen_actual = numerador.tipolec
+            tipo_lect_num = numerador.tipolecnum
+            lectura_desde = lectura_desde_m3 * float(self.factorconver)
+            lectura_actual = lectura_actual_m3 * float(self.factorconver)
+            vals = {
+                'lectura_desde': lectura_desde,
+                'lectura_actual': lectura_actual,
+                'lectura_desde_m3': lectura_desde_m3,
+                'lectura_actual_m3': lectura_actual_m3,
+                'fecha_desde': fecha_desde,
+                'fecha_actual': fecha_actual,
+                'comptador': comptador,
+                'origen_desde': origen_desde,
+                'origen_actual': origen_actual,
+                'periode': periode,
+                'ajust': ajust,
+                'motiu': motiu,
+                'tipo_lect_num': tipo_lect_num,
+                'factor_k': factor_k,
+                'pcs': pcs,
+                'ometre': numerador.aparatorelevante,
+                'consum_m3': float(numerador.consumo),
+                'consum': float(numerador.consumo) * float(self.factorconver)
+            }
+            res.append(vals)
+        return res
+
+    def get_giro(self):
+        return max([int(l.digmed) for l in self.listanumeradores])
 
 
 class Numerador(object):
@@ -1263,7 +1380,7 @@ class Imputacioncostes(object):
             return False
 
 
-# Datos para B7021
+# Datos para B7032
 class B7032(B7031):
     pass
 
@@ -1278,3 +1395,136 @@ class Factura(Factura):
             return data.text
         else:
             return False
+
+    def get_create_invoice_params(self):
+        res = super(Factura, self).get_create_invoice_params()
+        if self.numpseudofactura:
+            res['origin'] = (res['origin'] or "") + " - " + self.numpseudofactura
+        return res
+
+
+# Let the user say only B70
+class B70(B7031):
+    pass
+
+
+class MultiModeloAparato(Medidor):
+
+    def __init__(self, meter_list):
+        self.meters = meter_list
+        super(MultiModeloAparato, self).__init__(meter_list[0])
+
+    def _get_single_attribute(self, attribute):
+        for meter in self.meters:
+            attr_val = getattr(meter, attribute, None)
+            if attr_val is not None:
+                return attr_val
+
+        return None
+
+    def _get_list_attribute(self, attribute):
+        res = []
+
+        for meter in self.meters:
+            if hasattr(meter, attribute):
+                res += getattr(meter, attribute)
+
+        return res
+
+    def get_dates_inici_i_final(self):
+        data_inici = ''
+        data_final = ''
+        for lect in self.meters:
+            data_in_compt = datetime.strptime(
+                lect.feclecant, '%Y-%m-%d'
+            )
+            data_fi_compt = datetime.strptime(
+                lect.feclecact, '%Y-%m-%d'
+            )
+
+            if not data_inici or data_in_compt < data_inici:
+                data_inici = data_in_compt
+            if not data_final or data_in_compt > data_final:
+                data_final = data_fi_compt
+
+        return data_inici, data_final
+
+    @property
+    def feclecant(self):
+        return self._get_single_attribute('feclecant')
+
+    @property
+    def feclecact(self):
+        return self._get_single_attribute('feclecact')
+
+    @property
+    def modelomedidor(self):
+        return self._get_single_attribute('modelomedidor')
+
+    @property
+    def numseriemedidor(self):
+        return self._get_single_attribute('numseriemedidor')
+
+    @property
+    def factorconver(self):
+        return self._get_single_attribute('factorconver')
+
+    @property
+    def factork(self):
+        return self._get_single_attribute('factork')
+
+    @property
+    def pcs(self):
+        return self._get_single_attribute('pcs')
+
+    @property
+    def consumokwh(self):
+        return self._get_single_attribute('consumokwh')
+
+    @property
+    def codajuste(self):
+        return self._get_single_attribute('codajuste')
+
+    @property
+    def ajuste(self):
+        return self._get_single_attribute('ajuste')
+
+    @property
+    def motivolec(self):
+        return self._get_single_attribute('motivolec')
+
+    @property
+    def tipo_dh(self):
+        return self._get_single_attribute('tipo_dh')
+
+    @property
+    def listanumeradores(self):
+        return self._get_list_attribute('listanumeradores')
+
+
+def agrupar_lectures_per_data(lectures):
+    """Retorna un diccionari de llistes en què les
+       claus són les dates inicial i final de les lectures
+    """
+    lect = {}
+    for i in lectures:
+        key = (i['fecha_desde'], i['fecha_actual'])
+        if key not in lect:
+            lect[key] = []
+        lect[key].append(i)
+    return lect
+
+
+def obtenir_data_inici_i_final(dic):
+    """Retorna la data inicial i final del diccionari retornat
+       per la funció agrupar_lectures_per_data()
+    """
+    inici_conjunt = None
+    final_conjunt = None
+    for keys in dic.keys():
+        if not inici_conjunt or inici_conjunt > keys[0]:
+            inici_conjunt = keys[0]
+        if not final_conjunt or final_conjunt < keys[1]:
+            final_conjunt = keys[1]
+
+    return inici_conjunt, final_conjunt

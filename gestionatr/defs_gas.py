@@ -3667,3 +3667,33 @@ TAULA_PRIORIDAD = [
     ('0', 'Prioridad normal.'),
     ('1', 'Prioridad alta. '),
 ]
+
+REFUND_RECTIFICATIVE_TYPES = ['A', 'B']  # 'R' ?
+
+REQUIRE_REFERENCE_TYPES = [
+    'A', 'B', 'R'
+]
+
+SIGN = {'N': 1, 'R': 1, 'A': -1, 'B': -1}
+
+TIPUS_CONCEPTES = {
+    '0000': 'informacio',
+    '0001': 'informacio',
+    '0002': 'informacio',
+    '0003': 'lloguer',
+    # '0004': 'altres',
+    # '0005': 'altres',
+    # '0006': 'altres',
+    '0007': 'informacio',
+    '0008': 'impost',
+    '0009': 'informacio',
+    '0010': 'impost',
+    '0011': 'informacio',
+    '0012': 'lloguer',
+    '0013': 'lloguer',
+    '0014': 'lloguer',
+    # '0015': 'altres',
+    '0016': 'tfixe',
+    '0017': 'tvariable',
+    # '****': 'altres'
+}
