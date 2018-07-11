@@ -515,7 +515,7 @@ class Factura(object):
             'check_total': abs(self.importetotal),
             'origin': self.numfactura,
             'origin_date_invoice': self.fecfactura,
-            'reference': self.numfactura,
+            'reference': self.numfactorigen,
         }
 
     def get_linies_factura_by_type(self):
@@ -1137,7 +1137,7 @@ class Medidor(object):
                 'tipo_lect_num': tipo_lect_num,
                 'factor_k': factor_k,
                 'pcs': pcs,
-                'ometre': numerador.aparatorelevante,
+                'ometre': numerador.aparatorelevante == 'N',
                 'consum_m3': float(numerador.consumo),
                 'consum': float(numerador.consumo) * float(self.factorconver)
             }
@@ -1145,7 +1145,7 @@ class Medidor(object):
         return res
 
     def get_giro(self):
-        return max([int(l.digmed) for l in self.listanumeradores])
+        return max([10**int(l.digmed) for l in self.listanumeradores])
 
 
 class Numerador(object):
