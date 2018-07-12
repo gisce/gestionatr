@@ -1401,7 +1401,10 @@ class Factura(Factura):
 
     def get_origin(self):
         res = super(Factura, self).get_origin()
-        return (res or "") + " - " + (self.numpseudofactura or "")
+        if self.numpseudofactura:
+            return (res or "") + " - " + (self.numpseudofactura or "")
+        else:
+            return res
 
 
 # Let the user say only B70
