@@ -17,7 +17,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def reqcode(self):
         tree = '{0}.reqcode'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -26,7 +26,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def responsedate(self):
         tree = '{0}.responsedate'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -35,7 +35,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def responsehour(self):
         tree = '{0}.responsehour'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -44,7 +44,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def comreferencenum(self):
         tree = '{0}.comreferencenum'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -53,7 +53,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def result(self):
         tree = '{0}.result'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -62,7 +62,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def resultdesc(self):
         tree = '{0}.resultdesc'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -71,7 +71,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def resultreason(self):
         tree = '{0}.resultreason'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -80,7 +80,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def resultreasondesc(self):
         tree = '{0}.resultreasondesc'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -89,7 +89,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def nationality(self):
         tree = '{0}.nationality'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -98,7 +98,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def documenttype(self):
         tree = '{0}.documenttype'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -107,7 +107,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def documentnum(self):
         tree = '{0}.documentnum'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -116,7 +116,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def cups(self):
         tree = '{0}.cups'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -125,7 +125,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def updatereason(self):
         tree = '{0}.updatereason'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -134,7 +134,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def reqqd(self):
         tree = '{0}.reqqd'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -143,7 +143,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def reqqh(self):
         tree = '{0}.reqqh'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -152,7 +152,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def reqestimatedqa(self):
         tree = '{0}.reqestimatedqa'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -161,7 +161,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def reqoutgoingpressure(self):
         tree = '{0}.reqoutgoingpressure'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -170,7 +170,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def tolltype(self):
         tree = '{0}.tolltype'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -179,7 +179,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def qdgranted(self):
         tree = '{0}.qdgranted'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -188,7 +188,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def singlenomination(self):
         tree = '{0}.singlenomination'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -197,7 +197,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def netsituation(self):
         tree = '{0}.netsituation'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -206,7 +206,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def newmodeffectdate(self):
         tree = '{0}.newmodeffectdate'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -215,7 +215,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def foreseentransferdate(self):
         tree = '{0}.foreseentransferdate'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -224,7 +224,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def StatusPS(self):
         tree = '{0}.StatusPS'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -233,7 +233,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def extrainfo(self):
         tree = '{0}.extrainfo'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -243,7 +243,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def atrcode(self):
         tree = '{0}.atrcode'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -252,7 +252,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def transfereffectivedate(self):
         tree = '{0}.transfereffectivedate'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -261,7 +261,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def telemetering(self):
         tree = '{0}.telemetering'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -270,7 +270,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def finalqdgranted(self):
         tree = '{0}.finalqdgranted'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -279,7 +279,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def finalqhgranted(self):
         tree = '{0}.finalqhgranted'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -288,7 +288,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def finalclientyearlyconsumption(self):
         tree = '{0}.finalclientyearlyconsumption'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -297,7 +297,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def gasusetype(self):
         tree = '{0}.gasusetype'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -306,7 +306,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def activationtype(self):
         tree = '{0}.activationtype'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -315,7 +315,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def activationtypedesc(self):
         tree = '{0}.activationtypedesc'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -324,7 +324,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def closingtype(self):
         tree = '{0}.closingtype'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -333,7 +333,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def closingtypedesc(self):
         tree = '{0}.closingtypedesc'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -342,7 +342,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def interventiondate(self):
         tree = '{0}.interventiondate'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -351,7 +351,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def interventionhourfrom(self):
         tree = '{0}.interventionhourfrom'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -360,7 +360,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def interventionhourto(self):
         tree = '{0}.interventionhourto'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -369,7 +369,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def visitnumber(self):
         tree = '{0}.visitnumber'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -378,7 +378,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def firstname(self):
         tree = '{0}.firstname'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -387,7 +387,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def familyname1(self):
         tree = '{0}.familyname1'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -396,7 +396,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def familyname2(self):
         tree = '{0}.familyname2'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -405,7 +405,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def titulartype(self):
         tree = '{0}.titulartype'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -414,7 +414,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def regularaddress(self):
         tree = '{0}.regularaddress'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -423,7 +423,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def telephone1(self):
         tree = '{0}.telephone1'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -432,7 +432,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def telephone2(self):
         tree = '{0}.telephone2'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -441,7 +441,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def email(self):
         tree = '{0}.email'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -450,7 +450,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def language(self):
         tree = '{0}.language'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -459,7 +459,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def provinceowner(self):
         tree = '{0}.provinceowner'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -468,7 +468,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def cityowner(self):
         tree = '{0}.cityowner'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -477,7 +477,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def zipcodeowner(self):
         tree = '{0}.zipcodeowner'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -486,7 +486,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def streettypeowner(self):
         tree = '{0}.streettypeowner'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -495,7 +495,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def streetowner(self):
         tree = '{0}.streetowner'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -504,7 +504,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def streetnumberowner(self):
         tree = '{0}.streetnumberowner'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -513,7 +513,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def portalowner(self):
         tree = '{0}.portalowner'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -522,7 +522,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def staircaseowner(self):
         tree = '{0}.staircaseowner'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -531,7 +531,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def floorowner(self):
         tree = '{0}.floorowner'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -540,7 +540,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def doorowner(self):
         tree = '{0}.doorowner'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -549,7 +549,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def canonircperiodicity(self):
         tree = '{0}.canonircperiodicity'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -558,7 +558,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def lastinspectionsdate(self):
         tree = '{0}.lastinspectionsdate'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -567,7 +567,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def lastinspectionsresult(self):
         tree = '{0}.lastinspectionsresult'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -577,7 +577,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def readingtype(self):
         tree = '{0}.readingtype'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -586,7 +586,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def lectureperiodicity(self):
         tree = '{0}.lectureperiodicity'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -619,7 +619,7 @@ class A1_41(MessageGas, ProcessDeadline):
     def previousatrcode(self):
         tree = '{0}.previousatrcode'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -634,7 +634,7 @@ class counter(object):
     def countermodel(self):
         tree = 'countermodel'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -643,7 +643,7 @@ class counter(object):
     def countertype(self):
         tree = 'countertype'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -652,7 +652,7 @@ class counter(object):
     def counternumber(self):
         tree = 'counternumber'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -661,7 +661,7 @@ class counter(object):
     def counterproperty(self):
         tree = 'counterproperty'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -670,7 +670,7 @@ class counter(object):
     def reallecture(self):
         tree = 'reallecture'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -679,7 +679,7 @@ class counter(object):
     def counterpressure(self):
         tree = 'counterpressure'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -694,7 +694,7 @@ class corrector(object):
     def correctormodel(self):
         tree = 'correctormodel'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -703,7 +703,7 @@ class corrector(object):
     def correctortype(self):
         tree = 'correctortype'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -712,7 +712,7 @@ class corrector(object):
     def correctornumber(self):
         tree = 'correctornumber'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -721,7 +721,7 @@ class corrector(object):
     def correctorproperty(self):
         tree = 'correctorproperty'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False
@@ -730,7 +730,7 @@ class corrector(object):
     def correctedlecture(self):
         tree = 'correctedlecture'
         data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
+        if data is not None and data is not False:
             return data.text
         else:
             return False

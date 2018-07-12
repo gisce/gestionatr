@@ -12,5 +12,6 @@ from R1 import R1
 from F1 import F1
 from message_gas import MessageGas
 from A1_41 import A1_41
+from B70 import B7031, B7032, B70
 from A1_02 import A1_02
 from A1_05 import A1_05
