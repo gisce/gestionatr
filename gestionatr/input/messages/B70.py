@@ -323,6 +323,9 @@ class Factura(object):
         else:
             return False
 
+    def get_origin(self):
+        return self.numfactura
+
     @property
     def tipofacturacion(self):
         tree = 'tipofacturacion'
@@ -513,7 +516,7 @@ class Factura(object):
             'tipo_rectificadora': self.clasefact,
             'date_invoice': self.fecfactura,
             'check_total': abs(self.importetotal),
-            'origin': self.numfactura,
+            'origin': self.get_origin(),
             'origin_date_invoice': self.fecfactura,
             'reference': self.numfactorigen,
         }
@@ -1396,11 +1399,9 @@ class Factura(Factura):
         else:
             return False
 
-    def get_create_invoice_params(self):
-        res = super(Factura, self).get_create_invoice_params()
-        if self.numpseudofactura:
-            res['origin'] = (res['origin'] or "") + " - " + self.numpseudofactura
-        return res
+    def get_origin(self):
+        res = super(Factura, self).get_origin()
+        return (res or "") + " - " + (self.numpseudofactura or "")
 
 
 # Let the user say only B70
