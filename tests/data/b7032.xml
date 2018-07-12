@@ -72,7 +72,7 @@
                 <precunidad>0.02241300</precunidad>
                 <importe>39.14</importe>
                 <codconcepto>0017</codconcepto>
-                <desconcepto>Término variable peaje</desconcepto>
+                <desconcepto>Termino variable peaje</desconcepto>
                 <impuestoconcepto>N</impuestoconcepto>
                 <porcentajeimpcto>0</porcentajeimpcto>
             </concepto>
@@ -83,7 +83,7 @@
                 <precunidad>0.02241300</precunidad>
                 <importe>20.20</importe>
                 <codconcepto>0017</codconcepto>
-                <desconcepto>Término variable peaje</desconcepto>
+                <desconcepto>Termino variable peaje</desconcepto>
                 <impuestoconcepto>N</impuestoconcepto>
                 <porcentajeimpcto>0</porcentajeimpcto>
             </concepto>
@@ -94,7 +94,7 @@
                 <precunidad>0.190356164383</precunidad>
                 <importe>5.90</importe>
                 <codconcepto>0016</codconcepto>
-                <desconcepto>Término fijo peaje</desconcepto>
+                <desconcepto>Termino fijo peaje</desconcepto>
                 <impuestoconcepto>N</impuestoconcepto>
                 <porcentajeimpcto>0</porcentajeimpcto>
             </concepto>
@@ -105,7 +105,7 @@
                 <precunidad>0.190356164383</precunidad>
                 <importe>3.05</importe>
                 <codconcepto>0016</codconcepto>
-                <desconcepto>Término fijo peaje</desconcepto>
+                <desconcepto>Termino fijo peaje</desconcepto>
                 <impuestoconcepto>N</impuestoconcepto>
                 <porcentajeimpcto>0</porcentajeimpcto>
             </concepto>
@@ -175,7 +175,7 @@
                 <precunidad>0.02241300</precunidad>
                 <importe>39.14</importe>
                 <codconcepto>0017</codconcepto>
-                <desconcepto>Término inventado</desconcepto>
+                <desconcepto>Termino inventado</desconcepto>
                 <porcentajeconcepto>2</porcentajeconcepto>
                 <impuestoconcepto>N</impuestoconcepto>
                 <codtipoimpuesto>01</codtipoimpuesto>
