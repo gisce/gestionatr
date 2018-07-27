@@ -414,12 +414,13 @@ class IVA(XmlModel):
 
 class IVAReducido(XmlModel):
 
-    _sort_order = ('iva_reducido', 'base_imponible', 'porcentaje')
+    _sort_order = ('iva_reducido', 'base_imponible', 'porcentaje', 'importe')
 
     def __init__(self):
         self.iva_reducido = XmlField('IVAReducido')
-        self.base_imponible = XmlField('BaseImponible')
-        self.porcentaje = XmlField('Porcentaje')
+        self.base_imponible = XmlField('BaseImponible', rep=rep_decimal(2))
+        self.porcentaje = XmlField('Porcentaje', rep=rep_decimal(2))
+        self.importe = XmlField('Importe', rep=rep_decimal(2))
         super(IVAReducido, self).__init__('IVAReducido', 'iva_reducido')
 
 
