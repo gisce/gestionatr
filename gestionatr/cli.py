@@ -32,17 +32,21 @@ def test(filename, sector):
     with open(filename, 'r') as xml_file:
         try:
             data = xml_file.read()
-            if sector == 'e':
+            if sector == u'e':
                 m = message.Message(data)
-            elif sector == 'g':
+            elif sector == u'g':
                 m = message_gas.MessageGas(data)
             m.parse_xml()
             sys.stdout.write(u'Correct File\n')
         except except_f1 as e:
+            error_txt = unicode(e.value).encode(errors='ignore')
             sys.stdout.write(
-                u'WARNING: Invalid File: {0}\n'.format(str(e.value))
+                u'WARNING: Invalid File: {0}\n'.format(error_txt)
             )
         except Exception as e:
+            error_txt = unicode(e).encode(errors='ignore')
             sys.stdout.write(
-                u'WARNING: Invalid File: {0}\n'.format(str(e))
+                u'WARNING: Invalid File: {0}\n'.format(error_txt)
             )
+        finally:
+            sys.stdout.flush()
