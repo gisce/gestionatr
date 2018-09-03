@@ -31,7 +31,7 @@ class R1(C2):
         tree = '{0}.VariablesDetalleReclamacion'.format(self._header)
         obj = get_rec_attr(self.obj, tree, False)
         data = []
-        if obj not in [None, False]:
+        if obj not in [None, False] and hasattr(obj, "VariableDetalleReclamacion"):
             for i in obj.VariableDetalleReclamacion:
                 data.append(VariableDetalleReclamacion(i))
             return data
