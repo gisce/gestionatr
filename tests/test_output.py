@@ -15,6 +15,7 @@ from gestionatr.output.messages import sw_f1 as f1
 from gestionatr.output.messages import sw_a1_41 as a1_41
 from gestionatr.output.messages import sw_a1_02 as a1_02
 from gestionatr.output.messages import sw_a1_05 as a1_05
+from gestionatr.output.messages import sw_a1_44 as a1_44
 
 
 class test_C1(unittest.TestCase):
@@ -3077,3 +3078,87 @@ class test_A1_05(unittest.TestCase):
         mensaje_a105.build_tree()
         xml = str(mensaje_a105)
         assertXmlEqual(xml, self.xml_a105.read())
+
+
+class test_A1_44(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a144 = open(get_data("a144.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a144.close()
+
+    def test_create_a144(self):
+        # MensajeA144
+        mensaje_a144 = a1_44.MensajeA144()
+
+        # Heading
+        heading = a1_44.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '44',
+            'messagetype': 'A1'
+        }
+        heading.feed(heading_fields)
+
+        # A144
+        a144 = a1_44.A144()
+
+        # RegistrosDocumento
+        registros_documento = a1_05.Registerdoclist()
+        rd1 = a1_44.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-02',
+            'doctype': 'CC',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd1.feed(registro_doc_fields)
+        rd2 = a1_05.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-03',
+            'doctype': '01',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd2.feed(registro_doc_fields)
+        registros_documento.feed({
+            'registerdoc_list': [rd1, rd2],
+        })
+
+        a144_fields = {
+            'comreferencenum': '000123456789',
+            'sourcetype': '01',
+            'firstname': 'Gas',
+            'lastname': 'Al',
+            'secondname': 'Matalas',
+            'cups': 'ES1234000000000001JN',
+            'operationtype': 'A10001',
+            'description': 'Desc',
+            'operationnum': '111111',
+            'prefixtel1': '34',
+            'telephone1': '987654321',
+            'prefixtel2': '33',
+            'telephone2': '123456789',
+            'reqdate': '2018-05-01',
+            'reqhour': '13:00:00',
+            'readingdate': '2018-06-01',
+            'readingvalue': '25',
+            'extrainfo': 'comentarios extras',
+            'registerdoclist': registros_documento,
+        }
+        a144.feed(a144_fields)
+        mensaje_a144_fields = {
+            'heading': heading,
+            'a1': a144,
+        }
+        mensaje_a144.feed(mensaje_a144_fields)
+        mensaje_a144.build_tree()
+        xml = str(mensaje_a144)
+        assertXmlEqual(xml, self.xml_a144.read())
+
+
