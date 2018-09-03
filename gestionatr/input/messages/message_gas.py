@@ -30,6 +30,12 @@ XSD_DATA.update({
         'A3': 'A305.xsd',
         'A4': 'A405.xsd',
     },
+    '44': {
+        'A1': 'A144.xsd',
+        'A2': 'A244.xsd',
+        'A3': 'A344.xsd',
+        'A4': 'A444.xsd',
+    },
 })
 
 MAIN_MESSAGE_XSD.update({
@@ -53,6 +59,11 @@ MAIN_MESSAGE_XSD.update({
     'A205': 'a205',
     'A305': 'a305',
     'A405': 'a405',
+    # 44
+    'A144': 'a1',
+    'A244': 'a2',
+    'A344': 'a3',
+    'A444': 'a4',
 })
 
 

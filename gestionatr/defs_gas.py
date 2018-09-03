@@ -2009,6 +2009,7 @@ TAULA_MOTIVOS_DE_RECHAZO_CNMC = [
     ('R96', 'Tipo de activación solicita incoherente con el '
             'proceso solicitado'),
 ]
+TAULA_MOTIVO_RECHAZO_OCSUM = TAULA_MOTIVOS_DE_RECHAZO_CNMC
 TAULA_MES = [
     ('01', 'Enero'),
     ('02', 'Febrero'),
@@ -2428,6 +2429,8 @@ TAULA_SI_NO = [
     ('S', 'Sí'),
     ('N', 'No'),
 ]
+TAULA_INDICATIVO_SI = TAULA_SI_NO
+
 TAULA_MODELO_FECHA_EFECTO = [
     ('01', 'Primer valor posible estimado (1/11/21)'),
     ('02', 'Primer valor posible de lectura (mensual/bimestral)'),
@@ -2547,6 +2550,8 @@ TAULA_PROPIEDAD_CONTADOR_CORRECTOR = [
     ('08', 'PROPIO-PLAZOS-12'),
     ('10', 'PROPIO'),
 ]
+TAULA_PROPIEDAD_CONTADOR = TAULA_PROPIEDAD_CONTADOR_CORRECTOR
+
 TAULA_PRESION_COMUNITARIA = [
     ('MP', 'ENTRE 0,4 Y BARS MAX. '),
     ('MPA', 'MEDIA PRESION A '),
@@ -2906,6 +2911,8 @@ TAULA_CONCEPTOS_FACTURACION = [
                   'IRC realizada por empresa instaladora'),
     ('1', '1936', 'Canon IRC 4'),
 ]
+TAULA_CONCEPTO_FACTURACION = [(a[1], a[2]) for a in TAULA_CONCEPTOS_FACTURACION]
+
 TAULA_MOTIVO_REGULARIZACION_CONSUMO = [
     ('01', 'Verificación equipo de medida'),
     ('02', 'Avería en contador'),
@@ -3041,6 +3048,8 @@ TAULA_TIPOS_DE_DOCUMENTO = [
     ('06', 'Otra documentación del cliente'),
     ('99', 'Otros'),
 ]
+TAULA_TIPOS_DOCUMENTOS_ANEXOS = TAULA_TIPOS_DE_DOCUMENTO
+
 TAULA_ORIGEN_INSPECCION = [
     ('0', 'Distribuidor'),
     ('1', 'Comercializador'),
@@ -3083,6 +3092,8 @@ TAULA_TIPO_OPERACION = [
     ('A20004', 'Baja de Telemedida', 'AMBOS', 'A'),
     ('A20006', 'Aviso posible fraude', 'DIS', 'A'),
 ]
+TAULA_TIPO_ACTUACION = TAULA_TIPO_OPERACION
+
 TAULA_SITUACION_SUMINISTRO = [
     ('00', 'PENDIENTE COMUNICACION DE OBRA CORRIENTE'),
     ('01', 'PENDIENTE DE PRIMERA FACTURACION'),
