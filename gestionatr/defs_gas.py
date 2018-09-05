@@ -3038,6 +3038,8 @@ TAULA_TIPOS_DE_SOLICITANTE_RECLAMANTE = [
     ('08', 'Afectado no titular ni usuario del punto de suministro'),
     ('09', 'Asociaciones de Consumidores'),
 ]
+TAULA_TIPO_SOLICITANTE = TAULA_TIPOS_DE_SOLICITANTE_RECLAMANTE
+
 TAULA_TIPOS_DE_DOCUMENTO = [
     ('CC', 'Carta de Conformidad'),
     ('01', 'Acta de puesta en marcha'),
@@ -3093,6 +3095,7 @@ TAULA_TIPO_OPERACION = [
     ('A20006', 'Aviso posible fraude', 'DIS', 'A'),
 ]
 TAULA_TIPO_ACTUACION = TAULA_TIPO_OPERACION
+TAULA_TIPO_OPERACION_COMER = [(x[0], x[1]) for x in TAULA_TIPO_OPERACION if x[2] == 'AMBOS']
 
 TAULA_SITUACION_SUMINISTRO = [
     ('00', 'PENDIENTE COMUNICACION DE OBRA CORRIENTE'),
