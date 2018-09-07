@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sctdapplication xmlns="http://localhost/sctd/A444">
+    <heading>
+        <dispatchingcode>GML</dispatchingcode>
+        <dispatchingcompany>1234</dispatchingcompany>
+        <destinycompany>4321</destinycompany>
+        <communicationsdate>2018-05-01</communicationsdate>
+        <communicationshour>12:00:00</communicationshour>
+        <processcode>44</processcode>
+        <messagetype>A4</messagetype>
+    </heading>
+    <a4>
+        <reqcode>10_Aql6Crc</reqcode>
+        <reqdate>2018-09-03</reqdate>
+        <reqhour>15:53:48</reqhour>
+        <comreferencenum>123456789</comreferencenum>
+        <cups>20_BuEWbkISNj3eThQu8</cups>
+        <operationtype>A10001</operationtype>
+        <responsedate>2018-09-03</responsedate>
+        <responsehour>15:53:48</responsehour>
+        <result>13</result>
+        <resultdesc>No Realizada</resultdesc>
+        <resultreason>R01</resultreason>
+        <resultreasondesc>Cliente suministrado desde planta satélite.</resultreasondesc>
+        <closingtype>001</closingtype>
+        <closingtypedesc>La Actualización de Datos se ha realizado correctamente</closingtypedesc>
+        <reqdescription>255_jK4VNLI9yGHM2iXotIhngmDIbQsVCh</reqdescription>
+        <interventiondate>2018-09-03</interventiondate>
+        <interventionhour>15:53:48</interventionhour>
+        <resultinspection>01</resultinspection>
+        <resultinspectiondesc>CORRECTO</resultinspectiondesc>
+        <operationnum>40_Q6UldWk39wNRX5s2uSkVIponc3dAVu</operationnum>
+        <visitnumber>324</visitnumber>
+        <counterchange>S</counterchange>
+        <removallecture>15065352</removallecture>
+        <supplystatus>00</supplystatus>
+        <supplystatusdesc>PENDIENTE COMUNICACION DE OBRA CORRIENTE</supplystatusdesc>
+        <servicestatus>00</servicestatus>
+        <servicestatusdesc>EN SERVICIO</servicestatusdesc>
+        <extrainfo>400_iicHtFZt43x9GRffBbuEvZACvCUGr4</extrainfo>
+        <conceptnumber>95</conceptnumber>
+        <conceptlist>
+            <concept>
+                <level>1</level>
+                <code>0000</code>
+                <description>Importe Total Factura</description>
+                <periodicity>01</periodicity>
+                <units>66</units>
+                <unitimport>55445.71</unitimport>
+                <import>4016102.9</import>
+            </concept>
+        </conceptlist>
+        <counterlist>
+            <counter>
+                <countermodel>50_jr23Qy5fvVmQ2FtjhwovVAY8mxigTk</countermodel>
+                <countertype>7_UbbtS</countertype>
+                <counternumber>18_KbFpIkwTRIBDnU6</counternumber>
+                <counterproperty>04</counterproperty>
+                <reallecture>36119625759</reallecture>
+                <counterpressure>18000.079</counterpressure>
+            </counter>
+        </counterlist>
+        <defectlist>
+            <defect>
+                <code>001</code>
+                <description>FUGA DE GAS</description>
+            </defect>
+        </defectlist>
+        <registerdoclist>
+            <registerdoc>
+                <date>2018-09-03</date>
+                <doctype>CC</doctype>
+                <url>255_fNTPLw5NQGEdAC6TzZrLSetqW7K6PY</url>
+                <extrainfo>255_ieYyI19A1KmTmbsNs5i3ycsbRc01Rx</extrainfo>
+            </registerdoc>
+        </registerdoclist>
+    </a4>
+</sctdapplication>

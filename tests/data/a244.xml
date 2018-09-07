@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sctdapplication xmlns="http://localhost/sctd/A244">
+    <heading>
+        <dispatchingcode>GML</dispatchingcode>
+        <dispatchingcompany>1234</dispatchingcompany>
+        <destinycompany>4321</destinycompany>
+        <communicationsdate>2018-05-01</communicationsdate>
+        <communicationshour>12:00:00</communicationshour>
+        <processcode>44</processcode>
+        <messagetype>A2</messagetype>
+    </heading>
+    <a2>
+        <reqcode>0123456789</reqcode>
+        <reqdate>2018-05-01</reqdate>
+        <reqhour>13:00:00</reqhour>
+        <comreferencenum>000123456789</comreferencenum>
+        <cups>ES1234000000000001JN</cups>
+        <operationtype>A10011</operationtype>
+        <responsedate>2018-05-01</responsedate>
+        <responsehour>13:00:00</responsehour>
+        <result>01</result>
+        <resultdesc>Aceptada</resultdesc>
+        <resultreason>R32</resultreason>
+        <resultreasondesc>Fecha efecto solicitada anterior al día actual.</resultreasondesc>
+        <srcode>998877665544332211</srcode>
+        <extrainfo>Coments</extrainfo>
+    </a2>
+</sctdapplication>
