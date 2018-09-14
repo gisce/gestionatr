@@ -12,7 +12,7 @@ class MensajeA104(XmlModel):
         self.doc_root = None
         self.mensaje = XmlField(
             'sctdapplication',
-            attributes={'xmlns': 'http://localhost/sctd/A102'}
+            attributes={'xmlns': 'http://localhost/sctd/A104'}
         )
         self.heading = Heading()
         self.a104 = A104()
