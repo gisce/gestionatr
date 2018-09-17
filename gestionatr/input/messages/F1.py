@@ -509,11 +509,14 @@ class TerminoPotencia(Termino):
 
     PERIODO_TYPE = PeriodoPotencia
 
-    def get_contracted_periods_by_period(self):
+    def get_contracted_periods_by_period(self, use_facturada=False):
         cont_per = {}
 
         for period in self.periodos:
-            cont_per[period.nombre] = period.potencia_contratada
+            if not use_facturada:
+                cont_per[period.nombre] = period.potencia_contratada
+            else:
+                cont_per[period.nombre] = period.potencia_a_facturar
 
         return cont_per
 
