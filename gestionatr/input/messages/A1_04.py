@@ -16,3 +16,20 @@ class A1_04(A1_41):
         else:
             return False
 
+    @property
+    def operationnum(self):
+        tree = '{0}.operationnum'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def moreinformation(self):
+        tree = '{0}.moreinformation'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
