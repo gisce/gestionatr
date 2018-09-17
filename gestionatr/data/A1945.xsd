@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://localhost/sctd/A1945"
+	xmlns:tns="http://localhost/sctd/A1945"
+	elementFormDefault="qualified" >
+	<include schemaLocation="CommonTagsATCOM.xsd"></include>
+
+	<element name="sctdapplication"
+		type="tns:SctdApplicationA1945Type">
+	</element>
+
+	<complexType name="SctdApplicationA1945Type">
+		<sequence>
+			<element name="heading" type="tns:HeadingA1945Type" maxOccurs="1" minOccurs="1"></element>
+			<element name="a19" type="tns:A1945Type" maxOccurs="unbounded" minOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+    <complexType name="HeadingA1945Type">
+		<sequence>
+			<element name="dispatchingcode" maxOccurs="1"
+				minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="GML"></enumeration>
+						<length value="3"></length>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dispatchingcompany" type="tns:AgenteType"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="destinycompany" type="tns:AgenteType"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="communicationsdate" type="date" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="communicationshour" type="time" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="processcode" maxOccurs="1" minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"></length>
+						<enumeration value="45"></enumeration>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="messagetype" maxOccurs="1" minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="A19"></enumeration>
+						<minLength value="1"></minLength>
+						<maxLength value="3"></maxLength>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>    
+    </complexType>
+
+    <complexType name="A1945Type">
+    	<sequence>
+    		<element name="reqcode" type="tns:ReqcodeType"
+    			maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Código Solicitud</documentation></annotation>
+    		</element>
+    		<element name="reqdate" type="date" maxOccurs="1"
+    			minOccurs="1">
+                <annotation>
+                	<documentation>Fecha de Solicitud</documentation>
+                </annotation>
+    		</element>
+    		<element name="reqhour" type="time" maxOccurs="1"
+    			minOccurs="1">
+                <annotation>
+                	<documentation>Hora de Solicitud</documentation>
+                </annotation>
+    		</element>
+    		<element name="cups" type="tns:CupsType" maxOccurs="1"
+    			minOccurs="1">
+                <annotation>
+                	<documentation>CUPS</documentation>
+                </annotation>
+    		</element>
+    		<element name="operationtype" type="tns:OperationType"
+    			maxOccurs="1" minOccurs="1">
+                <annotation>
+                	<documentation>Tipo de Actuación</documentation>
+                </annotation>
+    		</element>
+    		<element name="operationnum" maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Número de Operación Generado</documentation>
+                </annotation>
+                <simpleType>
+    				<restriction base="string">
+    					<minLength value="1"></minLength>
+    					<maxLength value="40"></maxLength>
+						<whiteSpace value="collapse"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="responsedate" type="date" maxOccurs="1"
+    			minOccurs="1">
+                <annotation>
+                	<documentation>Fecha de Respuesta</documentation>
+                </annotation>
+    		</element>
+    		<element name="responsehour" type="time" maxOccurs="1"
+    			minOccurs="1">
+                <annotation>
+                	<documentation>Hora de Respuesta</documentation>
+                </annotation>
+    		</element>
+    		<element name="result" type="tns:ResultadoA19Type"
+    			maxOccurs="1" minOccurs="1">
+                <annotation>
+                	<documentation>Código de Resultado</documentation>
+                </annotation>
+    		</element>
+    		<element name="resultdesc" type="tns:ResultdescType"
+    			maxOccurs="1" minOccurs="1">
+                <annotation>
+                	<documentation>Descripción de Resultado</documentation>
+                </annotation>
+    		</element>
+    		<element name="closingtype" type="tns:ClosingCodeType"
+    			maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Tipo de Cierre</documentation>
+                </annotation>
+    		</element>
+    		<element name="closingtypedesc" maxOccurs="1"
+    			minOccurs="0">
+                <annotation>
+                	<documentation>Descripción del Tipo de Cierre</documentation>
+                </annotation>
+                <simpleType>
+    				<restriction base="string">
+    					<minLength value="1"></minLength>
+    					<maxLength value="100"></maxLength>
+						<whiteSpace value="collapse"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="activationtype" type="tns:ActivationType"
+    			maxOccurs="1" minOccurs="0">
+    			<annotation>
+    				<documentation>Tipo de Activación</documentation>
+    			</annotation>
+    		</element>
+    		<element name="activationtypedesc" maxOccurs="1"
+    			minOccurs="0">
+                <annotation>
+                	<documentation>Descripción de Tipo de Activación</documentation>
+                </annotation>
+                <simpleType>
+    				<restriction base="string">
+    					<minLength value="1"></minLength>
+    					<maxLength value="100"></maxLength>
+						<whiteSpace value="collapse"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="interventiondate" type="date" maxOccurs="1"
+    			minOccurs="0">
+                <annotation>
+                	<documentation>Fecha Intervención</documentation>
+                </annotation>
+    		</element>
+    		<element name="interventionhour" type="time" maxOccurs="1"
+    			minOccurs="0">
+                <annotation>
+                	<documentation>Hora Intervención</documentation>
+                </annotation>
+    		</element>
+    		<element name="resultinspection"
+    			type="tns:ResultInspectionType" maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Resultado Inspección</documentation>
+                </annotation>
+    		</element>
+    		<element name="resultinspectiondesc" maxOccurs="1"
+    			minOccurs="0">
+                <annotation>
+                	<documentation>Descripción de Resultado Inspección</documentation>
+                </annotation>
+                <simpleType>
+    				<restriction base="string">
+    					<minLength value="1"></minLength>
+    					<maxLength value="250"></maxLength>
+						<whiteSpace value="collapse"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="visitnumber" maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Número de Visita</documentation>
+                </annotation>
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="0"></minInclusive>
+						<maxInclusive value="999"></maxInclusive>
+					</restriction>
+				</simpleType>
+    		</element>
+    		<element name="counterchange" maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Cambio de Contador</documentation>
+                </annotation>
+                <simpleType>
+    				<restriction base="string">
+    					<length value="1"></length>
+    					<enumeration value="S"></enumeration>
+    					<enumeration value="N"></enumeration>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="removallecture" maxOccurs="1"
+    			minOccurs="0">
+                <annotation>
+                	<documentation>Lectura de Levantamiento de Contador</documentation>
+                </annotation>
+                <simpleType>
+                	<restriction base="decimal">
+                		<totalDigits value="9"></totalDigits>
+                		<fractionDigits value="0"></fractionDigits>
+                		<minInclusive value="0"></minInclusive>
+                	</restriction>
+                </simpleType>
+    		</element>
+    		<element name="supplystatus"
+    			type="tns:SupplyStatusCodeType" maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Situación del Suministro</documentation>
+                </annotation>
+    		</element>
+    		<element name="supplystatusdesc" maxOccurs="1"
+    			minOccurs="0">
+                <annotation>
+                	<documentation>Descripción Situación del Suministro</documentation>
+                </annotation>
+                <simpleType>
+    				<restriction base="string">
+    					<minLength value="1"></minLength>
+    					<maxLength value="100"></maxLength>
+						<whiteSpace value="collapse"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="servicestatus"
+    			type="tns:ServiceStatusCodeType" maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Situación del Servicio</documentation>
+                </annotation>
+    		</element>
+    		<element name="servicestatusdesc" maxOccurs="1"
+    			minOccurs="0">
+                <annotation>
+                	<documentation>Descripción Situación del Servicio</documentation>
+                </annotation>
+                <simpleType>
+    				<restriction base="string">
+    					<minLength value="1"></minLength>
+    					<maxLength value="100"></maxLength>
+						<whiteSpace value="collapse"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="extrainfo" type="tns:ExtrainfoType"
+    			maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Observaciones de la Comunicación</documentation>
+                </annotation>
+    		</element>
+    		<element name="communicationreason" maxOccurs="1"
+    			minOccurs="1">
+                <annotation>
+                	<documentation>Causa de la Comunicación</documentation>
+                </annotation>
+                <simpleType>
+    				<restriction base="string">
+    					<length value="2"></length>
+    					<enumeration value="08"></enumeration>
+    					<enumeration value="09"></enumeration>
+    					<enumeration value="10"></enumeration>
+    					<enumeration value="11"></enumeration>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="conceptnumber" maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Número de Conceptos</documentation>
+                </annotation>
+                <simpleType>
+                	<restriction base="decimal">
+                		<totalDigits value="2"></totalDigits>
+                		<fractionDigits value="0"></fractionDigits>
+                		<minInclusive value="0"></minInclusive>
+                	</restriction>
+                </simpleType>
+    		</element>
+    		<element name="conceptlist" type="tns:ConceptListType"
+    			maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Lista de Conceptos de Facturación</documentation>
+                </annotation>
+    		</element>
+    		<element name="counterlist" type="tns:CounterListType"
+    			maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Lista de Contadores</documentation>
+                </annotation>
+    		</element>
+    		<element name="defectlist" type="tns:DefectListType"
+    			maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Lista de Anomalías</documentation>
+                </annotation>
+    		</element>
+    		<element name="registerdoclist"
+    			type="tns:RegisterdocListType" maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Listado de Documentos</documentation>
+                </annotation>
+    		</element>
+    		<element name="inspectionorig" maxOccurs="1"
+    			minOccurs="0">
+                <annotation>
+                	<documentation>Origen de la Inspección</documentation>
+                </annotation>
+                <simpleType>
+    				<restriction base="string">
+    					<length value="1"></length>
+    					<enumeration value="0"></enumeration>
+    					<enumeration value="1"></enumeration>
+    					<enumeration value="2"></enumeration>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    	</sequence>
+    </complexType>
+    
+</schema>

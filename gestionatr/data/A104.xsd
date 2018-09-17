@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://localhost/sctd/A104"
+	xmlns:tns="http://localhost/sctd/A104"
+	elementFormDefault="qualified" >
+
+	<include schemaLocation="CommonTagsCONT.xsd"></include>
+	<element name="sctdapplication"
+		type="tns:SctdapplicationA104Type">
+	</element>
+
+	<complexType name="SctdapplicationA104Type">
+		<sequence>
+			<element name="heading" type="tns:HeadingA104Type" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="a104" type="tns:A104Type"
+				maxOccurs="unbounded" minOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="HeadingA104Type">
+		<sequence>
+			<element name="dispatchingcode" maxOccurs="1"
+				minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="GML"></enumeration>
+						<length value="3"></length>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dispatchingcompany" type="tns:AgenteType"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="destinycompany" type="tns:AgenteType"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="communicationsdate" type="date" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="communicationshour" type="time" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="processcode" maxOccurs="1" minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"></length>
+						<enumeration value="04"></enumeration>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="messagetype" maxOccurs="1" minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="A1"></enumeration>
+						<minLength value="1"></minLength>
+						<maxLength value="3"></maxLength>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="A104Type">
+        <annotation>
+        	<documentation>Fecha de Baja Solicitada. </documentation>
+        </annotation>
+        <sequence>
+        	<element name="comreferencenum"
+        		type="tns:ComreferencenumType" maxOccurs="1" minOccurs="1">
+        		<annotation>
+        			<documentation>
+        				Nº Referencia Solicitud Comercializadora
+        			</documentation>
+        		</annotation>
+        	</element>
+        	<element name="reqdate" type="date" maxOccurs="1"
+        		minOccurs="1">
+        		<annotation>
+        			<documentation>Fecha de Solicitud</documentation>
+        		</annotation>
+        	</element>
+        	<element name="reqhour" type="time" maxOccurs="1"
+        		minOccurs="1">
+        		<annotation>
+        			<documentation>Hora de Solicitud</documentation>
+        		</annotation>
+        	</element>
+        	<element name="titulartype" type="tns:TitularType"
+        		maxOccurs="1" minOccurs="0">
+        		<annotation>
+        			<documentation>Tipo de Titular</documentation>
+        		</annotation>
+        	</element>
+        	<element name="nationality" type="tns:NationalityType"
+        		maxOccurs="1" minOccurs="1">
+        		<annotation>
+        			<documentation>Nacionalidad</documentation>
+        		</annotation>
+        	</element>
+        	<element name="documenttype" type="tns:IdDocumentType"
+        		maxOccurs="1" minOccurs="1">
+        		<annotation>
+        			<documentation>
+        				Tipo Documento de Identificación
+        			</documentation>
+        		</annotation>
+        	</element>
+        	<element name="documentnum" type="tns:DocumentnumType"
+        		maxOccurs="1" minOccurs="1">
+        		<annotation>
+        			<documentation>Nº Documento</documentation>
+        		</annotation>
+        	</element>
+        	<element name="cups" type="tns:CupsType" maxOccurs="1"
+        		minOccurs="1">
+        		<annotation>
+        			<documentation>CUPS Solicitud</documentation>
+        		</annotation>
+        	</element>
+        	<element name="cancelreason" type="tns:MotivoBajaType"
+        		maxOccurs="1" minOccurs="1">
+        		<annotation>
+        			<documentation>Motivo de la Baja</documentation>
+        		</annotation>
+        	</element>
+        	<element name="modeffectdate" type="tns:ModeloFechaSolicitudType" maxOccurs="1" minOccurs="1"></element>
+        	<element name="reqcanceldate" type="date" maxOccurs="1"
+        		minOccurs="0">
+        	</element>
+        	<element name="cancelhour" type="time" maxOccurs="1"
+        		minOccurs="0">
+        		<annotation>
+        			<documentation>Hora de Cierre</documentation>
+        		</annotation>
+        	</element>
+        	<element name="contactphonenumber" type="tns:TelephoneType"
+        		maxOccurs="1" minOccurs="1">
+        		<annotation>
+        			<documentation>
+        				Teléfono de Contacto del Cliente
+        			</documentation>
+        		</annotation>
+        	</element>
+        	<element name="extrainfo" type="tns:ExtrainfoType"
+        		maxOccurs="1" minOccurs="0">
+        		<annotation>
+        			<documentation>
+        				Observaciones de la Solicitud
+        			</documentation>
+        		</annotation>
+        	</element>
+        </sequence>
+	</complexType>
+</schema>

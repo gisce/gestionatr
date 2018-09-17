@@ -53,12 +53,25 @@ def get_cliente(dir=False, tipo_dir=None):
     nombre.feed(nombre_fields)
 
     # Telefono
-    telefono = c2.Telefono()
+    telefono1 = c2.Telefono()
     telefono_fields = {
-        'prefijo_pais': '34',
+        'prefijo_pais': '36',
+        'numero': '666777666',
+    }
+    telefono1.feed(telefono_fields)
+    telefono2 = c2.Telefono()
+    telefono_fields = {
+        'prefijo_pais': '37',
+        'numero': '666777777',
+    }
+    telefono2.feed(telefono_fields)
+    telefono3 = c2.Telefono()
+    telefono_fields = {
+        'prefijo_pais': '38',
         'numero': '666777888',
     }
-    telefono.feed(telefono_fields)
+    telefono3.feed(telefono_fields)
+    telefonos = [telefono1, telefono2, telefono3]
 
     indicador_tipo_direccion = None
     if tipo_dir:
@@ -86,7 +99,7 @@ def get_cliente(dir=False, tipo_dir=None):
     cliente_fields = {
         'id_cliente': id_cliente,
         'nombre': nombre,
-        'telefono': telefono,
+        'telefonos': telefonos,
         'correo_electronico': 'email@host',
         'indicador_tipo_direccion': indicador_tipo_direccion,
         'direccion': direccion
@@ -106,12 +119,20 @@ def get_contacto(email=True):
         'numero': '666777888',
     }
     telefono.feed(telefono_fields)
+    telefono2 = c2.Telefono()
+    telefono_fields = {
+        'prefijo_pais': '34',
+        'numero': '666777999',
+    }
+    telefono2.feed(telefono_fields)
+    telefonos = [telefono, telefono2]
+
     correo = None
     if email:
         correo = 'email@host'
     contacto_fields = {
         'persona_de_contacto': 'Nombre Inventado',
-        'telefono': telefono,
+        'telefonos': telefonos,
         'correo_electronico': correo,
     }
     contacto.feed(contacto_fields)

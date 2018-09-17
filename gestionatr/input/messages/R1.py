@@ -31,7 +31,7 @@ class R1(C2):
         tree = '{0}.VariablesDetalleReclamacion'.format(self._header)
         obj = get_rec_attr(self.obj, tree, False)
         data = []
-        if obj not in [None, False]:
+        if obj not in [None, False] and hasattr(obj, "VariableDetalleReclamacion"):
             for i in obj.VariableDetalleReclamacion:
                 data.append(VariableDetalleReclamacion(i))
             return data
@@ -105,10 +105,10 @@ class R1(C2):
 
     @property
     def solicitud_informacion_adicional_para_retipificacion(self):
-        tree = '{0}.SolicitudesInformacionAdicional.SolicitudInformacionAdicionalparaRetipificacion'.format(self._header)
+        tree = '{0}.SolicitudesInformacionAdicional.SolicitudInformacionAdicionalParaRetipificacion'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data not in [None, False]:
-            return SolicitudInformacionAdicionalparaRetipificacion(data)
+            return SolicitudInformacionAdicionalParaRetipificacion(data)
         else:
             return False
 
@@ -135,10 +135,10 @@ class R1(C2):
     @property
     def variables_aportacion_informacion_para_retipificacion(self):
         data = []
-        tree = '{0}.VariablesAportacionInformacionparaRetipificacion'.format(self._header)
+        tree = '{0}.VariablesAportacionInformacionParaRetipificacion'.format(self._header)
         obj = get_rec_attr(self.obj, tree, False)
         if obj:
-            for d in obj.VariableAportacionInformacionparaRetipificacion:
+            for d in obj.VariableAportacionInformacionParaRetipificacion:
                 data.append(VariableDetalleReclamacion(d))
         return data
 
@@ -721,7 +721,7 @@ class SolicitudInformacionAdicional(object):
         return data
 
 
-class SolicitudInformacionAdicionalparaRetipificacion(object):
+class SolicitudInformacionAdicionalParaRetipificacion(object):
 
     def __init__(self, data):
         self.sol = data
@@ -956,13 +956,15 @@ class MinimumFieldsChecker(object):
                or get_rec_attr(self.r1, "cliente.razon_social", False)
 
     def check_telefono_contacto(self):
+        if self.r1.cliente and len(self.r1.cliente.telefonos) > 0:
+            return True
         for var in self.r1.variables_detalle_reclamacion:
-            if not get_rec_attr(var, "contacto.telfono_numero", False):
-                return False
+            if var.contacto and len(var.contacto.telefonos) > 0:
+                return True
         return len(self.r1.variables_detalle_reclamacion) > 0
 
     def check_cups(self):
-        return self.r1.cups
+        return get_rec_attr(self.r1, "cups", False)
 
     def check_fecha_incidente(self):
         for var in self.r1.variables_detalle_reclamacion:
@@ -1029,7 +1031,7 @@ class MinimumFieldsChecker(object):
 
     def check_codigo_de_solicitud(self):
         for var in self.r1.variables_detalle_reclamacion:
-            if not var.codigo_solicitud_reclamacion:
+            if not var.codigo_solicitud:
                 return False
         return len(self.r1.variables_detalle_reclamacion) > 0
 

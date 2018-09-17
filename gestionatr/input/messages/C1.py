@@ -136,6 +136,15 @@ class C1(Message, ProcessDeadline):
 
     # Datos paso 11
     @property
+    def ind_bono_social(self):
+        tree = '{0}.IndBonoSocial'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data:
+            return data.text
+        else:
+                return False
+
+    @property
     def fecha_activacion_prevista(self):
         tree = '{0}.FechaActivacionPrevista'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
@@ -173,6 +182,24 @@ class DatosSolicitud(object):
         data = ''
         try:
             data = self.datos_solicitud.ContratacionIncondicionalPS.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def contratacion_incondicional_bs(self):
+        data = ''
+        try:
+            data = self.datos_solicitud.ContratacionIncondicionalBS.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def bono_social(self):
+        data = ''
+        try:
+            data = self.datos_solicitud.BonoSocial.text
         except AttributeError:
             pass
         return data
@@ -267,19 +294,11 @@ class Cliente(object):
         return nom
 
     @property
-    def telfono_numero(self):
-        data = ''
+    def telefonos(self):
+        data = []
         try:
-            data = self.cliente.Telefono.Numero.text
-        except AttributeError:
-            pass
-        return data
-
-    @property
-    def telfono_prefijo_pais(self):
-        data = ''
-        try:
-            data = self.cliente.Telefono.PrefijoPais.text
+            for tel in self.cliente.Telefono:
+                data.append((tel.PrefijoPais.text, tel.Numero.text))
         except AttributeError:
             pass
         return data
@@ -355,6 +374,15 @@ class DatosAceptacion(object):
         data = ''
         try:
             data = self.datos_aceptacion.ActuacionCampo.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def bono_social(self):
+        data = ''
+        try:
+            data = self.datos_aceptacion.BonoSocial.text
         except AttributeError:
             pass
         return data
@@ -536,6 +564,15 @@ class DatosActivacion(object):
         data = False
         try:
             data = self.datos_activacion.Fecha.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def bono_social(self):
+        data = ''
+        try:
+            data = self.datos_activacion.BonoSocial.text
         except AttributeError:
             pass
         return data
@@ -983,6 +1020,15 @@ class DatosNotificacion(object):
         data = False
         try:
             data = self.datos_notificacion.FechaActivacion.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def ind_bono_social(self):
+        data = False
+        try:
+            data = self.datos_notificacion.IndBonoSocial.text
         except AttributeError:
             pass
         return data

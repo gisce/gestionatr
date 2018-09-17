@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://localhost/sctd/A105"
+	xmlns:tns="http://localhost/sctd/A105"
+	elementFormDefault="qualified" >
+
+	<include schemaLocation="CommonTagsCONT.xsd"></include>
+	<element name="sctdapplication"
+		type="tns:SctdapplicationA105Type">
+	</element>
+
+	<complexType name="SctdapplicationA105Type">
+		<sequence>
+			<element name="heading" type="tns:HeadingA105Type" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="a105" type="tns:A105Type"
+				maxOccurs="unbounded" minOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="HeadingA105Type">
+		<sequence>
+			<element name="dispatchingcode" maxOccurs="1"
+				minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="GML"></enumeration>
+						<length value="3"></length>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dispatchingcompany" type="tns:AgenteType"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="destinycompany" type="tns:AgenteType"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="communicationsdate" type="date" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="communicationshour" type="time" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="processcode" maxOccurs="1" minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"></length>
+						<enumeration value="05"></enumeration>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="messagetype" maxOccurs="1" minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="A1"></enumeration>
+						<minLength value="1"></minLength>
+						<maxLength value="3"></maxLength>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="A105Type">
+		<sequence>
+			<element name="comreferencenum"
+				type="tns:ComreferencenumType" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Nº Referencia Solicitud Comercializadora</documentation>
+				</annotation>
+			</element>
+			<element name="reqdate" type="date" maxOccurs="1"
+				minOccurs="1">
+				<annotation>
+					<documentation>Fecha de Solicitud</documentation>
+				</annotation>
+			</element>
+			<element name="reqhour" type="time" maxOccurs="1"
+				minOccurs="1">
+				<annotation>
+					<documentation>Hora de Solicitud</documentation>
+				</annotation>
+			</element>
+			<element name="nationality" type="tns:NationalityType"
+				maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Nacionalidad</documentation>
+				</annotation>
+			</element>
+			<element name="documenttype" type="tns:IdDocumentType"
+				maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Tipo Documento de Identificación</documentation>
+				</annotation>
+			</element>
+			<element name="documentnum" type="tns:DocumentnumType"
+				maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Nº Documento</documentation>
+				</annotation>
+			</element>
+			<element name="cups" type="tns:CupsType" maxOccurs="1"
+				minOccurs="1">
+				<annotation>
+					<documentation>CUPS Solicitud</documentation>
+				</annotation>
+			</element>
+			<element name="modeffectdate"
+				type="tns:ModeloFechaSolicitudType" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Modelo de Fecha Efecto</documentation>
+				</annotation>
+			</element>
+			<element name="reqtransferdate" type="date" maxOccurs="1"
+				minOccurs="0">
+				<annotation>
+					<documentation>Fecha de Efecto Solicitada</documentation>
+				</annotation>
+			</element>
+			<element name="updatereason"
+				type="tns:MotivoModificacionType" maxOccurs="1" minOccurs="1">
+                <annotation>
+                	<documentation>Motivo de Modificación</documentation>
+                </annotation>
+			</element>
+			<element name="surrogacy"
+				type="tns:FlagType" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Con/Sin subrrogación (Con/Sin rotura de ciclo de lectura)</documentation>
+				</annotation>
+			</element>
+			<element name="newtolltype" type="tns:TollType"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Nuevo Peaje.</documentation>
+                </annotation>
+			</element>
+			<element name="newreqqd" type="tns:QdType" maxOccurs="1"
+				minOccurs="0">
+				<annotation>
+					<documentation>Caudal Diario Solicitado.</documentation>
+				</annotation>
+			</element>
+			<element name="newnationality" type="tns:NationalityType"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Nueva Nacionalidad.</documentation>
+                </annotation>
+			</element>
+			<element name="newdocumenttype" type="tns:IdDocumentType"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Nuevo Tipo Documento de Identificación.</documentation>
+                </annotation>
+			</element>
+			<element name="newdocumentnum" type="tns:DocumentnumType"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Nuevo número de documento.</documentation>
+                </annotation>
+			</element>
+			<element name="newfirstname" type="tns:FirstnameType"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Nuevo Nombre Cliente.</documentation>
+                </annotation>
+			</element>
+			<element name="newfamilyname1" type="tns:FamilynameType"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Nuevo Apellido 1 / Razón Social.</documentation>
+                </annotation>
+			</element>
+			<element name="newfamilyname2" type="tns:FamilynameType"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Nuevo Apellido 2.</documentation>
+                </annotation>
+			</element>
+			<element name="newtitulartype" type="tns:TitularType"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Nuevo tipo de Persona.</documentation>
+                </annotation>
+			</element>
+			<element name="newregularaddress" type="tns:FlagType"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Nuevo Uso de la Vivienda del PS.</documentation>
+                </annotation>
+			</element>
+			<element name="newtelephone" type="tns:TelephoneType"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Nuevo Teléfono.</documentation>
+                </annotation>
+			</element>
+			<element name="newfax" type="tns:TelephoneType"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Nuevo Fax.</documentation>
+                </annotation>
+			</element>
+			<element name="newemail" type="tns:EmailType" maxOccurs="1"
+				minOccurs="0">
+                <annotation>
+                	<documentation>Nuevo E-mail.</documentation>
+                </annotation>
+			</element>
+			<element name="newcaecode" maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Nuevo Código CAE.</documentation>
+                </annotation>
+                <simpleType>
+					<restriction base="string">
+						<minLength value="1"></minLength>
+						<maxLength value="13"></maxLength>
+						<whiteSpace value="collapse"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="newprovinceowner"
+				type="tns:CodProvinciaType" maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Nueva Provincia del Titular.</documentation>
+                </annotation>
+			</element>
+			<element name="newcityowner" type="tns:CodAlpha5Type"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Nuevo Municipio del Titular.</documentation>
+                </annotation>
+			</element>
+			<element name="newzipcodeowner" type="tns:CodAlpha5Type"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Nuevo Código Postal del Titular.</documentation>
+                </annotation>
+			</element>
+			<element name="newstreettypeowner" type="tns:TipoViaType"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Nuevo Tipo de Vía del Titular.</documentation>
+                </annotation>
+			</element>
+			<element name="newstreetowner" type="tns:CalleType"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Nueva Vía del Titular.</documentation>
+                </annotation>
+			</element>
+			<element name="newstreetnumberowner" type="tns:NumFincaType"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Nuevo Número de vía del Titular.</documentation>
+                </annotation>
+			</element>
+			<element name="newportalowner" type="tns:CodAlpha5Type"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Nuevo Portal del Titular.</documentation>
+                </annotation>
+			</element>
+			<element name="newstaircaseowner" type="tns:CodAlpha5Type"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Nueva Escalera del Titular.</documentation>
+                </annotation>
+			</element>
+			<element name="newfloorowner" type="tns:CodAlpha5Type"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Nueva Planta del Titular.</documentation>
+                </annotation>
+			</element>
+			<element name="newdoorowner" type="tns:CodAlpha5Type"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Nueva Puerta del Titular.</documentation>
+                </annotation>
+			</element>
+			<element name="extrainfo" type="tns:ExtrainfoType" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Observaciones de la Solicitud.</documentation>
+				</annotation>
+			</element>
+			<element name="registerdoclist"
+				type="tns:RegisterdocListType" maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Lista de documentos</documentation>
+                </annotation>
+			</element>
+        </sequence>
+	</complexType>
+</schema>

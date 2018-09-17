@@ -12,6 +12,10 @@ from gestionatr.output.messages import sw_w1 as w1
 from gestionatr.output.messages import sw_b1 as b1
 from gestionatr.output.messages import sw_r1 as r1
 from gestionatr.output.messages import sw_f1 as f1
+from gestionatr.output.messages import sw_a1_41 as a1_41
+from gestionatr.output.messages import sw_a1_02 as a1_02
+from gestionatr.output.messages import sw_a1_05 as a1_05
+from gestionatr.output.messages import sw_a1_44 as a1_44
 
 
 class test_C1(unittest.TestCase):
@@ -90,7 +94,7 @@ class test_C1(unittest.TestCase):
             'periodo': '65',
             'magnitud_medida': 'PM',
             'procedencia': '30',
-            'ultima_lectura_firme': '6.00',
+            'ultima_lectura_firme': '0.00',
             'fecha_lectura_firme': '2003-01-02',
             'anomalia': '01',
             'comentarios': 'Comentario sobre anomalia',
@@ -185,6 +189,8 @@ class test_C1(unittest.TestCase):
             'ind_activacion': 'L',
             'fecha_prevista_accion': '2016-06-06',
             'contratacion_incondicional_ps': 'S',
+            'contratacion_incondicional_bs': 'S',
+            'bono_social': '0',
         }
         datos_solicitud.feed(datos_solicitud_fields)
 
@@ -229,6 +235,7 @@ class test_C1(unittest.TestCase):
             'fecha_aceptacion': '2016-06-06',
             'actuacion_campo': 'S',
             'fecha_ultima_lectura_firme': '2016-06-01',
+            'bono_social': '0',
         }
         datos_aceptacion.feed(datos_aceptacion_fields)
 
@@ -328,6 +335,7 @@ class test_C1(unittest.TestCase):
         datos_activacion = c1.DatosActivacion()
         datos_activacion_fields = {
             'fecha': '2016-08-21',
+            'bono_social': '1',
         }
         datos_activacion.feed(datos_activacion_fields)
 
@@ -403,6 +411,7 @@ class test_C1(unittest.TestCase):
         datos_notificacion = c1.DatosNotificacion()
         datos_notificacion_fields = {
             'fecha_activacion': '2016-08-21',
+            'ind_bono_social': 'S'
         }
         datos_notificacion.feed(datos_notificacion_fields)
 
@@ -467,6 +476,7 @@ class test_C1(unittest.TestCase):
         aceptacion_cambio_comercializador_saliente = c1.AceptacionCambioComercializadorSaliente()
         aceptacion_cambio_comercializador_saliente_fields = {
             'fecha_activacion_prevista': '2017-02-02',
+            'ind_bono_social': 'N'
         }
         aceptacion_cambio_comercializador_saliente.feed(aceptacion_cambio_comercializador_saliente_fields)
 
@@ -536,6 +546,8 @@ class test_C2(unittest.TestCase):
             'ind_activacion': 'L',
             'fecha_prevista_accion': '2016-06-06',
             'contratacion_incondicional_ps': 'S',
+            'contratacion_incondicional_bs': 'N',
+            'bono_social': '0',
         }
         datos_solicitud.feed(datos_solicitud_fields)
 
@@ -657,6 +669,7 @@ class test_C2(unittest.TestCase):
             'potencia_actual': '5000',
             'actuacion_campo': 'S',
             'fecha_ultima_lectura_firme': '2016-06-01',
+            'bono_social': '1',
         }
         datos_aceptacion.feed(datos_aceptacion_fields)
 
@@ -891,6 +904,7 @@ class test_M1(unittest.TestCase):
             'ind_activacion': 'L',
             'fecha_prevista_accion': '2016-06-06',
             'cnae': '2222',
+            'bono_social': '1'
         }
         datos_solicitud.feed(datos_solicitud_fields)
 
@@ -1660,16 +1674,23 @@ class test_R1(unittest.TestCase):
         contacto = r1.Contacto()
 
         # Telefono
-        telefono = r1.Telefono()
+        telefono1 = r1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '34',
+            'numero': '666777888',
+        }
+        telefono1.feed(telefono_fields)
+        telefono2 = r1.Telefono()
         telefono_fields = {
             'prefijo_pais': '34',
             'numero': '55512345',
         }
-        telefono.feed(telefono_fields)
+        telefono2.feed(telefono_fields)
+        telefonos = [telefono1, telefono2]
 
         contacto_fields = {
             'persona_de_contacto': 'Perico Palotes Largos',
-            'telefono': telefono,
+            'telefonos': telefonos,
             'correo_electronico': 'perico@acme.com',
         }
         contacto.feed(contacto_fields)
@@ -1747,17 +1768,30 @@ class test_R1(unittest.TestCase):
         nombre.feed(nombre_fields)
 
         # Telefono
-        telefono = r1.Telefono()
+        telefono1 = r1.Telefono()
         telefono_fields = {
             'prefijo_pais': '34',
             'numero': '666777888',
         }
-        telefono.feed(telefono_fields)
+        telefono1.feed(telefono_fields)
+        telefono2 = r1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '34',
+            'numero': '666777999',
+        }
+        telefono2.feed(telefono_fields)
+        telefono3 = r1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '34',
+            'numero': '666777555',
+        }
+        telefono3.feed(telefono_fields)
+        telefonos = [telefono1, telefono2, telefono3]
 
         reclamante_fields = {
             'id_reclamante': id_reclamante,
             'nombre': nombre,
-            'telefono': telefono,
+            'telefonos': telefonos,
             'correo_electronico': 'email@host',
         }
         reclamante.feed(reclamante_fields)
@@ -1893,18 +1927,18 @@ class test_R1(unittest.TestCase):
         }
         sia2.feed(solicitud_informacion_adicional_fields)
 
-        # SolicitudInformacionAdicionalparaRetipificacion
-        siar = r1.SolicitudInformacionAdicionalparaRetipificacion()
-        solicitud_informacion_adicionalpara_retipificacion_fields = {
+        # SolicitudInformacionAdicionalParaRetipificacion
+        siar = r1.SolicitudInformacionAdicionalParaRetipificacion()
+        solicitud_informacion_adicional_para_retipificacion_fields = {
             'tipo': '03',
             'subtipo': '003',
             'fecha_limite_envio': '2016-08-10',
         }
-        siar.feed(solicitud_informacion_adicionalpara_retipificacion_fields)
+        siar.feed(solicitud_informacion_adicional_para_retipificacion_fields)
 
         solicitudes_informacion_adicional_fields = {
             'solicitud_informacion_adicional_list': [sia1, sia2],
-            'solicitud_informacion_adicionalpara_retipificacion': siar
+            'solicitud_informacion_adicional_para_retipificacion': siar
         }
         solicitudes_informacion_adicional.feed(solicitudes_informacion_adicional_fields)
 
@@ -2066,10 +2100,10 @@ class test_R1(unittest.TestCase):
         }
         variables_aportacion_informacion.feed(variables_aportacion_informacion_fields)
 
-        # VariablesAportacionInformacionparaRetipificacion
-        variables_retipificacion = r1.VariablesAportacionInformacionparaRetipificacion()
+        # VariablesAportacionInformacionParaRetipificacion
+        variables_retipificacion = r1.VariablesAportacionInformacionParaRetipificacion()
 
-        vair1 = r1.VariableAportacionInformacionparaRetipificacion()
+        vair1 = r1.VariableAportacionInformacionParaRetipificacion()
 
         # LecturasAportadas
         lecturas_aportadas = r1.LecturasAportadas()
@@ -2100,16 +2134,23 @@ class test_R1(unittest.TestCase):
         contacto = r1.Contacto()
 
         # Telefono
-        telefono = r1.Telefono()
+        telefono1 = r1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '34',
+            'numero': '666777888',
+        }
+        telefono1.feed(telefono_fields)
+        telefono2 = r1.Telefono()
         telefono_fields = {
             'prefijo_pais': '34',
             'numero': '55512345',
         }
-        telefono.feed(telefono_fields)
+        telefono2.feed(telefono_fields)
+        telefonos = [telefono1, telefono2]
 
         contacto_fields = {
             'persona_de_contacto': 'Perico Palotes Largos',
-            'telefono': telefono,
+            'telefonos': telefonos,
             'correo_electronico': 'perico@acme.com',
         }
         contacto.feed(contacto_fields)
@@ -2150,7 +2191,7 @@ class test_R1(unittest.TestCase):
         vair1.feed(vair_fields)
 
         variables_retipificacion_fields = {
-            'variable_aportacion_informacionpara_retipificacion_list': [vair1],
+            'variable_aportacion_informacion_para_retipificacion_list': [vair1],
         }
         variables_retipificacion.feed(variables_retipificacion_fields)
 
@@ -2187,7 +2228,7 @@ class test_R1(unittest.TestCase):
         envio_informacion_reclamacion_fields = {
             'datos_envio_informacion': datos_envio_informacion,
             'variables_aportacion_informacion': variables_aportacion_informacion,
-            'variables_aportacion_informacionpara_retipificacion': variables_retipificacion,
+            'variables_aportacion_informacion_para_retipificacion': variables_retipificacion,
             'cliente': cliente,
             'comentarios': 'R104 test with VariablesAportacionInformacion.',
             'registros_documento': registros_documento,
@@ -2270,6 +2311,9 @@ class test_F1(unittest.TestCase):
         self.xml_f101_factura_atr_direccion_suministro = open(
             get_data("f101_factura_atr_direccion_suministro.xml"), "r"
         )
+        self.xml_f101_factura_atr_medidas_baja = open(
+            get_data("f101_factura_atr_medidas_baja.xml"), "r"
+        )
 
         direccion_suministro = f1.DireccionSuministro()
 
@@ -2308,7 +2352,7 @@ class test_F1(unittest.TestCase):
                 'escalera': '1234567890',
                 'piso': '1234567890',
                 'puerta': '12 4567890',
-                'tipo_aclarador_finca': None,
+                'tipo_aclarador_finca': False,
                 'alcarador_finca': None,
             }
         )
@@ -2381,6 +2425,22 @@ class test_F1(unittest.TestCase):
                 'marca_medida_con_perdidas': 'N',
                 'vas_trafo': None,
                 'porcentaje_perdidas': None,
+                'indicativo_curva_carga': '02',
+                'periodo_cch': None,
+                'periodo': periodo,
+            }
+        )
+
+        self.atr_data_lb = f1.DatosFacturaATR()
+
+        self.atr_data_lb.feed(
+            {
+                'fecha_boe': '2016-01-01',
+                'tarifa_atr_fact': '001',
+                'modo_control_potencia': 1,
+                'marca_medida_con_perdidas': 'S',
+                'vas_trafo': 50000.0,
+                'porcentaje_perdidas': 4.00,
                 'indicativo_curva_carga': '02',
                 'periodo_cch': None,
                 'periodo': periodo,
@@ -2745,6 +2805,16 @@ class test_F1(unittest.TestCase):
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_f101_factura_atr_direccion_suministro.read())
 
+    def test_create_pas01_atr_invoice_medidas_baja(self):
+        mensaje = self.with_factura_atr()
+
+        mensaje.facturas.factura_atr.datos_generales_factura_atr.datos_factura_atr = self.atr_data_lb
+
+        mensaje.build_tree()
+
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_f101_factura_atr_medidas_baja.read())
+
     def test_create_pas01_other_invoice(self):
         mensaje = self.with_factura_otros()
 
@@ -2752,3 +2822,343 @@ class test_F1(unittest.TestCase):
 
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_f101_factura_otros.read())
+
+
+class test_A1_41(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a141 = open(get_data("a141.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a141.close()
+
+    def test_create_a141(self):
+        # MensajeA141
+        mensaje_a141 = a1_41.MensajeA141()
+
+        # Heading
+        heading = a1_41.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '41',
+            'messagetype': 'A1'
+        }
+        heading.feed(heading_fields)
+
+        # A141
+        a141 = a1_41.A141()
+
+        # RegistrosDocumento
+        registros_documento = a1_41.Registerdoclist()
+        rd1 = a1_41.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-02',
+            'doctype': 'CC',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd1.feed(registro_doc_fields)
+        rd2 = a1_41.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-03',
+            'doctype': '01',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd2.feed(registro_doc_fields)
+        registros_documento.feed({
+            'registerdoc_list': [rd1, rd2],
+        })
+
+        a141_fields = {
+            'comreferencenum': '000123456789',
+            'reqdate': '2018-05-01',
+            'reqhour': '13:00:00',
+            'nationality': 'ES',
+            'documenttype': '01',
+            'documentnum': '11111111H',
+            'cups': 'ES1234000000000001JN',
+            'modeffectdate': '05',
+            'reqtransferdate': '2018-06-01',
+            'updatereason': '01',
+            'surrogacy': 'S',
+            'newnationality': 'AF',
+            'newdocumenttype': '03',
+            'newdocumentnum': '00000000T',
+            'newfirstname': 'Gas',
+            'newfamilyname1': 'Al',
+            'newfamilyname2': 'Matalas',
+            'newtitulartype': 'F',
+            'newregularaddress': 'S',
+            'newtelephone1': '999888777',
+            'newtelephone2': '666555444',
+            'newemail': 'gasalmatalas@atr',
+            'newlanguage': '02',
+            'newprovinceowner': '17',
+            'newcityowner': '17001',
+            'newzipcodeowner': '17002',
+            'newstreettypeowner': 'ACCE',
+            'newstreetowner': 'Carrer inventat',
+            'newstreetnumberowner': '1',
+            'newportal': '2',
+            'newstaircase': '3',
+            'newfloor': '4',
+            'newdoor': '5',
+            'newreqqd': '987654321.1234567',
+            'disconnectedserviceaccepted': 'N',
+            'extrainfo': 'comentarios extras',
+            'registerdoclist': registros_documento,
+        }
+        a141.feed(a141_fields)
+
+        mensaje_a141_fields = {
+            'heading': heading,
+            'a141': a141,
+        }
+        mensaje_a141.feed(mensaje_a141_fields)
+        mensaje_a141.build_tree()
+        xml = str(mensaje_a141)
+        assertXmlEqual(xml, self.xml_a141.read())
+
+
+class test_A1_02(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a102 = open(get_data("a102.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a102.close()
+
+    def test_create_a102(self):
+        # MensajeA102
+        mensaje_a102 = a1_02.MensajeA102()
+
+        # Heading
+        heading = a1_02.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '02',
+            'messagetype': 'A1'
+        }
+        heading.feed(heading_fields)
+
+        # A102
+        a102 = a1_02.A102()
+        a102_fields = {
+            'comreferencenum': '000123456789',
+            'reqdate': '2018-05-01',
+            'reqhour': '13:00:00',
+            'titulartype': 'F',
+            'nationality': 'ES',
+            'documenttype': '01',
+            'documentnum': '11111111H',
+            'cups': 'ES1234000000000001JN',
+            'modeffectdate': '05',
+            'reqtransferdate': '2018-06-01',
+            'disconnectedserviceaccepted': 'N',
+            'extrainfo': 'comentarios extras',
+            'reqqd': 654321.1234,
+            'reqestimatedqa': 987654,
+        }
+        a102.feed(a102_fields)
+        mensaje_a102_fields = {
+            'heading': heading,
+            'a102': a102,
+        }
+        mensaje_a102.feed(mensaje_a102_fields)
+        mensaje_a102.build_tree()
+        xml = str(mensaje_a102)
+        assertXmlEqual(xml, self.xml_a102.read())
+
+
+class test_A1_05(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a105 = open(get_data("a105.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a105.close()
+
+    def test_create_a105(self):
+        # MensajeA105
+        mensaje_a105 = a1_05.MensajeA105()
+
+        # Heading
+        heading = a1_05.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '05',
+            'messagetype': 'A1'
+        }
+        heading.feed(heading_fields)
+
+        # A141
+        a105 = a1_05.A105()
+
+        # RegistrosDocumento
+        registros_documento = a1_05.Registerdoclist()
+        rd1 = a1_05.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-02',
+            'doctype': 'CC',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd1.feed(registro_doc_fields)
+        rd2 = a1_05.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-03',
+            'doctype': '01',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd2.feed(registro_doc_fields)
+        registros_documento.feed({
+            'registerdoc_list': [rd1, rd2],
+        })
+
+        a105_fields = {
+            'comreferencenum': '000123456789',
+            'reqdate': '2018-05-01',
+            'reqhour': '13:00:00',
+            'nationality': 'ES',
+            'documenttype': '01',
+            'documentnum': '11111111H',
+            'cups': 'ES1234000000000001JN',
+            'modeffectdate': '05',
+            'reqtransferdate': '2018-06-01',
+            'updatereason': '01',
+            'surrogacy': 'S',
+            'newnationality': 'AF',
+            'newdocumenttype': '03',
+            'newdocumentnum': '00000000T',
+            'newfirstname': 'Gas',
+            'newfamilyname1': 'Al',
+            'newfamilyname2': 'Matalas',
+            'newtitulartype': 'F',
+            'newregularaddress': 'S',
+            'newtelephone': '999888777',
+            'newfax': '111222333',
+            'newemail': 'gasalmatalas@atr',
+            'newcaecode': '9988',
+            'newprovinceowner': '17',
+            'newcityowner': '17001',
+            'newzipcodeowner': '17002',
+            'newstreettypeowner': 'ACCE',
+            'newstreetowner': 'Carrer inventat',
+            'newstreetnumberowner': '1',
+            'newportalowner': '2',
+            'newstaircaseowner': '3',
+            'newfloorowner': '4',
+            'newdoorowner': '5',
+            'newreqqd': '987654321.1234567',
+            'newtolltype': '31',
+            'extrainfo': 'comentarios extras',
+            'registerdoclist': registros_documento,
+        }
+        a105.feed(a105_fields)
+
+        mensaje_a105_fields = {
+            'heading': heading,
+            'a105': a105,
+        }
+        mensaje_a105.feed(mensaje_a105_fields)
+        mensaje_a105.build_tree()
+        xml = str(mensaje_a105)
+        assertXmlEqual(xml, self.xml_a105.read())
+
+
+class test_A1_44(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a144 = open(get_data("a144.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a144.close()
+
+    def test_create_a144(self):
+        # MensajeA144
+        mensaje_a144 = a1_44.MensajeA144()
+
+        # Heading
+        heading = a1_44.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '44',
+            'messagetype': 'A1'
+        }
+        heading.feed(heading_fields)
+
+        # A144
+        a144 = a1_44.A144()
+
+        # RegistrosDocumento
+        registros_documento = a1_05.Registerdoclist()
+        rd1 = a1_44.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-02',
+            'doctype': 'CC',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd1.feed(registro_doc_fields)
+        rd2 = a1_05.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-03',
+            'doctype': '01',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd2.feed(registro_doc_fields)
+        registros_documento.feed({
+            'registerdoc_list': [rd1, rd2],
+        })
+
+        a144_fields = {
+            'comreferencenum': '000123456789',
+            'sourcetype': '01',
+            'firstname': 'Gas',
+            'lastname': 'Al',
+            'secondname': 'Matalas',
+            'cups': 'ES1234000000000001JN',
+            'operationtype': 'A10001',
+            'description': 'Desc',
+            'operationnum': '111111',
+            'prefixtel1': '34',
+            'telephone1': '987654321',
+            'prefixtel2': '33',
+            'telephone2': '123456789',
+            'reqdate': '2018-05-01',
+            'reqhour': '13:00:00',
+            'readingdate': '2018-06-01',
+            'readingvalue': '25',
+            'extrainfo': 'comentarios extras',
+            'registerdoclist': registros_documento,
+        }
+        a144.feed(a144_fields)
+        mensaje_a144_fields = {
+            'heading': heading,
+            'a1': a144,
+        }
+        mensaje_a144.feed(mensaje_a144_fields)
+        mensaje_a144.build_tree()
+        xml = str(mensaje_a144)
+        assertXmlEqual(xml, self.xml_a144.read())
+
+

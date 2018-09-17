@@ -13,5 +13,6 @@
   </Cabecera>
   <AceptacionCambioComercializadorSaliente>
     <FechaActivacionPrevista>2017-02-02</FechaActivacionPrevista>
+    <IndBonoSocial>N</IndBonoSocial>
   </AceptacionCambioComercializadorSaliente>
 </MensajeAceptacionCambiodeComercializadorSaliente>

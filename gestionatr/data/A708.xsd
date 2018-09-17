@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia León (Comisión Nacional de los Mercados y la Competencia) -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A708" targetNamespace="http://localhost/sctd/A708" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<element name="sctdapplication" type="tns:SctdapplicationA708Type"/>
+	<complexType name="SctdapplicationA708Type">
+		<sequence>
+			<element name="cabecera_a7" type="tns:HeadingA708Type" minOccurs="1" maxOccurs="1"/>
+			<element name="a7" type="tns:A708Type" minOccurs="1" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="HeadingA708Type">
+		<sequence>
+			<element name="codenvio" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="3"/>
+						<enumeration value="GML"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="empresaemisora" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="empresadestino" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="fechacomunic" type="date" minOccurs="1" maxOccurs="1"/>
+			<element name="horacomunic" type="time" minOccurs="1" maxOccurs="1"/>
+			<element name="codproceso" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"/>
+						<enumeration value="08"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="codtipomensaje" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"/>
+						<enumeration value="A7"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="A708Type">
+		<sequence>
+			<element name="cups" type="tns:CupsType" minOccurs="1" maxOccurs="1"/>
+			<element name="codatr" type="tns:AtrcodeType" minOccurs="1" maxOccurs="1"/>
+			<element name="um" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="18"/>
+						<minLength value="1"/>
+						<whiteSpace value="collapse"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="feclec" type="date" minOccurs="1" maxOccurs="1"/>
+			<element name="horalec" type="time" minOccurs="1" maxOccurs="1"/>
+			<element name="serializada" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="1"/>
+						<enumeration value="S"/>
+						<enumeration value="N"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="restadeserializada" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="18"/>
+						<minLength value="1"/>
+						<whiteSpace value="collapse"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="cupsresta" type="tns:CupsType" minOccurs="0" maxOccurs="1"/>
+			<element name="aparato" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"/>
+						<enumeration value="CO"/>
+						<enumeration value="CR"/>
+						<enumeration value="UR"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="medicion" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"/>
+						<enumeration value="01"/>
+						<enumeration value="02"/>
+						<enumeration value="03"/>
+						<enumeration value="04"/>
+						<enumeration value="05"/>
+						<enumeration value="06"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="modelomedidor" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="50"/>
+						<minLength value="1"/>
+						<whiteSpace value="collapse"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="numseriemedidor" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="18"/>
+						<whiteSpace value="collapse"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="unipres" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="6"/>
+						<minLength value="1"/>
+						<whiteSpace value="collapse"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="presrelativa" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="decimal">
+						<minInclusive value="0"/>
+						<totalDigits value="7"/>
+						<fractionDigits value="4"/>
+						<maxInclusive value="999.9999"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="temp" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="decimal">
+						<totalDigits value="4"/>
+						<fractionDigits value="2"/>
+						<minInclusive value="-99.99"/>
+						<maxInclusive value="99.99"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="numserieaparelev" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="18"/>
+						<minLength value="1"/>
+						<whiteSpace value="collapse"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="motivolec" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"/>
+						<enumeration value="01"/>
+						<enumeration value="02"/>
+						<enumeration value="03"/>
+						<enumeration value="04"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="perDH" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"/>
+						<enumeration value="01"/>
+						<enumeration value="03"/>
+						<enumeration value="10"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="tipoDH" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"/>
+						<enumeration value="00"/>
+						<enumeration value="01"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="observaciones1" type="tns:ObservacionesType" minOccurs="0" maxOccurs="1"/>
+			<element name="observaciones2" type="tns:ObservacionesType" minOccurs="0" maxOccurs="1"/>
+			<element name="observaciones3" type="tns:ObservacionesType" minOccurs="0" maxOccurs="1"/>
+			<element name="observaciones4" type="tns:ObservacionesType" minOccurs="0" maxOccurs="1"/>
+			<element name="listaNumeradores" type="tns:ListaNumeradoresType" minOccurs="1" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	<simpleType name="ObservacionesType">
+		<restriction base="string">
+			<maxLength value="50"/>
+			<minLength value="1"/>
+			<whiteSpace value="collapse"/>
+		</restriction>
+	</simpleType>
+	<complexType name="ListaNumeradoresType">
+		<sequence>
+			<element name="numerador" type="tns:NumeradorType" minOccurs="1" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="NumeradorType">
+		<sequence>
+			<element name="num" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="1"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="digmed" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="18"/>
+						<minLength value="1"/>
+						<whiteSpace value="collapse"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="digdecmed" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="2"/>
+						<minLength value="1"/>
+						<whiteSpace value="collapse"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="factmulmed" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="decimal">
+						<totalDigits value="8"/>
+						<fractionDigits value="2"/>
+						<minInclusive value="0"/>
+						<maxInclusive value="999999.99"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="lectura" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="decimal">
+						<totalDigits value="16"/>
+						<fractionDigits value="2"/>
+						<minInclusive value="0"/>
+						<maxInclusive value="99999999999999.99"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="tipolec" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="2"/>
+						<minLength value="1"/>
+						<enumeration value="0"/>
+						<enumeration value="1"/>
+						<enumeration value="2"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="tipolecnum" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"/>
+						<enumeration value="BR"/>
+						<enumeration value="CR"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<simpleType name="AgenteType">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="4"/>
+			<pattern value="([0-9])*"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="CupsType">
+		<restriction base="string">
+			<length value="20"/>
+			<pattern value="[a-zA-Z0-9]*"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="AtrcodeType">
+		<restriction base="string">
+			<length value="24"/>
+			<whiteSpace value="collapse"/>
+		</restriction>
+	</simpleType>
+</schema>

@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sctdapplication xmlns="http://localhost/sctd/A144">
+    <heading>
+        <dispatchingcode>GML</dispatchingcode>
+        <dispatchingcompany>1234</dispatchingcompany>
+        <destinycompany>4321</destinycompany>
+        <communicationsdate>2018-05-01</communicationsdate>
+        <communicationshour>12:00:00</communicationshour>
+        <processcode>44</processcode>
+        <messagetype>A1</messagetype>
+    </heading>
+    <a1>
+        <comreferencenum>000123456789</comreferencenum>
+        <sourcetype>01</sourcetype>
+        <firstname>Gas</firstname>
+        <lastname>Al</lastname>
+        <secondname>Matalas</secondname>
+        <cups>ES1234000000000001JN</cups>
+        <operationtype>A10001</operationtype>
+        <description>Desc</description>
+        <operationnum>111111</operationnum>
+        <prefixtel1>34</prefixtel1>
+        <telephone1>987654321</telephone1>
+        <prefixtel2>33</prefixtel2>
+        <telephone2>123456789</telephone2>
+        <reqdate>2018-05-01</reqdate>
+        <reqhour>13:00:00</reqhour>
+        <readingdate>2018-06-01</readingdate>
+        <readingvalue>25</readingvalue>
+        <extrainfo>comentarios extras</extrainfo>
+        <registerdoclist>
+            <registerdoc>
+                <date>2018-05-02</date>
+                <doctype>CC</doctype>
+                <url>http://www.gasalmatalas.com</url>
+                <extrainfo>404 page not found</extrainfo>
+            </registerdoc>
+            <registerdoc>
+                <date>2018-05-03</date>
+                <doctype>01</doctype>
+                <url>http://www.gasalmatalas.com</url>
+                <extrainfo>404 page not found</extrainfo>
+            </registerdoc>
+        </registerdoclist>
+    </a1>
+</sctdapplication>

@@ -2,7 +2,7 @@
 
 from libcomxml.core import XmlModel, XmlField
 from gestionatr.output.messages.base import Cabecera, rep_fecha, \
-    rep_fecha_sin_hora, rep_decimal, rep_entera, rep_ruedas
+    rep_fecha_sin_hora, rep_decimal, rep_entera, rep_entera2, rep_ruedas
 from gestionatr.output.messages.sw_c1 import IdCliente
 from gestionatr.output.messages.sw_c2 import Direccion
 
@@ -141,7 +141,7 @@ class DatosFacturaATR(XmlModel):
         self.tarifa_atr_fact = XmlField('TarifaATRFact')
         self.modo_control_potencia = XmlField('ModoControlPotencia')
         self.marca_medida_con_perdidas = XmlField('MarcaMedidaConPerdidas')
-        self.vas_trafo = XmlField('VAsTrafo')
+        self.vas_trafo = XmlField('VAsTrafo', rep=rep_entera)
         self.porcentaje_perdidas = XmlField(
             'PorcentajePerdidas', rep=rep_decimal(2)
         )
@@ -223,13 +223,13 @@ class PeriodoPotencia(XmlModel):
     def __init__(self):
         self.periodo = XmlField('Periodo')
         self.potencia_contratada = XmlField(
-            'PotenciaContratada', rep=rep_entera
+            'PotenciaContratada', rep=rep_entera2
         )
         self.potencia_max_demandada = XmlField(
-            'PotenciaMaxDemandada', rep=rep_entera
+            'PotenciaMaxDemandada', rep=rep_entera2
         )
         self.potencia_a_facturar = XmlField(
-            'PotenciaAFacturar', rep=rep_entera
+            'PotenciaAFacturar', rep=rep_entera2
         )
         self.precio_potencia = XmlField('PrecioPotencia', rep=rep_decimal(9))
         super(PeriodoPotencia, self).__init__('Periodo', 'periodo')
@@ -303,7 +303,7 @@ class PeriodoEnergiaActiva(XmlModel):
         self.valor_energia_activa = XmlField(
             'ValorEnergiaActiva', rep=rep_decimal(2)
         )
-        self.precio_energia = XmlField('PrecioEnergia')
+        self.precio_energia = XmlField('PrecioEnergia', rep=rep_decimal(9))
         super(PeriodoEnergiaActiva, self).__init__('Periodo', 'periodo')
 
 
@@ -414,12 +414,13 @@ class IVA(XmlModel):
 
 class IVAReducido(XmlModel):
 
-    _sort_order = ('iva_reducido', 'base_imponible', 'porcentaje')
+    _sort_order = ('iva_reducido', 'base_imponible', 'porcentaje', 'importe')
 
     def __init__(self):
         self.iva_reducido = XmlField('IVAReducido')
-        self.base_imponible = XmlField('BaseImponible')
-        self.porcentaje = XmlField('Porcentaje')
+        self.base_imponible = XmlField('BaseImponible', rep=rep_decimal(2))
+        self.porcentaje = XmlField('Porcentaje', rep=rep_decimal(2))
+        self.importe = XmlField('Importe', rep=rep_decimal(2))
         super(IVAReducido, self).__init__('IVAReducido', 'iva_reducido')
 
 

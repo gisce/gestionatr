@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia León (Comisión Nacional de los Mercados y la Competencia) -->
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Teresa Rodriguez-Losada Marco (Comisión Nacional de los Mercados y la Competencia) -->
 <xs:schema xmlns="http://localhost/elegibilidad" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposComplejos.xsd"/>
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
 	<xs:annotation>
 		<xs:documentation>
-			Version 1.0 CNMC 2016.xx.xx
+			Version 1.1 CNMC 2016.12.20
 		</xs:documentation>
 	</xs:annotation>
 	<xs:complexType name="InformacionAdicional">
@@ -105,7 +105,7 @@
 	<xs:complexType name="SolicitudesInformacionAdicional">
 		<xs:sequence>
 			<xs:element name="SolicitudInformacionAdicional" type="SolicitudInformacionAdicional" minOccurs="0" maxOccurs="10"/>
-			<xs:element name="SolicitudInformacionAdicionalparaRetipificacion" type="SolicitudInformacionAdicionalparaRetipificacion" minOccurs="0"/>
+			<xs:element name="SolicitudInformacionAdicionalParaRetipificacion" type="SolicitudInformacionAdicionalParaRetipificacion" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="SolicitudInformacionAdicional">
@@ -121,10 +121,10 @@
 	</xs:complexType>
 	<xs:complexType name="SolicitudesInformacionAdicionalparaRetipificacion">
 		<xs:sequence>
-			<xs:element name="SolicitudInformacionAdicional" type="SolicitudInformacionAdicionalparaRetipificacion" maxOccurs="10"/>
+			<xs:element name="SolicitudInformacionAdicional" type="SolicitudInformacionAdicionalParaRetipificacion" maxOccurs="10"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="SolicitudInformacionAdicionalparaRetipificacion">
+	<xs:complexType name="SolicitudInformacionAdicionalParaRetipificacion">
 		<xs:sequence>
 			<xs:element name="Tipo" type="TipoReclamacionPeticion">
 				<xs:annotation>
@@ -195,14 +195,14 @@
 	</xs:complexType>
 	<xs:complexType name="VariablesAportacionInformacionParaRetipificacion">
 		<xs:sequence>
-			<xs:element name="VariableAportacionInformacionparaRetipificacion" type="VariableDetalleReclamacion" maxOccurs="10"/>
+			<xs:element name="VariableAportacionInformacionParaRetipificacion" type="VariableDetalleReclamacion" maxOccurs="10"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="EnvioInformacionReclamacion">
 		<xs:sequence>
 			<xs:element name="DatosEnvioInformacion" type="DatosEnvioInformacion"/>
 			<xs:element name="VariablesAportacionInformacion" type="VariablesAportacionInformacion" minOccurs="0"/>
-			<xs:element name="VariablesAportacionInformacionparaRetipificacion" type="VariablesAportacionInformacionParaRetipificacion" minOccurs="0"/>
+			<xs:element name="VariablesAportacionInformacionParaRetipificacion" type="VariablesAportacionInformacionParaRetipificacion" minOccurs="0"/>
 			<xs:element name="Cliente" type="ClienteConDireccion" minOccurs="0"/>
 			<xs:element name="Comentarios" type="X4000"/>
 			<xs:element name="RegistrosDocumento" type="RegistrosDocs" minOccurs="0"/>

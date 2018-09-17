@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://localhost/sctd/A2648"
+	xmlns:tns="http://localhost/sctd/A2648"
+	elementFormDefault="qualified" >
+	<include schemaLocation="CommonTagsATCOM.xsd"></include>
+
+	<element name="sctdapplication"
+		type="tns:SctdApplicationA2648Type">
+	</element>
+
+	<complexType name="SctdApplicationA2648Type">
+		<sequence>
+			<element name="heading" type="tns:HeadingA2648Type"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="a26" type="tns:A2648Type"
+				maxOccurs="unbounded" minOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+    <complexType name="HeadingA2648Type">
+		<sequence>
+			<element name="dispatchingcode" maxOccurs="1"
+				minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="GML"></enumeration>
+						<length value="3"></length>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dispatchingcompany" type="tns:AgenteType"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="destinycompany" type="tns:AgenteType"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="communicationsdate" type="date" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="communicationshour" type="time" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="processcode" maxOccurs="1" minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"></length>
+						<enumeration value="48"></enumeration>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="messagetype" maxOccurs="1" minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="A26"></enumeration>
+						<minLength value="1"></minLength>
+						<maxLength value="3"></maxLength>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>    
+    
+    </complexType>
+
+    <complexType name="A2648Type">
+    	<sequence>
+    		<element name="reqcode" type="tns:ReqcodeType"
+    			maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Código Solicitud</documentation>
+                </annotation>
+    		</element>
+    		<element name="reqdate" type="date" maxOccurs="1"
+    			minOccurs="1">
+                <annotation>
+                	<documentation>Fecha de Mensaje</documentation>
+                </annotation>
+    		</element>
+    		<element name="reqhour" type="time" maxOccurs="1"
+    			minOccurs="1">
+                <annotation>
+                	<documentation>Hora de Mensaje</documentation>
+                </annotation>
+    		</element>
+    		<element name="comreferencenum"
+    			type="tns:ComreferencenumType" maxOccurs="1" minOccurs="1">
+                <annotation>
+                	<documentation>Num Referencia Solicitud Comercializadora</documentation>
+                </annotation>
+    		</element>
+    		<element name="sequential" maxOccurs="1" minOccurs="1">
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="0"></minInclusive>
+						<maxInclusive value="99"></maxInclusive>
+					</restriction>
+				</simpleType>
+    		</element>
+    		<element name="cups" type="tns:CupsType" maxOccurs="1"
+    			minOccurs="0">
+                <annotation>
+                	<documentation>CUPS</documentation>
+                </annotation>
+    		</element>
+    		<element name="informationdate" type="date" maxOccurs="1"
+    			minOccurs="1">
+                <annotation>
+                	<documentation>Fecha de la información adicional aportada</documentation></annotation>
+    		</element>
+    		<element name="informationtype" maxOccurs="1"
+    			minOccurs="1">
+                <annotation>
+                	<documentation>Tipo de Información Adicional Aportada</documentation></annotation>
+                <simpleType>
+    				<restriction base="string">
+    					<length value="2"></length>
+    					<enumeration value="01"></enumeration>
+    					<enumeration value="02"></enumeration>
+    					<enumeration value="03"></enumeration>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="claimreferencelist"
+    			type="tns:ClaimReferenceListType" maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Estructura Informativa para la Reclamación</documentation></annotation>
+    		</element>
+    		<element name="extrainfo" type="tns:ExtraInfoBigType"
+    			maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Comentarios</documentation>
+                </annotation>
+    		</element>
+    		<element name="variableinflist"
+    			type="tns:VariableInfListType" maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Listado de Variables</documentation>
+                </annotation>
+    		</element>
+    		<element name="registerdoclist"
+    			type="tns:RegisterdocListType" maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Listado de Documentos</documentation>
+                </annotation>
+    		</element>
+    	</sequence>
+    </complexType>
+</schema>

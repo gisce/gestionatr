@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia León (Comisión Nacional de los Mercados y la Competencia) -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A144" targetNamespace="http://localhost/sctd/A144" elementFormDefault="qualified">
+	<include schemaLocation="CommonTagsATCOM.xsd"/>
+	<element name="sctdapplication" type="tns:SctdApplicationA144Type"/>
+	<complexType name="SctdApplicationA144Type">
+		<sequence>
+			<element name="heading" type="tns:HeadingA144Type" minOccurs="1" maxOccurs="1"/>
+			<element name="a1" type="tns:A144Type" minOccurs="1" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="HeadingA144Type">
+		<sequence>
+			<element name="dispatchingcode" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="3"/>
+						<enumeration value="GML"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dispatchingcompany" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="destinycompany" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="communicationsdate" type="date" minOccurs="1" maxOccurs="1"/>
+			<element name="communicationshour" type="time" minOccurs="1" maxOccurs="1"/>
+			<element name="processcode" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"/>
+						<enumeration value="44"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="messagetype" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="3"/>
+						<enumeration value="A1"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="A144Type">
+		<sequence>
+			<element name="comreferencenum" type="tns:ComreferencenumType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Num Referencia Solicitud Comercializadora</documentation>
+				</annotation>
+			</element>
+			<element name="sourcetype" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de Solicitante</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<length value="2"/>
+						<enumeration value="01"/>
+						<enumeration value="02"/>
+						<enumeration value="03"/>
+						<enumeration value="04"/>
+						<enumeration value="06"/>
+						<enumeration value="07"/>
+						<enumeration value="08"/>
+						<enumeration value="09"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="firstname" type="tns:FirstnameType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Nombre Contacto</documentation>
+				</annotation>
+			</element>
+			<element name="lastname" type="tns:FamilynameType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Primer Apellido / Razón Social Contacto</documentation>
+				</annotation>
+			</element>
+			<element name="secondname" type="tns:FamilynameType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Segundo Apellido Contacto</documentation>
+				</annotation>
+			</element>
+			<element name="cups" type="tns:CupsType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>CUPS</documentation>
+				</annotation>
+			</element>
+			<element name="operationtype" type="tns:OperationType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de Actuación</documentation>
+				</annotation>
+			</element>
+			<element name="description" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Descripción de la Actuación Solicitada</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="400"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="operationnum" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Descripción de la Actuación Solicitada</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="40"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="prefixtel1" type="tns:PrefixTelType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Prefijo Nacional del Número de Teléfono Fijo</documentation>
+				</annotation>
+			</element>
+			<element name="telephone1" type="tns:TelephoneNumberType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Teléfono Fijo</documentation>
+				</annotation>
+			</element>
+			<element name="prefixtel2" type="tns:PrefixTelType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Prefijo Nacional del Número de Teléfono Móvil</documentation>
+				</annotation>
+			</element>
+			<element name="telephone2" type="tns:TelephoneNumberType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Teléfono Móvil</documentation>
+				</annotation>
+			</element>
+			<element name="reqdate" type="date" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha de Solicitud</documentation>
+				</annotation>
+			</element>
+			<element name="reqhour" type="time" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Hora de Solicitud</documentation>
+				</annotation>
+			</element>
+			<element name="readingdate" type="date" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha de Lectura Actual</documentation>
+				</annotation>
+			</element>
+			<element name="readingvalue" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Lectura Actual Contador</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="decimal">
+						<totalDigits value="16"/>
+						<fractionDigits value="2"/>
+						<minInclusive value="-99999999999999.99"/>
+						<maxInclusive value="99999999999999.99"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="extrainfo" type="tns:ExtrainfoType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Observaciones de la Solicitud de Actuación</documentation>
+				</annotation>
+			</element>
+			<element name="registerdoclist" type="tns:RegisterdocListType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Listado de Documentos</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

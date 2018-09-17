@@ -1,0 +1,1070 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:simpleType name="AgenteType">
+    	<xs:restriction base="xs:string">
+    		<xs:minLength value="1"></xs:minLength>
+    		<xs:maxLength value="4"></xs:maxLength>
+			<xs:pattern value="([0-9])*"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CupsType">
+    	<xs:restriction base="xs:string">
+    		<xs:length value="20"></xs:length>
+			<xs:pattern value="[a-zA-Z0-9]*"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="DatosEmpresaEmisoraType">
+    	<xs:sequence>
+    		<xs:element name="numdocumento" maxOccurs="1" minOccurs="1"
+    			type="CodAlpha20Type">
+    		</xs:element>
+    		<xs:element name="razonsocial" maxOccurs="1" minOccurs="1"
+    			type="CodAlpha50Type">
+    		</xs:element>
+    		<xs:element name="direccion" maxOccurs="1" minOccurs="1"
+    			type="CodAlpha60Type">
+    		</xs:element>
+    		<xs:element name="municipio" maxOccurs="1" minOccurs="1"
+    			type="CodAlpha60Type">
+    		</xs:element>
+    		<xs:element name="regmercantil" maxOccurs="1" minOccurs="1"
+    			type="CodAlpha150Type">
+    		</xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="DatosEmpresaDestinoType">
+    	<xs:sequence>
+    		<xs:element name="numdocumento" maxOccurs="1" minOccurs="1"
+    			type="CodAlpha20Type">
+    		</xs:element>
+    		<xs:element name="razonsocial" maxOccurs="1" minOccurs="1"
+    			type="CodAlpha50Type">
+    		</xs:element>
+    		<xs:element name="direccion" maxOccurs="1" minOccurs="1"
+    			type="CodAlpha60Type">
+    		</xs:element>
+    		<xs:element name="municipio" maxOccurs="1" minOccurs="1"
+    			type="CodAlpha60Type">
+    		</xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="CodProvinciaType">
+    	<xs:annotation>
+    		<xs:documentation>Código INE de Provincia</xs:documentation>
+    	</xs:annotation>
+    	<xs:restriction base="xs:string">
+    		<xs:length value="2"></xs:length>
+    		<xs:enumeration value="01"></xs:enumeration>
+    		<xs:enumeration value="02"></xs:enumeration>
+    		<xs:enumeration value="03"></xs:enumeration>
+    		<xs:enumeration value="04"></xs:enumeration>
+    		<xs:enumeration value="05"></xs:enumeration>
+    		<xs:enumeration value="06"></xs:enumeration>
+    		<xs:enumeration value="07"></xs:enumeration>
+    		<xs:enumeration value="08"></xs:enumeration>
+    		<xs:enumeration value="09"></xs:enumeration>
+    		<xs:enumeration value="10"></xs:enumeration>
+    		<xs:enumeration value="11"></xs:enumeration>
+    		<xs:enumeration value="12"></xs:enumeration>
+    		<xs:enumeration value="13"></xs:enumeration>
+    		<xs:enumeration value="14"></xs:enumeration>
+    		<xs:enumeration value="15"></xs:enumeration>
+    		<xs:enumeration value="16"></xs:enumeration>
+    		<xs:enumeration value="17"></xs:enumeration>
+    		<xs:enumeration value="18"></xs:enumeration>
+    		<xs:enumeration value="19"></xs:enumeration>
+    		<xs:enumeration value="20"></xs:enumeration>
+    		<xs:enumeration value="21"></xs:enumeration>
+    		<xs:enumeration value="22"></xs:enumeration>
+    		<xs:enumeration value="23"></xs:enumeration>
+    		<xs:enumeration value="24"></xs:enumeration>
+    		<xs:enumeration value="25"></xs:enumeration>
+    		<xs:enumeration value="26"></xs:enumeration>
+    		<xs:enumeration value="27"></xs:enumeration>
+    		<xs:enumeration value="28"></xs:enumeration>
+    		<xs:enumeration value="29"></xs:enumeration>
+    		<xs:enumeration value="30"></xs:enumeration>
+    		<xs:enumeration value="31"></xs:enumeration>
+    		<xs:enumeration value="32"></xs:enumeration>
+    		<xs:enumeration value="33"></xs:enumeration>
+    		<xs:enumeration value="34"></xs:enumeration>
+    		<xs:enumeration value="35"></xs:enumeration>
+    		<xs:enumeration value="36"></xs:enumeration>
+    		<xs:enumeration value="37"></xs:enumeration>
+    		<xs:enumeration value="38"></xs:enumeration>
+    		<xs:enumeration value="39"></xs:enumeration>
+    		<xs:enumeration value="40"></xs:enumeration>
+    		<xs:enumeration value="41"></xs:enumeration>
+    		<xs:enumeration value="42"></xs:enumeration>
+    		<xs:enumeration value="43"></xs:enumeration>
+    		<xs:enumeration value="44"></xs:enumeration>
+    		<xs:enumeration value="45"></xs:enumeration>
+    		<xs:enumeration value="46"></xs:enumeration>
+    		<xs:enumeration value="47"></xs:enumeration>
+    		<xs:enumeration value="48"></xs:enumeration>
+    		<xs:enumeration value="49"></xs:enumeration>
+    		<xs:enumeration value="50"></xs:enumeration>
+    		<xs:enumeration value="51"></xs:enumeration>
+    		<xs:enumeration value="52"></xs:enumeration>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CodAlpha5Type">
+    	<xs:restriction base="xs:string">
+    		<xs:minLength value="1"></xs:minLength>
+    		<xs:maxLength value="5"></xs:maxLength>
+			<xs:whiteSpace value="collapse"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CodAlpha20Type">
+    	<xs:restriction base="xs:string">
+    		<xs:minLength value="1"></xs:minLength>
+    		<xs:maxLength value="20"></xs:maxLength>
+			<xs:whiteSpace value="collapse"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CodAlpha30Type">
+    	<xs:restriction base="xs:string">
+    		<xs:minLength value="1"></xs:minLength>
+    		<xs:maxLength value="30"></xs:maxLength>
+			<xs:whiteSpace value="collapse"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CodAlpha40Type">
+    	<xs:restriction base="xs:string">
+    		<xs:minLength value="1"></xs:minLength>
+    		<xs:maxLength value="40"></xs:maxLength>
+			<xs:whiteSpace value="collapse"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CodAlpha50Type">
+    	<xs:restriction base="xs:string">
+    		<xs:minLength value="1"></xs:minLength>
+    		<xs:maxLength value="50"></xs:maxLength>
+			<xs:whiteSpace value="collapse"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CodAlpha60Type">
+    	<xs:restriction base="xs:string">
+    		<xs:minLength value="1"></xs:minLength>
+    		<xs:maxLength value="60"></xs:maxLength>
+			<xs:whiteSpace value="collapse"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CodAlpha100Type">
+    	<xs:restriction base="xs:string">
+    		<xs:minLength value="1"></xs:minLength>
+    		<xs:maxLength value="100"></xs:maxLength>
+			<xs:whiteSpace value="collapse"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CodAlpha150Type">
+    	<xs:restriction base="xs:string">
+    		<xs:minLength value="1"></xs:minLength>
+    		<xs:maxLength value="150"></xs:maxLength>
+			<xs:whiteSpace value="collapse"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CodAlpha255Type">
+    	<xs:restriction base="xs:string">
+    		<xs:minLength value="1"></xs:minLength>
+    		<xs:maxLength value="255"></xs:maxLength>
+			<xs:whiteSpace value="collapse"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="TipoViaType">
+    	<xs:restriction base="xs:string">
+    		<xs:minLength value="1"></xs:minLength>
+    		<xs:maxLength value="5"></xs:maxLength>
+			<xs:whiteSpace value="collapse"/>
+    	</xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="CalleType">
+    	<xs:restriction base="xs:string">
+    		<xs:minLength value="1"></xs:minLength>
+    		<xs:maxLength value="60"></xs:maxLength>
+			<xs:whiteSpace value="collapse"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="NumFincaType">
+    	<xs:restriction base="xs:string">
+    		<xs:minLength value="1"></xs:minLength>
+    		<xs:maxLength value="4"></xs:maxLength>
+			<xs:whiteSpace value="collapse"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="TipoDocumentoType">
+    	<xs:restriction base="xs:string">
+    		<xs:length value="2"></xs:length>
+    		<xs:enumeration value="01"></xs:enumeration>
+    		<xs:enumeration value="03"></xs:enumeration>
+    		<xs:enumeration value="04"></xs:enumeration>
+    		<xs:enumeration value="07"></xs:enumeration>
+    		<xs:enumeration value="08"></xs:enumeration>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="NumDocumentoType">
+    	<xs:restriction base="xs:string">
+    		<xs:minLength value="1"></xs:minLength>
+    		<xs:maxLength value="20"></xs:maxLength>
+			<xs:whiteSpace value="collapse"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="TipoFacturaType">
+    	<xs:restriction base="xs:string">
+    		<xs:length value="2"></xs:length>
+    		<xs:enumeration value="01"></xs:enumeration>
+    		<xs:enumeration value="11"></xs:enumeration>
+    		<xs:enumeration value="99"></xs:enumeration>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ClaseFacturaType">
+    	<xs:restriction base="xs:string">
+    		<xs:length value="1"></xs:length>
+    		<xs:enumeration value="N"></xs:enumeration>
+    		<xs:enumeration value="A"></xs:enumeration>
+    		<xs:enumeration value="R"></xs:enumeration>
+    		<xs:enumeration value="B"></xs:enumeration>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="TipoFacturacionType">
+    	<xs:restriction base="xs:string">
+    		<xs:length value="1"></xs:length>
+    		<xs:enumeration value="1"></xs:enumeration>
+    		<xs:enumeration value="2"></xs:enumeration>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="TipoPeajeType">
+    	<xs:restriction base="xs:string">
+    		<xs:length value="2"></xs:length>
+			<xs:enumeration value="11"></xs:enumeration>
+			<xs:enumeration value="12"></xs:enumeration>
+			<xs:enumeration value="13"></xs:enumeration>
+			<xs:enumeration value="21"></xs:enumeration>
+			<xs:enumeration value="22"></xs:enumeration>
+			<xs:enumeration value="23"></xs:enumeration>
+			<xs:enumeration value="24"></xs:enumeration>
+			<xs:enumeration value="25"></xs:enumeration>
+			<xs:enumeration value="26"></xs:enumeration>
+			<xs:enumeration value="1B"></xs:enumeration>
+			<xs:enumeration value="2B"></xs:enumeration>
+			<xs:enumeration value="3B"></xs:enumeration>
+			<xs:enumeration value="4B"></xs:enumeration>
+			<xs:enumeration value="5B"></xs:enumeration>
+			<xs:enumeration value="6B"></xs:enumeration>
+			<xs:enumeration value="31"></xs:enumeration>
+			<xs:enumeration value="32"></xs:enumeration>
+			<xs:enumeration value="33"></xs:enumeration>
+			<xs:enumeration value="34"></xs:enumeration>
+			<xs:enumeration value="35"></xs:enumeration>
+			<xs:enumeration value="41"></xs:enumeration>
+			<xs:enumeration value="42"></xs:enumeration>
+			<xs:enumeration value="43"></xs:enumeration>
+			<xs:enumeration value="44"></xs:enumeration>
+			<xs:enumeration value="45"></xs:enumeration>
+			<xs:enumeration value="46"></xs:enumeration>
+			<xs:enumeration value="47"></xs:enumeration>
+			<xs:enumeration value="A1"></xs:enumeration>
+			<xs:enumeration value="A2"></xs:enumeration>
+			<xs:enumeration value="A3"></xs:enumeration>
+			<xs:enumeration value="B1"></xs:enumeration>
+			<xs:enumeration value="B2"></xs:enumeration>
+			<xs:enumeration value="C1"></xs:enumeration>
+			<xs:enumeration value="C2"></xs:enumeration>
+			<xs:enumeration value="D1"></xs:enumeration>
+			<xs:enumeration value="D2"></xs:enumeration>
+			<xs:enumeration value="M1"></xs:enumeration>
+			<xs:enumeration value="M2"></xs:enumeration>
+			<xs:enumeration value="99"></xs:enumeration>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="ListaBoeType">
+    	<xs:sequence>
+    		<xs:element name="boe" type="BoeType" maxOccurs="unbounded"
+    			minOccurs="1">
+    		</xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ListaConceptosType">
+    	<xs:sequence>
+    		<xs:element name="concepto" type="ConceptoType"
+    			maxOccurs="unbounded" minOccurs="1">
+    		</xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ListaMedidoresType">
+    	<xs:sequence>
+    		<xs:element name="medidor" type="MedidorType"
+    			maxOccurs="unbounded" minOccurs="1">
+    		</xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ListaFacturasInspecType">
+    	<xs:sequence>
+    		<xs:element name="facturainspeccion"
+    			type="FacturaInspeccionType" maxOccurs="unbounded"
+    			minOccurs="1">
+    		</xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ListaContactosType">
+    	<xs:sequence>
+    		<xs:element name="contacto" type="ContactoType"
+    			maxOccurs="unbounded" minOccurs="1">
+    		</xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ListaHistorialConsumosType">
+    	<xs:sequence>
+    		<xs:element name="consumo" type="ConsumoType"
+    			maxOccurs="unbounded" minOccurs="1">
+    		</xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ImputacionCostesType">
+    	<xs:sequence>
+    		<xs:element name="pcttasacnmc" maxOccurs="1"
+    			minOccurs="1">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="6"></xs:totalDigits>
+    					<xs:fractionDigits value="3"></xs:fractionDigits>
+    					<xs:maxInclusive value="999.999"></xs:maxInclusive>
+    					<xs:minInclusive value="0"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="pctcuotagts" maxOccurs="1" minOccurs="1">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="6"></xs:totalDigits>
+    					<xs:fractionDigits value="3"></xs:fractionDigits>
+    					<xs:maxInclusive value="999.999"></xs:maxInclusive>
+    					<xs:minInclusive value="0"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="BoeType">
+    	<xs:sequence>
+    		<xs:element name="numboe" maxOccurs="1" minOccurs="1">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:string">
+    					<xs:minLength value="1"></xs:minLength>
+    					<xs:maxLength value="15"></xs:maxLength>
+						<xs:whiteSpace value="collapse"/>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="fecboe" type="xs:date" maxOccurs="1"
+    			minOccurs="1">
+    		</xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ConceptoType">
+    	<xs:sequence>
+    		<xs:element name="fecdesde" type="xs:date" maxOccurs="1"
+    			minOccurs="1">
+    		</xs:element>
+    		<xs:element name="fechasta" type="xs:date" maxOccurs="1"
+    			minOccurs="1">
+    		</xs:element>
+    		<xs:element name="unidad" maxOccurs="1" minOccurs="1">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="14"></xs:totalDigits>
+    					<xs:fractionDigits value="4"></xs:fractionDigits>
+    					<xs:maxInclusive value="9999999999.9999"></xs:maxInclusive>
+    					<xs:minInclusive value="-9999999999.9999"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="precunidad" maxOccurs="1" minOccurs="0">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="29"></xs:totalDigits>
+    					<xs:fractionDigits value="12"></xs:fractionDigits>
+    					<xs:maxInclusive value="99999999999999.9999999999"></xs:maxInclusive>
+    					<xs:minInclusive value="-99999999999999.9999999999"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="importe" maxOccurs="1" minOccurs="1">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="29"></xs:totalDigits>
+    					<xs:fractionDigits value="12"></xs:fractionDigits>
+    					<xs:maxInclusive value="99999999999999.9999999999"></xs:maxInclusive>
+    					<xs:minInclusive value="-99999999999999.9999999999"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="codconcepto"
+    			type="ConceptoFacturacionType" maxOccurs="1" minOccurs="1">
+    		</xs:element>
+    		<xs:element name="desconcepto" type="CodAlpha255Type"
+    			maxOccurs="1" minOccurs="1">
+    		</xs:element>
+    		<xs:element name="porcentajeconcepto" maxOccurs="1"
+    			minOccurs="0">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="11"></xs:totalDigits>
+    					<xs:fractionDigits value="7"></xs:fractionDigits>
+    					<xs:maxInclusive value="9999.9999999"></xs:maxInclusive>
+    					<xs:minInclusive value="0"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="impuestoconcepto" maxOccurs="1"
+    			minOccurs="1">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:string">
+
+    					<xs:length value="1"></xs:length>
+    					<xs:enumeration value="S"></xs:enumeration>
+    					<xs:enumeration value="N"></xs:enumeration>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="codtipoimpuesto" maxOccurs="1"
+    			minOccurs="0">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:string">
+
+    					<xs:length value="2"></xs:length>
+    					<xs:enumeration value="01"></xs:enumeration>
+    					<xs:enumeration value="02"></xs:enumeration>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="porcentajeimpcto" maxOccurs="1"
+    			minOccurs="0">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="11"></xs:totalDigits>
+    					<xs:fractionDigits value="7"></xs:fractionDigits>
+    					<xs:maxInclusive value="9999.9999999"></xs:maxInclusive>
+    					<xs:minInclusive value="0"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="umconcepto" maxOccurs="1" minOccurs="0">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:string">
+    					<xs:minLength value="1"></xs:minLength>
+    					<xs:maxLength value="18"></xs:maxLength>
+						<xs:whiteSpace value="collapse"/>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="aparatoconcepto" type="TipoAparatoType"
+    			maxOccurs="1" minOccurs="0">
+    		</xs:element>
+    		<xs:element name="observaciones" type="CodAlpha100Type"
+    			maxOccurs="1" minOccurs="0">
+    		</xs:element>
+    		<xs:element name="fecDesdeProrrateo" type="xs:date" maxOccurs="1"
+    			minOccurs="0">
+    		</xs:element>
+    		<xs:element name="tipoInteresDemora" maxOccurs="1" minOccurs="0">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="11"></xs:totalDigits>
+    					<xs:fractionDigits value="7"></xs:fractionDigits>
+    					<xs:maxInclusive value="9999.9999999"></xs:maxInclusive>
+    					<xs:minInclusive value="0"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="ConceptoFacturacionType">
+    	<xs:restriction base="xs:string">
+    		<xs:length value="4"></xs:length>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="TipoAparatoType">
+    	<xs:restriction base="xs:string">
+    		<xs:length value="2"></xs:length>
+    		<xs:enumeration value="CO"></xs:enumeration>
+    		<xs:enumeration value="CR"></xs:enumeration>
+    		<xs:enumeration value="UR"></xs:enumeration>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="MedidorType">
+    	<xs:sequence>
+    		<xs:element name="um" maxOccurs="1" minOccurs="1">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:string">
+    					<xs:minLength value="1"></xs:minLength>
+    					<xs:maxLength value="18"></xs:maxLength>
+						<xs:whiteSpace value="collapse"/>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="feclecant" type="xs:date" maxOccurs="1"
+    			minOccurs="1">
+    		</xs:element>
+    		<xs:element name="horalecant" type="xs:time" maxOccurs="1"
+    			minOccurs="0">
+    		</xs:element>
+    		<xs:element name="feclecact" type="xs:date" maxOccurs="1"
+    			minOccurs="1">
+    		</xs:element>
+    		<xs:element name="horalecact" type="xs:time" maxOccurs="1"
+    			minOccurs="0">
+    		</xs:element>
+    		<xs:element name="serializada" maxOccurs="1" minOccurs="1">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:string">
+
+    					<xs:length value="1"></xs:length>
+    					<xs:enumeration value="S"></xs:enumeration>
+    					<xs:enumeration value="N"></xs:enumeration>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="restadeserializada" maxOccurs="1"
+    			minOccurs="0">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:string">
+    					<xs:minLength value="1"></xs:minLength>
+    					<xs:maxLength value="18"></xs:maxLength>
+						<xs:whiteSpace value="collapse"/>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="cupsresta" type="CupsType" maxOccurs="1"
+    			minOccurs="0">
+    		</xs:element>
+    		<xs:element name="aparato" type="TipoAparatoType"
+    			maxOccurs="1" minOccurs="1">
+    		</xs:element>
+    		<xs:element name="medicion" maxOccurs="1" minOccurs="0"
+    			type="TipoCorrectorType">
+
+    		</xs:element>
+    		<xs:element name="modelomedidor" maxOccurs="1" minOccurs="0">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:string">
+    					<xs:minLength value="1"></xs:minLength>
+    					<xs:maxLength value="50"></xs:maxLength>
+						<xs:whiteSpace value="collapse"/>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="numseriemedidor" maxOccurs="1"
+    			minOccurs="1">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:string">
+    					<xs:minLength value="1"></xs:minLength>
+    					<xs:maxLength value="18"></xs:maxLength>
+						<xs:whiteSpace value="collapse"/>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="unipres" maxOccurs="1" minOccurs="0">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:string">
+    					<xs:minLength value="1"></xs:minLength>
+    					<xs:maxLength value="6"></xs:maxLength>
+						<xs:whiteSpace value="collapse"/>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="presatm" maxOccurs="1" minOccurs="0">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="8"></xs:totalDigits>
+    					<xs:fractionDigits value="5"></xs:fractionDigits>
+    					<xs:maxInclusive value="999.99999"></xs:maxInclusive>
+    					<xs:minInclusive value="0"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="presionsuministro" maxOccurs="1"
+    			minOccurs="1">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="7"></xs:totalDigits>
+    					<xs:fractionDigits value="4"></xs:fractionDigits>
+    					<xs:maxInclusive value="999.9999"></xs:maxInclusive>
+    					<xs:minInclusive value="0"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="temp" maxOccurs="1" minOccurs="0">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="4"></xs:totalDigits>
+    					<xs:fractionDigits value="2"></xs:fractionDigits>
+    					<xs:maxInclusive value="99.99"></xs:maxInclusive>
+    					<xs:minInclusive value="-99.99"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="factorconver" maxOccurs="1" minOccurs="1">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="9"></xs:totalDigits>
+    					<xs:fractionDigits value="6"></xs:fractionDigits>
+    					<xs:maxInclusive value="999.999999"></xs:maxInclusive>
+    					<xs:minInclusive value="0"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="factork" maxOccurs="1" minOccurs="1">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="8"></xs:totalDigits>
+    					<xs:fractionDigits value="6"></xs:fractionDigits>
+    					<xs:maxInclusive value="99.999999"></xs:maxInclusive>
+    					<xs:minInclusive value="0"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="pcs" maxOccurs="1" minOccurs="1">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="8"></xs:totalDigits>
+    					<xs:fractionDigits value="6"></xs:fractionDigits>
+    					<xs:maxInclusive value="99.999999"></xs:maxInclusive>
+    					<xs:minInclusive value="0"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="zeta" maxOccurs="1" minOccurs="0">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="7"></xs:totalDigits>
+    					<xs:fractionDigits value="6"></xs:fractionDigits>
+    					<xs:maxInclusive value="9.999999"></xs:maxInclusive>
+    					<xs:minInclusive value="0"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="densidad" maxOccurs="1" minOccurs="0">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="8"></xs:totalDigits>
+    					<xs:fractionDigits value="4"></xs:fractionDigits>
+    					<xs:maxInclusive value="9999.9999"></xs:maxInclusive>
+    					<xs:minInclusive value="0"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="n2" maxOccurs="1" minOccurs="0">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="8"></xs:totalDigits>
+    					<xs:fractionDigits value="4"></xs:fractionDigits>
+    					<xs:maxInclusive value="9999.9999"></xs:maxInclusive>
+    					<xs:minInclusive value="0"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="co2" maxOccurs="1" minOccurs="0">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="8"></xs:totalDigits>
+    					<xs:fractionDigits value="4"></xs:fractionDigits>
+    					<xs:maxInclusive value="9999.9999"></xs:maxInclusive>
+    					<xs:minInclusive value="0"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="h2" maxOccurs="1" minOccurs="0">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="8"></xs:totalDigits>
+    					<xs:fractionDigits value="4"></xs:fractionDigits>
+    					<xs:maxInclusive value="9999.9999"></xs:maxInclusive>
+    					<xs:minInclusive value="0"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="consumokwh" maxOccurs="1" minOccurs="1">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="29"></xs:totalDigits>
+    					<xs:fractionDigits value="12"></xs:fractionDigits>
+    					<xs:maxInclusive value="99999999999999.9999999999"></xs:maxInclusive>
+    					<xs:minInclusive value="-99999999999999.9999999999"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="consumoereal" maxOccurs="1" minOccurs="0">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="29"></xs:totalDigits>
+    					<xs:fractionDigits value="12"></xs:fractionDigits>
+    					<xs:maxInclusive value="99999999999999.9999999999"></xs:maxInclusive>
+    					<xs:minInclusive value="-99999999999999.9999999999"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="consumoreg" maxOccurs="1" minOccurs="0">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="29"></xs:totalDigits>
+    					<xs:fractionDigits value="12"></xs:fractionDigits>
+    					<xs:maxInclusive value="99999999999999.9999999999"></xs:maxInclusive>
+    					<xs:minInclusive value="-99999999999999.9999999999"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="codajuste"
+    			type="MotivoRegularizacionConsumoType" maxOccurs="1"
+    			minOccurs="0">
+    		</xs:element>
+    		<xs:element name="ajuste" maxOccurs="1" minOccurs="0">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="13"></xs:totalDigits>
+    					<xs:fractionDigits value="2"></xs:fractionDigits>
+    					<xs:maxInclusive value="99999999999.99"></xs:maxInclusive>
+    					<xs:minInclusive value="-99999999999.99"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="qdaplicado" maxOccurs="1" minOccurs="0">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="13"></xs:totalDigits>
+    					<xs:fractionDigits value="2"></xs:fractionDigits>
+    					<xs:maxInclusive value="99999999999.99"></xs:maxInclusive>
+    					<xs:minInclusive value="-99999999999.99"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="qdmaximo" maxOccurs="1" minOccurs="0">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="13"></xs:totalDigits>
+    					<xs:fractionDigits value="2"></xs:fractionDigits>
+    					<xs:maxInclusive value="99999999999.99"></xs:maxInclusive>
+    					<xs:minInclusive value="-99999999999.99"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="fecqdmax" type="xs:date" maxOccurs="1"
+    			minOccurs="0">
+    		</xs:element>
+    		<xs:element name="dqmedio" maxOccurs="1" minOccurs="0">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="13"></xs:totalDigits>
+    					<xs:fractionDigits value="2"></xs:fractionDigits>
+    					<xs:maxInclusive value="99999999999.99"></xs:maxInclusive>
+    					<xs:minInclusive value="-99999999999.99"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="qdcontratado" maxOccurs="1" minOccurs="0">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="13"></xs:totalDigits>
+    					<xs:fractionDigits value="2"></xs:fractionDigits>
+    					<xs:maxInclusive value="99999999999.99"></xs:maxInclusive>
+    					<xs:minInclusive value="-99999999999.99"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="motivolec" type="MotivoLecturaType"
+    			maxOccurs="1" minOccurs="0">
+    		</xs:element>
+    		<xs:element name="tipoDH"
+    			type="TipoDiscriminacionHorariaType" maxOccurs="1"
+    			minOccurs="0">
+    		</xs:element>
+    		<xs:element name="perlec" type="PeriodicidadLecturaType"
+    			maxOccurs="1" minOccurs="0">
+    		</xs:element>
+    		<xs:element name="capacidadcontador" maxOccurs="1"
+    			minOccurs="0">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="29"></xs:totalDigits>
+    					<xs:fractionDigits value="12"></xs:fractionDigits>
+    					<xs:maxInclusive value="99999999999999.9999999999"></xs:maxInclusive>
+    					<xs:minInclusive value="0"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="observaciones1" type="CodAlpha100Type"
+    			maxOccurs="1" minOccurs="0">
+    		</xs:element>
+    		<xs:element name="observaciones2" type="CodAlpha100Type"
+    			maxOccurs="1" minOccurs="0">
+    		</xs:element>
+    		<xs:element name="listanumeradores"
+    			type="ListaNumeradoresType" maxOccurs="1" minOccurs="1">
+    		</xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="TipoCorrectorType">
+    	<xs:restriction base="xs:string">
+    		<xs:length value="2"></xs:length>
+    		<xs:enumeration value="01"></xs:enumeration>
+    		<xs:enumeration value="02"></xs:enumeration>
+    		<xs:enumeration value="03"></xs:enumeration>
+    		<xs:enumeration value="04"></xs:enumeration>
+    		<xs:enumeration value="05"></xs:enumeration>
+    		<xs:enumeration value="06"></xs:enumeration>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="MotivoRegularizacionConsumoType">
+    	<xs:restriction base="xs:string">
+    		<xs:length value="2"></xs:length>
+    		<xs:enumeration value="01"></xs:enumeration>
+    		<xs:enumeration value="02"></xs:enumeration>
+    		<xs:enumeration value="03"></xs:enumeration>
+    		<xs:enumeration value="04"></xs:enumeration>
+    		<xs:enumeration value="05"></xs:enumeration>
+    		<xs:enumeration value="06"></xs:enumeration>
+    		<xs:enumeration value="07"></xs:enumeration>
+    		<xs:enumeration value="08"></xs:enumeration>
+    		<xs:enumeration value="09"></xs:enumeration>
+    		<xs:enumeration value="10"></xs:enumeration>
+    		<xs:enumeration value="11"></xs:enumeration>
+    		<xs:enumeration value="12"></xs:enumeration>
+    		<xs:enumeration value="13"></xs:enumeration>
+    		<xs:enumeration value="99"></xs:enumeration>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="MotivoLecturaType">
+    	<xs:restriction base="xs:string">
+    		<xs:length value="2"></xs:length>
+    		<xs:enumeration value="01"></xs:enumeration>
+    		<xs:enumeration value="02"></xs:enumeration>
+    		<xs:enumeration value="03"></xs:enumeration>
+    		<xs:enumeration value="04"></xs:enumeration>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="TipoDiscriminacionHorariaType">
+    	<xs:restriction base="xs:string">
+    		<xs:length value="2"></xs:length>
+    		<xs:enumeration value="00"></xs:enumeration>
+    		<xs:enumeration value="01"></xs:enumeration>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PeriodicidadLecturaType">
+    	<xs:restriction base="xs:string">
+    		<xs:length value="1"></xs:length>
+    		<xs:enumeration value="M"></xs:enumeration>
+    		<xs:enumeration value="B"></xs:enumeration>
+    		<xs:enumeration value="A"></xs:enumeration>
+    		<xs:enumeration value="S"></xs:enumeration>
+    		<xs:enumeration value="D"></xs:enumeration>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="ListaNumeradoresType">
+    	<xs:sequence>
+    		<xs:element name="numerador" type="NumeradorType"
+    			maxOccurs="unbounded" minOccurs="1">
+    		</xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="NumeradorType">
+    	<xs:sequence>
+    		<xs:element name="num" maxOccurs="1" minOccurs="1">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:string">
+    					<xs:length value="1"></xs:length>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="digmed" maxOccurs="1" minOccurs="1">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:string">
+    					<xs:minLength value="1"></xs:minLength>
+    					<xs:maxLength value="18"></xs:maxLength>
+						<xs:whiteSpace value="collapse"/>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="digdecmed" maxOccurs="1" minOccurs="0">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:string">
+    					<xs:minLength value="1"></xs:minLength>
+    					<xs:maxLength value="2"></xs:maxLength>
+						<xs:whiteSpace value="collapse"/>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="factmulmed" maxOccurs="1" minOccurs="1">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="8"></xs:totalDigits>
+    					<xs:fractionDigits value="2"></xs:fractionDigits>
+    					<xs:maxInclusive value="999999.99"></xs:maxInclusive>
+    					<xs:minInclusive value="0"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="lectant" maxOccurs="1" minOccurs="1">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="16"></xs:totalDigits>
+    					<xs:fractionDigits value="2"></xs:fractionDigits>
+    					<xs:maxInclusive value="99999999999999.99"></xs:maxInclusive>
+    					<xs:minInclusive value="-99999999999999.99"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="lecact" maxOccurs="1" minOccurs="1">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="16"></xs:totalDigits>
+    					<xs:fractionDigits value="2"></xs:fractionDigits>
+    					<xs:maxInclusive value="99999999999999.99"></xs:maxInclusive>
+    					<xs:minInclusive value="-99999999999999.99"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="tipolec" type="TipoLecturaType"
+    			maxOccurs="1" minOccurs="1">
+    		</xs:element>
+    		<xs:element name="consumo" maxOccurs="1" minOccurs="1">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="16"></xs:totalDigits>
+    					<xs:fractionDigits value="2"></xs:fractionDigits>
+    					<xs:maxInclusive value="99999999999999.99"></xs:maxInclusive>
+    					<xs:minInclusive value="-99999999999999.99"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="tipolecnum"
+    			type="TipoLecturaNumeradorType" maxOccurs="1"
+    			minOccurs="1">
+    		</xs:element>
+    		<xs:element name="aparatorelevante" maxOccurs="1"
+    			minOccurs="0">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:string">
+
+    					<xs:length value="1"></xs:length>
+    					<xs:enumeration value="S"></xs:enumeration>
+    					<xs:enumeration value="N"></xs:enumeration>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    		<xs:element name="observaciones" type="CodAlpha100Type"
+    			maxOccurs="1" minOccurs="0">
+    		</xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="TipoLecturaType">
+    	<xs:restriction base="xs:string">
+    		<xs:minLength value="1"></xs:minLength>
+    		<xs:maxLength value="2"></xs:maxLength>
+    		<xs:enumeration value="0"></xs:enumeration>
+    		<xs:enumeration value="1"></xs:enumeration>
+    		<xs:enumeration value="2"></xs:enumeration>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="TipoLecturaNumeradorType">
+    	<xs:restriction base="xs:string">
+    		<xs:length value="2"></xs:length>
+    		<xs:enumeration value="BR"></xs:enumeration>
+    		<xs:enumeration value="CR"></xs:enumeration>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="FacturaInspeccionType">
+    	<xs:sequence>
+    		<xs:element name="numdocumentoinstalador"
+    			type="CodAlpha20Type" maxOccurs="1" minOccurs="1">
+    		</xs:element>
+    		<xs:element name="razonsocialinstalador"
+    			type="CodAlpha50Type" maxOccurs="1" minOccurs="1">
+    		</xs:element>
+    		<xs:element name="numfacturainspeccion"
+    			type="CodAlpha20Type" maxOccurs="1" minOccurs="1">
+    		</xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ContactoType">
+    	<xs:sequence>
+    		<xs:element name="denominacion" type="CodAlpha100Type"
+    			maxOccurs="1" minOccurs="1">
+    		</xs:element>
+    		<xs:element name="url" type="CodAlpha100Type" maxOccurs="1"
+    			minOccurs="1">
+    		</xs:element>
+    		<xs:element name="email" type="CodAlpha100Type"
+    			maxOccurs="1" minOccurs="1">
+    		</xs:element>
+    		<xs:element name="telefono" type="CodAlpha20Type"
+    			maxOccurs="1" minOccurs="1">
+    		</xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ConsumoType">
+    	<xs:sequence>
+    		<xs:element name="fecinicioperiodo" type="xs:date" maxOccurs="1"
+    			minOccurs="1">
+    		</xs:element>
+    		<xs:element name="fecfinperiodo" type="xs:date" maxOccurs="1"
+    			minOccurs="1">
+    		</xs:element>
+    		<xs:element name="consumoperiodo" maxOccurs="1" minOccurs="1">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:decimal">
+    					<xs:totalDigits value="16"></xs:totalDigits>
+    					<xs:fractionDigits value="2"></xs:fractionDigits>
+    					<xs:maxInclusive value="99999999999999.99"></xs:maxInclusive>
+    					<xs:minInclusive value="-99999999999999.99"></xs:minInclusive>
+    				</xs:restriction>
+    			</xs:simpleType>
+    		</xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+</xs:schema>
