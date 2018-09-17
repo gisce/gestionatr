@@ -3125,7 +3125,7 @@ class test_A1_04(unittest.TestCase):
         self.assertEqual(a204.foreseentransferdate, '2018-06-01')
         self.assertEqual(
             a204.extrainfo,
-            'Información adicional con la ubicación del tesoro de Mary Read'
+            u'Información adicional con la ubicación del tesoro de Mary Read'
         )
 
     def test_a304(self):
@@ -3140,8 +3140,8 @@ class test_A1_04(unittest.TestCase):
         self.assertEqual(a304.nationality, 'ES')
         self.assertEqual(a304.documenttype, '01')
         self.assertEqual(a304.documentnum, '11111111H')
-        self.assertEqual(a304.result, '01')
-        self.assertEqual(a304.resultdesc, 'Aceptada')
+        self.assertEqual(a304.result, '09')
+        self.assertEqual(a304.resultdesc, 'Realizada')
         self.assertEqual(a304.activationtype, '001')
         self.assertEqual(a304.activationtypedesc, 'Realizada puesta en servicio')
         self.assertEqual(a304.cups, 'ES1234000000000001JN')
@@ -3152,7 +3152,7 @@ class test_A1_04(unittest.TestCase):
         self.assertEqual(a304.transfereffectivedate, '2018-07-01')
         self.assertEqual(
             a304.extrainfo,
-            'Información adicional con la ubicación del tesoro de Mary Read'
+            u'Información adicional con la ubicación del tesoro de Mary Read'
         )
 
         counter = a304.counterlist[0]
@@ -3201,8 +3201,8 @@ class test_A1_04(unittest.TestCase):
         self.assertEqual(a404.nationality, 'ES')
         self.assertEqual(a404.documenttype, '01')
         self.assertEqual(a404.documentnum, '11111111H')
-        self.assertEqual(a404.result, '01')
-        self.assertEqual(a404.resultdesc, 'Aceptada')
+        self.assertEqual(a404.result, '13')
+        self.assertEqual(a404.resultdesc, 'No Realizada')
 
         self.assertEqual(a404.cups, 'ES1234000000000001JN')
 
@@ -3217,7 +3217,7 @@ class test_A1_04(unittest.TestCase):
         )
         self.assertEqual(
             a404.extrainfo,
-            'Información adicional con la ubicación del tesoro de Mary Read'
+            u'Información adicional con la ubicación del tesoro de Mary Read'
         )
 
         registerdoc = a404.registerdoclist[0]
