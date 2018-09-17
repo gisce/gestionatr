@@ -3214,7 +3214,7 @@ class test_A1_04(unittest.TestCase):
 
         mensaje_a104_fields = {
             'heading': heading,
-            'a1': a104,
+            'a104': a104,
         }
         mensaje_a104.feed(mensaje_a104_fields)
         mensaje_a104.build_tree()
