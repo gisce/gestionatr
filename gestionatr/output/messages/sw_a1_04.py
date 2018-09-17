@@ -26,7 +26,7 @@ class A104(XmlModel):
         'a104', 'comreferencenum', 'reqdate', 'reqhour', 'titulartype',
         'nationality', 'documenttype', 'documentnum', 'cups',
         'cancelreason', 'modeffectdate', 'reqcanceldate', 'cancelhour',
-        'contactphonenumber', 'extrainfo'
+        'contactphonenumber', 'extrainfo', 'registerdoclist'
     )
 
     def __init__(self):
