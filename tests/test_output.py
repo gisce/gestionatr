@@ -3179,10 +3179,10 @@ class test_A1_04(unittest.TestCase):
         heading = a1_04.Heading()
         heading_fields = {
             'dispatchingcode': 'GML',
-            'dispatchingcompany': '1234',
-            'destinycompany': '4321',
+            'dispatchingcompany': '4321',
+            'destinycompany': '1234',
             'communicationsdate': '2018-05-01',
-            'communicationshour': '12:00:00',
+            'communicationshour': '13:00:00',
             'processcode': '04',
             'messagetype': 'A1'
         }
