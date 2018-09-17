@@ -2,6 +2,7 @@
 
 from libcomxml.core import XmlModel, XmlField
 from gestionatr.output.messages.base_gas import Heading
+from gestionatr.output.messages.sw_a1_41 import Registerdoclist, Registerdoc
 
 
 # Paso 01
@@ -44,4 +45,5 @@ class A104(XmlModel):
         self.cancelhour = XmlField('cancelhour')
         self.contactphonenumber = XmlField('contactphonenumber')
         self.extrainfo = XmlField('extrainfo')
+        self.registerdoclist = Registerdoclist()
         super(A104, self).__init__('a104', 'a104')
