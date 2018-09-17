@@ -3194,7 +3194,7 @@ class test_A1_04(unittest.TestCase):
         a104_fields = {
             'comreferencenum': '000123456789',
             'reqdate': '2018-05-01',
-            'reqhour': '13:00:00',
+            'reqhour': '12:00:00',
             'titulartype': 'F',
             'nationality': 'ES',
             'documenttype': '07',

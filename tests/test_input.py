@@ -3227,7 +3227,7 @@ class test_A1_04(unittest.TestCase):
         self.assertEqual(registerdoc.extrainfo, u"404 page not found")
 
         registerdoc2 = a404.registerdoclist[1]
-        self.assertEqual(registerdoc2.date, u"2018-05-02")
+        self.assertEqual(registerdoc2.date, u"2018-05-03")
         self.assertEqual(registerdoc2.doctype, u"01")
         self.assertEqual(registerdoc2.url, u"http://www.gasalmatalas.com")
         self.assertEqual(registerdoc2.extrainfo, u"404 page not found")
