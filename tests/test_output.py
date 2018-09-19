@@ -16,6 +16,7 @@ from gestionatr.output.messages import sw_a1_41 as a1_41
 from gestionatr.output.messages import sw_a1_02 as a1_02
 from gestionatr.output.messages import sw_a1_05 as a1_05
 from gestionatr.output.messages import sw_a1_44 as a1_44
+from gestionatr.output.messages import sw_a1_03 as a1_03
 
 
 class test_C1(unittest.TestCase):
@@ -3162,3 +3163,52 @@ class test_A1_44(unittest.TestCase):
         assertXmlEqual(xml, self.xml_a144.read())
 
 
+class test_A1_03(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a103 = open(get_data("a103.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a103.close()
+
+    def test_create_a103(self):
+        # MensajeA103
+        mensaje_a103 = a1_03.MensajeA103()
+
+        # Heading
+        heading = a1_03.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '03',
+            'messagetype': 'A1'
+        }
+        heading.feed(heading_fields)
+
+        # A103
+        a103 = a1_03.A103()
+
+        a103_fields = {
+            'comreferencenum': '000123456789',
+            'titulartype': 'F',
+            'nationality': 'ES',
+            'documenttype': '01',
+            'documentnum': 'ES11111111H',
+            'annulmentreason': '002',
+            'cups': 'ES1234000000000001JN',
+            'reqdate': '2018-05-01',
+            'reqhour': '13:00:00',
+            'extrainfo': 'comentarios extras',
+        }
+        a103.feed(a103_fields)
+        mensaje_a103_fields = {
+            'heading': heading,
+            'a103': a103,
+        }
+        mensaje_a103.feed(mensaje_a103_fields)
+        mensaje_a103.build_tree()
+        xml = str(mensaje_a103)
+        assertXmlEqual(xml, self.xml_a103.read())

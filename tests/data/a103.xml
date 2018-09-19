@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sctdapplication xmlns="http://localhost/sctd/A103">
+    <heading>
+        <dispatchingcode>GML</dispatchingcode>
+        <dispatchingcompany>1234</dispatchingcompany>
+        <destinycompany>4321</destinycompany>
+        <communicationsdate>2018-05-01</communicationsdate>
+        <communicationshour>12:00:00</communicationshour>
+        <processcode>03</processcode>
+        <messagetype>A1</messagetype>
+    </heading>
+    <a103>
+        <comreferencenum>000123456789</comreferencenum>
+        <reqdate>2018-05-01</reqdate>
+        <reqhour>13:00:00</reqhour>
+        <titulartype>F</titulartype>
+        <nationality>ES</nationality>
+        <documenttype>01</documenttype>
+        <documentnum>ES11111111H</documentnum>
+        <cups>ES1234000000000001JN</cups>
+        <annulmentreason>002</annulmentreason>
+        <extrainfo>comentarios extras</extrainfo>
+    </a103>
+</sctdapplication>
