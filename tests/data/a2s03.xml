@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sctdapplication xmlns="http://localhost/sctd/A2S03">
+    <heading>
+        <dispatchingcode>GML</dispatchingcode>
+        <dispatchingcompany>1234</dispatchingcompany>
+        <destinycompany>4321</destinycompany>
+        <communicationsdate>2018-05-01</communicationsdate>
+        <communicationshour>12:00:00</communicationshour>
+        <processcode>03</processcode>
+        <messagetype>A2S</messagetype>
+    </heading>
+    <a2s03>
+        <reqcode>0123456789</reqcode>
+        <responsedate>2018-05-01</responsedate>
+        <responsehour>13:00:00</responsehour>
+        <result>01</result>
+        <resultdesc>Aceptada</resultdesc>
+        <nationality>ES</nationality>
+        <documenttype>01</documenttype>
+        <documentnum>ES11111111H</documentnum>
+        <cups>ES1234000000000001JN</cups>
+        <annulmentreason>002</annulmentreason>
+        <extrainfo>Coments</extrainfo>
+    </a2s03>
+</sctdapplication>

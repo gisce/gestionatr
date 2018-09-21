@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from . import unittest
 from .utils import get_data
-from gestionatr.input.messages import C1, C2, A3, B1, M1, D1, W1, Q1, R1, F1, Deadlines, A1_41, A1_02, A1_05, B7031, B7032, A1_44
+from gestionatr.input.messages import C1, C2, A3, B1, M1, D1, W1, Q1, R1, F1, Deadlines, A1_41, A1_02, A1_05, B7031, B7032, A1_44, A1_03
 from gestionatr.input.messages.F1 \
     import agrupar_lectures_per_data, obtenir_data_inici_i_final
 
@@ -3092,3 +3092,47 @@ class test_A1_44(unittest.TestCase):
         self.assertEqual(registerdoc.doctype, u"CC")
         self.assertEqual(registerdoc.url, u"255_fNTPLw5NQGEdAC6TzZrLSetqW7K6PY")
         self.assertEqual(registerdoc.extrainfo, u"255_ieYyI19A1KmTmbsNs5i3ycsbRc01Rx")
+
+
+class test_A1_03(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a203 = open(get_data("a203.xml"), "r")
+        self.xml_a2s03 = open(get_data("a2s03.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a203.close()
+        self.xml_a2s03.close()
+
+    def test_a203(self):
+        a203 = A1_03(self.xml_a203)
+        a203.parse_xml()
+        self.assertEqual(a203.reqcode, u'0123456789')
+        self.assertEqual(a203.comreferencenum, u'000123456789')
+        self.assertEqual(a203.cups, u'ES1234000000000001JN')
+        self.assertEqual(a203.responsedate, u'2018-05-01')
+        self.assertEqual(a203.responsehour, u'13:00:00')
+        self.assertEqual(a203.result, u'01')
+        self.assertEqual(a203.resultdesc, u'Aceptada')
+        self.assertEqual(a203.resultreason, u'R32')
+        self.assertEqual(a203.resultreasondesc, u'Fecha efecto solicitada anterior al día actual.')
+        self.assertEqual(a203.extrainfo, u'Coments')
+        self.assertEqual(a203.nationality, u"ES")
+        self.assertEqual(a203.documenttype, u"01")
+        self.assertEqual(a203.documentnum, u"ES11111111H")
+        self.assertEqual(a203.annulmentreason, u"002")
+
+    def test_a2s03(self):
+        a203 = A1_03(self.xml_a2s03)
+        a203.parse_xml()
+        self.assertEqual(a203.reqcode, u'0123456789')
+        self.assertEqual(a203.cups, u'ES1234000000000001JN')
+        self.assertEqual(a203.responsedate, u'2018-05-01')
+        self.assertEqual(a203.responsehour, u'13:00:00')
+        self.assertEqual(a203.result, u'01')
+        self.assertEqual(a203.resultdesc, u'Aceptada')
+        self.assertEqual(a203.extrainfo, u'Coments')
+        self.assertEqual(a203.nationality, u"ES")
+        self.assertEqual(a203.documenttype, u"01")
+        self.assertEqual(a203.documentnum, u"ES11111111H")
+        self.assertEqual(a203.annulmentreason, u"002")
