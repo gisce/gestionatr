@@ -17,6 +17,7 @@ from gestionatr.output.messages import sw_a1_02 as a1_02
 from gestionatr.output.messages import sw_a1_05 as a1_05
 from gestionatr.output.messages import sw_a1_44 as a1_44
 from gestionatr.output.messages import sw_a1_03 as a1_03
+from gestionatr.output.messages import sw_a1_48 as a1_48
 
 
 class test_C1(unittest.TestCase):
@@ -3212,3 +3213,235 @@ class test_A1_03(unittest.TestCase):
         mensaje_a103.build_tree()
         xml = str(mensaje_a103)
         assertXmlEqual(xml, self.xml_a103.read())
+
+
+class test_A1_48(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a148 = open(get_data("a148.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a148.close()
+
+    def test_create_a148(self):
+        # A148
+        mensaje = a1_48.MensajeA148()
+        heading = a1_48.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '48',
+            'messagetype': 'A1'
+        }
+        heading.feed(heading_fields)
+        a148 = a1_48.A148()
+
+        # claimer
+        claimer = a1_48.claimer()
+
+        # claimerid
+        claimerid = a1_48.claimerid()
+        claimerid_fields = {
+            'claimerdocumenttype': '01',
+            'claimerdocumentnum': 'ES00000000T',
+        }
+        claimerid.feed(claimerid_fields)
+
+
+        # claimername
+        claimername = a1_48.claimername()
+        claimername_fields = {
+            'claimerfirstname': 'gas',
+            'claimerlastname': 'al',
+            'claimersecondname': 'matalas',
+        }
+        claimername.feed(claimername_fields)
+
+
+        # claimertelephone
+        claimertelephone = a1_48.claimertelephone()
+        claimertelephone_fields = {
+            'claimerprefixtel1': '34',
+            'claimertelephone1': '999888777',
+        }
+        claimertelephone.feed(claimertelephone_fields)
+
+        claimer_fields = {
+            'claimerid': claimerid,
+            'claimername': claimername,
+            'claimertelephone': claimertelephone,
+            'claimeremail': 'gas@matalas',
+        }
+        claimer.feed(claimer_fields)
+
+        # claimreference
+        claimreference = a1_48.claimreference()
+        # contact
+        contact = a1_48.contact()
+        # contacttelephone
+        contacttelephone = a1_48.contacttelephone()
+        contacttelephone_fields = {
+            'telephoneprefix': '+34',
+            'telephonenumber': '666555444',
+        }
+        contacttelephone.feed(contacttelephone_fields)
+        contact_fields = {
+            'contactname': 'mortdegana',
+            'contacttelephone': contacttelephone,
+            'contactemail': 'matalas@gas',
+        }
+        contact.feed(contact_fields)
+        # incidentperiod
+        incidentperiod = a1_48.incidentperiod()
+        incidentperiod_fields = {
+            'datefrom': '2018-09-21',
+            'dateto': '2018-09-21',
+        }
+        incidentperiod.feed(incidentperiod_fields)
+        # incidentlocation
+        incidentlocation = a1_48.incidentlocation()
+        incidentlocation_fields = {
+            'incidentlocationdesc': 'calle pequeña',
+            'incidentlocationprovince': '01',
+            'incidentlocationcity': '000001',
+            'incidentlocationcitysubdivision': '20AA',
+            'incidentlocationzipcode': '17888',
+        }
+        incidentlocation.feed(incidentlocation_fields)
+        # reading
+        reading = a1_48.reading()
+        reading_fields = {
+            'readingdate': '2018-09-21',
+            'readingvalue': '4.89',
+        }
+        reading.feed(reading_fields)
+        # incident
+        incident = a1_48.incident()
+        incident_fields = {
+            'incidentdate': '2018-09-21',
+        }
+        incident.feed(incident_fields)
+        # client
+        client = a1_48.client()
+        # document
+        document = a1_48.document()
+        document_fields = {
+            'documenttype': '01',
+            'documentnum': 'ES11111111T',
+        }
+        document.feed(document_fields)
+        # name
+        name = a1_48.cname()
+        name_fields = {
+            'firstname': 'nom',
+            'familyname1': 'cognom',
+            'familyname2': 'cognom 2',
+        }
+        name.feed(name_fields)
+        # telephone
+        telephone = a1_48.telephone()
+        telephone_fields = {
+            'telephoneprefix': '34',
+            'telephonenumber': '999111222',
+        }
+        telephone.feed(telephone_fields)
+        # clientAddress
+        clientAddress = a1_48.clientAddress()
+        clientAddress_fields = {
+            'province': '01',
+            'city': '000001',
+            'zipcode': '16001',
+            'streettype': 'ACCE',
+            'street': 'inventat',
+            'streetnumber': '4_ce',
+            'portal': '5_TE2',
+            'staircase': '5_mIh',
+            'floor': '5_e6A',
+            'door': '5_40T',
+        }
+        clientAddress.feed(clientAddress_fields)
+        client_fields = {
+            'document': document,
+            'titulartype': 'F',
+            'cname': name,
+            'telephone': telephone,
+            'email': 'a@a',
+            'clientAddress': clientAddress,
+        }
+        client.feed(client_fields)
+        claimreference_fields = {
+            'wrongattentiontype': '01',
+            'comreferencenum': '0000001',
+            'targetclaimcomreferencenum': '9999998',
+            'conceptcontract': '01',
+            'conceptfacturation': '02',
+            'contact': contact,
+            'nnssexpedient': '45666666',
+            'fraudrecordnum': '888888888',
+            'incidentperiod': incidentperiod,
+            'invoicenumber': 'F5555',
+            'incidentlocation': incidentlocation,
+            'reading': reading,
+            'incident': incident,
+            'client': client,
+            'claimedcompensation': '520176666.24',
+            'iban': 'ES0000000000000000000000000000000',
+        }
+        claimreference.feed(claimreference_fields)
+        claimreferencelist = a1_48.claimreferencelist()
+        claimreference_fields = {
+            'claimreference_list': [claimreference],
+        }
+        claimreferencelist.feed(claimreference_fields)
+
+        # Registerdoclist
+        rd1 = a1_44.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-02',
+            'doctype': 'CC',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd1.feed(registro_doc_fields)
+        rd2 = a1_05.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-03',
+            'doctype': '01',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': 'Comments'
+        }
+        rd2.feed(registro_doc_fields)
+        registerdoclist = a1_48.Registerdoclist()
+        registerdoclist_fields = {
+            'registerdoclist': [rd1, rd2],
+        }
+        registerdoclist.feed(registerdoclist_fields)
+
+        a148_fields = {
+            'reqdate': '2018-05-01',
+            'reqhour': '13:00:00',
+            'comreferencenum': '000123456789',
+            'claimertype': '01',
+            'claimer': claimer,
+            'claimtype': '01',
+            'claimsubtype': '001',
+            'originreference': 'AB999888',
+            'claimreferencelist': claimreferencelist,
+            'cups': 'ES1234000000000001JN',
+            'legallimitdate': '2018-09-21',
+            'priority': '1',
+            'extrainfo': 'comentarios extra',
+            'registerdoclist': registerdoclist,
+        }
+        a148.feed(a148_fields)
+        mensaje_a148_fields = {
+            'heading': heading,
+            'a1': a148,
+        }
+        mensaje.feed(mensaje_a148_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_a148.read())
