@@ -82,6 +82,231 @@ class A1_48(A1_03):
         else:
             return False
 
+    # step a25
+    @property
+    def sequential(self):
+        tree = '{0}.sequential'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def interventiontype(self):
+        tree = '{0}.interventiontype'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def newclaimtype(self):
+        tree = '{0}.newclaimtype'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def newclaimsubtype(self):
+        tree = '{0}.newclaimsubtype'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def visitdate(self):
+        tree = '{0}.visitdate'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def visithour(self):
+        tree = '{0}.visithour'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def informationtype(self):
+        tree = '{0}.informationtype'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def resultreasonintervention(self):
+        tree = '{0}.resultreasonintervention'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def informationlist(self):
+        data = []
+        obj = get_rec_attr(self.obj, self._header, False)
+        if (hasattr(obj, 'informationlist') and
+                hasattr(obj.informationlist, 'information')):
+            for d in obj.informationlist.information:
+                data.append(information(d))
+        return data
+
+    # step a26
+    @property
+    def informationdate(self):
+        tree = '{0}.informationdate'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def variableinflist(self):
+        data = []
+        obj = get_rec_attr(self.obj, self._header, False)
+        if (hasattr(obj, 'variableinflist') and
+                hasattr(obj.variableinflist, 'variableinf')):
+            for d in obj.variableinflist.variableinf:
+                data.append(variableinf(d))
+        return data
+
+    # step a3
+    @property
+    def resolutiondetail(self):
+        tree = '{0}.resolutiondetail'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def resolutiondetaildesc(self):
+        tree = '{0}.resolutiondetaildesc'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def creditedcompensation(self):
+        tree = '{0}.creditedcompensation'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def anomalyfraudrecordnum(self):
+        tree = '{0}.anomalyfraudrecordnum'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def movementdate(self):
+        tree = '{0}.movementdate'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+
+class variableinf(object):
+
+    def __init__(self, data):
+        self.obj = data
+
+    @property
+    def moreinformationtype(self):
+        tree = 'moreinformationtype'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def description(self):
+        tree = 'description'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def variabletype(self):
+        tree = 'variabletype'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def variablevalue(self):
+        tree = 'variablevalue'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+
+
+class information(object):
+
+    def __init__(self, data):
+        self.obj = data
+
+    @property
+    def moreinformation(self):
+        tree = 'moreinformation'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def moreinformationtype(self):
+        tree = 'moreinformationtype'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def limitsenddate(self):
+        tree = 'limitsenddate'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
 
 class client(object):
 
@@ -417,6 +642,15 @@ class claimreference(object):
 
     def __init__(self, data):
         self.obj = data
+
+    @property
+    def numfactura(self):
+        tree = 'numfactura'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
 
     @property
     def wrongattentiontype(self):

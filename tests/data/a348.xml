@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sctdapplication xmlns="http://localhost/sctd/A348">
+    <heading>
+        <dispatchingcode>GML</dispatchingcode>
+        <dispatchingcompany>1234</dispatchingcompany>
+        <destinycompany>4321</destinycompany>
+        <communicationsdate>2018-05-01</communicationsdate>
+        <communicationshour>12:00:00</communicationshour>
+        <processcode>48</processcode>
+        <messagetype>A3</messagetype>
+    </heading>
+    <a3>
+        <reqdate>2018-09-24</reqdate>
+        <reqhour>17:04:56</reqhour>
+        <responsedate>2018-09-24</responsedate>
+        <responsehour>17:04:56</responsehour>
+        <comreferencenum>123456789</comreferencenum>
+        <claimtype>01</claimtype>
+        <claimsubtype>001</claimsubtype>
+        <cups>ES1234000000000001JN</cups>
+        <srcode>55</srcode>
+        <result>01</result>
+        <resultdesc>Procedente / Favorable</resultdesc>
+        <resolutiondetail>0010101</resolutiondetail>
+        <resolutiondetaildesc>Se piden disculpas</resolutiondetaildesc>
+        <reqdescription>rdesc</reqdescription>
+        <creditedcompensation>88.02</creditedcompensation>
+        <anomalyfraudrecordnum>885522</anomalyfraudrecordnum>
+        <movementdate>2018-09-24</movementdate>
+        <extrainfo>extra</extrainfo>
+        <registerdoclist>
+            <registerdoc>
+                <date>2018-09-24</date>
+                <doctype>CC</doctype>
+                <url>gasal@matalas</url>
+                <extrainfo>coments</extrainfo>
+            </registerdoc>
+        </registerdoclist>
+    </a3>
+</sctdapplication>

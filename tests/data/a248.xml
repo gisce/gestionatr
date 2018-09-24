@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sctdapplication xmlns="http://localhost/sctd/A248">
+    <heading>
+        <dispatchingcode>GML</dispatchingcode>
+        <dispatchingcompany>1234</dispatchingcompany>
+        <destinycompany>4321</destinycompany>
+        <communicationsdate>2018-05-01</communicationsdate>
+        <communicationshour>12:00:00</communicationshour>
+        <processcode>48</processcode>
+        <messagetype>A2</messagetype>
+    </heading>
+    <a2>
+        <reqcode>0123456789</reqcode>
+        <reqdate>2018-09-24</reqdate>
+        <reqhour>15:01:41</reqhour>
+        <responsedate>2018-05-01</responsedate>
+        <responsehour>13:00:00</responsehour>
+        <comreferencenum>000123456789</comreferencenum>
+        <claimtype>01</claimtype>
+        <claimsubtype>001</claimsubtype>
+        <cups>ES1234000000000001JN</cups>
+        <result>01</result>
+        <resultdesc>Aceptada</resultdesc>
+        <resultreason>R01</resultreason>
+        <resultreasondesc>Cliente suministrado desde planta satélite.</resultreasondesc>
+        <srcode>00010</srcode>
+        <extrainfo>comentarios extras</extrainfo>
+    </a2>
+</sctdapplication>
