@@ -3143,8 +3143,10 @@ class test_a148(unittest.TestCase):
 
     def setUp(self):
         self.xml_a148 = open(get_data("a148.xml"), "r")
+        self.xml_a248 = open(get_data("a248.xml"), "r")
 
     def tearDown(self):
+        self.xml_a148.close()
         self.xml_a148.close()
 
     def test_a148(self):
@@ -3235,3 +3237,23 @@ class test_a148(unittest.TestCase):
         self.assertEqual(registerdoc.url, u'http://www.gasalmatalas.com')
         self.assertEqual(registerdoc.extrainfo, u'Comments')
 
+    def test_a248(self):
+        a248 = A1_48(self.xml_a248)
+        a248.parse_xml()
+        self.assertEqual(a248.comreferencenum, u'000123456789')
+        self.assertEqual(a248.cups, u'ES1234000000000001JN')
+        self.assertEqual(a248.reqcode, u"0123456789")
+        self.assertEqual(a248.reqdate, u"2018-09-24")
+        self.assertEqual(a248.reqhour, u"15:01:41")
+        self.assertEqual(a248.responsedate, u"2018-05-01")
+        self.assertEqual(a248.responsehour, u"13:00:00")
+        self.assertEqual(a248.comreferencenum, u"000123456789")
+        self.assertEqual(a248.claimtype, u"01")
+        self.assertEqual(a248.claimsubtype, u"001")
+        self.assertEqual(a248.cups, u"ES1234000000000001JN")
+        self.assertEqual(a248.result, u"01")
+        self.assertEqual(a248.resultdesc, u"Aceptada")
+        self.assertEqual(a248.resultreason, u"R01")
+        self.assertEqual(a248.resultreasondesc, u"Cliente suministrado desde planta satélite.")
+        self.assertEqual(a248.srcode, u"00010")
+        self.assertEqual(a248.extrainfo, u"comentarios extras")
