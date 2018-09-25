@@ -2,10 +2,10 @@
 from message_gas import MessageGas
 from Deadlines import ProcessDeadline, DeadLine, Workdays, Naturaldays
 from gestionatr.utils import get_rec_attr
-from A1_03 import *
+from A1_04 import *
 
 
-class A1_48(A1_03):
+class A1_48(A1_04):
 
     steps = []
 

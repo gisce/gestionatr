@@ -3249,6 +3249,7 @@ class test_A1_04(unittest.TestCase):
         self.assertEqual(a404.result, '13')
         self.assertEqual(a404.resultdesc, 'No Realizada')
 
+
 class test_A1_48(unittest.TestCase):
 
     def setUp(self):
@@ -3535,6 +3536,116 @@ class test_A1_48(unittest.TestCase):
         self.assertEqual(registerdoc.doctype, u"CC")
         self.assertEqual(registerdoc.url, u"gasal@matalas")
         self.assertEqual(registerdoc.extrainfo, u"coments")
+
+class test_A1_04(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a204 = open(get_data("a204.xml"), "r")
+        self.xml_a304 = open(get_data("a304.xml"), "r")
+        self.xml_a404 = open(get_data("a404.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a204.close()
+        self.xml_a304.close()
+        self.xml_a404.close()
+
+    def test_a204(self):
+        a204 = A1_04(self.xml_a204)
+        a204.parse_xml()
+
+        self.assertEqual(a204.reqcode, '0123456789')
+        self.assertEqual(a204.comreferencenum, '000123456789')
+        self.assertEqual(a204.responsedate, '2018-05-01')
+        self.assertEqual(a204.responsehour, '13:00:00')
+        self.assertEqual(a204.result, '01')
+        self.assertEqual(a204.resultdesc, 'Aceptada')
+        self.assertEqual(a204.nationality, 'ES')
+        self.assertEqual(a204.documenttype, '01')
+        self.assertEqual(a204.documentnum, '11111111H')
+        self.assertEqual(a204.cups, 'ES1234000000000001JN')
+        self.assertEqual(a204.cancelreason, '04')
+        self.assertEqual(a204.newmodeffectdate, '04')
+        self.assertEqual(a204.foreseentransferdate, '2018-06-01')
+        self.assertEqual(
+            a204.extrainfo,
+            u'Información adicional con la ubicación del tesoro de Mary Read'
+        )
+
+    def test_a304(self):
+        a304 = A1_04(self.xml_a304)
+        a304.parse_xml()
+
+        self.assertEqual(a304.reqcode, '0123456789')
+        self.assertEqual(a304.comreferencenum, '000123456789')
+        self.assertEqual(a304.responsedate, '2018-05-01')
+        self.assertEqual(a304.responsehour, '13:00:00')
+        self.assertEqual(a304.titulartype, 'F')
+        self.assertEqual(a304.nationality, 'ES')
+        self.assertEqual(a304.documenttype, '01')
+        self.assertEqual(a304.documentnum, '11111111H')
+        self.assertEqual(a304.result, '09')
+        self.assertEqual(a304.resultdesc, 'Realizada')
+        self.assertEqual(a304.activationtype, '001')
+        self.assertEqual(a304.activationtypedesc, 'Realizada puesta en servicio')
+        self.assertEqual(a304.cups, 'ES1234000000000001JN')
+        self.assertEqual(a304.atrcode, '000111222333444555666777')
+
+        self.assertEqual(a304.operationnum, '4444448877787879894898189881848844894894')
+        self.assertEqual(a304.moreinformation, 'N')
+        self.assertEqual(a304.transfereffectivedate, '2018-07-01')
+        self.assertEqual(
+            a304.extrainfo,
+            u'Información adicional con la ubicación del tesoro de Mary Read'
+        )
+
+        counter = a304.counterlist[0]
+
+        self.assertEqual(counter.countermodel, u"marca1")
+        self.assertEqual(counter.countertype, u"tipo1")
+        self.assertEqual(counter.counternumber, u"B123456")
+        self.assertEqual(counter.counterproperty, u"04")
+        self.assertEqual(counter.reallecture, u"2000")
+        self.assertEqual(counter.counterpressure, u"54321.123")
+
+        counter2 = a304.counterlist[1]
+
+        self.assertEqual(counter2.countermodel, u"marca2")
+        self.assertEqual(counter2.countertype, u"tipo2")
+        self.assertEqual(counter2.counternumber, u"C123456")
+        self.assertEqual(counter2.counterproperty, u"06")
+        self.assertEqual(counter2.reallecture, u"3000")
+        self.assertEqual(counter2.counterpressure, u"13245.321")
+
+        corrector = a304.correctorlist[0]
+        self.assertEqual(corrector.correctedlecture, u'2200')
+        self.assertEqual(corrector.correctormodel, u'modelo1')
+        self.assertEqual(corrector.correctornumber, u'D123456')
+        self.assertEqual(corrector.correctorproperty, u'01')
+        self.assertEqual(corrector.correctortype, u'01')
+
+        corrector2 = a304.correctorlist[1]
+        self.assertEqual(corrector2.correctedlecture, u'3300')
+        self.assertEqual(corrector2.correctormodel, u'modelo2')
+        self.assertEqual(corrector2.correctornumber, u'E654321')
+        self.assertEqual(corrector2.correctorproperty, u'02')
+        self.assertEqual(corrector2.correctortype, u'02')
+
+        self.assertEqual(len(a304.counterlist), 2)
+
+    def test_a404(self):
+        a404 = A1_04(self.xml_a404)
+        a404.parse_xml()
+
+        self.assertEqual(a404.reqcode, '0123456789')
+        self.assertEqual(a404.comreferencenum, '000123456789')
+        self.assertEqual(a404.responsedate, '2018-05-01')
+        self.assertEqual(a404.responsehour, '13:00:00')
+        self.assertEqual(a404.titulartype, 'F')
+        self.assertEqual(a404.nationality, 'ES')
+        self.assertEqual(a404.documenttype, '01')
+        self.assertEqual(a404.documentnum, '11111111H')
+        self.assertEqual(a404.result, '13')
+        self.assertEqual(a404.resultdesc, 'No Realizada')
 
         self.assertEqual(a404.cups, 'ES1234000000000001JN')
 
