@@ -17,3 +17,4 @@ from A1_02 import A1_02
 from A1_05 import A1_05
 from A1_44 import A1_44
 from A1_03 import A1_03
+from A1_04 import A1_04
