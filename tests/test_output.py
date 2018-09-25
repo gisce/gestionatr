@@ -16,6 +16,7 @@ from gestionatr.output.messages import sw_a1_41 as a1_41
 from gestionatr.output.messages import sw_a1_02 as a1_02
 from gestionatr.output.messages import sw_a1_05 as a1_05
 from gestionatr.output.messages import sw_a1_44 as a1_44
+from gestionatr.output.messages import sw_a1_04 as a1_04
 from gestionatr.output.messages import sw_a1_03 as a1_03
 from gestionatr.output.messages import sw_a1_48 as a1_48
 
@@ -3215,6 +3216,64 @@ class test_A1_03(unittest.TestCase):
         assertXmlEqual(xml, self.xml_a103.read())
 
 
+class test_A1_04(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a104 = open(get_data("a104.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a104.close()
+
+    def test_create_a104(self):
+        # MensajeA104
+        mensaje_a104 = a1_04.MensajeA104()
+
+        # Heading
+        heading = a1_04.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '4321',
+            'destinycompany': '1234',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '04',
+            'messagetype': 'A1'
+        }
+        heading.feed(heading_fields)
+
+        # A104
+        a104 = a1_04.A104()
+
+        a104_fields = {
+            'comreferencenum': '000123456789',
+            'reqdate': '2018-05-01',
+            'reqhour': '12:00:00',
+            'titulartype': 'F',
+            'nationality': 'ES',
+            'documenttype': '07',
+            'documentnum': '11111111H',
+            'cups': 'ES1234000000000001JN',
+            'cancelreason': '04',
+            'modeffectdate': '03',
+            'reqcanceldate': '2018-03-08',
+            'contactphonenumber': '555123456',
+            'extrainfo': (
+                'Información adicional con la ubicación '
+                'del tesoro de Mary Read'
+            )
+        }
+
+        a104.feed(a104_fields)
+
+        mensaje_a104_fields = {
+            'heading': heading,
+            'a104': a104,
+        }
+        mensaje_a104.feed(mensaje_a104_fields)
+        mensaje_a104.build_tree()
+        xml = str(mensaje_a104)
+        assertXmlEqual(xml, self.xml_a104.read())
+
 class test_A1_48(unittest.TestCase):
 
     def setUp(self):
@@ -3445,3 +3504,4 @@ class test_A1_48(unittest.TestCase):
         mensaje.build_tree()
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_a148.read())
+

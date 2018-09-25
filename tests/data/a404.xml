@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sctdapplication xmlns="http://localhost/sctd/A404">
+    <heading>
+        <dispatchingcode>GML</dispatchingcode>
+        <dispatchingcompany>1234</dispatchingcompany>
+        <destinycompany>4321</destinycompany>
+        <communicationsdate>2018-05-01</communicationsdate>
+        <communicationshour>12:00:00</communicationshour>
+        <processcode>04</processcode>
+        <messagetype>A4</messagetype>
+    </heading>
+    <a404>
+        <reqcode>0123456789</reqcode>
+        <comreferencenum>000123456789</comreferencenum>
+        <responsedate>2018-05-01</responsedate>
+        <responsehour>13:00:00</responsehour>
+        <titulartype>F</titulartype>
+        <nationality>ES</nationality>
+        <documenttype>01</documenttype>
+        <documentnum>11111111H</documentnum>
+        <result>13</result>
+        <resultdesc>No Realizada</resultdesc>
+        <resultreason>R32</resultreason>
+        <resultreasondesc>Fecha efecto solicitada anterior al dia actual.</resultreasondesc>
+        <cups>ES1234000000000001JN</cups>
+        <operationnum>4444448877787879894898189881848844894894</operationnum>
+        <extrainfo>Información adicional con la ubicación del tesoro de Mary Read</extrainfo>
+        <registerdoclist>
+            <registerdoc>
+                <date>2018-05-02</date>
+                <doctype>03</doctype>
+                <url>http://www.gasalmatalas.com</url>
+                <extrainfo>404 page not found</extrainfo>
+            </registerdoc>
+            <registerdoc>
+                <date>2018-05-03</date>
+                <doctype>01</doctype>
+                <url>http://www.gasalmatalas.com</url>
+                <extrainfo>404 page not found</extrainfo>
+            </registerdoc>
+        </registerdoclist>
+    </a404>
+</sctdapplication>

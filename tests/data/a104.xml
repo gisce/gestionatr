@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sctdapplication xmlns="http://localhost/sctd/A104">
+    <heading>
+        <dispatchingcode>GML</dispatchingcode>
+        <dispatchingcompany>4321</dispatchingcompany>
+        <destinycompany>1234</destinycompany>
+        <communicationsdate>2018-05-01</communicationsdate>
+        <communicationshour>12:00:00</communicationshour>
+        <processcode>04</processcode>
+        <messagetype>A1</messagetype>
+    </heading>
+    <a104>
+        <comreferencenum>000123456789</comreferencenum>
+        <reqdate>2018-05-01</reqdate>
+        <reqhour>12:00:00</reqhour>
+        <titulartype>F</titulartype>
+        <nationality>ES</nationality>
+        <documenttype>07</documenttype>
+        <documentnum>11111111H</documentnum>
+        <cups>ES1234000000000001JN</cups>
+        <cancelreason>04</cancelreason>
+        <modeffectdate>03</modeffectdate>
+        <reqcanceldate>2018-03-08</reqcanceldate>
+        <contactphonenumber>555123456</contactphonenumber>
+        <extrainfo>Información adicional con la ubicación del tesoro de Mary Read</extrainfo>
+    </a104>
+</sctdapplication>
