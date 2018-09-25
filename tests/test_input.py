@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 from . import unittest
 from .utils import get_data
-from gestionatr.input.messages import C1, C2, A3, B1, M1, D1, W1, Q1, R1, F1, Deadlines, A1_41, A1_02, A1_05, B7031, B7032, A1_44, A1_03, A1_04
+from gestionatr.input.messages import C1, C2, A3, B1, M1, D1, W1, Q1, R1, F1, Deadlines, \
+    A1_41, A1_02, A1_05, B7031, B7032, A1_44, A1_03, A1_48, A1_04
 from gestionatr.input.messages.F1 \
     import agrupar_lectures_per_data, obtenir_data_inici_i_final
 
@@ -3137,6 +3138,404 @@ class test_A1_03(unittest.TestCase):
         self.assertEqual(a203.documentnum, u"ES11111111H")
         self.assertEqual(a203.annulmentreason, u"002")
 
+
+class test_A1_04(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a204 = open(get_data("a204.xml"), "r")
+        self.xml_a304 = open(get_data("a304.xml"), "r")
+        self.xml_a404 = open(get_data("a404.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a204.close()
+        self.xml_a304.close()
+        self.xml_a404.close()
+
+    def test_a204(self):
+        a204 = A1_04(self.xml_a204)
+        a204.parse_xml()
+
+        self.assertEqual(a204.reqcode, '0123456789')
+        self.assertEqual(a204.comreferencenum, '000123456789')
+        self.assertEqual(a204.responsedate, '2018-05-01')
+        self.assertEqual(a204.responsehour, '13:00:00')
+        self.assertEqual(a204.result, '01')
+        self.assertEqual(a204.resultdesc, 'Aceptada')
+        self.assertEqual(a204.nationality, 'ES')
+        self.assertEqual(a204.documenttype, '01')
+        self.assertEqual(a204.documentnum, '11111111H')
+        self.assertEqual(a204.cups, 'ES1234000000000001JN')
+        self.assertEqual(a204.cancelreason, '04')
+        self.assertEqual(a204.newmodeffectdate, '04')
+        self.assertEqual(a204.foreseentransferdate, '2018-06-01')
+        self.assertEqual(
+            a204.extrainfo,
+            u'Información adicional con la ubicación del tesoro de Mary Read'
+        )
+
+    def test_a304(self):
+        a304 = A1_04(self.xml_a304)
+        a304.parse_xml()
+
+        self.assertEqual(a304.reqcode, '0123456789')
+        self.assertEqual(a304.comreferencenum, '000123456789')
+        self.assertEqual(a304.responsedate, '2018-05-01')
+        self.assertEqual(a304.responsehour, '13:00:00')
+        self.assertEqual(a304.titulartype, 'F')
+        self.assertEqual(a304.nationality, 'ES')
+        self.assertEqual(a304.documenttype, '01')
+        self.assertEqual(a304.documentnum, '11111111H')
+        self.assertEqual(a304.result, '09')
+        self.assertEqual(a304.resultdesc, 'Realizada')
+        self.assertEqual(a304.activationtype, '001')
+        self.assertEqual(a304.activationtypedesc, 'Realizada puesta en servicio')
+        self.assertEqual(a304.cups, 'ES1234000000000001JN')
+        self.assertEqual(a304.atrcode, '000111222333444555666777')
+
+        self.assertEqual(a304.operationnum, '4444448877787879894898189881848844894894')
+        self.assertEqual(a304.moreinformation, 'N')
+        self.assertEqual(a304.transfereffectivedate, '2018-07-01')
+        self.assertEqual(
+            a304.extrainfo,
+            u'Información adicional con la ubicación del tesoro de Mary Read'
+        )
+
+        counter = a304.counterlist[0]
+
+        self.assertEqual(counter.countermodel, u"marca1")
+        self.assertEqual(counter.countertype, u"tipo1")
+        self.assertEqual(counter.counternumber, u"B123456")
+        self.assertEqual(counter.counterproperty, u"04")
+        self.assertEqual(counter.reallecture, u"2000")
+        self.assertEqual(counter.counterpressure, u"54321.123")
+
+        counter2 = a304.counterlist[1]
+
+        self.assertEqual(counter2.countermodel, u"marca2")
+        self.assertEqual(counter2.countertype, u"tipo2")
+        self.assertEqual(counter2.counternumber, u"C123456")
+        self.assertEqual(counter2.counterproperty, u"06")
+        self.assertEqual(counter2.reallecture, u"3000")
+        self.assertEqual(counter2.counterpressure, u"13245.321")
+
+        corrector = a304.correctorlist[0]
+        self.assertEqual(corrector.correctedlecture, u'2200')
+        self.assertEqual(corrector.correctormodel, u'modelo1')
+        self.assertEqual(corrector.correctornumber, u'D123456')
+        self.assertEqual(corrector.correctorproperty, u'01')
+        self.assertEqual(corrector.correctortype, u'01')
+
+        corrector2 = a304.correctorlist[1]
+        self.assertEqual(corrector2.correctedlecture, u'3300')
+        self.assertEqual(corrector2.correctormodel, u'modelo2')
+        self.assertEqual(corrector2.correctornumber, u'E654321')
+        self.assertEqual(corrector2.correctorproperty, u'02')
+        self.assertEqual(corrector2.correctortype, u'02')
+
+        self.assertEqual(len(a304.counterlist), 2)
+
+    def test_a404(self):
+        a404 = A1_04(self.xml_a404)
+        a404.parse_xml()
+
+        self.assertEqual(a404.reqcode, '0123456789')
+        self.assertEqual(a404.comreferencenum, '000123456789')
+        self.assertEqual(a404.responsedate, '2018-05-01')
+        self.assertEqual(a404.responsehour, '13:00:00')
+        self.assertEqual(a404.titulartype, 'F')
+        self.assertEqual(a404.nationality, 'ES')
+        self.assertEqual(a404.documenttype, '01')
+        self.assertEqual(a404.documentnum, '11111111H')
+        self.assertEqual(a404.result, '13')
+        self.assertEqual(a404.resultdesc, 'No Realizada')
+
+
+class test_A1_48(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a148 = open(get_data("a148.xml"), "r")
+        self.xml_a248 = open(get_data("a248.xml"), "r")
+        self.xml_a2548 = open(get_data("a2548.xml"), "r")
+        self.xml_a2648 = open(get_data("a2648.xml"), "r")
+        self.xml_a348 = open(get_data("a348.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a148.close()
+        self.xml_a248.close()
+        self.xml_a2548.close()
+        self.xml_a2648.close()
+        self.xml_a348.close()
+
+    def test_a148(self):
+        a148 = A1_48(self.xml_a148)
+        a148.parse_xml()
+        self.assertEqual(a148.comreferencenum, u'000123456789')
+        self.assertEqual(a148.cups, u'ES1234000000000001JN')
+
+        self.assertEqual(a148.claimertype, u"01")
+        claimer = a148.claimer
+        claimerid = claimer.claimerid
+        self.assertEqual(claimerid.claimerdocumenttype, u"01")
+        self.assertEqual(claimerid.claimerdocumentnum, u"ES00000000T")
+        claimername = claimer.claimername
+        self.assertEqual(claimername.claimerfirstname, u"gas")
+        self.assertEqual(claimername.claimerlastname, u"al")
+        self.assertEqual(claimername.claimersecondname, u"matalas")
+        claimertelephone = claimer.claimertelephone
+        self.assertEqual(claimertelephone.claimerprefixtel1, u"34")
+        self.assertEqual(claimertelephone.claimertelephone1, u"999888777")
+        self.assertEqual(claimer.claimeremail, u"gas@matalas")
+        self.assertEqual(a148.claimtype, u"01")
+        self.assertEqual(a148.claimsubtype, u"001")
+        self.assertEqual(a148.originreference, u"AB999888")
+        claimreference = a148.claimreferencelist[0]
+        self.assertEqual(claimreference.wrongattentiontype, u"01")
+        self.assertEqual(claimreference.comreferencenum, u"0000001")
+        self.assertEqual(claimreference.targetclaimcomreferencenum, u"9999998")
+        self.assertEqual(claimreference.conceptcontract, u"01")
+        self.assertEqual(claimreference.conceptfacturation, u"02")
+        contact = claimreference.contact
+        self.assertEqual(contact.contactname, u"mortdegana")
+        contacttelephone = contact.contacttelephone
+        self.assertEqual(contacttelephone.telephoneprefix, u"+34")
+        self.assertEqual(contacttelephone.telephonenumber, u"666555444")
+        self.assertEqual(contact.contactemail, u"matalas@gas")
+        self.assertEqual(claimreference.nnssexpedient, u"45666666")
+        self.assertEqual(claimreference.fraudrecordnum, u"888888888")
+        incidentperiod = claimreference.incidentperiod
+        self.assertEqual(incidentperiod.datefrom, u"2018-09-21")
+        self.assertEqual(incidentperiod.dateto, u"2018-09-21")
+        self.assertEqual(claimreference.invoicenumber, u"F5555")
+        incidentlocation = claimreference.incidentlocation
+        self.assertEqual(incidentlocation.incidentlocationdesc, u"calle pequeña")
+        self.assertEqual(incidentlocation.incidentlocationprovince, u"01")
+        self.assertEqual(incidentlocation.incidentlocationcity, u"000001")
+        self.assertEqual(incidentlocation.incidentlocationcitysubdivision, u"20AA")
+        self.assertEqual(incidentlocation.incidentlocationzipcode, u"17888")
+        reading = claimreference.reading
+        self.assertEqual(reading.readingdate, u"2018-09-21")
+        self.assertEqual(reading.readingvalue, u"4.89")
+        incident = claimreference.incident
+        self.assertEqual(incident.incidentdate, u"2018-09-21")
+        client = claimreference.client
+        document = client.document
+        self.assertEqual(document.documenttype, u"01")
+        self.assertEqual(document.documentnum, u"ES11111111T")
+        self.assertEqual(client.titulartype, u"F")
+        name = client.name
+        self.assertEqual(name.firstname, u"nom")
+        self.assertEqual(name.familyname1, u"cognom")
+        self.assertEqual(name.familyname2, u"cognom 2")
+        telephone = client.telephone
+        self.assertEqual(telephone.telephoneprefix, u"34")
+        self.assertEqual(telephone.telephonenumber, u"999111222")
+        self.assertEqual(client.email, u"a@a")
+        clientaddress = client.clientaddress
+        self.assertEqual(clientaddress.province, u"01")
+        self.assertEqual(clientaddress.city, u"000001")
+        self.assertEqual(clientaddress.zipcode, u"16001")
+        self.assertEqual(clientaddress.streettype, u"ACCE")
+        self.assertEqual(clientaddress.street, u"inventat")
+        self.assertEqual(clientaddress.streetnumber, u"4_ce")
+        self.assertEqual(clientaddress.portal, u"5_TE2")
+        self.assertEqual(clientaddress.staircase, u"5_mIh")
+        self.assertEqual(clientaddress.floor, u"5_e6A")
+        self.assertEqual(clientaddress.door, u"5_40T")
+        self.assertEqual(claimreference.claimedcompensation, u"520176666.24")
+        self.assertEqual(claimreference.iban, u"ES0000000000000000000000000000000")
+        self.assertEqual(a148.cups, u"ES1234000000000001JN")
+        self.assertEqual(a148.legallimitdate, u"2018-09-21")
+        self.assertEqual(a148.priority, u"1")
+        self.assertEqual(a148.extrainfo, u"comentarios extra")
+        self.assertEqual(len(a148.registerdoclist), 2)
+        registerdoc = a148.registerdoclist[1]
+        self.assertEqual(registerdoc.date, u'2018-05-03')
+        self.assertEqual(registerdoc.doctype, u'01')
+        self.assertEqual(registerdoc.url, u'http://www.gasalmatalas.com')
+        self.assertEqual(registerdoc.extrainfo, u'Comments')
+
+    def test_a248(self):
+        a248 = A1_48(self.xml_a248)
+        a248.parse_xml()
+        self.assertEqual(a248.comreferencenum, u'000123456789')
+        self.assertEqual(a248.cups, u'ES1234000000000001JN')
+        self.assertEqual(a248.reqcode, u"0123456789")
+        self.assertEqual(a248.reqdate, u"2018-09-24")
+        self.assertEqual(a248.reqhour, u"15:01:41")
+        self.assertEqual(a248.responsedate, u"2018-05-01")
+        self.assertEqual(a248.responsehour, u"13:00:00")
+        self.assertEqual(a248.comreferencenum, u"000123456789")
+        self.assertEqual(a248.claimtype, u"01")
+        self.assertEqual(a248.claimsubtype, u"001")
+        self.assertEqual(a248.cups, u"ES1234000000000001JN")
+        self.assertEqual(a248.result, u"01")
+        self.assertEqual(a248.resultdesc, u"Aceptada")
+        self.assertEqual(a248.resultreason, u"R01")
+        self.assertEqual(a248.resultreasondesc, u"Cliente suministrado desde planta satélite.")
+        self.assertEqual(a248.srcode, u"00010")
+        self.assertEqual(a248.extrainfo, u"comentarios extras")
+
+    def test_a2548(self):
+        a2548 = A1_48(self.xml_a2548)
+        a2548.parse_xml()
+        self.assertEqual(a2548.reqcode, u"123456789")
+        self.assertEqual(a2548.responsedate, u"2018-09-24")
+        self.assertEqual(a2548.responsehour, u"15:25:18")
+        self.assertEqual(a2548.comreferencenum, u"987654321")
+        self.assertEqual(a2548.sequential, u"01")
+        self.assertEqual(a2548.claimtype, u"01")
+        self.assertEqual(a2548.claimsubtype, u"001")
+        self.assertEqual(a2548.cups, u"ES1234000000000001JN")
+        self.assertEqual(a2548.srcode, u"99988")
+        self.assertEqual(a2548.interventiontype, u"01")
+        self.assertEqual(a2548.newclaimtype, u"01")
+        self.assertEqual(a2548.newclaimsubtype, u"001")
+        self.assertEqual(a2548.operationnum, u"741")
+        self.assertEqual(a2548.visitdate, u"2018-09-24")
+        self.assertEqual(a2548.visithour, u"15:25:18")
+        self.assertEqual(a2548.informationtype, u"002")
+        self.assertEqual(a2548.resultreasonintervention, u"R01")
+        self.assertEqual(a2548.interventiondate, u"2018-09-24")
+        self.assertEqual(a2548.interventionhourfrom, u"15:25:18")
+        self.assertEqual(a2548.interventionhourto, u"15:25:18")
+        self.assertEqual(a2548.resultinspection, u"01")
+        self.assertEqual(a2548.visitnumber, u"590")
+        self.assertEqual(a2548.extrainfo, u"coments")
+        self.assertEqual(a2548.conceptnumber, u"74")
+        concept = a2548.conceptlist[0]
+        self.assertEqual(concept.level, u"1")
+        self.assertEqual(concept.code, u"0000")
+        self.assertEqual(concept.description, u"Importe Total Factura")
+        self.assertEqual(concept.periodicity, u"01")
+        self.assertEqual(concept.units, u"185")
+        self.assertEqual(concept.unitimport, u"10534.1")
+        self.assertEqual(concept.import_, u"1240977.69")
+        counter = a2548.counterlist[0]
+        self.assertEqual(counter.countermodel, u"model")
+        self.assertEqual(counter.countertype, u"55")
+        self.assertEqual(counter.counternumber, u"9999")
+        self.assertEqual(counter.counterproperty, u"04")
+        self.assertEqual(counter.reallecture, u"68104264290")
+        self.assertEqual(counter.counterpressure, u"83819.042")
+        defect = a2548.defectlist[0]
+        self.assertEqual(defect.code, u"001")
+        self.assertEqual(defect.description, u"FUGA DE GAS")
+        registerdoc = a2548.registerdoclist[0]
+        self.assertEqual(registerdoc.date, u"2018-09-24")
+        self.assertEqual(registerdoc.doctype, u"CC")
+        self.assertEqual(registerdoc.url, u"gasalatalas.com")
+        self.assertEqual(registerdoc.extrainfo, u"extra")
+        information = a2548.informationlist[0]
+        self.assertEqual(information.moreinformation, u"moer information")
+        self.assertEqual(information.moreinformationtype, u"01")
+        self.assertEqual(information.limitsenddate, u"2018-09-24")
+
+    def test_a2648(self):
+        a2648 = A1_48(self.xml_a2648)
+        a2648.parse_xml()
+        self.assertEqual(a2648.reqcode, u'7777')
+        self.assertEqual(a2648.reqdate, u"2018-05-01")
+        self.assertEqual(a2648.reqhour, u"13:00:00")
+        self.assertEqual(a2648.comreferencenum, u'000123456789')
+        self.assertEqual(a2648.sequential, u'01')
+        self.assertEqual(a2648.cups, u'ES1234000000000001JN')
+        self.assertEqual(a2648.informationdate, u"2018-09-24")
+        self.assertEqual(a2648.informationtype, u"01")
+
+        claimreference = a2648.claimreferencelist[0]
+        self.assertEqual(claimreference.wrongattentiontype, u"01")
+        self.assertEqual(claimreference.comreferencenum, u"0000001")
+        self.assertEqual(claimreference.targetclaimcomreferencenum, u"9999998")
+        self.assertEqual(claimreference.conceptcontract, u"01")
+        self.assertEqual(claimreference.conceptfacturation, u"02")
+        contact = claimreference.contact
+        self.assertEqual(contact.contactname, u"mortdegana")
+        contacttelephone = contact.contacttelephone
+        self.assertEqual(contacttelephone.telephoneprefix, u"+34")
+        self.assertEqual(contacttelephone.telephonenumber, u"666555444")
+        self.assertEqual(contact.contactemail, u"matalas@gas")
+        self.assertEqual(claimreference.nnssexpedient, u"45666666")
+        self.assertEqual(claimreference.fraudrecordnum, u"888888888")
+        incidentperiod = claimreference.incidentperiod
+        self.assertEqual(incidentperiod.datefrom, u"2018-09-21")
+        self.assertEqual(incidentperiod.dateto, u"2018-09-21")
+        self.assertEqual(claimreference.invoicenumber, u"F5555")
+        incidentlocation = claimreference.incidentlocation
+        self.assertEqual(incidentlocation.incidentlocationdesc, u"calle pequeña")
+        self.assertEqual(incidentlocation.incidentlocationprovince, u"01")
+        self.assertEqual(incidentlocation.incidentlocationcity, u"000001")
+        self.assertEqual(incidentlocation.incidentlocationcitysubdivision, u"20AA")
+        self.assertEqual(incidentlocation.incidentlocationzipcode, u"17888")
+        reading = claimreference.reading
+        self.assertEqual(reading.readingdate, u"2018-09-21")
+        self.assertEqual(reading.readingvalue, u"4.89")
+        incident = claimreference.incident
+        self.assertEqual(incident.incidentdate, u"2018-09-21")
+        client = claimreference.client
+        document = client.document
+        self.assertEqual(document.documenttype, u"01")
+        self.assertEqual(document.documentnum, u"ES11111111T")
+        self.assertEqual(client.titulartype, u"F")
+        name = client.name
+        self.assertEqual(name.firstname, u"nom")
+        self.assertEqual(name.familyname1, u"cognom")
+        self.assertEqual(name.familyname2, u"cognom 2")
+        telephone = client.telephone
+        self.assertEqual(telephone.telephoneprefix, u"34")
+        self.assertEqual(telephone.telephonenumber, u"999111222")
+        self.assertEqual(client.email, u"a@a")
+        clientaddress = client.clientaddress
+        self.assertEqual(clientaddress.province, u"01")
+        self.assertEqual(clientaddress.city, u"000001")
+        self.assertEqual(clientaddress.zipcode, u"16001")
+        self.assertEqual(clientaddress.streettype, u"ACCE")
+        self.assertEqual(clientaddress.street, u"inventat")
+        self.assertEqual(clientaddress.streetnumber, u"4_ce")
+        self.assertEqual(clientaddress.portal, u"5_TE2")
+        self.assertEqual(clientaddress.staircase, u"5_mIh")
+        self.assertEqual(clientaddress.floor, u"5_e6A")
+        self.assertEqual(clientaddress.door, u"5_40T")
+        self.assertEqual(claimreference.claimedcompensation, u"520176666.24")
+        self.assertEqual(claimreference.iban, u"ES0000000000000000000000000000000")
+        self.assertEqual(a2648.extrainfo, u"comentarios extra")
+        variableinf = a2648.variableinflist[0]
+        self.assertEqual(variableinf.moreinformationtype, u"01")
+        self.assertEqual(variableinf.description, u"desc")
+        self.assertEqual(variableinf.variabletype, u"01")
+        self.assertEqual(variableinf.variablevalue, u"val")
+        self.assertEqual(len(a2648.registerdoclist), 2)
+        registerdoc = a2648.registerdoclist[1]
+        self.assertEqual(registerdoc.date, u'2018-05-03')
+        self.assertEqual(registerdoc.doctype, u'01')
+        self.assertEqual(registerdoc.url, u'http://www.gasalmatalas.com')
+        self.assertEqual(registerdoc.extrainfo, u'Comments')
+
+    def test_a348(self):
+        a348 = A1_48(self.xml_a348)
+        a348.parse_xml()
+        self.assertEqual(a348.reqdate, u"2018-09-24")
+        self.assertEqual(a348.reqhour, u"17:04:56")
+        self.assertEqual(a348.responsedate, u"2018-09-24")
+        self.assertEqual(a348.responsehour, u"17:04:56")
+        self.assertEqual(a348.comreferencenum, u"123456789")
+        self.assertEqual(a348.claimtype, u"01")
+        self.assertEqual(a348.claimsubtype, u"001")
+        self.assertEqual(a348.cups, u"ES1234000000000001JN")
+        self.assertEqual(a348.srcode, u"55")
+        self.assertEqual(a348.result, u"01")
+        self.assertEqual(a348.resultdesc, u"Procedente / Favorable")
+        self.assertEqual(a348.resolutiondetail, u"0010101")
+        self.assertEqual(a348.resolutiondetaildesc, u"Se piden disculpas")
+        self.assertEqual(a348.reqdescription, u"rdesc")
+        self.assertEqual(a348.creditedcompensation, u"88.02")
+        self.assertEqual(a348.anomalyfraudrecordnum, u"885522")
+        self.assertEqual(a348.movementdate, u"2018-09-24")
+        self.assertEqual(a348.extrainfo, u"extra")
+        registerdoc = a348.registerdoclist[0]
+        self.assertEqual(registerdoc.date, u"2018-09-24")
+        self.assertEqual(registerdoc.doctype, u"CC")
+        self.assertEqual(registerdoc.url, u"gasal@matalas")
+        self.assertEqual(registerdoc.extrainfo, u"coments")
 
 class test_A1_04(unittest.TestCase):
 
