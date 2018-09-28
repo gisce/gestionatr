@@ -262,6 +262,13 @@ SUBTYPES_R101 = [
         'type': '07',
     }),
     ({
+        'min_fields': ['nif_cliente', 'nombre_cliente', 'telefono_contacto',
+                       'cups', 'importe_reclamado'],
+        'code': '033',
+        'name': u'POR URGENCIAS',
+        'type': '08',
+    }),
+    ({
         'min_fields': ['cups', 'codigo_de_solicitud',
                        'concepto_contratacion'],
         'code': '034',
@@ -373,6 +380,36 @@ SUBTYPES_R101 = [
         'code': '049',
         'name': u'FALTA FICHERO MEDIDA',
         'type': '02',
+    }),
+    ({
+        'min_fields': ['cups', 'comentarios', 'num_factura', ''],
+        'code': '050',
+        'name': u'DESACUERDO FACTURACIÓN',
+        'type': '09',
+    }),
+    ({
+        'min_fields': ['nif_cliente', 'nombre_cliente', 'telefono_contacto', 'cups', 'comentarios'],
+        'code': '051',
+        'name': u'CONDUCTA INADECUADA',
+        'type': '09',
+    }),
+    ({
+        'min_fields': ['nif_cliente', 'nombre_cliente', 'telefono_contacto', 'cups', 'comentarios'],
+        'code': '052',
+        'name': u'DISCONFORMIDAD TRABAJOS REALIZADOS',
+        'type': '09',
+    }),
+    ({
+        'min_fields': ['telefono_contacto', 'cups', 'comentarios', 'persona_de_contacto'],
+        'code': '053',
+        'name': u'INCUMPLIMIENTO HORA',
+        'type': '09',
+    }),
+    ({
+        'min_fields': ['nombre_cliente', 'telefono_contacto', 'cups', 'fecha_incidente', 'comentarios'],
+        'code': '054',
+        'name': u'DAÑOS INSPECCIÓN',
+        'type': '09',
     }),
     ({
         'min_fields': ['cups', 'comentarios', 'num_fact'],

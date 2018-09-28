@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from defs import SUBTYPES_R101
 
 TAULA_CATEGORIA_SUJETO = [
     ('COM', 'Comercializadora'),
@@ -3708,3 +3709,5 @@ TIPUS_CONCEPTES = {
     '0017': 'tvariable',
     # '****': 'altres'
 }
+
+SUBTYPES_A1_48 = SUBTYPES_R101[:]
