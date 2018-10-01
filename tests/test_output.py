@@ -3274,13 +3274,16 @@ class test_A1_04(unittest.TestCase):
         xml = str(mensaje_a104)
         assertXmlEqual(xml, self.xml_a104.read())
 
+
 class test_A1_48(unittest.TestCase):
 
     def setUp(self):
         self.xml_a148 = open(get_data("a148.xml"), "r")
+        self.xml_a2648 = open(get_data("a2648.xml"), "r")
 
     def tearDown(self):
         self.xml_a148.close()
+        self.xml_a2648.close()
 
     def test_create_a148(self):
         # A148
@@ -3504,4 +3507,208 @@ class test_A1_48(unittest.TestCase):
         mensaje.build_tree()
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_a148.read())
+
+    def test_create_a2648(self):
+        # A2648
+        mensaje = a1_48.MensajeA2648()
+        heading = a1_48.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '48',
+            'messagetype': 'A26'
+        }
+        heading.feed(heading_fields)
+
+        # A2648
+        a2648 = a1_48.A2648()
+
+        # claimreference
+        claimreference = a1_48.claimreference()
+        # contact
+        contact = a1_48.contact()
+        # contacttelephone
+        contacttelephone = a1_48.contacttelephone()
+        contacttelephone_fields = {
+            'telephoneprefix': '+34',
+            'telephonenumber': '666555444',
+        }
+        contacttelephone.feed(contacttelephone_fields)
+        contact_fields = {
+            'contactname': 'mortdegana',
+            'contacttelephone': contacttelephone,
+            'contactemail': 'matalas@gas',
+        }
+        contact.feed(contact_fields)
+        # incidentperiod
+        incidentperiod = a1_48.incidentperiod()
+        incidentperiod_fields = {
+            'datefrom': '2018-09-21',
+            'dateto': '2018-09-21',
+        }
+        incidentperiod.feed(incidentperiod_fields)
+        # incidentlocation
+        incidentlocation = a1_48.incidentlocation()
+        incidentlocation_fields = {
+            'incidentlocationdesc': 'calle pequeña',
+            'incidentlocationprovince': '01',
+            'incidentlocationcity': '000001',
+            'incidentlocationcitysubdivision': '20AA',
+            'incidentlocationzipcode': '17888',
+        }
+        incidentlocation.feed(incidentlocation_fields)
+        # reading
+        reading = a1_48.reading()
+        reading_fields = {
+            'readingdate': '2018-09-21',
+            'readingvalue': '4.89',
+        }
+        reading.feed(reading_fields)
+        # incident
+        incident = a1_48.incident()
+        incident_fields = {
+            'incidentdate': '2018-09-21',
+        }
+        incident.feed(incident_fields)
+        # client
+        client = a1_48.client()
+        # document
+        document = a1_48.document()
+        document_fields = {
+            'documenttype': '01',
+            'documentnum': 'ES11111111T',
+        }
+        document.feed(document_fields)
+        # name
+        name = a1_48.cname()
+        name_fields = {
+            'firstname': 'nom',
+            'familyname1': 'cognom',
+            'familyname2': 'cognom 2',
+        }
+        name.feed(name_fields)
+        # telephone
+        telephone = a1_48.telephone()
+        telephone_fields = {
+            'telephoneprefix': '34',
+            'telephonenumber': '999111222',
+        }
+        telephone.feed(telephone_fields)
+        # clientAddress
+        clientAddress = a1_48.clientAddress()
+        clientAddress_fields = {
+            'province': '01',
+            'city': '000001',
+            'zipcode': '16001',
+            'streettype': 'ACCE',
+            'street': 'inventat',
+            'streetnumber': '4_ce',
+            'portal': '5_TE2',
+            'staircase': '5_mIh',
+            'floor': '5_e6A',
+            'door': '5_40T',
+        }
+        clientAddress.feed(clientAddress_fields)
+        client_fields = {
+            'document': document,
+            'titulartype': 'F',
+            'cname': name,
+            'telephone': telephone,
+            'email': 'a@a',
+            'clientAddress': clientAddress,
+        }
+        client.feed(client_fields)
+        claimreference_fields = {
+            'wrongattentiontype': '01',
+            'comreferencenum': '0000001',
+            'targetclaimcomreferencenum': '9999998',
+            'conceptcontract': '01',
+            'conceptfacturation': '02',
+            'contact': contact,
+            'nnssexpedient': '45666666',
+            'fraudrecordnum': '888888888',
+            'incidentperiod': incidentperiod,
+            'invoicenumber': 'F5555',
+            'incidentlocation': incidentlocation,
+            'reading': reading,
+            'incident': incident,
+            'client': client,
+            'claimedcompensation': '520176666.24',
+            'iban': 'ES0000000000000000000000000000000',
+        }
+        claimreference.feed(claimreference_fields)
+        claimreferencelist = a1_48.claimreferencelist()
+        claimreference_fields = {
+            'claimreference_list': [claimreference],
+        }
+        claimreferencelist.feed(claimreference_fields)
+
+        # Registerdoclist
+        rd1 = a1_44.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-02',
+            'doctype': 'CC',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd1.feed(registro_doc_fields)
+        rd2 = a1_05.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-03',
+            'doctype': '01',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': 'Comments'
+        }
+        rd2.feed(registro_doc_fields)
+        registerdoclist = a1_48.Registerdoclist()
+        registerdoclist_fields = {
+            'registerdoclist': [rd1, rd2],
+        }
+        registerdoclist.feed(registerdoclist_fields)
+
+        # variableinf
+        variableinf_list = []
+        variableinf = a1_48.variableinf()
+        variableinf_fields = {
+            'moreinformationtype': '01',
+            'description': 'desc',
+            'variabletype': '01',
+            'variablevalue': 'val',
+        }
+        variableinf.feed(variableinf_fields)
+        variableinf_list.append(variableinf)
+
+        variableinflist = a1_48.variableinflist()
+        variableinflist.feed({'variableinf_list': variableinf_list})
+
+        a2648_fields = {
+            'reqdate': '2018-05-01',
+            'reqhour': '13:00:00',
+            'comreferencenum': '000123456789',
+            'claimtype': '01',
+            'claimsubtype': '001',
+            'originreference': 'AB999888',
+            'claimreferencelist': claimreferencelist,
+            'cups': 'ES1234000000000001JN',
+            'legallimitdate': '2018-09-21',
+            'priority': '1',
+            'extrainfo': 'comentarios extra',
+            'registerdoclist': registerdoclist,
+            'reqcode': '7777',
+            'sequential': '01',
+            'informationdate': '2018-09-24',
+            'informationtype': '01',
+            'variableinflist': variableinflist,
+        }
+        a2648.feed(a2648_fields)
+        mensaje.feed({
+            'heading': heading,
+            'a26': a2648,
+        })
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_a2648.read())
 
