@@ -264,3 +264,60 @@ class clientAddress(XmlModel):
         self.floor = XmlField('floor')
         self.door = XmlField('door')
         super(clientAddress, self).__init__('clientAddress', 'client_address')
+
+
+class MensajeA2648(XmlModel):
+    _sort_order = ('mensaje', 'heading', 'a26')
+
+    def __init__(self):
+        self.doc_root = None
+        self.mensaje = XmlField(
+            'sctdapplication', attributes={'xmlns': 'http://localhost/sctd/A2648'}
+        )
+        self.heading = Heading()
+        self.a26 = A2648()
+        super(MensajeA2648, self).__init__('sctdapplication', 'mensaje')
+
+
+class A2648(XmlModel):
+
+    _sort_order = ('a26', 'reqcode', 'reqdate', 'reqhour', 'comreferencenum', 'sequential', 'cups', 'informationdate', 'informationtype', 'claimreferencelist', 'extrainfo', 'variableinflist', 'registerdoclist')
+
+    def __init__(self):
+        self.a26 = XmlField('a26')
+        self.reqcode = XmlField('reqcode')
+        self.reqdate = XmlField('reqdate')
+        self.reqhour = XmlField('reqhour')
+        self.comreferencenum = XmlField('comreferencenum')
+        self.sequential = XmlField('sequential')
+        self.cups = XmlField('cups')
+        self.informationdate = XmlField('informationdate')
+        self.informationtype = XmlField('informationtype')
+        self.claimreferencelist = claimreferencelist()
+        self.extrainfo = XmlField('extrainfo')
+        self.variableinflist = variableinflist()
+        self.registerdoclist = Registerdoclist()
+        super(A2648, self).__init__('a26', 'a26')
+
+
+class variableinflist(XmlModel):
+
+    _sort_order = ('variableinflist', 'variableinf_list')
+
+    def __init__(self):
+        self.variableinflist = XmlField('variableinflist')
+        self.variableinf_list = []
+        super(variableinflist, self).__init__('variableinflist', 'variableinflist')
+
+
+class variableinf(XmlModel):
+
+    _sort_order = ('variableinf', 'moreinformationtype', 'description', 'variabletype', 'variablevalue')
+
+    def __init__(self):
+        self.variableinf = XmlField('variableinf')
+        self.moreinformationtype = XmlField('moreinformationtype')
+        self.description = XmlField('description')
+        self.variabletype = XmlField('variabletype')
+        self.variablevalue = XmlField('variablevalue')
+        super(variableinf, self).__init__('variableinf', 'variableinf')

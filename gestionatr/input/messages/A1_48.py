@@ -3,6 +3,7 @@ from message_gas import MessageGas
 from Deadlines import ProcessDeadline, DeadLine, Workdays, Naturaldays
 from gestionatr.utils import get_rec_attr
 from A1_04 import *
+from gestionatr.defs_gas import SUBTYPES_A1_48
 
 
 class A1_48(A1_04):
@@ -1039,3 +1040,21 @@ class document(object):
         else:
             return False
 
+
+# Module Functions
+def get_minimum_fields(r1_subtype):
+    for x in SUBTYPES_A1_48:
+        if x['code'] == r1_subtype:
+            return x['min_fields']
+    return []
+
+
+def get_subtypes(r1_type):
+    return [x['code'] for x in SUBTYPES_A1_48 if x['type'] == r1_type]
+
+
+def get_type_from_subtype(r1_subtype):
+    for x in SUBTYPES_A1_48:
+        if x['code'] == r1_subtype:
+            return x['type']
+    return []
