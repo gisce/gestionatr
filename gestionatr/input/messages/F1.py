@@ -795,6 +795,7 @@ class Integrador(object):
 
     def __init__(self, data):
         self.integrador = data
+        self._periode = None
 
     @property
     def magnitud(self):
@@ -804,9 +805,16 @@ class Integrador(object):
 
     @property
     def codigo_periodo(self):
-        if hasattr(self.integrador, 'CodigoPeriodo'):
+        if self._periode:
+            return self._periode
+        elif hasattr(self.integrador, 'CodigoPeriodo'):
             return self.integrador.CodigoPeriodo.text.strip()
-        return None
+        else:
+            return None
+
+    @codigo_periodo.setter
+    def codigo_periodo(self, value):
+        self._periode = value
 
     @property
     def constante_multiplicadora(self):
@@ -902,8 +910,32 @@ class ModeloAparato(object):
     def integradores(self):
         data = []
         if hasattr(self.modelo_aparato, 'Integrador'):
+            integradors_dh_per_data = {}
             for d in self.modelo_aparato.Integrador:
-                data.append(Integrador(d))
+                integrador = Integrador(d)
+                if integrador.codigo_periodo in ['21', '22', '23'] and integrador.magnitud == 'PM':
+                    # Algunes distris envien 2 periodes de potencia en les DHx ...
+                    # Diuen que només facturen la mes gran i la CNMC diu que esta be :(
+                    # Els guardem per tractarlos despres
+                    integradors_dh_per_data.setdefault(integrador.lectura_hasta.fecha, [])
+                    integradors_dh_per_data[integrador.lectura_hasta.fecha].append(integrador)
+                else:
+                    data.append(integrador)
+
+            # Per tractar els multiples periodes en una DH nosaltres agafarem
+            # la lectura mes gran de cada data com a P1 ja que no hi ha altres
+            # Px de potencia per una DHx.
+            for dlects_xml in integradors_dh_per_data.values():
+                if len(dlects_xml) > 1:
+                    # Ens quedem amb la mes gran per aquesta data
+                    if dlects_xml[0].lectura_hasta.lectura >= dlects_xml[1].lectura_hasta.lectura:
+                        max_lect = dlects_xml[0]
+                    else:
+                        max_lect = dlects_xml[1]
+                    max_lect.codigo_periodo = '21'
+                    data.append(max_lect)
+                else:
+                    data.append(dlects_xml[0])
         return data
 
     @property
