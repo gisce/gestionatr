@@ -1185,6 +1185,8 @@ class test_F1(unittest.TestCase):
             self.xml_f101_free_interpretation = f.read()
         with open(get_data("f101_factura_empty_rent.xml"), "r") as f:
             self.xml_f101_empty_rent = f.read()
+        with open(get_data("F1_periodos_DH.xml"), "r") as f:
+            self.xml_f101_integradores_dh = f.read()
 
     def testATRInvoice(self):
         f1 = F1(self.xml_f101_atr_invoice)
@@ -1378,6 +1380,20 @@ class test_F1(unittest.TestCase):
         )
 
         self.assertEqual(fact.get_info_facturacio_potencia(), u'icp')
+
+    def test_integradores_DH(self):
+        f1 = F1(self.xml_f101_integradores_dh)
+        f1.parse_xml()
+
+        self.assertEqual(f1.otras_facturas, [])
+        self.assertEqual(len(f1.facturas_atr), 1)
+
+        fact = f1.facturas_atr[0]
+        comptador = fact.get_comptadors()[0]
+        integradors_pm = comptador.get_lectures_maximetre()
+        self.assertEqual(len(integradors_pm), 1)
+        self.assertEqual(integradors_pm[0].codigo_periodo, '21')
+        self.assertEqual(integradors_pm[0].lectura_hasta.lectura, 100)
 
     def test_factura_atr_30A(self):
         f1 = F1(self.xml_f101_atr_invoice_30A)
