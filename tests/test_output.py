@@ -19,6 +19,7 @@ from gestionatr.output.messages import sw_a1_44 as a1_44
 from gestionatr.output.messages import sw_a1_04 as a1_04
 from gestionatr.output.messages import sw_a1_03 as a1_03
 from gestionatr.output.messages import sw_a1_48 as a1_48
+from gestionatr.output.messages import sw_a1_46 as a1_46
 
 
 class test_C1(unittest.TestCase):
@@ -3712,3 +3713,69 @@ class test_A1_48(unittest.TestCase):
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_a2648.read())
 
+
+class test_A1_46(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a146 = open(get_data("a146.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a146.close()
+
+    def test_create_a146(self):
+        # A146
+        mensaje = a1_46.MensajeA146()
+        heading = a1_46.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '46',
+            'messagetype': 'A1'
+        }
+        heading.feed(heading_fields)
+        a146 = a1_46.A146()
+
+        # Registerdoclist
+        rd1 = a1_44.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-02',
+            'doctype': 'CC',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd1.feed(registro_doc_fields)
+        rd2 = a1_05.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-03',
+            'doctype': '01',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': 'Comments'
+        }
+        rd2.feed(registro_doc_fields)
+        registerdoclist = a1_46.Registerdoclist()
+        registerdoclist_fields = {
+            'registerdoclist': [rd1, rd2],
+        }
+        registerdoclist.feed(registerdoclist_fields)
+
+        a146_fields = {
+            'reqdate': '2018-05-01',
+            'reqhour': '13:00:00',
+            'comreferencenum': '000123456789',
+            'cups': 'ES1234000000000001JN',
+            'operationtype': 'A20002',
+            'extrainfo': 'comentarios extra',
+            'registerdoclist': registerdoclist,
+        }
+        a146.feed(a146_fields)
+        mensaje_a146_fields = {
+            'heading': heading,
+            'a1': a146,
+        }
+        mensaje.feed(mensaje_a146_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_a146.read())
