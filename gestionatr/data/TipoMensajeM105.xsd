@@ -5,7 +5,7 @@
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
 	<xs:annotation>
 		<xs:documentation>
-			Version 1.1 CNMC 2016.12.20
+			Version 1.2 CNMC 2016.12.20
 		</xs:documentation>
 	</xs:annotation>
 	<xs:complexType name="ActivacionModificacionDeATRM105">

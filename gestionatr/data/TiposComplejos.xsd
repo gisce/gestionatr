@@ -4,7 +4,7 @@
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
 	<xs:annotation>
 		<xs:documentation>
-			Version 1.1 CNMC 2016.12.20
+			Version 1.2 CNMC 2016.12.20
 		</xs:documentation>
 	</xs:annotation>
 	<xs:complexType name="AparatoActivacion">
@@ -273,7 +273,7 @@
 					<xs:documentation>Tabla 11</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="Direccion" type="Direccion" minOccurs="0"/>
+			<xs:element name="Direccion" type="DireccionCont" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="ContratoConModificacion">
@@ -526,6 +526,102 @@
 			<xs:element name="CorreoElectronico" minOccurs="0">
 				<xs:simpleType>
 					<xs:restriction base="X60">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DireccionCont">
+		<xs:sequence>
+			<xs:element name="Pais" type="X25"/>
+			<xs:element name="Provincia">
+				<xs:simpleType>
+					<xs:restriction base="X2">
+						<xs:pattern value="[0-9]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Municipio">
+				<xs:simpleType>
+					<xs:restriction base="X6">
+						<xs:minLength value="5"/>
+						<xs:pattern value="[0-9]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Poblacion" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X9">
+						<xs:pattern value="[0-9]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="CodPostal">
+				<xs:simpleType>
+					<xs:restriction base="X5">
+						<xs:minLength value="5"/>
+						<xs:pattern value="[0-9]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="Via" type="DireccionVía"/>
+				<xs:element name="ApartadoDeCorreos" type="X5"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DireccionVía">
+		<xs:sequence>
+			<xs:element name="TipoVia" type="TipoVia">
+				<xs:annotation>
+					<xs:documentation>Tabla 12</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Calle">
+				<xs:simpleType>
+					<xs:restriction base="X30">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="NumeroFinca">
+				<xs:simpleType>
+					<xs:restriction base="X5">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="DuplicadorFinca" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X3">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Escalera" type="Escalera" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 13</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Piso" type="Piso" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 14</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Puerta" type="Puerta" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 15</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TipoAclaradorFinca" type="TipoAclaradorFinca" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 16</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AclaradorFinca" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X40">
 						<xs:whiteSpace value="collapse"/>
 					</xs:restriction>
 				</xs:simpleType>
@@ -968,7 +1064,7 @@
 		<xs:sequence>
 			<xs:element name="MotivoCambioATRDesdeDistribuidora" type="MotivoCambioATRDesdeDistribuidora"/>
 			<xs:element name="FechaPrevistaAplicacionCambioATR" type="xs:date"/>
-			<xs:element name="PeriodicidadFacturacion" type="PeriodicidadFacturacion" minOccurs="0"/>
+			<xs:element name="PeriodicidadFacturacion" type="PeriodicidadFacturacion"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Potencias">

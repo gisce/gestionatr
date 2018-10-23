@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TipoMensajeRechazo.xsd"/>
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
 	<xs:annotation>
 		<xs:documentation>
-			Version 1.1 CNMC 2016.12.20
+			Version 1.2 CNMC 2016.12.20
 		</xs:documentation>
 	</xs:annotation>
 	<xs:element name="MensajeIncidenciasATRDistribuidor">
 		<xs:annotation>
-			<xs:documentation>Version CNMC 1.1</xs:documentation>
+			<xs:documentation>Version CNMC 1.2</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
