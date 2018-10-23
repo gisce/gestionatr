@@ -121,6 +121,15 @@ class DatosSolicitud(DatosSolicitud):
             pass
         return data
 
+    @property
+    def solicitud_tension(self):
+        data = ''
+        try:
+            data = self.datos_solicitud.SolicitudTension.text
+        except AttributeError:
+            pass
+        return data
+
 
 class Contrato(Contrato):
 
