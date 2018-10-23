@@ -101,14 +101,16 @@
                 <Provincia>17</Provincia>
                 <Municipio>17079</Municipio>
                 <Poblacion>17079</Poblacion>
-                <TipoVia>PZ</TipoVia>
                 <CodPostal>17001</CodPostal>
-                <Calle>MELA MUTERMILCH</Calle>
-                <NumeroFinca>2</NumeroFinca>
-                <Piso>001</Piso>
-                <Puerta>001</Puerta>
-                <TipoAclaradorFinca>BI</TipoAclaradorFinca>
-                <AclaradorFinca>Bloque de Pisos</AclaradorFinca>
+                <Via>
+                    <TipoVia>PZ</TipoVia>
+                    <Calle>MELA MUTERMILCH</Calle>
+                    <NumeroFinca>2</NumeroFinca>
+                    <Piso>001</Piso>
+                    <Puerta>001</Puerta>
+                    <TipoAclaradorFinca>BI</TipoAclaradorFinca>
+                    <AclaradorFinca>Bloque de Pisos</AclaradorFinca>
+                </Via>
             </Direccion>
         </Cliente>
         <TipoReclamante>01</TipoReclamante>

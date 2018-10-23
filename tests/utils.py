@@ -77,7 +77,7 @@ def get_cliente(dir=False, tipo_dir=None):
     if tipo_dir:
         indicador_tipo_direccion = tipo_dir
     direccion = None
-    if dir:
+    if dir == "correo":
         # Direccion
         direccion = c2.Direccion()
         direccion_fields = {
@@ -85,14 +85,30 @@ def get_cliente(dir=False, tipo_dir=None):
             'provincia': '17',
             'municipio': '17079',
             'poblacion': '17079',
-            'tipo_via': 'PZ',
+            'apartado_de_correos': "A1234",
             'cod_postal': '17001',
+        }
+        direccion.feed(direccion_fields)
+    elif dir:
+        via = c2.Via()
+        via.feed({
+            'tipo_via': 'PZ',
             'calle': 'MELA MUTERMILCH',
             'numero_finca': '2',
             'piso': '001',
             'puerta': '001',
             'tipo_aclarador_finca': 'BI',
             'aclarador_finca': 'Bloque de Pisos',
+        })
+        # Direccion
+        direccion = c2.Direccion()
+        direccion_fields = {
+            'pais': 'España',
+            'provincia': '17',
+            'municipio': '17079',
+            'poblacion': '17079',
+            'via': via,
+            'cod_postal': '17001',
         }
         direccion.feed(direccion_fields)
 

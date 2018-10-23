@@ -367,6 +367,7 @@ class test_C2(unittest.TestCase):
         self.assertEqual(c.datos_solicitud.tipo_solicitud_administrativa, u'S')
         self.assertEqual(c.datos_solicitud.contratacion_incondicional_bs, u'N')
         self.assertEqual(c.datos_solicitud.bono_social, u'0')
+        self.assertEqual(c.datos_solicitud.solicitud_tension, u'T')
         # Contrato
         contrato = c.contrato
         contacto = contrato.contacto
@@ -497,9 +498,11 @@ class test_A3(unittest.TestCase):
 
     def setUp(self):
         self.xml_a301 = open(get_data("a301.xml"), "r")
+        self.xml_a301_correos = open(get_data("a301_correos.xml"), "r")
 
     def tearDown(self):
         self.xml_a301.close()
+        self.xml_a301_correos.close()
 
     def test_a301_completo(self):
         a3 = A3(self.xml_a301)
@@ -586,6 +589,19 @@ class test_A3(unittest.TestCase):
         # Comentarios
         self.assertEqual(a3.comentarios, u'Comentario')
         self.assertFalse(a3.registros_documento)
+
+    def test_a301_correos(self):
+        a3 = A3(self.xml_a301_correos)
+        a3.parse_xml()
+        # Cliente
+        cliente = a3.cliente
+        direccion = cliente.direccion
+        self.assertEqual(direccion.cod_postal, u'17001')
+        self.assertEqual(direccion.municipio, u'17079')
+        self.assertEqual(direccion.pais, u'España')
+        self.assertEqual(direccion.poblacion, u'17079')
+        self.assertEqual(direccion.provincia, u'17')
+        self.assertEqual(direccion.apartado_de_correos, u'A1234')
 
 
 class test_B1(unittest.TestCase):
