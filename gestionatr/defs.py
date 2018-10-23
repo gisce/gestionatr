@@ -675,7 +675,6 @@ TABLA_17 = [
     ('014', '6.3'),
     ('015', '6.4'),
     ('016', '6.5'),
-    ('017', '6.1B'),
 ]
 
 TABLA_20 = [
@@ -1157,8 +1156,8 @@ CONTROL_POTENCIA = TABLA_51
 
 
 TABLA_53 = [
-    ('T', 'Cambio de titular sin subrogación'),
-    ('S', 'Cambio de titular con subrogación'),
+    ('T', 'Cambio de titular por traspaso'),
+    ('S', 'Cambio de titular por subrogación'),
     ('A',
      'Cambio datos administrativos (excepto cambio de titular y corrección de datos identificativos del cliente)'),
     ('C', 'Corrección datos que identifican al cliente'),
@@ -2019,3 +2018,8 @@ TABLA_116 = [
 ]
 
 REQUIRE_PERSON_TYPE = ['NV', 'OT']
+
+TABLA_117 = [
+    ('M', 'Monofásica'),
+    ('T', 'Trifásica')
+]
