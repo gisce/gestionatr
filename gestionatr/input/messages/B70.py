@@ -1506,6 +1506,9 @@ class MultiModeloAparato(Medidor):
     @property
     def listanumeradores(self):
         return self._get_list_attribute('listanumeradores')
+    @property
+    def presionsuministro(self):
+        return self._get_single_attribute('presionsuministro')
 
 
 def agrupar_lectures_per_data(lectures):
