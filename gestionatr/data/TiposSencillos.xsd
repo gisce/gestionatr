@@ -3,7 +3,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:annotation>
 		<xs:documentation>
-			Version 1.1 CNMC 2016.12.20
+			Version 1.2 CNMC 2016.12.20
 		</xs:documentation>
 	</xs:annotation>
 	<xs:simpleType name="AltaBajaModificacion">
@@ -241,15 +241,7 @@
 			<xs:enumeration value="86"/>
 			<xs:enumeration value="87"/>
 			<xs:enumeration value="88"/>
-			<xs:enumeration value="90"/>
-			<xs:enumeration value="91"/>
-			<xs:enumeration value="92"/>
 			<xs:enumeration value="93"/>
-			<xs:enumeration value="94"/>
-			<xs:enumeration value="95"/>
-			<xs:enumeration value="96"/>
-			<xs:enumeration value="97"/>
-			<xs:enumeration value="98"/>
 			<xs:enumeration value="99"/>
 			<xs:enumeration value="A1"/>
 			<xs:enumeration value="A2"/>
@@ -280,6 +272,9 @@
 			<xs:enumeration value="C9"/>
 			<xs:enumeration value="D1"/>
 			<xs:enumeration value="D2"/>
+			<xs:enumeration value="D3"/>
+			<xs:enumeration value="D4"/>
+			<xs:enumeration value="D5"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="CodPM">
@@ -2577,6 +2572,18 @@ la reclamacion
 			<xs:enumeration value="99"/>
 		</xs:restriction>
 	</xs:simpleType>
+		<xs:simpleType name="SolicitudTension">
+		<xs:annotation>
+			<xs:documentation> tipo de tensión solicitada (tabla 117)
+			M	Monofásica
+			T	Trifásica
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="M"/>
+			<xs:enumeration value="T"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="TipoMovimiento">
 		<xs:annotation>
 			<xs:documentation>Tipo movimiento del aparato (tabla 31)
@@ -2876,7 +2883,6 @@ la reclamacion
 			VI	VIAL
 			ZN	ZONA
 			AD	ALDEA
-			AO	APARTADO DE CORREOS
 			CJ	CALLEJA
 			CH	CHALET
 			CT	CUESTA
@@ -2946,7 +2952,6 @@ la reclamacion
 			<xs:enumeration value="VI"/>
 			<xs:enumeration value="ZN"/>
 			<xs:enumeration value="AD"/>
-			<xs:enumeration value="AO"/>
 			<xs:enumeration value="CJ"/>
 			<xs:enumeration value="CH"/>
 			<xs:enumeration value="CT"/>

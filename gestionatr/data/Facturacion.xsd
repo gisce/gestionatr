@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia León (Comisión Nacional de los Mercados y la Competencia) -->
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Comisión Nacional de los Mercados y la Competencia (Comisión Nacional de los Mercados y la Competencia) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
 	<xs:include schemaLocation="TiposComplejos.xsd"/>
 	<xs:annotation>
 		<xs:documentation>
-			Version 1.1 CNMC 2016.12.20
+			Version 1.2 CNMC 2016.12.20
 		</xs:documentation>
 	</xs:annotation>
 	<xs:element name="MensajeFacturacion" type="MensajeFacturacion">
 		<xs:annotation>
-			<xs:documentation>Version CNMC 1.1</xs:documentation>
+			<xs:documentation>Version CNMC 1.2</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 	<xs:complexType name="MensajeFacturacion">
@@ -164,7 +164,7 @@
 							<xs:element name="Potencia" minOccurs="0">
 								<xs:complexType>
 									<xs:sequence>
-										<xs:element name="TerminoPotencia" maxOccurs="6">
+										<xs:element name="TerminoPotencia" maxOccurs="10">
 											<xs:complexType>
 												<xs:sequence>
 													<xs:element name="FechaDesde" type="xs:date"/>
@@ -229,7 +229,7 @@
 							<xs:element name="EnergiaActiva" minOccurs="0">
 								<xs:complexType>
 									<xs:sequence>
-										<xs:element name="TerminoEnergiaActiva" maxOccurs="6">
+										<xs:element name="TerminoEnergiaActiva" maxOccurs="10">
 											<xs:complexType>
 												<xs:sequence>
 													<xs:element name="FechaDesde" type="xs:date"/>
@@ -264,7 +264,7 @@
 							<xs:element name="EnergiaReactiva" minOccurs="0">
 								<xs:complexType>
 									<xs:sequence>
-										<xs:element name="TerminoEnergiaReactiva" maxOccurs="6">
+										<xs:element name="TerminoEnergiaReactiva" maxOccurs="10">
 											<xs:complexType>
 												<xs:sequence>
 													<xs:element name="FechaDesde" type="xs:date"/>

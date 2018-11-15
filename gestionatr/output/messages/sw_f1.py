@@ -2,7 +2,7 @@
 
 from libcomxml.core import XmlModel, XmlField
 from gestionatr.output.messages.base import Cabecera, rep_fecha, \
-    rep_fecha_sin_hora, rep_decimal, rep_entera, rep_entera2, rep_ruedas
+    rep_fecha_sin_hora, rep_decimal, rep_entera, rep_entera2, rep_ruedas, rep_cut
 from gestionatr.output.messages.sw_c1 import IdCliente
 from gestionatr.output.messages.sw_c2 import Direccion
 
@@ -571,9 +571,29 @@ class DatosGeneralesOtrasFacturas(XmlModel):
         )
 
 
-class DireccionSuministro(Direccion):
-    def __init__(self):
-        super(DireccionSuministro, self).__init__(name='DireccionSuministro')
+class DireccionSuministro(XmlModel):
+
+    _sort_order = ('direccion', 'pais', 'provincia', 'municipio', 'poblacion', 'tipo_via', 'cod_postal', 'calle', 'numero_finca', 'duplicador_finca', 'escalera', 'piso', 'puerta', 'tipo_aclarador_finca', 'aclarador_finca')
+
+    def __init__(self, name='DireccionSuministro'):
+        self.direccion = XmlField(name)
+        self.pais = XmlField('Pais')
+        self.provincia = XmlField('Provincia')
+        self.municipio = XmlField('Municipio')
+        self.poblacion = XmlField('Poblacion')
+        self.tipo_via = XmlField('TipoVia')
+        self.cod_postal = XmlField('CodPostal')
+        self.calle = XmlField('Calle', rep=rep_cut(30))
+        self.numero_finca = XmlField('NumeroFinca', rep=rep_cut(5))
+        self.duplicador_finca = XmlField('DuplicadorFinca', rep=rep_cut(3))
+        self.escalera = XmlField('Escalera', rep=rep_cut(3))
+        self.piso = XmlField('Piso', rep=rep_cut(3))
+        self.puerta = XmlField('Puerta', rep=rep_cut(3))
+        self.tipo_aclarador_finca = XmlField(
+            'TipoAclaradorFinca', rep=rep_cut(2)
+        )
+        self.aclarador_finca = XmlField('AclaradorFinca', rep=rep_cut(40))
+        super(DireccionSuministro, self).__init__(name, 'direccion')
 
 
 class ConceptoRepercutible(XmlModel):
