@@ -1,26 +1,20 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<MensajeCambiodeComercializadorConCambios xmlns="http://localhost/elegibilidad">
+<MensajeAlta xmlns="http://localhost/elegibilidad">
     <Cabecera>
         <CodigoREEEmpresaEmisora>1234</CodigoREEEmpresaEmisora>
         <CodigoREEEmpresaDestino>4321</CodigoREEEmpresaDestino>
-        <CodigoDelProceso>C2</CodigoDelProceso>
+        <CodigoDelProceso>A3</CodigoDelProceso>
         <CodigoDePaso>01</CodigoDePaso>
         <CodigoDeSolicitud>201412111009</CodigoDeSolicitud>
         <SecuencialDeSolicitud>01</SecuencialDeSolicitud>
         <FechaSolicitud>2014-04-16T22:13:37</FechaSolicitud>
         <CUPS>ES1234000000000001JN0F</CUPS>
     </Cabecera>
-    <CambiodeComercializadorConCambios>
+    <Alta>
         <DatosSolicitud>
-            <TipoModificacion>S</TipoModificacion>
-            <TipoSolicitudAdministrativa>S</TipoSolicitudAdministrativa>
             <CNAE>2222</CNAE>
             <IndActivacion>L</IndActivacion>
             <FechaPrevistaAccion>2016-06-06</FechaPrevistaAccion>
-            <ContratacionIncondicionalPS>S</ContratacionIncondicionalPS>
-            <ContratacionIncondicionalBS>N</ContratacionIncondicionalBS>
-            <BonoSocial>0</BonoSocial>
-            <SolicitudTension>T</SolicitudTension>
         </DatosSolicitud>
         <Contrato>
             <FechaFinalizacion>2018-01-01</FechaFinalizacion>
@@ -34,7 +28,6 @@
                 </PotenciasContratadas>
                 <ModoControlPotencia>1</ModoControlPotencia>
             </CondicionesContractuales>
-            <PeriodicidadFacturacion>01</PeriodicidadFacturacion>
             <ConsumoAnualEstimado>5000</ConsumoAnualEstimado>
             <Contacto>
                 <PersonaDeContacto>Nombre Inventado</PersonaDeContacto>
@@ -46,7 +39,6 @@
                     <PrefijoPais>34</PrefijoPais>
                     <Numero>666777999</Numero>
                 </Telefono>
-                <CorreoElectronico>email@host</CorreoElectronico>
             </Contacto>
         </Contrato>
         <Cliente>
@@ -78,15 +70,7 @@
                 <Municipio>17079</Municipio>
                 <Poblacion>17079</Poblacion>
                 <CodPostal>17001</CodPostal>
-                <Via>
-                    <TipoVia>PZ</TipoVia>
-                    <Calle>MELA MUTERMILCH</Calle>
-                    <NumeroFinca>2</NumeroFinca>
-                    <Piso>001</Piso>
-                    <Puerta>001</Puerta>
-                    <TipoAclaradorFinca>BI</TipoAclaradorFinca>
-                    <AclaradorFinca>Bloque de Pisos</AclaradorFinca>
-                </Via>
+                <ApartadoDeCorreos>A1234</ApartadoDeCorreos>
             </Direccion>
         </Cliente>
         <Medida>
@@ -107,15 +91,10 @@
         </Medida>
         <DocTecnica>
             <DatosCie>
-                <CIEPapel>
+                <CIEElectronico>
                     <CodigoCie>1234567</CodigoCie>
-                    <PotenciaInstBT>3500</PotenciaInstBT>
-                    <PotenciaNoInterrumpible>2000</PotenciaNoInterrumpible>
-                    <FechaEmisionCie>2015-06-04</FechaEmisionCie>
-                    <NifInstalador>12345678Z</NifInstalador>
-                    <TensionSuministroCIE>10</TensionSuministroCIE>
-                    <TipoSuministro>VI</TipoSuministro>
-                </CIEPapel>
+                    <SelloElectronico>11111</SelloElectronico>
+                </CIEElectronico>
                 <ValidezCIE>ES</ValidezCIE>
             </DatosCie>
             <DatosAPM>
@@ -128,5 +107,5 @@
             </DatosAPM>
         </DocTecnica>
         <Comentarios>Comentario</Comentarios>
-    </CambiodeComercializadorConCambios>
-</MensajeCambiodeComercializadorConCambios>
+    </Alta>
+</MensajeAlta>

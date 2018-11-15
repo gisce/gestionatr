@@ -5,7 +5,7 @@
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
 	<xs:annotation>
 		<xs:documentation>
-			Version 1.1 CNMC 2016.12.20
+			Version 1.2 CNMC 2016.12.20
 		</xs:documentation>
 	</xs:annotation>
 	<!-- Mensaje de Alta -->
@@ -34,7 +34,12 @@
 					<xs:documentation>Tabla 8</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="FechaPrevistaAccion" type="date-or-nothing" minOccurs="0"/>
+			<xs:element name="FechaPrevistaAccion" type="xs:date" minOccurs="0"/>
+			<xs:element name="SolicitudTension" type="SolicitudTension" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 117</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 		<!-- Informacion del Contrato de Alta -->
 	</xs:complexType>

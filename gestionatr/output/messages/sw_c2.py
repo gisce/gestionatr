@@ -38,7 +38,7 @@ class CambiodeComercializadorConCambios(XmlModel):
 
 class DatosSolicitud(DatosSolicitud):
 
-    _sort_order = ('datos_solicitud', 'tipo_modificacion', 'tipo_solicitud_administrativa', 'cnae', 'ind_activacion', 'fecha_prevista_accion', 'contratacion_incondicional_ps', 'contratacion_incondicional_bs', 'bono_social')
+    _sort_order = ('datos_solicitud', 'tipo_modificacion', 'tipo_solicitud_administrativa', 'cnae', 'ind_activacion', 'fecha_prevista_accion', 'contratacion_incondicional_ps', 'contratacion_incondicional_bs', 'bono_social', 'solicitud_tension')
 
     def __init__(self):
         super(DatosSolicitud, self).__init__()
@@ -84,7 +84,7 @@ class Cliente(Cliente):
 
 class Direccion(XmlModel):
 
-    _sort_order = ('direccion', 'pais', 'provincia', 'municipio', 'poblacion', 'tipo_via', 'cod_postal', 'calle', 'numero_finca', 'duplicador_finca', 'escalera', 'piso', 'puerta', 'tipo_aclarador_finca', 'aclarador_finca')
+    _sort_order = ('direccion', 'pais', 'provincia', 'municipio', 'poblacion', 'cod_postal', 'via', 'apartado_de_correos')
 
     def __init__(self, name='Direccion'):
         self.direccion = XmlField(name)
@@ -92,8 +92,19 @@ class Direccion(XmlModel):
         self.provincia = XmlField('Provincia')
         self.municipio = XmlField('Municipio')
         self.poblacion = XmlField('Poblacion')
-        self.tipo_via = XmlField('TipoVia')
         self.cod_postal = XmlField('CodPostal')
+        self.via = Via()
+        self.apartado_de_correos = XmlField('ApartadoDeCorreos')
+        super(Direccion, self).__init__(name, 'direccion')
+
+
+class Via(XmlModel):
+
+    _sort_order = ('via', 'tipo_via', 'calle', 'numero_finca', 'duplicador_finca', 'escalera', 'piso', 'puerta', 'tipo_aclarador_finca', 'aclarador_finca')
+
+    def __init__(self, name='Via'):
+        self.via = XmlField(name)
+        self.tipo_via = XmlField('TipoVia')
         self.calle = XmlField('Calle', rep=rep_cut(30))
         self.numero_finca = XmlField('NumeroFinca', rep=rep_cut(5))
         self.duplicador_finca = XmlField('DuplicadorFinca', rep=rep_cut(3))
@@ -104,7 +115,7 @@ class Direccion(XmlModel):
             'TipoAclaradorFinca', rep=rep_cut(2)
         )
         self.aclarador_finca = XmlField('AclaradorFinca', rep=rep_cut(40))
-        super(Direccion, self).__init__(name, 'direccion')
+        super(Via, self).__init__(name, 'via')
 
 
 class Medida(XmlModel):

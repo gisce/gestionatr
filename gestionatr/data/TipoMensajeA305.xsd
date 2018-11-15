@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposComplejos.xsd"/>
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
 	<xs:annotation>
 		<xs:documentation>
-			Version 1.1 CNMC 2016.12.20
+			Version 1.2 CNMC 2016.12.20
 		</xs:documentation>
 	</xs:annotation>
 	<xs:complexType name="ActivacionAltaA305">
@@ -38,9 +37,4 @@
 			<xs:element name="CondicionesContractuales" type="CondicionesContractualesC"/>
 		</xs:sequence>
 	</xs:complexType>
-
-	
-
-
-
 </xs:schema>
