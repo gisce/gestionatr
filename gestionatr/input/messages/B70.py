@@ -1115,6 +1115,7 @@ class Medidor(object):
         motiu = self.codajuste
         factor_k = float(self.factork)
         pcs = float(self.pcs)
+        pressio_subministrament = float(self.presionsuministro)
 
         for numerador in self.listanumeradores:
             lectura_desde_m3 = float(numerador.lectant)
@@ -1125,6 +1126,7 @@ class Medidor(object):
             lectura_desde = lectura_desde_m3 * float(self.factorconver)
             lectura_actual = lectura_actual_m3 * float(self.factorconver)
             vals = {
+                'pressio_suministre': pressio_subministrament,
                 'lectura_desde': lectura_desde,
                 'lectura_actual': lectura_actual,
                 'lectura_desde_m3': lectura_desde_m3,
