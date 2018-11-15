@@ -2531,6 +2531,7 @@ class test_B70(unittest.TestCase):
         self.assertEqual(medidor.capacidadcontador, '2000')
         self.assertEqual(medidor.observaciones1, 'Obs1')
         self.assertEqual(medidor.observaciones2, 'Obs2')
+        medidor.get_lectures_info()
 
         self.assertEqual(len(medidor.listanumeradores), 2)
         num = medidor.listanumeradores[1]
