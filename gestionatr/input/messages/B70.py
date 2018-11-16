@@ -1126,7 +1126,7 @@ class Medidor(object):
             lectura_desde = lectura_desde_m3 * float(self.factorconver)
             lectura_actual = lectura_actual_m3 * float(self.factorconver)
             vals = {
-                'pressio_suministre': pressio_subministrament,
+                'pressio_subministrament': pressio_subministrament,
                 'lectura_desde': lectura_desde,
                 'lectura_actual': lectura_actual,
                 'lectura_desde_m3': lectura_desde_m3,
