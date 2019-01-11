@@ -382,7 +382,7 @@ SUBTYPES_R101 = [
         'type': '02',
     }),
     ({
-        'min_fields': ['cups', 'comentarios', 'num_factura', ''],
+        'min_fields': ['cups', 'comentarios', 'num_factura'],
         'code': '050',
         'name': u'DESACUERDO FACTURACIÓN',
         'type': '09',
@@ -491,13 +491,13 @@ SUBTYPES_R101 = [
         'type': '02',
     }),
     ({
-        'min_fields': ['nif_cliente', 'nombre_cliente', 'cups', 'comentarios', 'num_factura'],
+        'min_fields': ['nif_cliente', 'nombre_cliente', 'cups', 'comentarios', 'num_fact'],
         'code': '068',
         'name': u'RECLAMACIÓN POR APLICACIÓN DEL FACTOR DE CONVERSIÓN O EL PCS',
         'type': '02',
     }),
     ({
-        'min_fields': ['cups', 'comentarios', 'num_factura'],
+        'min_fields': ['cups', 'comentarios', 'num_fact'],
         'code': '069',
         'name': u'COPIA F1 EN PDF',
         'type': '02',
