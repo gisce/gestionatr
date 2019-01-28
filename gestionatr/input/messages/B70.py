@@ -62,10 +62,15 @@ class B7031(MessageGas):
             return False
 
     def get_facturas_atr(self):
-        return [f for f in self.facturas if not f.is_only_conceptes()]
+        return [f for f in self.facturas if not f.is_only_conceptes() and not f.tipofactura == '99']
 
     def get_facturas_otros(self):
-        return [f for f in self.facturas if f.is_only_conceptes()]
+        if self.codproceso == '33':
+            return []
+        return [f for f in self.facturas if f.is_only_conceptes() and not f.tipofactura == '99']
+
+    def get_facturas_agregadas(self):
+        return [f for f in self.facturas if f.tipofactura == '99']
 
 
 class Datosempresadestino(object):
@@ -513,12 +518,12 @@ class Factura(object):
 
     def get_create_invoice_params(self):
         return {
-            'tipo_rectificadora': self.clasefact,
+            'tipo_rectificadora': self.clasefact or self.indfacturarect or 'N',
             'date_invoice': self.fecfactura,
             'check_total': abs(self.importetotal),
             'origin': self.get_origin(),
             'origin_date_invoice': self.fecfactura,
-            'reference': self.numfactorigen,
+            'reference': self.numfactorigen or self.numfacturarect,
         }
 
     def get_linies_factura_by_type(self):
@@ -1390,6 +1395,10 @@ class B7032(B7031):
     pass
 
 
+class B7033(B7032):
+    pass
+
+
 class Factura(Factura):
 
     @property
@@ -1407,6 +1416,38 @@ class Factura(Factura):
             return (res or "") + " - " + (self.numpseudofactura or "")
         else:
             return res
+
+    @property
+    def numfacturarect(self):
+        tree = 'numfacturarect'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def numfactorigen(self):
+        if self.numfacturarect:
+            return self.numfacturarect
+        else:
+            return super(Factura, self).numfactorigen
+
+    @property
+    def indfacturarect(self):
+        tree = 'indfacturarect'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def clasefact(self):
+        if self.indfacturarect:
+            return self.indfacturarect
+        else:
+            return super(Factura, self).clasefact
 
 
 # Let the user say only B70
