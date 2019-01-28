@@ -563,6 +563,11 @@ class Factura(object):
             total = info['total']
         return lloguers, total
 
+    def get_remesa(self):
+        return {
+            'id_remesa': self.idremesa,
+            'fecha_valor_remesa': self.fecpago
+        }
 
 class Boe(object):
     def __init__(self, data):
