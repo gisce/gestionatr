@@ -202,11 +202,11 @@ class MessageGas(Message):
     def data_sollicitud(self):
         try:
             ref = self.head.communicationsdate.text
-            ref2 = self.head.communicationshour.text
+            ref2 = self.head.communicationshour.text.split(".")[0]
         except:
             try:
                 ref = self.head.fechacomunic.text
-                ref2 = self.head.horacomunic.text
+                ref2 = self.head.horacomunic.text.split(".")[0]
             except:
                 pass
         if not ref:
