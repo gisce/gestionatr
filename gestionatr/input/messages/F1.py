@@ -913,8 +913,8 @@ class ModeloAparato(object):
             integradors_dh_per_data = {}
             for d in self.modelo_aparato.Integrador:
                 integrador = Integrador(d)
-                if integrador.codigo_periodo in ['21', '22', '23'] and integrador.magnitud == 'PM':
-                    # Algunes distris envien 2 periodes de potencia en les DHx ...
+                if integrador.codigo_periodo in ['21', '22', '81', '82', '83'] and integrador.magnitud == 'PM':
+                    # Algunes distris envien 2/3 periodes de potencia en les DHx ...
                     # Diuen que només facturen la mes gran i la CNMC diu que esta be :(
                     # Els guardem per tractarlos despres
                     integradors_dh_per_data.setdefault(integrador.lectura_hasta.fecha, [])
@@ -927,12 +927,12 @@ class ModeloAparato(object):
             # Px de potencia per una DHx.
             for dlects_xml in integradors_dh_per_data.values():
                 if len(dlects_xml) > 1:
-                    # Ens quedem amb la mes gran per aquesta data
-                    if dlects_xml[0].lectura_hasta.lectura >= dlects_xml[1].lectura_hasta.lectura:
-                        max_lect = dlects_xml[0]
-                    else:
-                        max_lect = dlects_xml[1]
-                    max_lect.codigo_periodo = '21'
+                    max_lect = dlects_xml[0]
+                    for dlect_xml in dlects_xml:
+                        # Ens quedem amb la mes gran per aquesta data
+                        if dlect_xml.lectura_hasta.lectura >= max_lect.lectura_hasta.lectura:
+                            max_lect = dlect_xml
+                            max_lect.codigo_periodo = max_lect.codigo_periodo[0] + '1'
                     data.append(max_lect)
                 else:
                     data.append(dlects_xml[0])
