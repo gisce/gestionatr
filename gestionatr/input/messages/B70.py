@@ -524,6 +524,7 @@ class Factura(object):
             'origin': self.get_origin(),
             'origin_date_invoice': self.fecfactura,
             'reference': self.numfactorigen or self.numfacturarect,
+            'tipo_factura': self.tipofactura
         }
 
     def get_linies_factura_by_type(self):
