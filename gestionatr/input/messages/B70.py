@@ -1147,7 +1147,7 @@ class Medidor(object):
                 'comptador': comptador,
                 'origen_desde': origen_desde,
                 'origen_actual': origen_actual,
-                'periode': periode,
+                'periode': periode or "P1",
                 'ajust': ajust,
                 'motiu': motiu,
                 'tipo_lect_num': tipo_lect_num,
