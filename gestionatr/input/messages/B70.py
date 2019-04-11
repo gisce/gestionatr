@@ -62,15 +62,12 @@ class B7031(MessageGas):
             return False
 
     def get_facturas_atr(self):
-        return [f for f in self.facturas if not f.is_only_conceptes() and not f.tipofactura == '99']
+        return [f for f in self.facturas if not f.is_only_conceptes()]
 
     def get_facturas_otros(self):
         if self.codproceso == '33':
             return []
-        return [f for f in self.facturas if f.is_only_conceptes() and not f.tipofactura == '99']
-
-    def get_facturas_agregadas(self):
-        return [f for f in self.facturas if f.tipofactura == '99']
+        return [f for f in self.facturas if f.is_only_conceptes()]
 
 
 class Datosempresadestino(object):
@@ -1118,46 +1115,49 @@ class Medidor(object):
 
     def get_lectures_info(self):
         res = []
-        fecha_desde = self.feclecant
-        fecha_actual = self.feclecact
-        comptador = self.numseriemedidor
-        periode = self.tipo_dh
-        ajust = float(self.ajuste)
-        motiu = self.codajuste
-        factor_k = float(self.factork)
-        pcs = float(self.pcs)
-        pressio_subministrament = float(self.presionsuministro)
+        if not hasattr(self, 'meters'):
+            self.meters = [self]
+        for meter in self.meters:
+            fecha_desde = meter.feclecant
+            fecha_actual = meter.feclecact
+            comptador = meter.numseriemedidor
+            periode = meter.tipo_dh
+            ajust = float(meter.ajuste)
+            motiu = meter.codajuste
+            factor_k = float(meter.factork)
+            pcs = float(meter.pcs)
+            pressio_subministrament = float(meter.presionsuministro)
 
-        for numerador in self.listanumeradores:
-            lectura_desde_m3 = float(numerador.lectant)
-            lectura_actual_m3 = float(numerador.lecact)
-            origen_desde = numerador.tipolec
-            origen_actual = numerador.tipolec
-            tipo_lect_num = numerador.tipolecnum
-            lectura_desde = lectura_desde_m3 * float(self.factorconver)
-            lectura_actual = lectura_actual_m3 * float(self.factorconver)
-            vals = {
-                'pressio_subministrament': pressio_subministrament,
-                'lectura_desde': lectura_desde,
-                'lectura_actual': lectura_actual,
-                'lectura_desde_m3': lectura_desde_m3,
-                'lectura_actual_m3': lectura_actual_m3,
-                'fecha_desde': fecha_desde,
-                'fecha_actual': fecha_actual,
-                'comptador': comptador,
-                'origen_desde': origen_desde,
-                'origen_actual': origen_actual,
-                'periode': periode or "P1",
-                'ajust': ajust,
-                'motiu': motiu,
-                'tipo_lect_num': tipo_lect_num,
-                'factor_k': factor_k,
-                'pcs': pcs,
-                'ometre': numerador.aparatorelevante == 'N',
-                'consum_m3': float(numerador.consumo),
-                'consum': float(numerador.consumo) * float(self.factorconver)
-            }
-            res.append(vals)
+            for numerador in meter.listanumeradores:
+                lectura_desde_m3 = float(numerador.lectant)
+                lectura_actual_m3 = float(numerador.lecact)
+                origen_desde = numerador.tipolec
+                origen_actual = numerador.tipolec
+                tipo_lect_num = numerador.tipolecnum
+                lectura_desde = lectura_desde_m3 * float(meter.factorconver)
+                lectura_actual = lectura_actual_m3 * float(meter.factorconver)
+                vals = {
+                    'pressio_subministrament': pressio_subministrament,
+                    'lectura_desde': lectura_desde,
+                    'lectura_actual': lectura_actual,
+                    'lectura_desde_m3': lectura_desde_m3,
+                    'lectura_actual_m3': lectura_actual_m3,
+                    'fecha_desde': fecha_desde,
+                    'fecha_actual': fecha_actual,
+                    'comptador': comptador,
+                    'origen_desde': origen_desde,
+                    'origen_actual': origen_actual,
+                    'periode': periode or "P1",
+                    'ajust': ajust,
+                    'motiu': motiu,
+                    'tipo_lect_num': tipo_lect_num,
+                    'factor_k': factor_k,
+                    'pcs': pcs,
+                    'ometre': numerador.aparatorelevante == 'N',
+                    'consum_m3': float(numerador.consumo),
+                    'consum': float(numerador.consumo) * float(meter.factorconver)
+                }
+                res.append(vals)
         return res
 
     def get_giro(self):
