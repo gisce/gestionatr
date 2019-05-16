@@ -3724,3 +3724,9 @@ TIPUS_CONCEPTES = {
 }
 
 SUBTYPES_A1_48 = SUBTYPES_R101[:]
+
+TAULA_TIPO_COMUNICACION_A12_26 = [
+    ('01', "Corrección de errores puntuales"),
+    ('05', "Actualización de datos: denominación de las calles, errores en los datos del cliente..."),
+    ('06', "Reubicación tarifaria"),
+]
