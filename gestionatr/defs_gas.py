@@ -2425,7 +2425,20 @@ TAULA_ANOMALIA_INSTALACION = [
     ('C45', 'Falta registro comprob.sist deteccion'),
     ('C50', 'Otros irc'),
     ('C55', 'Patios de ventilación (desbordamiento)'),
+    ('B20', 'Flexible'),
+    ('B98', 'Documentación / Otros'),
+    ('C60', 'Tuberías y Accesorios en Instalaciones Industriales'),
+    ('C70', 'Regulación en Instalaciones Industriales'),
+    ('C98', 'Documentación / Otros'),
+    ('D10', 'Tuberías y Accesorios'),
+    ('D20', 'Flexible'),
+    ('D30', 'Aparatos'),
+    ('D40', 'Evacuación de Gases'),
+    ('D50', 'Local / Ventilaciones'),
+    ('D70', 'Regulación en Instalaciones Industriales'),
+    ('D98', 'Documentación / Otros'),
 ]
+
 TAULA_SI_NO = [
     ('S', 'Sí'),
     ('N', 'No'),
