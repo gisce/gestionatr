@@ -3,7 +3,7 @@
 from . import unittest
 from .utils import get_data
 from gestionatr.input.messages import C1, C2, A3, B1, M1, D1, W1, Q1, R1, F1, Deadlines, \
-    A1_41, A1_02, A1_05, B7031, B7032, A1_44, A1_03, A1_48, A1_04, A1_46
+    A1_41, A1_02, A1_05, B7031, B7032, A1_44, A1_03, A1_48, A1_04, A1_46, A12_26
 from gestionatr.input.messages.F1 \
     import agrupar_lectures_per_data, obtenir_data_inici_i_final
 
@@ -3592,3 +3592,83 @@ class test_A1_46(unittest.TestCase):
         self.assertEqual(a246.resultreason, u"R01")
         self.assertEqual(a246.resultreasondesc, u"Cliente suministrado desde planta satélite.")
         self.assertEqual(a246.extrainfo, u"comentarios extras")
+
+
+class test_A12_26(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a1226 = open(get_data("a1226.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a1226.close()
+
+    def test_a246(self):
+        a1226 = A12_26(self.xml_a1226)
+        a1226.parse_xml()
+        self.assertEqual(a1226.reqhour, u"12:57:59")
+        self.assertEqual(a1226.atrcode, u"24_0mVgXP2mQWbjDIW3Y7DFf")
+        self.assertEqual(a1226.atrversion, u"151")
+        self.assertEqual(a1226.cups, u"ES1234000000000001JN")
+        self.assertEqual(a1226.nationality, u"SB")
+        self.assertEqual(a1226.documenttype, u"01")
+        self.assertEqual(a1226.documentnum, u"20_ikhOXhfYkJDE8GXdS")
+        self.assertEqual(a1226.firstname, u"40_F6S6mwa91ebOPvu1lRDhPV2aRTjRic")
+        self.assertEqual(a1226.familyname1, u"30_ghUjt3ZyeoBellwhPI3g99zFDyB")
+        self.assertEqual(a1226.familyname2, u"30_Sv2t9Zg4JuKhOMPAk0CWygkBw85")
+        self.assertEqual(a1226.telephone, u"20_fO2z6JBpmivuOeG3a")
+        self.assertEqual(a1226.fax, u"20_qXZjH8iiAc2bsH1It")
+        self.assertEqual(a1226.newcustomer, u"S")
+        self.assertEqual(a1226.email, u"60_EUMoY071vBip1qmYVxuJ1TGmJihWmM")
+        self.assertEqual(a1226.streettype, u"ACCE")
+        self.assertEqual(a1226.street, u"60_vdL9HZyoO6RyPRQnmirjeDxoLX0Uej")
+        self.assertEqual(a1226.streetnumber, u"4_tS")
+        self.assertEqual(a1226.portal, u"5_PUQ")
+        self.assertEqual(a1226.staircase, u"5_7bv")
+        self.assertEqual(a1226.floor, u"5_DLx")
+        self.assertEqual(a1226.door, u"5_mmC")
+        self.assertEqual(a1226.province, u"01")
+        self.assertEqual(a1226.city, u"00001")
+        self.assertEqual(a1226.zipcode, u"5_MLU")
+        self.assertEqual(a1226.tolltype, u"11")
+        self.assertEqual(a1226.qdgranted, u"5.8689")
+        self.assertEqual(a1226.qhgranted, u"88")
+        self.assertEqual(a1226.singlenomination, u"S")
+        self.assertEqual(a1226.transfereffectivedate, u"2019-05-16")
+        self.assertEqual(a1226.finalclientyearlyconsumption, u"878")
+        self.assertEqual(a1226.netsituation, u"14_bdrdvx3064I")
+        self.assertEqual(a1226.outgoingpressuregranted, u"72012.464")
+        self.assertEqual(a1226.lastinspectionsdate, u"2019-05-16")
+        self.assertEqual(a1226.lastinspectionsresult, u"01")
+        self.assertEqual(a1226.readingtype, u"0")
+        self.assertEqual(a1226.rentingamount, u"40770.27")
+        self.assertEqual(a1226.rentingperiodicity, u"01")
+        self.assertEqual(a1226.canonircamount, u"62529.35")
+        self.assertEqual(a1226.canonircperiodicity, u"01")
+        self.assertEqual(a1226.canonircforlife, u"S")
+        self.assertEqual(a1226.canonircdate, u"2019-05-16")
+        self.assertEqual(a1226.canonircmonth, u"01")
+        self.assertEqual(a1226.othersamount, u"51589.82")
+        self.assertEqual(a1226.othersperiodicity, u"01")
+        self.assertEqual(a1226.readingperiodicitycode, u"01")
+        self.assertEqual(a1226.transporter, u"0001")
+        self.assertEqual(a1226.transnet, u"14_0jldeS2u13Y")
+        self.assertEqual(a1226.gasusetype, u"01")
+        self.assertEqual(a1226.caecode, u"13_h1c6VEDs7V")
+        self.assertEqual(a1226.updatereason, u"01")
+        self.assertEqual(a1226.communicationreason, u"01")
+        self.assertEqual(a1226.titulartype, u"F")
+        self.assertEqual(a1226.regularaddress, u"S")
+        counter = a1226.counterlist[0]
+        self.assertEqual(counter.countermodel, u"50_gKM9uwusZjqsf9bWbLEvzf9LhZGq17")
+        self.assertEqual(counter.countertype, u"7_OC85P")
+        self.assertEqual(counter.counternumber, u"18_KcbwQ2vdOKAR0nQ")
+        self.assertEqual(counter.counterproperty, u"04")
+        self.assertEqual(counter.reallecture, u"53749846509")
+        self.assertEqual(counter.counterpressure, u"72241.495")
+        self.assertEqual(len(a1226.correctorlist), 2)
+        corrector = a1226.correctorlist[0]
+        self.assertEqual(corrector.correctedlecture, u'2200')
+        self.assertEqual(corrector.correctormodel, u'modelo1')
+        self.assertEqual(corrector.correctornumber, u'D123456')
+        self.assertEqual(corrector.correctorproperty, u'01')
+        self.assertEqual(corrector.correctortype, u'01')
