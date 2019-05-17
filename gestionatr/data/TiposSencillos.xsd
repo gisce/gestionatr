@@ -314,6 +314,7 @@
 			46 	Exencion cargo variable autoconsumo
 			47	Derechos de acometida de generacion
 			48	Suplemento territorial por tributos económicos del año 2013 según la Orden ETU/35/2017
+			49 	Suplemento territorial por tributos económicos del año 2013 según la Orden TEC/271/2019
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -345,6 +346,7 @@
 			<xs:enumeration value="46"/>
 			<xs:enumeration value="47"/>
 			<xs:enumeration value="48"/>
+			<xs:enumeration value="49"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Decimal10">
@@ -1907,7 +1909,6 @@
 			014	6.3	
 			015	6.4	
 			016	6.5
-			017 	6.1B
 		</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -1924,7 +1925,6 @@
 			<xs:enumeration value="014"/>
 			<xs:enumeration value="015"/>
 			<xs:enumeration value="016"/>
-			<xs:enumeration value="017"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TarifaATRFact">
@@ -2572,7 +2572,7 @@ la reclamacion
 			<xs:enumeration value="99"/>
 		</xs:restriction>
 	</xs:simpleType>
-		<xs:simpleType name="SolicitudTension">
+	<xs:simpleType name="SolicitudTension">
 		<xs:annotation>
 			<xs:documentation> tipo de tensión solicitada (tabla 117)
 			M	Monofásica

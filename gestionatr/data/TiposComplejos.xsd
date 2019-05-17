@@ -566,12 +566,12 @@
 				</xs:simpleType>
 			</xs:element>
 			<xs:choice>
-				<xs:element name="Via" type="DireccionVía"/>
+				<xs:element name="Via" type="DireccionVia"/>
 				<xs:element name="ApartadoDeCorreos" type="X5"/>
 			</xs:choice>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="DireccionVía">
+	<xs:complexType name="DireccionVia">
 		<xs:sequence>
 			<xs:element name="TipoVia" type="TipoVia">
 				<xs:annotation>
