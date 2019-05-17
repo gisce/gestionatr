@@ -201,6 +201,9 @@ class MessageGas(Message):
             data = get_rec_attr(self.obj, tree, False)
             if data not in [None, False]:
                 return data.text
+            if self.processcode == '26':
+                tree = '{0}.atrcode'.format(self._header)
+                return get_rec_attr(self.obj, tree, False)
             raise except_f1('Error', u'Documento sin código de solicitud')
 
     @property
