@@ -58,6 +58,9 @@ XSD_DATA.update({
         'A1': 'A146.xsd',
         'A2': 'A246.xsd',
     },
+    '26': {
+        'A12': 'A1226.xsd',
+    },
 })
 
 MAIN_MESSAGE_XSD.update({
@@ -104,6 +107,8 @@ MAIN_MESSAGE_XSD.update({
     # 46
     'A146': 'a1',
     'A246': 'a2',
+    # 26
+    'A1226': 'a1226',
 })
 
 
@@ -196,6 +201,9 @@ class MessageGas(Message):
             data = get_rec_attr(self.obj, tree, False)
             if data not in [None, False]:
                 return data.text
+            if self.processcode == '26':
+                tree = '{0}.atrcode'.format(self._header)
+                return get_rec_attr(self.obj, tree, False)
             raise except_f1('Error', u'Documento sin código de solicitud')
 
     @property
