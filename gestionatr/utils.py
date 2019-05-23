@@ -1,4 +1,5 @@
 from gestionatr import defs
+from gestionatr import defs_gas
 import os
 from collections import namedtuple
 
@@ -23,6 +24,22 @@ def get_rec_attr(obj, attr, default=None):
 
 def get_description(code, table_name):
     table = getattr(defs, table_name, None)
+    if not table:
+        raise ValueError(
+            "The table with the name '{}' doesn't exist".format(table_name)
+        )
+    res = dict(table).get(code, None)
+    if not res:
+        raise ValueError(
+            "The key '{}' in the table '{}' doesn't exist".format(
+                code, table_name
+            )
+        )
+    return res
+
+
+def get_description_gas(code, table_name):
+    table = getattr(defs_gas, table_name, None)
     if not table:
         raise ValueError(
             "The table with the name '{}' doesn't exist".format(table_name)

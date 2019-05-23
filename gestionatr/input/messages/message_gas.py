@@ -61,6 +61,9 @@ XSD_DATA.update({
     '26': {
         'A12': 'A1226.xsd',
     },
+    '45': {
+        'A19': 'A1945.xsd',
+    },
 })
 
 MAIN_MESSAGE_XSD.update({
@@ -109,6 +112,8 @@ MAIN_MESSAGE_XSD.update({
     'A246': 'a2',
     # 26
     'A1226': 'a1226',
+    # 45
+    'A1945': 'a19',
 })
 
 

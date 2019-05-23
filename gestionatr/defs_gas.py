@@ -3110,6 +3110,7 @@ TAULA_TIPO_OPERACION = [
 ]
 TAULA_TIPO_ACTUACION = TAULA_TIPO_OPERACION
 TAULA_TIPO_OPERACION_COMER = [(x[0], x[1]) for x in TAULA_TIPO_OPERACION if x[2] == 'AMBOS']
+TAULA_TIPO_OPERACION_TODOS = [(x[0], x[1]) for x in TAULA_TIPO_OPERACION]
 
 TAULA_SITUACION_SUMINISTRO = [
     ('00', 'PENDIENTE COMUNICACION DE OBRA CORRIENTE'),
@@ -3729,4 +3730,11 @@ TAULA_TIPO_COMUNICACION_A12_26 = [
     ('01', "Corrección de errores puntuales"),
     ('05', "Actualización de datos: denominación de las calles, errores en los datos del cliente..."),
     ('06', "Reubicación tarifaria"),
+]
+
+TAULA_TIPO_COMUNICACION_A19_45 = [
+    ('08', "Comunicación de fecha y resultado de las inspecciones periódicas"),
+    ('09', "Comunicación de cortes y reinicios de actuación derivadas de inspección."),
+    ('10', "Comunicación de cortes y reinicios de actuaciones en campo derivadas de operaciones de emergencias"),
+    ('11', "Comunicación de actuación a petición del consumidor."),
 ]
