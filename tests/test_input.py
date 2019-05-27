@@ -3,7 +3,7 @@
 from . import unittest
 from .utils import get_data
 from gestionatr.input.messages import C1, C2, A3, B1, M1, D1, W1, Q1, R1, F1, Deadlines, \
-    A1_41, A1_02, A1_05, B7031, B7032, A1_44, A1_03, A1_48, A1_04, A1_46, A12_26
+    A1_41, A1_02, A1_05, B7031, B7032, A1_44, A1_03, A1_48, A1_04, A1_46, A12_26, A19_45
 from gestionatr.input.messages.F1 \
     import agrupar_lectures_per_data, obtenir_data_inici_i_final
 
@@ -3672,3 +3672,72 @@ class test_A12_26(unittest.TestCase):
         self.assertEqual(corrector.correctornumber, u'D123456')
         self.assertEqual(corrector.correctorproperty, u'01')
         self.assertEqual(corrector.correctortype, u'01')
+
+
+class test_A19_45(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a1945 = open(get_data("a1945.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a1945.close()
+
+    def test_a246(self):
+        a1945 = A19_45(self.xml_a1945)
+        a1945.parse_xml()
+        self.assertEqual(a1945.reqcode, '0014296514')
+        self.assertEqual(a1945.reqdate, '2019-01-02')
+        self.assertEqual(a1945.reqhour, '15:28:54')
+        self.assertEqual(a1945.cups, 'ES0217010143209335YG')
+        self.assertEqual(a1945.operationtype, 'A10009')
+        self.assertEqual(a1945.operationnum, '5838204')
+        self.assertEqual(a1945.responsedate, '2019-01-02')
+        self.assertEqual(a1945.responsehour, '15:28:55')
+        self.assertEqual(a1945.result, '13')
+        self.assertEqual(a1945.resultdesc, 'No Realizada')
+        self.assertEqual(a1945.closingtype, '028')
+        self.assertEqual(a1945.closingtypedesc, 'No realizada por causas imputables al cliente')
+        self.assertEqual(a1945.activationtype, '001')
+        self.assertEqual(a1945.activationtypedesc, 'Descripcion')
+        self.assertEqual(a1945.interventiondate, '2018-12-11')
+        self.assertEqual(a1945.interventionhour, '07:44:32')
+        self.assertEqual(a1945.resultinspection, '03')
+        self.assertEqual(a1945.resultinspectiondesc, 'AUSENTE')
+        self.assertEqual(a1945.visitnumber, '1')
+        self.assertEqual(a1945.counterchange, 'N')
+        self.assertEqual(a1945.removallecture, '50')
+        self.assertEqual(a1945.supplystatus, '01')
+        self.assertEqual(a1945.supplystatusdesc, 'Desc.Suply')
+        self.assertEqual(a1945.servicestatus, '00')
+        self.assertEqual(a1945.servicestatusdesc, 'EN SERVICIO')
+        self.assertEqual(a1945.extrainfo, 'COMENTARIIIS')
+        self.assertEqual(a1945.communicationreason, '08')
+        self.assertEqual(a1945.conceptnumber, u'2')
+        self.assertEqual(len(a1945.conceptlist), 2)
+        concept = a1945.conceptlist[1]
+        self.assertEqual(concept.level, u'1')
+        self.assertEqual(concept.code, u'0002')
+        self.assertEqual(concept.description, u'Desc')
+        self.assertEqual(concept.periodicity, u'03')
+        self.assertEqual(concept.units, u'1')
+        self.assertEqual(concept.unitimport, u'23.8')
+        self.assertEqual(concept.import_, u'23.8')
+        self.assertEqual(len(a1945.counterlist), 2)
+        counter = a1945.counterlist[1]
+        self.assertEqual(counter.countermodel, u'marca2')
+        self.assertEqual(counter.counternumber, u'C123456')
+        self.assertEqual(counter.counterpressure, u'13245.321')
+        self.assertEqual(counter.counterproperty, u'06')
+        self.assertEqual(counter.countertype, u'tipo2')
+        self.assertEqual(counter.reallecture, u'3000')
+        self.assertEqual(len(a1945.defectlist), 2)
+        defect = a1945.defectlist[1]
+        self.assertEqual(defect.code, u'002')
+        self.assertEqual(defect.description, u'Desc2')
+        self.assertEqual(len(a1945.registerdoclist), 2)
+        registerdoc = a1945.registerdoclist[1]
+        self.assertEqual(registerdoc.date, u'2018-01-01')
+        self.assertEqual(registerdoc.doctype, u'02')
+        self.assertEqual(registerdoc.url, u'http://gasalmatalas.com')
+        self.assertEqual(registerdoc.extrainfo, u'Comments')
+
