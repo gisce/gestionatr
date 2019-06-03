@@ -99,8 +99,10 @@ class R1(C2):
         tree = '{0}.SolicitudesInformacionAdicional'.format(self._header)
         obj = get_rec_attr(self.obj, tree, False)
         if obj:
-            for d in obj.SolicitudInformacionAdicional:
-                data.append(SolicitudInformacionAdicional(d))
+            sol = get_rec_attr(obj, 'SolicitudInformacionAdicional', False)
+            if sol:
+                for d in sol:
+                    data.append(SolicitudInformacionAdicional(d))
         return data
 
     @property
