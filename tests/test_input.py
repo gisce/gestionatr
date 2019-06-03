@@ -902,6 +902,7 @@ class test_R1(unittest.TestCase):
         self.xml_r102_accept = open(get_data("r102_accept.xml"), "r")
         self.xml_r103 = open(get_data("r103.xml"), "r")
         self.xml_r103_intervenciones = open(get_data("r103_intervenciones.xml"), "r")
+        self.xml_r103_no_add_info = open(get_data("r103_no_add_info.xml"), "r")
         self.xml_r104 = open(get_data("r104.xml"), "r")
         self.xml_r105 = open(get_data("r105.xml"), "r")
 
@@ -910,6 +911,7 @@ class test_R1(unittest.TestCase):
         self.xml_r102_accept.close()
         self.xml_r103.close()
         self.xml_r103_intervenciones.close()
+        self.xml_r103_no_add_info.close()
         self.xml_r104.close()
         self.xml_r105.close()
 
@@ -1062,6 +1064,22 @@ class test_R1(unittest.TestCase):
         self.assertEqual(intv2.numero_visita, u'10')
         self.assertEqual(intv2.resultado, u'001')
         self.assertEqual(intv2.tipo_intervencion, u'02')
+
+        # Sin Informacion Adicional
+        r1_noadd = R1(self.xml_r103_no_add_info)
+        r1_noadd.parse_xml()
+        dinfo = r1_noadd.datos_informacion
+        self.assertEqual(dinfo.tipo_comunicacion, u'04')
+        self.assertEqual(dinfo.codigo_reclamacion_distribuidora, u'12345678')
+        sols = r1_noadd.solicitudes_informacion_adicional
+        self.assertEqual(len(sols), 0)
+        retip = r1_noadd.solicitud_informacion_adicional_para_retipificacion
+        self.assertEqual(retip.tipo, u'02')
+        self.assertEqual(retip.subtipo, u'004')
+        self.assertEqual(retip.fecha_limite_envio, u'2019-06-19')
+        self.assertEqual(
+            r1_noadd.comentarios, u'Solicitud de datos para la retipificación'
+        )
 
     def test_r104(self):
         r1 = R1(self.xml_r104)
