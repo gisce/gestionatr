@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from gestionatr.output.messages.sw_d1 import MensajeNotificacionCambiosATRDesdeDistribuidor
+
 from . import unittest
 from .utils import get_data
 from gestionatr.input.messages import C1, C2, A3, B1, M1, D1, W1, Q1, R1, F1, Deadlines, \
@@ -787,9 +789,13 @@ class test_D1(unittest.TestCase):
 
     def setUp(self):
         self.xml_d101 = open(get_data("d101.xml"), "r")
+        self.xml_d102_accept = open(get_data("d102_accept.xml"), "r")
+        self.xml_d102_reject = open(get_data("d102_reject.xml"), "r")
 
     def tearDown(self):
         self.xml_d101.close()
+        self.xml_d102_accept.close()
+        self.xml_d102_reject.close()
 
     def test_d101(self):
         d1 = D1(self.xml_d101)
@@ -797,7 +803,80 @@ class test_D1(unittest.TestCase):
         self.assertEqual(d1.periodicidad_facturacion, u'01')
         self.assertEqual(d1.fecha_prevista_aplicacion_cambio_atr, u'2016-06-09')
         self.assertEqual(d1.motivo_cambio_atr_desde_distribuidora, u'01')
+        info = d1.info_registro_autocons
+        self.assertEqual(info.movimiento, u'A')
+        autoconsumo = info.autoconsumo
+        self.assertEqual(autoconsumo.cau, u'1234567890123456789012345')
+        self.assertEqual(autoconsumo.seccion_registro, u'2')
+        self.assertEqual(autoconsumo.sub_seccion, u'a0')
+        self.assertEqual(autoconsumo.colectivo, u'S')
+        self.assertEqual(autoconsumo.tipo_instalacion, u'01')
+        self.assertEqual(autoconsumo.esquema_medida, u'A')
+        suministro = info.datos_suministro
+        self.assertEqual(suministro.cups, u'ES1234000000000001JN0F')
+        self.assertEqual(suministro.tipo_cups, u'01')
+        self.assertEqual(suministro.tension_pf, u'BT')
+        self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')
+        inst_gen = info.datos_inst_gen[0]
+        self.assertEqual(inst_gen.cil, u'1234567890qwertyuiop12345')
+        self.assertEqual(inst_gen.tec_generador, u'b12')
+        self.assertEqual(inst_gen.combustible, u'Diesel')
+        self.assertEqual(inst_gen.pot_instalada_gen, u'100')
+        self.assertEqual(inst_gen.tension_gen, u'BT')
+        self.assertEqual(inst_gen.ssaa, u'S')
+        self.assertEqual(inst_gen.ref_catastro, u'1234567890qwertyuidf')
+        utm = inst_gen.utm
+        self.assertEqual(utm.x, u'100')
+        self.assertEqual(utm.y, u'200')
+        self.assertEqual(utm.huso, u'40')
+        self.assertEqual(utm.banda, u'E')
+        titular = inst_gen.titular_representante_gen
+        self.assertEqual(titular.nombre.nombre_de_pila, u'Juan')
+        self.assertEqual(titular.nombre.primer_apellido, u'López')
+        self.assertEqual(titular.nombre.segundo_apellido, u'Sánchez')
+        self.assertEqual(titular.nif, u'49916604A')
+        self.assertEqual(titular.telefono[0].prefijo_pais, u'0034')
+        self.assertEqual(titular.telefono[0].numero, u'933834841')
+        self.assertEqual(titular.correo_electronico, u'mail_falso@dominio.com')
+        direccion = titular.direccion
+        self.assertEqual(direccion.pais, u'España')
+        self.assertEqual(direccion.provincia, u'17')
+        self.assertEqual(direccion.municipio, u'171181')
+        self.assertEqual(direccion.poblacion, u'118000400')
+        self.assertEqual(direccion.cod_postal, u'17230')
+        self.assertEqual(direccion.via.tipo_via, u'CL')
+        self.assertEqual(direccion.via.calle, u'Pau Casals')
+        self.assertEqual(direccion.via.numero_finca, u'18')
+        self.assertEqual(direccion.via.duplicador_finca, u'1')
+        self.assertEqual(direccion.via.escalera, u'D')
+        self.assertEqual(direccion.via.piso, u'3')
+        self.assertEqual(direccion.via.puerta, u'2')
+        self.assertEqual(direccion.via.tipo_aclarador_finca, u'BI')
+        self.assertEqual(direccion.via.aclarador_finca, u'Bar')
+        self.assertEqual(info.comentarios, u'Esto es un comentario')
 
+    def test_d102_accept(self):
+        d1 = D1(self.xml_d102_accept)
+        d1.parse_xml()
+        # Datos Aceptacion
+        self.assertEqual(d1.datos_aceptacion.fecha_aceptacion, u'2016-06-06')
+
+    def test_d102_reject(self):
+        d1 = D1(self.xml_d102_reject)
+        d1.parse_xml()
+        self.assertEqual(d1.fecha_rechazo, u'2016-07-20')
+        self.assertEqual(len(d1.registros_documento), 2)
+        doc1 = d1.registros_documento[0]
+        doc2 = d1.registros_documento[1]
+        self.assertEqual(doc1.tipo_doc_aportado, u'08')
+        self.assertEqual(doc1.direccion_url, u'http://eneracme.com/docs/NIF11111111H.pdf')
+        self.assertEqual(doc2.tipo_doc_aportado, u'07')
+        self.assertEqual(doc2.direccion_url, u'http://eneracme.com/docs/NIF11111111H.pdf')
+        self.assertEqual(len(d1.rechazos), 1)
+        rej = d1.rechazos[0]
+        self.assertEqual(rej.secuencial, u'1')
+        self.assertEqual(rej.codigo_motivo, u'F1')
+        self.assertEqual(rej.comentarios, u'Motiu de rebuig F1')
 
 class test_W1(unittest.TestCase):
 

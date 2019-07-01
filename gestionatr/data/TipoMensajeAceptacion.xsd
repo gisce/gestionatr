@@ -32,6 +32,11 @@
 			<xs:element name="Contrato" type="ContratoAceptacionM"/>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="AceptacionD1">
+		<xs:sequence>
+			<xs:element name="DatosAceptacion" type="DatosAceptacionD1"/>
+		</xs:sequence>
+	</xs:complexType>
 	<!-- Tipos secundarios de la transaccion actual -->
 	<!-- Datos contrato aceptacion C1 -->
 	<xs:complexType name="ContratoAceptacionC1">
@@ -111,6 +116,12 @@
 					<xs:documentation>Tabla 116</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Datos  aceptacion D1 -->
+	<xs:complexType name="DatosAceptacionD1">
+		<xs:sequence>
+			<xs:element name="FechaAceptacion" type="xs:date"/>
 		</xs:sequence>
 	</xs:complexType>
 	<!-- Datos contrato aceptacion C2 -->

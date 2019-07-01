@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia León (Comisión Nacional de los Mercados y la Competencia) -->
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Pelayo García Bermejo (Comisión Nacional de los Mercados y la Competencia) -->
 <xs:schema xmlns="http://localhost/elegibilidad" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
 	<xs:annotation>
@@ -1063,8 +1063,9 @@
 	<xs:complexType name="NotificacionCambiosATRDesdeDistribuidor">
 		<xs:sequence>
 			<xs:element name="MotivoCambioATRDesdeDistribuidora" type="MotivoCambioATRDesdeDistribuidora"/>
-			<xs:element name="FechaPrevistaAplicacionCambioATR" type="xs:date"/>
-			<xs:element name="PeriodicidadFacturacion" type="PeriodicidadFacturacion"/>
+			<xs:element name="FechaPrevistaAplicacionCambioATR" type="xs:date" minOccurs="0"/>
+			<xs:element name="PeriodicidadFacturacion" type="PeriodicidadFacturacion" minOccurs="0"/>
+			<xs:element name="InfoRegistoAutocons" type="TypeInfoRegistoAutocons" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Potencias">
@@ -1246,5 +1247,153 @@
 				</xs:simpleType>
 			</xs:element>
 		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TypeInfoRegistoAutocons">
+		<xs:sequence>
+			<xs:element name="Movimiento" type="AltaBajaModificacion">
+				<xs:annotation>
+					<xs:documentation>Tabla 37</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Autoconsumo" type="TypeAutoconsumo"/>
+			<xs:element name="DatosSuministro" type="TypeDatosSuministro"/>
+			<xs:element name="DatosInstGen" type="TypeDatosInstGen" maxOccurs="unbounded"/>
+			<xs:element name="Comentarios" type="X4000" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TypeAutoconsumo">
+		<xs:sequence>
+			<xs:element name="CAU" type="CodigoAutoconsumo"/>
+			<xs:element name="SeccionRegistro" type="SeccionRegistro">
+				<xs:annotation>
+					<xs:documentation>Tabla 127</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SubSeccion" type="SubSeccion" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 128</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Colectivo" type="Indicativo">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TipoInstalacion" type="TipoInstalacion">
+				<xs:annotation>
+					<xs:documentation>Tabla 129</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EsquemaMedida" type="EsquemaMedida">
+				<xs:annotation>
+					<xs:documentation>Tabla 130</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TypeDatosSuministro">
+		<xs:sequence>
+			<xs:element name="CUPS" type="Codigo"/>
+			<xs:element name="TipoCUPS" type="TipoCUPS">
+				<xs:annotation>
+					<xs:documentation>Tabla 131</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TensionPF" type="TipoTension">
+				<xs:annotation>
+					<xs:documentation>Tabla 132</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RefCatastro" type="RefCatastro"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TypeDatosInstGen">
+		<xs:sequence>
+			<xs:element name="CIL" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="CodigoCIL">
+						<xs:minLength value="25"/>
+						<xs:maxLength value="25"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="TecGenerador" type="TecGenerador">
+				<xs:annotation>
+					<xs:documentation>Tabla 126</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Combustible" type="X60" minOccurs="0"/>
+			<xs:element name="PotInstaladaGen" type="Decimal10V3"/>
+			<xs:element name="TensionGen" type="TipoTension">
+				<xs:annotation>
+					<xs:documentation>Tabla 132</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SSAA" type="Indicativo">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RefCatastro" type="RefCatastro"/>
+			<xs:element name="UTM" type="TypeUTM"/>
+			<xs:element name="TitularRepresentanteGen" type="TypeTitularGeneracion" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TypeTitularGeneracion">
+		<xs:sequence>
+			<xs:element name="Nombre" type="TypeNombre"/>
+			<xs:element name="NIF" type="X14"/>
+			<xs:element name="Telefono" type="TelefonoInternacional" minOccurs="1" maxOccurs="5"/>
+			<xs:element name="CorreoElectronico" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X60">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Direccion" type="DireccionCont"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TypeUTM">
+		<xs:sequence>
+			<xs:element name="X" type="X8"/>
+			<xs:element name="Y" type="X8"/>
+			<xs:element name="Huso" type="TypeHuso"/>
+			<xs:element name="Banda" type="TypeBanda" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TypeNombre">
+		<xs:choice>
+			<xs:sequence>
+				<xs:element name="NombreDePila">
+					<xs:simpleType>
+						<xs:restriction base="X45">
+							<xs:whiteSpace value="collapse"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="PrimerApellido">
+					<xs:simpleType>
+						<xs:restriction base="X45">
+							<xs:whiteSpace value="collapse"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="SegundoApellido" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="X45">
+							<xs:whiteSpace value="collapse"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			</xs:sequence>
+			<xs:element name="RazonSocial">
+				<xs:simpleType>
+					<xs:restriction base="X45">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:choice>
 	</xs:complexType>
 </xs:schema>
