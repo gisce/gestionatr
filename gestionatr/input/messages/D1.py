@@ -35,24 +35,24 @@ class D1(C1):
 
     @property
     def info_registro_autocons(self):
-        tree = '{0}.InfoRegistoAutocons'.format(self._header)
+        tree = '{0}.InfoRegistroAutocons'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data not in [None, False]:
-            return InfoRegistoAutocons(data)
+            return InfoRegistroAutocons(data)
         else:
             return False
 
 
-class InfoRegistoAutocons(object):
+class InfoRegistroAutocons(object):
 
     def __init__(self, data):
-        self.info_registo_autocons = data
+        self.info_registro_autocons = data
 
     @property
     def movimiento(self):
         data = ''
         try:
-            data = self.info_registo_autocons.Movimiento.text
+            data = self.info_registro_autocons.Movimiento.text
         except AttributeError:
             pass
         return data
@@ -61,7 +61,7 @@ class InfoRegistoAutocons(object):
     def autoconsumo(self):
         data = ''
         try:
-            data = Autoconsumo(self.info_registo_autocons.Autoconsumo)
+            data = Autoconsumo(self.info_registro_autocons.Autoconsumo)
         except AttributeError:
             pass
         return data
@@ -70,7 +70,7 @@ class InfoRegistoAutocons(object):
     def datos_suministro(self):
         data = ''
         try:
-            data = DatosSuministro(self.info_registo_autocons.DatosSuministro)
+            data = DatosSuministro(self.info_registro_autocons.DatosSuministro)
         except AttributeError:
             pass
         return data
@@ -79,7 +79,7 @@ class InfoRegistoAutocons(object):
     def datos_inst_gen(self):
         data = []
         try:
-            for datos in self.info_registo_autocons.DatosInstGen:
+            for datos in self.info_registro_autocons.DatosInstGen:
                 data.append(DatosInstGen(datos))
         except AttributeError:
             pass
@@ -89,7 +89,7 @@ class InfoRegistoAutocons(object):
     def comentarios(self):
         data = ''
         try:
-            data = self.info_registo_autocons.Comentarios.text
+            data = self.info_registro_autocons.Comentarios.text
         except AttributeError:
             pass
         return data

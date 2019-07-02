@@ -1,13 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from gestionatr.output.messages.sw_d1 import MensajeNotificacionCambiosATRDesdeDistribuidor
-
-from . import unittest
-from .utils import get_data
 from gestionatr.input.messages import C1, C2, A3, B1, M1, D1, W1, Q1, R1, F1, Deadlines, \
     A1_41, A1_02, A1_05, B7031, B7032, A1_44, A1_03, A1_48, A1_04, A1_46, A12_26, A19_45
-from gestionatr.input.messages.F1 \
-    import agrupar_lectures_per_data, obtenir_data_inici_i_final
+from gestionatr.input.messages.F1 import agrupar_lectures_per_data, obtenir_data_inici_i_final
+from . import unittest
+from .utils import get_data
 
 
 class test_MessageBase(unittest.TestCase):
@@ -789,11 +786,15 @@ class test_D1(unittest.TestCase):
 
     def setUp(self):
         self.xml_d101 = open(get_data("d101.xml"), "r")
+        self.xml_d101_min_with_info = open(get_data("d101_min_with_info.xml"), "r")
+        self.xml_d101_fully_min = open(get_data("d101_fully_min.xml"), "r")
         self.xml_d102_accept = open(get_data("d102_accept.xml"), "r")
         self.xml_d102_reject = open(get_data("d102_reject.xml"), "r")
 
     def tearDown(self):
         self.xml_d101.close()
+        self.xml_d101_fully_min.close()
+        self.xml_d101_min_with_info.close()
         self.xml_d102_accept.close()
         self.xml_d102_reject.close()
 
@@ -854,6 +855,53 @@ class test_D1(unittest.TestCase):
         self.assertEqual(direccion.via.tipo_aclarador_finca, u'BI')
         self.assertEqual(direccion.via.aclarador_finca, u'Bar')
         self.assertEqual(info.comentarios, u'Esto es un comentario')
+
+    def test_d101_min_with_info(self):
+        d1 = D1(self.xml_d101_min_with_info)
+        d1.parse_xml()
+        self.assertEqual(d1.motivo_cambio_atr_desde_distribuidora, u'04')
+        info = d1.info_registro_autocons
+        self.assertEqual(info.movimiento, u'A')
+        autoconsumo = info.autoconsumo
+        self.assertEqual(autoconsumo.cau, u'1234567890123456789012345')
+        self.assertEqual(autoconsumo.seccion_registro, u'2')
+        self.assertEqual(autoconsumo.colectivo, u'S')
+        self.assertEqual(autoconsumo.tipo_instalacion, u'01')
+        self.assertEqual(autoconsumo.esquema_medida, u'A')
+        suministro = info.datos_suministro
+        self.assertEqual(suministro.cups, u'ES1234000000000001JN0F')
+        self.assertEqual(suministro.tipo_cups, u'01')
+        self.assertEqual(suministro.tension_pf, u'BT')
+        self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')
+        inst_gen = info.datos_inst_gen[0]
+        self.assertEqual(inst_gen.tec_generador, u'b12')
+        self.assertEqual(inst_gen.pot_instalada_gen, u'100')
+        self.assertEqual(inst_gen.tension_gen, u'BT')
+        self.assertEqual(inst_gen.ssaa, u'S')
+        self.assertEqual(inst_gen.ref_catastro, u'1234567890qwertyuidf')
+        utm = inst_gen.utm
+        self.assertEqual(utm.x, u'100')
+        self.assertEqual(utm.y, u'200')
+        self.assertEqual(utm.huso, u'40')
+        titular = inst_gen.titular_representante_gen
+        self.assertEqual(titular.nombre.nombre_de_pila, u'Juan')
+        self.assertEqual(titular.nombre.primer_apellido, u'López')
+        self.assertEqual(titular.nif, u'49916604A')
+        self.assertEqual(titular.telefono[0].prefijo_pais, u'0034')
+        self.assertEqual(titular.telefono[0].numero, u'933834841')
+        direccion = titular.direccion
+        self.assertEqual(direccion.pais, u'España')
+        self.assertEqual(direccion.provincia, u'17')
+        self.assertEqual(direccion.municipio, u'171181')
+        self.assertEqual(direccion.cod_postal, u'17230')
+        self.assertEqual(direccion.via.tipo_via, u'CL')
+        self.assertEqual(direccion.via.calle, u'Pau Casals')
+        self.assertEqual(direccion.via.numero_finca, u'18')
+
+    def test_d101_fully_min(self):
+        d1 = D1(self.xml_d101_fully_min)
+        d1.parse_xml()
+        self.assertEqual(d1.motivo_cambio_atr_desde_distribuidora, u'01')
 
     def test_d102_accept(self):
         d1 = D1(self.xml_d102_accept)

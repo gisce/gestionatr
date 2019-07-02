@@ -11,15 +11,12 @@
         <CUPS>ES0116000000011531LK0F</CUPS>
     </Cabecera>
     <NotificacionCambiosATRDesdeDistribuidor>
-        <MotivoCambioATRDesdeDistribuidora>01</MotivoCambioATRDesdeDistribuidora>
-        <FechaPrevistaAplicacionCambioATR>2016-06-09</FechaPrevistaAplicacionCambioATR>
-        <PeriodicidadFacturacion>01</PeriodicidadFacturacion>
+        <MotivoCambioATRDesdeDistribuidora>04</MotivoCambioATRDesdeDistribuidora>
         <InfoRegistroAutocons>
             <Movimiento>A</Movimiento>
             <Autoconsumo>
                 <CAU>1234567890123456789012345</CAU>
                 <SeccionRegistro>2</SeccionRegistro>
-                <SubSeccion>a0</SubSeccion>
                 <Colectivo>S</Colectivo>
                 <TipoInstalacion>01</TipoInstalacion>
                 <EsquemaMedida>A</EsquemaMedida>
@@ -31,9 +28,7 @@
                 <RefCatastro>1234567890qwertyuiop</RefCatastro>
             </DatosSuministro>
             <DatosInstGen>
-                <CIL>1234567890qwertyuiop12345</CIL>
                 <TecGenerador>b12</TecGenerador>
-                <Combustible>Diesel</Combustible>
                 <PotInstaladaGen>100</PotInstaladaGen>
                 <TensionGen>BT</TensionGen>
                 <SSAA>S</SSAA>
@@ -42,13 +37,11 @@
                     <X>100</X>
                     <Y>200</Y>
                     <Huso>40</Huso>
-                    <Banda>E</Banda>
                 </UTM>
                 <TitularRepresentanteGen>
                     <Nombre>
                         <NombreDePila>Juan</NombreDePila>
                         <PrimerApellido>López</PrimerApellido>
-                        <SegundoApellido>Sánchez</SegundoApellido>
                     </Nombre>
                     <NIF>49916604A</NIF>
                     <Telefono>
@@ -63,28 +56,19 @@
                         <PrefijoPais>0034</PrefijoPais>
                         <Numero>683834841</Numero>
                     </Telefono>
-                    <CorreoElectronico>mail_falso@dominio.com</CorreoElectronico>
                     <Direccion>
                         <Pais>España</Pais>
                         <Provincia>17</Provincia>
                         <Municipio>171181</Municipio>
-                        <Poblacion>118000400</Poblacion>
                         <CodPostal>17230</CodPostal>
                         <Via>
                             <TipoVia>CL</TipoVia>
                             <Calle>Pau Casals</Calle>
                             <NumeroFinca>18</NumeroFinca>
-                            <DuplicadorFinca>1</DuplicadorFinca>
-                            <Escalera>D</Escalera>
-                            <Piso>3</Piso>
-                            <Puerta>2</Puerta>
-                            <TipoAclaradorFinca>BI</TipoAclaradorFinca>
-                            <AclaradorFinca>Bar</AclaradorFinca>
                         </Via>
                     </Direccion>
                 </TitularRepresentanteGen>
             </DatosInstGen>
-            <Comentarios>Esto es un comentario</Comentarios>
         </InfoRegistroAutocons>
     </NotificacionCambiosATRDesdeDistribuidor>
 </MensajeNotificacionCambiosATRDesdeDistribuidor>
