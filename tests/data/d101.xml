@@ -15,19 +15,15 @@
         <FechaPrevistaAplicacionCambioATR>2016-06-09</FechaPrevistaAplicacionCambioATR>
         <PeriodicidadFacturacion>01</PeriodicidadFacturacion>
         <InfoRegistroAutocons>
-            <Movimiento>A</Movimiento>
             <Autoconsumo>
                 <CAU>1234567890123456789012345</CAU>
                 <SeccionRegistro>2</SeccionRegistro>
                 <SubSeccion>a0</SubSeccion>
                 <Colectivo>S</Colectivo>
-                <TipoInstalacion>01</TipoInstalacion>
-                <EsquemaMedida>A</EsquemaMedida>
             </Autoconsumo>
             <DatosSuministro>
                 <CUPS>ES1234000000000001JN0F</CUPS>
                 <TipoCUPS>01</TipoCUPS>
-                <TensionPF>BT</TensionPF>
                 <RefCatastro>1234567890qwertyuiop</RefCatastro>
             </DatosSuministro>
             <DatosInstGen>
@@ -35,7 +31,8 @@
                 <TecGenerador>b12</TecGenerador>
                 <Combustible>Diesel</Combustible>
                 <PotInstaladaGen>100</PotInstaladaGen>
-                <TensionGen>BT</TensionGen>
+                <TipoInstalacion>01</TipoInstalacion>
+                <EsquemaMedida>B</EsquemaMedida>
                 <SSAA>S</SSAA>
                 <RefCatastro>1234567890qwertyuidf</RefCatastro>
                 <UTM>

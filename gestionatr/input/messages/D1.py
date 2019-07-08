@@ -49,15 +49,6 @@ class InfoRegistroAutocons(object):
         self.info_registro_autocons = data
 
     @property
-    def movimiento(self):
-        data = ''
-        try:
-            data = self.info_registro_autocons.Movimiento.text
-        except AttributeError:
-            pass
-        return data
-
-    @property
     def autoconsumo(self):
         data = ''
         try:
@@ -136,24 +127,6 @@ class Autoconsumo(object):
             pass
         return data
 
-    @property
-    def tipo_instalacion(self):
-        data = ''
-        try:
-            data = self.autoconsumo.TipoInstalacion.text
-        except AttributeError:
-            pass
-        return data
-
-    @property
-    def esquema_medida(self):
-        data = ''
-        try:
-            data = self.autoconsumo.EsquemaMedida.text
-        except AttributeError:
-            pass
-        return data
-
 
 class DatosSuministro(object):
 
@@ -174,15 +147,6 @@ class DatosSuministro(object):
         data = ''
         try:
             data = self.datos_suministro.TipoCUPS.text
-        except AttributeError:
-            pass
-        return data
-
-    @property
-    def tension_pf(self):
-        data = ''
-        try:
-            data = self.datos_suministro.TensionPF.text
         except AttributeError:
             pass
         return data
@@ -239,10 +203,19 @@ class DatosInstGen(object):
         return data
 
     @property
-    def tension_gen(self):
+    def tipo_instalacion(self):
         data = ''
         try:
-            data = self.datos_inst_gen.TensionGen.text
+            data = self.datos_inst_gen.TipoInstalacion.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def esquema_medida(self):
+        data = ''
+        try:
+            data = self.datos_inst_gen.EsquemaMedida.text
         except AttributeError:
             pass
         return data

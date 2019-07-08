@@ -13,26 +13,19 @@
     <NotificacionCambiosATRDesdeDistribuidor>
         <MotivoCambioATRDesdeDistribuidora>04</MotivoCambioATRDesdeDistribuidora>
         <InfoRegistroAutocons>
-            <Movimiento>A</Movimiento>
             <Autoconsumo>
                 <CAU>1234567890123456789012345</CAU>
                 <SeccionRegistro>2</SeccionRegistro>
                 <Colectivo>S</Colectivo>
-                <TipoInstalacion>01</TipoInstalacion>
-                <EsquemaMedida>A</EsquemaMedida>
             </Autoconsumo>
             <DatosSuministro>
                 <CUPS>ES1234000000000001JN0F</CUPS>
-                <TipoCUPS>01</TipoCUPS>
-                <TensionPF>BT</TensionPF>
-                <RefCatastro>1234567890qwertyuiop</RefCatastro>
             </DatosSuministro>
             <DatosInstGen>
                 <TecGenerador>b12</TecGenerador>
                 <PotInstaladaGen>100</PotInstaladaGen>
-                <TensionGen>BT</TensionGen>
+                <TipoInstalacion>01</TipoInstalacion>
                 <SSAA>S</SSAA>
-                <RefCatastro>1234567890qwertyuidf</RefCatastro>
                 <UTM>
                     <X>100</X>
                     <Y>200</Y>

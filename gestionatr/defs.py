@@ -1974,7 +1974,11 @@ TABLA_108 = [('01', u'Mensual'),
 
 TABLA_109 = [('01', u'Telegestión Operativa con CCH'),
              ('02', u'Telegestión No Operativa'),
-             ('03', u'Telegestión Operativa sin CCH'), ]
+             ('03', u'Telegestión Operativa sin CCH'),
+             ('04', u'Alta en autoconsumo'),
+             ('05', u'Modificación de tipo de autoconsumo'),
+             ('06', u'Modificación coeficiente de reparto'),
+             ('07', u'Modificación potencia generación'), ]
 
 TABLA_110 = [('01', u'Acompaña curva de carga'),
              ('02', u'Perfilado'),
@@ -2025,3 +2029,89 @@ TABLA_117 = [
     ('M', 'Monofásica'),
     ('T', 'Trifásica')
 ]
+
+TABLA_126 = [
+    ('a11', u'Cogeneraciones que utilicen como combustible el gas natural, siempre que éste suponga al menos el 95 '
+            u'por ciento de la energía primaria utilizada, o al menos el 65 por ciento de la energía primaria '
+            u'utilizada cuando el resto provenga de biomasa o biogás de los grupos b.6, b.7 y b.8; siendo los '
+            u'porcentajes de la energía primaria utilizada citados medidos por el poder calorífico inferior.'),
+    ('a12', u'Cogeneraciones que utilicen como combustible principal derivados de petróleo o carbón, siempre que '
+            u'suponga al menos el 95 por ciento de la energía primaria utilizada, medida por el poder '
+            u'calorífico inferior'),
+    ('a13', u'Resto de cogeneraciones que utilicen gas natural o derivados de petróleo o carbón, y no cumplan '
+            u'con los límites de consumo establecidos para los subgrupos a.1.1 ó a.1.2.'),
+    ('a20', u'Instalaciones que incluyan una central que utilice energías residuales procedentes de cualquier '
+            u'instalación, máquina o proceso industrial cuya finalidad no sea la producción de energía eléctrica.'),
+    ('b11', u'Instalaciones que únicamente utilicen la radiación solar como energía primaria mediante la tecnología '
+            u'fotovoltaica.'),
+    ('b12', u'Instalaciones que únicamente utilicen procesos térmicos para la transformación de la energía solar, '
+            u'como energía primaria, en electricidad.'),
+    ('b21', u'Instalaciones eólicas ubicadas en tierra.'),
+    ('b22', u'Instalaciones eólicas ubicadas en espacios marinos, que incluyen tanto las aguas interiores como el '
+            u'mar territorial.'),
+    ('b30', u'Instalaciones que únicamente utilicen como energía primaria la geotérmica, hidrotérmica, aerotérmica, '
+            u'la de las olas, la de las mareas, la de las rocas calientes y secas, la oceanotérmica y la energía de '
+            u'las corrientes marinas.'),
+    ('b41', u'Centrales hidroeléctricas cuyas instalaciones hidráulicas (presa o azud, toma, canal y otras) hayan '
+            u'sido construidas exclusivamente para uso hidroeléctrico.'),
+    ('b42', u'Centrales hidroeléctricas que hayan sido construidas en infraestructuras existentes (presas, canales '
+            u'o conducciones) o dedicadas a otros usos distintos al hidroeléctrico.'),
+    ('b51', u'Centrales hidroeléctricas cuyas instalaciones hidráulicas (presa o azud, toma, canal y otras) hayan '
+            u'sido construidas exclusivamente para uso hidroeléctrico.'),
+    ('b52', u'Centrales hidroeléctricas que hayan sido construidas en infraestructuras existentes (presa, canales o '
+            u'conducciones) o dedicadas a otros usos distintos al hidroeléctrico.'),
+    ('b60', u'Centrales de generación eléctrica o de cogeneración que utilicen como combustible principal biomasa '
+            u'procedente de cultivos energéticos, de actividades agrícolas, ganaderas o de jardinerías, de '
+            u'aprovechamientos forestales y otras operaciones silvícolas en las masas forestales y espacios verdes, '
+            u'en los términos que figuran en el anexo I. Se entenderá como combustible principal aquel combustible '
+            u'que suponga, como mínimo, el 90 por ciento de la energía primaria utilizada, medida por el poder '
+            u'calorífico inferior.'),
+    ('b71', u'Instalaciones que empleen como combustible principal el biogás de vertederos controlados. Estas '
+            u'instalaciones podrán abastecerse con hasta un 50 por ciento de energía primaria procedente de biogás '
+            u'generado en digestores.'),
+    ('b72', u'Instalaciones que empleen como combustible principal biolíquidos o el biogás generado en digestores '
+            u'procedente de cultivos energéticos o de restos agrícolas, de deyecciones ganaderas, de residuos '
+            u'biodegradables de instalaciones industriales, de residuos domiciliarios o similares, de lodos de '
+            u'depuración de aguas residuales u otros para los cuales sea de aplicación el proceso de digestión '
+            u'anaerobia, tanto individualmente como en co-digestión. Estas instalaciones podrán abastecerse con '
+            u'hasta un 50 por ciento de energía primaria procedente de biogás de vertederos controlados.'),
+    ('b80', u'Centrales de generación eléctrica o de cogeneración que utilicen como combustible principal biomasa '
+            u'procedente de instalaciones industriales del sector agrícola o forestal en los términos que figuran en '
+            u'el anexo I. Se entenderá como combustible principal aquel combustible que suponga, como mínimo, el 90 '
+            u'por ciento de la energía primaria utilizada, medida por el poder calorífico inferior.'),
+    ('c10', u'Centrales que utilicen como combustible principal residuos domésticos y similares.'),
+    ('c20', u'Centrales que utilicen como combustible principal otros residuos no contemplados en el grupo c.1, '
+            u'combustibles de los grupos b.6, b.7 y b.8 cuando no cumplan con los límites de consumo establecidos '
+            u'para los citados grupos, licores negros y las centrales que a la entrada en vigor de este real decreto '
+            u'estuvieran inscritas en la categoría c) grupo c.3 prevista en el artículo 2.1 del Real Decreto '
+            u'661/2007, de 25 de mayo, por el que se regula la actividad de producción de energía eléctrica en '
+            u'régimen especial.'),
+    ('c30', u'Centrales que a la entrada en vigor de este real decreto estuvieran acogidas a la categoría c) grupo '
+            u'c.4 prevista en el artículo 2.1 del Real Decreto 661/2007, de 25 de mayo, utilizando como combustible '
+            u'productos de explotaciones mineras de calidades no comerciales para la generación eléctrica por su '
+            u'elevado contenido en azufre o cenizas, representando los residuos más del 25 por ciento de la energía '
+            u'primaria utilizada.'),
+]
+
+TABLA_127 = [('1', u'Sin excedentes'),
+             ('2', u'Con excedentes'), ]
+
+TABLA_128 = [('a0', u'Con excedentes y mecanismo de compensación simplificado'),
+             ('b1', u'Con excedentes sin mecanismo de compensación y un único contrato de suministro'),
+             ('b2', u'Con excedentes sin mecanismo de compensación y varios contratos de suministro'), ]
+
+TABLA_129 = [('01', u'Red interior'),
+             ('02', u'Red interior da varios consumidores (instalación de enlace)'),
+             ('03', u'Próxima a través de red'), ]
+
+TABLA_130 = [('A', u'EdM Bidireccional en PF'),
+             ('B', u'EdM Bidireccional en PF y EdM gen. Neta'),
+             ('C', u'EdM Consumo Total y EdM bidireccional gen. Neta'),
+             ('D', u'EdM Consumo Total y EdM gen bruta y EdM SSAA'),
+             ('E', u'Configuración singular'), ]
+
+TABLA_131 = [('01', u'Consumo'),
+             ('02', u'Servicios Auxiliares'), ]
+
+TABLA_132 = [('BT', u'Baja tensión, si tensión <= 1kV'),
+             ('AT', u'Alta tensión, si tensión >1kV'), ]

@@ -34,12 +34,11 @@ class NotificacionCambiosATRDesdeDistribuidor(XmlModel):
 
 class InfoRegistroAutocons(XmlModel):
 
-    _sort_order = ('info_registro_autocons', 'movimiento', 'autoconsumo', 'datos_suministro', 'datos_inst_gen',
+    _sort_order = ('info_registro_autocons', 'autoconsumo', 'datos_suministro', 'datos_inst_gen',
                    'comentarios')
 
     def __init__(self):
         self.info_registro_autocons = XmlField('InfoRegistroAutocons')
-        self.movimiento = XmlField('Movimiento')
         self.autoconsumo = Autoconsumo()
         self.datos_suministro = DatosSuministro()
         self.datos_inst_gen = DatosInstGen()
@@ -49,8 +48,7 @@ class InfoRegistroAutocons(XmlModel):
 
 class Autoconsumo(XmlModel):
 
-    _sort_order = ('autoconsumo', 'cau', 'seccion_registro', 'sub_seccion', 'colectivo', 'tipo_instalacion',
-                   'esquema_medida')
+    _sort_order = ('autoconsumo', 'cau', 'seccion_registro', 'sub_seccion', 'colectivo')
 
     def __init__(self):
         self.autoconsumo = XmlField('Autoconsumo')
@@ -58,28 +56,25 @@ class Autoconsumo(XmlModel):
         self.seccion_registro = XmlField('SeccionRegistro')
         self.sub_seccion = XmlField('SubSeccion')
         self.colectivo = XmlField('Colectivo')
-        self.tipo_instalacion = XmlField('TipoInstalacion')
-        self.esquema_medida = XmlField('EsquemaMedida')
         super(Autoconsumo, self).__init__('Autoconsumo', 'autoconsumo')
 
 
 class DatosSuministro(XmlModel):
 
-    _sort_order = ('datos_suministro', 'cups', 'tipo_cups', 'tension_pf', 'ref_catastro')
+    _sort_order = ('datos_suministro', 'cups', 'tipo_cups', 'ref_catastro')
 
     def __init__(self):
         self.datos_suministro = XmlField('DatosSuministro')
         self.cups = XmlField('CUPS')
         self.tipo_cups = XmlField('TipoCUPS')
-        self.tension_pf = XmlField('TensionPF')
         self.ref_catastro = XmlField('RefCatastro')
         super(DatosSuministro, self).__init__('DatosSuministro', 'datos_suministro')
 
 
 class DatosInstGen(XmlModel):
 
-    _sort_order = ('datos_inst_gen', 'cil', 'tec_generador', 'combustible', 'pot_instalada_gen', 'tension_gen', 'ssaa',
-                   'ref_catastro', 'utm', 'titular_representante_gen')
+    _sort_order = ('datos_inst_gen', 'cil', 'tec_generador', 'combustible', 'pot_instalada_gen', 'tipo_instalacion',
+                   'esquema_medida', 'ssaa', 'ref_catastro', 'utm', 'titular_representante_gen')
 
     def __init__(self):
         self.datos_inst_gen = XmlField('DatosInstGen')
@@ -87,7 +82,8 @@ class DatosInstGen(XmlModel):
         self.tec_generador = XmlField('TecGenerador')
         self.combustible = XmlField('Combustible')
         self.pot_instalada_gen = XmlField('PotInstaladaGen')
-        self.tension_gen = XmlField('TensionGen')
+        self.tipo_instalacion = XmlField('TipoInstalacion')
+        self.esquema_medida = XmlField('EsquemaMedida')
         self.ssaa = XmlField('SSAA')
         self.ref_catastro = XmlField('RefCatastro')
         self.utm = UTM()
@@ -110,13 +106,12 @@ class UTM(XmlModel):
 
 class TitularRepresentanteGen(XmlModel):
 
-    _sort_order = ('titular_representante_gen', 'nombre', 'razon_social', 'nif', 'telefono', 'correo_electronico',
+    _sort_order = ('titular_representante_gen', 'nombre', 'nif', 'telefono', 'correo_electronico',
                    'direccion')
 
     def __init__(self):
         self.titular_representante_gen = XmlField('TitularRepresentanteGen')
         self.nombre = Nombre()
-        self.razon_social = XmlField('RazonSocial')
         self.nif = XmlField('NIF')
         self.telefono = Telefono()
         self.correo_electronico = XmlField('CorreoElectronico')
@@ -126,13 +121,14 @@ class TitularRepresentanteGen(XmlModel):
 
 class Nombre(XmlModel):
 
-    _sort_order = ('nombre', 'nombre_de_pila', 'primer_apellido', 'segundo_apellido')
+    _sort_order = ('nombre', 'nombre_de_pila', 'primer_apellido', 'segundo_apellido', 'razon_social')
 
     def __init__(self):
         self.nombre = XmlField('Nombre')
         self.nombre_de_pila = XmlField('NombreDePila')
         self.primer_apellido = XmlField('PrimerApellido')
         self.segundo_apellido = XmlField('SegundoApellido')
+        self.razon_social = XmlField('RazonSocial')
         super(Nombre, self).__init__('Nombre', 'nombre')
 
 
@@ -149,8 +145,8 @@ class Telefono(XmlModel):
 
 class Direccion(XmlModel):
 
-    _sort_order = ('direccion', 'pais', 'provincia', 'municipio', 'poblacion', 'cod_postal', 'apartado_de_correos',
-                   'via')
+    _sort_order = ('direccion', 'pais', 'provincia', 'municipio', 'poblacion', 'cod_postal', 'via',
+                   'apartado_de_correos')
 
     def __init__(self):
         self.direccion = XmlField('Direccion')
@@ -159,8 +155,8 @@ class Direccion(XmlModel):
         self.municipio = XmlField('Municipio')
         self.poblacion = XmlField('Poblacion')
         self.cod_postal = XmlField('CodPostal')
-        self.apartado_de_correos = XmlField('ApartadoDeCorreos')
         self.via = Via()
+        self.apartado_de_correos = XmlField('ApartadoDeCorreos')
         super(Direccion, self).__init__('Direccion', 'direccion')
 
 

@@ -805,25 +805,22 @@ class test_D1(unittest.TestCase):
         self.assertEqual(d1.fecha_prevista_aplicacion_cambio_atr, u'2016-06-09')
         self.assertEqual(d1.motivo_cambio_atr_desde_distribuidora, u'01')
         info = d1.info_registro_autocons
-        self.assertEqual(info.movimiento, u'A')
         autoconsumo = info.autoconsumo
         self.assertEqual(autoconsumo.cau, u'1234567890123456789012345')
         self.assertEqual(autoconsumo.seccion_registro, u'2')
         self.assertEqual(autoconsumo.sub_seccion, u'a0')
         self.assertEqual(autoconsumo.colectivo, u'S')
-        self.assertEqual(autoconsumo.tipo_instalacion, u'01')
-        self.assertEqual(autoconsumo.esquema_medida, u'A')
         suministro = info.datos_suministro
         self.assertEqual(suministro.cups, u'ES1234000000000001JN0F')
         self.assertEqual(suministro.tipo_cups, u'01')
-        self.assertEqual(suministro.tension_pf, u'BT')
         self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')
         inst_gen = info.datos_inst_gen[0]
         self.assertEqual(inst_gen.cil, u'1234567890qwertyuiop12345')
         self.assertEqual(inst_gen.tec_generador, u'b12')
         self.assertEqual(inst_gen.combustible, u'Diesel')
         self.assertEqual(inst_gen.pot_instalada_gen, u'100')
-        self.assertEqual(inst_gen.tension_gen, u'BT')
+        self.assertEqual(inst_gen.tipo_instalacion, u'01')
+        self.assertEqual(inst_gen.esquema_medida, u'B')
         self.assertEqual(inst_gen.ssaa, u'S')
         self.assertEqual(inst_gen.ref_catastro, u'1234567890qwertyuidf')
         utm = inst_gen.utm
@@ -861,24 +858,17 @@ class test_D1(unittest.TestCase):
         d1.parse_xml()
         self.assertEqual(d1.motivo_cambio_atr_desde_distribuidora, u'04')
         info = d1.info_registro_autocons
-        self.assertEqual(info.movimiento, u'A')
         autoconsumo = info.autoconsumo
         self.assertEqual(autoconsumo.cau, u'1234567890123456789012345')
         self.assertEqual(autoconsumo.seccion_registro, u'2')
         self.assertEqual(autoconsumo.colectivo, u'S')
-        self.assertEqual(autoconsumo.tipo_instalacion, u'01')
-        self.assertEqual(autoconsumo.esquema_medida, u'A')
         suministro = info.datos_suministro
         self.assertEqual(suministro.cups, u'ES1234000000000001JN0F')
-        self.assertEqual(suministro.tipo_cups, u'01')
-        self.assertEqual(suministro.tension_pf, u'BT')
-        self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')
         inst_gen = info.datos_inst_gen[0]
         self.assertEqual(inst_gen.tec_generador, u'b12')
         self.assertEqual(inst_gen.pot_instalada_gen, u'100')
-        self.assertEqual(inst_gen.tension_gen, u'BT')
+        self.assertEqual(inst_gen.tipo_instalacion, u'01')
         self.assertEqual(inst_gen.ssaa, u'S')
-        self.assertEqual(inst_gen.ref_catastro, u'1234567890qwertyuidf')
         utm = inst_gen.utm
         self.assertEqual(utm.x, u'100')
         self.assertEqual(utm.y, u'200')

@@ -1125,8 +1125,6 @@ class test_D1(unittest.TestCase):
             'seccion_registro': '2',
             'sub_seccion': 'a0',
             'colectivo': 'S',
-            'tipo_instalacion': '01',
-            'esquema_medida': 'A',
         }
         autoconsumo.feed(autoconsumo_fields)
 
@@ -1135,7 +1133,6 @@ class test_D1(unittest.TestCase):
         suministro_fields = {
             'cups': 'ES1234000000000001JN0F',
             'tipo_cups': '01',
-            'tension_pf': 'BT',
             'ref_catastro': '1234567890qwertyuiop',
         }
         suministro.feed(suministro_fields)
@@ -1228,7 +1225,8 @@ class test_D1(unittest.TestCase):
             'tec_generador': 'b12',
             'combustible': 'Diesel',
             'pot_instalada_gen': '100',
-            'tension_gen': 'BT',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
             'ssaa': 'S',
             'ref_catastro': '1234567890qwertyuidf',
             'utm': utm,

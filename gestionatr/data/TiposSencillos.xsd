@@ -3,7 +3,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:annotation>
 		<xs:documentation>
-			Version 1.2 CNMC 2016.12.20
+			Version 1.3 CNMC 2016.12.20
 		</xs:documentation>
 	</xs:annotation>
 	<xs:simpleType name="AltaBajaModificacion">
@@ -328,18 +328,20 @@
 			54	Autoconsumo del periodo 4
 			55	Autoconsumo del periodo 5
 			56	Autoconsumo del periodo 6
-			61	Consumo neto de la red del periodo 1
-			62	Consumo neto de la red del periodo 2
-			63	Consumo neto de la red del periodo 3
-			64	Consumo neto de la red del periodo 4
-			65	Consumo neto de la red del periodo 5
-			66	Consumo neto de la red del periodo 6
+			61	Generación neta por el coeficiente del periodo 1
+			62	Generación neta por el coeficiente del periodo 2
+			63	Generación neta por el coeficiente del periodo 3
+			64	Generación neta por el coeficiente del periodo 4
+			65	Generación neta por el coeficiente del periodo 5
+			66	Generación neta por el coeficiente del periodo 6
 			71	Excedente del periodo 1
 			72	Excedente del periodo 2
 			73	Excedente del periodo 3
 			74	Excedente del periodo 4
 			75	Excedente del periodo 5
 			76	Excedente del periodo 6
+			81	Tipo de autoconsumo
+			82	Coeficiente de reparto
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -390,6 +392,8 @@
 			<xs:enumeration value="74"/>
 			<xs:enumeration value="75"/>
 			<xs:enumeration value="76"/>
+			<xs:enumeration value="81"/>
+			<xs:enumeration value="82"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Decimal10">
@@ -1610,6 +1614,7 @@
 			05	Modificación de tipo de autoconsumo
 			06	Modificación coeficiente de reparto
 			07	Modificación potencia generación
+			08	Baja en autoconsumo
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -1620,6 +1625,7 @@
 			<xs:enumeration value="05"/>
 			<xs:enumeration value="06"/>
 			<xs:enumeration value="07"/>
+			<xs:enumeration value="08"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="MotivoFacturacion">
@@ -2155,7 +2161,7 @@
 			B4	Concurrencia con solicitud baja motivo 04	
 			A0	Cuanto antes sin actuaciones en campo
 			P0	Por incumplimiento del plazo minimo de preaviso
-			C1	Cuando lleguen el resto de solicitudes asociadas al autoconsumo colectivo.
+			C1	Cuando lleguen el resto de solicitudes asociadas al autoconsumo colectivo
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2254,10 +2260,15 @@
 			53	Con excedentes sin compensación individual con cto SSAA en Red Interior - SSAA
 			54 	Con excedentes sin compensación Colectivo/en Red Interior - Consumo
 			55 	Con excedentes sin compensación Colectivo/en Red Interior - SSAA
-			62 	Con excedentes sin compensación Individual con cto SSAA a través de red - Consumo
-			63 	Con excedentes sin compensación individual con cto SSAA a través de red - SSAA
-			64 	Con excedentes sin compensación Colectivo a través de red - Consumo
-			65 	Con excedentes sin compensación Colectivo a través de red - SSAA 	
+			56	Con excedentes sin compensación Colectivo/en Red Interior - SSAA
+			61 	Con excedentes sin compensación Individual con cto SSAA a través de red - Consumo
+			62 	Con excedentes sin compensación individual con cto SSAA a través de red - SSAA
+			63 	Con excedentes sin compensación Colectivo a través de red - Consumo
+			64 	Con excedentes sin compensación Colectivo a través de red - SSAA 	
+			71	Con excedentes sin compensación Individual con cto SSAA a través de red y red interior - Consumo
+			72	Con excedentes sin compensación individual con cto SSAA a través de red y red interior - SSAA
+			73	Con excedentes sin compensación Colectivo con cto de SSAA  a través de red y red interior - Consumo
+			74	Con excedentes sin compensación Colectivo con cto de SSAA a través de red y red interior - SSAA
 		</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2275,10 +2286,15 @@
 			<xs:enumeration value="53"/>
 			<xs:enumeration value="54"/>
 			<xs:enumeration value="55"/>
+			<xs:enumeration value="56"/>
+			<xs:enumeration value="61"/>
 			<xs:enumeration value="62"/>
 			<xs:enumeration value="63"/>
 			<xs:enumeration value="64"/>
-			<xs:enumeration value="65"/>
+			<xs:enumeration value="71"/>
+			<xs:enumeration value="72"/>
+			<xs:enumeration value="73"/>
+			<xs:enumeration value="74"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TipoCodigoPeriodoDH">
@@ -3274,7 +3290,7 @@ la reclamacion
 	</xs:simpleType>
 	<xs:simpleType name="TipoImpositivo">
 		<xs:annotation>
-			<xs:documentation>
+			<xs:documentation> Tipo Impuesto (Tabla 114)
 			1 -  IVA / IPSI/ IGIC    
 			2 -  IVA / IPSI/ IGIC  reducido
 			3 -  IVA / IPSI/ IGIC EXENTO
@@ -3427,7 +3443,7 @@ la reclamacion
 	</xs:simpleType>
 	<xs:simpleType name="Decimal10V3">
 		<xs:restriction base="xs:decimal">
-			<xs:totalDigits value="14"/>
+			<xs:totalDigits value="13"/>
 			<xs:fractionDigits value="3"/>
 			<xs:minInclusive value="0"/>
 			<xs:maxInclusive value="9999999999.999"/>
@@ -3526,13 +3542,6 @@ la reclamacion
 			<xs:enumeration value="V"/>
 			<xs:enumeration value="W"/>
 			<xs:enumeration value="X"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="Decimal9V2">
-		<xs:restriction base="xs:decimal">
-			<xs:totalDigits value="11"/>
-			<xs:fractionDigits value="2"/>
-			<xs:maxInclusive value="999999999.99"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>
