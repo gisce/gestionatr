@@ -989,8 +989,15 @@ TABLA_27 = [
     ('C9', 'El tipo de activación solicitada no es coherente con el tipo de solicitud'),
     ('D1', 'Suministro acogido a bono social'),
     ('D2', 'No es posible anulación ya que no existe solicitud previa'),
+    ('D3', 'No cumple con la potencia normalizada para el PS ni el múltiplo de potencia establecido'),
+    ('D4', 'El tipo de tensión solicitada es la que ya tiene el PS.'),
+    ('D5', 'Falta documentación según lo establecido en la Ley 12/2017 de las Islas Baleares.'),
+    ('E6', 'Modificación del tipo de autoconsumo no permitida. No ha trascurrido un año desde la última modificación.'),
+    ('E7', 'Falta acuerdo de reparto/Acuerdo de reparto incorrecto/Faltan coeficientes de reparto en acuerdo'),
+    ('E8', 'No recibida información técnica de la CCAA (para BT y <=100kW).'),
+    ('E9', 'En el periodo establecido, no se han recibido el resto de solicitudes de modificación del colectivo'),
+    ('F1', 'Disconformidad del consumidor a la información sobre autoconsumo'),
     ('99', 'Otros'),
-
 ]
 
 TABLA_28 = [
@@ -999,7 +1006,8 @@ TABLA_28 = [
     ('09', 'Deficiencia subsanable en la instalación'),
     ('10', 'Deficiencia subsanable en EdM'),
     ('11', 'Trabajos pendientes de finalizar'),
-    ('12', 'Teléfono de contacto erróneo')
+    ('12', 'Teléfono de contacto erróneo'),
+    ('14', 'Pendiente resto solicitudes asociadas al autoconsumo colectivo')
 ]
 
 TABLA_30 = [
@@ -1163,6 +1171,7 @@ TABLA_53 = [
      'Cambio datos administrativos (excepto cambio de titular y corrección de datos identificativos del cliente)'),
     ('C', 'Corrección datos que identifican al cliente'),
     ('P', 'La solicitud implica cambio en la periodicidad de la facturación'),
+    ('R', 'Modificación acuerdo de reparto de un autoconsumo colectivo')
 ]
 
 TABLA_55 = [
@@ -1175,12 +1184,12 @@ TABLA_55 = [
     ('B4', 'Concurrencia con solicitud baja motivo 04'),
     ('A0', 'Cuanto antes sin actuaciones en campo'),
     ('P0', 'Por incumplimiento del plazo mínimo de preaviso'),
-
+    ('C1', 'Cuando lleguen el resto de solicitudes asociadas al autoconsumo colectivo')
 ]
 TIPUS_ACTIVACIO = TABLA_55
 
 TABLA_61 = [
-    ('01', u'CIE'),
+    ('01', u'CIE consumo'),
     ('02', u'Acta de Puesta en Marcha'),
     ('03', u'Acta de Inspección'),
     ('04', u'Reclamación'),
@@ -1188,6 +1197,8 @@ TABLA_61 = [
     ('06', u'Facturas'),
     ('07', u'Otra documentación del cliente'),
     ('08', u'Otros'),
+    ('09', u'Acuerdo reparto'),
+    ('10', u'CIE generación')
 ]
 
 TABLA_62 = [
@@ -1916,7 +1927,27 @@ TABLA_103 = [
     ('46', u'Exención Cargo Variable Autoconsumo'),
     ('47', u'Derechos de acometida de generación'),
     ('48', u'Suplemento territorial por tributos económicos del año 2013 según la Orden ETU/35/2017'),
-    ('49', u'Suplemento territorial por tributos económicos del año 2013 según la Orden TEC/271/2019')
+    ('49', u'Suplemento territorial por tributos económicos del año 2013 según la Orden TEC/271/2019'),
+    ('51', u'Autoconsumo del periodo 1'),
+    ('52', u'Autoconsumo del periodo 2'),
+    ('53', u'Autoconsumo del periodo 3'),
+    ('54', u'Autoconsumo del periodo 4'),
+    ('55', u'Autoconsumo del periodo 5'),
+    ('56', u'Autoconsumo del periodo 6'),
+    ('61', u'Generación neta por el coeficiente del periodo 1'),
+    ('62', u'Generación neta por el coeficiente del periodo 2'),
+    ('63', u'Generación neta por el coeficiente del periodo 3'),
+    ('64', u'Generación neta por el coeficiente del periodo 4'),
+    ('65', u'Generación neta por el coeficiente del periodo 5'),
+    ('66', u'Generación neta por el coeficiente del periodo 6'),
+    ('71', u'Excedente del periodo 1'),
+    ('72', u'Excedente del periodo 2'),
+    ('73', u'Excedente del periodo 3'),
+    ('74', u'Excedente del periodo 4'),
+    ('75', u'Excedente del periodo 5'),
+    ('76', u'Excedente del periodo 6'),
+    ('81', u'Tipo de autoconsumo'),
+    ('82', u'Coeficiente de reparto'),
 ]
 
 CONCEPTOS_CON_FECHA_OPERACION = [
@@ -1978,7 +2009,8 @@ TABLA_109 = [('01', u'Telegestión Operativa con CCH'),
              ('04', u'Alta en autoconsumo'),
              ('05', u'Modificación de tipo de autoconsumo'),
              ('06', u'Modificación coeficiente de reparto'),
-             ('07', u'Modificación potencia generación'), ]
+             ('07', u'Modificación potencia generación'),
+             ('08', u'Baja en autoconsumo'), ]
 
 TABLA_110 = [('01', u'Acompaña curva de carga'),
              ('02', u'Perfilado'),
@@ -2007,12 +2039,31 @@ TABLA_113 = [
     ('01', u'Autoconsumo Tipo 1'),
     ('2A', u'Autoconsumo tipo 2 (según el Art. 13. 2. a) RD 900/2015)'),
     ('2B', u'Autoconsumo tipo 2 (según el Art. 13. 2. b) RD 900/2015)'),
-    ('2G', u'Servicios auxiliares de generación ligada a un autoconsumo tipo 2')
+    ('2G', u'Servicios auxiliares de generación ligada a un autoconsumo tipo 2'),
+    ('31', u'Sin Excedentes Individual – Consumo'),
+    ('32', u'Sin Excedentes Colectivo – Consumo'),
+    ('41', u'Con excedentes y compensación Individual - Consumo '),
+    ('42', u'Con excedentes y compensación Colectivo– Consumo'),
+    ('51', u'Con excedentes sin compensación Individual sin cto de SSAA en Red Interior– Consumo'),
+    ('52', u'Con excedentes sin compensación Colectivo sin cto de SSAA en Red Interior– Consumo'),
+    ('53', u'Con excedentes sin compensación Individual con cto SSAA en Red Interior– Consumo'),
+    ('54', u'Con excedentes sin compensación individual con cto SSAA en Red Interior– SSAA'),
+    ('55', u'Con excedentes sin compensación Colectivo/en Red Interior– Consumo'),
+    ('56', u'Con excedentes sin compensación Colectivo/en Red Interior - SSAA'),
+    ('61', u'Con excedentes sin compensación Individual con cto SSAA a través de red – Consumo'),
+    ('62', u'Con excedentes sin compensación individual con cto SSAA a través de red – SSAA'),
+    ('63', u'Con excedentes sin compensación Colectivo a través de red – Consumo'),
+    ('64', u'Con excedentes sin compensación Colectivo a través de red - SSAA'),
+    ('71', u'Con excedentes sin compensación Individual con cto SSAA a través de red y red interior – Consumo'),
+    ('72', u'Con excedentes sin compensación individual con cto SSAA a través de red y red interior – SSAA'),
+    ('73', u'Con excedentes sin compensación Colectivo con cto de SSAA  a través de red y red interior – Consumo'),
+    ('74', u'Con excedentes sin compensación Colectivo con cto de SSAA a través de red y red interior - SSAA'),
 ]
 
 TABLA_114 = [
     ('1', u'IVA / IPSI/ IGIC'),
     ('2', u'IVA / IPSI/ IGIC Reducido'),
+    ('3', u'IVA / IPSI/ IGIC EXENTO'),
 ]
 
 TABLA_115 = PERSONA
@@ -2020,7 +2071,6 @@ TABLA_115 = PERSONA
 TABLA_116 = [
     ('0', u'No Bono Social – Retirada del BS'),
     ('1', u'Bono Social'),
-#    ('02', u'Bono Social – Esencial (Según Art. 4 RD 897/2017)'),
 ]
 
 REQUIRE_PERSON_TYPE = ['NV', 'OT']
