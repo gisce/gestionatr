@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<MensajeActualizacionRegistroAutoconsumo xmlns="http://localhost/elegibilidad">
+    <Cabecera>
+        <CodigoREEEmpresaEmisora>4321</CodigoREEEmpresaEmisora>
+        <CodigoEmpresaDestino>09</CodigoEmpresaDestino>
+        <CodigoDelProceso>A1</CodigoDelProceso>
+        <CodigoDePaso>02</CodigoDePaso>
+        <CodigoDeSolicitud>201605219497</CodigoDeSolicitud>
+        <SecuencialDeSolicitud>00</SecuencialDeSolicitud>
+        <FechaSolicitud>2016-06-08T04:24:09</FechaSolicitud>
+    </Cabecera>
+    <ActualizacionRegistroAutoconsumo>
+        <CAU>1234567890123456789012345</CAU>
+        <Rechazos>
+            <Rechazo>
+                <FechaRechazo>2016-06-08</FechaRechazo>
+                <Secuencial>00</Secuencial>
+                <CodigoMotivo>01</CodigoMotivo>
+                <CUPS>ES1234000000000001JN0F</CUPS>
+                <Comentarios>Comentario del rechazo</Comentarios>
+            </Rechazo>
+            <Rechazo>
+                <FechaRechazo>2016-06-08</FechaRechazo>
+                <Secuencial>00</Secuencial>
+                <CodigoMotivo>F1</CodigoMotivo>
+                <CUPS>ES1234000000000001JN0F</CUPS>
+                <Comentarios>Comentario del rechazo</Comentarios>
+            </Rechazo>
+            <Rechazo>
+                <FechaRechazo>2016-06-08</FechaRechazo>
+                <Secuencial>00</Secuencial>
+                <CodigoMotivo>F4</CodigoMotivo>
+                <CUPS>ES1234000000000001JN0F</CUPS>
+                <Comentarios>Comentario del rechazo</Comentarios>
+            </Rechazo>
+        </Rechazos>
+        <Comentarios>Esto es un comentario</Comentarios>
+    </ActualizacionRegistroAutoconsumo>
+</MensajeActualizacionRegistroAutoconsumo>

@@ -8,6 +8,7 @@ from gestionatr.output.messages import sw_a1_41 as a1_41
 from gestionatr.output.messages import sw_a1_44 as a1_44
 from gestionatr.output.messages import sw_a1_46 as a1_46
 from gestionatr.output.messages import sw_a1_48 as a1_48
+from gestionatr.output.messages import sw_a1 as a1
 from gestionatr.output.messages import sw_a3 as a3
 from gestionatr.output.messages import sw_b1 as b1
 from gestionatr.output.messages import sw_c1 as c1
@@ -759,6 +760,289 @@ class test_C2(unittest.TestCase):
         mensaje.build_tree()
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_c203.read())
+
+
+class test_A1(unittest.TestCase):
+
+        def setUp(self):
+            self.xml_a101 = open(get_data("a101.xml"), "r")
+            self.xml_a102_accept = open(get_data("a102_accept.xml"), "r")
+            self.xml_a102_reject = open(get_data("a102_reject.xml"), "r")
+
+        def tearDown(self):
+            self.xml_a101.close()
+            self.xml_a102_accept.close()
+            self.xml_a102_reject.close()
+
+        def test_create_pas01(self):
+            # InfoRegistroAutoconsA1
+            mensaje = a1.A101()
+
+            # Cabecera
+            cabecera = a1.CabeceraA101()
+            cabecera_fields = {
+                'codigo_empresa_emisora': '09',
+                'codigo_ree_empresa_destino': '4321',
+                'codigo_del_proceso': 'A1',
+                'codigo_del_paso': '01',
+                'codigo_de_solicitud': '201605219497',
+                'secuencial_de_solicitud': '00',
+                'fecha': '2016-06-08T04:24:09',
+            }
+            cabecera.feed(cabecera_fields)
+
+            # Autoconsumo
+            autoconsumo = d1.Autoconsumo()
+            autoconsumo_fields = {
+                'cau': '1234567890123456789012345',
+                'seccion_registro': '2',
+                'sub_seccion': 'a0',
+                'colectivo': 'S',
+            }
+            autoconsumo.feed(autoconsumo_fields)
+
+            # DatosSuministro
+            suministro = d1.DatosSuministro()
+            suministro_fields = {
+                'cups': 'ES1234000000000001JN0F',
+                'tipo_cups': '01',
+                'ref_catastro': '1234567890qwertyuiop',
+            }
+            suministro.feed(suministro_fields)
+
+            # UTM
+            utm = d1.UTM()
+            utm_fields = {
+                'x': '100',
+                'y': '200',
+                'huso': '40',
+                'banda': 'E',
+            }
+            utm.feed(utm_fields)
+
+            # Nombre
+            nombre = d1.Nombre()
+            nombre_fields = {
+                'nombre_de_pila': 'Juan',
+                'primer_apellido': 'López',
+                'segundo_apellido': 'Sánchez',
+            }
+            nombre.feed(nombre_fields)
+
+            # Telefono
+            telefono = d1.Telefono()
+            telefono_fields = {
+                'prefijo_pais': '0034',
+                'numero': '933834841',
+            }
+            telefono.feed(telefono_fields)
+
+            # Telefono 2
+            telefono2 = d1.Telefono()
+            telefono2_fields = {
+                'prefijo_pais': '0034',
+                'numero': '633834841',
+            }
+            telefono2.feed(telefono2_fields)
+
+            # Telefono 3
+            telefono3 = d1.Telefono()
+            telefono3_fields = {
+                'prefijo_pais': '0034',
+                'numero': '683834841',
+            }
+            telefono3.feed(telefono3_fields)
+
+            # Via
+            via = d1.Via()
+            via_fields = {
+                'tipo_via': 'CL',
+                'calle': 'Pau Casals',
+                'numero_finca': '18',
+                'duplicador_finca': '1',
+                'escalera': 'D',
+                'piso': '3',
+                'puerta': '2',
+                'tipo_aclarador_finca': 'BI',
+                'aclarador_finca': 'Bar',
+            }
+            via.feed(via_fields)
+
+            # Direccion
+            direccion = d1.Direccion()
+            direccion_fields = {
+                'pais': 'España',
+                'provincia': '17',
+                'municipio': '171181',
+                'poblacion': '118000400',
+                'cod_postal': '17230',
+                'via': via
+            }
+            direccion.feed(direccion_fields)
+
+            # TitularRepresentanteGen
+            titular = d1.TitularRepresentanteGen()
+            titular_representante_gen_fields = {
+                'nombre': nombre,
+                'nif': '49916604A',
+                'telefono': [telefono, telefono2, telefono3],
+                'correo_electronico': 'mail_falso@dominio.com',
+                'direccion': direccion,
+            }
+            titular.feed(titular_representante_gen_fields)
+
+            # DatosInstGen
+            datos = d1.DatosInstGen()
+            datos_inst_gen_fields = {
+                'cil': '1234567890qwertyuiop12345',
+                'tec_generador': 'b12',
+                'combustible': 'Diesel',
+                'pot_instalada_gen': '100',
+                'tipo_instalacion': '01',
+                'esquema_medida': 'B',
+                'ssaa': 'S',
+                'ref_catastro': '1234567890qwertyuidf',
+                'utm': utm,
+                'titular_representante_gen': titular,
+            }
+            datos.feed(datos_inst_gen_fields)
+
+            # InfoRegistroAutocons
+            info = a1.InfoRegistroAutoconsA1()
+            info_registro_autocons_fields = {
+                'movimiento': 'A',
+                'autoconsumo': autoconsumo,
+                'datos_suministro': suministro,
+                'datos_inst_gen': datos,
+                'comentarios': 'Esto es un comentario'
+            }
+            info.feed(info_registro_autocons_fields)
+
+            a101_fields = {
+                'cabecera': cabecera,
+                'info_registro_autocons': info,
+            }
+            mensaje.feed(a101_fields)
+            mensaje.build_tree()
+            xml = str(mensaje)
+            assertXmlEqual(xml, self.xml_a101.read())
+
+        def test_create_pas02_accept(self):
+            # Cabecera
+            cabecera = a1.CabeceraA102()
+            cabecera_fields = {
+                'codigo_ree_empresa_emisora': '4321',
+                'codigo_empresa_destino': '09',
+                'codigo_del_proceso': 'A1',
+                'codigo_del_paso': '02',
+                'codigo_de_solicitud': '201605219497',
+                'secuencial_de_solicitud': '00',
+                'fecha': '2016-06-08T04:24:09',
+            }
+            cabecera.feed(cabecera_fields)
+
+            # ActualizacionRegistroAutoconsumo
+            datos_registro = a1.ActualizacionDatosRegistro()
+            actualizacion_datos_registro_fields = {
+                'sub_seccion': 'a0',
+            }
+            datos_registro.feed(actualizacion_datos_registro_fields)
+
+            # ActualizacionRegistroAutoconsumo
+            registro = a1.ActualizacionRegistroAutoconsumo()
+            actualizacion_registro_autoconsumo_fields = {
+                'cau': '1234567890123456789012345',
+                'actualizacion_datos_registro': datos_registro,
+                'comentarios': 'Esto es un comentario',
+
+            }
+            registro.feed(actualizacion_registro_autoconsumo_fields)
+
+            # MensajeActualizacionRegistroAutoconsumo
+            mensaje = a1.MensajeActualizacionRegistroAutoconsumo()
+            mensaje_actualizacion_registro_autoconsumo_fields = {
+                'cabecera': cabecera,
+                'actualizacion_registro_autoconsumo': registro,
+            }
+            mensaje.feed(mensaje_actualizacion_registro_autoconsumo_fields)
+
+            mensaje.build_tree()
+            xml = str(mensaje)
+            assertXmlEqual(xml, self.xml_a102_accept.read())
+
+        def test_create_pas02_rej(self):
+            # Cabecera
+            cabecera = a1.CabeceraA102()
+            cabecera_fields = {
+                'codigo_ree_empresa_emisora': '4321',
+                'codigo_empresa_destino': '09',
+                'codigo_del_proceso': 'A1',
+                'codigo_del_paso': '02',
+                'codigo_de_solicitud': '201605219497',
+                'secuencial_de_solicitud': '00',
+                'fecha': '2016-06-08T04:24:09',
+            }
+            cabecera.feed(cabecera_fields)
+
+            # Rechazo 1
+            rechazo1 = a1.Rechazo()
+            rechazo1_fields = {
+                'fecha_rechazo': '2016-06-08',
+                'secuencial': '00',
+                'codigo_motivo': '01',
+                'cups': 'ES1234000000000001JN0F',
+                'comentarios': 'Comentario del rechazo',
+            }
+            rechazo1.feed(rechazo1_fields)
+            # Rechazo 2
+            rechazo2 = a1.Rechazo()
+            rechazo2_fields = {
+                'fecha_rechazo': '2016-06-08',
+                'secuencial': '00',
+                'codigo_motivo': 'F1',
+                'cups': 'ES1234000000000001JN0F',
+                'comentarios': 'Comentario del rechazo',
+            }
+            rechazo2.feed(rechazo2_fields)
+            # Rechazo 3
+            rechazo3 = a1.Rechazo()
+            rechazo3_fields = {
+                'fecha_rechazo': '2016-06-08',
+                'secuencial': '00',
+                'codigo_motivo': 'F4',
+                'cups': 'ES1234000000000001JN0F',
+                'comentarios': 'Comentario del rechazo',
+            }
+            rechazo3.feed(rechazo3_fields)
+
+            # Rechazos
+            rechazos = d1.Rechazos()
+            rechazos_fields = {
+                'rechazos': [rechazo1, rechazo2, rechazo3],
+            }
+            rechazos.feed(rechazos_fields)
+
+            # ActualizacionRegistroAutoconsumo
+            registro = a1.ActualizacionRegistroAutoconsumo()
+            actualizacion_registro_autoconsumo_fields = {
+                'cau': '1234567890123456789012345',
+                'rechazos': rechazos,
+                'comentarios': 'Esto es un comentario',
+
+            }
+            registro.feed(actualizacion_registro_autoconsumo_fields)
+
+            # MensajeActualizacionRegistroAutoconsumo
+            mensaje = a1.MensajeActualizacionRegistroAutoconsumo()
+            mensaje_actualizacion_registro_autoconsumo_fields = {
+                'cabecera': cabecera,
+                'actualizacion_registro_autoconsumo': registro,
+            }
+            mensaje.feed(mensaje_actualizacion_registro_autoconsumo_fields)
+
+            mensaje.build_tree()
+            xml = str(mensaje)
+            assertXmlEqual(xml, self.xml_a102_reject.read())
 
 
 class test_A3(unittest.TestCase):

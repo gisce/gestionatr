@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<MensajeActualizacionRegistroAutoconsumo xmlns="http://localhost/elegibilidad">
+    <Cabecera>
+        <CodigoREEEmpresaEmisora>4321</CodigoREEEmpresaEmisora>
+        <CodigoEmpresaDestino>09</CodigoEmpresaDestino>
+        <CodigoDelProceso>A1</CodigoDelProceso>
+        <CodigoDePaso>02</CodigoDePaso>
+        <CodigoDeSolicitud>201605219497</CodigoDeSolicitud>
+        <SecuencialDeSolicitud>00</SecuencialDeSolicitud>
+        <FechaSolicitud>2016-06-08T04:24:09</FechaSolicitud>
+    </Cabecera>
+    <ActualizacionRegistroAutoconsumo>
+        <CAU>1234567890123456789012345</CAU>
+        <ActualizacionDatosRegistro>
+            <SubSeccion>a0</SubSeccion>
+        </ActualizacionDatosRegistro>
+        <Comentarios>Esto es un comentario</Comentarios>
+    </ActualizacionRegistroAutoconsumo>
+</MensajeActualizacionRegistroAutoconsumo>

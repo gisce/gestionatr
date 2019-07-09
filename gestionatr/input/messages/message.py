@@ -4,6 +4,8 @@ from gestionatr import utils
 
 XSD_DATA = {'F1': {'01': 'Facturacion.xsd'},
             'Q1': {'01': 'SaldoLecturasFacturacion.xsd'},
+            'A1': {'01': 'A101.xsd',
+                   '02': 'A102e.xsd'},
             'A3': {'01': 'Alta.xsd',
                    '02': ('AceptacionAlta.xsd',
                           'Rechazo.xsd'),
@@ -96,6 +98,8 @@ MAIN_MESSAGE_XSD = {
     'NotificacionCambiosATRDesdeDistribuidor': 'NotificacionCambiosATRDesdeDistribuidor',
     'AceptacionD1': 'AceptacionNotificacionCambiosATRDesdeDistribuidor',
     'RechazoD1': 'Rechazos',
+    'A101': 'InfoRegistroAutocons',
+    'A102e': 'ActualizacionRegistroAutoconsumo',
     'ModificacionDeATR': 'ModificacionDeATR',
     'AceptacionModificacionDeATR': 'AceptacionModificacionDeATR',
     'ActivacionModificacionDeATR': 'ActivacionModificaciones',
