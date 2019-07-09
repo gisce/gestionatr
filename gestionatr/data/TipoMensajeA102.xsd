@@ -3,7 +3,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposComplejosCCAA.xsd"/>
 	<xs:include schemaLocation="TiposSencillosCCAA.xsd"/>
-	<xs:include schemaLocation="TipoMensajeRechazo.xsd"/>
+	<xs:include schemaLocation="TipoMensajeRechazoCCAA.xsd"/>
 	<xs:annotation>
 		<xs:documentation>Version XX CNMC 201X.XX.XX</xs:documentation>
 	</xs:annotation>
