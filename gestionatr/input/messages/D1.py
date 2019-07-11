@@ -327,7 +327,7 @@ class TitularRepresentanteGen(object):
         data = []
         try:
             for telefono in self.titular_representante_gen.Telefono:
-                data.append(Telefono(telefono))
+                data.append((telefono.PrefijoPais.text, telefono.Numero.text))
         except AttributeError:
             pass
         return data
@@ -392,31 +392,6 @@ class Nombre(object):
             pass
         return data
 
-
-class Telefono(object):
-
-    def __init__(self, data):
-        self.telefono = data
-
-    @property
-    def prefijo_pais(self):
-        data = ''
-        try:
-            data = self.telefono.PrefijoPais.text
-        except AttributeError:
-            pass
-        return data
-
-    @property
-    def numero(self):
-        data = ''
-        try:
-            data = self.telefono.Numero.text
-        except AttributeError:
-            pass
-        return data
-
-
 class Direccion(object):
 
     def __init__(self, data):
@@ -426,7 +401,7 @@ class Direccion(object):
     def pais(self):
         data = ''
         try:
-            data = self.direccion.Pais.text
+            data = self.direccion.Pais.text.strip()
         except AttributeError:
             pass
         return data
@@ -435,7 +410,7 @@ class Direccion(object):
     def provincia(self):
         data = ''
         try:
-            data = self.direccion.Provincia.text
+            data = self.direccion.Provincia.text.strip()
         except AttributeError:
             pass
         return data
@@ -444,7 +419,7 @@ class Direccion(object):
     def municipio(self):
         data = ''
         try:
-            data = self.direccion.Municipio.text
+            data = self.direccion.Municipio.text.strip()
         except AttributeError:
             pass
         return data
@@ -453,7 +428,7 @@ class Direccion(object):
     def poblacion(self):
         data = ''
         try:
-            data = self.direccion.Poblacion.text
+            data = self.direccion.Poblacion.text.strip()
         except AttributeError:
             pass
         return data
@@ -462,112 +437,124 @@ class Direccion(object):
     def cod_postal(self):
         data = ''
         try:
-            data = self.direccion.CodPostal.text
+            data = self.direccion.CodPostal.text.strip()
         except AttributeError:
             pass
         return data
-
-    @property
-    def via(self):
-        data = ''
-        try:
-            data = Via(self.direccion.Via)
-        except AttributeError:
-            pass
-        return data
-
-    @property
-    def apartado_de_correos(self):
-        data = ''
-        try:
-            data = self.direccion.ApartadoDeCorreos.text
-        except AttributeError:
-            pass
-        return data
-
-
-class Via(object):
-
-    def __init__(self, data):
-        self.via = data
 
     @property
     def tipo_via(self):
         data = ''
         try:
-            data = self.via.TipoVia.text
+            data = self.direccion.Via.TipoVia.text.strip()
         except AttributeError:
-            pass
+            try:
+                data = self.direccion.TipoVia.text.strip()
+            except AttributeError:
+                pass
         return data
 
     @property
     def calle(self):
         data = ''
         try:
-            data = self.via.Calle.text
+            data = self.direccion.Via.Calle.text.strip()
         except AttributeError:
-            pass
+            try:
+                data = self.direccion.Calle.text.strip()
+            except AttributeError:
+                pass
         return data
 
     @property
     def numero_finca(self):
         data = ''
         try:
-            data = self.via.NumeroFinca.text
+            data = self.direccion.Via.NumeroFinca.text.strip()
         except AttributeError:
-            pass
+            try:
+                data = self.direccion.NumeroFinca.text.strip()
+            except AttributeError:
+                pass
         return data
 
     @property
     def duplicador_finca(self):
         data = ''
         try:
-            data = self.via.DuplicadorFinca.text
+            data = self.direccion.Via.DuplicadorFinca.text.strip()
         except AttributeError:
-            pass
+            try:
+                data = self.direccion.DuplicadorFinca.text.strip()
+            except AttributeError:
+                pass
         return data
 
     @property
     def escalera(self):
         data = ''
         try:
-            data = self.via.Escalera.text
+            data = self.direccion.Via.Escalera.text.strip()
         except AttributeError:
-            pass
+            try:
+                data = self.direccion.Escalera.text.strip()
+            except AttributeError:
+                pass
         return data
 
     @property
     def piso(self):
         data = ''
         try:
-            data = self.via.Piso.text
+            data = self.direccion.Via.Piso.text.strip()
         except AttributeError:
-            pass
+            try:
+                data = self.direccion.Piso.text.strip()
+            except AttributeError:
+                pass
         return data
 
     @property
     def puerta(self):
         data = ''
         try:
-            data = self.via.Puerta.text
+            data = self.direccion.Via.Puerta.text.strip()
         except AttributeError:
-            pass
+            try:
+                data = self.direccion.Puerta.text.strip()
+            except AttributeError:
+                pass
         return data
 
     @property
     def tipo_aclarador_finca(self):
         data = ''
         try:
-            data = self.via.TipoAclaradorFinca.text
+            data = self.direccion.Via.TipoAclaradorFinca.text.strip()
         except AttributeError:
-            pass
+            try:
+                data = self.direccion.TipoAclaradorFinca.text.strip()
+            except AttributeError:
+                pass
         return data
 
     @property
     def aclarador_finca(self):
         data = ''
         try:
-            data = self.via.AclaradorFinca.text
+            data = self.direccion.Via.AclaradorFinca.text.strip()
+        except AttributeError:
+            try:
+                data = self.direccion.AclaradorFinca.text.strip()
+            except AttributeError:
+                pass
+        return data
+
+    @property
+    def apartado_de_correos(self):
+        data = ''
+        try:
+            data = self.direccion.ApartadoDeCorreos.text.strip()
         except AttributeError:
             pass
         return data
