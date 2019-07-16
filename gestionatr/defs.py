@@ -604,6 +604,11 @@ SUBTYPES_R1_ATC = [(x['code'], x['name']) for x in SUBTYPES_R101]
 
 
 # TABLES
+TABLA_3 = [
+    ('01', 'Envío información sobre autoconsumo desde CCAA a Distribuidor'),
+    ('02', 'Envío información sobre autoconsumo desde Distribuidor a CCAA'),
+]
+
 TABLA_6 = [
     ('NI', 'NIF'),
     ('NV', 'N.I.V.A'),
@@ -651,7 +656,68 @@ TABLA_11 = [('S', u"(S) Si el domicilio fiscal coincide "
             ('F', u"(F) Si el domicilio fiscal no coincide "
                   u"con el de suministro")]
 
-# TABLA_12 TIPO VIA Optional , thus not implemented
+TABLA_12 = [
+    ('AC', 'Acceso'),
+    ('AD', 'Aldea'),
+    ('AF', 'Afueras'),
+    ('AG', 'Agrupación'),
+    ('AL', 'Alameda'),
+    ('AR', 'Arrabal'),
+    ('AU', 'Autopista / Autovía'),
+    ('AV', 'Avenida'),
+    ('BC', 'Barranco'),
+    ('BD', 'Barriada'),
+    ('BL', 'Bloque'),
+    ('BO', 'Barrio'),
+    ('CA', 'Colonia'),
+    ('CF', 'Callejón'),
+    ('CH', 'Chalet'),
+    ('CI', 'Carril'),
+    ('CJ', 'Calleja'),
+    ('CL', 'Calle'),
+    ('CM', 'Complejo'),
+    ('CN', 'Camino'),
+    ('CO', 'Cooperativa'),
+    ('CR', 'Carretera'),
+    ('CS', 'Casa'),
+    ('CT', 'Cuesta'),
+    ('DI', 'Diseminado extrarradio'),
+    ('ED', 'Edificio'),
+    ('EN', 'Entrada'),
+    ('FC', 'Finca'),
+    ('FI', 'Ficticio'),
+    ('GL', 'Glorieta'),
+    ('GR', 'Grupo'),
+    ('LG', 'Lugar'),
+    ('MA', 'Masía'),
+    ('MU', 'Muelle'),
+    ('MZ', 'Manzana'),
+    ('NU', 'Núcleo'),
+    ('OV', 'Otros'),
+    ('PA', 'Parque'),
+    ('PB', 'Poblado'),
+    ('PD', 'Partida'),
+    ('PE', 'Paseo'),
+    ('PI', 'Políg.industrial'),
+    ('PJ', 'Paraje'),
+    ('PL', 'Pantalan'),
+    ('PO', 'Polígono'),
+    ('PQ', 'Parque'),
+    ('PR', 'Prolongación'),
+    ('PS', 'Pasaje'),
+    ('PT', 'Plazoleta'),
+    ('PY', 'Playa'),
+    ('PZ', 'Plaza'),
+    ('RA', 'Rambla'),
+    ('RD', 'Ronda'),
+    ('RS', 'Residencial'),
+    ('SD', 'Senda'),
+    ('TR', 'Travesía'),
+    ('UR', 'Urbanización'),
+    ('VI', 'Vial'),
+    ('ZN', 'Zona'),
+]
+TIPO_VIA = TABLA_12
 
 # TABLA_13 ESCALERA Optional , thus not implemented
 
@@ -997,6 +1063,10 @@ TABLA_27 = [
     ('E8', 'No recibida información técnica de la CCAA (para BT y <=100kW).'),
     ('E9', 'En el periodo establecido, no se han recibido el resto de solicitudes de modificación del colectivo'),
     ('F1', 'Disconformidad del consumidor a la información sobre autoconsumo'),
+    ('F2', 'No existe un alta en autoconsumo previo'),
+    ('F3', 'Tipo de autoconsumo no coherente con el esquema de medida'),
+    ('F4', 'Tipo de autoconsumo no coherente con el tipo de instalación'),
+    ('F5', 'Instalación de >100kW en BT o Instalación en AT'),
     ('99', 'Otros'),
 ]
 
@@ -1055,7 +1125,9 @@ TIPO_DH_APARATO = TABLA_35
 TABLA_36 = [('S', 'Lectura no acumulativa'),
             ('N', 'Lectura acumulativa')]
 
-TABLA_37 = [('A', 'Alta'), ('B', 'Baja'), ('M', 'Modificación')]
+TABLA_37 = [('A', 'Alta'),
+            ('B', 'Baja'),
+            ('M', 'Modificación')]
 TIPUS_MOVIMENT = TABLA_37
 
 TABLA_38 = [('1', 'Lectura local manual'),

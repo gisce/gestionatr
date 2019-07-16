@@ -516,7 +516,7 @@ class test_A1(unittest.TestCase):
         self.assertEqual(autoconsumo.seccion_registro, u'2')
         self.assertEqual(autoconsumo.sub_seccion, u'a0')
         self.assertEqual(autoconsumo.colectivo, u'S')
-        suministro = a1.datos_suministro
+        suministro = a1.datos_suministro[0]
         self.assertEqual(suministro.cups, u'ES1234000000000001JN0F')
         self.assertEqual(suministro.tipo_cups, u'01')
         self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')

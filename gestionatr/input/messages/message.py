@@ -271,6 +271,20 @@ class Message(MessageBase):
         return ref
 
     @property
+    def get_codi_ccaa_emissora(self):
+        ref = self.head.CodigoEmpresaEmisora.text
+        if not ref:
+            raise except_f1('Error', u'Documento sin emisor')
+        return ref
+
+    @property
+    def get_codi_ccaa_desti(self):
+        ref = self.head.CodigoEmpresaDestino.text
+        if not ref:
+            raise except_f1('Error', u'Documento sin destinatario')
+        return ref
+
+    @property
     def cups(self):
         if self.tipus == 'R1':
             if utils.get_rec_attr(self, "head.CUPS", False):
