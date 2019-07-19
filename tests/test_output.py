@@ -779,7 +779,7 @@ class test_A1(unittest.TestCase):
             mensaje = a1.A101()
 
             # Cabecera
-            cabecera = a1.CabeceraA101()
+            cabecera = a1.CabeceraAutoconsumo()
             cabecera_fields = {
                 'codigo_empresa_emisora': '09',
                 'codigo_ree_empresa_destino': '4321',
@@ -929,7 +929,7 @@ class test_A1(unittest.TestCase):
 
         def test_create_pas02_accept(self):
             # Cabecera
-            cabecera = a1.CabeceraA102()
+            cabecera = a1.CabeceraAutoconsumoRechazo()
             cabecera_fields = {
                 'codigo_ree_empresa_emisora': '4321',
                 'codigo_empresa_destino': '09',
@@ -972,7 +972,7 @@ class test_A1(unittest.TestCase):
 
         def test_create_pas02_rej(self):
             # Cabecera
-            cabecera = a1.CabeceraA102()
+            cabecera = a1.CabeceraAutoconsumoRechazo()
             cabecera_fields = {
                 'codigo_ree_empresa_emisora': '4321',
                 'codigo_empresa_destino': '09',
