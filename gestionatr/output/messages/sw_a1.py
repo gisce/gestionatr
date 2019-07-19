@@ -2,7 +2,7 @@
 from libcomxml.core import XmlModel, XmlField
 
 from gestionatr.output.messages.sw_d1 import InfoRegistroAutocons
-from gestionatr.output.messages.base import rep_solicitud, rep_fecha
+from gestionatr.output.messages.base import CabeceraAutoconsumo, CabeceraAutoconsumoRechazo
 
 
 # Paso 01
@@ -13,28 +13,9 @@ class A101(XmlModel):
     def __init__(self):
         self.mensaje = XmlField('A101',
                                 attributes={'xmlns': 'http://localhost/elegibilidad'})
-        self.cabecera = CabeceraA101()
+        self.cabecera = CabeceraAutoconsumo()
         self.info_registro_autocons = InfoRegistroAutoconsA1()
         super(A101, self).__init__('A101', 'mensaje')
-
-
-class CabeceraA101(XmlModel):
-
-    _sort_order = ('cabecera', 'codigo_empresa_emisora',
-                   'codigo_ree_empresa_destino', 'codigo_del_proceso',
-                   'codigo_del_paso', 'codigo_de_solicitud',
-                   'secuencial_de_solicitud', 'fecha')
-
-    def __init__(self):
-        self.cabecera = XmlField('Cabecera')
-        self.codigo_empresa_emisora = XmlField('CodigoEmpresaEmisora')
-        self.codigo_ree_empresa_destino = XmlField('CodigoREEEmpresaDestino')
-        self.codigo_del_proceso = XmlField('CodigoDelProceso')
-        self.codigo_del_paso = XmlField('CodigoDePaso')
-        self.codigo_de_solicitud = XmlField('CodigoDeSolicitud', rep=rep_solicitud)
-        self.secuencial_de_solicitud = XmlField('SecuencialDeSolicitud')
-        self.fecha = XmlField('FechaSolicitud', rep=rep_fecha)
-        super(CabeceraA101, self).__init__('Cabecera', 'cabecera')
 
 
 class InfoRegistroAutoconsA1(InfoRegistroAutocons):
@@ -55,28 +36,9 @@ class MensajeActualizacionRegistroAutoconsumo(XmlModel):
     def __init__(self):
         self.mensaje = XmlField('MensajeActualizacionRegistroAutoconsumo',
                                 attributes={'xmlns': 'http://localhost/elegibilidad'})
-        self.cabecera = CabeceraA102()
+        self.cabecera = CabeceraAutoconsumoRechazo()
         self.actualizacion_registro_autoconsumo = ActualizacionRegistroAutoconsumo()
         super(MensajeActualizacionRegistroAutoconsumo, self).__init__('MensajeActualizacionRegistroAutoconsumo', 'mensaje')
-
-
-class CabeceraA102(XmlModel):
-
-    _sort_order = ('cabecera', 'codigo_ree_empresa_emisora',
-                   'codigo_empresa_destino', 'codigo_del_proceso',
-                   'codigo_del_paso', 'codigo_de_solicitud',
-                   'secuencial_de_solicitud', 'fecha')
-
-    def __init__(self):
-        self.cabecera = XmlField('Cabecera')
-        self.codigo_ree_empresa_emisora = XmlField('CodigoREEEmpresaEmisora')
-        self.codigo_empresa_destino = XmlField('CodigoEmpresaDestino')
-        self.codigo_del_proceso = XmlField('CodigoDelProceso')
-        self.codigo_del_paso = XmlField('CodigoDePaso')
-        self.codigo_de_solicitud = XmlField('CodigoDeSolicitud', rep=rep_solicitud)
-        self.secuencial_de_solicitud = XmlField('SecuencialDeSolicitud')
-        self.fecha = XmlField('FechaSolicitud', rep=rep_fecha)
-        super(CabeceraA102, self).__init__('Cabecera', 'cabecera')
 
 
 class ActualizacionRegistroAutoconsumo(XmlModel):
@@ -106,11 +68,11 @@ class ActualizacionDatosRegistro(XmlModel):
 
 class Rechazos(XmlModel):
 
-    _sort_order = ('rechazos', 'rechazo')
+    _sort_order = ('rechazos', 'rechazo_list')
 
     def __init__(self):
         self.rechazos = XmlField('Rechazos')
-        self.rechazo = Rechazo()
+        self.rechazo_list = []
         super(Rechazos, self).__init__('Rechazos', 'rechazos')
 
 

@@ -27,6 +27,25 @@ class Cabecera(XmlModel):
         super(Cabecera, self).__init__('Cabecera', 'cabecera')
 
 
+class CabeceraAutoconsumo(XmlModel):
+
+    _sort_order = ('cabecera', 'codigo_empresa_emisora',
+                   'codigo_ree_empresa_destino', 'codigo_del_proceso',
+                   'codigo_del_paso', 'codigo_de_solicitud',
+                   'secuencial_de_solicitud', 'fecha')
+
+    def __init__(self):
+        self.cabecera = XmlField('Cabecera')
+        self.codigo_empresa_emisora = XmlField('CodigoEmpresaEmisora')
+        self.codigo_ree_empresa_destino = XmlField('CodigoREEEmpresaDestino')
+        self.codigo_del_proceso = XmlField('CodigoDelProceso')
+        self.codigo_del_paso = XmlField('CodigoDePaso')
+        self.codigo_de_solicitud = XmlField('CodigoDeSolicitud', rep=rep_solicitud)
+        self.secuencial_de_solicitud = XmlField('SecuencialDeSolicitud')
+        self.fecha = XmlField('FechaSolicitud', rep=rep_fecha)
+        super(CabeceraAutoconsumo, self).__init__('Cabecera', 'cabecera')
+
+
 class CabeceraReclamacion(XmlModel):
 
     _sort_order = ('cabecera', 'codigo_ree_empresa_emisora',
@@ -47,6 +66,25 @@ class CabeceraReclamacion(XmlModel):
         self.cups = XmlField('CUPS')
         super(CabeceraReclamacion, self).__init__('CabeceraReclamacion',
                                                   'cabecera')
+
+
+class CabeceraAutoconsumoRechazo(XmlModel):
+
+    _sort_order = ('cabecera', 'codigo_ree_empresa_emisora',
+                   'codigo_empresa_destino', 'codigo_del_proceso',
+                   'codigo_del_paso', 'codigo_de_solicitud',
+                   'secuencial_de_solicitud', 'fecha')
+
+    def __init__(self):
+        self.cabecera = XmlField('Cabecera')
+        self.codigo_ree_empresa_emisora = XmlField('CodigoREEEmpresaEmisora')
+        self.codigo_empresa_destino = XmlField('CodigoEmpresaDestino')
+        self.codigo_del_proceso = XmlField('CodigoDelProceso')
+        self.codigo_del_paso = XmlField('CodigoDePaso')
+        self.codigo_de_solicitud = XmlField('CodigoDeSolicitud', rep=rep_solicitud)
+        self.secuencial_de_solicitud = XmlField('SecuencialDeSolicitud')
+        self.fecha = XmlField('FechaSolicitud', rep=rep_fecha)
+        super(CabeceraAutoconsumoRechazo, self).__init__('Cabecera', 'cabecera')
 
 
 def rep_solicitud(codsol):
