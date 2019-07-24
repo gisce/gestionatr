@@ -2253,18 +2253,19 @@
 			2B	Autoconsumo tipo 2 segun el Art. 13.2.b) del RD 900/2015
 			31 	Sin Excedentes Individual - Consumo
 			32 	Sin Excedentes Colectivo - Consumo
+			33	Sin Excedentes Colectivo con acuerdo de compensación - Consumo
 			41 	Con excedentes y compensación Individual - Consumo  
 			42 	Con excedentes y compensación Colectivo - Consumo
 			51 	Con excedentes sin compensación Individual sin cto de SSAA en Red Interior - Consumo
 			52 	Con excedentes sin compensación Individual con cto SSAA en Red Interior - Consumo
 			53	Con excedentes sin compensación individual con cto SSAA en Red Interior - SSAA
 			54 	Con excedentes sin compensación Colectivo/en Red Interior - Consumo
-			55 	Con excedentes sin compensación Colectivo/en Red Interior - SSAA
-			56	Con excedentes sin compensación Colectivo/en Red Interior - SSAA
+			55 	Con excedentes sin compensación Colectivo con cto de SSAA en Red Interior - Consumo
+			56	Con excedentes sin compensación Colectivo con cto de SSAA en Red Interior - SSAA
 			61 	Con excedentes sin compensación Individual con cto SSAA a través de red - Consumo
 			62 	Con excedentes sin compensación individual con cto SSAA a través de red - SSAA
-			63 	Con excedentes sin compensación Colectivo a través de red - Consumo
-			64 	Con excedentes sin compensación Colectivo a través de red - SSAA 	
+			63 	Con excedentes sin compensación Colectivo con cto de SSAA a través de red - Consumo
+			64 	Con excedentes sin compensación Colectivo  con cto de SSAA a través de red - SSAA	
 			71	Con excedentes sin compensación Individual con cto SSAA a través de red y red interior - Consumo
 			72	Con excedentes sin compensación individual con cto SSAA a través de red y red interior - SSAA
 			73	Con excedentes sin compensación Colectivo con cto de SSAA  a través de red y red interior - Consumo
@@ -2279,6 +2280,7 @@
 			<xs:enumeration value="2G"/>
 			<xs:enumeration value="31"/>
 			<xs:enumeration value="32"/>
+			<xs:enumeration value="33"/>
 			<xs:enumeration value="41"/>
 			<xs:enumeration value="42"/>
 			<xs:enumeration value="51"/>
@@ -3312,8 +3314,8 @@ la reclamacion
 	</xs:simpleType>
 	<xs:simpleType name="CodigoAutoconsumo">
 		<xs:restriction base="xs:string">
-			<xs:minLength value="25"/>
-			<xs:maxLength value="25"/>
+			<xs:minLength value="26"/>
+			<xs:maxLength value="26"/>
 			<xs:pattern value="[a-zA-Z0-9]*"/>
 		</xs:restriction>
 	</xs:simpleType>
@@ -3385,18 +3387,6 @@ la reclamacion
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="01"/>
 			<xs:enumeration value="02"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="TipoTension">
-		<xs:annotation>
-			<xs:documentation> Tipo de tensión (tabla 132)
-				BT si tensión menos o igual que 1kV
-				AT si tensión  mayor que 1kV
-			</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="BT"/>
-			<xs:enumeration value="AT"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="RefCatastro">
@@ -3544,11 +3534,10 @@ la reclamacion
 			<xs:enumeration value="X"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:simpleType name="Decimal9V2">
-		<xs:restriction base="xs:decimal">
-			<xs:totalDigits value="11"/>
-			<xs:fractionDigits value="2"/>
-			<xs:maxInclusive value="999999999.99"/>
+	<xs:simpleType name="X11">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="11"/>
+			<xs:maxLength value="11"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

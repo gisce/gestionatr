@@ -162,13 +162,13 @@
 			</xs:element>
 			<xs:element name="RefCatastro" type="RefCatastro" minOccurs="0"/>
 			<xs:element name="UTM" type="TypeUTM" minOccurs="0"/>
-			<xs:element name="TitularRepresentanteGen" type="TypeTitularGeneracion" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="TitularRepresentanteGen" type="TypeTitularGeneracion" minOccurs="0" maxOccurs="1"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="TypeTitularGeneracion">
 		<xs:sequence>
+			<xs:element name="IdTitular" type="TypeIdTitular"/>
 			<xs:element name="Nombre" type="TypeNombre"/>
-			<xs:element name="NIF" type="X14"/>
 			<xs:element name="Telefono" type="TelefonoInternacional" minOccurs="1" maxOccurs="5"/>
 			<xs:element name="CorreoElectronico" minOccurs="0">
 				<xs:simpleType>
@@ -177,7 +177,7 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element name="Direccion" type="DireccionCont"/>
+			<xs:element name="Direccion" type="TipoDireccion"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="TypeNombre">
@@ -235,7 +235,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="DireccionCont">
+	<xs:complexType name="TipoDireccion">
 		<xs:sequence>
 			<xs:element name="Pais" type="X25"/>
 			<xs:element name="Provincia">
@@ -255,7 +255,8 @@
 			</xs:element>
 			<xs:element name="Poblacion" minOccurs="0">
 				<xs:simpleType>
-					<xs:restriction base="X9">
+					<xs:restriction base="X11">
+						<xs:minLength value="11"/>
 						<xs:pattern value="[0-9]*"/>
 					</xs:restriction>
 				</xs:simpleType>
@@ -346,6 +347,23 @@
 			<xs:element name="Y" type="X8"/>
 			<xs:element name="Huso" type="TypeHuso"/>
 			<xs:element name="Banda" type="TypeBanda" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TypeIdTitular">
+		<xs:sequence>
+			<xs:element name="TipoIdentificador" type="TipoIdentificador">
+				<xs:annotation>
+					<xs:documentation>Tabla 6</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Identificador">
+				<xs:simpleType>
+					<xs:restriction base="X14">
+						<xs:whiteSpace value="collapse"/>
+						<xs:minLength value="7"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 </xs:schema>

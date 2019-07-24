@@ -4,12 +4,12 @@
 	<xs:include schemaLocation="TiposSencillosCCAA.xsd"/>
 	<xs:annotation>
 		<xs:documentation>
-			Version 1.2 CNMC 2016.12.20
+			Version 1.0 CNMC 2019.XX.XX
 		</xs:documentation>
 	</xs:annotation>
 	<!-- Rechazo -->
 	<xs:complexType name="RechazoDistribuidorCCAA">
-		<xs:sequence>			
+		<xs:sequence>
 			<xs:element name="Rechazo" type="Rechazo" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>

@@ -34,7 +34,7 @@ class MensajeActualizacionRegistroAutoconsumo(XmlModel):
     _sort_order = ('mensaje', 'cabecera', 'actualizacion_registro_autoconsumo')
 
     def __init__(self):
-        self.mensaje = XmlField('MensajeActualizacionRegistroAutoconsumo',
+        self.mensaje = XmlField('A102',
                                 attributes={'xmlns': 'http://localhost/elegibilidad'})
         self.cabecera = CabeceraAutoconsumoRechazo()
         self.actualizacion_registro_autoconsumo = ActualizacionRegistroAutoconsumo()

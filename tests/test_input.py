@@ -512,7 +512,7 @@ class test_A1(unittest.TestCase):
 
         self.assertEqual(a1.movimiento, u'A')
         autoconsumo = a1.autoconsumo
-        self.assertEqual(autoconsumo.cau, u'1234567890123456789012345')
+        self.assertEqual(autoconsumo.cau, u'ES1234000000000001JN0FA001')
         self.assertEqual(autoconsumo.seccion_registro, u'2')
         self.assertEqual(autoconsumo.sub_seccion, u'a0')
         self.assertEqual(autoconsumo.colectivo, u'S')
@@ -521,7 +521,7 @@ class test_A1(unittest.TestCase):
         self.assertEqual(suministro.tipo_cups, u'01')
         self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')
         inst_gen = a1.datos_inst_gen[0]
-        self.assertEqual(inst_gen.cil, u'1234567890qwertyuiop12345')
+        self.assertEqual(inst_gen.cil, u'ES1234000000000001JN0F001')
         self.assertEqual(inst_gen.tec_generador, u'b12')
         self.assertEqual(inst_gen.combustible, u'Diesel')
         self.assertEqual(inst_gen.pot_instalada_gen, u'100')
@@ -535,10 +535,11 @@ class test_A1(unittest.TestCase):
         self.assertEqual(utm.huso, u'40')
         self.assertEqual(utm.banda, u'E')
         titular = inst_gen.titular_representante_gen
+        self.assertEqual(titular.id_titular.tipo_identificador, u'NI')
+        self.assertEqual(titular.id_titular.identificador, u'111111111H')
         self.assertEqual(titular.nombre.nombre_de_pila, u'Juan')
         self.assertEqual(titular.nombre.primer_apellido, u'López')
         self.assertEqual(titular.nombre.segundo_apellido, u'Sánchez')
-        self.assertEqual(titular.nif, u'49916604A')
         self.assertEqual(titular.telefono[0][0], u'0034')
         self.assertEqual(titular.telefono[0][1], u'933834841')
         self.assertEqual(titular.correo_electronico, u'mail_falso@dominio.com')
@@ -546,7 +547,7 @@ class test_A1(unittest.TestCase):
         self.assertEqual(direccion.pais, u'España')
         self.assertEqual(direccion.provincia, u'17')
         self.assertEqual(direccion.municipio, u'171181')
-        self.assertEqual(direccion.poblacion, u'118000400')
+        self.assertEqual(direccion.poblacion, u'17118000400')
         self.assertEqual(direccion.cod_postal, u'17230')
         self.assertEqual(direccion.tipo_via, u'CL')
         self.assertEqual(direccion.calle, u'Pau Casals')
@@ -563,7 +564,7 @@ class test_A1(unittest.TestCase):
         a1 = A1(self.xml_a102_accept)
         a1.parse_xml()
 
-        self.assertEqual(a1.cau, u'1234567890123456789012345')
+        self.assertEqual(a1.cau, u'ES1234000000000001JN0FA001')
         registro = a1.actualizacion_datos_registro
         self.assertEqual(registro.sub_seccion, u'a0')
         self.assertEqual(a1.comentarios, u'Esto es un comentario')
@@ -572,7 +573,7 @@ class test_A1(unittest.TestCase):
         a1 = A1(self.xml_a102_reject)
         a1.parse_xml()
 
-        self.assertEqual(a1.cau, u'1234567890123456789012345')
+        self.assertEqual(a1.cau, u'ES1234000000000001JN0FA001')
         self.assertEqual(a1.comentarios, u'Esto es un comentario')
         rechazos = a1.rechazos
         self.assertEqual(len(rechazos), 3)
@@ -913,7 +914,7 @@ class test_D1(unittest.TestCase):
         self.assertEqual(d1.motivo_cambio_atr_desde_distribuidora, u'01')
         info = d1.info_registro_autocons
         autoconsumo = info.autoconsumo
-        self.assertEqual(autoconsumo.cau, u'1234567890123456789012345')
+        self.assertEqual(autoconsumo.cau, u'ES1234000000000001JN0FA001')
         self.assertEqual(autoconsumo.seccion_registro, u'2')
         self.assertEqual(autoconsumo.sub_seccion, u'a0')
         self.assertEqual(autoconsumo.colectivo, u'S')
@@ -936,10 +937,11 @@ class test_D1(unittest.TestCase):
         self.assertEqual(utm.huso, u'40')
         self.assertEqual(utm.banda, u'E')
         titular = inst_gen.titular_representante_gen
+        self.assertEqual(titular.id_titular.tipo_identificador, u'NI')
+        self.assertEqual(titular.id_titular.identificador, u'111111111H')
         self.assertEqual(titular.nombre.nombre_de_pila, u'Juan')
         self.assertEqual(titular.nombre.primer_apellido, u'López')
         self.assertEqual(titular.nombre.segundo_apellido, u'Sánchez')
-        self.assertEqual(titular.nif, u'49916604A')
         self.assertEqual(titular.telefono[0][0], u'0034')
         self.assertEqual(titular.telefono[0][1], u'933834841')
         self.assertEqual(titular.correo_electronico, u'mail_falso@dominio.com')
@@ -947,7 +949,7 @@ class test_D1(unittest.TestCase):
         self.assertEqual(direccion.pais, u'España')
         self.assertEqual(direccion.provincia, u'17')
         self.assertEqual(direccion.municipio, u'171181')
-        self.assertEqual(direccion.poblacion, u'118000400')
+        self.assertEqual(direccion.poblacion, u'17118000400')
         self.assertEqual(direccion.cod_postal, u'17230')
         self.assertEqual(direccion.tipo_via, u'CL')
         self.assertEqual(direccion.calle, u'Pau Casals')
@@ -966,7 +968,7 @@ class test_D1(unittest.TestCase):
         self.assertEqual(d1.motivo_cambio_atr_desde_distribuidora, u'04')
         info = d1.info_registro_autocons
         autoconsumo = info.autoconsumo
-        self.assertEqual(autoconsumo.cau, u'1234567890123456789012345')
+        self.assertEqual(autoconsumo.cau, u'ES1234000000000001JN0FA001')
         self.assertEqual(autoconsumo.seccion_registro, u'2')
         self.assertEqual(autoconsumo.colectivo, u'S')
         suministro = info.datos_suministro
@@ -981,9 +983,10 @@ class test_D1(unittest.TestCase):
         self.assertEqual(utm.y, u'200')
         self.assertEqual(utm.huso, u'40')
         titular = inst_gen.titular_representante_gen
+        self.assertEqual(titular.id_titular.tipo_identificador, u'NI')
+        self.assertEqual(titular.id_titular.identificador, u'111111111H')
         self.assertEqual(titular.nombre.nombre_de_pila, u'Juan')
         self.assertEqual(titular.nombre.primer_apellido, u'López')
-        self.assertEqual(titular.nif, u'49916604A')
         self.assertEqual(titular.telefono[0][0], u'0034')
         self.assertEqual(titular.telefono[0][1], u'933834841')
         direccion = titular.direccion

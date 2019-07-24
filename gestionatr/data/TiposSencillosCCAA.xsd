@@ -47,8 +47,8 @@
 	</xs:simpleType>
 	<xs:simpleType name="CodigoAutoconsumo">
 		<xs:restriction base="xs:string">
-			<xs:minLength value="25"/>
-			<xs:maxLength value="25"/>
+			<xs:minLength value="26"/>
+			<xs:maxLength value="26"/>
 			<xs:pattern value="[a-zA-Z0-9]*"/>
 		</xs:restriction>
 	</xs:simpleType>
@@ -213,12 +213,6 @@
 		<xs:restriction base="xs:string">
 			<xs:minLength value="1"/>
 			<xs:maxLength value="6"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="X9">
-		<xs:restriction base="xs:string">
-			<xs:minLength value="1"/>
-			<xs:maxLength value="9"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="X5">
@@ -588,6 +582,30 @@
 			<xs:fractionDigits value="3"/>
 			<xs:minInclusive value="0"/>
 			<xs:maxInclusive value="9999999999.999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoIdentificador">
+		<xs:annotation>
+			<xs:documentation>Tipo de Identificador de los datos del usuario (tabla 6)	
+				NI	NIF
+				NV	N.I.V.A.
+				OT	Otros
+				PS	Pasaporte
+				NE	N.I.E.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NI"/>
+			<xs:enumeration value="NV"/>
+			<xs:enumeration value="OT"/>
+			<xs:enumeration value="PS"/>
+			<xs:enumeration value="NE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="X11">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="11"/>
+			<xs:maxLength value="11"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

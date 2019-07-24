@@ -794,7 +794,7 @@ class test_A1(unittest.TestCase):
             # Autoconsumo
             autoconsumo = d1.Autoconsumo()
             autoconsumo_fields = {
-                'cau': '1234567890123456789012345',
+                'cau': 'ES1234000000000001JN0FA001',
                 'seccion_registro': '2',
                 'sub_seccion': 'a0',
                 'colectivo': 'S',
@@ -819,6 +819,14 @@ class test_A1(unittest.TestCase):
                 'banda': 'E',
             }
             utm.feed(utm_fields)
+
+            # IdTitular
+            id_titular = d1.IdTitular()
+            id_titular_fields = {
+                'tipo_identificador': 'NI',
+                'identificador': '111111111H',
+            }
+            id_titular.feed(id_titular_fields)
 
             # Nombre
             nombre = d1.Nombre()
@@ -874,7 +882,7 @@ class test_A1(unittest.TestCase):
                 'pais': 'España',
                 'provincia': '17',
                 'municipio': '171181',
-                'poblacion': '118000400',
+                'poblacion': '17118000400',
                 'cod_postal': '17230',
                 'via': via
             }
@@ -883,8 +891,8 @@ class test_A1(unittest.TestCase):
             # TitularRepresentanteGen
             titular = d1.TitularRepresentanteGen()
             titular_representante_gen_fields = {
+                'id_titular': id_titular,
                 'nombre': nombre,
-                'nif': '49916604A',
                 'telefono': [telefono, telefono2, telefono3],
                 'correo_electronico': 'mail_falso@dominio.com',
                 'direccion': direccion,
@@ -894,7 +902,7 @@ class test_A1(unittest.TestCase):
             # DatosInstGen
             datos = d1.DatosInstGen()
             datos_inst_gen_fields = {
-                'cil': '1234567890qwertyuiop12345',
+                'cil': 'ES1234000000000001JN0F001',
                 'tec_generador': 'b12',
                 'combustible': 'Diesel',
                 'pot_instalada_gen': '100',
@@ -951,7 +959,7 @@ class test_A1(unittest.TestCase):
             # ActualizacionRegistroAutoconsumo
             registro = a1.ActualizacionRegistroAutoconsumo()
             actualizacion_registro_autoconsumo_fields = {
-                'cau': '1234567890123456789012345',
+                'cau': 'ES1234000000000001JN0FA001',
                 'actualizacion_datos_registro': datos_registro,
                 'comentarios': 'Esto es un comentario',
 
@@ -1025,7 +1033,7 @@ class test_A1(unittest.TestCase):
             # ActualizacionRegistroAutoconsumo
             registro = a1.ActualizacionRegistroAutoconsumo()
             actualizacion_registro_autoconsumo_fields = {
-                'cau': '1234567890123456789012345',
+                'cau': 'ES1234000000000001JN0FA001',
                 'rechazos': rechazos,
                 'comentarios': 'Esto es un comentario',
 
@@ -1405,7 +1413,7 @@ class test_D1(unittest.TestCase):
         # Autoconsumo
         autoconsumo = d1.Autoconsumo()
         autoconsumo_fields = {
-            'cau': '1234567890123456789012345',
+            'cau': 'ES1234000000000001JN0FA001',
             'seccion_registro': '2',
             'sub_seccion': 'a0',
             'colectivo': 'S',
@@ -1430,6 +1438,14 @@ class test_D1(unittest.TestCase):
             'banda': 'E',
         }
         utm.feed(utm_fields)
+
+        # IdTitular
+        id_titular = d1.IdTitular()
+        id_titular_fields = {
+            'tipo_identificador': 'NI',
+            'identificador': '111111111H',
+        }
+        id_titular.feed(id_titular_fields)
 
         # Nombre
         nombre = d1.Nombre()
@@ -1485,7 +1501,7 @@ class test_D1(unittest.TestCase):
             'pais': 'España',
             'provincia': '17',
             'municipio': '171181',
-            'poblacion': '118000400',
+            'poblacion': '17118000400',
             'cod_postal': '17230',
             'via': via
         }
@@ -1494,8 +1510,8 @@ class test_D1(unittest.TestCase):
         # TitularRepresentanteGen
         titular = d1.TitularRepresentanteGen()
         titular_representante_gen_fields = {
+            'id_titular': id_titular,
             'nombre': nombre,
-            'nif': '49916604A',
             'telefono': [telefono, telefono2, telefono3],
             'correo_electronico': 'mail_falso@dominio.com',
             'direccion': direccion,
@@ -1505,7 +1521,7 @@ class test_D1(unittest.TestCase):
         # DatosInstGen
         datos = d1.DatosInstGen()
         datos_inst_gen_fields = {
-            'cil': '1234567890qwertyuiop12345',
+            'cil': 'ES1234000000000001JN0F001',
             'tec_generador': 'b12',
             'combustible': 'Diesel',
             'pot_instalada_gen': '100',

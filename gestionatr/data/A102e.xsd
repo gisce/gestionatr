@@ -3,7 +3,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TipoMensajeA102.xsd"/>
 	<xs:include schemaLocation="TiposSencillosCCAA.xsd"/>
-	<xs:element name="MensajeActualizacionRegistroAutoconsumo">
+	<xs:element name="A102">
 		<xs:annotation>
 			<xs:documentation>Version XX CNMC 201X.XX.XX</xs:documentation>
 		</xs:annotation>

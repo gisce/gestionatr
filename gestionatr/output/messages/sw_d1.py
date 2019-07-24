@@ -106,17 +106,28 @@ class UTM(XmlModel):
 
 class TitularRepresentanteGen(XmlModel):
 
-    _sort_order = ('titular_representante_gen', 'nombre', 'nif', 'telefono', 'correo_electronico',
+    _sort_order = ('titular_representante_gen', 'id_titular', 'nombre', 'telefono', 'correo_electronico',
                    'direccion')
 
     def __init__(self):
         self.titular_representante_gen = XmlField('TitularRepresentanteGen')
+        self.id_titular = IdTitular()
         self.nombre = Nombre()
-        self.nif = XmlField('NIF')
         self.telefono = Telefono()
         self.correo_electronico = XmlField('CorreoElectronico')
         self.direccion = Direccion()
         super(TitularRepresentanteGen, self).__init__('TitularRepresentanteGen', 'titular_representante_gen')
+
+
+class IdTitular(XmlModel):
+
+    _sort_order = ('id_titular', 'tipo_identificador', 'identificador')
+
+    def __init__(self):
+        self.id_titular = XmlField('IdTitular')
+        self.tipo_identificador = XmlField('TipoIdentificador')
+        self.identificador = XmlField('Identificador')
+        super(IdTitular, self).__init__('IdTitular', 'id_titular')
 
 
 class Nombre(XmlModel):

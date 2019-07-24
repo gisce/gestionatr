@@ -305,19 +305,19 @@ class TitularRepresentanteGen(object):
         self.titular_representante_gen = data
 
     @property
-    def nombre(self):
+    def id_titular(self):
         data = ''
         try:
-            data = Nombre(self.titular_representante_gen.Nombre)
+            data = IdTitular(self.titular_representante_gen.IdTitular)
         except AttributeError:
             pass
         return data
 
     @property
-    def nif(self):
+    def nombre(self):
         data = ''
         try:
-            data = self.titular_representante_gen.NIF.text
+            data = Nombre(self.titular_representante_gen.Nombre)
         except AttributeError:
             pass
         return data
@@ -346,6 +346,30 @@ class TitularRepresentanteGen(object):
         data = ''
         try:
             data = Direccion(self.titular_representante_gen.Direccion)
+        except AttributeError:
+            pass
+        return data
+
+
+class IdTitular(object):
+
+    def __init__(self, data):
+        self.id_titular = data
+
+    @property
+    def tipo_identificador(self):
+        data = ''
+        try:
+            data = self.id_titular.TipoIdentificador.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def identificador(self):
+        data = ''
+        try:
+            data = self.id_titular.Identificador.text
         except AttributeError:
             pass
         return data
@@ -391,6 +415,7 @@ class Nombre(object):
         except AttributeError:
             pass
         return data
+
 
 class Direccion(object):
 

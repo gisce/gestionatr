@@ -14,7 +14,7 @@
         <MotivoCambioATRDesdeDistribuidora>04</MotivoCambioATRDesdeDistribuidora>
         <InfoRegistroAutocons>
             <Autoconsumo>
-                <CAU>1234567890123456789012345</CAU>
+                <CAU>ES1234000000000001JN0FA001</CAU>
                 <SeccionRegistro>2</SeccionRegistro>
                 <Colectivo>S</Colectivo>
             </Autoconsumo>
@@ -32,11 +32,14 @@
                     <Huso>40</Huso>
                 </UTM>
                 <TitularRepresentanteGen>
+                    <IdTitular>
+                        <TipoIdentificador>NI</TipoIdentificador>
+                        <Identificador>111111111H</Identificador>
+                    </IdTitular>
                     <Nombre>
                         <NombreDePila>Juan</NombreDePila>
                         <PrimerApellido>López</PrimerApellido>
                     </Nombre>
-                    <NIF>49916604A</NIF>
                     <Telefono>
                         <PrefijoPais>0034</PrefijoPais>
                         <Numero>933834841</Numero>
