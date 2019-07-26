@@ -107,13 +107,6 @@
 															<xs:documentation>Tabla 107</xs:documentation>
 														</xs:annotation>
 													</xs:element>
-													<xs:element name="TipoAutoconsumo" type="TipoAutoconsumo" minOccurs="0">
-														<xs:annotation>
-															<xs:documentation>Tabla 113</xs:documentation>
-														</xs:annotation>
-													</xs:element>
-													<xs:element name="CAU" type="CodigoAutoconsumo" minOccurs="0"/>
-													<xs:element name="CoefReparto" type="Decimal9V2" minOccurs="0"/>
 													<xs:element name="ModoControlPotencia" type="ModoControlPotencia">
 														<xs:annotation>
 															<xs:documentation> Tabla 51</xs:documentation>
