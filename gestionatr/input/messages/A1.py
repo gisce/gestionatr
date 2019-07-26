@@ -212,8 +212,8 @@ class MinimumFieldsChecker(object):
         if pas == '01':
             return [
                 'moviment', 'cau', 'seccio_registre', 'collectiu', 'cups', 'tec_generador',
-                'pot_installada_gen', 'tipus_installacio', 'ssaa', 'nom_titular', 'nif',
-                'telefon', 'pais', 'provincia', 'municipi', 'codi_postal', 'via_or_apartat_correus'
+                'pot_installada_gen', 'tipus_installacio', 'ssaa', 'nom_titular', 'tipus_identificador',
+                'identificador', 'telefon', 'pais', 'provincia', 'municipi', 'codi_postal', 'via_or_apartat_correus'
             ]
         elif pas == '02':
             return [
@@ -274,10 +274,16 @@ class MinimumFieldsChecker(object):
             valid = valid and check
         return valid
 
-    def check_nif(self):
+    def check_tipus_identificador(self):
         valid = True
         for datos in self.a1.datos_inst_gen:
-            valid = valid and get_rec_attr(datos.titular_representante_gen, "nif", False)
+            valid = valid and get_rec_attr(datos.titular_representante_gen.id_titular, "tipo_identificador", False)
+        return valid
+
+    def check_identificador(self):
+        valid = True
+        for datos in self.a1.datos_inst_gen:
+            valid = valid and get_rec_attr(datos.titular_representante_gen.id_titular, "identificador", False)
         return valid
 
     def check_telefon(self):
