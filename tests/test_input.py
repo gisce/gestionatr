@@ -923,7 +923,7 @@ class test_D1(unittest.TestCase):
         self.assertEqual(suministro.tipo_cups, u'01')
         self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')
         inst_gen = info.datos_inst_gen[0]
-        self.assertEqual(inst_gen.cil, u'1234567890qwertyuiop12345')
+        self.assertEqual(inst_gen.cil, u'ES1234000000000001JN0F001')
         self.assertEqual(inst_gen.tec_generador, u'b12')
         self.assertEqual(inst_gen.combustible, u'Diesel')
         self.assertEqual(inst_gen.pot_instalada_gen, u'100')
