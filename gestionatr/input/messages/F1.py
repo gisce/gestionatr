@@ -44,6 +44,29 @@ CODIS_REG_REFACT = {
     'RGM42012': '42',
 }
 
+CODIS_AUTOCONSUM = {
+    '51': 'autoconsum',
+    '52': 'autoconsum',
+    '53': 'autoconsum',
+    '54': 'autoconsum',
+    '55': 'autoconsum',
+    '56': 'autoconsum',
+    '61': 'generacio',
+    '62': 'generacio',
+    '63': 'generacio',
+    '64': 'generacio',
+    '65': 'generacio',
+    '66': 'generacio',
+    '71': 'excedent',
+    '72': 'excedent',
+    '73': 'excedent',
+    '74': 'excedent',
+    '75': 'excedent',
+    '76': 'excedent',
+    '81': 'informacio',
+    '82': 'informacio',
+}
+
 # Totalitzadors a ignorar
 SKIP_TOTALITZADORS = ('00', '60')
 
@@ -366,6 +389,8 @@ class Factura(object):
                 regulating_concept = codigo in CODIS_REG_REFACT.values()
                 if regulating_concept and concepte.total >= 0:
                     continue
+                elif concepte.is_autoconsum():
+                    conceptes.append(concepte)
                 elif concepte.importe:
                     total += concepte.importe
                     conceptes.append(concepte)
@@ -1279,6 +1304,8 @@ class ConceptoRepercutible(object):
             return self.concepto.Comentarios.text.strip()
         return None
 
+    def is_autoconsum(self):
+        return self.concepto_repercutible in CODIS_AUTOCONSUM.keys()
 
 class OtraFactura(Factura):
     DATOS_GENERALES_NAME = 'DatosGeneralesOtrasFacturas'
