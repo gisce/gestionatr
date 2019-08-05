@@ -3,10 +3,12 @@ from message import Message
 from gestionatr.input.messages.C2 import Direccion
 from gestionatr.defs import TARIFES_SEMPRE_MAX
 from datetime import datetime, date
+from gestionatr.utils import repartir_consums_entre_lectures
 
 # Magnituds d'OCSUM
 MAGNITUDS_OCSUM = {
     'AE': 'A',
+    'AS': 'S',
     'R1': 'R',
     'PM': 'M',
     'EP': 'EP'
@@ -57,12 +59,12 @@ CODIS_AUTOCONSUM = {
     '64': 'generacio',
     '65': 'generacio',
     '66': 'generacio',
-    '71': 'excedent',
-    '72': 'excedent',
-    '73': 'excedent',
-    '74': 'excedent',
-    '75': 'excedent',
-    '76': 'excedent',
+    '71': 'exedent',
+    '72': 'exedent',
+    '73': 'exedent',
+    '74': 'exedent',
+    '75': 'exedent',
+    '76': 'exedent',
     '81': 'informacio',
     '82': 'informacio',
 }
@@ -796,24 +798,45 @@ class Ajuste(object):
 
     def __init__(self, data):
         self.ajuste = data
+        self._codigo_motivo = None
+        self._ajuste_por_integrador = None
+        self._comentario = None
 
     @property
     def codigo_motivo(self):
+        if self._codigo_motivo:
+            return self._codigo_motivo
         if hasattr(self.ajuste, 'CodigoMotivoAjuste'):
             return self.ajuste.CodigoMotivoAjuste.text.strip()
         return None
 
+    @codigo_motivo.setter
+    def codigo_motivo(self, value):
+        self._codigo_motivo = value
+
     @property
     def ajuste_por_integrador(self):
+        if self._ajuste_por_integrador:
+            return self._ajuste_por_integrador
         if hasattr(self.ajuste, 'AjustePorIntegrador'):
             return float(self.ajuste.AjustePorIntegrador.text.strip())
         return None
 
+    @ajuste_por_integrador.setter
+    def ajuste_por_integrador(self, value):
+        self._ajuste_por_integrador = value
+
     @property
     def comentario(self):
+        if self._comentario:
+            return self._comentario
         if hasattr(self.ajuste, 'Comentarios'):
             return self.ajuste.Comentarios.text.strip()
         return None
+
+    @comentario.setter
+    def comentario(self, value):
+        self._comentario = value
 
 
 class Integrador(object):
@@ -821,6 +844,10 @@ class Integrador(object):
     def __init__(self, data):
         self.integrador = data
         self._periode = None
+        self._ajuste = None
+
+    def unique_name(self):
+        return '_'.join([self.codigo_periodo, self.tipus, self.lectura_desde.fecha,  self.lectura_hasta.fecha])
 
     @property
     def magnitud(self):
@@ -893,9 +920,15 @@ class Integrador(object):
 
     @property
     def ajuste(self):
+        if self._ajuste:
+            return self._ajuste
         if hasattr(self.integrador, 'Ajuste'):
             return Ajuste(self.integrador.Ajuste)
         return None
+
+    @ajuste.setter
+    def ajuste(self, value):
+        self._ajuste = value
 
     @property
     def ometre(self):
@@ -1003,13 +1036,19 @@ class ModeloAparato(object):
         return lectures
 
     def get_lectures_activa(self):
+        return self.get_lectures(['A', 'S'])
+
+    def get_lectures_activa_entrant(self):
         return self.get_lectures(['A'])
+
+    def get_lectures_activa_sortint(self):
+        return self.get_lectures(['S'])
 
     def get_lectures_reactiva(self):
         return self.get_lectures(['R'])
 
     def get_lectures_energia(self):
-        return self.get_lectures(['A', 'R'])
+        return self.get_lectures(['A', 'S', 'R'])
 
     def get_lectures_maximetre(self):
         return self.get_lectures(['M'])
@@ -1102,6 +1141,12 @@ class FacturaATR(Factura):
             ('lloguer', self.get_info_lloguer),
         ]
 
+    def te_autoconsum(self):
+        for concepte in self.conceptos_repercutibles:
+            if concepte.concepto_repercutible in CODIS_AUTOCONSUM.keys():
+                return True
+        return False
+
     @property
     def potencia(self):
         if hasattr(self.factura, 'Potencia'):
@@ -1145,6 +1190,67 @@ class FacturaATR(Factura):
             for d in self.factura.Medidas:
                 data.append(Medida(d))
         return data
+
+    def get_consum_facturat(self, tipus, periode):
+        if tipus not in ['A', 'S']:
+            return None
+
+        if tipus == 'A' and self.energia_activa:
+            res = []
+            for activa in self.energia_activa.terminos_energia_activa:
+                for periode_activa in activa.periodos:
+                    if periode_activa.nombre == periode:
+                        res.append(periode_activa.cantidad)
+            return res
+
+        if tipus == 'S':
+            res = []
+            for concepte in self.conceptos_repercutibles:
+                if concepte.concepto_repercutible[0] == '7' and concepte.concepto_repercutible[1] == periode[1]:
+                    res.append(concepte.unidades)
+            return res
+
+        return None
+
+    def get_lectures_amb_ajust_autoconsum(self, tipus='S', ajust_balancejat=True):
+        lectures_per_periode = {}
+        for comptador in self.get_comptadors():
+            for lectura in comptador.get_lectures(tipus):
+                periode = lectura.periode
+                if not lectures_per_periode.get(periode):
+                    lectures_per_periode[periode] = {'comptador': comptador, 'lectures': []}
+                lectures_per_periode[periode]['lectures'].append(lectura)
+
+        res = {}
+        for periode, info in lectures_per_periode.iteritems():
+            lectures = info['lectures']
+            comptador = info['comptador']
+            if not res.get(comptador):
+                res[comptador] = []
+            if ajust_balancejat:
+                consums_desitjats = self.get_consum_facturat(tipus=tipus, periode=periode)
+                if not consums_desitjats:
+                    continue
+                consums_repartits = repartir_consums_entre_lectures(consums_desitjats, lectures)
+                for lectura, consum in consums_repartits.iteritems():
+                    if not lectura.ajuste:
+                        lectura.ajuste = Ajuste(None)
+                    else:
+                        lectura.ajuste = Ajuste(lectura.ajuste.ajuste)
+                    old_ajust = lectura.ajuste and lectura.ajuste.ajuste_por_integrador or 0.0
+                    new_val = consum - (lectura.lectura_hasta.lectura - lectura.lectura_desde.lectura + old_ajust)
+                    if new_val != 0.0:
+                        lectura.ajuste.ajuste_por_integrador = consum - (lectura.lectura_hasta.lectura - lectura.lectura_desde.lectura)
+                        lectura.ajuste.codigo_motivo = "98"  # Autoconsumo
+            for l in lectures:
+                res[comptador].append(l)
+        return res
+
+    def get_lectures_activa_entrant(self, ajust_balancejat=True):
+        return self.get_lectures_amb_ajust_autoconsum(tipus='A', ajust_balancejat=ajust_balancejat)
+
+    def get_lectures_activa_sortint(self, ajust_balancejat=True):
+        return self.get_lectures_amb_ajust_autoconsum(tipus='S', ajust_balancejat=ajust_balancejat)
 
     def get_comptadors(self):
         """Retorna totes les lectures en una llista de comptadors"""

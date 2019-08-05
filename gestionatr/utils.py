@@ -2,6 +2,7 @@ from gestionatr import defs
 from gestionatr import defs_gas
 import os
 from collections import namedtuple
+from datetime import datetime
 
 _ROOT = os.path.abspath(os.path.dirname(__file__))
 
@@ -74,3 +75,28 @@ def validate_xml(data, is_gas=False):
                 return ValidationResult(False, u'Invalid File: {0}'.format(str(e2.value)))
             else:
                 return ValidationResult(False, u'Invalid File: {0}'.format(str(e.value)))
+
+
+def repartir_consums_entre_lectures(consums, lectures_xml):
+    """
+    Sabem repartir en 2 escenaris:
+        - Un consum per cada lectura
+        - Un consum per X lectures
+    NO sabem repartir:
+        - Mes de un consum per un nombre diferent de lectures. per exemple 3 consums per 4 lectures
+    """
+    res = {}
+    if len(consums) == len(lectures_xml):
+        i = 0
+        for l in lectures_xml:
+            res[l] = consums[i]
+            i += 1
+    elif len(consums) == 1:
+        consum = consums[0]
+        total_dies = 0.0
+        for l in lectures_xml:
+            total_dies += datetime.strptime(l.lectura_hasta.fecha, "%Y-%m-%d") - datetime.strptime(l.lectura_desde.fecha, "%Y-%m-%d")
+        for l in lectures_xml:
+            dies = datetime.strptime(l.lectura_hasta.fecha, "%Y-%m-%d") - datetime.strptime(l.lectura_desde.fecha, "%Y-%m-%d")
+            res[l] = consum * (dies/total_dies)
+    return res
