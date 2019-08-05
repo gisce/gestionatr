@@ -1276,7 +1276,7 @@ class ConceptoRepercutible(object):
     @property
     def comentarios(self):
         if hasattr(self.concepto, 'Comentarios'):
-            return self.concepto.Comentarios.text.strip()
+            return self.concepto.Comentarios.text
         return None
 
 
