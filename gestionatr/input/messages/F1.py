@@ -787,7 +787,7 @@ class Ajuste(object):
     @property
     def comentario(self):
         if hasattr(self.ajuste, 'Comentarios'):
-            return self.ajuste.Comentarios.text.strip()
+            return self.ajuste.Comentarios.text
         return None
 
 
