@@ -2132,6 +2132,8 @@ TABLA_113 = [
     ('74', u'Con excedentes sin compensación Colectivo con cto de SSAA a través de red y red interior - SSAA'),
 ]
 
+TENEN_AUTOCONSUM = [x[0] for x in TABLA_113 if x[0] not in ['00', '01', '2A', '2B', '2G']]
+
 TABLA_114 = [
     ('1', u'IVA / IPSI/ IGIC'),
     ('2', u'IVA / IPSI/ IGIC Reducido'),
