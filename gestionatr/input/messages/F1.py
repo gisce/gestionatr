@@ -845,6 +845,7 @@ class Integrador(object):
         self.integrador = data
         self._periode = None
         self._ajuste = None
+        self.comptador = None
 
     def unique_name(self):
         return '_'.join([self.codigo_periodo, self.tipus, self.lectura_desde.fecha,  self.lectura_hasta.fecha])
@@ -1216,17 +1217,14 @@ class FacturaATR(Factura):
         lectures_per_periode = {}
         for comptador in self.get_comptadors():
             for lectura in comptador.get_lectures(tipus):
+                lectura.comptador = comptador
                 periode = lectura.periode
                 if not lectures_per_periode.get(periode):
-                    lectures_per_periode[periode] = {'comptador': comptador, 'lectures': []}
-                lectures_per_periode[periode]['lectures'].append(lectura)
+                    lectures_per_periode[periode] = []
+                lectures_per_periode[periode].append(lectura)
 
         res = {}
-        for periode, info in lectures_per_periode.iteritems():
-            lectures = info['lectures']
-            comptador = info['comptador']
-            if not res.get(comptador):
-                res[comptador] = []
+        for periode, lectures in lectures_per_periode.iteritems():
             if ajust_balancejat:
                 consums_desitjats = self.get_consum_facturat(tipus=tipus, periode=periode)
                 if not consums_desitjats:
@@ -1243,7 +1241,9 @@ class FacturaATR(Factura):
                         lectura.ajuste.ajuste_por_integrador = consum - (lectura.lectura_hasta.lectura - lectura.lectura_desde.lectura)
                         lectura.ajuste.codigo_motivo = "98"  # Autoconsumo
             for l in lectures:
-                res[comptador].append(l)
+                if not res.get(l.comptador):
+                    res[l.comptador] = []
+                res[l.comptador].append(l)
         return res
 
     def get_lectures_activa_entrant(self, ajust_balancejat=True):
