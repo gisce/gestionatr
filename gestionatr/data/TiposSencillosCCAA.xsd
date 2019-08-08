@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- creado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Pelayo García Bermejo (Comisión Nacional de los Mercados y la Competencia) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+		<xs:documentation>Version XX CNMC 201X.XX.XX</xs:documentation>
+	</xs:annotation>
+	<xs:simpleType name="X">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="CodigoDelProceso">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="A1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CodigoDePaso">
+		<xs:annotation>
+			<xs:documentation>Codigo del paso (tabla 3)
+			01	Envío información sobre autoconsumo desde CCAA a Distribuidor
+			02	Envío información sobre autoconsumo desde Distribuidor a CCAA		
+		</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Codigo">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="20"/>
+			<xs:maxLength value="22"/>
+			<xs:pattern value="[a-zA-Z0-9]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AltaBajaModificacion">
+		<xs:annotation>
+			<xs:documentation>Tipo de movimiento (tabla 37)
+			A	Alta
+			B	Baja
+			M	Modificacion
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="A"/>
+			<xs:enumeration value="B"/>
+			<xs:enumeration value="M"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CodigoAutoconsumo">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="26"/>
+			<xs:maxLength value="26"/>
+			<xs:pattern value="[a-zA-Z0-9]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SeccionRegistro">
+		<xs:annotation>
+			<xs:documentation> Sección Registro (tabla 127)
+				1 - Sin excedentes
+				2 - Con excedentes
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SubSeccion">
+		<xs:annotation>
+			<xs:documentation> Subsección (tabla 128)
+				a0 - Con excedentes y mecanismo de compesación simplificado
+				b1 - Con excedentes sin mecanismo de compensación y un único contrato de suministro 
+				b2 - Con excedentes sin mecanismo de compensación y varios contratos de suministro
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="a0"/>
+			<xs:enumeration value="b1"/>
+			<xs:enumeration value="b2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Indicativo">
+		<xs:annotation>
+			<xs:documentation> Indicativo Si/No (tabla 26)
+			valor de verdad (S o N) 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="S"/>
+			<xs:enumeration value="N"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoInstalacion">
+		<xs:annotation>
+			<xs:documentation> Tipo de instalación (tabla 129)
+				01 - Red interior
+				02 - Red interior da varios consumidores (instalación de enlace)
+				03 - Próxima a través de red
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EsquemaMedida">
+		<xs:annotation>
+			<xs:documentation> Esquema de medida (tabla 130)
+				A - EdM Bidireccional en PF
+				B - EdM Bidireccional en PF y EdM gen. neta
+				C - EdM Consumo Total y EdM bidireccional gen. neta
+				D - EdM Consumo Total y EdM gen bruta y EdM cons SSAA
+				E - Configuración singular
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="A"/>
+			<xs:enumeration value="B"/>
+			<xs:enumeration value="C"/>
+			<xs:enumeration value="D"/>
+			<xs:enumeration value="E"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoCUPS">
+		<xs:annotation>
+			<xs:documentation> Tipo CUPS (tabla 131)
+				01 - Consumo
+				02 - Servicios Auxiliares
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RefCatastro">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="20"/>
+			<xs:maxLength value="20"/>
+			<xs:pattern value="[a-zA-Z0-9]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CodigoCIL">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="25"/>
+			<xs:maxLength value="25"/>
+			<xs:pattern value="[a-zA-Z0-9]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TecGenerador">
+		<xs:annotation>
+			<xs:documentation> Tecnología de generación (tabla 126)
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="a11"/>
+			<xs:enumeration value="a12"/>
+			<xs:enumeration value="a13"/>
+			<xs:enumeration value="a20"/>
+			<xs:enumeration value="b11"/>
+			<xs:enumeration value="b12"/>
+			<xs:enumeration value="b21"/>
+			<xs:enumeration value="b22"/>
+			<xs:enumeration value="b30"/>
+			<xs:enumeration value="b41"/>
+			<xs:enumeration value="b42"/>
+			<xs:enumeration value="b51"/>
+			<xs:enumeration value="b52"/>
+			<xs:enumeration value="b60"/>
+			<xs:enumeration value="b71"/>
+			<xs:enumeration value="b72"/>
+			<xs:enumeration value="b80"/>
+			<xs:enumeration value="c10"/>
+			<xs:enumeration value="c20"/>
+			<xs:enumeration value="c30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Potencia">
+		<xs:restriction base="xs:long">
+			<xs:minInclusive value="0"/>
+			<xs:totalDigits value="14"/>
+			<xs:fractionDigits value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="X45">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="45"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="X14">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="14"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="X25">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="X2">
+		<xs:annotation>
+			<xs:documentation>cadena de dos caracteres</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="X6">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="X5">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoVia">
+		<xs:annotation>
+			<xs:documentation>Tipo de Identificador de la via de los datos del usuario (tabla 12)
+			AC	ACCESO
+			AD 	ALDEA
+			AF	AFUERAS
+			AG	AGRUPACIÓN
+			AL	ALAMEDA
+			AR	ARRABAL
+			AU	AUTOP/AUTOVÍA
+			AV	AVENIDA
+			BC	BARRANCO
+			BD	BARRIADA
+			BL	BLOQUE
+			BO	BARRIO
+			CA	COLONIA
+			CF	CALLEJÓN
+			CH 	CHALET
+			CI	    CARRIL
+			CJ 	CALLEJA
+			CL	CALLE
+			CM	COMPLEJO
+			CN	CAMINO
+			CO	COOPERATIVA
+			CR	CARRETERA
+			CS	CASA
+			CT	CUESTA
+			DI		DISEMINADO EXTRARRADIO
+			ED	EDIFICIO
+			EN	ENTRADA
+			FC	FINCA
+			FI		FICTICIO
+			GL	GLORIETA
+			GR	GRUPO
+			LG	LUGAR
+			MA	MASÍA
+			MU	MUELLE
+			MZ	MANZANA
+			NU	NUCLEO
+			OV	OTROS
+			PA	PARQUE
+			PB	POBLADO
+			PD	PARTIDA
+			PE	PASEO
+			PI		POL.INDUSTRIAL
+			PJ	PARAJE
+			PL	PANTALAN
+			PO	POLÍGONO
+			PQ	PARQUE
+			PR	PROLONGACIÓN
+			PS	PASAJE
+			PT	PLAZOLETA
+			PY	PLAYA
+			PZ	PLAZA
+			RA	RAMBLA
+			RD	RONDA
+			RS	RESIDENCIAL
+			SD	SENDA
+			TR	TRAVESÍA
+			UR	URBANIZACIÓN
+			VI	VIAL
+			ZN	ZONA
+			AD	ALDEA
+			CJ	CALLEJA
+			CH	CHALET
+			CT	CUESTA
+			LG	LUGAR
+			OV	OTROS
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AC"/>
+			<xs:enumeration value="AD"/>
+			<xs:enumeration value="AF"/>
+			<xs:enumeration value="AG"/>
+			<xs:enumeration value="AL"/>
+			<xs:enumeration value="AR"/>
+			<xs:enumeration value="AU"/>
+			<xs:enumeration value="AV"/>
+			<xs:enumeration value="BC"/>
+			<xs:enumeration value="BD"/>
+			<xs:enumeration value="BL"/>
+			<xs:enumeration value="BO"/>
+			<xs:enumeration value="CA"/>
+			<xs:enumeration value="CF"/>
+			<xs:enumeration value="CH"/>
+			<xs:enumeration value="CI"/>
+			<xs:enumeration value="CJ"/>
+			<xs:enumeration value="CL"/>
+			<xs:enumeration value="CM"/>
+			<xs:enumeration value="CN"/>
+			<xs:enumeration value="CO"/>
+			<xs:enumeration value="CR"/>
+			<xs:enumeration value="CS"/>
+			<xs:enumeration value="CT"/>
+			<xs:enumeration value="DI"/>
+			<xs:enumeration value="ED"/>
+			<xs:enumeration value="EN"/>
+			<xs:enumeration value="FC"/>
+			<xs:enumeration value="FI"/>
+			<xs:enumeration value="GL"/>
+			<xs:enumeration value="GR"/>
+			<xs:enumeration value="LG"/>
+			<xs:enumeration value="MA"/>
+			<xs:enumeration value="MU"/>
+			<xs:enumeration value="MZ"/>
+			<xs:enumeration value="NU"/>
+			<xs:enumeration value="OV"/>
+			<xs:enumeration value="PA"/>
+			<xs:enumeration value="PB"/>
+			<xs:enumeration value="PD"/>
+			<xs:enumeration value="PE"/>
+			<xs:enumeration value="PI"/>
+			<xs:enumeration value="PJ"/>
+			<xs:enumeration value="PL"/>
+			<xs:enumeration value="PO"/>
+			<xs:enumeration value="PQ"/>
+			<xs:enumeration value="PR"/>
+			<xs:enumeration value="PS"/>
+			<xs:enumeration value="PT"/>
+			<xs:enumeration value="PY"/>
+			<xs:enumeration value="PZ"/>
+			<xs:enumeration value="RA"/>
+			<xs:enumeration value="RD"/>
+			<xs:enumeration value="RS"/>
+			<xs:enumeration value="SD"/>
+			<xs:enumeration value="TR"/>
+			<xs:enumeration value="UR"/>
+			<xs:enumeration value="VI"/>
+			<xs:enumeration value="ZN"/>
+			<xs:enumeration value="AD"/>
+			<xs:enumeration value="CJ"/>
+			<xs:enumeration value="CH"/>
+			<xs:enumeration value="CT"/>
+			<xs:enumeration value="LG"/>
+			<xs:enumeration value="OV"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="X30">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="X3">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Escalera">
+		<xs:annotation>
+			<xs:documentation>Escalera (tabla 13) </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Piso">
+		<xs:annotation>
+			<xs:documentation>Piso (tabla 14) </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Puerta">
+		<xs:annotation>
+			<xs:documentation>Puerta (tabla 15) </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoAclaradorFinca">
+		<xs:annotation>
+			<xs:documentation>Tipo aclarador de finca (tabla 16)
+			BI	BIS
+			KM	Punto Kilometrico
+			NO	Normal
+			PC	Parcela
+			PR	Proximo
+			SN	S/N
+		</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="BI"/>
+			<xs:enumeration value="KM"/>
+			<xs:enumeration value="NO"/>
+			<xs:enumeration value="PC"/>
+			<xs:enumeration value="PR"/>
+			<xs:enumeration value="SN"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="X40">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="X12">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="X60">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="X4">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="X4000">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="4000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Decimal2">
+		<xs:annotation>
+			<xs:documentation>decimal de dos digitos</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="2"/>
+			<xs:fractionDigits value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CodigoMotivoRechazo">
+		<xs:annotation>
+			<xs:documentation> Codigo motivo del rechazo (tabla 27)
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="85"/>
+			<xs:enumeration value="F1"/>
+			<xs:enumeration value="F2"/>
+			<xs:enumeration value="F3"/>
+			<xs:enumeration value="F4"/>
+			<xs:enumeration value="F5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="X8">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="X1">
+		<xs:annotation>
+			<xs:documentation>cadena de un caracter</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeHuso">
+		<xs:annotation>
+			<xs:documentation>cadena de dos caracteres con valores restringidos</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+			<xs:enumeration value="8"/>
+			<xs:enumeration value="9"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="14"/>
+			<xs:enumeration value="15"/>
+			<xs:enumeration value="16"/>
+			<xs:enumeration value="17"/>
+			<xs:enumeration value="18"/>
+			<xs:enumeration value="19"/>
+			<xs:enumeration value="20"/>
+			<xs:enumeration value="21"/>
+			<xs:enumeration value="22"/>
+			<xs:enumeration value="23"/>
+			<xs:enumeration value="24"/>
+			<xs:enumeration value="25"/>
+			<xs:enumeration value="26"/>
+			<xs:enumeration value="27"/>
+			<xs:enumeration value="28"/>
+			<xs:enumeration value="29"/>
+			<xs:enumeration value="30"/>
+			<xs:enumeration value="31"/>
+			<xs:enumeration value="32"/>
+			<xs:enumeration value="33"/>
+			<xs:enumeration value="34"/>
+			<xs:enumeration value="35"/>
+			<xs:enumeration value="36"/>
+			<xs:enumeration value="37"/>
+			<xs:enumeration value="38"/>
+			<xs:enumeration value="39"/>
+			<xs:enumeration value="40"/>
+			<xs:enumeration value="41"/>
+			<xs:enumeration value="42"/>
+			<xs:enumeration value="43"/>
+			<xs:enumeration value="44"/>
+			<xs:enumeration value="45"/>
+			<xs:enumeration value="46"/>
+			<xs:enumeration value="47"/>
+			<xs:enumeration value="48"/>
+			<xs:enumeration value="49"/>
+			<xs:enumeration value="50"/>
+			<xs:enumeration value="51"/>
+			<xs:enumeration value="52"/>
+			<xs:enumeration value="53"/>
+			<xs:enumeration value="54"/>
+			<xs:enumeration value="55"/>
+			<xs:enumeration value="56"/>
+			<xs:enumeration value="57"/>
+			<xs:enumeration value="58"/>
+			<xs:enumeration value="59"/>
+			<xs:enumeration value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeBanda">
+		<xs:annotation>
+			<xs:documentation>Cadena de un caracter restringido </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="C"/>
+			<xs:enumeration value="D"/>
+			<xs:enumeration value="E"/>
+			<xs:enumeration value="F"/>
+			<xs:enumeration value="G"/>
+			<xs:enumeration value="H"/>
+			<xs:enumeration value="J"/>
+			<xs:enumeration value="K"/>
+			<xs:enumeration value="L"/>
+			<xs:enumeration value="M"/>
+			<xs:enumeration value="N"/>
+			<xs:enumeration value="Ñ"/>
+			<xs:enumeration value="P"/>
+			<xs:enumeration value="Q"/>
+			<xs:enumeration value="R"/>
+			<xs:enumeration value="S"/>
+			<xs:enumeration value="T"/>
+			<xs:enumeration value="U"/>
+			<xs:enumeration value="V"/>
+			<xs:enumeration value="W"/>
+			<xs:enumeration value="X"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Decimal10V3">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="13"/>
+			<xs:fractionDigits value="3"/>
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="9999999999.999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoIdentificador">
+		<xs:annotation>
+			<xs:documentation>Tipo de Identificador de los datos del usuario (tabla 6)	
+				NI	NIF
+				NV	N.I.V.A.
+				OT	Otros
+				PS	Pasaporte
+				NE	N.I.E.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NI"/>
+			<xs:enumeration value="NV"/>
+			<xs:enumeration value="OT"/>
+			<xs:enumeration value="PS"/>
+			<xs:enumeration value="NE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="X11">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="11"/>
+			<xs:maxLength value="11"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

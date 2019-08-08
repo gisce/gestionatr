@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from . import unittest
-from .utils import get_data
 from gestionatr.input.messages import C1, C2, A3, B1, M1, D1, W1, Q1, R1, F1, Deadlines, \
     A1_41, A1_02, A1_05, B7031, B7032, A1_44, A1_03, A1_48, A1_04, A1_46, A12_26, A19_45
-from gestionatr.input.messages.F1 \
-    import agrupar_lectures_per_data, obtenir_data_inici_i_final
+from gestionatr.input.messages.A1 import A1
+from gestionatr.input.messages.F1 import agrupar_lectures_per_data, obtenir_data_inici_i_final
+from . import unittest
+from .utils import get_data
 
 
 class test_MessageBase(unittest.TestCase):
@@ -494,6 +494,113 @@ class test_C2(unittest.TestCase):
         self.assertEqual(i2.comentarios, u'Com 2')
 
 
+class test_A1(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a101 = open(get_data("a101.xml"), "r")
+        self.xml_a102_accept = open(get_data("a102_accept.xml"), "r")
+        self.xml_a102_reject = open(get_data("a102_reject.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a101.close()
+        self.xml_a102_accept.close()
+        self.xml_a102_reject.close()
+
+    def test_a101(self):
+        a1 = A1(self.xml_a101)
+        a1.parse_xml()
+
+        self.assertEqual(a1.movimiento, u'A')
+        autoconsumo = a1.autoconsumo
+        self.assertEqual(autoconsumo.cau, u'ES1234000000000001JN0FA001')
+        self.assertEqual(autoconsumo.seccion_registro, u'2')
+        self.assertEqual(autoconsumo.sub_seccion, u'a0')
+        self.assertEqual(autoconsumo.colectivo, u'S')
+        suministro = a1.datos_suministro[0]
+        self.assertEqual(suministro.cups, u'ES1234000000000001JN0F')
+        self.assertEqual(suministro.tipo_cups, u'01')
+        self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')
+        inst_gen = a1.datos_inst_gen[0]
+        self.assertEqual(inst_gen.cil, u'ES1234000000000001JN0F001')
+        self.assertEqual(inst_gen.tec_generador, u'b12')
+        self.assertEqual(inst_gen.combustible, u'Diesel')
+        self.assertEqual(inst_gen.pot_instalada_gen, u'100')
+        self.assertEqual(inst_gen.tipo_instalacion, u'01')
+        self.assertEqual(inst_gen.esquema_medida, u'B')
+        self.assertEqual(inst_gen.ssaa, u'S')
+        self.assertEqual(inst_gen.ref_catastro, u'1234567890qwertyuidf')
+        utm = inst_gen.utm
+        self.assertEqual(utm.x, u'100')
+        self.assertEqual(utm.y, u'200')
+        self.assertEqual(utm.huso, u'40')
+        self.assertEqual(utm.banda, u'E')
+        titular = inst_gen.titular_representante_gen
+        self.assertEqual(titular.id_titular.tipo_identificador, u'NI')
+        self.assertEqual(titular.id_titular.identificador, u'111111111H')
+        self.assertEqual(titular.nombre.nombre_de_pila, u'Juan')
+        self.assertEqual(titular.nombre.primer_apellido, u'López')
+        self.assertEqual(titular.nombre.segundo_apellido, u'Sánchez')
+        self.assertEqual(titular.telefono[0][0], u'0034')
+        self.assertEqual(titular.telefono[0][1], u'933834841')
+        self.assertEqual(titular.correo_electronico, u'mail_falso@dominio.com')
+        direccion = titular.direccion
+        self.assertEqual(direccion.pais, u'España')
+        self.assertEqual(direccion.provincia, u'17')
+        self.assertEqual(direccion.municipio, u'171181')
+        self.assertEqual(direccion.poblacion, u'17118000400')
+        self.assertEqual(direccion.cod_postal, u'17230')
+        self.assertEqual(direccion.tipo_via, u'CL')
+        self.assertEqual(direccion.calle, u'Pau Casals')
+        self.assertEqual(direccion.numero_finca, u'18')
+        self.assertEqual(direccion.duplicador_finca, u'1')
+        self.assertEqual(direccion.escalera, u'D')
+        self.assertEqual(direccion.piso, u'3')
+        self.assertEqual(direccion.puerta, u'2')
+        self.assertEqual(direccion.tipo_aclarador_finca, u'BI')
+        self.assertEqual(direccion.aclarador_finca, u'Bar')
+        self.assertEqual(a1.comentarios, u'Esto es un comentario')
+
+    def test_a102_accept(self):
+        a1 = A1(self.xml_a102_accept)
+        a1.parse_xml()
+
+        self.assertEqual(a1.cau, u'ES1234000000000001JN0FA001')
+        registro = a1.actualizacion_datos_registro
+        self.assertEqual(registro.sub_seccion, u'a0')
+        self.assertEqual(a1.comentarios, u'Esto es un comentario')
+
+    def test_a102_reject(self):
+        a1 = A1(self.xml_a102_reject)
+        a1.parse_xml()
+
+        self.assertEqual(a1.cau, u'ES1234000000000001JN0FA001')
+        self.assertEqual(a1.comentarios, u'Esto es un comentario')
+        rechazos = a1.rechazos
+        self.assertEqual(len(rechazos), 3)
+        # Rechazo 1
+        rechazo1 = rechazos[0]
+        self.assertEqual(rechazo1.fecha_rechazo, u'2016-06-08')
+        self.assertEqual(rechazo1.secuencial, u'00')
+        self.assertEqual(rechazo1.codigo_motivo, u'01')
+        self.assertEqual(rechazo1.cups, u'ES1234000000000001JN0F')
+        self.assertEqual(rechazo1.comentarios, u'Comentario del rechazo')
+        # Rechazo 2
+        rechazo2 = rechazos[1]
+        self.assertEqual(rechazo2.fecha_rechazo, u'2016-06-08')
+        self.assertEqual(rechazo2.secuencial, u'00')
+        self.assertEqual(rechazo2.codigo_motivo, u'F1')
+        self.assertEqual(rechazo2.cups, u'ES1234000000000001JN0F')
+        self.assertEqual(rechazo2.comentarios, u'Comentario del rechazo')
+        # Rechazo 3
+        rechazo3 = rechazos[2]
+        self.assertEqual(rechazo3.fecha_rechazo, u'2016-06-08')
+        self.assertEqual(rechazo3.secuencial, u'00')
+        self.assertEqual(rechazo3.codigo_motivo, u'F4')
+        self.assertEqual(rechazo3.cups, u'ES1234000000000001JN0F')
+        self.assertEqual(rechazo3.comentarios, u'Comentario del rechazo')
+
+
+
 class test_A3(unittest.TestCase):
 
     def setUp(self):
@@ -787,9 +894,17 @@ class test_D1(unittest.TestCase):
 
     def setUp(self):
         self.xml_d101 = open(get_data("d101.xml"), "r")
+        self.xml_d101_min_with_info = open(get_data("d101_min_with_info.xml"), "r")
+        self.xml_d101_fully_min = open(get_data("d101_fully_min.xml"), "r")
+        self.xml_d102_accept = open(get_data("d102_accept.xml"), "r")
+        self.xml_d102_reject = open(get_data("d102_reject.xml"), "r")
 
     def tearDown(self):
         self.xml_d101.close()
+        self.xml_d101_fully_min.close()
+        self.xml_d101_min_with_info.close()
+        self.xml_d102_accept.close()
+        self.xml_d102_reject.close()
 
     def test_d101(self):
         d1 = D1(self.xml_d101)
@@ -797,7 +912,119 @@ class test_D1(unittest.TestCase):
         self.assertEqual(d1.periodicidad_facturacion, u'01')
         self.assertEqual(d1.fecha_prevista_aplicacion_cambio_atr, u'2016-06-09')
         self.assertEqual(d1.motivo_cambio_atr_desde_distribuidora, u'01')
+        info = d1.info_registro_autocons
+        autoconsumo = info.autoconsumo
+        self.assertEqual(autoconsumo.cau, u'ES1234000000000001JN0FA001')
+        self.assertEqual(autoconsumo.seccion_registro, u'2')
+        self.assertEqual(autoconsumo.sub_seccion, u'a0')
+        self.assertEqual(autoconsumo.colectivo, u'S')
+        suministro = info.datos_suministro
+        self.assertEqual(suministro.cups, u'ES1234000000000001JN0F')
+        self.assertEqual(suministro.tipo_cups, u'01')
+        self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')
+        inst_gen = info.datos_inst_gen[0]
+        self.assertEqual(inst_gen.cil, u'ES1234000000000001JN0F001')
+        self.assertEqual(inst_gen.tec_generador, u'b12')
+        self.assertEqual(inst_gen.combustible, u'Diesel')
+        self.assertEqual(inst_gen.pot_instalada_gen, u'100')
+        self.assertEqual(inst_gen.tipo_instalacion, u'01')
+        self.assertEqual(inst_gen.esquema_medida, u'B')
+        self.assertEqual(inst_gen.ssaa, u'S')
+        self.assertEqual(inst_gen.ref_catastro, u'1234567890qwertyuidf')
+        utm = inst_gen.utm
+        self.assertEqual(utm.x, u'100')
+        self.assertEqual(utm.y, u'200')
+        self.assertEqual(utm.huso, u'40')
+        self.assertEqual(utm.banda, u'E')
+        titular = inst_gen.titular_representante_gen
+        self.assertEqual(titular.id_titular.tipo_identificador, u'NI')
+        self.assertEqual(titular.id_titular.identificador, u'111111111H')
+        self.assertEqual(titular.nombre.nombre_de_pila, u'Juan')
+        self.assertEqual(titular.nombre.primer_apellido, u'López')
+        self.assertEqual(titular.nombre.segundo_apellido, u'Sánchez')
+        self.assertEqual(titular.telefono[0][0], u'0034')
+        self.assertEqual(titular.telefono[0][1], u'933834841')
+        self.assertEqual(titular.correo_electronico, u'mail_falso@dominio.com')
+        direccion = titular.direccion
+        self.assertEqual(direccion.pais, u'España')
+        self.assertEqual(direccion.provincia, u'17')
+        self.assertEqual(direccion.municipio, u'171181')
+        self.assertEqual(direccion.poblacion, u'17118000400')
+        self.assertEqual(direccion.cod_postal, u'17230')
+        self.assertEqual(direccion.tipo_via, u'CL')
+        self.assertEqual(direccion.calle, u'Pau Casals')
+        self.assertEqual(direccion.numero_finca, u'18')
+        self.assertEqual(direccion.duplicador_finca, u'1')
+        self.assertEqual(direccion.escalera, u'D')
+        self.assertEqual(direccion.piso, u'3')
+        self.assertEqual(direccion.puerta, u'2')
+        self.assertEqual(direccion.tipo_aclarador_finca, u'BI')
+        self.assertEqual(direccion.aclarador_finca, u'Bar')
+        self.assertEqual(info.comentarios, u'Esto es un comentario')
 
+    def test_d101_min_with_info(self):
+        d1 = D1(self.xml_d101_min_with_info)
+        d1.parse_xml()
+        self.assertEqual(d1.motivo_cambio_atr_desde_distribuidora, u'04')
+        info = d1.info_registro_autocons
+        autoconsumo = info.autoconsumo
+        self.assertEqual(autoconsumo.cau, u'ES1234000000000001JN0FA001')
+        self.assertEqual(autoconsumo.seccion_registro, u'2')
+        self.assertEqual(autoconsumo.colectivo, u'S')
+        suministro = info.datos_suministro
+        self.assertEqual(suministro.cups, u'ES1234000000000001JN0F')
+        inst_gen = info.datos_inst_gen[0]
+        self.assertEqual(inst_gen.tec_generador, u'b12')
+        self.assertEqual(inst_gen.pot_instalada_gen, u'100')
+        self.assertEqual(inst_gen.tipo_instalacion, u'01')
+        self.assertEqual(inst_gen.ssaa, u'S')
+        utm = inst_gen.utm
+        self.assertEqual(utm.x, u'100')
+        self.assertEqual(utm.y, u'200')
+        self.assertEqual(utm.huso, u'40')
+        titular = inst_gen.titular_representante_gen
+        self.assertEqual(titular.id_titular.tipo_identificador, u'NI')
+        self.assertEqual(titular.id_titular.identificador, u'111111111H')
+        self.assertEqual(titular.nombre.nombre_de_pila, u'Juan')
+        self.assertEqual(titular.nombre.primer_apellido, u'López')
+        self.assertEqual(titular.telefono[0][0], u'0034')
+        self.assertEqual(titular.telefono[0][1], u'933834841')
+        direccion = titular.direccion
+        self.assertEqual(direccion.pais, u'España')
+        self.assertEqual(direccion.provincia, u'17')
+        self.assertEqual(direccion.municipio, u'171181')
+        self.assertEqual(direccion.cod_postal, u'17230')
+        self.assertEqual(direccion.tipo_via, u'CL')
+        self.assertEqual(direccion.calle, u'Pau Casals')
+        self.assertEqual(direccion.numero_finca, u'18')
+
+    def test_d101_fully_min(self):
+        d1 = D1(self.xml_d101_fully_min)
+        d1.parse_xml()
+        self.assertEqual(d1.motivo_cambio_atr_desde_distribuidora, u'01')
+
+    def test_d102_accept(self):
+        d1 = D1(self.xml_d102_accept)
+        d1.parse_xml()
+        # Datos Aceptacion
+        self.assertEqual(d1.datos_aceptacion.fecha_aceptacion, u'2016-06-06')
+
+    def test_d102_reject(self):
+        d1 = D1(self.xml_d102_reject)
+        d1.parse_xml()
+        self.assertEqual(d1.fecha_rechazo, u'2016-07-20')
+        self.assertEqual(len(d1.registros_documento), 2)
+        doc1 = d1.registros_documento[0]
+        doc2 = d1.registros_documento[1]
+        self.assertEqual(doc1.tipo_doc_aportado, u'08')
+        self.assertEqual(doc1.direccion_url, u'http://eneracme.com/docs/NIF11111111H.pdf')
+        self.assertEqual(doc2.tipo_doc_aportado, u'07')
+        self.assertEqual(doc2.direccion_url, u'http://eneracme.com/docs/NIF11111111H.pdf')
+        self.assertEqual(len(d1.rechazos), 1)
+        rej = d1.rechazos[0]
+        self.assertEqual(rej.secuencial, u'1')
+        self.assertEqual(rej.codigo_motivo, u'F1')
+        self.assertEqual(rej.comentarios, u'Motiu de rebuig F1')
 
 class test_W1(unittest.TestCase):
 

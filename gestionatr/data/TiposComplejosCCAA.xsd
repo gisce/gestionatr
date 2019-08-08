@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Comisión Nacional de los Mercados y la Competencia (Comisión Nacional de los Mercados y la Competencia) -->
+<!-- creado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Pelayo García Bermejo (Comisión Nacional de los Mercados y la Competencia) -->
+<xs:schema xmlns="http://localhost/elegibilidad" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="TiposSencillosCCAA.xsd"/>
+	<xs:annotation>
+		<xs:documentation>Version XX CNMC 201X.XX.XX</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="CabeceraCCAA01">
+		<xs:sequence>
+			<xs:element name="CodigoEmpresaEmisora">
+				<xs:simpleType>
+					<xs:restriction base="X">
+						<xs:length value="2"/>
+						<xs:pattern value="[0-9]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="CodigoREEEmpresaDestino">
+				<xs:annotation>
+					<xs:documentation>Tabla 1</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="X">
+						<xs:length value="4" fixed="false"/>
+						<xs:pattern value="[0-9]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="CodigoDelProceso" type="CodigoDelProceso"/>
+			<xs:element name="CodigoDePaso" type="CodigoDePaso" default="01">
+				<xs:annotation>
+					<xs:documentation>Tabla 3</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CodigoDeSolicitud">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[0-9]{12}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="SecuencialDeSolicitud">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[0-9]{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="FechaSolicitud" type="xs:dateTime"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CabeceraCCAA02">
+		<xs:sequence>
+			<xs:element name="CodigoREEEmpresaEmisora">
+				<xs:annotation>
+					<xs:documentation>Tabla 1</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:annotation>
+						<xs:documentation>Tabla 1</xs:documentation>
+					</xs:annotation>
+					<xs:restriction base="X">
+						<xs:length value="4" fixed="false"/>
+						<xs:pattern value="[0-9]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="CodigoEmpresaDestino">
+				<xs:simpleType>
+					<xs:restriction base="X">
+						<xs:length value="2"/>
+						<xs:pattern value="[0-9]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="CodigoDelProceso" type="CodigoDelProceso"/>
+			<xs:element name="CodigoDePaso" type="CodigoDePaso" default="02">
+				<xs:annotation>
+					<xs:documentation>Tabla 3</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CodigoDeSolicitud">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[0-9]{12}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="SecuencialDeSolicitud">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[0-9]{2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="FechaSolicitud" type="xs:dateTime"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TypeAutoconsumo">
+		<xs:sequence>
+			<xs:element name="CAU" type="CodigoAutoconsumo"/>
+			<xs:element name="SeccionRegistro" type="SeccionRegistro">
+				<xs:annotation>
+					<xs:documentation>Tabla 127</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SubSeccion" type="SubSeccion" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 128</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Colectivo" type="Indicativo">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TypeDatosSuministro">
+		<xs:sequence>
+			<xs:element name="CUPS" type="Codigo"/>
+			<xs:element name="TipoCUPS" type="TipoCUPS" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 131</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RefCatastro" type="RefCatastro" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TypeDatosInstGen">
+		<xs:sequence>
+			<xs:element name="CIL" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="CodigoCIL">
+						<xs:minLength value="25"/>
+						<xs:maxLength value="25"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="TecGenerador" type="TecGenerador">
+				<xs:annotation>
+					<xs:documentation>Tabla 126</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Combustible" type="X60" minOccurs="0"/>
+			<xs:element name="PotInstaladaGen" type="Decimal10V3"/>
+			<xs:element name="TipoInstalacion" type="TipoInstalacion">
+				<xs:annotation>
+					<xs:documentation>Tabla 129</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EsquemaMedida" type="EsquemaMedida" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 130</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SSAA" type="Indicativo">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RefCatastro" type="RefCatastro" minOccurs="0"/>
+			<xs:element name="UTM" type="TypeUTM" minOccurs="0"/>
+			<xs:element name="TitularRepresentanteGen" type="TypeTitularGeneracion" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TypeTitularGeneracion">
+		<xs:sequence>
+			<xs:element name="IdTitular" type="TypeIdTitular"/>
+			<xs:element name="Nombre" type="TypeNombre"/>
+			<xs:element name="Telefono" type="TelefonoInternacional" minOccurs="1" maxOccurs="5"/>
+			<xs:element name="CorreoElectronico" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X60">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Direccion" type="TipoDireccion"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TypeNombre">
+		<xs:choice>
+			<xs:sequence>
+				<xs:element name="NombreDePila">
+					<xs:simpleType>
+						<xs:restriction base="X45">
+							<xs:whiteSpace value="collapse"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="PrimerApellido">
+					<xs:simpleType>
+						<xs:restriction base="X45">
+							<xs:whiteSpace value="collapse"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="SegundoApellido" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="X45">
+							<xs:whiteSpace value="collapse"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			</xs:sequence>
+			<xs:element name="RazonSocial">
+				<xs:simpleType>
+					<xs:restriction base="X45">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="TelefonoInternacional">
+		<xs:sequence>
+			<xs:element name="PrefijoPais">
+				<xs:simpleType>
+					<xs:restriction base="X4">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="4"/>
+						<xs:pattern value="[0-9]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Numero">
+				<xs:simpleType>
+					<xs:restriction base="X12">
+						<xs:minLength value="6"/>
+						<xs:pattern value="[0-9]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TipoDireccion">
+		<xs:sequence>
+			<xs:element name="Pais" type="X25"/>
+			<xs:element name="Provincia">
+				<xs:simpleType>
+					<xs:restriction base="X2">
+						<xs:pattern value="[0-9]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Municipio">
+				<xs:simpleType>
+					<xs:restriction base="X6">
+						<xs:minLength value="5"/>
+						<xs:pattern value="[0-9]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Poblacion" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X11">
+						<xs:minLength value="11"/>
+						<xs:pattern value="[0-9]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="CodPostal">
+				<xs:simpleType>
+					<xs:restriction base="X5">
+						<xs:minLength value="5"/>
+						<xs:pattern value="[0-9]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="Via" type="DireccionVia"/>
+				<xs:element name="ApartadoDeCorreos" type="X5"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DireccionVia">
+		<xs:sequence>
+			<xs:element name="TipoVia" type="TipoVia">
+				<xs:annotation>
+					<xs:documentation>Tabla 12</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Calle">
+				<xs:simpleType>
+					<xs:restriction base="X30">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="NumeroFinca">
+				<xs:simpleType>
+					<xs:restriction base="X5">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="DuplicadorFinca" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X3">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Escalera" type="Escalera" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 13</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Piso" type="Piso" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 14</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Puerta" type="Puerta" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 15</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TipoAclaradorFinca" type="TipoAclaradorFinca" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 16</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AclaradorFinca" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X40">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TypeActualizacionDatosRegistro">
+		<xs:sequence>
+			<xs:element name="SubSeccion" type="SubSeccion">
+				<xs:annotation>
+					<xs:documentation>Tabla 128</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TypeUTM">
+		<xs:sequence>
+			<xs:element name="X" type="X8"/>
+			<xs:element name="Y" type="X8"/>
+			<xs:element name="Huso" type="TypeHuso"/>
+			<xs:element name="Banda" type="TypeBanda" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TypeIdTitular">
+		<xs:sequence>
+			<xs:element name="TipoIdentificador" type="TipoIdentificador">
+				<xs:annotation>
+					<xs:documentation>Tabla 6</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Identificador">
+				<xs:simpleType>
+					<xs:restriction base="X14">
+						<xs:whiteSpace value="collapse"/>
+						<xs:minLength value="7"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Teresa Rodriguez-Losada Marco (Comisión Nacional de los Mercados y la Competencia) -->
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Pelayo García Bermejo (Comisión Nacional de los Mercados y la Competencia) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:annotation>
 		<xs:documentation>
-			Version 1.2 CNMC 2016.12.20
+			Version 1.3 CNMC 2016.12.20
 		</xs:documentation>
 	</xs:annotation>
 	<xs:simpleType name="AltaBajaModificacion">
@@ -152,6 +152,7 @@
 			10	Deficiencia subsanable en el Equipo de Medida
 			11	Trabajos pendientes de finalizar
 			12	Telefono de contacto erroneo
+			14	Pendiente resto solicitudes asociadas al autoconsumo colectivo
 		</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -161,6 +162,7 @@
 			<xs:enumeration value="10"/>
 			<xs:enumeration value="11"/>
 			<xs:enumeration value="12"/>
+			<xs:enumeration value="14"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="CodigoMotivoRechazo">
@@ -275,6 +277,11 @@
 			<xs:enumeration value="D3"/>
 			<xs:enumeration value="D4"/>
 			<xs:enumeration value="D5"/>
+			<xs:enumeration value="E6"/>
+			<xs:enumeration value="E7"/>
+			<xs:enumeration value="E8"/>
+			<xs:enumeration value="E9"/>
+			<xs:enumeration value="F1"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="CodPM">
@@ -315,6 +322,26 @@
 			47	Derechos de acometida de generacion
 			48	Suplemento territorial por tributos económicos del año 2013 según la Orden ETU/35/2017
 			49 	Suplemento territorial por tributos económicos del año 2013 según la Orden TEC/271/2019
+			51	Autoconsumo del periodo 1 
+			52	Autoconsumo del periodo 2
+			53	Autoconsumo del periodo 3
+			54	Autoconsumo del periodo 4
+			55	Autoconsumo del periodo 5
+			56	Autoconsumo del periodo 6
+			61	Generación neta por el coeficiente del periodo 1
+			62	Generación neta por el coeficiente del periodo 2
+			63	Generación neta por el coeficiente del periodo 3
+			64	Generación neta por el coeficiente del periodo 4
+			65	Generación neta por el coeficiente del periodo 5
+			66	Generación neta por el coeficiente del periodo 6
+			71	Excedente del periodo 1
+			72	Excedente del periodo 2
+			73	Excedente del periodo 3
+			74	Excedente del periodo 4
+			75	Excedente del periodo 5
+			76	Excedente del periodo 6
+			81	Tipo de autoconsumo
+			82	Coeficiente de reparto
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -347,6 +374,26 @@
 			<xs:enumeration value="47"/>
 			<xs:enumeration value="48"/>
 			<xs:enumeration value="49"/>
+			<xs:enumeration value="51"/>
+			<xs:enumeration value="52"/>
+			<xs:enumeration value="53"/>
+			<xs:enumeration value="54"/>
+			<xs:enumeration value="55"/>
+			<xs:enumeration value="56"/>
+			<xs:enumeration value="61"/>
+			<xs:enumeration value="62"/>
+			<xs:enumeration value="63"/>
+			<xs:enumeration value="64"/>
+			<xs:enumeration value="65"/>
+			<xs:enumeration value="66"/>
+			<xs:enumeration value="71"/>
+			<xs:enumeration value="72"/>
+			<xs:enumeration value="73"/>
+			<xs:enumeration value="74"/>
+			<xs:enumeration value="75"/>
+			<xs:enumeration value="76"/>
+			<xs:enumeration value="81"/>
+			<xs:enumeration value="82"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Decimal10">
@@ -1563,12 +1610,22 @@
 			01	Telegestion Operativa con CCH
 			02	Telegestion No Operativa
 			03	Telegestion Operativa sin CCH
+			04	Alta en autoconsumo
+			05	Modificación de tipo de autoconsumo
+			06	Modificación coeficiente de reparto
+			07	Modificación potencia generación
+			08	Baja en autoconsumo
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="01"/>
 			<xs:enumeration value="02"/>
 			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
+			<xs:enumeration value="07"/>
+			<xs:enumeration value="08"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="MotivoFacturacion">
@@ -2104,6 +2161,7 @@
 			B4	Concurrencia con solicitud baja motivo 04	
 			A0	Cuanto antes sin actuaciones en campo
 			P0	Por incumplimiento del plazo minimo de preaviso
+			C1	Cuando lleguen el resto de solicitudes asociadas al autoconsumo colectivo
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2116,6 +2174,7 @@
 			<xs:enumeration value="B4"/>
 			<xs:enumeration value="A0"/>
 			<xs:enumeration value="P0"/>
+			<xs:enumeration value="C1"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TipoAparato">
@@ -2192,6 +2251,25 @@
 			01	Autoconsumo tipo 1
 			2A	Autoconsumo tipo 2 segun el Art. 13.2.a) del RD 900/2015
 			2B	Autoconsumo tipo 2 segun el Art. 13.2.b) del RD 900/2015
+			31 	Sin Excedentes Individual - Consumo
+			32 	Sin Excedentes Colectivo - Consumo
+			33	Sin Excedentes Colectivo con acuerdo de compensación - Consumo
+			41 	Con excedentes y compensación Individual - Consumo  
+			42 	Con excedentes y compensación Colectivo - Consumo
+			51 	Con excedentes sin compensación Individual sin cto de SSAA en Red Interior - Consumo
+			52 	Con excedentes sin compensación Individual con cto SSAA en Red Interior - Consumo
+			53	Con excedentes sin compensación individual con cto SSAA en Red Interior - SSAA
+			54 	Con excedentes sin compensación Colectivo/en Red Interior - Consumo
+			55 	Con excedentes sin compensación Colectivo con cto de SSAA en Red Interior - Consumo
+			56	Con excedentes sin compensación Colectivo con cto de SSAA en Red Interior - SSAA
+			61 	Con excedentes sin compensación Individual con cto SSAA a través de red - Consumo
+			62 	Con excedentes sin compensación individual con cto SSAA a través de red - SSAA
+			63 	Con excedentes sin compensación Colectivo con cto de SSAA a través de red - Consumo
+			64 	Con excedentes sin compensación Colectivo  con cto de SSAA a través de red - SSAA	
+			71	Con excedentes sin compensación Individual con cto SSAA a través de red y red interior - Consumo
+			72	Con excedentes sin compensación individual con cto SSAA a través de red y red interior - SSAA
+			73	Con excedentes sin compensación Colectivo con cto de SSAA  a través de red y red interior - Consumo
+			74	Con excedentes sin compensación Colectivo con cto de SSAA a través de red y red interior - SSAA
 		</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2200,6 +2278,25 @@
 			<xs:enumeration value="2A"/>
 			<xs:enumeration value="2B"/>
 			<xs:enumeration value="2G"/>
+			<xs:enumeration value="31"/>
+			<xs:enumeration value="32"/>
+			<xs:enumeration value="33"/>
+			<xs:enumeration value="41"/>
+			<xs:enumeration value="42"/>
+			<xs:enumeration value="51"/>
+			<xs:enumeration value="52"/>
+			<xs:enumeration value="53"/>
+			<xs:enumeration value="54"/>
+			<xs:enumeration value="55"/>
+			<xs:enumeration value="56"/>
+			<xs:enumeration value="61"/>
+			<xs:enumeration value="62"/>
+			<xs:enumeration value="63"/>
+			<xs:enumeration value="64"/>
+			<xs:enumeration value="71"/>
+			<xs:enumeration value="72"/>
+			<xs:enumeration value="73"/>
+			<xs:enumeration value="74"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TipoCodigoPeriodoDH">
@@ -2707,14 +2804,16 @@ la reclamacion
 	<xs:simpleType name="TiposDocumentacion">
 		<xs:annotation>
 			<xs:documentation>Tipos de Documentacion (tabla 61)
-			01	CIE
+			01	CIE consumo
 			02	Acta de Puesta en Marcha
 			03	Acta de Inspeccion
 			04	Reclamacion
 			05	Respuesta a reclamacion
 			06	Facturas
 			07	Otra documentacion del cliente
-			08	Otros			
+			08	Otros		
+			09	Acuerdo reparto
+			10	CIE generación	
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2726,6 +2825,8 @@ la reclamacion
 			<xs:enumeration value="06"/>
 			<xs:enumeration value="07"/>
 			<xs:enumeration value="08"/>
+			<xs:enumeration value="09"/>
+			<xs:enumeration value="10"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TipoSolicitudAdministrativa">
@@ -2736,6 +2837,7 @@ la reclamacion
 			A	Cambio datos administrativos (excepto cambio de titular y correccion de datos identificativos del cliente)
 			C	Correccion de datos que identifican al cliente
 			P	La solicitud implica cambio en la periodicidad de la facturacion
+			R	Modificación acuerdo de reparto de un autoconsumo colectivo
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2744,6 +2846,7 @@ la reclamacion
 			<xs:enumeration value="A"/>
 			<xs:enumeration value="C"/>
 			<xs:enumeration value="P"/>
+			<xs:enumeration value="R"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TiposSuministro">
@@ -3189,14 +3292,16 @@ la reclamacion
 	</xs:simpleType>
 	<xs:simpleType name="TipoImpositivo">
 		<xs:annotation>
-			<xs:documentation>
+			<xs:documentation> Tipo Impuesto (Tabla 114)
 			1 -  IVA / IPSI/ IGIC    
 			2 -  IVA / IPSI/ IGIC  reducido
+			3 -  IVA / IPSI/ IGIC EXENTO
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="1"/>
 			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="empty-string">
@@ -3206,5 +3311,233 @@ la reclamacion
 	</xs:simpleType>
 	<xs:simpleType name="date-or-nothing">
 		<xs:union memberTypes="xs:date empty-string"/>
+	</xs:simpleType>
+	<xs:simpleType name="CodigoAutoconsumo">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="26"/>
+			<xs:maxLength value="26"/>
+			<xs:pattern value="[a-zA-Z0-9]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SeccionRegistro">
+		<xs:annotation>
+			<xs:documentation> Sección Registro (tabla 127)
+				1 - Sin excedentes
+				2 - Con excedentes
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SubSeccion">
+		<xs:annotation>
+			<xs:documentation> Subsección (tabla 128)
+				a0 - Con excedentes y mecanismo de compesación simplificado
+				b1 - Con excedentes sin mecanismo de compensación y un único contrato de suministro 
+				b2 - Con excedentes sin mecanismo de compensación y varios contratos de suministro
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="a0"/>
+			<xs:enumeration value="b1"/>
+			<xs:enumeration value="b2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoInstalacion">
+		<xs:annotation>
+			<xs:documentation> Tipo de instalación (tabla 129)
+				01 - Red interior
+				02 - Red interior da varios consumidores (instalación de enlace)
+				03 - Próxima a través de red
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EsquemaMedida">
+		<xs:annotation>
+			<xs:documentation> Esquema de medida (tabla 130)
+				A - EdM Bidireccional en PF
+				B - EdM Bidireccional en PF y EdM gen. neta
+				C - EdM Consumo Total y EdM bidireccional gen. neta
+				D - EdM Consumo Total y EdM gen bruta y EdM cons SSAA
+				E - Configuración singular
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="A"/>
+			<xs:enumeration value="B"/>
+			<xs:enumeration value="C"/>
+			<xs:enumeration value="D"/>
+			<xs:enumeration value="E"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoCUPS">
+		<xs:annotation>
+			<xs:documentation> Tipo CUPS (tabla 131)
+				01 - Consumo
+				02 - Servicios Auxiliares
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RefCatastro">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="20"/>
+			<xs:maxLength value="20"/>
+			<xs:pattern value="[a-zA-Z0-9]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CodigoCIL">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="25"/>
+			<xs:maxLength value="25"/>
+			<xs:pattern value="[a-zA-Z0-9]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TecGenerador">
+		<xs:annotation>
+			<xs:documentation> Tecnología de generación (tabla 126)
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="a11"/>
+			<xs:enumeration value="a12"/>
+			<xs:enumeration value="a13"/>
+			<xs:enumeration value="a20"/>
+			<xs:enumeration value="b11"/>
+			<xs:enumeration value="b12"/>
+			<xs:enumeration value="b21"/>
+			<xs:enumeration value="b22"/>
+			<xs:enumeration value="b30"/>
+			<xs:enumeration value="b41"/>
+			<xs:enumeration value="b42"/>
+			<xs:enumeration value="b51"/>
+			<xs:enumeration value="b52"/>
+			<xs:enumeration value="b60"/>
+			<xs:enumeration value="b71"/>
+			<xs:enumeration value="b72"/>
+			<xs:enumeration value="b80"/>
+			<xs:enumeration value="c10"/>
+			<xs:enumeration value="c20"/>
+			<xs:enumeration value="c30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Decimal10V3">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="13"/>
+			<xs:fractionDigits value="3"/>
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="9999999999.999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeHuso">
+		<xs:annotation>
+			<xs:documentation>cadena de dos caracteres con valores restringidos</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+			<xs:enumeration value="8"/>
+			<xs:enumeration value="9"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="14"/>
+			<xs:enumeration value="15"/>
+			<xs:enumeration value="16"/>
+			<xs:enumeration value="17"/>
+			<xs:enumeration value="18"/>
+			<xs:enumeration value="19"/>
+			<xs:enumeration value="20"/>
+			<xs:enumeration value="21"/>
+			<xs:enumeration value="22"/>
+			<xs:enumeration value="23"/>
+			<xs:enumeration value="24"/>
+			<xs:enumeration value="25"/>
+			<xs:enumeration value="26"/>
+			<xs:enumeration value="27"/>
+			<xs:enumeration value="28"/>
+			<xs:enumeration value="29"/>
+			<xs:enumeration value="30"/>
+			<xs:enumeration value="31"/>
+			<xs:enumeration value="32"/>
+			<xs:enumeration value="33"/>
+			<xs:enumeration value="34"/>
+			<xs:enumeration value="35"/>
+			<xs:enumeration value="36"/>
+			<xs:enumeration value="37"/>
+			<xs:enumeration value="38"/>
+			<xs:enumeration value="39"/>
+			<xs:enumeration value="40"/>
+			<xs:enumeration value="41"/>
+			<xs:enumeration value="42"/>
+			<xs:enumeration value="43"/>
+			<xs:enumeration value="44"/>
+			<xs:enumeration value="45"/>
+			<xs:enumeration value="46"/>
+			<xs:enumeration value="47"/>
+			<xs:enumeration value="48"/>
+			<xs:enumeration value="49"/>
+			<xs:enumeration value="50"/>
+			<xs:enumeration value="51"/>
+			<xs:enumeration value="52"/>
+			<xs:enumeration value="53"/>
+			<xs:enumeration value="54"/>
+			<xs:enumeration value="55"/>
+			<xs:enumeration value="56"/>
+			<xs:enumeration value="57"/>
+			<xs:enumeration value="58"/>
+			<xs:enumeration value="59"/>
+			<xs:enumeration value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeBanda">
+		<xs:annotation>
+			<xs:documentation>Cadena de un caracter restringido </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="C"/>
+			<xs:enumeration value="D"/>
+			<xs:enumeration value="E"/>
+			<xs:enumeration value="F"/>
+			<xs:enumeration value="G"/>
+			<xs:enumeration value="H"/>
+			<xs:enumeration value="J"/>
+			<xs:enumeration value="K"/>
+			<xs:enumeration value="L"/>
+			<xs:enumeration value="M"/>
+			<xs:enumeration value="N"/>
+			<xs:enumeration value="Ñ"/>
+			<xs:enumeration value="P"/>
+			<xs:enumeration value="Q"/>
+			<xs:enumeration value="R"/>
+			<xs:enumeration value="S"/>
+			<xs:enumeration value="T"/>
+			<xs:enumeration value="U"/>
+			<xs:enumeration value="V"/>
+			<xs:enumeration value="W"/>
+			<xs:enumeration value="X"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="X11">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="11"/>
+			<xs:maxLength value="11"/>
+		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

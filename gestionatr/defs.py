@@ -604,6 +604,11 @@ SUBTYPES_R1_ATC = [(x['code'], x['name']) for x in SUBTYPES_R101]
 
 
 # TABLES
+TABLA_3 = [
+    ('01', 'Envío información sobre autoconsumo desde CCAA a Distribuidor'),
+    ('02', 'Envío información sobre autoconsumo desde Distribuidor a CCAA'),
+]
+
 TABLA_6 = [
     ('NI', 'NIF'),
     ('NV', 'N.I.V.A'),
@@ -651,7 +656,68 @@ TABLA_11 = [('S', u"(S) Si el domicilio fiscal coincide "
             ('F', u"(F) Si el domicilio fiscal no coincide "
                   u"con el de suministro")]
 
-# TABLA_12 TIPO VIA Optional , thus not implemented
+TABLA_12 = [
+    ('AC', 'Acceso'),
+    ('AD', 'Aldea'),
+    ('AF', 'Afueras'),
+    ('AG', 'Agrupación'),
+    ('AL', 'Alameda'),
+    ('AR', 'Arrabal'),
+    ('AU', 'Autopista / Autovía'),
+    ('AV', 'Avenida'),
+    ('BC', 'Barranco'),
+    ('BD', 'Barriada'),
+    ('BL', 'Bloque'),
+    ('BO', 'Barrio'),
+    ('CA', 'Colonia'),
+    ('CF', 'Callejón'),
+    ('CH', 'Chalet'),
+    ('CI', 'Carril'),
+    ('CJ', 'Calleja'),
+    ('CL', 'Calle'),
+    ('CM', 'Complejo'),
+    ('CN', 'Camino'),
+    ('CO', 'Cooperativa'),
+    ('CR', 'Carretera'),
+    ('CS', 'Casa'),
+    ('CT', 'Cuesta'),
+    ('DI', 'Diseminado extrarradio'),
+    ('ED', 'Edificio'),
+    ('EN', 'Entrada'),
+    ('FC', 'Finca'),
+    ('FI', 'Ficticio'),
+    ('GL', 'Glorieta'),
+    ('GR', 'Grupo'),
+    ('LG', 'Lugar'),
+    ('MA', 'Masía'),
+    ('MU', 'Muelle'),
+    ('MZ', 'Manzana'),
+    ('NU', 'Núcleo'),
+    ('OV', 'Otros'),
+    ('PA', 'Parque'),
+    ('PB', 'Poblado'),
+    ('PD', 'Partida'),
+    ('PE', 'Paseo'),
+    ('PI', 'Políg.industrial'),
+    ('PJ', 'Paraje'),
+    ('PL', 'Pantalan'),
+    ('PO', 'Polígono'),
+    ('PQ', 'Parque'),
+    ('PR', 'Prolongación'),
+    ('PS', 'Pasaje'),
+    ('PT', 'Plazoleta'),
+    ('PY', 'Playa'),
+    ('PZ', 'Plaza'),
+    ('RA', 'Rambla'),
+    ('RD', 'Ronda'),
+    ('RS', 'Residencial'),
+    ('SD', 'Senda'),
+    ('TR', 'Travesía'),
+    ('UR', 'Urbanización'),
+    ('VI', 'Vial'),
+    ('ZN', 'Zona'),
+]
+TIPO_VIA = TABLA_12
 
 # TABLA_13 ESCALERA Optional , thus not implemented
 
@@ -989,8 +1055,19 @@ TABLA_27 = [
     ('C9', 'El tipo de activación solicitada no es coherente con el tipo de solicitud'),
     ('D1', 'Suministro acogido a bono social'),
     ('D2', 'No es posible anulación ya que no existe solicitud previa'),
+    ('D3', 'No cumple con la potencia normalizada para el PS ni el múltiplo de potencia establecido'),
+    ('D4', 'El tipo de tensión solicitada es la que ya tiene el PS.'),
+    ('D5', 'Falta documentación según lo establecido en la Ley 12/2017 de las Islas Baleares.'),
+    ('E6', 'Modificación del tipo de autoconsumo no permitida. No ha trascurrido un año desde la última modificación.'),
+    ('E7', 'Falta acuerdo de reparto/Acuerdo de reparto incorrecto/Faltan coeficientes de reparto en acuerdo'),
+    ('E8', 'No recibida información técnica de la CCAA (para BT y <=100kW).'),
+    ('E9', 'En el periodo establecido, no se han recibido el resto de solicitudes de modificación del colectivo'),
+    ('F1', 'Disconformidad del consumidor a la información sobre autoconsumo'),
+    ('F2', 'No existe un alta en autoconsumo previo'),
+    ('F3', 'Tipo de autoconsumo no coherente con el esquema de medida'),
+    ('F4', 'Tipo de autoconsumo no coherente con el tipo de instalación'),
+    ('F5', 'Instalación de >100kW en BT o Instalación en AT'),
     ('99', 'Otros'),
-
 ]
 
 TABLA_28 = [
@@ -999,7 +1076,8 @@ TABLA_28 = [
     ('09', 'Deficiencia subsanable en la instalación'),
     ('10', 'Deficiencia subsanable en EdM'),
     ('11', 'Trabajos pendientes de finalizar'),
-    ('12', 'Teléfono de contacto erróneo')
+    ('12', 'Teléfono de contacto erróneo'),
+    ('14', 'Pendiente resto solicitudes asociadas al autoconsumo colectivo')
 ]
 
 TABLA_30 = [
@@ -1047,7 +1125,9 @@ TIPO_DH_APARATO = TABLA_35
 TABLA_36 = [('S', 'Lectura no acumulativa'),
             ('N', 'Lectura acumulativa')]
 
-TABLA_37 = [('A', 'Alta'), ('B', 'Baja'), ('M', 'Modificación')]
+TABLA_37 = [('A', 'Alta'),
+            ('B', 'Baja'),
+            ('M', 'Modificación')]
 TIPUS_MOVIMENT = TABLA_37
 
 TABLA_38 = [('1', 'Lectura local manual'),
@@ -1163,6 +1243,7 @@ TABLA_53 = [
      'Cambio datos administrativos (excepto cambio de titular y corrección de datos identificativos del cliente)'),
     ('C', 'Corrección datos que identifican al cliente'),
     ('P', 'La solicitud implica cambio en la periodicidad de la facturación'),
+    ('R', 'Modificación acuerdo de reparto de un autoconsumo colectivo')
 ]
 
 TABLA_55 = [
@@ -1175,12 +1256,12 @@ TABLA_55 = [
     ('B4', 'Concurrencia con solicitud baja motivo 04'),
     ('A0', 'Cuanto antes sin actuaciones en campo'),
     ('P0', 'Por incumplimiento del plazo mínimo de preaviso'),
-
+    ('C1', 'Cuando lleguen el resto de solicitudes asociadas al autoconsumo colectivo')
 ]
 TIPUS_ACTIVACIO = TABLA_55
 
 TABLA_61 = [
-    ('01', u'CIE'),
+    ('01', u'CIE consumo'),
     ('02', u'Acta de Puesta en Marcha'),
     ('03', u'Acta de Inspección'),
     ('04', u'Reclamación'),
@@ -1188,6 +1269,8 @@ TABLA_61 = [
     ('06', u'Facturas'),
     ('07', u'Otra documentación del cliente'),
     ('08', u'Otros'),
+    ('09', u'Acuerdo reparto'),
+    ('10', u'CIE generación')
 ]
 
 TABLA_62 = [
@@ -1916,7 +1999,27 @@ TABLA_103 = [
     ('46', u'Exención Cargo Variable Autoconsumo'),
     ('47', u'Derechos de acometida de generación'),
     ('48', u'Suplemento territorial por tributos económicos del año 2013 según la Orden ETU/35/2017'),
-    ('49', u'Suplemento territorial por tributos económicos del año 2013 según la Orden TEC/271/2019')
+    ('49', u'Suplemento territorial por tributos económicos del año 2013 según la Orden TEC/271/2019'),
+    ('51', u'Autoconsumo del periodo 1'),
+    ('52', u'Autoconsumo del periodo 2'),
+    ('53', u'Autoconsumo del periodo 3'),
+    ('54', u'Autoconsumo del periodo 4'),
+    ('55', u'Autoconsumo del periodo 5'),
+    ('56', u'Autoconsumo del periodo 6'),
+    ('61', u'Generación neta por el coeficiente del periodo 1'),
+    ('62', u'Generación neta por el coeficiente del periodo 2'),
+    ('63', u'Generación neta por el coeficiente del periodo 3'),
+    ('64', u'Generación neta por el coeficiente del periodo 4'),
+    ('65', u'Generación neta por el coeficiente del periodo 5'),
+    ('66', u'Generación neta por el coeficiente del periodo 6'),
+    ('71', u'Excedente del periodo 1'),
+    ('72', u'Excedente del periodo 2'),
+    ('73', u'Excedente del periodo 3'),
+    ('74', u'Excedente del periodo 4'),
+    ('75', u'Excedente del periodo 5'),
+    ('76', u'Excedente del periodo 6'),
+    ('81', u'Tipo de autoconsumo'),
+    ('82', u'Coeficiente de reparto'),
 ]
 
 CONCEPTOS_CON_FECHA_OPERACION = [
@@ -1974,7 +2077,12 @@ TABLA_108 = [('01', u'Mensual'),
 
 TABLA_109 = [('01', u'Telegestión Operativa con CCH'),
              ('02', u'Telegestión No Operativa'),
-             ('03', u'Telegestión Operativa sin CCH'), ]
+             ('03', u'Telegestión Operativa sin CCH'),
+             ('04', u'Alta en autoconsumo'),
+             ('05', u'Modificación de tipo de autoconsumo'),
+             ('06', u'Modificación coeficiente de reparto'),
+             ('07', u'Modificación potencia generación'),
+             ('08', u'Baja en autoconsumo'), ]
 
 TABLA_110 = [('01', u'Acompaña curva de carga'),
              ('02', u'Perfilado'),
@@ -2003,12 +2111,33 @@ TABLA_113 = [
     ('01', u'Autoconsumo Tipo 1'),
     ('2A', u'Autoconsumo tipo 2 (según el Art. 13. 2. a) RD 900/2015)'),
     ('2B', u'Autoconsumo tipo 2 (según el Art. 13. 2. b) RD 900/2015)'),
-    ('2G', u'Servicios auxiliares de generación ligada a un autoconsumo tipo 2')
+    ('2G', u'Servicios auxiliares de generación ligada a un autoconsumo tipo 2'),
+    ('31', u'Sin Excedentes Individual – Consumo'),
+    ('32', u'Sin Excedentes Colectivo – Consumo'),
+    ('41', u'Con excedentes y compensación Individual - Consumo '),
+    ('42', u'Con excedentes y compensación Colectivo– Consumo'),
+    ('51', u'Con excedentes sin compensación Individual sin cto de SSAA en Red Interior– Consumo'),
+    ('52', u'Con excedentes sin compensación Colectivo sin cto de SSAA en Red Interior– Consumo'),
+    ('53', u'Con excedentes sin compensación Individual con cto SSAA en Red Interior– Consumo'),
+    ('54', u'Con excedentes sin compensación individual con cto SSAA en Red Interior– SSAA'),
+    ('55', u'Con excedentes sin compensación Colectivo/en Red Interior– Consumo'),
+    ('56', u'Con excedentes sin compensación Colectivo/en Red Interior - SSAA'),
+    ('61', u'Con excedentes sin compensación Individual con cto SSAA a través de red – Consumo'),
+    ('62', u'Con excedentes sin compensación individual con cto SSAA a través de red – SSAA'),
+    ('63', u'Con excedentes sin compensación Colectivo a través de red – Consumo'),
+    ('64', u'Con excedentes sin compensación Colectivo a través de red - SSAA'),
+    ('71', u'Con excedentes sin compensación Individual con cto SSAA a través de red y red interior – Consumo'),
+    ('72', u'Con excedentes sin compensación individual con cto SSAA a través de red y red interior – SSAA'),
+    ('73', u'Con excedentes sin compensación Colectivo con cto de SSAA  a través de red y red interior – Consumo'),
+    ('74', u'Con excedentes sin compensación Colectivo con cto de SSAA a través de red y red interior - SSAA'),
 ]
+
+TENEN_AUTOCONSUM = [x[0] for x in TABLA_113 if x[0] not in ['00', '01', '2A', '2B', '2G']]
 
 TABLA_114 = [
     ('1', u'IVA / IPSI/ IGIC'),
     ('2', u'IVA / IPSI/ IGIC Reducido'),
+    ('3', u'IVA / IPSI/ IGIC EXENTO'),
 ]
 
 TABLA_115 = PERSONA
@@ -2016,7 +2145,6 @@ TABLA_115 = PERSONA
 TABLA_116 = [
     ('0', u'No Bono Social – Retirada del BS'),
     ('1', u'Bono Social'),
-#    ('02', u'Bono Social – Esencial (Según Art. 4 RD 897/2017)'),
 ]
 
 REQUIRE_PERSON_TYPE = ['NV', 'OT']
@@ -2025,3 +2153,89 @@ TABLA_117 = [
     ('M', 'Monofásica'),
     ('T', 'Trifásica')
 ]
+
+TABLA_126 = [
+    ('a11', u'[A11] - Cogeneraciones que utilicen como combustible el gas natural, siempre que éste suponga al menos '
+            u'el 95 por ciento de la energía primaria utilizada, o al menos el 65 por ciento de la energía primaria '
+            u'utilizada cuando el resto provenga de biomasa o biogás de los grupos b.6, b.7 y b.8; siendo los '
+            u'porcentajes de la energía primaria utilizada citados medidos por el poder calorífico inferior.'),
+    ('a12', u'[A12] - Cogeneraciones que utilicen como combustible principal derivados de petróleo o carbón, siempre '
+            u'que suponga al menos el 95 por ciento de la energía primaria utilizada, medida por el poder '
+            u'calorífico inferior'),
+    ('a13', u'[A13] - Resto de cogeneraciones que utilicen gas natural o derivados de petróleo o carbón, y no cumplan '
+            u'con los límites de consumo establecidos para los subgrupos a.1.1 ó a.1.2.'),
+    ('a20', u'[A20] - Instalaciones que incluyan una central que utilice energías residuales procedentes de cualquier '
+            u'instalación, máquina o proceso industrial cuya finalidad no sea la producción de energía eléctrica.'),
+    ('b11', u'[B11] - Instalaciones que únicamente utilicen la radiación solar como energía primaria mediante la '
+            u'tecnología fotovoltaica.'),
+    ('b12', u'[B12] - Instalaciones que únicamente utilicen procesos térmicos para la transformación de la energía '
+            u'solar, como energía primaria, en electricidad.'),
+    ('b21', u'[B21] - Instalaciones eólicas ubicadas en tierra.'),
+    ('b22', u'[B22] - Instalaciones eólicas ubicadas en espacios marinos, que incluyen tanto las aguas interiores como '
+            u'el mar territorial.'),
+    ('b30', u'[B30] - Instalaciones que únicamente utilicen como energía primaria la geotérmica, hidrotérmica, '
+            u'aerotérmica, la de las olas, la de las mareas, la de las rocas calientes y secas, la oceanotérmica y la '
+            u'energía de las corrientes marinas.'),
+    ('b41', u'[B41] - Centrales hidroeléctricas cuyas instalaciones hidráulicas (presa o azud, toma, canal y otras) '
+            u'hayan sido construidas exclusivamente para uso hidroeléctrico.'),
+    ('b42', u'[B42] - Centrales hidroeléctricas que hayan sido construidas en infraestructuras existentes (presas, '
+            u'canales o conducciones) o dedicadas a otros usos distintos al hidroeléctrico.'),
+    ('b51', u'[B51] - Centrales hidroeléctricas cuyas instalaciones hidráulicas (presa o azud, toma, canal y otras) '
+            u'hayan sido construidas exclusivamente para uso hidroeléctrico.'),
+    ('b52', u'[B52] - Centrales hidroeléctricas que hayan sido construidas en infraestructuras existentes (presa, '
+            u'canales o conducciones) o dedicadas a otros usos distintos al hidroeléctrico.'),
+    ('b60', u'[B60] - Centrales de generación eléctrica o de cogeneración que utilicen como combustible principal '
+            u'biomasa procedente de cultivos energéticos, de actividades agrícolas, ganaderas o de jardinerías, de '
+            u'aprovechamientos forestales y otras operaciones silvícolas en las masas forestales y espacios verdes, '
+            u'en los términos que figuran en el anexo I. Se entenderá como combustible principal aquel combustible '
+            u'que suponga, como mínimo, el 90 por ciento de la energía primaria utilizada, medida por el poder '
+            u'calorífico inferior.'),
+    ('b71', u'[B71] - Instalaciones que empleen como combustible principal el biogás de vertederos controlados. Estas '
+            u'instalaciones podrán abastecerse con hasta un 50 por ciento de energía primaria procedente de biogás '
+            u'generado en digestores.'),
+    ('b72', u'[B72] - Instalaciones que empleen como combustible principal biolíquidos o el biogás generado en '
+            u'digestores procedente de cultivos energéticos o de restos agrícolas, de deyecciones ganaderas, de '
+            u'residuos biodegradables de instalaciones industriales, de residuos domiciliarios o similares, de lodos '
+            u'de depuración de aguas residuales u otros para los cuales sea de aplicación el proceso de digestión '
+            u'anaerobia, tanto individualmente como en co-digestión. Estas instalaciones podrán abastecerse con '
+            u'hasta un 50 por ciento de energía primaria procedente de biogás de vertederos controlados.'),
+    ('b80', u'[B80] - Centrales de generación eléctrica o de cogeneración que utilicen como combustible principal '
+            u'biomasa procedente de instalaciones industriales del sector agrícola o forestal en los términos que '
+            u'figuran en el anexo I. Se entenderá como combustible principal aquel combustible que suponga, como '
+            u'mínimo, el 90 por ciento de la energía primaria utilizada, medida por el poder calorífico inferior.'),
+    ('c10', u'[C10] - Centrales que utilicen como combustible principal residuos domésticos y similares.'),
+    ('c20', u'[C20] - Centrales que utilicen como combustible principal otros residuos no contemplados en el grupo '
+            u'c.1, combustibles de los grupos b.6, b.7 y b.8 cuando no cumplan con los límites de consumo establecidos '
+            u'para los citados grupos, licores negros y las centrales que a la entrada en vigor de este real decreto '
+            u'estuvieran inscritas en la categoría c) grupo c.3 prevista en el artículo 2.1 del Real Decreto '
+            u'661/2007, de 25 de mayo, por el que se regula la actividad de producción de energía eléctrica en '
+            u'régimen especial.'),
+    ('c30', u'[C30] - Centrales que a la entrada en vigor de este real decreto estuvieran acogidas a la categoría c) '
+            u'grupo c.4 prevista en el artículo 2.1 del Real Decreto 661/2007, de 25 de mayo, utilizando como '
+            u'combustible productos de explotaciones mineras de calidades no comerciales para la generación eléctrica '
+            u'por su elevado contenido en azufre o cenizas, representando los residuos más del 25 por ciento de la '
+            u'energía primaria utilizada.'),
+]
+
+TABLA_127 = [('1', u'Sin excedentes'),
+             ('2', u'Con excedentes'), ]
+
+TABLA_128 = [('a0', u'Con excedentes y mecanismo de compensación simplificado'),
+             ('b1', u'Con excedentes sin mecanismo de compensación y un único contrato de suministro'),
+             ('b2', u'Con excedentes sin mecanismo de compensación y varios contratos de suministro'), ]
+
+TABLA_129 = [('01', u'Red interior'),
+             ('02', u'Red interior da varios consumidores (instalación de enlace)'),
+             ('03', u'Próxima a través de red'), ]
+
+TABLA_130 = [('A', u'EdM Bidireccional en PF'),
+             ('B', u'EdM Bidireccional en PF y EdM gen. Neta'),
+             ('C', u'EdM Consumo Total y EdM bidireccional gen. Neta'),
+             ('D', u'EdM Consumo Total y EdM gen bruta y EdM SSAA'),
+             ('E', u'Configuración singular'), ]
+
+TABLA_131 = [('01', u'Consumo'),
+             ('02', u'Servicios Auxiliares'), ]
+
+TABLA_132 = [('BT', u'Baja tensión, si tensión <= 1kV'),
+             ('AT', u'Alta tensión, si tensión >1kV'), ]

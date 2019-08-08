@@ -4,6 +4,8 @@ from gestionatr import utils
 
 XSD_DATA = {'F1': {'01': 'Facturacion.xsd'},
             'Q1': {'01': 'SaldoLecturasFacturacion.xsd'},
+            'A1': {'01': 'A101.xsd',
+                   '02': 'A102e.xsd'},
             'A3': {'01': 'Alta.xsd',
                    '02': ('AceptacionAlta.xsd',
                           'Rechazo.xsd'),
@@ -48,7 +50,8 @@ XSD_DATA = {'F1': {'01': 'Facturacion.xsd'},
                    '11': 'AceptacionCambiodeComercializadorSaliente.xsd',
                    '12': 'RechazoCambiodeComercializadorSaliente.xsd',
                    },
-            'D1': {'01': 'NotificacionCambiosATRDesdeDistribuidor.xsd'
+            'D1': {'01': 'NotificacionCambiosATRDesdeDistribuidor.xsd',
+                   '02': ('AceptacionNotificacionCambiosATRDesdeDistribuidor.xsd', 'RechazoD1.xsd'),
                    },
             'M1': {'01': 'ModificacionDeATR.xsd',
                    '02': ('AceptacionModificacionDeATR.xsd',
@@ -93,6 +96,10 @@ MAIN_MESSAGE_XSD = {
     'AceptacionCambiodeComercializadorSaliente': 'AceptacionCambioComercializadorSaliente',
     'RechazoCambiodeComercializadorSaliente': 'RechazoCambioComercializadorSaliente',
     'NotificacionCambiosATRDesdeDistribuidor': 'NotificacionCambiosATRDesdeDistribuidor',
+    'AceptacionD1': 'AceptacionNotificacionCambiosATRDesdeDistribuidor',
+    'RechazoD1': 'Rechazos',
+    'A101': 'InfoRegistroAutocons',
+    'A102e': 'ActualizacionRegistroAutoconsumo',
     'ModificacionDeATR': 'ModificacionDeATR',
     'AceptacionModificacionDeATR': 'AceptacionModificacionDeATR',
     'ActivacionModificacionDeATR': 'ActivacionModificaciones',
@@ -259,6 +266,20 @@ class Message(MessageBase):
     @property
     def get_codi_destinatari(self):
         ref = self.head.CodigoREEEmpresaDestino.text
+        if not ref:
+            raise except_f1('Error', u'Documento sin destinatario')
+        return ref
+
+    @property
+    def get_codi_ccaa_emissora(self):
+        ref = self.head.CodigoEmpresaEmisora.text
+        if not ref:
+            raise except_f1('Error', u'Documento sin emisor')
+        return ref
+
+    @property
+    def get_codi_ccaa_desti(self):
+        ref = self.head.CodigoEmpresaDestino.text
         if not ref:
             raise except_f1('Error', u'Documento sin destinatario')
         return ref

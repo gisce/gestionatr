@@ -67,6 +67,42 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<!-- Rechazo D1 -->
+	<xs:complexType name="RechazoD1">
+		<xs:sequence>
+			<xs:element name="FechaRechazo" type="xs:date"/>
+			<xs:element name="Rechazo" type="RechazoD"/>
+			<xs:element name="RegistrosDocumento" type="RegistrosDocs" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RechazoD">
+		<xs:sequence>
+			<xs:element name="Secuencial">
+				<xs:simpleType>
+					<xs:restriction base="Decimal2">
+						<xs:minInclusive value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="CodigoMotivo">				
+				<xs:simpleType>
+					<xs:annotation>
+						<xs:documentation>Tabla 27</xs:documentation>
+					</xs:annotation>
+					<xs:restriction base="xs:string">			
+						<xs:enumeration value="F1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Comentarios">
+				<xs:simpleType>
+					<xs:restriction base="X4000">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<!-- Incidencia -->
 	<xs:complexType name="IncidenciasATRDistribuidorB">
 		<xs:sequence>

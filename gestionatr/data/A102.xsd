@@ -68,7 +68,7 @@
 			<element name="comreferencenum"
 				type="tns:ComreferencenumType" maxOccurs="1" minOccurs="1">
                 <annotation>
-                	<documentation>Nº Referencia Solicitud Comercializadora</documentation>
+                	<documentation>Nï¿½ Referencia Solicitud Comercializadora</documentation>
                 </annotation>
 			</element>
 			<element name="reqdate" type="date" maxOccurs="1"
@@ -95,13 +95,13 @@
 			<element name="documenttype" type="tns:IdDocumentType"
 				maxOccurs="1" minOccurs="1">
 				<annotation>
-					<documentation>Tipo Documento de Identificación</documentation>
+					<documentation>Tipo Documento de Identificaciï¿½n</documentation>
 				</annotation>
 			</element>
 			<element name="documentnum" type="tns:DocumentnumType"
 				maxOccurs="1" minOccurs="1">
                 <annotation>
-                	<documentation>Nº Documento</documentation></annotation>
+                	<documentation>Nï¿½ Documento</documentation></annotation>
 			</element>
 			<element name="cups" type="tns:CupsType" maxOccurs="1"
 				minOccurs="1">
