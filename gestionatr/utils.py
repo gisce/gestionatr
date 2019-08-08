@@ -93,10 +93,14 @@ def repartir_consums_entre_lectures(consums, lectures_xml):
             i += 1
     elif len(consums) == 1:
         consum = consums[0]
-        total_dies = 0.0
+        import math
+        parte_decimal, parte_entera = math.modf(consum)
+        part_igual = int(parte_entera) / len(lectures_xml)
+        residu = (int(parte_entera) % len(lectures_xml)) + parte_decimal
+
+        l = None
         for l in lectures_xml:
-            total_dies += datetime.strptime(l.lectura_hasta.fecha, "%Y-%m-%d") - datetime.strptime(l.lectura_desde.fecha, "%Y-%m-%d")
-        for l in lectures_xml:
-            dies = datetime.strptime(l.lectura_hasta.fecha, "%Y-%m-%d") - datetime.strptime(l.lectura_desde.fecha, "%Y-%m-%d")
-            res[l] = consum * (dies/total_dies)
+            res[l] = part_igual
+        if l:
+            res[l] += residu
     return res
