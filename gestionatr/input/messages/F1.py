@@ -831,7 +831,7 @@ class Ajuste(object):
         if self._comentario:
             return self._comentario
         if hasattr(self.ajuste, 'Comentarios'):
-            return self.ajuste.Comentarios.text.strip()
+            return self.ajuste.Comentarios.text
         return None
 
     @comentario.setter
@@ -1407,7 +1407,7 @@ class ConceptoRepercutible(object):
     @property
     def comentarios(self):
         if hasattr(self.concepto, 'Comentarios'):
-            return self.concepto.Comentarios.text.strip()
+            return self.concepto.Comentarios.text
         return None
 
     def is_autoconsum(self):
