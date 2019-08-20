@@ -40,6 +40,10 @@ class D1(C1):
         if data not in [None, False]:
             return InfoRegistroAutocons(data)
         else:
+            tree = '{0}.InfoRegistoAutocons'.format(self._header)
+            data = get_rec_attr(self.obj, tree, False)
+            if data not in [None, False]:
+                return InfoRegistroAutocons(data)
             return False
 
 
