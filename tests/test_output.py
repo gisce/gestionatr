@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import copy
+
 from gestionatr.output.messages import sw_a1_02 as a1_02
 from gestionatr.output.messages import sw_a1_03 as a1_03
 from gestionatr.output.messages import sw_a1_04 as a1_04
@@ -795,20 +797,36 @@ class test_A1(unittest.TestCase):
             autoconsumo = d1.Autoconsumo()
             autoconsumo_fields = {
                 'cau': 'ES1234000000000001JN0FA001',
-                'seccion_registro': '2',
-                'sub_seccion': 'a0',
+                'seccion_registro': '1',
+                # 'sub_seccion': 'a0',
                 'colectivo': 'S',
             }
             autoconsumo.feed(autoconsumo_fields)
 
             # DatosSuministro
-            suministro = d1.DatosSuministro()
+            suministro_1 = d1.DatosSuministro()
             suministro_fields = {
                 'cups': 'ES1234000000000001JN0F',
                 'tipo_cups': '01',
                 'ref_catastro': '1234567890qwertyuiop',
             }
-            suministro.feed(suministro_fields)
+            suministro_1.feed(suministro_fields)
+
+            suministro_2 = d1.DatosSuministro()
+            suministro_fields = {
+                'cups': 'ES1234000000000002JN0F',
+                'tipo_cups': '01',
+                'ref_catastro': '1234567890qwertyuiop',
+            }
+            suministro_2.feed(suministro_fields)
+
+            suministro_3 = d1.DatosSuministro()
+            suministro_fields = {
+                'cups': 'ES1234000000000003JN0F',
+                'tipo_cups': '01',
+                'ref_catastro': '1234567890qwertyuiop',
+            }
+            suministro_3.feed(suministro_fields)
 
             # UTM
             utm = d1.UTM()
@@ -900,7 +918,7 @@ class test_A1(unittest.TestCase):
             titular.feed(titular_representante_gen_fields)
 
             # DatosInstGen
-            datos = d1.DatosInstGen()
+            datos_1 = d1.DatosInstGen()
             datos_inst_gen_fields = {
                 'cil': 'ES1234000000000001JN0F001',
                 'tec_generador': 'b12',
@@ -913,15 +931,32 @@ class test_A1(unittest.TestCase):
                 'utm': utm,
                 'titular_representante_gen': titular,
             }
-            datos.feed(datos_inst_gen_fields)
+            datos_1.feed(datos_inst_gen_fields)
+
+            # utm2 = copy.deepcopy(utm)
+            # titular2 = copy.deepcopy(titular)
+
+            datos_2 = d1.DatosInstGen()
+            datos_inst_gen_fields = {
+                'cil': 'ES1234000000000002JN0F001',
+                'tec_generador': 'b11',
+                'pot_instalada_gen': '100',
+                'tipo_instalacion': '01',
+                'esquema_medida': 'B',
+                'ssaa': 'S',
+                'ref_catastro': '1234567890qwertyuidf',
+                # 'utm': utm2,
+                # 'titular_representante_gen': titular2,
+            }
+            datos_2.feed(datos_inst_gen_fields)
 
             # InfoRegistroAutocons
             info = a1.InfoRegistroAutoconsA1()
             info_registro_autocons_fields = {
                 'movimiento': 'A',
                 'autoconsumo': autoconsumo,
-                'datos_suministro': suministro,
-                'datos_inst_gen': datos,
+                'datos_suministro': [suministro_1, suministro_2, suministro_3],
+                'datos_inst_gen': [datos_1, datos_2],
                 'comentarios': 'Esto es un comentario'
             }
             info.feed(info_registro_autocons_fields)
@@ -1519,7 +1554,7 @@ class test_D1(unittest.TestCase):
         titular.feed(titular_representante_gen_fields)
 
         # DatosInstGen
-        datos = d1.DatosInstGen()
+        datos_1 = d1.DatosInstGen()
         datos_inst_gen_fields = {
             'cil': 'ES1234000000000001JN0F001',
             'tec_generador': 'b12',
@@ -1532,7 +1567,24 @@ class test_D1(unittest.TestCase):
             'utm': utm,
             'titular_representante_gen': titular,
         }
-        datos.feed(datos_inst_gen_fields)
+        datos_1.feed(datos_inst_gen_fields)
+
+        utm2 = copy.deepcopy(utm)
+        titular2 = copy.deepcopy(titular)
+
+        datos_2 = d1.DatosInstGen()
+        datos_inst_gen_fields = {
+            'cil': 'ES1234000000000001JN0F002',
+            'tec_generador': 'b11',
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm2,
+            'titular_representante_gen': titular2,
+        }
+        datos_2.feed(datos_inst_gen_fields)
 
         # InfoRegistroAutocons
         info = d1.InfoRegistroAutocons()
@@ -1540,7 +1592,7 @@ class test_D1(unittest.TestCase):
             'movimiento': 'A',
             'autoconsumo': autoconsumo,
             'datos_suministro': suministro,
-            'datos_inst_gen': datos,
+            'datos_inst_gen': [datos_1, datos_2],
             'comentarios': 'Esto es un comentario'
         }
         info.feed(info_registro_autocons_fields)

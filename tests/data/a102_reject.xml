@@ -9,7 +9,7 @@
         <SecuencialDeSolicitud>00</SecuencialDeSolicitud>
         <FechaSolicitud>2016-06-08T04:24:09</FechaSolicitud>
     </Cabecera>
-    <ActualizacionRegistroAutoconsumo>
+    <A102>
         <CAU>ES1234000000000001JN0FA001</CAU>
         <Rechazos>
             <Rechazo>
@@ -35,5 +35,5 @@
             </Rechazo>
         </Rechazos>
         <Comentarios>Esto es un comentario</Comentarios>
-    </ActualizacionRegistroAutoconsumo>
+    </A102>
 </A102>

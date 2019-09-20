@@ -130,14 +130,7 @@
 	</xs:complexType>
 	<xs:complexType name="TypeDatosInstGen">
 		<xs:sequence>
-			<xs:element name="CIL" minOccurs="0">
-				<xs:simpleType>
-					<xs:restriction base="CodigoCIL">
-						<xs:minLength value="25"/>
-						<xs:maxLength value="25"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:element>
+			<xs:element name="CIL" type="CodigoCIL" minOccurs="0"/>
 			<xs:element name="TecGenerador" type="TecGenerador">
 				<xs:annotation>
 					<xs:documentation>Tabla 126</xs:documentation>
