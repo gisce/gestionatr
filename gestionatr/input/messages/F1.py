@@ -1087,6 +1087,10 @@ class MultiModeloAparato(ModeloAparato):
         return self._get_single_attribute('tipo_aparato')
 
     @property
+    def cod_pm(self):
+        return self._get_single_attribute('cod_pm')
+
+    @property
     def marca_aparato(self):
         return self._get_single_attribute('marca_aparato')
 
@@ -1257,6 +1261,7 @@ class FacturaATR(Factura):
         comptadors_agrupats = {}
         for medida in self.medidas:
             for aparell in medida.modelos_aparatos:
+                aparell.cod_pm = medida.cod_pm
                 comptadors_agrupats.setdefault(
                     aparell.numero_serie, []
                 ).append(aparell)
