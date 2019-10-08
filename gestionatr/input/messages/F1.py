@@ -1148,7 +1148,7 @@ class FacturaATR(Factura):
 
     def te_autoconsum(self):
         for concepte in self.conceptos_repercutibles:
-            if concepte.concepto_repercutible in CODIS_AUTOCONSUM.keys():
+            if concepte.concepto_repercutible in CODIS_AUTOCONSUM.keys() and concepte.concepto_repercutible not in ('81', '82'):
                 return True
         return False
 
