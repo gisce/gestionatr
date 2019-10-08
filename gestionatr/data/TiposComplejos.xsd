@@ -1065,7 +1065,7 @@
 			<xs:element name="MotivoCambioATRDesdeDistribuidora" type="MotivoCambioATRDesdeDistribuidora"/>
 			<xs:element name="FechaPrevistaAplicacionCambioATR" type="xs:date" minOccurs="0"/>
 			<xs:element name="PeriodicidadFacturacion" type="PeriodicidadFacturacion" minOccurs="0"/>
-			<xs:element name="InfoRegistroAutocons" type="TypeInfoRegistroAutocons" minOccurs="0"/>
+			<xs:element name="InfoRegistoAutocons" type="TypeInfoRegistoAutocons" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Potencias">
@@ -1248,7 +1248,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="TypeInfoRegistroAutocons">
+	<xs:complexType name="TypeInfoRegistoAutocons">
 		<xs:sequence>
 			<xs:element name="Autoconsumo" type="TypeAutoconsumo"/>
 			<xs:element name="DatosSuministro" type="TypeDatosSuministro"/>

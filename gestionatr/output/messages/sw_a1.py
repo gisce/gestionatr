@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from libcomxml.core import XmlModel, XmlField
 
-from gestionatr.output.messages.sw_d1 import InfoRegistroAutocons
+from gestionatr.output.messages.sw_d1 import Autoconsumo, DatosSuministro, DatosInstGen
 from gestionatr.output.messages.base import CabeceraAutoconsumo, CabeceraAutoconsumoRechazo
 
 
@@ -18,14 +18,19 @@ class A101(XmlModel):
         super(A101, self).__init__('A101', 'mensaje')
 
 
-class InfoRegistroAutoconsA1(InfoRegistroAutocons):
+class InfoRegistroAutoconsA1(XmlModel):
 
     _sort_order = ('info_registro_autocons', 'movimiento', 'autoconsumo', 'datos_suministro', 'datos_inst_gen',
                    'comentarios')
 
     def __init__(self):
+        self.info_registro_autocons = XmlField('A101')
         self.movimiento = XmlField('Movimiento')
-        super(InfoRegistroAutoconsA1, self).__init__()
+        self.autoconsumo = Autoconsumo()
+        self.datos_suministro = DatosSuministro()
+        self.datos_inst_gen = DatosInstGen()
+        self.comentarios = XmlField('Comentarios')
+        super(InfoRegistroAutoconsA1, self).__init__('InfoRegistoAutoconsA1', 'info_registro_autocons')
 
 
 # Paso 02
@@ -47,13 +52,12 @@ class ActualizacionRegistroAutoconsumo(XmlModel):
                    'rechazos', 'comentarios')
 
     def __init__(self):
-        self.actualizacion_registro_autoconsumo = XmlField('ActualizacionRegistroAutoconsumo')
+        self.actualizacion_registro_autoconsumo = XmlField('A102')
         self.cau = XmlField('CAU')
         self.actualizacion_datos_registro = ActualizacionDatosRegistro()
         self.rechazos = Rechazos()
         self.comentarios = XmlField('Comentarios')
-        super(ActualizacionRegistroAutoconsumo, self).__init__('ActualizacionRegistroAutoconsumo',
-                                                               'actualizacion_registro_autoconsumo')
+        super(ActualizacionRegistroAutoconsumo, self).__init__('A102', 'actualizacion_registro_autoconsumo')
 
 
 class ActualizacionDatosRegistro(XmlModel):

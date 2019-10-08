@@ -12,7 +12,7 @@
     </Cabecera>
     <NotificacionCambiosATRDesdeDistribuidor>
         <MotivoCambioATRDesdeDistribuidora>04</MotivoCambioATRDesdeDistribuidora>
-        <InfoRegistroAutocons>
+        <InfoRegistoAutocons>
             <Autoconsumo>
                 <CAU>ES1234000000000001JN0FA001</CAU>
                 <SeccionRegistro>2</SeccionRegistro>
@@ -65,6 +65,6 @@
                     </Direccion>
                 </TitularRepresentanteGen>
             </DatosInstGen>
-        </InfoRegistroAutocons>
+        </InfoRegistoAutocons>
     </NotificacionCambiosATRDesdeDistribuidor>
 </MensajeNotificacionCambiosATRDesdeDistribuidor>
