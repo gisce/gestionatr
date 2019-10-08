@@ -9,16 +9,25 @@
         <SecuencialDeSolicitud>00</SecuencialDeSolicitud>
         <FechaSolicitud>2016-06-08T04:24:09</FechaSolicitud>
     </Cabecera>
-    <InfoRegistroAutocons>
+    <A101>
         <Movimiento>A</Movimiento>
         <Autoconsumo>
             <CAU>ES1234000000000001JN0FA001</CAU>
-            <SeccionRegistro>2</SeccionRegistro>
-            <SubSeccion>a0</SubSeccion>
+            <SeccionRegistro>1</SeccionRegistro>
             <Colectivo>S</Colectivo>
         </Autoconsumo>
         <DatosSuministro>
             <CUPS>ES1234000000000001JN0F</CUPS>
+            <TipoCUPS>01</TipoCUPS>
+            <RefCatastro>1234567890qwertyuiop</RefCatastro>
+        </DatosSuministro>
+        <DatosSuministro>
+            <CUPS>ES1234000000000002JN0F</CUPS>
+            <TipoCUPS>01</TipoCUPS>
+            <RefCatastro>1234567890qwertyuiop</RefCatastro>
+        </DatosSuministro>
+        <DatosSuministro>
+            <CUPS>ES1234000000000003JN0F</CUPS>
             <TipoCUPS>01</TipoCUPS>
             <RefCatastro>1234567890qwertyuiop</RefCatastro>
         </DatosSuministro>
@@ -80,6 +89,15 @@
                 </Direccion>
             </TitularRepresentanteGen>
         </DatosInstGen>
+        <DatosInstGen>
+            <CIL>ES1234000000000002JN0F001</CIL>
+            <TecGenerador>b11</TecGenerador>
+            <PotInstaladaGen>100</PotInstaladaGen>
+            <TipoInstalacion>01</TipoInstalacion>
+            <EsquemaMedida>B</EsquemaMedida>
+            <SSAA>S</SSAA>
+            <RefCatastro>1234567890qwertyuidf</RefCatastro>
+        </DatosInstGen>
         <Comentarios>Esto es un comentario</Comentarios>
-    </InfoRegistroAutocons>
+    </A101>
 </A101>

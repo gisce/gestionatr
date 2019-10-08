@@ -2114,6 +2114,7 @@ TABLA_113 = [
     ('2G', u'Servicios auxiliares de generación ligada a un autoconsumo tipo 2'),
     ('31', u'Sin Excedentes Individual – Consumo'),
     ('32', u'Sin Excedentes Colectivo – Consumo'),
+    ('33', u'Sin Excedentes Colectivo con acuerdo de compensación – Consumo'),
     ('41', u'Con excedentes y compensación Individual - Consumo '),
     ('42', u'Con excedentes y compensación Colectivo– Consumo'),
     ('51', u'Con excedentes sin compensación Individual sin cto de SSAA en Red Interior– Consumo'),
