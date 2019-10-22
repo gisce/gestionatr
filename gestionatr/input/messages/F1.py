@@ -468,8 +468,14 @@ class Periodo(object):
         """Algunas empresas envian periodos que no se deben facturar.
         Esos tienen precio 0. Pese a eso, si tienen cantidad los facturaremos
         igual ya que tambien hay empresas que quieren facturar lineas pero dejan
-        el precio a 0"""
-        return bool(self.precio) or bool(self.cantidad)
+        el precio a 0.
+        Hay distribuidoras que envían periodos con precio 0 y cantidad 0, que
+        son de activa y reactiva en periodos que sí hay que tener en cuenta.
+        Si ambos son 0, los consideramos facturables.
+        """
+        return bool(self.precio) or bool(self.cantidad) or (
+                not bool(self.precio) and not bool(self.cantidad)
+        )
 
 
 class PeriodoPotencia(Periodo):
