@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
-from message import Message
+from __future__ import absolute_import, unicode_literals
+from .message import Message
 from gestionatr.input.messages.C2 import Direccion
 from gestionatr.defs import TARIFES_SEMPRE_MAX
 from datetime import datetime, date
 from gestionatr.utils import repartir_consums_entre_lectures
+import six
 
 # Magnituds d'OCSUM
 MAGNITUDS_OCSUM = {
@@ -1272,7 +1274,7 @@ class FacturaATR(Factura):
 
             di, df = aparell_multi.get_dates_inici_i_final()
             comptadors.append((di, df, aparell_multi))
-        return [a[2] for a in sorted(comptadors, lambda x,y: cmp(x[0], y[0]))]
+        return [a[2] for a in sorted(comptadors, key=lambda x: x[0])]
 
     def get_info_potencia(self):
         """Retorna els periodes de potència"""

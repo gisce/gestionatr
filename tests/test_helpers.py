@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import, unicode_literals
 from . import unittest
 from gestionatr.helpers import *
 from .utils import get_data
@@ -30,7 +31,8 @@ class TestsHelpers(unittest.TestCase):
 
     def test_validate_xml(self):
         from gestionatr.utils import validate_xml
-        xml_c101_minim = open(get_data("c101_minim.xml"), "r")
-        xml_c101_ok = xml_c101_minim.read()
-        res = validate_xml(xml_c101_ok)
-        self.assertTrue(res.valid)
+        with open(get_data("c101_minim.xml"), "rb") as xml_c101_minim:
+            xml_c101_ok = xml_c101_minim.read()
+            res = validate_xml(xml_c101_ok)
+            self.assertTrue(res.valid)
+

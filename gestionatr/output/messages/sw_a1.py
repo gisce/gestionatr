@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import, unicode_literals
 from libcomxml.core import XmlModel, XmlField
 
 from gestionatr.output.messages.sw_d1 import Autoconsumo, DatosSuministro, DatosInstGen

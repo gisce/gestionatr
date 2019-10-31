@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import, unicode_literals
 from lxml import objectify, etree
 from gestionatr import utils
-from message import XSD_DATA, MAIN_MESSAGE_XSD, Message, except_f1
+from .message import XSD_DATA, MAIN_MESSAGE_XSD, Message, except_f1
 from gestionatr.utils import get_rec_attr
 
 XSD_DATA.update({

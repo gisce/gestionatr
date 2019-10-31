@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import, unicode_literals
 from gestionatr.utils import get_rec_attr
-from C1 import C1
-from Deadlines import ProcessDeadline, DeadLine, Workdays, Naturaldays
+from .C1 import C1
+from .Deadlines import ProcessDeadline, DeadLine, Workdays, Naturaldays
 
 
 class W1(C1):

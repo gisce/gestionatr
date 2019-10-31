@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import, unicode_literals
 import copy
 
 from gestionatr.output.messages import sw_a1_02 as a1_02
@@ -28,14 +29,14 @@ from .utils import get_data, assertXmlEqual, get_header, get_cliente, get_contac
 class test_C1(unittest.TestCase):
 
     def setUp(self):
-        self.xml_c101_completo = open(get_data("c101.xml"), "r")
-        self.xml_c102_accept = open(get_data("c102_accept.xml"), "r")
-        self.xml_c102_reject = open(get_data("c102_reject.xml"), "r")
-        self.xml_c105 = open(get_data("c105.xml"), "r")
-        self.xml_c106 = open(get_data("c106.xml"), "r")
-        self.xml_c109 = open(get_data("c109.xml"), "r")
-        self.xml_c111 = open(get_data("c111.xml"), "r")
-        self.xml_c112 = open(get_data("c112.xml"), "r")
+        self.xml_c101_completo = open(get_data("c101.xml"), "rb")
+        self.xml_c102_accept = open(get_data("c102_accept.xml"), "rb")
+        self.xml_c102_reject = open(get_data("c102_reject.xml"), "rb")
+        self.xml_c105 = open(get_data("c105.xml"), "rb")
+        self.xml_c106 = open(get_data("c106.xml"), "rb")
+        self.xml_c109 = open(get_data("c109.xml"), "rb")
+        self.xml_c111 = open(get_data("c111.xml"), "rb")
+        self.xml_c112 = open(get_data("c112.xml"), "rb")
 
         # RegistrosDocumento
         self.registros_documento = c1.RegistrosDocumento()
@@ -525,9 +526,9 @@ class test_C1(unittest.TestCase):
 class test_C2(unittest.TestCase):
 
     def setUp(self):
-        self.xml_c201_completo = open(get_data("c201.xml"), "r")
-        self.xml_c202_accept = open(get_data("c202_accept.xml"), "r")
-        self.xml_c203 = open(get_data("c203.xml"), "r")
+        self.xml_c201_completo = open(get_data("c201.xml"), "rb")
+        self.xml_c202_accept = open(get_data("c202_accept.xml"), "rb")
+        self.xml_c203 = open(get_data("c203.xml"), "rb")
 
     def tearDown(self):
         self.xml_c201_completo.close()
@@ -767,9 +768,9 @@ class test_C2(unittest.TestCase):
 class test_A1(unittest.TestCase):
 
         def setUp(self):
-            self.xml_a101 = open(get_data("a101.xml"), "r")
-            self.xml_a102_accept = open(get_data("a102_accept.xml"), "r")
-            self.xml_a102_reject = open(get_data("a102_reject.xml"), "r")
+            self.xml_a101 = open(get_data("a101.xml"), "rb")
+            self.xml_a102_accept = open(get_data("a102_accept.xml"), "rb")
+            self.xml_a102_reject = open(get_data("a102_reject.xml"), "rb")
 
         def tearDown(self):
             self.xml_a101.close()
@@ -1090,8 +1091,8 @@ class test_A1(unittest.TestCase):
 
 class test_A3(unittest.TestCase):
     def setUp(self):
-        self.xml_a301 = open(get_data("a301.xml"), "r")
-        self.xml_a301_correos = open(get_data("a301_correos.xml"), "r")
+        self.xml_a301 = open(get_data("a301.xml"), "rb")
+        self.xml_a301_correos = open(get_data("a301_correos.xml"), "rb")
 
     def tearDown(self):
         self.xml_a301.close()
@@ -1328,7 +1329,7 @@ class test_A3(unittest.TestCase):
 
 class test_M1(unittest.TestCase):
     def setUp(self):
-        self.xml_m101 = open(get_data("m101.xml"), "r")
+        self.xml_m101 = open(get_data("m101.xml"), "rb")
 
     def tearDown(self):
         self.xml_m101.close()
@@ -1418,9 +1419,9 @@ class test_M1(unittest.TestCase):
 class test_D1(unittest.TestCase):
 
     def setUp(self):
-        self.xml_d101 = open(get_data("d101.xml"), "r")
-        self.xml_d102_accept = open(get_data("d102_accept.xml"), "r")
-        self.xml_d102_reject = open(get_data("d102_reject.xml"), "r")
+        self.xml_d101 = open(get_data("d101.xml"), "rb")
+        self.xml_d102_accept = open(get_data("d102_accept.xml"), "rb")
+        self.xml_d102_reject = open(get_data("d102_reject.xml"), "rb")
 
     def tearDown(self):
         self.xml_d101.close()
@@ -1729,7 +1730,7 @@ class test_D1(unittest.TestCase):
 class test_Q1(unittest.TestCase):
 
     def setUp(self):
-        self.xml_q101 = open(get_data("q101.xml"), "r")
+        self.xml_q101 = open(get_data("q101.xml"), "rb")
 
     def tearDown(self):
         self.xml_q101.close()
@@ -1905,9 +1906,9 @@ class test_Q1(unittest.TestCase):
 class test_W1(unittest.TestCase):
 
     def setUp(self):
-        self.xml_w101 = open(get_data("w101.xml"), "r")
-        self.xml_w102_accept = open(get_data("w102_accept.xml"), "r")
-        self.xml_w102_reject = open(get_data("w102_reject.xml"), "r")
+        self.xml_w101 = open(get_data("w101.xml"), "rb")
+        self.xml_w102_accept = open(get_data("w102_accept.xml"), "rb")
+        self.xml_w102_reject = open(get_data("w102_reject.xml"), "rb")
 
     def tearDown(self):
         self.xml_w101.close()
@@ -2034,10 +2035,10 @@ class test_W1(unittest.TestCase):
 class test_B1(unittest.TestCase):
 
     def setUp(self):
-        self.xml_b101 = open(get_data("b101.xml"), "r")
-        self.xml_b102_accept = open(get_data("b102_accept.xml"), "r")
-        self.xml_b104_accept = open(get_data("b104_accept.xml"), "r")
-        self.xml_b105 = open(get_data("b105.xml"), "r")
+        self.xml_b101 = open(get_data("b101.xml"), "rb")
+        self.xml_b102_accept = open(get_data("b102_accept.xml"), "rb")
+        self.xml_b104_accept = open(get_data("b104_accept.xml"), "rb")
+        self.xml_b105 = open(get_data("b105.xml"), "rb")
 
     def tearDown(self):
         self.xml_b101.close()
@@ -2306,12 +2307,12 @@ class test_B1(unittest.TestCase):
 class test_R1(unittest.TestCase):
 
     def setUp(self):
-        self.xml_r101 = open(get_data("r101.xml"), "r")
-        self.xml_r102_accept = open(get_data("r102_accept.xml"), "r")
-        self.xml_r103 = open(get_data("r103.xml"), "r")
-        self.xml_r103_intervenciones = open(get_data("r103_intervenciones.xml"), "r")
-        self.xml_r104 = open(get_data("r104.xml"), "r")
-        self.xml_r105 = open(get_data("r105.xml"), "r")
+        self.xml_r101 = open(get_data("r101.xml"), "rb")
+        self.xml_r102_accept = open(get_data("r102_accept.xml"), "rb")
+        self.xml_r103 = open(get_data("r103.xml"), "rb")
+        self.xml_r103_intervenciones = open(get_data("r103_intervenciones.xml"), "rb")
+        self.xml_r104 = open(get_data("r104.xml"), "rb")
+        self.xml_r105 = open(get_data("r105.xml"), "rb")
 
     def tearDown(self):
         self.xml_r101.close()
@@ -3018,15 +3019,15 @@ class test_R1(unittest.TestCase):
 class test_F1(unittest.TestCase):
 
     def setUp(self):
-        self.xml_f101_factura_atr = open(get_data("f101_factura_atr.xml"), "r")
+        self.xml_f101_factura_atr = open(get_data("f101_factura_atr.xml"), "rb")
         self.xml_f101_factura_otros = open(
-            get_data("f101_factura_otros.xml"), "r"
+            get_data("f101_factura_otros.xml"), "rb"
         )
         self.xml_f101_factura_atr_direccion_suministro = open(
-            get_data("f101_factura_atr_direccion_suministro.xml"), "r"
+            get_data("f101_factura_atr_direccion_suministro.xml"), "rb"
         )
         self.xml_f101_factura_atr_medidas_baja = open(
-            get_data("f101_factura_atr_medidas_baja.xml"), "r"
+            get_data("f101_factura_atr_medidas_baja.xml"), "rb"
         )
 
         direccion_suministro = f1.DireccionSuministro()
@@ -3426,6 +3427,9 @@ class test_F1(unittest.TestCase):
 
     def tearDown(self):
         self.xml_f101_factura_atr.close()
+        self.xml_f101_factura_otros.close()
+        self.xml_f101_factura_atr_direccion_suministro.close()
+        self.xml_f101_factura_atr_medidas_baja.close()
 
     def with_factura_atr(self):
         cabecera = get_header(process='F1', step='01')
@@ -3541,7 +3545,7 @@ class test_F1(unittest.TestCase):
 class test_A1_41(unittest.TestCase):
 
     def setUp(self):
-        self.xml_a141 = open(get_data("a141.xml"), "r")
+        self.xml_a141 = open(get_data("a141.xml"), "rb")
 
     def tearDown(self):
         self.xml_a141.close()
@@ -3642,7 +3646,7 @@ class test_A1_41(unittest.TestCase):
 class test_A1_02(unittest.TestCase):
 
     def setUp(self):
-        self.xml_a102 = open(get_data("a102.xml"), "r")
+        self.xml_a102 = open(get_data("a102.xml"), "rb")
 
     def tearDown(self):
         self.xml_a102.close()
@@ -3696,7 +3700,7 @@ class test_A1_02(unittest.TestCase):
 class test_A1_05(unittest.TestCase):
 
     def setUp(self):
-        self.xml_a105 = open(get_data("a105.xml"), "r")
+        self.xml_a105 = open(get_data("a105.xml"), "rb")
 
     def tearDown(self):
         self.xml_a105.close()
@@ -3797,7 +3801,7 @@ class test_A1_05(unittest.TestCase):
 class test_A1_44(unittest.TestCase):
 
     def setUp(self):
-        self.xml_a144 = open(get_data("a144.xml"), "r")
+        self.xml_a144 = open(get_data("a144.xml"), "rb")
 
     def tearDown(self):
         self.xml_a144.close()
@@ -3879,7 +3883,7 @@ class test_A1_44(unittest.TestCase):
 class test_A1_03(unittest.TestCase):
 
     def setUp(self):
-        self.xml_a103 = open(get_data("a103.xml"), "r")
+        self.xml_a103 = open(get_data("a103.xml"), "rb")
 
     def tearDown(self):
         self.xml_a103.close()
@@ -3930,7 +3934,7 @@ class test_A1_03(unittest.TestCase):
 class test_A1_04(unittest.TestCase):
 
     def setUp(self):
-        self.xml_a104 = open(get_data("a104.xml"), "r")
+        self.xml_a104 = open(get_data("a104.xml"), "rb")
 
     def tearDown(self):
         self.xml_a104.close()
@@ -3989,8 +3993,8 @@ class test_A1_04(unittest.TestCase):
 class test_A1_48(unittest.TestCase):
 
     def setUp(self):
-        self.xml_a148 = open(get_data("a148.xml"), "r")
-        self.xml_a2648 = open(get_data("a2648.xml"), "r")
+        self.xml_a148 = open(get_data("a148.xml"), "rb")
+        self.xml_a2648 = open(get_data("a2648.xml"), "rb")
 
     def tearDown(self):
         self.xml_a148.close()
@@ -4427,7 +4431,7 @@ class test_A1_48(unittest.TestCase):
 class test_A1_46(unittest.TestCase):
 
     def setUp(self):
-        self.xml_a146 = open(get_data("a146.xml"), "r")
+        self.xml_a146 = open(get_data("a146.xml"), "rb")
 
     def tearDown(self):
         self.xml_a146.close()

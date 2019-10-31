@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import, unicode_literals
+from io import IOBase
 from lxml import objectify, etree
 from gestionatr import utils
+import six
 
 XSD_DATA = {'F1': {'01': 'Facturacion.xsd'},
             'Q1': {'01': 'SaldoLecturasFacturacion.xsd'},
@@ -121,7 +124,7 @@ class MessageBase(object):
         """Construir mensaje base."""
         self.obj = None
         self.error = None
-        if isinstance(xml, file):
+        if (six.PY2 and isinstance(xml, file)) or isinstance(xml, IOBase):
             self.check_fpos(xml)
             xml = xml.read()
         self.xml_orig = xml
@@ -146,7 +149,7 @@ class MessageBase(object):
     @staticmethod
     def check_fpos(f_obj):
         """Setejar la posició actual dels fixers"""
-        if isinstance(f_obj, file) and f_obj.tell() != 0:
+        if isinstance(f_obj, IOBase) and f_obj.tell() != 0:
             f_obj.seek(0)
 
     def set_tipus(self):
@@ -226,9 +229,8 @@ class Message(MessageBase):
                 self._header = MAIN_MESSAGE_XSD[fitxer.split(".xsd")[0]]
             except:
                 self._header = fitxer.split(".xsd")[0]
-            xsd = utils.get_data(fitxer)
-            self.f_xsd = open(xsd, 'r')
-        except except_f1, e:
+            self.xsd = utils.get_data(fitxer)
+        except except_f1 as e:
             raise e
         except:
             msg = u"Fichero '{0}' corrupto".format(
@@ -242,18 +244,20 @@ class Message(MessageBase):
 
     def parse_xml(self, validate=True):
         """Importar contenido del xml"""
-        self.check_fpos(self.f_xsd)
-        schema = etree.XMLSchema(file=self.f_xsd)
-        parser = objectify.makeparser(schema=schema)
-        try:
-            self.obj = objectify.fromstring(self.str_xml, parser)
-        except Exception as e:
-            self.error = e.message
-            if validate:
-                raise except_f1('Error', u'Documento inválido: {0}'.format(e))
-            else:
-                parser = objectify.makeparser(schema=None)
+        with open(self.xsd, 'rb') as f_xsd:
+            self.f_xsd = f_xsd
+            self.check_fpos(self.f_xsd)
+            schema = etree.XMLSchema(file=self.f_xsd)
+            parser = objectify.makeparser(schema=schema)
+            try:
                 self.obj = objectify.fromstring(self.str_xml, parser)
+            except Exception as e:
+                self.error = e.message
+                if validate:
+                    raise except_f1('Error', u'Documento inválido: {0}'.format(e))
+                else:
+                    parser = objectify.makeparser(schema=None)
+                    self.obj = objectify.fromstring(self.str_xml, parser)
 
     # Funcions relacionades amb la capçalera del XML
     @property

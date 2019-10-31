@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import, unicode_literals
 from gestionatr.input.messages import C1
 from gestionatr.utils import get_rec_attr
 

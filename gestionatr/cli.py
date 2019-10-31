@@ -1,4 +1,6 @@
 # -*- encoding: utf-8 -*-
+from __future__ import absolute_import, unicode_literals
+import six
 import sys
 import click
 
@@ -29,24 +31,24 @@ def atr():
 @click.option("--filename", "-f", help="path to XML filename", required=True)
 @click.option("--sector", "-s", help="e (power) or g (gas)", default="e")
 def test(filename, sector):
-    with open(filename, 'r') as xml_file:
+    with open(filename, 'rb') as xml_file:
         try:
             data = xml_file.read()
-            if sector == u'e':
+            if sector == 'e':
                 m = message.Message(data)
-            elif sector == u'g':
+            elif sector == 'g':
                 m = message_gas.MessageGas(data)
             m.parse_xml()
-            sys.stdout.write(u'Correct File\n')
+            sys.stdout.write('Correct File\n')
         except except_f1 as e:
-            error_txt = unicode(e.value).encode(errors='ignore')
+            error_txt = six.text_type(e.value).encode(errors='ignore')
             sys.stdout.write(
-                u'WARNING: Invalid File: {0}\n'.format(error_txt)
+                'WARNING: Invalid File: {0}\n'.format(error_txt)
             )
         except Exception as e:
-            error_txt = unicode(e).encode(errors='ignore')
+            error_txt = six.text_type(e).encode(errors='ignore')
             sys.stdout.write(
-                u'WARNING: Invalid File: {0}\n'.format(error_txt)
+                'WARNING: Invalid File: {0}\n'.format(error_txt)
             )
         finally:
             sys.stdout.flush()

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import, unicode_literals
 from gestionatr.output.messages.sw_c1 import *
 from gestionatr.output.messages.base import rep_cut
 

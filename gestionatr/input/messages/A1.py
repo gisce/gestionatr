@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-from message import Message
-from Deadlines import ProcessDeadline
+from __future__ import absolute_import, unicode_literals
+from .message import Message
+from .Deadlines import ProcessDeadline
 from gestionatr.input.messages import except_f1
-from D1 import DatosInstGen, DatosSuministro, Autoconsumo
+from .D1 import DatosInstGen, DatosSuministro, Autoconsumo
 from gestionatr.utils import get_rec_attr
 
 

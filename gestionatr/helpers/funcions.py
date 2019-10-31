@@ -3,6 +3,8 @@
 """Helper functions for libComXml
 """
 
+from __future__ import absolute_import, unicode_literals
+
 CODIS_REFACT = {'RT42011': '40',
                 'RT12012': '41',
                 'RM42012': '42'}

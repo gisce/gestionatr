@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import, unicode_literals
 
 # Mapeig de distribuïdores
 provincies_arago = ['22', '44', '50']  # Osca, Terol, Saragossa

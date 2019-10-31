@@ -193,6 +193,13 @@ def get_medida():
 def assertXmlEqual(got, want):
     from lxml.doctestcompare import LXMLOutputChecker
     from doctest import Example
+    import six
+
+    if isinstance(want, six.binary_type):
+        from lxml import etree
+        from io import BytesIO
+        x = etree.parse(BytesIO(want))
+        want = etree.tostring(x, encoding='unicode')
 
     checker = LXMLOutputChecker()
     if checker.check_output(want, got, 0):
