@@ -513,13 +513,27 @@ class test_A1(unittest.TestCase):
         self.assertEqual(a1.movimiento, u'A')
         autoconsumo = a1.autoconsumo
         self.assertEqual(autoconsumo.cau, u'ES1234000000000001JN0FA001')
-        self.assertEqual(autoconsumo.seccion_registro, u'2')
-        self.assertEqual(autoconsumo.sub_seccion, u'a0')
+        self.assertEqual(autoconsumo.seccion_registro, u'1')
+        # self.assertEqual(autoconsumo.sub_seccion, u'a0')
         self.assertEqual(autoconsumo.colectivo, u'S')
+        # Suministros
+        # Suministro 1
         suministro = a1.datos_suministro[0]
         self.assertEqual(suministro.cups, u'ES1234000000000001JN0F')
         self.assertEqual(suministro.tipo_cups, u'01')
         self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')
+        # Suministro 2
+        suministro = a1.datos_suministro[1]
+        self.assertEqual(suministro.cups, u'ES1234000000000002JN0F')
+        self.assertEqual(suministro.tipo_cups, u'01')
+        self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')
+        # Suministro 3
+        suministro = a1.datos_suministro[2]
+        self.assertEqual(suministro.cups, u'ES1234000000000003JN0F')
+        self.assertEqual(suministro.tipo_cups, u'01')
+        self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')
+        # Generadores
+        # Generador_1
         inst_gen = a1.datos_inst_gen[0]
         self.assertEqual(inst_gen.cil, u'ES1234000000000001JN0F001')
         self.assertEqual(inst_gen.tec_generador, u'b12')
@@ -558,6 +572,17 @@ class test_A1(unittest.TestCase):
         self.assertEqual(direccion.puerta, u'2')
         self.assertEqual(direccion.tipo_aclarador_finca, u'BI')
         self.assertEqual(direccion.aclarador_finca, u'Bar')
+        self.assertEqual(a1.comentarios, u'Esto es un comentario')
+        # Generador 2
+        inst_gen = a1.datos_inst_gen[1]
+        self.assertEqual(inst_gen.cil, u'ES1234000000000002JN0F001')
+        self.assertEqual(inst_gen.tec_generador, u'b11')
+        self.assertEqual(inst_gen.combustible, u'')
+        self.assertEqual(inst_gen.pot_instalada_gen, u'100')
+        self.assertEqual(inst_gen.tipo_instalacion, u'01')
+        self.assertEqual(inst_gen.esquema_medida, u'B')
+        self.assertEqual(inst_gen.ssaa, u'S')
+        self.assertEqual(inst_gen.ref_catastro, u'1234567890qwertyuidf')
         self.assertEqual(a1.comentarios, u'Esto es un comentario')
 
     def test_a102_accept(self):
@@ -922,21 +947,35 @@ class test_D1(unittest.TestCase):
         self.assertEqual(suministro.cups, u'ES1234000000000001JN0F')
         self.assertEqual(suministro.tipo_cups, u'01')
         self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')
-        inst_gen = info.datos_inst_gen[0]
-        self.assertEqual(inst_gen.cil, u'ES1234000000000001JN0F001')
-        self.assertEqual(inst_gen.tec_generador, u'b12')
-        self.assertEqual(inst_gen.combustible, u'Diesel')
-        self.assertEqual(inst_gen.pot_instalada_gen, u'100')
-        self.assertEqual(inst_gen.tipo_instalacion, u'01')
-        self.assertEqual(inst_gen.esquema_medida, u'B')
-        self.assertEqual(inst_gen.ssaa, u'S')
-        self.assertEqual(inst_gen.ref_catastro, u'1234567890qwertyuidf')
-        utm = inst_gen.utm
-        self.assertEqual(utm.x, u'100')
-        self.assertEqual(utm.y, u'200')
-        self.assertEqual(utm.huso, u'40')
-        self.assertEqual(utm.banda, u'E')
-        titular = inst_gen.titular_representante_gen
+        inst_gen_1 = info.datos_inst_gen[0]
+        self.assertEqual(inst_gen_1.cil, u'ES1234000000000001JN0F001')
+        self.assertEqual(inst_gen_1.tec_generador, u'b12')
+        self.assertEqual(inst_gen_1.combustible, u'Diesel')
+        self.assertEqual(inst_gen_1.pot_instalada_gen, u'100')
+        self.assertEqual(inst_gen_1.tipo_instalacion, u'01')
+        self.assertEqual(inst_gen_1.esquema_medida, u'B')
+        self.assertEqual(inst_gen_1.ssaa, u'S')
+        self.assertEqual(inst_gen_1.ref_catastro, u'1234567890qwertyuidf')
+        utm_1 = inst_gen_1.utm
+        self.assertEqual(utm_1.x, u'100')
+        self.assertEqual(utm_1.y, u'200')
+        self.assertEqual(utm_1.huso, u'40')
+        self.assertEqual(utm_1.banda, u'E')
+
+        inst_gen_2 = info.datos_inst_gen[1]
+        self.assertEqual(inst_gen_2.cil, u'ES1234000000000001JN0F002')
+        self.assertEqual(inst_gen_2.tec_generador, u'b11')
+        self.assertEqual(inst_gen_2.pot_instalada_gen, u'100')
+        self.assertEqual(inst_gen_2.tipo_instalacion, u'01')
+        self.assertEqual(inst_gen_2.esquema_medida, u'B')
+        self.assertEqual(inst_gen_2.ssaa, u'S')
+        self.assertEqual(inst_gen_2.ref_catastro, u'1234567890qwertyuidf')
+        utm_2 = inst_gen_2.utm
+        self.assertEqual(utm_2.x, u'100')
+        self.assertEqual(utm_2.y, u'200')
+        self.assertEqual(utm_2.huso, u'40')
+        self.assertEqual(utm_2.banda, u'E')
+        titular = inst_gen_1.titular_representante_gen
         self.assertEqual(titular.id_titular.tipo_identificador, u'NI')
         self.assertEqual(titular.id_titular.identificador, u'111111111H')
         self.assertEqual(titular.nombre.nombre_de_pila, u'Juan')

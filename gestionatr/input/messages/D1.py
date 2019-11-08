@@ -35,11 +35,15 @@ class D1(C1):
 
     @property
     def info_registro_autocons(self):
-        tree = '{0}.InfoRegistroAutocons'.format(self._header)
+        tree = '{0}.InfoRegistoAutocons'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data not in [None, False]:
             return InfoRegistroAutocons(data)
         else:
+            tree = '{0}.InfoRegistoAutocons'.format(self._header)
+            data = get_rec_attr(self.obj, tree, False)
+            if data not in [None, False]:
+                return InfoRegistroAutocons(data)
             return False
 
 

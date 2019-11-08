@@ -38,12 +38,12 @@ class InfoRegistroAutocons(XmlModel):
                    'comentarios')
 
     def __init__(self):
-        self.info_registro_autocons = XmlField('InfoRegistroAutocons')
+        self.info_registro_autocons = XmlField('InfoRegistoAutocons')
         self.autoconsumo = Autoconsumo()
         self.datos_suministro = DatosSuministro()
         self.datos_inst_gen = DatosInstGen()
         self.comentarios = XmlField('Comentarios')
-        super(InfoRegistroAutocons, self).__init__('InfoRegistroAutocons', 'info_registro_autocons')
+        super(InfoRegistroAutocons, self).__init__('InfoRegistoAutocons', 'info_registro_autocons')
 
 
 class Autoconsumo(XmlModel):

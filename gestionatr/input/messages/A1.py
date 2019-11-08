@@ -266,70 +266,79 @@ class MinimumFieldsChecker(object):
 
     def check_nom_titular(self):
         valid = True
-        for datos in self.a1.datos_inst_gen:
-            nom = datos.titular_representante_gen.nombre
-            check = get_rec_attr(nom, "nombre_de_pila", False) and \
-                    get_rec_attr(nom, "primer_apellido", False) or \
-                    get_rec_attr(nom, "razon_social", False)
-            valid = valid and check
+        if self.a1.autoconsumo.seccion_registro == '2':
+            for datos in self.a1.datos_inst_gen:
+                nom = datos.titular_representante_gen.nombre
+                check = get_rec_attr(nom, "nombre_de_pila", False) and \
+                        get_rec_attr(nom, "primer_apellido", False) or \
+                        get_rec_attr(nom, "razon_social", False)
+                valid = valid and check
         return valid
 
     def check_tipus_identificador(self):
         valid = True
-        for datos in self.a1.datos_inst_gen:
-            valid = valid and get_rec_attr(datos.titular_representante_gen.id_titular, "tipo_identificador", False)
+        if self.a1.autoconsumo.seccion_registro == '2':
+            for datos in self.a1.datos_inst_gen:
+                valid = valid and get_rec_attr(datos.titular_representante_gen.id_titular, "tipo_identificador", False)
         return valid
 
     def check_identificador(self):
         valid = True
-        for datos in self.a1.datos_inst_gen:
-            valid = valid and get_rec_attr(datos.titular_representante_gen.id_titular, "identificador", False)
+        if self.a1.autoconsumo.seccion_registro == '2':
+            for datos in self.a1.datos_inst_gen:
+                valid = valid and get_rec_attr(datos.titular_representante_gen.id_titular, "identificador", False)
         return valid
 
     def check_telefon(self):
         valid = True
-        for datos in self.a1.datos_inst_gen:
-            telefon = get_rec_attr(datos.titular_representante_gen, "telefono", False)
-            if not telefon:
-                return False
-            valid = valid and len(telefon) > 0
+        if self.a1.autoconsumo.seccion_registro == '2':
+            for datos in self.a1.datos_inst_gen:
+                telefon = get_rec_attr(datos.titular_representante_gen, "telefono", False)
+                if not telefon:
+                    return False
+                valid = valid and len(telefon) > 0
         return valid
 
     def check_pais(self):
         valid = True
-        for datos in self.a1.datos_inst_gen:
-            direccio = datos.titular_representante_gen.direccion
-            valid = valid and get_rec_attr(direccio, "pais", False)
+        if self.a1.autoconsumo.seccion_registro == '2':
+            for datos in self.a1.datos_inst_gen:
+                direccio = datos.titular_representante_gen.direccion
+                valid = valid and get_rec_attr(direccio, "pais", False)
         return valid
 
     def check_provincia(self):
         valid = True
-        for datos in self.a1.datos_inst_gen:
-            direccio = datos.titular_representante_gen.direccion
-            valid = valid and get_rec_attr(direccio, "provincia", False)
+        if self.a1.autoconsumo.seccion_registro == '2':
+            for datos in self.a1.datos_inst_gen:
+                direccio = datos.titular_representante_gen.direccion
+                valid = valid and get_rec_attr(direccio, "provincia", False)
         return valid
 
     def check_municipi(self):
         valid = True
-        for datos in self.a1.datos_inst_gen:
-            direccio = datos.titular_representante_gen.direccion
-            valid = valid and get_rec_attr(direccio, "municipio", False)
+        if self.a1.autoconsumo.seccion_registro == '2':
+            for datos in self.a1.datos_inst_gen:
+                direccio = datos.titular_representante_gen.direccion
+                valid = valid and get_rec_attr(direccio, "municipio", False)
         return valid
 
     def check_codi_postal(self):
         valid = True
-        for datos in self.a1.datos_inst_gen:
-            direccio = datos.titular_representante_gen.direccion
-            valid = valid and get_rec_attr(direccio, "cod_postal", False)
+        if self.a1.autoconsumo.seccion_registro == '2':
+            for datos in self.a1.datos_inst_gen:
+                direccio = datos.titular_representante_gen.direccion
+                valid = valid and get_rec_attr(direccio, "cod_postal", False)
         return valid
 
     def check_via_or_apartat_correus(self):
         valid = True
-        for datos in self.a1.datos_inst_gen:
-            direccio = datos.titular_representante_gen.direccion
-            has_apartado_correos = get_rec_attr(direccio, "apartado_de_correos", False)
-            has_via = get_rec_attr(direccio, "tipo_via", False) and \
-                      get_rec_attr(direccio, "calle", False) and \
-                      get_rec_attr(direccio, "numero_finca", False)
-            valid = valid and (has_apartado_correos or has_via)
+        if self.a1.autoconsumo.seccion_registro == '2':
+            for datos in self.a1.datos_inst_gen:
+                direccio = datos.titular_representante_gen.direccion
+                has_apartado_correos = get_rec_attr(direccio, "apartado_de_correos", False)
+                has_via = get_rec_attr(direccio, "tipo_via", False) and \
+                          get_rec_attr(direccio, "calle", False) and \
+                          get_rec_attr(direccio, "numero_finca", False)
+                valid = valid and (has_apartado_correos or has_via)
         return valid
