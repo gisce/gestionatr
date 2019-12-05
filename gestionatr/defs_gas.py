@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from defs import SUBTYPES_R101
+from __future__ import absolute_import, unicode_literals
+from .defs import SUBTYPES_R101
 
 TAULA_CATEGORIA_SUJETO = [
     ('COM', 'Comercializadora'),

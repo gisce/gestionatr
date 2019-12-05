@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from __future__ import absolute_import, unicode_literals
 from libcomxml.core import XmlModel, XmlField
 from gestionatr.output.messages.base import Cabecera, rep_fecha, \
     rep_fecha_sin_hora, rep_decimal, rep_entera, rep_entera2, rep_ruedas, rep_cut

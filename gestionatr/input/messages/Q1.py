@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-from message import Message
+from __future__ import absolute_import, unicode_literals
+from .message import Message
 from gestionatr.utils import get_rec_attr
-from Deadlines import ProcessDeadline
+from .Deadlines import ProcessDeadline
 
 
 class Q1(Message, ProcessDeadline):

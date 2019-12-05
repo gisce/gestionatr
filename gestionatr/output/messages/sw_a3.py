@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import, unicode_literals
 from gestionatr.output.messages.sw_c2 import *
 
 

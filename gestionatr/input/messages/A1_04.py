@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import, unicode_literals
 from gestionatr.utils import get_rec_attr
-from A1_44 import A1_44
+from .A1_44 import A1_44
 
 
 class A1_04(A1_44):

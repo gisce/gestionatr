@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from __future__ import absolute_import, unicode_literals
 # Definició de variables de llibreria
 # Taula 107 del document d'OCSUM:
 # OCSUM - E - Tablas de códigos 2012.05.23.doc

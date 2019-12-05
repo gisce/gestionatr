@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from C1 import C1, DatosSolicitud, Contrato, Cliente
-from Deadlines import DeadLine, Workdays, Naturaldays
+from __future__ import absolute_import, unicode_literals
+from .C1 import C1, DatosSolicitud, Contrato, Cliente
+from .Deadlines import DeadLine, Workdays, Naturaldays
 from gestionatr.utils import get_rec_attr
 
 

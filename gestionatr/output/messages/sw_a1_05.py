@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from __future__ import absolute_import, unicode_literals
 from libcomxml.core import XmlModel, XmlField
 from gestionatr.output.messages.base_gas import Heading
 from gestionatr.output.messages.sw_a1_41 import Registerdoclist, Registerdoc

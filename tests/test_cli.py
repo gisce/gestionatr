@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import
 from click.testing import CliRunner
 from .utils import get_data
 from gestionatr.cli import atr, test
@@ -18,7 +19,6 @@ class CommandTest(unittest.TestCase):
 
     def test_atr_test_default_e(self):
         runner = CliRunner()
-
         result = runner.invoke(test, ['-f', get_data('f101_factura_atr.xml')])
         expect(result.output).to(equal('Correct File\n'))
 
