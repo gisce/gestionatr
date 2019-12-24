@@ -1219,7 +1219,10 @@ class FacturaATR(Factura):
 
         return None
 
-    def get_lectures_amb_ajust_autoconsum(self, tipus='S', ajust_balancejat=True):
+    def get_lectures_amb_ajust_autoconsum(self, tipus='S', ajust_balancejat=True, motiu_ajust="98"):
+        return self.get_lectures_amb_ajust_quadrat_amb_consum(tipus=tipus, ajust_balancejat=ajust_balancejat, motiu_ajust=motiu_ajust)
+    
+    def get_lectures_amb_ajust_quadrat_amb_consum(self, tipus='S', ajust_balancejat=True, motiu_ajust="98"):
         lectures_per_periode = {}
         for comptador in self.get_comptadors():
             for lectura in comptador.get_lectures(tipus):
@@ -1245,18 +1248,18 @@ class FacturaATR(Factura):
                     new_val = consum - (lectura.lectura_hasta.lectura - lectura.lectura_desde.lectura + old_ajust)
                     if new_val != 0.0:
                         lectura.ajuste.ajuste_por_integrador = consum - (lectura.lectura_hasta.lectura - lectura.lectura_desde.lectura)
-                        lectura.ajuste.codigo_motivo = "98"  # Autoconsumo
+                        lectura.ajuste.codigo_motivo = motiu_ajust  # normalment 98 - Autoconsumo
             for l in lectures:
                 if not res.get(l.comptador):
                     res[l.comptador] = []
                 res[l.comptador].append(l)
         return res
 
-    def get_lectures_activa_entrant(self, ajust_balancejat=True):
-        return self.get_lectures_amb_ajust_autoconsum(tipus='A', ajust_balancejat=ajust_balancejat)
+    def get_lectures_activa_entrant(self, ajust_balancejat=True, motiu_ajust="98"):
+        return self.get_lectures_amb_ajust_quadrat_amb_consum(tipus='A', ajust_balancejat=ajust_balancejat, motiu_ajust=motiu_ajust)
 
-    def get_lectures_activa_sortint(self, ajust_balancejat=True):
-        return self.get_lectures_amb_ajust_autoconsum(tipus='S', ajust_balancejat=ajust_balancejat)
+    def get_lectures_activa_sortint(self, ajust_balancejat=True, motiu_ajust="98"):
+        return self.get_lectures_amb_ajust_quadrat_amb_consum(tipus='S', ajust_balancejat=ajust_balancejat, motiu_ajust=motiu_ajust)
 
     def get_comptadors(self):
         """Retorna totes les lectures en una llista de comptadors"""
