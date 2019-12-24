@@ -1219,6 +1219,9 @@ class FacturaATR(Factura):
 
         return None
 
+    def get_lectures_amb_ajust_autoconsum(self, tipus='S', ajust_balancejat=True, motiu_ajust="98"):
+        return self.get_lectures_amb_ajust_quadrat_amb_consum(tipus=tipus, ajust_balancejat=ajust_balancejat, motiu_ajust=motiu_ajust)
+    
     def get_lectures_amb_ajust_quadrat_amb_consum(self, tipus='S', ajust_balancejat=True, motiu_ajust="98"):
         lectures_per_periode = {}
         for comptador in self.get_comptadors():
