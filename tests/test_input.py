@@ -590,8 +590,6 @@ class test_A1(unittest.TestCase):
         a1.parse_xml()
 
         self.assertEqual(a1.cau, u'ES1234000000000001JN0FA001')
-        registro = a1.actualizacion_datos_registro
-        self.assertEqual(registro.sub_seccion, u'a0')
         self.assertEqual(a1.comentarios, u'Esto es un comentario')
 
     def test_a102_reject(self):
@@ -601,27 +599,22 @@ class test_A1(unittest.TestCase):
         self.assertEqual(a1.cau, u'ES1234000000000001JN0FA001')
         self.assertEqual(a1.comentarios, u'Esto es un comentario')
         rechazos = a1.rechazos
-        self.assertEqual(len(rechazos), 3)
+        self.assertEqual(len(rechazos.rechazo), 3)
+        self.assertEqual(rechazos.fecha_rechazo, u'2016-06-08')
         # Rechazo 1
-        rechazo1 = rechazos[0]
-        self.assertEqual(rechazo1.fecha_rechazo, u'2016-06-08')
+        rechazo1 = rechazos.rechazo[0]
         self.assertEqual(rechazo1.secuencial, u'00')
         self.assertEqual(rechazo1.codigo_motivo, u'01')
-        self.assertEqual(rechazo1.cups, u'ES1234000000000001JN0F')
         self.assertEqual(rechazo1.comentarios, u'Comentario del rechazo')
         # Rechazo 2
-        rechazo2 = rechazos[1]
-        self.assertEqual(rechazo2.fecha_rechazo, u'2016-06-08')
+        rechazo2 = rechazos.rechazo[1]
         self.assertEqual(rechazo2.secuencial, u'00')
         self.assertEqual(rechazo2.codigo_motivo, u'F1')
-        self.assertEqual(rechazo2.cups, u'ES1234000000000001JN0F')
         self.assertEqual(rechazo2.comentarios, u'Comentario del rechazo')
         # Rechazo 3
-        rechazo3 = rechazos[2]
-        self.assertEqual(rechazo3.fecha_rechazo, u'2016-06-08')
+        rechazo3 = rechazos.rechazo[2]
         self.assertEqual(rechazo3.secuencial, u'00')
         self.assertEqual(rechazo3.codigo_motivo, u'F4')
-        self.assertEqual(rechazo3.cups, u'ES1234000000000001JN0F')
         self.assertEqual(rechazo3.comentarios, u'Comentario del rechazo')
 
 
