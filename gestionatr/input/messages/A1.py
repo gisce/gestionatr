@@ -96,23 +96,13 @@ class A1(Message, ProcessDeadline):
             return False
 
     @property
-    def actualizacion_datos_registro(self):
-        tree = '{0}.ActualizacionDatosRegistro'.format(self._header)
+    def rechazos(self):
+        tree = '{0}.Rechazos'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data not in [None, False]:
-            return ActualizacionDatosRegistro(data)
+            return Rechazos(data)
         else:
             return False
-
-    @property
-    def rechazos(self):
-        data = []
-        obj = get_rec_attr(self.obj, self._header, False)
-        if (hasattr(obj, 'Rechazos') and
-                hasattr(obj.Rechazos, 'Rechazo')):
-            for d in obj.Rechazos.Rechazo:
-                data.append(Rechazo(d))
-        return data
 
     @property
     def comentarios(self):
@@ -128,16 +118,26 @@ class A1(Message, ProcessDeadline):
         return checker.check()
 
 
-class ActualizacionDatosRegistro(object):
+class Rechazos(object):
 
     def __init__(self, data):
-        self.actualizacion_datos_registro = data
+        self.rechazos = data
 
     @property
-    def sub_seccion(self):
+    def fecha_rechazo(self):
         data = ''
         try:
-            data = self.actualizacion_datos_registro.SubSeccion.text
+            data = self.rechazos.FechaRechazo.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def rechazo(self):
+        data = []
+        try:
+            for rechazo in self.rechazos.Rechazo:
+                data.append(Rechazo(rechazo))
         except AttributeError:
             pass
         return data
@@ -147,15 +147,6 @@ class Rechazo(object):
 
     def __init__(self, data):
         self.rechazo = data
-
-    @property
-    def fecha_rechazo(self):
-        data = ''
-        try:
-            data = self.rechazo.FechaRechazo.text
-        except AttributeError:
-            pass
-        return data
 
     @property
     def secuencial(self):
@@ -171,15 +162,6 @@ class Rechazo(object):
         data = ''
         try:
             data = self.rechazo.CodigoMotivo.text
-        except AttributeError:
-            pass
-        return data
-
-    @property
-    def cups(self):
-        data = ''
-        try:
-            data = self.rechazo.CUPS.text
         except AttributeError:
             pass
         return data
@@ -216,9 +198,7 @@ class MinimumFieldsChecker(object):
                 'identificador', 'telefon', 'pais', 'provincia', 'municipi', 'codi_postal', 'via_or_apartat_correus'
             ]
         elif pas == '02':
-            return [
-                'actualitzacio_dades_regsitre', 'rebuigs'
-            ]
+            return ['cau']
         else:
             return False
 

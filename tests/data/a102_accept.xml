@@ -11,9 +11,14 @@
     </Cabecera>
     <A102>
         <CAU>ES1234000000000001JN0FA001</CAU>
-        <ActualizacionDatosRegistro>
-            <SubSeccion>a0</SubSeccion>
-        </ActualizacionDatosRegistro>
+        <Rechazos>
+            <FechaRechazo>2016-06-08</FechaRechazo>
+            <Rechazo>
+                <Secuencial>00</Secuencial>
+                <CodigoMotivo>01</CodigoMotivo>
+                <Comentarios>TODO: ELIMINAR CUANDO LA CNMC ARREGLE EL XSD</Comentarios>
+            </Rechazo>
+        </Rechazos>
         <Comentarios>Esto es un comentario</Comentarios>
     </A102>
 </A102>

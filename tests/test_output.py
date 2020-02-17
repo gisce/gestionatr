@@ -984,30 +984,40 @@ class test_A1(unittest.TestCase):
             }
             cabecera.feed(cabecera_fields)
 
-            # ActualizacionRegistroAutoconsumo
-            datos_registro = a1.ActualizacionDatosRegistro()
-            actualizacion_datos_registro_fields = {
-                'sub_seccion': 'a0',
+            # Rechazo 1
+            rechazo1 = a1.Rechazo()
+            rechazo1_fields = {
+                'secuencial': '00',
+                'codigo_motivo': '01',
+                'comentarios': 'TODO: ELIMINAR CUANDO LA CNMC ARREGLE EL XSD',
             }
-            datos_registro.feed(actualizacion_datos_registro_fields)
+            rechazo1.feed(rechazo1_fields)
+
+            # Rechazos
+            rechazos = a1.Rechazos()
+            rechazos_fields = {
+                'fecha_rechazo': '2016-06-08',
+                'rechazo_list': [rechazo1],
+            }
+            rechazos.feed(rechazos_fields)
 
             # ActualizacionRegistroAutoconsumo
-            registro = a1.ActualizacionRegistroAutoconsumo()
-            actualizacion_registro_autoconsumo_fields = {
+            a102 = a1.A102()
+            a102_fields = {
                 'cau': 'ES1234000000000001JN0FA001',
-                'actualizacion_datos_registro': datos_registro,
+                'rechazos': rechazos,
                 'comentarios': 'Esto es un comentario',
 
             }
-            registro.feed(actualizacion_registro_autoconsumo_fields)
+            a102.feed(a102_fields)
 
             # MensajeActualizacionRegistroAutoconsumo
-            mensaje = a1.MensajeActualizacionRegistroAutoconsumo()
-            mensaje_actualizacion_registro_autoconsumo_fields = {
+            mensaje = a1.MensajeA102()
+            mensaje_a102_fields = {
                 'cabecera': cabecera,
-                'actualizacion_registro_autoconsumo': registro,
+                'a102': a102,
             }
-            mensaje.feed(mensaje_actualizacion_registro_autoconsumo_fields)
+            mensaje.feed(mensaje_a102_fields)
 
             mensaje.build_tree()
             xml = str(mensaje)
@@ -1030,58 +1040,53 @@ class test_A1(unittest.TestCase):
             # Rechazo 1
             rechazo1 = a1.Rechazo()
             rechazo1_fields = {
-                'fecha_rechazo': '2016-06-08',
                 'secuencial': '00',
                 'codigo_motivo': '01',
-                'cups': 'ES1234000000000001JN0F',
                 'comentarios': 'Comentario del rechazo',
             }
             rechazo1.feed(rechazo1_fields)
             # Rechazo 2
             rechazo2 = a1.Rechazo()
             rechazo2_fields = {
-                'fecha_rechazo': '2016-06-08',
                 'secuencial': '00',
                 'codigo_motivo': 'F1',
-                'cups': 'ES1234000000000001JN0F',
                 'comentarios': 'Comentario del rechazo',
             }
             rechazo2.feed(rechazo2_fields)
             # Rechazo 3
             rechazo3 = a1.Rechazo()
             rechazo3_fields = {
-                'fecha_rechazo': '2016-06-08',
                 'secuencial': '00',
                 'codigo_motivo': 'F4',
-                'cups': 'ES1234000000000001JN0F',
                 'comentarios': 'Comentario del rechazo',
             }
             rechazo3.feed(rechazo3_fields)
 
             # Rechazos
-            rechazos = d1.Rechazos()
+            rechazos = a1.Rechazos()
             rechazos_fields = {
-                'rechazos': [rechazo1, rechazo2, rechazo3],
+                'fecha_rechazo': '2016-06-08',
+                'rechazo_list': [rechazo1, rechazo2, rechazo3],
             }
             rechazos.feed(rechazos_fields)
 
             # ActualizacionRegistroAutoconsumo
-            registro = a1.ActualizacionRegistroAutoconsumo()
-            actualizacion_registro_autoconsumo_fields = {
+            a102 = a1.A102()
+            a102_fields = {
                 'cau': 'ES1234000000000001JN0FA001',
                 'rechazos': rechazos,
                 'comentarios': 'Esto es un comentario',
 
             }
-            registro.feed(actualizacion_registro_autoconsumo_fields)
+            a102.feed(a102_fields)
 
             # MensajeActualizacionRegistroAutoconsumo
-            mensaje = a1.MensajeActualizacionRegistroAutoconsumo()
-            mensaje_actualizacion_registro_autoconsumo_fields = {
+            mensaje = a1.MensajeA102()
+            mensaje_a102_fields = {
                 'cabecera': cabecera,
-                'actualizacion_registro_autoconsumo': registro,
+                'a102': a102,
             }
-            mensaje.feed(mensaje_actualizacion_registro_autoconsumo_fields)
+            mensaje.feed(mensaje_a102_fields)
 
             mensaje.build_tree()
             xml = str(mensaje)

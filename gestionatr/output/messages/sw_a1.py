@@ -34,61 +34,47 @@ class InfoRegistroAutoconsA1(XmlModel):
 
 
 # Paso 02
-class MensajeActualizacionRegistroAutoconsumo(XmlModel):
+class MensajeA102(XmlModel):
 
-    _sort_order = ('mensaje', 'cabecera', 'actualizacion_registro_autoconsumo')
+    _sort_order = ('mensaje', 'cabecera', 'a102')
 
     def __init__(self):
         self.mensaje = XmlField('A102',
                                 attributes={'xmlns': 'http://localhost/elegibilidad'})
         self.cabecera = CabeceraAutoconsumoRechazo()
-        self.actualizacion_registro_autoconsumo = ActualizacionRegistroAutoconsumo()
-        super(MensajeActualizacionRegistroAutoconsumo, self).__init__('MensajeActualizacionRegistroAutoconsumo', 'mensaje')
+        self.a102 = A102()
+        super(MensajeA102, self).__init__('MensajeA102', 'mensaje')
 
 
-class ActualizacionRegistroAutoconsumo(XmlModel):
+class A102(XmlModel):
 
-    _sort_order = ('actualizacion_registro_autoconsumo', 'cau', 'actualizacion_datos_registro',
-                   'rechazos', 'comentarios')
+    _sort_order = ('a102', 'cau', 'rechazos', 'comentarios')
 
     def __init__(self):
-        self.actualizacion_registro_autoconsumo = XmlField('A102')
+        self.a102 = XmlField('A102')
         self.cau = XmlField('CAU')
-        self.actualizacion_datos_registro = ActualizacionDatosRegistro()
         self.rechazos = Rechazos()
         self.comentarios = XmlField('Comentarios')
-        super(ActualizacionRegistroAutoconsumo, self).__init__('A102', 'actualizacion_registro_autoconsumo')
-
-
-class ActualizacionDatosRegistro(XmlModel):
-
-    _sort_order = ('actualizacion_datos_registro', 'sub_seccion')
-
-    def __init__(self):
-        self.actualizacion_datos_registro = XmlField('ActualizacionDatosRegistro')
-        self.sub_seccion = XmlField('SubSeccion')
-        super(ActualizacionDatosRegistro, self).__init__('ActualizacionDatosRegistro', 'actualizacion_datos_registro')
-
+        super(A102, self).__init__('A102', 'a102')
 
 class Rechazos(XmlModel):
 
-    _sort_order = ('rechazos', 'rechazo_list')
+    _sort_order = ('rechazos', 'fecha_rechazo', 'rechazo_list')
 
     def __init__(self):
         self.rechazos = XmlField('Rechazos')
+        self.fecha_rechazo = XmlField('FechaRechazo')
         self.rechazo_list = []
         super(Rechazos, self).__init__('Rechazos', 'rechazos')
 
 
 class Rechazo(XmlModel):
 
-    _sort_order = ('rechazo', 'fecha_rechazo', 'secuencial', 'codigo_motivo', 'cups', 'comentarios')
+    _sort_order = ('rechazo', 'secuencial', 'codigo_motivo', 'comentarios')
 
     def __init__(self):
         self.rechazo = XmlField('Rechazo')
-        self.fecha_rechazo = XmlField('FechaRechazo')
         self.secuencial = XmlField('Secuencial')
         self.codigo_motivo = XmlField('CodigoMotivo')
-        self.cups = XmlField('CUPS')
         self.comentarios = XmlField('Comentarios')
         super(Rechazo, self).__init__('Rechazo', 'rechazo')
