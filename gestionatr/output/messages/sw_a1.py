@@ -43,7 +43,7 @@ class MensajeA102(XmlModel):
                                 attributes={'xmlns': 'http://localhost/elegibilidad'})
         self.cabecera = CabeceraAutoconsumoRechazo()
         self.a102 = A102()
-        super(MensajeA102, self).__init__('MensajeA102', 'mensaje')
+        super(MensajeA102, self).__init__('A102', 'mensaje')
 
 
 class A102(XmlModel):
@@ -56,6 +56,7 @@ class A102(XmlModel):
         self.rechazos = Rechazos()
         self.comentarios = XmlField('Comentarios')
         super(A102, self).__init__('A102', 'a102')
+
 
 class Rechazos(XmlModel):
 
