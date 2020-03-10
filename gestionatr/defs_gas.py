@@ -3721,6 +3721,7 @@ TIPUS_CONCEPTES = {
     # '0015': 'altres',
     '0016': 'tfixe',
     '0017': 'tvariable',
+    '1212': 'demora',  # Es diferent perque no te impostos, s'ha de tractar per separat
     # '****': 'altres'
 }
 
