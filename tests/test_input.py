@@ -4025,11 +4025,13 @@ class test_A1_38(unittest.TestCase):
         self.xml_a238 = open(get_data("a238.xml"), "r")
         self.xml_a2538 = open(get_data("a2538.xml"), "r")
         self.xml_a338 = open(get_data("a338.xml"), "r")
+        self.xml_a438 = open(get_data("a438.xml"), "r")
 
     def tearDown(self):
         self.xml_a238.close()
         self.xml_a2538.close()
         self.xml_a338.close()
+        self.xml_a438.close()
 
     def test_a238(self):
         a238 = A1_38(self.xml_a238)
@@ -4166,3 +4168,28 @@ class test_A1_38(unittest.TestCase):
         self.assertEqual(corrector.correctornumber, u'D123456')
         self.assertEqual(corrector.correctorproperty, u'01')
         self.assertEqual(corrector.correctortype, u'01')
+
+    def test_a438(self):
+        a438 = A1_38(self.xml_a438)
+        a438.parse_xml()
+        self.assertEqual(a438.reqcode, u"10_z9f2k6S")
+        self.assertEqual(a438.comreferencenum, u"123456789")
+        self.assertEqual(a438.responsedate, u"2020-03-13")
+        self.assertEqual(a438.responsehour, u"15:09:09")
+        self.assertEqual(a438.result, u"13")
+        self.assertEqual(a438.resultdesc, u"Aceptada")
+        self.assertEqual(a438.resultreason, u"R01")
+        self.assertEqual(a438.resultreasondesc, u"Cliente suministrado desde planta satélite.")
+        self.assertEqual(a438.interventiondate, u"2020-03-13")
+        self.assertEqual(a438.interventionhour, u"15:09:09")
+        self.assertEqual(a438.cups, u"20aXn4jOtXkA8PF9JCHH")
+        self.assertEqual(a438.nationality, u"SB")
+        self.assertEqual(a438.documenttype, u"01")
+        self.assertEqual(a438.documentnum, u"20_IebsHNeRmZxuEPuXi")
+        self.assertEqual(a438.operationnum, u"40_PFC7QxHLQmOOoIp6PGjE13LnU2cqsI")
+        self.assertEqual(a438.visitnumber, u"987")
+        self.assertEqual(a438.extrainfo, u"400_ssYcpvXKXUF3DuQzltLLSTHWo2SDsC")
+        self.assertEqual(len(a438.defectlist), 2)
+        defect = a438.defectlist[1]
+        self.assertEqual(defect.code, u'002')
+        self.assertEqual(defect.description, u'Desc2')
