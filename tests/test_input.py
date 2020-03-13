@@ -4017,17 +4017,19 @@ class test_A19_45(unittest.TestCase):
         self.assertEqual(registerdoc.doctype, u'02')
         self.assertEqual(registerdoc.url, u'http://gasalmatalas.com')
         self.assertEqual(registerdoc.extrainfo, u'Comments')
-        
+
 
 class test_A1_38(unittest.TestCase):
 
     def setUp(self):
         self.xml_a238 = open(get_data("a238.xml"), "r")
+        self.xml_a2538 = open(get_data("a2538.xml"), "r")
 
     def tearDown(self):
         self.xml_a238.close()
+        self.xml_a2538.close()
 
-    def test_a241(self):
+    def test_a238(self):
         a238 = A1_38(self.xml_a238)
         a238.parse_xml()
         self.assertEqual(a238.reqcode, u"10_4E4mh15")
@@ -4060,3 +4062,35 @@ class test_A1_38(unittest.TestCase):
         self.assertEqual(concept.units, u'1')
         self.assertEqual(concept.unitimport, u'23.8')
         self.assertEqual(concept.import_, u'23.8')
+
+    def test_a2538(self):
+        a2538 = A1_38(self.xml_a2538)
+        a2538.parse_xml()
+        self.assertEqual(a2538.reqcode, u"10_p62j9fh")
+        self.assertEqual(a2538.visitdate, u"2020-03-13")
+        self.assertEqual(a2538.visithour, u"14:26:35")
+        self.assertEqual(a2538.comreferencenum, u"123456789")
+        self.assertEqual(a2538.informationtype, u"002")
+        self.assertEqual(a2538.informationtypedesc, u"0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001")
+        self.assertEqual(a2538.interventiondate, u"2020-03-13")
+        self.assertEqual(a2538.interventionhourfrom, u"14:26:35")
+        self.assertEqual(a2538.interventionhourto, u"14:26:35")
+        self.assertEqual(a2538.cups, u"20alzDPKUDB5HhZDhn5X")
+        self.assertEqual(a2538.resultinspection, u"01")
+        self.assertEqual(a2538.resultinspectiondesc, u"CORRECTO")
+        self.assertEqual(a2538.visitnumber, u"228")
+        self.assertEqual(a2538.operationnum, u"40_tQzwG5OT6YTye1UiYVtoV3r9VymR5B")
+        self.assertEqual(a2538.extrainfo, u"400_C9BEFQSmU4c7fJcqlXEYL79KyKwcZ9")
+        self.assertEqual(a2538.conceptnumber, u"37")
+        concept = a2538.conceptlist[1]
+        self.assertEqual(concept.level, u'1')
+        self.assertEqual(concept.code, u'0002')
+        self.assertEqual(concept.description, u'Desc')
+        self.assertEqual(concept.periodicity, u'03')
+        self.assertEqual(concept.units, u'1')
+        self.assertEqual(concept.unitimport, u'23.8')
+        self.assertEqual(concept.import_, u'23.8')
+        self.assertEqual(len(a2538.defectlist), 2)
+        defect = a2538.defectlist[1]
+        self.assertEqual(defect.code, u'002')
+        self.assertEqual(defect.description, u'Desc2')
