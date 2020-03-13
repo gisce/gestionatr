@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from gestionatr.input.messages import C1, C2, A3, B1, M1, D1, W1, Q1, R1, F1, Deadlines, \
-    A1_41, A1_02, A1_05, B7031, B7032, A1_44, A1_03, A1_48, A1_04, A1_46, A12_26, A19_45
+    A1_41, A1_02, A1_05, B7031, B7032, A1_44, A1_03, A1_48, A1_04, A1_46, A12_26, A19_45, A1_38
 from gestionatr.input.messages.A1 import A1
 from gestionatr.input.messages.F1 import agrupar_lectures_per_data, obtenir_data_inici_i_final
 from . import unittest
@@ -4017,4 +4017,46 @@ class test_A19_45(unittest.TestCase):
         self.assertEqual(registerdoc.doctype, u'02')
         self.assertEqual(registerdoc.url, u'http://gasalmatalas.com')
         self.assertEqual(registerdoc.extrainfo, u'Comments')
+        
 
+class test_A1_38(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a238 = open(get_data("a238.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a238.close()
+
+    def test_a241(self):
+        a238 = A1_38(self.xml_a238)
+        a238.parse_xml()
+        self.assertEqual(a238.reqcode, u"10_4E4mh15")
+        self.assertEqual(a238.comreferencenum, u"123456789123")
+        self.assertEqual(a238.responsedate, u"2020-03-13")
+        self.assertEqual(a238.responsehour, u"13:52:14")
+        self.assertEqual(a238.result, u"01")
+        self.assertEqual(a238.resultdesc, u"Aceptada")
+        self.assertEqual(a238.resultreason, u"R01")
+        self.assertEqual(a238.resultreasondesc, u"Cliente suministrado desde planta satélite.")
+        self.assertEqual(a238.nationality, u"SB")
+        self.assertEqual(a238.documenttype, u"01")
+        self.assertEqual(a238.documentnum, u"20_f8aQW2mqoLv4GLJ8M")
+        self.assertEqual(a238.cups, u"20ai6Nmki1j8m5qCDmuG")
+        self.assertEqual(a238.qdgranted, u"481479688.216")
+        self.assertEqual(a238.qhgranted, u"397959673")
+        self.assertEqual(a238.outgoingpressuregranted, u"87952.239")
+        self.assertEqual(a238.clientyearlyconsumption, u"445325674084")
+        self.assertEqual(a238.tolltype, u"11")
+        self.assertEqual(a238.newmodeffectdate, u"01")
+        self.assertEqual(a238.foreseentransferdate, u"2020-03-13")
+        self.assertEqual(a238.extrainfo, u"400_Y1cLoMJo2SXTeCdHmJCodtnOvEsmDn")
+        self.assertEqual(a238.conceptnumber, u"4")
+        self.assertEqual(len(a238.conceptlist), 2)
+        concept = a238.conceptlist[1]
+        self.assertEqual(concept.level, u'1')
+        self.assertEqual(concept.code, u'0002')
+        self.assertEqual(concept.description, u'Desc')
+        self.assertEqual(concept.periodicity, u'03')
+        self.assertEqual(concept.units, u'1')
+        self.assertEqual(concept.unitimport, u'23.8')
+        self.assertEqual(concept.import_, u'23.8')
