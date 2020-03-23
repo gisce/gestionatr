@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sctdapplication xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://localhost/sctd/A138">
+  <heading>
+      <dispatchingcode>GML</dispatchingcode>
+      <dispatchingcompany>1234</dispatchingcompany>
+      <destinycompany>4321</destinycompany>
+      <communicationsdate>2018-05-01</communicationsdate>
+      <communicationshour>12:00:00</communicationshour>
+      <processcode>38</processcode>
+      <messagetype>A1</messagetype>
+  </heading>
+  <a1>
+    <comreferencenum>12345</comreferencenum>
+    <reqdate>2020-03-01</reqdate>
+    <reqhour>08:00:00</reqhour>
+    <titulartype>F</titulartype>
+    <nationality>ES</nationality>
+    <documenttype>01</documenttype>
+    <documentnum>11111111H</documentnum>
+    <firstname>Gas</firstname>
+    <familyname1>Al</familyname1>
+    <familyname2>Matalas</familyname2>
+    <telephone1>999888777</telephone1>
+    <telephone2>666555444</telephone2>
+    <fax>111444555</fax>
+    <email>gasalmatalas@atr</email>
+    <language>02</language>
+    <province>17</province>
+    <city>17001</city>
+    <zipcode>17002</zipcode>
+    <streettype>ACCE</streettype>
+    <street>Carrer inventat</street>
+    <streetnumber>1</streetnumber>
+    <portal>2</portal>
+    <staircase>3</staircase>
+    <floor>4</floor>
+    <door>5</door>
+    <regularaddress>S</regularaddress>
+    <provinceowner>16</provinceowner>
+    <cityowner>17000</cityowner>
+    <zipcodeowner>17001</zipcodeowner>
+    <streettypeowner>ACCE</streettypeowner>
+    <streetowner>Carrer inventat 2</streetowner>
+    <streetnumberowner>12</streetnumberowner>
+    <portalowner>22</portalowner>
+    <staircaseowner>32</staircaseowner>
+    <floorowner>42</floorowner>
+    <doorowner>52</doorowner>
+    <cups>ES1234000000000001JN</cups>
+    <reqqd>10</reqqd>
+    <reqqh>20</reqqh>
+    <reqestimatedqa>30</reqestimatedqa>
+    <reqoutgoingpressure>40</reqoutgoingpressure>
+    <gasusetype>01</gasusetype>
+    <tolltype>31</tolltype>
+    <counterproperty>01</counterproperty>
+    <aptransind>S</aptransind>
+    <aptransnumber>9999</aptransnumber>
+    <reig>98</reig>
+    <designpower>97</designpower>
+    <iricertificatedate>2020-01-01</iricertificatedate>
+    <terminstexist>S</terminstexist>
+    <modeffectdate>05</modeffectdate>
+    <reqactivationdate>2020-02-01</reqactivationdate>
+    <extrainfo>EXTRA EXTRA! EL GAS NO TE SENTIT!</extrainfo>
+    <registerdoclist>
+        <registerdoc>
+            <date>2018-05-02</date>
+            <doctype>CC</doctype>
+            <url>http://www.gasalmatalas.com</url>
+            <extrainfo>404 page not found</extrainfo>
+        </registerdoc>
+        <registerdoc>
+            <date>2018-05-03</date>
+            <doctype>01</doctype>
+            <url>http://www.gasalmatalas.com</url>
+            <extrainfo>404 page not found</extrainfo>
+        </registerdoc>
+    </registerdoclist>
+  </a1>
+</sctdapplication>

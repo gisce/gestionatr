@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import copy
 
+from gestionatr.output.messages import sw_a1_38 as a1_38
 from gestionatr.output.messages import sw_a1_02 as a1_02
 from gestionatr.output.messages import sw_a1_03 as a1_03
 from gestionatr.output.messages import sw_a1_04 as a1_04
@@ -4494,3 +4495,121 @@ class test_A1_46(unittest.TestCase):
         mensaje.build_tree()
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_a146.read())
+
+
+class test_A1_38(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a138 = open(get_data("a138.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a138.close()
+
+    def test_create_a138(self):
+        # Mensajea138
+        mensaje_a138 = a1_38.MensajeA138()
+
+        # Heading
+        heading = a1_38.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '38',
+            'messagetype': 'A1'
+        }
+        heading.feed(heading_fields)
+
+        # a138
+        a138 = a1_38.A138()
+
+        # RegistrosDocumento
+        registros_documento = a1_38.Registerdoclist()
+        rd1 = a1_38.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-02',
+            'doctype': 'CC',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd1.feed(registro_doc_fields)
+        rd2 = a1_38.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-03',
+            'doctype': '01',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd2.feed(registro_doc_fields)
+        registros_documento.feed({
+            'registerdoc_list': [rd1, rd2],
+        })
+
+        a138_fields = {
+            'comreferencenum': "12345",
+            'reqdate': "2020-03-01",
+            'reqhour': "08:00:00",
+            'titulartype': "F",
+            'nationality': "ES",
+            'documenttype': "01",
+            'documentnum': "11111111H",
+            'firstname': "Gas",
+            'familyname1': "Al",
+            'familyname2': "Matalas",
+            'telephone1': "999888777",
+            'telephone2': "666555444",
+            'fax': "111444555",
+            'email': "gasalmatalas@atr",
+            'language': "02",
+            'province': "17",
+            'city': "17001",
+            'zipcode': "17002",
+            'streettype': "ACCE",
+            'street': "Carrer inventat",
+            'streetnumber': "1",
+            'portal': "2",
+            'staircase': "3",
+            'floor': "4",
+            'door': "5",
+            'regularaddress': "S",
+            'provinceowner': "16",
+            'cityowner': "17000",
+            'zipcodeowner': "17001",
+            'streettypeowner': "ACCE",
+            'streetowner': "Carrer inventat 2",
+            'streetnumberowner': "12",
+            'portalowner': "22",
+            'staircaseowner': "32",
+            'floorowner': "42",
+            'doorowner': "52",
+            'cups': "ES1234000000000001JN",
+            'reqqd': "10",
+            'reqqh': "20",
+            'reqestimatedqa': "30",
+            'reqoutgoingpressure': "40",
+            'gasusetype': "01",
+            'tolltype': "31",
+            'counterproperty': "01",
+            'aptransind': "S",
+            'aptransnumber': "9999",
+            'reig': "98",
+            'designpower': "97",
+            'iricertificatedate': "2020-01-01",
+            'terminstexist': "S",
+            'modeffectdate': "05",
+            'reqactivationdate': "2020-02-01",
+            'extrainfo': "EXTRA EXTRA! EL GAS NO TE SENTIT!",
+            'registerdoclist': registros_documento,
+        }
+        a138.feed(a138_fields)
+
+        mensaje_a138_fields = {
+            'heading': heading,
+            'a1': a138,
+        }
+        mensaje_a138.feed(mensaje_a138_fields)
+        mensaje_a138.build_tree()
+        xml = str(mensaje_a138)
+        assertXmlEqual(xml, self.xml_a138.read())
