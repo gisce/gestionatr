@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sctdapplication xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://localhost/sctd/A238">
+  <heading>
+      <dispatchingcode>GML</dispatchingcode>
+      <dispatchingcompany>1234</dispatchingcompany>
+      <destinycompany>4321</destinycompany>
+      <communicationsdate>2018-05-01</communicationsdate>
+      <communicationshour>12:00:00</communicationshour>
+      <processcode>38</processcode>
+      <messagetype>A2</messagetype>
+  </heading>
+  <a2>
+    <reqcode>10_4E4mh15</reqcode>
+    <comreferencenum>123456789123</comreferencenum>
+    <responsedate>2020-03-13</responsedate>
+    <responsehour>13:52:14</responsehour>
+    <result>01</result>
+    <resultdesc>Aceptada</resultdesc>
+    <resultreason>R01</resultreason>
+    <resultreasondesc>Cliente suministrado desde planta satélite.</resultreasondesc>
+    <nationality>SB</nationality>
+    <documenttype>01</documenttype>
+    <documentnum>20_f8aQW2mqoLv4GLJ8M</documentnum>
+    <cups>20ai6Nmki1j8m5qCDmuG</cups>
+    <qdgranted>481479688.216</qdgranted>
+    <qhgranted>397959673</qhgranted>
+    <outgoingpressuregranted>87952.239</outgoingpressuregranted>
+    <clientyearlyconsumption>445325674084</clientyearlyconsumption>
+    <tolltype>11</tolltype>
+    <newmodeffectdate>01</newmodeffectdate>
+    <foreseentransferdate>2020-03-13</foreseentransferdate>
+    <extrainfo>400_Y1cLoMJo2SXTeCdHmJCodtnOvEsmDn</extrainfo>
+    <conceptnumber>4</conceptnumber>
+    <conceptlist>
+        <concept>
+            <level>2</level>
+            <code>0002</code>
+            <description>Desc</description>
+            <periodicity>03</periodicity>
+            <units>2</units>
+            <unitimport>23.8</unitimport>
+            <import>23.8</import>
+        </concept>
+        <concept>
+            <level>1</level>
+            <code>0002</code>
+            <description>Desc</description>
+            <periodicity>03</periodicity>
+            <units>1</units>
+            <unitimport>23.8</unitimport>
+            <import>23.8</import>
+        </concept>
+    </conceptlist>
+  </a2>
+</sctdapplication>
