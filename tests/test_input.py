@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from gestionatr.input.messages import C1, C2, A3, B1, M1, D1, W1, Q1, R1, F1, Deadlines, \
+from gestionatr.input.messages import A1, A3, B1, C1, C2, D1, M1, P0, Q1, R1, W1, F1, Deadlines, \
     A1_41, A1_02, A1_05, B7031, B7032, A1_44, A1_03, A1_48, A1_04, A1_46, A12_26, A19_45, A1_38
-from gestionatr.input.messages.A1 import A1
 from gestionatr.input.messages.F1 import agrupar_lectures_per_data, obtenir_data_inici_i_final
 from . import unittest
 from .utils import get_data
@@ -367,7 +366,8 @@ class test_C2(unittest.TestCase):
         self.assertEqual(c.datos_solicitud.tipo_solicitud_administrativa, u'S')
         self.assertEqual(c.datos_solicitud.contratacion_incondicional_bs, u'N')
         self.assertEqual(c.datos_solicitud.bono_social, u'0')
-        self.assertEqual(c.datos_solicitud.solicitud_tension, u'T')
+        self.assertEqual(c.datos_solicitud.solicitud_tension, u'S')
+        self.assertEqual(c.datos_solicitud.tension_solicitada, u'02')
         # Contrato
         contrato = c.contrato
         contacto = contrato.contacto
@@ -411,7 +411,7 @@ class test_C2(unittest.TestCase):
         self.assertEqual(direccion.numero_finca, u'2')
         self.assertEqual(direccion.pais, u'España')
         self.assertEqual(direccion.piso, u'001')
-        self.assertEqual(direccion.poblacion, u'17079')
+        self.assertEqual(direccion.poblacion, u'17079000501')
         self.assertEqual(direccion.provincia, u'17')
         self.assertEqual(direccion.puerta, u'001')
         self.assertEqual(direccion.tipo_aclarador_finca, u'BI')
@@ -677,7 +677,7 @@ class test_A3(unittest.TestCase):
         self.assertEqual(direccion.numero_finca, u'2')
         self.assertEqual(direccion.pais, u'España')
         self.assertEqual(direccion.piso, u'001')
-        self.assertEqual(direccion.poblacion, u'17079')
+        self.assertEqual(direccion.poblacion, u'17079000501')
         self.assertEqual(direccion.provincia, u'17')
         self.assertEqual(direccion.puerta, u'001')
         self.assertEqual(direccion.tipo_aclarador_finca, u'BI')
@@ -724,7 +724,7 @@ class test_A3(unittest.TestCase):
         self.assertEqual(direccion.cod_postal, u'17001')
         self.assertEqual(direccion.municipio, u'17079')
         self.assertEqual(direccion.pais, u'España')
-        self.assertEqual(direccion.poblacion, u'17079')
+        self.assertEqual(direccion.poblacion, u'17079000501')
         self.assertEqual(direccion.provincia, u'17')
         self.assertEqual(direccion.apartado_de_correos, u'A1234')
 
@@ -1210,7 +1210,7 @@ class test_R1(unittest.TestCase):
         self.assertEqual(ubi.des_ubicacion_incidencia, u'Destino')
         self.assertEqual(ubi.cod_postal, u'17001')
         self.assertEqual(ubi.municipio, u'17079')
-        self.assertEqual(ubi.poblacion, u'17079')
+        self.assertEqual(ubi.poblacion, u'17079000501')
         self.assertEqual(ubi.provincia, u'17')
         cont = var1.contacto
         self.assertEqual(cont.correo_electronico, u'perico@acme.com')
@@ -1243,7 +1243,7 @@ class test_R1(unittest.TestCase):
         self.assertEqual(direccion.numero_finca, u'2')
         self.assertEqual(direccion.pais, u'España')
         self.assertEqual(direccion.piso, u'001')
-        self.assertEqual(direccion.poblacion, u'17079')
+        self.assertEqual(direccion.poblacion, u'17079000501')
         self.assertEqual(direccion.provincia, u'17')
         self.assertEqual(direccion.puerta, u'001')
         self.assertEqual(direccion.tipo_aclarador_finca, u'BI')
@@ -1385,7 +1385,7 @@ class test_R1(unittest.TestCase):
         self.assertEqual(ubi.des_ubicacion_incidencia, u'Destino')
         self.assertEqual(ubi.cod_postal, u'17001')
         self.assertEqual(ubi.municipio, u'17079')
-        self.assertEqual(ubi.poblacion, u'17079')
+        self.assertEqual(ubi.poblacion, u'17079000501')
         self.assertEqual(ubi.provincia, u'17')
         cont = varr1.contacto
         self.assertEqual(cont.correo_electronico, u'perico@acme.com')
@@ -1418,7 +1418,7 @@ class test_R1(unittest.TestCase):
         self.assertEqual(direccion.numero_finca, u'2')
         self.assertEqual(direccion.pais, u'España')
         self.assertEqual(direccion.piso, u'001')
-        self.assertEqual(direccion.poblacion, u'17079')
+        self.assertEqual(direccion.poblacion, u'17079000501')
         self.assertEqual(direccion.provincia, u'17')
         self.assertEqual(direccion.puerta, u'001')
         self.assertEqual(direccion.tipo_aclarador_finca, u'BI')
@@ -2478,6 +2478,43 @@ class test_F1(unittest.TestCase):
         # are empty
         self.assertEqual(llog, [])
         self.assertEqual(total, 0)
+
+
+class test_P0(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_p001 = open(get_data("p001.xml"), "r")
+        self.xml_p002_accept = open(get_data("p002_accept.xml"), "r")
+        self.xml_p002_accept_min = open(get_data("p002_accept_min.xml"), "r")
+        self.xml_p002_reject = open(get_data("p002_reject.xml"), "r")
+
+    def tearDown(self):
+        self.xml_p001.close()
+        self.xml_p002_accept.close()
+        self.xml_p002_reject.close()
+
+    def test_p001(self):
+        p0 = P0(self.xml_p001)
+        p0.parse_xml()
+        self.assertEqual(p0.tipo_identificador, u'NI')
+        self.assertEqual(p0.identificador, u'11111111H')
+
+    def test_p002_accept(self):
+        p0 = P0(self.xml_p002_accept)
+        p0.parse_xml()
+        # Datos Aceptacion
+        self.assertEqual(p0.expediente_acometida.expediente_abierto, 'S')
+
+    def test_p002_accept_min(self):
+        p0 = P0(self.xml_p002_accept_min)
+        p0.parse_xml()
+        # Datos Aceptacion
+        self.assertEqual(p0.en_vigor, 'N')
+
+    def test_p002_reject(self):
+        p0 = P0(self.xml_p002_reject)
+        p0.parse_xml()
+        self.assertEqual(p0.fecha_rechazo, u'2016-07-20')
 
 
 class test_MessageGas(unittest.TestCase):

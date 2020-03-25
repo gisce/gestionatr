@@ -19,6 +19,7 @@ from gestionatr.output.messages import sw_c2 as c2
 from gestionatr.output.messages import sw_d1 as d1
 from gestionatr.output.messages import sw_f1 as f1
 from gestionatr.output.messages import sw_m1 as m1
+from gestionatr.output.messages import sw_p0 as p0
 from gestionatr.output.messages import sw_q1 as q1
 from gestionatr.output.messages import sw_r1 as r1
 from gestionatr.output.messages import sw_w1 as w1
@@ -556,7 +557,8 @@ class test_C2(unittest.TestCase):
             'contratacion_incondicional_ps': 'S',
             'contratacion_incondicional_bs': 'N',
             'bono_social': '0',
-            'solicitud_tension': 'T'
+            'solicitud_tension': 'S',
+            'tension_solicitada': '02'
         }
         datos_solicitud.feed(datos_solicitud_fields)
 
@@ -1732,6 +1734,300 @@ class test_D1(unittest.TestCase):
         assertXmlEqual(xml, self.xml_d102_reject.read())
 
 
+class test_P0(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_p001 = open(get_data("p001.xml"), "r")
+        self.xml_p002_accept = open(get_data("p002_accept.xml"), "r")
+        self.xml_p002_accept_min = open(get_data("p002_accept_min.xml"), "r")
+        self.xml_p002_reject = open(get_data("p002_reject.xml"), "r")
+
+    def tearDown(self):
+        self.xml_p001.close()
+        self.xml_p002_accept.close()
+        self.xml_p002_reject.close()
+
+    def test_create_pas01(self):
+        # MensajeSolicitudInformacionAlRegistroDePS
+        mensaje = p0.MensajeSolicitudInformacionAlRegistroDePS()
+
+        # Cabecera
+        cabecera = p0.Cabecera()
+        cabecera_fields = {
+            'codigo_ree_empresa_emisora': '1234',
+            'codigo_ree_empresa_destino': '4321',
+            'codigo_del_proceso': 'P0',
+            'codigo_del_paso': '01',
+            'codigo_de_solicitud': '201412111009',
+            'secuencial_de_solicitud': '01',
+            'fecha': '2014-04-16T22:13:37',
+            'cups': 'ES1234000000000001JN0F',
+        }
+        cabecera.feed(cabecera_fields)
+
+        # ValidacionCliente
+        validacion_cliente = p0.ValidacionCliente()
+        validacion_cliente_fields = {
+            'tipo_identificador': 'NI',
+            'identificador': '11111111H',
+        }
+        validacion_cliente.feed(validacion_cliente_fields)
+
+        mensaje_solicitud_informacion_al_registro_de_ps_fields = {
+            'cabecera': cabecera,
+            'validacion_cliente': validacion_cliente,
+        }
+        mensaje.feed(mensaje_solicitud_informacion_al_registro_de_ps_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_p001.read())
+
+    def test_create_pas02_accept(self):
+        # Cabecera
+        cabecera = p0.Cabecera()
+        cabecera_fields = {
+            'codigo_ree_empresa_emisora': '1234',
+            'codigo_ree_empresa_destino': '4321',
+            'codigo_del_proceso': 'P0',
+            'codigo_del_paso': '02',
+            'codigo_de_solicitud': '201607211259',
+            'secuencial_de_solicitud': '01',
+            'fecha': '2016-07-21T12:59:47',
+            'cups': 'ES1234000000000001JN0F',
+        }
+        cabecera.feed(cabecera_fields)
+
+        # EstadoContratable
+        estado_contratable = p0.EstadoContratable()
+        estado_contratable_fields = {
+            'contratable': 'N',
+            'motivo': '03'
+        }
+        estado_contratable.feed(estado_contratable_fields)
+
+        # PotenciasContratadas
+        potencias_contratadas = p0.PotenciasContratadas()
+        potencias_contratadas_fields = {
+            'potencia': '6000',
+        }
+        potencias_contratadas.feed(potencias_contratadas_fields)
+
+        # CondicionesContractuales
+        condiciones_contractuales = p0.CondicionesContractuales()
+        condiciones_contractuales_fields = {
+            'tarifa_atr': '001',
+            'potencias_contratadas': potencias_contratadas,
+            'modo_control_potencia': '1'
+        }
+        condiciones_contractuales.feed(condiciones_contractuales_fields)
+
+        # Contrato
+        contrato = p0.Contrato()
+        contrato_fields = {
+            'tipo_contrato_atr': '03',
+            'fecha_finalizacion': '2020-03-31',
+            'tipo_autoconsumo': '01',
+            'fecha_ultimo_movimiento_tipo_autocons': '2020-01-01',
+            'ind_bono_social': 'N',
+            'ind_esencial': 'N',
+            'vivienda_habitual': 'S',
+            'cnae': '9820',
+            'condiciones_contractuales': condiciones_contractuales,
+            'modo_facturacion_potencia': '1',
+            'no_interrumpible': 'S',
+            'potencia_no_interrumpible': '6000',
+            'potencia_max_sin_expediente': '8000',
+            'vas_trafo': '50',
+            'periodicidad_facturacion': '01',
+            'tipo_de_telegestion': '01',
+            'icp_activado_telegestion': 'S',
+            'peaje_directo': 'S',
+            'deposito_garantia': 'N',
+        }
+        contrato.feed(contrato_fields)
+
+        # DerechosReconocidos
+        derechos_reconocidos = p0.DerechosReconocidos()
+        derechos_reconocidos_fields = {
+            'derecho_acceso': '5000',
+            'derechos_extension': '5000',
+            'fecha_limite_derechos_extension': '1900-01-01'
+        }
+        derechos_reconocidos.feed(derechos_reconocidos_fields)
+
+        # CaracteristicasPM
+        caracteristicas_pm = p0.CaracteristicasPM()
+        caracteristicas_pm_fields = {
+            'tipo_pm': '05',
+            'tension_pm': '220',
+            'relacion_transformacion_intensidad': '20/1000'
+        }
+        caracteristicas_pm.feed(caracteristicas_pm_fields)
+
+        # Historia
+        historia = p0.Historia()
+        historia_fields = {
+            'fecha_ultimo_movimiento_contratacion': '1900-01-01',
+            'fecha_cambio_comercializador': '1900-01-01',
+            'fecha_ultima_lectura': '2020-01-01',
+            'fecha_ultima_verificacion': '1900-01-01',
+            'resultado_ultima_lectura': 'S'
+        }
+        historia.feed(historia_fields)
+
+        # Equipo1
+        equipo1 = p0.Equipo()
+        equipo1_fields = {
+            'tipo_aparato': 'TT',
+            'tipo_equipo': 'L09',
+            'tipo_propiedad': '1',
+            'codigo_fases_equipo_medida': 'T',
+            'tipo_dh_edm': '2'
+        }
+        equipo1.feed(equipo1_fields)
+
+        # Equipo2
+        equipo2 = p0.Equipo()
+        equipo2_fields = {
+            'tipo_aparato': 'CG',
+            'tipo_equipo': 'L09',
+            'tipo_propiedad': '1',
+            'codigo_fases_equipo_medida': 'T',
+            'tipo_dh_edm': '2'
+        }
+        equipo2.feed(equipo2_fields)
+
+        # CIEPapel
+        cie_papel = p0.CIEPapel()
+        cie_papel_fields = {
+            'codigo_cie': '12345678901234567890123456789012345',
+            'fecha_emision_cie': '2020-03-01',
+            'fecha_caducidad_cie': '2021-03-01',
+            'tension_suministro_cie': '02',
+            'tipo_suministro': 'IT'
+        }
+        cie_papel.feed(cie_papel_fields)
+
+        # DatosCie
+        datos_cie = p0.DatosCie()
+        datos_cie_fields = {
+            'cie_papel': cie_papel,
+            'validez_cie': 'AU'
+        }
+        datos_cie.feed(datos_cie_fields)
+
+        # DatosAPM
+        datos_apm = p0.DatosAPM()
+        datos_apm_fields = {
+            'codigo_apm': '12345678901234567890123456789012345',
+            'potencia_inst_at': '60000',
+            'fecha_emision_apm': '2020-01-01',
+            'fecha_caducidad_apm': '2021-01-01',
+        }
+        datos_apm.feed(datos_apm_fields)
+
+        # DocTecnica
+        doc_tecnica = p0.DocTecnica()
+        doc_tecnica_fields = {
+            'datos_cie': datos_cie,
+            'datos_apm': datos_apm,
+        }
+        doc_tecnica.feed(doc_tecnica_fields)
+
+        # ExpedienteAnomaliaFraude
+        expediente_anomalia_fraude = p0.ExpedienteAnomaliaFraude()
+        expediente_anomalia_fraude_fields = {
+            'expediente_abierto': 'S',
+            'codigo_motivo_expediente': 'A002',
+        }
+        expediente_anomalia_fraude.feed(expediente_anomalia_fraude_fields)
+
+        # ExpedienteAcometida
+        expediente_acometida = p0.ExpedienteAcometida()
+        expediente_acometida_fields = {
+            'expediente_abierto': 'S',
+            'codigo_motivo_expediente': '02',
+        }
+        expediente_acometida.feed(expediente_acometida_fields)
+
+        # EnvioInformacionPS
+        envio_informacion_ps = p0.EnvioInformacionPS()
+        envio_informacion_ps_fields = {
+            'resultado_validacion_cliente': 'S',
+            'en_vigor': 'S',
+            'estado_contratable': estado_contratable,
+            'existe_solicitud_en_curso': 'S',
+            'tipo_solicitud_en_curso': 'C100',
+            'contrato': contrato,
+            'potencia_maxima_autorizada': '10000',
+            'tension_del_suministro': '02',
+            'derechos_reconocidos': derechos_reconocidos,
+            'caracteristicas_pm': caracteristicas_pm,
+            'historia': historia,
+            'equipo': [equipo1, equipo2],
+            'doc_tecnica': doc_tecnica,
+            'expediente_anomalia_fraude': expediente_anomalia_fraude,
+            'expediente_acometida': expediente_acometida
+        }
+        envio_informacion_ps.feed(envio_informacion_ps_fields)
+
+        # MensajeAceptacionCambiodeComercializadorSinCambios
+        mensaje = p0.MensajeEnvioInformacionPS()
+        mensaje_envio_informacion_ps_fields = {
+            'cabecera': cabecera,
+            'envio_informacion_ps': envio_informacion_ps,
+        }
+        mensaje.feed(mensaje_envio_informacion_ps_fields)
+
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_p002_accept.read())
+
+    def test_create_pas02_rej(self):
+        # Cabecera
+        cabecera = p0.Cabecera()
+        cabecera_fields = {
+            'codigo_ree_empresa_emisora': '1234',
+            'codigo_ree_empresa_destino': '4321',
+            'codigo_del_proceso': 'P0',
+            'codigo_del_paso': '02',
+            'codigo_de_solicitud': '201607211259',
+            'secuencial_de_solicitud': '01',
+            'fecha': '2016-07-21T12:59:47',
+            'cups': 'ES1234000000000001JN0F',
+        }
+        cabecera.feed(cabecera_fields)
+
+        # Rechazos
+        rechazo = p0.Rechazo()
+        rechazo_fields = {
+            'secuencial': '1',
+            'codigo_motivo': 'F1',
+            'comentarios': 'Motiu de rebuig F1'
+        }
+        rechazo.feed(rechazo_fields)
+
+        # RechazosPeticion
+        rechazos_peticion = p0.RechazosPeticion()
+        rechazos_peticion_fields = {
+            'fecha_rechazo': '2016-07-20',
+            'rechazo': rechazo,
+        }
+        rechazos_peticion.feed(rechazos_peticion_fields)
+
+        # MensajeRechazo
+        mensaje_rechazo = p0.MensajeRechazo()
+        mensaje_rechazo_fields = {
+            'cabecera': cabecera,
+            'rechazos_peticion': rechazos_peticion,
+        }
+        mensaje_rechazo.feed(mensaje_rechazo_fields)
+
+        mensaje_rechazo.build_tree()
+        xml = str(mensaje_rechazo)
+        assertXmlEqual(xml, self.xml_p002_reject.read())
+
+
 class test_Q1(unittest.TestCase):
 
     def setUp(self):
@@ -2421,7 +2717,7 @@ class test_R1(unittest.TestCase):
             'des_ubicacion_incidencia': 'Destino',
             'provincia': '17',
             'municipio': '17079',
-            'poblacion': '17079',
+            'poblacion': '17079000501',
             'cod_postal': '17001',
         }
         ubicacion_incidencia.feed(ubicacion_incidencia_fields)
@@ -2881,7 +3177,7 @@ class test_R1(unittest.TestCase):
             'des_ubicacion_incidencia': 'Destino',
             'provincia': '17',
             'municipio': '17079',
-            'poblacion': '17079',
+            'poblacion': '17079000501',
             'cod_postal': '17001',
         }
         ubicacion_incidencia.feed(ubicacion_incidencia_fields)
