@@ -2,11 +2,6 @@
 <xs:schema xmlns="http://localhost/elegibilidad" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposComplejos.xsd"/>
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
-	<xs:annotation>
-		<xs:documentation>
-			Version 1.2 CNMC 2016.12.20
-		</xs:documentation>
-	</xs:annotation>
 	<!-- Rechazo -->
 	<xs:complexType name="RechazoDistribuidor">
 		<xs:sequence>
@@ -67,6 +62,74 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="RechazoPeticionDistribuidor">
+		<xs:sequence>
+			<xs:element name="FechaRechazo" type="xs:date"/>
+			<xs:element name="Rechazo" type="RechazoPeticion" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RechazoPeticion">
+		<xs:sequence>
+			<xs:element name="Secuencial">
+				<xs:simpleType>
+					<xs:restriction base="Decimal2">
+						<xs:minInclusive value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="CodigoMotivo" type="CodigoMotivoRechazoP0">
+				<xs:annotation>
+					<xs:documentation>Tabla 27</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Comentarios">
+				<xs:simpleType>
+					<xs:restriction base="X4000">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RechazoDistribuidorTraspasoCOR">
+		<xs:sequence>
+			<xs:element name="FechaRechazo" type="xs:date"/>
+			<xs:element name="Rechazo" type="RechazoTraspasoCOR" maxOccurs="2"/>
+			<xs:element name="RegistrosDocumento" type="RegistrosDocs" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RechazoTraspasoCOR">
+		<xs:sequence>
+			<xs:element name="Secuencial">
+				<xs:simpleType>
+					<xs:restriction base="Decimal2">
+						<xs:minInclusive value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="CodigoMotivo">
+				<xs:simpleType>
+					<xs:annotation>
+						<xs:documentation>codigo motivo del rechazo (de la tabla 27) permitidos en el proceso de Traspaso a COR 
+						08  Fecha de finalización del Contrato sin informar o no válida
+						E4  Impago previo
+						</xs:documentation>
+					</xs:annotation>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="08"/>
+						<xs:enumeration value="E4"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Comentarios">
+				<xs:simpleType>
+					<xs:restriction base="X4000">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<!-- Rechazo D1 -->
 	<xs:complexType name="RechazoD1">
 		<xs:sequence>
@@ -84,12 +147,12 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element name="CodigoMotivo">				
+			<xs:element name="CodigoMotivo">
 				<xs:simpleType>
 					<xs:annotation>
 						<xs:documentation>Tabla 27</xs:documentation>
 					</xs:annotation>
-					<xs:restriction base="xs:string">			
+					<xs:restriction base="xs:string">
 						<xs:enumeration value="F1"/>
 					</xs:restriction>
 				</xs:simpleType>

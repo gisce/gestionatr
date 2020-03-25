@@ -2,11 +2,6 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposComplejos.xsd"/>
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
-	<xs:annotation>
-		<xs:documentation>
-			Version 1.2 CNMC 2016.12.20
-		</xs:documentation>
-	</xs:annotation>
 	<xs:complexType name="NotificacionBajaATRB105">
 		<xs:sequence>
 			<xs:element name="DatosActivacionBaja" type="DatosNotificacionBajaATRB105"/>
