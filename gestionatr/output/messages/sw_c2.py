@@ -38,13 +38,14 @@ class CambiodeComercializadorConCambios(XmlModel):
 
 class DatosSolicitud(DatosSolicitud):
 
-    _sort_order = ('datos_solicitud', 'tipo_modificacion', 'tipo_solicitud_administrativa', 'cnae', 'ind_activacion', 'fecha_prevista_accion', 'contratacion_incondicional_ps', 'contratacion_incondicional_bs', 'bono_social', 'solicitud_tension')
+    _sort_order = ('datos_solicitud', 'tipo_modificacion', 'tipo_solicitud_administrativa', 'cnae', 'ind_activacion', 'fecha_prevista_accion', 'contratacion_incondicional_ps', 'contratacion_incondicional_bs', 'bono_social', 'solicitud_tension', 'tension_solicitada')
 
     def __init__(self):
         super(DatosSolicitud, self).__init__()
         self.tipo_modificacion = XmlField('TipoModificacion')
         self.tipo_solicitud_administrativa = XmlField('TipoSolicitudAdministrativa')
         self.cnae = XmlField('CNAE')
+        self.tension_solicitada = XmlField('TensionSolicitada')
 
 
 class Contrato(Contrato):
