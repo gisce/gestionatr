@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<MensajeSolicitudInformacionAlRegistroDePS xmlns="http://localhost/elegibilidad">
+	<Cabecera>
+		<CodigoREEEmpresaEmisora>1234</CodigoREEEmpresaEmisora>
+		<CodigoREEEmpresaDestino>4321</CodigoREEEmpresaDestino>
+		<CodigoDelProceso>P0</CodigoDelProceso>
+		<CodigoDePaso>01</CodigoDePaso>
+		<CodigoDeSolicitud>201412111009</CodigoDeSolicitud>
+		<SecuencialDeSolicitud>01</SecuencialDeSolicitud>
+		<FechaSolicitud>2014-04-16T22:13:37</FechaSolicitud>
+		<CUPS>ES1234000000000001JN0F</CUPS>
+	</Cabecera>
+	<ValidacionCliente>
+		<TipoIdentificador>NI</TipoIdentificador>
+		<Identificador>11111111H</Identificador>
+	</ValidacionCliente>
+</MensajeSolicitudInformacionAlRegistroDePS>

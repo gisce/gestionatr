@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<MensajeRechazo xmlns="http://localhost/elegibilidad">
+  <Cabecera>
+    <CodigoREEEmpresaEmisora>1234</CodigoREEEmpresaEmisora>
+    <CodigoREEEmpresaDestino>4321</CodigoREEEmpresaDestino>
+    <CodigoDelProceso>P0</CodigoDelProceso>
+    <CodigoDePaso>02</CodigoDePaso>
+    <CodigoDeSolicitud>201607211259</CodigoDeSolicitud>
+    <SecuencialDeSolicitud>01</SecuencialDeSolicitud>
+    <FechaSolicitud>2016-07-21T12:59:47</FechaSolicitud>
+    <CUPS>ES1234000000000001JN0F</CUPS>
+  </Cabecera>
+  <RechazosPeticion>
+    <FechaRechazo>2016-07-20</FechaRechazo>
+    <Rechazo>
+      <Secuencial>1</Secuencial>
+      <CodigoMotivo>F1</CodigoMotivo>
+      <Comentarios>Motiu de rebuig F1</Comentarios>
+    </Rechazo>
+  </RechazosPeticion>
+</MensajeRechazo>

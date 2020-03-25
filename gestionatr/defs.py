@@ -1309,6 +1309,37 @@ TABLA_62 = [
     ('VI', u'Vivienda'),
 ]
 
+TABLA_63 = [
+    ('A001', u'Programación/parametrización errónea'),
+    ('A002', u'Equipo de Medida con conexión errónea'),
+    ('A003', u'Equipo de Medida inadecuado a instalación'),
+    ('A004', u'Contador averiado'),
+    ('A005', u'Transformadores averiados'),
+    ('A006', u'Módem averiado/Fallo comunicación'),
+    ('A007', u'Error medición fuera de margen'),
+    ('A008', u'Programación/parametrización errónea por avería'),
+    ('A009', u'Contador no se lee'),
+    ('A010', u'Constante contador no corresponde a constante facturación'),
+    ('A011', u'Lectura errónea'),
+    ('A012', u'Suministro no se factura'),
+    ('A013', u'Corriente directa autorizada'),
+    ('A014', u'Tarifa/Discriminación horaria mal informada o aplicada'),
+    ('F001', u'Corriente directa con contrato'),
+    ('F002', u'Corriente directa con contrato (doble acometida)'),
+    ('F003', u'Corriente directa sin contrato (sin contador)'),
+    ('F004', u'Corriente directa sin contrato (con contador)'),
+    ('F005', u'Inversión entrada-salida'),
+    ('F006', u'Puente entrada-salida en la misma fase (shunt)'),
+    ('F007', u'Puente de tensión aislado/desconectado'),
+    ('F008', u'Equipo de medida manipulado'),
+    ('F009', u'Conexión de equipo de medida manipulada'),
+    ('F010', u'Cambio de placa características de transformadores I/T'),
+    ('F011', u'Equipo de medida sustituido sin autorización'),
+    ('F012', u'Programación/parametrización alterada'),
+    ('F013', u'ICP puenteado o no ajustado a potencia contratada'),
+    ('F014', u'Cesión de energía'),
+]
+
 TABLA_64 = [
     ('01', u'1X220'),
     ('02', u'1X230'),
@@ -2153,6 +2184,46 @@ REQUIRE_PERSON_TYPE = ['NV', 'OT']
 TABLA_117 = [
     ('M', 'Monofásica'),
     ('T', 'Trifásica')
+]
+
+TABLA_123 = [
+    ('01', u'El PS no ha pasado la inspección de la instalación de enlace (instalación desde la Caja General '
+           u'de Protección, CGP,  al contador)'),
+    ('02', u'Instalación eléctrica peligrosa'),
+    ('03', u'Necesidad de abrir expediente de acometida: Derechos caducados'),
+    ('04', u'Expediente abierto de nuevos suministros'),
+    ('05', u'Expediente abierto de inspección'),
+    ('06', u'Falta licencia de ocupación, cédula de habitabilidad u otra documentación relevante que impide la '
+           u'contratación del NNSS'),
+    ('07', u'Orden o Resolución de la Administración Pública competente, Resolución o Mandato Judicial que impide '
+           u'la contratación en el PS'),
+]
+
+TABLA_124 = [
+    ('A300', u'Solicitud de nuevo suministro'),
+    ('C100', u'Solicitud de cambio de comercializador sin modificación en el contrato de acceso'),
+    ('C200', u'Solicitud de cambio de comercializador con modificación en el contrato de acceso'),
+    ('B101', u'Baja por cese de actividad'),
+    ('B102', u'Baja por fin de contrato de suministro'),
+    ('B103', u'Corte o suspensión del suministro por impago'),
+    ('B104', u'Baja por Impago')
+]
+
+TABLA_125 = [
+    ('01', u'Aumento potencia'),
+    ('02', u'Cambio tensión'),
+    ('03', u'Cambio tarifa'),
+    ('04', u'Nuevo suministro'),
+    ('05', u'Colectivo nueva construcción'),
+    ('06', u'Colectivo electrificación rural'),
+    ('07', u'Informativo Plan urbanístico'),
+    ('08', u'Informativo Plan industrial'),
+    ('09', u'Informativo Productor de Régimen Especial'),
+    ('10', u'Colectivo reconstrucción vivienda'),
+    ('11', u'TCT No relacionado a NNSS'),
+    ('12', u'TCT Relacionado a NNSS'),
+    ('13', u'Colectivo renovación de Instalaciones de enlace varios suministros'),
+    ('14', u'Renovación de instalaciones de enlace')
 ]
 
 TABLA_126 = [
