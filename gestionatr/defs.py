@@ -945,12 +945,12 @@ TABLA_26 = [('S', 'Si'), ('N', 'No')]
 SINO = TABLA_26
 
 TABLA_27 = [
-    ('1', 'No existe Punto de Suministro asociado al CUPS'),
-    ('2', 'Inexistencia de Contrato de ATR previo en vigor'),
-    ('3', 'NIF-CIF No coincide con el del Contrato en vigor'),
-    ('7', 'Tipo de Contrato sin informar o erróneo'),
-    ('8', 'Fecha de finalización del Contrato sin informar o no válida'),
-    ('9', 'Existencia de sentencia judicial relativa a deuda del cliente'),
+    ('01', 'No existe Punto de Suministro asociado al CUPS'),
+    ('02', 'Inexistencia de Contrato de ATR previo en vigor'),
+    ('03', 'NIF-CIF No coincide con el del Contrato en vigor'),
+    ('07', 'Tipo de Contrato sin informar o erróneo'),
+    ('08', 'Fecha de finalización del Contrato sin informar o no válida'),
+    ('09', 'Existencia de sentencia judicial relativa a deuda del cliente'),
     ('11', 'Comercializadora incorrecta'),
     ('12', 'Contrato cortado por impago'),
     ('14', 'Potencia Solicitada mayor que la Potencia Máxima Autorizada en baja tensión'),
@@ -1058,6 +1058,15 @@ TABLA_27 = [
     ('D3', 'No cumple con la potencia normalizada para el PS ni el múltiplo de potencia establecido'),
     ('D4', 'El tipo de tensión solicitada es la que ya tiene el PS.'),
     ('D5', 'Falta documentación según lo establecido en la Ley 12/2017 de las Islas Baleares.'),
+    ('D6', 'Identificador del titular del proceso subyacente no coincide con el titular que pretende desistir'),
+    ('D7', 'Desistimiento sobre un proceso de contratación en curso'),
+    ('D8', 'Desistimiento no posible técnicamente en campo'),
+    ('D9', 'Desistimiento no posible por movimiento de contratación posterior'),
+    ('E1', 'Código de solicitud de referencia no existe en la distribuidora'),
+    ('E2', 'El desistimiento no aplica al proceso subyacente'),
+    ('E3', 'Desistimiento solicitado por Persona Jurídica'),
+    ('E4', 'Impago Previo'),
+    ('E5', 'CUPS sujeto a LOPD'),
     ('E6', 'Modificación del tipo de autoconsumo no permitida. No ha trascurrido un año desde la última modificación.'),
     ('E7', 'Falta acuerdo de reparto/Acuerdo de reparto incorrecto/Faltan coeficientes de reparto en acuerdo'),
     ('E8', 'No recibida información técnica de la CCAA (para BT y <=100kW).'),
@@ -1067,6 +1076,9 @@ TABLA_27 = [
     ('F3', 'Tipo de autoconsumo no coherente con el esquema de medida'),
     ('F4', 'Tipo de autoconsumo no coherente con el tipo de instalación'),
     ('F5', 'Instalación de >100kW en BT o Instalación en AT'),
+    ('G1', 'Sólo se podrá modificar: -el tipo de identificador y el identificador o, -nombre y apellidos (razón social).'),
+    ('G2', 'Revisión interior incorrecta, debe aportar documentación técnica posterior a la revisión'),
+    ('G3', 'Código solicitud ATR inexistente'),
     ('99', 'Otros'),
 ]
 
@@ -1077,6 +1089,7 @@ TABLA_28 = [
     ('10', 'Deficiencia subsanable en EdM'),
     ('11', 'Trabajos pendientes de finalizar'),
     ('12', 'Teléfono de contacto erróneo'),
+    ('13', 'El consumidor en campo no quiere la baja por cese de actividad'),
     ('14', 'Pendiente resto solicitudes asociadas al autoconsumo colectivo')
 ]
 
@@ -1256,7 +1269,8 @@ TABLA_55 = [
     ('B4', 'Concurrencia con solicitud baja motivo 04'),
     ('A0', 'Cuanto antes sin actuaciones en campo'),
     ('P0', 'Por incumplimiento del plazo mínimo de preaviso'),
-    ('C1', 'Cuando lleguen el resto de solicitudes asociadas al autoconsumo colectivo')
+    ('C1', 'Cuando lleguen el resto de solicitudes asociadas al autoconsumo colectivo'),
+    ('T1', 'Concurrencia con Traspaso a la COR programado por desistimiento')
 ]
 TIPUS_ACTIVACIO = TABLA_55
 
@@ -1389,7 +1403,8 @@ TABLA_64 = [
     ('46', u'150'),
     ('47', u'3x100'),
     ('48', u'3x150/260'),
-    ('49', u'3x260')
+    ('49', u'3x260'),
+    ('99', u'Otra tensión obsoleta'),
 ]
 
 TABLA_65 = [
@@ -1414,6 +1429,7 @@ TABLA_73 = [
     ('0030104', 'Contador parado'),
     ('0030105', 'Error programación EDM'),
     ('0030106', 'ICP inadecuado para la potencia contratada'),
+    ('0030107', 'Se normalizar telemedida. Se aportan parámetros'),
     ('0030201', 'Equipo correcto'),
     ('0030202', 'Instalación correcta'),
     ('0030203', 'Histórico de consumos / lecturas coherente.'),
@@ -1421,6 +1437,8 @@ TABLA_73 = [
     ('0030205', 'Expediente por anomalía en curso'),
     ('0030206', 'Elemento externo responsabilidad de cliente'),
     ('0030207', 'Improcedente. Se adjunta explicación en comentarios'),
+    ('0030208', 'Telemedida no obligatoria/ No solicitado modem'),
+    ('0030209', 'Telemedida no operativa/ Comunicaciones propiedad del usuario'),
     ('0030301', 'No se localiza al cliente'),
     ('0030302', 'No corresponde a distribuidora.'),
     ('0030303', 'Cliente no aporta información adicional.'),
@@ -1605,16 +1623,22 @@ TABLA_73 = [
     ('0280203', 'No existe corte realizado'),
     ('0280204', 'Improcedente. Se adjunta explicación en comentarios'),
     ('0290101', 'Se indemniza incumplimiento de calidad de atención en próxima factura'),
+    ('0290102', 'Se indemniza'),
+    ('0290103', 'Pendiente indemnización. No se ha podido conseguir datos necesarios a través de un paso 04. Contacte con distribuidor'),
     ('0290201', 'Reclamación atendida en plazo'),
     ('0290202', 'Retraso imputable al cliente/ comercializadora'),
     ('0290203', 'Improcedente. Se adjunta explicación en comentarios'),
     ('0300101', 'Se indemniza incumplimiento de calidad de atención en próxima factura'),
+    ('0300102', 'Se indemniza incumplimiento de calidad de atención'),
+    ('0300103', 'Pendiente indemnización. No se ha podido conseguir datos necesarios a través de un paso 04. Contacte con distribuidor'),
     ('0300201', 'Solicitud de información NNSS atendida en plazo'),
     ('0300202', 'Improcedente. Se adjunta explicación en comentarios'),
     ('0310101', 'Se indemniza incumplimiento de calidad de atención en próxima factura'),
     ('0310201', 'Ejecución de NNSS atendido en plazo'),
     ('0310202', 'Improcedente. Se adjunta explicación en comentarios'),
     ('0320101', 'Se indemniza incumplimiento de calidad de atención en próxima factura'),
+    ('0320102', 'Se indemniza incumplimiento de calidad de atención'),
+    ('0320103', 'Pendiente indemnización. No se ha podido conseguir datos necesarios a través de un paso 04. Contacte con distribuidor'),
     ('0320201', 'Reconexión atendida en plazo'),
     ('0320202', 'Incumplimiento por causa imputable al cliente'),
     ('0320203', 'Plazo superado por motivos ajenos a la distribuidora (indicar motivo)'),
@@ -1751,6 +1775,9 @@ TABLA_73 = [
     ('0620203', 'Improcedente. Se adjunta explicación en comentarios'),
     ('0630101', 'Se gestiona la publicación del paso'),
     ('0630102', 'Movimiento realizado fuera de plazo'),
+    ('0630103', 'Se indemniza incumplimiento de calidad de atención en próxima factura'),
+    ('0630104', 'Se indemniza incumplimiento de calidad de atención'),
+    ('0630105', 'Pendiente indemnización. No se ha podido conseguir datos necesarios a través de un paso 04. Contacte con distribuidor'),
     ('0630201', 'No existe solicitud'),
     ('0630202', 'Movimiento realizado en plazo'),
     ('0630203', 'Movimiento fuera de plazo imputable al cliente'),
@@ -1799,7 +1826,30 @@ TABLA_73 = [
     ('0700101', 'Procedente. Se agiliza trámite de reclamación.'),
     ('0700201', 'Retraso imputable al cliente/comercializador'),
     ('0700202', 'Improcedente. Se adjunta explicación en comentarios.'),
-
+    ('0710101', 'Se gestiona la publicación del paso'),
+    ('0710102', 'Movimiento realizado fuera de plazo'),
+    ('0710201', 'No existe solicitud'),
+    ('0710202', 'Movimiento realizado en plazo'),
+    ('0710203', 'Improcedente. Se adjunta explicación en comentarios'),
+    ('0720101', 'Se gestiona la publicación del paso'),
+    ('0720102', 'Procedente. Se agiliza trámite de desistimiento'),
+    ('0720201', 'No existe solicitud'),
+    ('0720202', 'Movimiento retrasado imputable al cliente. Se adjunta explicación en comentarios'),
+    ('0720203', 'Improcedente. Se adjunta explicación en comentarios'),
+    ('0730101', 'Se aportan parámetros'),
+    ('0730201', 'Telemedida no obligatoria/ No solicitado modem'),
+    ('0730202', 'Telemedida no operativa/ Comunicaciones propiedad del usuario'),
+    ('0730203', 'Improcedente. Se adjunta explicación en comentarios'),
+    ('0730301', 'Acceso denegado'),
+    ('0730302', 'Visita anulada por el cliente'),
+    ('0730303', 'Cliente no aporta información adicional'),
+    ('0730304', 'No se localiza al cliente'),
+    ('0740101', 'Se gestiona la publicación del paso'),
+    ('0740102', 'Movimiento realizado fuera de plazo'),
+    ('0740201', 'No existe solicitud'),
+    ('0740202', 'Movimiento realizado en plazo'),
+    ('0740203', 'Movimiento fuera de plazo imputable al cliente'),
+    ('0740204', 'Improcedente. Se adjunta explicación en comentarios'),
 ]
 
 TABLA_74 = [('01', u'Concertacion de visita'),
@@ -1939,7 +1989,8 @@ TABLA_86 = [
            u'asociados a los derechos de actuación (si el equipo es de '
            u'alquiler y en cualquier caso si el equipo es propiedad del '
            u'cliente).'
-     )
+     ),
+    ('07', u'Incidencia en el equipo de telemedida')
 ]
 
 TABLA_87 = [
@@ -2148,6 +2199,7 @@ TABLA_113 = [
     ('33', u'Sin Excedentes Colectivo con acuerdo de compensación – Consumo'),
     ('41', u'Con excedentes y compensación Individual - Consumo '),
     ('42', u'Con excedentes y compensación Colectivo– Consumo'),
+    ('43', u'Con excedentes y compensación Colectivo a través de red– Consumo'),
     ('51', u'Con excedentes sin compensación Individual sin cto de SSAA en Red Interior– Consumo'),
     ('52', u'Con excedentes sin compensación Colectivo sin cto de SSAA en Red Interior– Consumo'),
     ('53', u'Con excedentes sin compensación Individual con cto SSAA en Red Interior– Consumo'),
@@ -2182,8 +2234,48 @@ TABLA_116 = [
 REQUIRE_PERSON_TYPE = ['NV', 'OT']
 
 TABLA_117 = [
-    ('M', 'Monofásica'),
-    ('T', 'Trifásica')
+    ('M', u'Monofásica'),
+    ('T', u'Trifásica')
+]
+
+TABLA_118 = [
+    ('01', u'Vuelta a la situación anterior – En servicio'),
+    ('02', u'Vuelta a la situación anterior – Sin servicio (cortado)'),
+    ('03', u'Traspaso a la COR'),
+    ('04', u'Baja del contrato por rechazo de la COR'),
+    ('05', u'Baja por cese de actividad'),
+    ('06', u'Activación de Cambio de Comercializador'),
+]
+
+
+TABLA_119 = [
+    ('01', u'Solicitud de baja por fin de contrato de energía (B1 motivo 02)'),
+    ('02', u'Solicitud de desistimiento a un cambio de comercializador de un nuevo titular'),
+    ('03', u'Decisión fundada de la Dirección General de Política Energética y Minas, cautelar o '
+           u'definitivamente, se traspasan los puntos de suministro al COR'),
+]
+
+TABLA_120 = [
+    ('01', u'Baja del contrato de acceso de duración inferior a un año según fecha solicitada por la '
+           u'empresa comercializadora'),
+    ('02', u'Baja del contrato de acceso por suministro cortado/proceso de corte e inhabilitación del '
+           u'comercializador en vigor.'),
+    ('02', u'Baja del contrato de acceso por orden judicial o mandato de organismo oficial'),
+    ('03', u'Baja del contrato de acceso por rechazo del COR al traspaso'),
+    ('04', u'Baja del contrato de acceso a iniciativa de la distribuidora por seguridad de la red.'),
+    ('05', u'Baja del contrato de acceso por haber pasado dos meses desde que se suspendió un punto de '
+           u'suministro tras el desistimiento de un cambio de comercializador activado sobre un punto de '
+           u'suministro suspendido por impago'),
+]
+
+TABLA_121 = [
+    ('01', u'Nuevo teléfono de contacto.'),
+    ('02', u'Deficiencia/Trabajos subsanada. Contactar con cliente'),
+]
+
+TABLA_122 = [
+    ('01', u'Desistimiento en plazo máx. de 14 días naturales'),
+    ('02', u'Desistimiento por incumplimiento de comercializador en contratación'),
 ]
 
 TABLA_123 = [
