@@ -2155,6 +2155,16 @@ TABLA_117 = [
     ('T', 'Trifásica')
 ]
 
+TABLA_120 = [
+    ('01', 'Baja del contrato de acceso de duración inferior a un año según fecha solicitada por la comercializadora'),
+    ('02', 'Baja del contrato de acceso por orden judicial o mandato de organismo oficial'),
+    ('03', 'Baja del contrato de acceso por rechazo del COR al traspaso'),
+    ('04', 'Baja del contrato de acceso a iniciativa de la distribuidora por seguridad de la red.'),
+    ('05', 'Baja del contrato de acceso por haber pasado dos meses desde que se suspendió un punto de suministro '
+           'tras el desistimiento de un cambio de comercializador activado sobre un punto de suministro '
+           'suspendido por impago'),
+]
+
 TABLA_126 = [
     ('a11', u'[A11] - Cogeneraciones que utilicen como combustible el gas natural, siempre que éste suponga al menos '
             u'el 95 por ciento de la energía primaria utilizada, o al menos el 65 por ciento de la energía primaria '
