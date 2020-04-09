@@ -14,6 +14,7 @@ from gestionatr.output.messages import sw_a1_48 as a1_48
 from gestionatr.output.messages import sw_a1 as a1
 from gestionatr.output.messages import sw_a3 as a3
 from gestionatr.output.messages import sw_b1 as b1
+from gestionatr.output.messages import sw_b2 as b2
 from gestionatr.output.messages import sw_c1 as c1
 from gestionatr.output.messages import sw_c2 as c2
 from gestionatr.output.messages import sw_d1 as d1
@@ -2308,6 +2309,164 @@ class test_B1(unittest.TestCase):
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_b105.read())
 
+class test_B2(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_b205 = open(get_data("b205.xml"), "r")
+
+    def tearDown(self):
+        self.xml_b205.close()
+
+    def test_create_pas05(self):
+        # MensajeActivacionBajaUnidireccional
+        mensaje = b2.MensajeActivacionBajaUnidireccional()
+
+        # Cabecera
+        cabecera = get_header(process='B2', step='05')
+
+        # ActivacionBaja
+        activacion_baja = b2.ActivacionBaja()
+
+        # DatosActivacionBaja
+        datos_activacion_baja = b2.DatosActivacionBaja()
+        datos_activacion_baja_fields = {
+            'motivo': '02',
+            'fecha_activacion': '2016-08-21',
+        }
+        datos_activacion_baja.feed(datos_activacion_baja_fields)
+
+        # Contrato
+        contrato = b2.Contrato()
+
+        # IdContrato
+        id_contrato = b2.IdContrato()
+        id_contrato.feed({'cod_contrato': '00001'})
+        contrato.feed({'id_contrato': id_contrato})
+
+        # PuntosDeMedida
+        puntos_de_medida = b2.PuntosDeMedida()
+        # PuntoDeMedida
+        punto_de_medida = b2.PuntoDeMedida()
+        # Aparatos
+        aparatos = b2.Aparatos()
+        # Aparato
+        aparato = b2.Aparato()
+
+        # ModeloAparato
+        modelo_aparato = b2.ModeloAparato()
+        modelo_aparato_fields = {
+            'tipo_aparato': 'CG',
+            'marca_aparato': '132',
+            'modelo_marca': '011',
+        }
+        modelo_aparato.feed(modelo_aparato_fields)
+
+        # DatosAparato
+        datos_aparato = b2.DatosAparato()
+        datos_aparato_fields = {
+            'periodo_fabricacion': '2005',
+            'numero_serie': '0000539522',
+            'funcion_aparato': 'M',
+            'num_integradores': '18',
+            'constante_energia': '1.000',
+            'constante_maximetro': '1.000',
+            'ruedas_enteras': '08',
+            'ruedas_decimales': '02',
+        }
+        datos_aparato.feed(datos_aparato_fields)
+
+        # Medidas
+        medidas = b2.Medidas()
+        # Medida 1
+        medida1 = c1.Medida()
+        medida_fields = {
+            'tipo_dhedm': '6',
+            'periodo': '65',
+            'magnitud_medida': 'PM',
+            'procedencia': '30',
+            'ultima_lectura_firme': '6.00',
+            'fecha_lectura_firme': '2003-01-02',
+            'anomalia': '01',
+            'comentarios': 'Comentario sobre anomalia',
+        }
+        medida1.feed(medida_fields)
+        # Medida 2
+        medida2 = c1.Medida()
+        medida_fields = {
+            'tipo_dhedm': '6',
+            'periodo': '66',
+            'magnitud_medida': 'PM',
+            'procedencia': '30',
+            'ultima_lectura_firme': '6.00',
+            'fecha_lectura_firme': '2003-01-03',
+        }
+        medida2.feed(medida_fields)
+        medidas_fields = {
+            'medida_list': [medida1, medida2],
+        }
+        medidas.feed(medidas_fields)
+
+        aparato_fields = {
+            'modelo_aparato': modelo_aparato,
+            'tipo_movimiento': 'CX',
+            'tipo_equipo_medida': 'L03',
+            'tipo_propiedad_aparato': '1',
+            'propietario': 'Desc. Propietario',
+            'tipo_dhedm': '6',
+            'modo_medida_potencia': '1',
+            'lectura_directa': 'N',
+            'cod_precinto': '02',
+            'datos_aparato': datos_aparato,
+            'medidas': medidas,
+        }
+        aparato.feed(aparato_fields)
+        aparatos_fields = {
+            'aparato_list': [aparato],
+        }
+        aparatos.feed(aparatos_fields)
+
+        punto_de_medida_fields = {
+            'cod_pm': 'ES1234000000000001JN0F',
+            'tipo_movimiento': 'A',
+            'tipo_pm': '03',
+            'cod_pm_principal': 'ES1234000000000002JN0F',
+            'modo_lectura': '1',
+            'funcion': 'P',
+            'direccion_enlace': '39522',
+            'direccion_punto_medida': '000000001',
+            'num_linea': '12',
+            'telefono_telemedida': '987654321',
+            'estado_telefono': '1',
+            'clave_acceso': '0000000007',
+            'tension_pm': '0',
+            'fecha_vigor': '2003-01-01',
+            'fecha_alta': '2003-01-01',
+            'fecha_baja': '2003-02-01',
+            'aparatos': aparatos,
+            'comentarios': 'Comentarios Varios',
+        }
+        punto_de_medida.feed(punto_de_medida_fields)
+
+        puntos_de_medida_fields = {
+            'punto_de_medida_list': [punto_de_medida],
+        }
+        puntos_de_medida.feed(puntos_de_medida_fields)
+
+        activacion_baja_fields = {
+            'datos_activacion_baja': datos_activacion_baja,
+            'contrato': contrato,
+            'puntos_de_medida': puntos_de_medida,
+        }
+        activacion_baja.feed(activacion_baja_fields)
+
+        mensaje_activacion_baja_suspension_fields = {
+            'cabecera': cabecera,
+            'activacion_baja': activacion_baja,
+        }
+        mensaje.feed(mensaje_activacion_baja_suspension_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_b205.read())
 
 class test_R1(unittest.TestCase):
 

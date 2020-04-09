@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from gestionatr.input.messages import C1, C2, A3, B1, M1, D1, W1, Q1, R1, F1, Deadlines, \
+from gestionatr.input.messages import C1, C2, A3, B1, B2, M1, D1, W1, Q1, R1, F1, Deadlines, \
     A1_41, A1_02, A1_05, B7031, B7032, A1_44, A1_03, A1_48, A1_04, A1_46, A12_26, A19_45, A1_38
 from gestionatr.input.messages.A1 import A1
 from gestionatr.input.messages.F1 import agrupar_lectures_per_data, obtenir_data_inici_i_final
@@ -844,6 +844,78 @@ class test_B1(unittest.TestCase):
         self.assertFalse(md2.comentarios)
         self.assertEqual(md2.fecha_lectura_firme, u'2003-01-03')
 
+class test_B2(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_b205 = open(get_data("b205.xml"), "r")
+
+    def tearDown(self):
+        self.xml_b205.close()
+
+    def test_b205(self):
+        b2 = B2(self.xml_b205)
+        b2.parse_xml()
+        # Datos Activacion Baja
+        self.assertEqual(b2.datos_activacion_baja.fecha_activacion, u'2016-08-21')
+        # Contrato
+        self.assertEqual(b2.contrato.cod_contrato, u'00001')
+        # Puntos Medida
+        self.assertEqual(len(b2.puntos_medida), 1)
+        pm = b2.puntos_medida[0]
+        self.assertEqual(pm.cod_pm, u'ES1234000000000001JN0F')
+        self.assertEqual(pm.tipo_movimiento, u'A')
+        self.assertEqual(pm.tipo_pm, u'03')
+        self.assertEqual(pm.cod_pm_principal, u'ES1234000000000002JN0F')
+        self.assertEqual(pm.modo_lectura, u'1')
+        self.assertEqual(pm.funcion, u'P')
+        self.assertEqual(pm.direccion_enlace, u'39522')
+        self.assertEqual(pm.direccion_punto_medida, u'000000001')
+        self.assertEqual(pm.num_linea, u'12')
+        self.assertEqual(pm.telefono_telemedida, u'987654321')
+        self.assertEqual(pm.estado_telefono, u'1')
+        self.assertEqual(pm.clave_acceso, u'0000000007')
+        self.assertEqual(pm.tension_pm, u'0')
+        self.assertEqual(pm.fecha_vigor, u'2003-01-01')
+        self.assertEqual(pm.fecha_alta, u'2003-01-01')
+        self.assertEqual(pm.fecha_baja, u'2003-02-01')
+        self.assertEqual(pm.comentarios, u'Comentarios Varios')
+        # Aparatos
+        self.assertEqual(len(pm.aparatos), 1)
+        ap = pm.aparatos[0]
+        self.assertEqual(ap.cod_precinto, u'02')
+        self.assertEqual(ap.constante_energia, u'1.000')
+        self.assertEqual(ap.constante_maximetro, u'1.000')
+        self.assertEqual(ap.funcion_aparato, u'M')
+        self.assertEqual(ap.lectura_directa, u'N')
+        self.assertEqual(ap.marca_aparato, u'132')
+        self.assertEqual(ap.modelo_marca, u'011')
+        self.assertEqual(ap.modo_medida_potencia, u'1')
+        self.assertEqual(ap.num_integradores, u'18')
+        self.assertEqual(ap.numero_serie, u'0000539522')
+        self.assertEqual(ap.periodo_fabricacion, u'2005')
+        self.assertEqual(ap.propietario, u'Desc. Propietario')
+        self.assertEqual(ap.ruedas_decimales, u'02')
+        self.assertEqual(ap.ruedas_enteras, u'08')
+        self.assertEqual(ap.tipo_aparato, u'CG')
+        self.assertEqual(ap.tipo_dhedm, u'6')
+        self.assertEqual(ap.tipo_equipo_medida, u'L03')
+        self.assertEqual(ap.tipo_movimiento, u'CX')
+        self.assertEqual(ap.tipo_propiedad_aparato, u'1')
+        # Medidas
+        self.assertEqual(len(ap.medidas), 2)
+        md = ap.medidas[0]
+        self.assertEqual(md.anomalia, u'01')
+        self.assertEqual(md.comentarios, u'Comentario sobre anomalia')
+        self.assertEqual(md.fecha_lectura_firme, u'2003-01-02')
+        self.assertEqual(md.magnitud_medida, u'PM')
+        self.assertEqual(md.periodo, u'65')
+        self.assertEqual(md.procedencia, u'30')
+        self.assertEqual(md.tipo_dhedm, u'6')
+        self.assertEqual(md.ultima_lectura_firme, u'6.00')
+        md2 = ap.medidas[1]
+        self.assertFalse(md2.anomalia)
+        self.assertFalse(md2.comentarios)
+        self.assertEqual(md2.fecha_lectura_firme, u'2003-01-03')
 
 class test_M1(unittest.TestCase):
 
