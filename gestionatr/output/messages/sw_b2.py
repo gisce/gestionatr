@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from gestionatr.output.messages.sw_b1 import *
 
+
 # Paso 05
 class MensajeActivacionBajaUnidireccional(XmlModel):
 
@@ -12,6 +13,7 @@ class MensajeActivacionBajaUnidireccional(XmlModel):
         self.cabecera = Cabecera()
         self.activacion_baja = ActivacionBaja()
         super(MensajeActivacionBajaUnidireccional, self).__init__('MensajeActivacionBajaUnidireccional', 'mensaje')
+
 
 class ActivacionBaja(XmlModel):
 
@@ -34,5 +36,3 @@ class DatosActivacionBaja(XmlModel):
         self.motivo = XmlField('Motivo')
         self.fecha_activacion = XmlField('FechaActivacion')
         super(DatosActivacionBaja, self).__init__('DatosActivacionBaja', 'datos_activacion_baja')
-
-

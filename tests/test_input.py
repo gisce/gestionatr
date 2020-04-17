@@ -844,6 +844,7 @@ class test_B1(unittest.TestCase):
         self.assertFalse(md2.comentarios)
         self.assertEqual(md2.fecha_lectura_firme, u'2003-01-03')
 
+
 class test_B2(unittest.TestCase):
 
     def setUp(self):
@@ -916,6 +917,7 @@ class test_B2(unittest.TestCase):
         self.assertFalse(md2.anomalia)
         self.assertFalse(md2.comentarios)
         self.assertEqual(md2.fecha_lectura_firme, u'2003-01-03')
+
 
 class test_M1(unittest.TestCase):
 

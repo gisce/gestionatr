@@ -15,6 +15,7 @@ class B2(B1):
         else:
             return False
 
+
 class DatosActivacionBaja(DatosActivacionBaja):
 
     @property

@@ -2309,6 +2309,7 @@ class test_B1(unittest.TestCase):
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_b105.read())
 
+
 class test_B2(unittest.TestCase):
 
     def setUp(self):
@@ -2467,6 +2468,7 @@ class test_B2(unittest.TestCase):
         mensaje.build_tree()
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_b205.read())
+
 
 class test_R1(unittest.TestCase):
 
