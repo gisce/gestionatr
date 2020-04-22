@@ -508,6 +508,30 @@ SUBTYPES_R101 = [
         'name': u'RETRASO EN LA ATENCIÓN A RECLAMACIONES NO SUJETAS A ATENCIÓN REGLAMENTARIA',
         'type': '01',
     }),
+({
+        'min_fields': ['cups', 'codigo_de_solicitud'],
+        'code': '071',
+        'name': u'RETRASO EN PLAZO ACEPTACIÓN DESISTIMIENTO',
+        'type': '03',
+    }),
+({
+        'min_fields': ['cups', 'codigo_de_solicitud'],
+        'code': '072',
+        'name': u'RETRASO EN PLAZO ACTIVACIÓN DESISTIMIENTO',
+        'type': '03',
+    }),
+({
+        'min_fields': ['nif_cliente', 'nombre_cliente', 'telefono_contacto', 'cups', 'comentarios',],
+        'code': '073',
+        'name': u'PARÁMETROS DE COMUNICACIÓN',
+        'type': '02',
+    }),
+({
+        'min_fields': ['cups', 'codigo_de_solicitud', 'cod_reclam_anterior'],
+        'code': '074',
+        'name': u'RETRASO PLAZO ACEPTACIÓN ANULACIÓN',
+        'type': '03',
+    }),
     ({
         'min_fields': [],
         'code': '100',
@@ -958,7 +982,7 @@ TABLA_27 = [
     ('17', 'Tarifa no válida para la Tensión de Suministro'),
     ('18', 'Equipo nuevo propiedad del Cliente no cumple los criterios de Contratación ATR'),
     ('20', 'Instalación no disponible o ampliación suministro en trámite (Expediente Abierto + Código de Expediente + Motivo de Expediente)'),
-    ('21', 'Existencia de Contrato Previo en vigor en una Salida Directa a Mercado Libre'),
+    ('21', 'Existencia de Contrato Previo en vigor'),
     ('22', 'Potencia Solicitada mayor que la Potencia Máxima Reconocida de Extensión'),
     ('23', 'CNAE No Informado o no válido'),
     ('26', 'Acceso imposibilitado más de dos veces por causas ajenas a la Distribuidora'),
@@ -1269,8 +1293,9 @@ TABLA_55 = [
     ('B4', 'Concurrencia con solicitud baja motivo 04'),
     ('A0', 'Cuanto antes sin actuaciones en campo'),
     ('P0', 'Por incumplimiento del plazo mínimo de preaviso'),
-    ('C1', 'Cuando lleguen el resto de solicitudes asociadas al autoconsumo colectivo'),
-    ('T1', 'Concurrencia con Traspaso a la COR programado por desistimiento')
+    ('C1', 'Con la activación de la última de las solicitudes de modificación asociadas al colectivo '
+           'que reciba el distribuidor '),
+    ('T1', 'Concurrencia con Traspaso a la COR')
 ]
 TIPUS_ACTIVACIO = TABLA_55
 
@@ -1624,21 +1649,27 @@ TABLA_73 = [
     ('0280204', 'Improcedente. Se adjunta explicación en comentarios'),
     ('0290101', 'Se indemniza incumplimiento de calidad de atención en próxima factura'),
     ('0290102', 'Se indemniza'),
-    ('0290103', 'Pendiente indemnización. No se ha podido conseguir datos necesarios a través de un paso 04. Contacte con distribuidor'),
+    ('0290103', 'Pendiente indemnización. No se ha podido conseguir datos necesarios a través de un paso 04. '
+                'Contacte con distribuidor'),
     ('0290201', 'Reclamación atendida en plazo'),
     ('0290202', 'Retraso imputable al cliente/ comercializadora'),
     ('0290203', 'Improcedente. Se adjunta explicación en comentarios'),
     ('0300101', 'Se indemniza incumplimiento de calidad de atención en próxima factura'),
     ('0300102', 'Se indemniza incumplimiento de calidad de atención'),
-    ('0300103', 'Pendiente indemnización. No se ha podido conseguir datos necesarios a través de un paso 04. Contacte con distribuidor'),
+    ('0300103', 'Pendiente indemnización. No se ha podido conseguir datos necesarios a través de un paso 04. '
+                'Contacte con distribuidor'),
     ('0300201', 'Solicitud de información NNSS atendida en plazo'),
     ('0300202', 'Improcedente. Se adjunta explicación en comentarios'),
     ('0310101', 'Se indemniza incumplimiento de calidad de atención en próxima factura'),
     ('0310201', 'Ejecución de NNSS atendido en plazo'),
+    ('0310102', 'Se indemniza incumplimiento de calidad de atención'),
+    ('0310103', 'Pendiente indemnización. No se ha podido conseguir datos necesarios a través de un paso 04. '
+                'Contacte con distribuidor'),
     ('0310202', 'Improcedente. Se adjunta explicación en comentarios'),
     ('0320101', 'Se indemniza incumplimiento de calidad de atención en próxima factura'),
     ('0320102', 'Se indemniza incumplimiento de calidad de atención'),
-    ('0320103', 'Pendiente indemnización. No se ha podido conseguir datos necesarios a través de un paso 04. Contacte con distribuidor'),
+    ('0320103', 'Pendiente indemnización. No se ha podido conseguir datos necesarios a través de un paso 04. '
+                'Contacte con distribuidor'),
     ('0320201', 'Reconexión atendida en plazo'),
     ('0320202', 'Incumplimiento por causa imputable al cliente'),
     ('0320203', 'Plazo superado por motivos ajenos a la distribuidora (indicar motivo)'),
@@ -1777,7 +1808,8 @@ TABLA_73 = [
     ('0630102', 'Movimiento realizado fuera de plazo'),
     ('0630103', 'Se indemniza incumplimiento de calidad de atención en próxima factura'),
     ('0630104', 'Se indemniza incumplimiento de calidad de atención'),
-    ('0630105', 'Pendiente indemnización. No se ha podido conseguir datos necesarios a través de un paso 04. Contacte con distribuidor'),
+    ('0630105', 'Pendiente indemnización. No se ha podido conseguir datos necesarios a través de un paso 04. '
+                'Contacte con distribuidor'),
     ('0630201', 'No existe solicitud'),
     ('0630202', 'Movimiento realizado en plazo'),
     ('0630203', 'Movimiento fuera de plazo imputable al cliente'),
@@ -2316,16 +2348,6 @@ TABLA_125 = [
     ('12', u'TCT Relacionado a NNSS'),
     ('13', u'Colectivo renovación de Instalaciones de enlace varios suministros'),
     ('14', u'Renovación de instalaciones de enlace')
-]
-
-TABLA_120 = [
-    ('01', 'Baja del contrato de acceso de duración inferior a un año según fecha solicitada por la comercializadora'),
-    ('02', 'Baja del contrato de acceso por orden judicial o mandato de organismo oficial'),
-    ('03', 'Baja del contrato de acceso por rechazo del COR al traspaso'),
-    ('04', 'Baja del contrato de acceso a iniciativa de la distribuidora por seguridad de la red.'),
-    ('05', 'Baja del contrato de acceso por haber pasado dos meses desde que se suspendió un punto de suministro '
-           'tras el desistimiento de un cambio de comercializador activado sobre un punto de suministro '
-           'suspendido por impago'),
 ]
 
 TABLA_126 = [
