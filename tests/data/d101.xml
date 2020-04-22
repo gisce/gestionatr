@@ -14,7 +14,7 @@
         <MotivoCambioATRDesdeDistribuidora>01</MotivoCambioATRDesdeDistribuidora>
         <FechaPrevistaAplicacionCambioATR>2016-06-09</FechaPrevistaAplicacionCambioATR>
         <PeriodicidadFacturacion>01</PeriodicidadFacturacion>
-        <InfoRegistoAutocons>
+        <InfoRegistroAutocons>
             <Autoconsumo>
                 <CAU>ES1234000000000001JN0FA001</CAU>
                 <SeccionRegistro>2</SeccionRegistro>
@@ -142,6 +142,6 @@
                 </TitularRepresentanteGen>
             </DatosInstGen>
             <Comentarios>Esto es un comentario</Comentarios>
-        </InfoRegistoAutocons>
+        </InfoRegistroAutocons>
     </NotificacionCambiosATRDesdeDistribuidor>
 </MensajeNotificacionCambiosATRDesdeDistribuidor>
