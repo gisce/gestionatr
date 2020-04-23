@@ -11,6 +11,7 @@ from gestionatr.output.messages import sw_a1_41 as a1_41
 from gestionatr.output.messages import sw_a1_44 as a1_44
 from gestionatr.output.messages import sw_a1_46 as a1_46
 from gestionatr.output.messages import sw_a1_48 as a1_48
+from gestionatr.output.messages import sw_a20_36 as a20_36
 from gestionatr.output.messages import sw_a1 as a1
 from gestionatr.output.messages import sw_a3 as a3
 from gestionatr.output.messages import sw_b1 as b1
@@ -5070,3 +5071,58 @@ class test_A1_38(unittest.TestCase):
         mensaje_a138.build_tree()
         xml = str(mensaje_a138)
         assertXmlEqual(xml, self.xml_a138.read())
+
+
+class test_A20_36(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a2036 = open(get_data("a2036.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a2036.close()
+
+    def test_create_a2036(self):
+        # Mensajea2036
+        mensaje_a2036 = a20_36.MensajeA2036()
+
+        # Heading
+        heading = a20_36.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '36',
+            'messagetype': 'A20'
+        }
+        heading.feed(heading_fields)
+
+        # a20
+        a20 = a20_36.A20()
+
+        a20_fields = {
+            'reqdate': "2020-03-01",
+            'reqhour': "08:00:00",
+            'cups': "ES1234000000000001JN",
+            'province': "17",
+            'city': "17001",
+            'zipcode': "17001",
+            'streettype': "ACCE",
+            'street': "Carrer inventat",
+            'streetnumber': "1",
+            'portal': "2",
+            'staircase': "3",
+            'floor': "4",
+            'door': "5"
+        }
+        a20.feed(a20_fields)
+
+        mensaje_a2036_fields = {
+            'heading': heading,
+            'a20': a20,
+        }
+        mensaje_a2036.feed(mensaje_a2036_fields)
+        mensaje_a2036.build_tree()
+        xml = str(mensaje_a2036)
+        assertXmlEqual(xml, self.xml_a2036.read())

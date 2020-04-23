@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from gestionatr.input.messages import A1, A3, B1, B2, C1, C2, D1, M1, P0, Q1, R1, W1, F1, Deadlines, \
-    A1_41, A1_02, A1_05, B7031, B7032, A1_44, A1_03, A1_48, A1_04, A1_46, A12_24, A12_26, A19_45, A1_38
+    A1_41, A1_02, A1_05, B7031, B7032, A1_44, A1_03, A1_48, A1_04, A1_46, A12_24, A12_26, A19_45, A1_38, A20_36
 from gestionatr.input.messages.F1 import agrupar_lectures_per_data, obtenir_data_inici_i_final
 from . import unittest
 from .utils import get_data
@@ -4362,3 +4362,46 @@ class test_A1_38(unittest.TestCase):
         defect = a438.defectlist[1]
         self.assertEqual(defect.code, u'002')
         self.assertEqual(defect.description, u'Desc2')
+
+
+class test_A21_36(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a2136 = open(get_data("a2136.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a2136.close()
+
+    def test_a246(self):
+        a2136 = A20_36(self.xml_a2136)
+        a2136.parse_xml()
+        self.assertEqual(a2136.solcode, '1234567890')
+        self.assertEqual(a2136.reqdate, '2020-03-01')
+        self.assertEqual(a2136.reqhour, '08:00:00')
+        self.assertEqual(a2136.cups, 'ES1234000000000001JN')
+        self.assertEqual(a2136.result, '01')
+        self.assertEqual(a2136.resultdescr, 'Aceptada')
+        self.assertEqual(a2136.reason, 'R01')
+        self.assertEqual(a2136.reasondescr, u'Cliente suministrado desde planta satélite.')
+        self.assertEqual(a2136.permissionreq, 'S')
+        self.assertEqual(a2136.expecteddate, '2020-04-30')
+        self.assertEqual(a2136.infraestructurestatus, '01')
+        self.assertEqual(a2136.province, '17')
+        self.assertEqual(a2136.city, '17001')
+        self.assertEqual(a2136.zipcode, '17001')
+        self.assertEqual(a2136.streettype, 'ACCE')
+        self.assertEqual(a2136.street, 'Carrer inventat')
+        self.assertEqual(a2136.streetnumber, '1')
+        self.assertEqual(a2136.portal, '2')
+        self.assertEqual(a2136.staircase, '3')
+        self.assertEqual(a2136.floor, '4')
+        self.assertEqual(a2136.door, '5')
+        self.assertEqual(a2136.zipcode, '17001')
+        self.assertEqual(a2136.comunitypressure, 'B5')
+        self.assertEqual(a2136.aptransind, 'S')
+        self.assertEqual(a2136.aptransnumber, '1234')
+        self.assertEqual(a2136.reig, '123456')
+        self.assertEqual(a2136.iricertificateneeded, 'S')
+        self.assertEqual(a2136.iricertificatedate, '2020-01-01')
+        self.assertEqual(a2136.designpower, '10000')
+        self.assertEqual(a2136.terminstexist, 'S')
