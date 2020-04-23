@@ -23,6 +23,7 @@ from A1_03 import A1_03
 from A1_04 import A1_04
 from A1_48 import A1_48
 from A1_46 import A1_46
+from A1_49 import A1_49
 from A12_24 import A12_24
 from A12_26 import A12_26
 from A19_45 import A19_45
