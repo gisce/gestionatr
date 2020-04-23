@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A349" targetNamespace="http://localhost/sctd/A349" elementFormDefault="qualified">
+	<include schemaLocation="CommonTagsCONT.xsd"/>
+	<element name="sctdapplication" type="tns:SctdapplicationA349Type"/>
+	<complexType name="SctdapplicationA349Type">
+		<sequence>
+			<element name="heading" type="tns:HeadingA349Type" minOccurs="1" maxOccurs="1"/>
+			<element name="a349" type="tns:A349Type" minOccurs="1" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="HeadingA349Type">
+		<sequence>
+			<element name="dispatchingcode" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="3"/>
+						<enumeration value="GML"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dispatchingcompany" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="destinycompany" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="communicationsdate" type="date" minOccurs="1" maxOccurs="1"/>
+			<element name="communicationshour" type="time" minOccurs="1" maxOccurs="1"/>
+			<element name="processcode" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"/>
+						<enumeration value="49"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="messagetype" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="3"/>
+						<enumeration value="A3"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="A349Type">
+		<sequence>
+			<element name="reqcode" type="tns:ReqcodeType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Código Solicitud</documentation>
+				</annotation>
+			</element>
+			<element name="comreferencenum" type="tns:ComreferencenumType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Nº Referencia Solicitud Comercializadora</documentation>
+				</annotation>
+			</element>
+			<element name="responsedate" type="date" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha de Respuesta</documentation>
+				</annotation>
+			</element>
+			<element name="responsehour" type="time" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Hora de Respuesta</documentation>
+				</annotation>
+			</element>
+			<element name="cups" type="tns:CupsType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>CUPS Solicitud</documentation>
+				</annotation>
+			</element>
+			<element name="atrcode" type="tns:AtrcodeType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Código Contrato ATR</documentation>
+				</annotation>
+			</element>
+			<element name="resactivacion" type="tns:ResActivacion" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Resultado de la Activación</documentation>
+				</annotation>
+			</element>
+			<element name="transfereffectivedate" type="date" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha  Efecto Solicitud (inclusive)</documentation>
+				</annotation>
+			</element>
+			<element name="enservicio" type="tns:FlagType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Información sobre si el PS vuelve a la situación anterior en servicio (S) o cortado (N)</documentation>
+				</annotation>
+			</element>
+			<element name="telemetering" type="tns:FlagType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Dispone de Telemedida</documentation>
+				</annotation>
+			</element>
+			<element name="finalqdgranted" type="tns:QdType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Caudal Diario Concedido Final</documentation>
+				</annotation>
+			</element>
+			<element name="finalqhgranted" type="tns:QhType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Caudal Horario Concedido Final</documentation>
+				</annotation>
+			</element>
+			<element name="finalclientyearlyconsumption" type="tns:QaType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Caudal anual final</documentation>
+				</annotation>
+			</element>
+			<element name="gasusetype" type="tns:UsoGasType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de Uso del Gas</documentation>
+				</annotation>
+			</element>
+			<element name="result" type="tns:ResultadoA3Type" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Código de Resultado</documentation>
+				</annotation>
+			</element>
+			<element name="resultdesc" type="tns:ResultdescType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Descripción de Resultado</documentation>
+				</annotation>
+			</element>
+			<element name="indanulable" type="tns:FlagType">
+				<annotation>
+					<documentation>Indicativo que informa de si el proceso subyacente es anulable</documentation>
+				</annotation>
+			</element>
+			<element name="interventiondate" type="date" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha de Intervención</documentation>
+				</annotation>
+			</element>
+			<element name="interventionhourfrom" type="time" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Hora de inicio de intervención</documentation>
+				</annotation>
+			</element>
+			<element name="interventionhourto" type="time" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Hora de fin de intervención</documentation>
+				</annotation>
+			</element>
+			<element name="visitnumber" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Número de Visita</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="0"/>
+						<maxInclusive value="999"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="canonircperiodicity" type="tns:PeriodicidadCanonIRCType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Periodicidad de Canon IRC</documentation>
+				</annotation>
+			</element>
+			<element name="lastinspectionsdate" type="date" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha Ultima Inspeción</documentation>
+				</annotation>
+			</element>
+			<element name="lastinspectionsresult" type="tns:ResultInspectionType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Resultado Ultima Inspección</documentation>
+				</annotation>
+			</element>
+			<element name="StatusPS" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Situación del PS</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<length value="1"/>
+						<enumeration value="0"/>
+						<enumeration value="1"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="readingtype" type="tns:ReadingType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de Lectura</documentation>
+				</annotation>
+			</element>
+			<element name="lectureperiodicity" type="tns:PeriodicidadLecturaType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Periodicidad de Lectura</documentation>
+				</annotation>
+			</element>
+			<element name="extrainfo" type="tns:ExtrainfoType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Observaciones de la Realización</documentation>
+				</annotation>
+			</element>
+			<element name="counterlist" type="tns:CounterListType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Lista de Contadores</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

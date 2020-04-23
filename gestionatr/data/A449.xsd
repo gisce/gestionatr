@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A449" targetNamespace="http://localhost/sctd/A449" elementFormDefault="qualified">
+	<include schemaLocation="CommonTagsCONT.xsd"/>
+	<element name="sctdapplication" type="tns:SctdapplicationA449Type"/>
+	<complexType name="SctdapplicationA449Type">
+		<sequence>
+			<element name="heading" type="tns:HeadingA449Type" minOccurs="1" maxOccurs="1"/>
+			<element name="a449" type="tns:A449Type" minOccurs="1" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="HeadingA449Type">
+		<sequence>
+			<element name="dispatchingcode" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="3"/>
+						<enumeration value="GML"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dispatchingcompany" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="destinycompany" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="communicationsdate" type="date" minOccurs="1" maxOccurs="1"/>
+			<element name="communicationshour" type="time" minOccurs="1" maxOccurs="1"/>
+			<element name="processcode" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"/>
+						<enumeration value="49"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="messagetype" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="3"/>
+						<enumeration value="A4"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="A449Type">
+		<sequence>
+			<element name="reqcode" type="tns:ReqcodeType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Código de Solicitud</documentation>
+				</annotation>
+			</element>
+			<element name="comreferencenum" type="tns:ComreferencenumType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Nº Referencia Solicitud Comercializadora</documentation>
+				</annotation>
+			</element>
+			<element name="responsedate" type="date" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha de Respuesta</documentation>
+				</annotation>
+			</element>
+			<element name="responsehour" type="time" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Hora de Respuesta</documentation>
+				</annotation>
+			</element>
+			<element name="cups" type="tns:CupsType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>CUPS Solicitud</documentation>
+				</annotation>
+			</element>
+			<element name="resultreason" type="tns:MotivoRechazoType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Motivo Resultado</documentation>
+				</annotation>
+			</element>
+			<element name="interventiondate" type="date" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha Intervención</documentation>
+				</annotation>
+			</element>
+			<element name="interventionhourfrom" type="time" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Hora de inicio de intervención</documentation>
+				</annotation>
+			</element>
+			<element name="interventionhourto" type="time" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Hora de fin de intervención</documentation>
+				</annotation>
+			</element>
+			<element name="visitnumber" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Número de Visita</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="0"/>
+						<maxInclusive value="999"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="extrainfo" type="tns:ExtrainfoType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Observaciones de Rechazo tras Intervención</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

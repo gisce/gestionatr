@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A2604" targetNamespace="http://localhost/sctd/A2604" elementFormDefault="qualified">
+	<include schemaLocation="CommonTagsCONT.xsd"/>
+	<element name="sctdapplication" type="tns:SctdApplicationA2604Type"/>
+	<complexType name="SctdApplicationA2604Type">
+		<sequence>
+			<element name="heading" type="tns:HeadingA2604Type" minOccurs="1" maxOccurs="1"/>
+			<element name="a2604" type="tns:A2604Type" minOccurs="1" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="HeadingA2604Type">
+		<sequence>
+			<element name="dispatchingcode" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="3"/>
+						<enumeration value="GML"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dispatchingcompany" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="destinycompany" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="communicationsdate" type="date" minOccurs="1" maxOccurs="1"/>
+			<element name="communicationshour" type="time" minOccurs="1" maxOccurs="1"/>
+			<element name="processcode" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"/>
+						<enumeration value="04"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="messagetype" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="3"/>
+						<enumeration value="A26"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="A2604Type">
+		<sequence>
+			<element name="reqcode" type="tns:ReqcodeType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Código Solicitud</documentation>
+				</annotation>
+			</element>
+			<element name="cups" type="tns:CupsType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>CUPS</documentation>
+				</annotation>
+			</element>
+			<element name="comreferencenum" type="tns:ComreferencenumType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Nº Referencia Solicitud Comercializadora. Identifica unívocamente cada una de las solicitudes de una Empresa</documentation>
+				</annotation>
+			</element>
+			<element name="stateincidence" type="tns:stateincidenceType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Contestación de la incidencia. Estado</documentation>
+				</annotation>
+			</element>
+			<element name="contact" type="tns:ContactinciType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Nodo obligatorio con los datos de la persona de contacto</documentation>
+				</annotation>
+			</element>
+			<element name="extrainfo" type="tns:ExtrainfoType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Comentarios</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

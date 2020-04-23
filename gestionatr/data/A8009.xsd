@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A8009" targetNamespace="http://localhost/sctd/A8009" elementFormDefault="qualified">
+	<include schemaLocation="CommonTagsCONT.xsd"/>
+	<element name="sctdapplication" type="tns:SctdapplicationA8009Type"/>
+	<complexType name="SctdapplicationA8009Type">
+		<sequence>
+			<element name="heading" type="tns:HeadingA8009Type" minOccurs="1" maxOccurs="1"/>
+			<element name="a8009" type="tns:A8009Type" minOccurs="1" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="HeadingA8009Type">
+		<sequence>
+			<element name="dispatchingcode" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="3"/>
+						<enumeration value="GML"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="version" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="3"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dispatchingcompany" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="destinycompany" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="communicationsdate" type="date" minOccurs="1" maxOccurs="1"/>
+			<element name="communicationshour" type="time" minOccurs="1" maxOccurs="1"/>
+			<element name="processcode" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"/>
+						<enumeration value="09"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="messagetype" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="3"/>
+						<enumeration value="A80"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="A8009Type">
+		<sequence>
+			<element name="cups" type="tns:CupsType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>CUPS</documentation>
+				</annotation>
+			</element>
+			<element name="pc" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Código de punto de conexión</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="12"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="fecreparto" type="date" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha del reparto</documentation>
+				</annotation>
+			</element>
+			<element name="peaje" type="tns:TollType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de Peaje</documentation>
+				</annotation>
+			</element>
+			<element name="tipotelemedida" type="tns:TelemedidaType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de Telemedida</documentation>
+				</annotation>
+			</element>
+			<element name="telemedida" type="tns:TelemedidaNType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Valor de la Telemedida (m3)</documentation>
+				</annotation>
+			</element>
+			<element name="telemedidan1" type="tns:TelemedidaNType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Valor de la Telemedida N-1 (m3)</documentation>
+				</annotation>
+			</element>
+			<element name="telemedidan2" type="tns:TelemedidaNType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Valor de la Telemedida N-2 (m3)</documentation>
+				</annotation>
+			</element>
+			<element name="telemedidan3" type="tns:TelemedidaNType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Valor de la Telemedida N-3 (m3)</documentation>
+				</annotation>
+			</element>
+			<element name="cd" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Reparto diario</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="decimal">
+						<totalDigits value="16"/>
+						<fractionDigits value="7"/>
+						<minInclusive value="0"/>
+						<maxInclusive value="999999999.9999999"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="qd" type="tns:QdType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Caudal diario</documentation>
+				</annotation>
+			</element>
+			<element name="fc" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Factor corrector de utilización</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="decimal">
+						<totalDigits value="16"/>
+						<fractionDigits value="7"/>
+						<minInclusive value="0"/>
+						<maxInclusive value="999999999.9999999"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="cm" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Consumo mensual</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="decimal">
+						<totalDigits value="12"/>
+						<fractionDigits value="0"/>
+						<minInclusive value="0"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="tipodia" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de día</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="2"/>
+						<enumeration value="L"/>
+						<enumeration value="F"/>
+						<enumeration value="1"/>
+						<enumeration value="2"/>
+						<enumeration value="3"/>
+						<enumeration value="4"/>
+						<enumeration value="5"/>
+						<enumeration value="6"/>
+						<enumeration value="7"/>
+						<enumeration value="8"/>
+						<enumeration value="9"/>
+						<enumeration value="10"/>
+						<enumeration value="11"/>
+						<enumeration value="12"/>
+						<enumeration value="13"/>
+						<enumeration value="14"/>
+						<enumeration value="15"/>
+						<enumeration value="16"/>
+						<enumeration value="17"/>
+						<enumeration value="18"/>
+						<enumeration value="19"/>
+						<enumeration value="20"/>
+						<enumeration value="21"/>
+						<enumeration value="22"/>
+						<enumeration value="23"/>
+						<enumeration value="24"/>
+						<enumeration value="25"/>
+						<enumeration value="26"/>
+						<enumeration value="27"/>
+						<enumeration value="28"/>
+						<enumeration value="29"/>
+						<enumeration value="30"/>
+						<enumeration value="31"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="totalkwh" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Total de KWh consumidos en el punto de conexión.</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="decimal">
+						<totalDigits value="10"/>
+						<fractionDigits value="0"/>
+						<minInclusive value="0"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="listpctd" type="tns:ListaPCTDType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Lista de PCTD's o PCDD's</documentation>
+				</annotation>
+			</element>
+			<element name="listmunicipiored" type="tns:ListaMunicipioRedType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Lista de Municipios-Red</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<simpleType name="TelemedidaNType">
+		<restriction base="decimal">
+			<totalDigits value="10"/>
+			<fractionDigits value="0"/>
+			<minInclusive value="0"/>
+		</restriction>
+	</simpleType>
+</schema>

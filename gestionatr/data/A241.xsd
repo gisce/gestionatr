@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia León (Comisión Nacional de los Mercados y la Competencia) -->
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A241" targetNamespace="http://localhost/sctd/A241" elementFormDefault="qualified">
 	<include schemaLocation="CommonTagsCONT.xsd"/>
 	<element name="sctdapplication" type="tns:SctdapplicationA241Type"/>
@@ -119,7 +118,7 @@
 			</element>
 			<element name="reqqd" type="tns:QdType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Caudal Diario</documentation>
+					<documentation>Caudal Diario Qd </documentation>
 				</annotation>
 			</element>
 			<element name="reqqh" minOccurs="0" maxOccurs="1">
@@ -135,7 +134,7 @@
 			</element>
 			<element name="reqestimatedqa" type="tns:QaType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Caudal estimado anual</documentation>
+					<documentation>Caudal Estimado Anual Qa </documentation>
 				</annotation>
 			</element>
 			<element name="reqoutgoingpressure" type="tns:PressureType" minOccurs="0" maxOccurs="1">
@@ -171,9 +170,7 @@ Podría ser diferente del indicada en el A1 (ej. por concurrencia con baja o nece
 			</element>
 			<element name="foreseentransferdate" type="date" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>
-						Fecha Prevista Efecto Solicitud
-					</documentation>
+					<documentation>Fecha Prevista Efecto Solicitud</documentation>
 				</annotation>
 			</element>
 			<element name="StatusPS" minOccurs="0" maxOccurs="1">

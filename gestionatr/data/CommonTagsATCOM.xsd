@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia León (Comisión Nacional de los Mercados y la Competencia) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 	<xs:simpleType name="ActivationType">
 		<xs:restriction base="xs:string">
@@ -241,7 +240,6 @@
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
 						<xs:length value="2"/>
-						<xs:enumeration value="01"/>
 						<xs:enumeration value="02"/>
 						<xs:enumeration value="03"/>
 						<xs:enumeration value="04"/>
@@ -386,6 +384,10 @@
 			<xs:enumeration value="066"/>
 			<xs:enumeration value="067"/>
 			<xs:enumeration value="068"/>
+			<xs:enumeration value="070"/>
+			<xs:enumeration value="071"/>
+			<xs:enumeration value="072"/>
+			<xs:enumeration value="074"/>
 			<xs:enumeration value="101"/>
 			<xs:enumeration value="102"/>
 			<xs:enumeration value="103"/>
@@ -708,8 +710,7 @@ Deberá estar formada por un texto seguido del carácter @ y un nombre de dominio.
 			</xs:element>
 			<xs:element name="contactemail" type="EmailType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Dirección de Correo Electrónico.
-Deberá estar formada por un texto seguido del carácter @ y un nombre de dominio.</xs:documentation>
+					<xs:documentation>Dirección de Correo Electrónico. Deberá estar formada por un texto seguido del carácter @ y un nombre de dominio.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -779,6 +780,7 @@ Deberá estar formada por un texto seguido del carácter @ y un nombre de dominio.
 	<xs:simpleType name="CupsType">
 		<xs:restriction base="xs:string">
 			<xs:length value="20"/>
+			<xs:pattern value="[a-zA-Z0-9]*"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="DefectListType">
@@ -795,7 +797,7 @@ Deberá estar formada por un texto seguido del carácter @ y un nombre de dominio.
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
 						<xs:minLength value="1"/>
-						<xs:maxLength value="3"/>						
+						<xs:maxLength value="3"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -932,9 +934,13 @@ Deberá estar formada por un texto seguido del carácter @ y un nombre de dominio.
 			<xs:enumeration value="041"/>
 			<xs:enumeration value="050"/>
 			<xs:enumeration value="051"/>
+			<xs:enumeration value="060"/>
+			<xs:enumeration value="061"/>
 			<xs:enumeration value="907"/>
 			<xs:enumeration value="909"/>
 			<xs:enumeration value="910"/>
+			<xs:enumeration value="911"/>
+			<xs:enumeration value="912"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="InformationListType">
@@ -1076,6 +1082,23 @@ Deberá estar formada por un texto seguido del carácter @ y un nombre de dominio.
 			<xs:enumeration value="R92"/>
 			<xs:enumeration value="R93"/>
 			<xs:enumeration value="R94"/>
+			<xs:enumeration value="R95"/>
+			<xs:enumeration value="R96"/>
+			<xs:enumeration value="R98"/>
+			<xs:enumeration value="R99"/>
+			<xs:enumeration value="S01"/>
+			<xs:enumeration value="S02"/>
+			<xs:enumeration value="S03"/>
+			<xs:enumeration value="S04"/>
+			<xs:enumeration value="S05"/>
+			<xs:enumeration value="S06"/>
+			<xs:enumeration value="S08"/>
+			<xs:enumeration value="S11"/>
+			<xs:enumeration value="S12"/>
+			<xs:enumeration value="S14"/>
+			<xs:enumeration value="S15"/>
+			<xs:enumeration value="S16"/>
+			<xs:enumeration value="S17"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="NameType">
@@ -1666,6 +1689,25 @@ Para un incidente en un día concreto, la fecha hasta será igual a la fecha desde
 			<xs:enumeration value="0680101"/>
 			<xs:enumeration value="0680201"/>
 			<xs:enumeration value="0680202"/>
+			<xs:enumeration value="0700101"/>
+			<xs:enumeration value="0700201"/>
+			<xs:enumeration value="0700202"/>
+			<xs:enumeration value="0710101"/>
+			<xs:enumeration value="0710102"/>
+			<xs:enumeration value="0710201"/>
+			<xs:enumeration value="0710202"/>
+			<xs:enumeration value="0710203"/>
+			<xs:enumeration value="0720101"/>
+			<xs:enumeration value="0720102"/>
+			<xs:enumeration value="0720201"/>
+			<xs:enumeration value="0720202"/>
+			<xs:enumeration value="0720203"/>
+			<xs:enumeration value="0740101"/>
+			<xs:enumeration value="0740102"/>
+			<xs:enumeration value="0740201"/>
+			<xs:enumeration value="0740202"/>
+			<xs:enumeration value="0740203"/>
+			<xs:enumeration value="0740204"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="ResultadoA19Type">
@@ -1891,8 +1933,8 @@ Para un incidente en un día concreto, la fecha hasta será igual a la fecha desde
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
-						<xs:minLength value="1"/>
-						<xs:maxLength value="9"/>
+						<xs:minLength value="11"/>
+						<xs:maxLength value="11"/>
 						<xs:whiteSpace value="collapse"/>
 					</xs:restriction>
 				</xs:simpleType>
@@ -1949,4 +1991,54 @@ Para un incidente en un día concreto, la fecha hasta será igual a la fecha desde
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:simpleType name="stateincidenceType">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="stateincidencedescType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="100"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ContactinciType">
+		<xs:sequence>
+			<xs:element name="contactname" type="NombreContactoType">
+				<xs:annotation>
+					<xs:documentation>Nombre Completo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contacttelephone1" type="TelephoneNumberType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Número de Teléfono1</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contacttelephone2" type="TelephoneNumberType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Número de Teléfono</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contacttelephone3" type="TelephoneNumberType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Número de Teléfono</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contactemail" type="EmailType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Dirección de Correo Electrónico. Deberá estar formada por un texto seguido del carácter @ y un nombre de dominio.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="MotivoAnulacionType">
+		<xs:restriction base="xs:string">
+			<xs:length value="3"/>
+			<xs:enumeration value="101"/>
+			<xs:enumeration value="102"/>
+		</xs:restriction>
+	</xs:simpleType>
 </xs:schema>

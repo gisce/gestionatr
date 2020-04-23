@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A8609" targetNamespace="http://localhost/sctd/A8609" elementFormDefault="qualified">
+	<include schemaLocation="CommonTagsCONT.xsd"/>
+	<element name="sctdapplication" type="tns:SctdapplicationA8609Type"/>
+	
+	<complexType name="SctdapplicationA8609Type">
+		<sequence>
+			<element name="heading" type="tns:HeadingA8609Type" minOccurs="1" maxOccurs="1"/>
+			<element name="a8609" type="tns:A8609Type" minOccurs="1" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="HeadingA8609Type">
+		<sequence>
+			<element name="dispatchingcode" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="3"/>
+						<enumeration value="GML"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="version" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="3"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dispatchingcompany" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="destinycompany" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="communicationsdate" type="date" minOccurs="1" maxOccurs="1"/>
+			<element name="communicationshour" type="time" minOccurs="1" maxOccurs="1"/>
+			<element name="processcode" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"/>
+						<enumeration value="09"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="messagetype" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="3"/>
+						<enumeration value="A86"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="A8609Type">
+		<sequence>			
+			<element name="pc" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Código de punto de conexión</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="12"/>
+					</restriction>
+				</simpleType>				
+			</element>			
+			<element name="fecreparto" type="date" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha del reparto</documentation>
+				</annotation>				
+			</element>								
+			<element name="listsumariopeaje" type="tns:ListaSumarioPeajeType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Desglose por peaje del número de puntos de suministro, del reparto diario del punto de conexión (incluyendo A80 y A81)</documentation>
+				</annotation>
+			</element>										
+		</sequence>
+	</complexType>
+	
+	<complexType name="SumarioPeajeType">
+		<sequence>
+			<element name="peaje" type="tns:TollType" minOccurs="1" maxOccurs="1"/>
+			<element name="numps" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="decimal">
+						<totalDigits value="8"/>
+						<fractionDigits value="0"/>
+						<minInclusive value="0"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="ListaSumarioPeajeType">
+		<sequence>
+			<element name="sumariopeaje" type="tns:SumarioPeajeType" minOccurs="1" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>	
+	
+</schema>
