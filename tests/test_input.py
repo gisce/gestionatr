@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from gestionatr.input.messages import A1, A3, B1, B2, C1, C2, D1, M1, P0, Q1, R1, W1, F1, Deadlines, \
-    A1_41, A1_02, A1_05, B7031, B7032, A1_44, A1_03, A1_48, A1_04, A1_46, A12_26, A19_45, A1_38
+    A1_41, A1_02, A1_05, B7031, B7032, A1_44, A1_03, A1_48, A1_04, A1_46, A12_24, A12_26, A19_45, A1_38
 from gestionatr.input.messages.F1 import agrupar_lectures_per_data, obtenir_data_inici_i_final
 from . import unittest
 from .utils import get_data
@@ -4061,6 +4061,64 @@ class test_A12_26(unittest.TestCase):
         self.assertEqual(corrector.correctorproperty, u'01')
         self.assertEqual(corrector.correctortype, u'01')
 
+class test_A12_24(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a1224 = open(get_data("a1224.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a1224.close()
+
+    def test_a246(self):
+        a1224 = A12_24(self.xml_a1224)
+        a1224.parse_xml()
+
+        self.assertEqual(a1224.reqdate, u"2018-05-01")
+        self.assertEqual(a1224.reqhour, u"12:00:00")
+        self.assertEqual(a1224.atrcode, u"000111222333444555666777")
+        self.assertEqual(a1224.atrversion, u"2")
+        self.assertEqual(a1224.nationality, u"ES")
+        self.assertEqual(a1224.documenttype, u"01")
+        self.assertEqual(a1224.documentnum, u"11111111H")
+        self.assertEqual(a1224.cups, u"ES1234000000000001JN")
+
+        self.assertEqual(a1224.operationnum, u"4444448877787879894898189881848844894894")
+        self.assertEqual(a1224.communicationreason, u"01")
+        self.assertEqual(a1224.transfereffectivedate, u"2018-07-01")
+        self.assertEqual(a1224.readingtype, u"1")
+
+        counter = a1224.counterlist[0]
+        self.assertEqual(counter.countermodel, u"marca1")
+        self.assertEqual(counter.countertype, u"tipo1")
+        self.assertEqual(counter.counternumber, u"B123456")
+        self.assertEqual(counter.counterproperty, u"04")
+        self.assertEqual(counter.reallecture, u"2000")
+        self.assertEqual(counter.counterpressure, u"54321.123")
+
+        counter2 = a1224.counterlist[1]
+
+        self.assertEqual(counter2.countermodel, u"marca2")
+        self.assertEqual(counter2.countertype, u"tipo2")
+        self.assertEqual(counter2.counternumber, u"C123456")
+        self.assertEqual(counter2.counterproperty, u"06")
+        self.assertEqual(counter2.reallecture, u"3000")
+        self.assertEqual(counter2.counterpressure, u"13245.321")
+
+        corrector = a1224.correctorlist[0]
+        self.assertEqual(corrector.correctedlecture, u'2200')
+        self.assertEqual(corrector.correctormodel, u'modelo1')
+        self.assertEqual(corrector.correctornumber, u'D123456')
+        self.assertEqual(corrector.correctorproperty, u'01')
+        self.assertEqual(corrector.correctortype, u'01')
+
+        corrector2 = a1224.correctorlist[1]
+        self.assertEqual(corrector2.correctedlecture, u'3300')
+        self.assertEqual(corrector2.correctormodel, u'modelo2')
+        self.assertEqual(corrector2.correctornumber, u'E654321')
+        self.assertEqual(corrector2.correctorproperty, u'02')
+        self.assertEqual(corrector2.correctortype, u'02')
+
+        self.assertEqual(len(a1224.counterlist), 2)
 
 class test_A19_45(unittest.TestCase):
 
