@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sctdapplication xmlns="http://localhost/sctd/A449">
+    <heading>
+        <dispatchingcode>GML</dispatchingcode>
+        <dispatchingcompany>1234</dispatchingcompany>
+        <destinycompany>4321</destinycompany>
+        <communicationsdate>2018-05-01</communicationsdate>
+        <communicationshour>12:00:00</communicationshour>
+        <processcode>49</processcode>
+        <messagetype>A4</messagetype>
+    </heading>
+    <a449>
+        <reqcode>10_z9f2k6S</reqcode>
+        <comreferencenum>123456789</comreferencenum>
+        <responsedate>2020-03-13</responsedate>
+        <responsehour>15:09:09</responsehour>
+        <cups>20aXn4jOtXkA8PF9JCHH</cups>
+        <resultreason>R01</resultreason>
+        <interventiondate>2020-03-13</interventiondate>
+        <interventionhourfrom>15:09:09</interventionhourfrom>
+        <interventionhourto>15:09:09</interventionhourto>
+        <visitnumber>987</visitnumber>
+        <extrainfo>400_ssYcpvXKXUF3DuQzltLLSTHWo2SDsC</extrainfo>
+    </a449>
+</sctdapplication>
+

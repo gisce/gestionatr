@@ -11,6 +11,7 @@ from gestionatr.output.messages import sw_a1_41 as a1_41
 from gestionatr.output.messages import sw_a1_44 as a1_44
 from gestionatr.output.messages import sw_a1_46 as a1_46
 from gestionatr.output.messages import sw_a1_48 as a1_48
+from gestionatr.output.messages import sw_a1_49 as a1_49
 from gestionatr.output.messages import sw_a20_36 as a20_36
 from gestionatr.output.messages import sw_a1 as a1
 from gestionatr.output.messages import sw_a3 as a3
@@ -5071,6 +5072,58 @@ class test_A1_38(unittest.TestCase):
         mensaje_a138.build_tree()
         xml = str(mensaje_a138)
         assertXmlEqual(xml, self.xml_a138.read())
+
+
+class test_A1_49(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a149 = open(get_data("a149.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a149.close()
+
+    def test_create_a149(self):
+        # Mensajea149
+        mensaje_a149 = a1_49.MensajeA149()
+
+        # Heading
+        heading = a1_49.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '49',
+            'messagetype': 'A1'
+        }
+        heading.feed(heading_fields)
+
+        # a149
+        a149 = a1_49.A149()
+
+        a149_fields = {
+            'comreferencenum': '12345',
+            'reqdate': "2020-03-01",
+            'reqhour': "08:00:00",
+            'cups': "ES1234000000000001JN",
+            'comreferencenumdes': '123456789012',
+            'tipodesistimiento': '01',
+            'documenttype': '01',
+            'documentnum': '11111111H',
+            'titulartype': 'F',
+            'extrainfo': 'EXTRA EXTRA! EL GAS NO TE SENTIT!'
+        }
+        a149.feed(a149_fields)
+
+        mensaje_a149_fields = {
+            'heading': heading,
+            'a149': a149,
+        }
+        mensaje_a149.feed(mensaje_a149_fields)
+        mensaje_a149.build_tree()
+        xml = str(mensaje_a149)
+        assertXmlEqual(xml, self.xml_a149.read())
 
 
 class test_A20_36(unittest.TestCase):

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sctdapplication xmlns="http://localhost/sctd/A4S49">
+    <heading>
+        <dispatchingcode>GML</dispatchingcode>
+        <dispatchingcompany>1234</dispatchingcompany>
+        <destinycompany>4321</destinycompany>
+        <communicationsdate>2018-05-01</communicationsdate>
+        <communicationshour>12:00:00</communicationshour>
+        <processcode>49</processcode>
+        <messagetype>A4S</messagetype>
+    </heading>
+    <a4s49>
+        <reqcode>10_z9f2k6S</reqcode>
+        <responsedate>2020-03-13</responsedate>
+        <responsehour>15:09:09</responsehour>
+        <nationality>ES</nationality>
+        <documenttype>01</documenttype>
+        <documentnum>11111111H</documentnum>
+        <cups>20aXn4jOtXkA8PF9JCHH</cups>
+        <previousatrcode>000111222333444555666777</previousatrcode>
+        <result>13</result>
+        <resultdesc>Aceptada</resultdesc>
+        <resultreason>R01</resultreason>
+        <resultreasondesc>Cliente suministrado desde planta satélite.</resultreasondesc>
+        <extrainfo>400_ssYcpvXKXUF3DuQzltLLSTHWo2SDsC</extrainfo>
+    </a4s49>
+</sctdapplication>
