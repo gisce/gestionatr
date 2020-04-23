@@ -98,9 +98,9 @@ class R1(C2):
         data = []
         tree = '{0}.SolicitudesInformacionAdicional'.format(self._header)
         obj = get_rec_attr(self.obj, tree, False)
-        if obj:
+        if obj not in [None, False]:
             sol = get_rec_attr(obj, 'SolicitudInformacionAdicional', False)
-            if sol:
+            if sol not in [None, False]:
                 for d in sol:
                     data.append(SolicitudInformacionAdicional(d))
         return data
@@ -129,7 +129,7 @@ class R1(C2):
         data = []
         tree = '{0}.VariablesAportacionInformacion'.format(self._header)
         obj = get_rec_attr(self.obj, tree, False)
-        if obj:
+        if obj not in [None, False]:
             for d in obj.VariableAportacionInformacion:
                 data.append(VariableAportacionInformacion(d))
         return data
@@ -139,7 +139,7 @@ class R1(C2):
         data = []
         tree = '{0}.VariablesAportacionInformacionParaRetipificacion'.format(self._header)
         obj = get_rec_attr(self.obj, tree, False)
-        if obj:
+        if obj not in [None, False]:
             for d in obj.VariableAportacionInformacionParaRetipificacion:
                 data.append(VariableDetalleReclamacion(d))
         return data
