@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from gestionatr.input.messages import A1, A3, B1, B2, C1, C2, D1, E1, M1, P0, Q1, R1, W1, F1, Deadlines
+from gestionatr.input.messages import A1, A3, B1, B2, C1, C2, D1, E1, M1, P0, Q1, R1, T1, W1, F1, Deadlines
 from gestionatr.input.messages import A1_41, A1_02, A1_05, A1_44, A1_03, A1_48, A1_04, A1_46, A1_38, A1_49
 from gestionatr.input.messages import B7031, B7032, A12_24, A12_26, A19_45, A20_36
 from gestionatr.input.messages.F1 import agrupar_lectures_per_data, obtenir_data_inici_i_final
@@ -2836,6 +2836,268 @@ class test_E1(unittest.TestCase):
         e1 = E1(self.xml_e113)
         e1.parse_xml()
         self.assertEqual(e1.contestacion_incidencia, u'02')
+
+
+class test_T1(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_t101 = open(get_data("t101.xml"), "r")
+        self.xml_t102_accept = open(get_data("t102_accept.xml"), "r")
+        self.xml_t102_reject = open(get_data("t102_reject.xml"), "r")
+        self.xml_t105 = open(get_data("t105.xml"), "r")
+        self.xml_t106 = open(get_data("t106.xml"), "r")
+        self.xml_t110 = open(get_data("t110.xml"), "r")
+
+    def tearDown(self):
+        self.xml_t101.close()
+        self.xml_t102_accept.close()
+        self.xml_t102_reject.close()
+        self.xml_t105.close()
+        self.xml_t106.close()
+        self.xml_t110.close()
+
+    def test_t101(self):
+        t1 = T1(self.xml_t101)
+        t1.parse_xml()
+
+        self.assertEqual(t1.datos_solicitud.motivo_traspaso, u'03')
+        self.assertEqual(t1.datos_solicitud.fecha_prevista_accion, u'2020-05-01')
+        self.assertEqual(t1.datos_solicitud.cnae, u'9820')
+        self.assertEqual(t1.datos_solicitud.ind_esencial, u'S')
+        self.assertEqual(t1.datos_solicitud.susp_baja_impago_en_curso, u'S')
+        # Contrato
+        self.assertEqual(t1.contrato.contacto.persona_de_contacto, u'Nombre Inventado')
+        self.assertEqual(len(t1.contrato.contacto.telefonos), 2)
+        self.assertEqual(t1.contrato.contacto.telefonos[1][1], u'666777999')
+        self.assertEqual(t1.contrato.contacto.telefonos[1][0], u'34')
+        self.assertEqual(t1.contrato.fecha_finalizacion, u'2018-01-01')
+        self.assertEqual(t1.contrato.modo_control_potencia, u'1')
+        self.assertEqual(len(t1.contrato.potencias_contratadas), 2)
+        self.assertEqual(t1.contrato.potencias_contratadas[0][1], 1000)
+        self.assertEqual(t1.contrato.potencias_contratadas[1][1], 2000)
+        self.assertEqual(t1.contrato.tarifa_atr, u'003')
+        self.assertEqual(t1.contrato.tipo_autoconsumo, u'00')
+        self.assertEqual(t1.contrato.tipo_contrato_atr, u'02')
+        self.assertEqual(t1.contrato.consumo_anual_estimado, u'5000')
+        # Cliente
+        self.assertEqual(t1.cliente.correo_electronico, u'email@host')
+        self.assertEqual(t1.cliente.identificador, u'B36385870')
+        self.assertEqual(t1.cliente.indicador_tipo_direccion, u'F')
+        self.assertEqual(t1.cliente.nombre, u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
+        self.assertEqual(t1.cliente.razon_social, u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
+        self.assertEqual(len(t1.cliente.telefonos), 3)
+        self.assertEqual(t1.cliente.telefonos[0][1], u'666777666')
+        self.assertEqual(t1.cliente.telefonos[0][0], u'36')
+        self.assertEqual(t1.cliente.telefonos[2][1], u'666777888')
+        self.assertEqual(t1.cliente.telefonos[2][0], u'38')
+        self.assertEqual(t1.cliente.tipo_identificador, u'NI')
+        self.assertEqual(t1.cliente.tipo_persona, u'J')
+        self.assertEqual(t1.cliente.direccion.aclarador_finca, u'Bloque de Pisos')
+        self.assertEqual(t1.cliente.direccion.calle, u'MELA MUTERMILCH')
+        self.assertEqual(t1.cliente.direccion.cod_postal, u'17001')
+        self.assertEqual(t1.cliente.direccion.duplicador_finca, u'')
+        self.assertEqual(t1.cliente.direccion.escalera, u'')
+        self.assertEqual(t1.cliente.direccion.municipio, u'17079')
+        self.assertEqual(t1.cliente.direccion.numero_finca, u'2')
+        self.assertEqual(t1.cliente.direccion.pais, u'España')
+        self.assertEqual(t1.cliente.direccion.piso, u'001')
+        self.assertEqual(t1.cliente.direccion.poblacion, u'17079000501')
+        self.assertEqual(t1.cliente.direccion.provincia, u'17')
+        self.assertEqual(t1.cliente.direccion.puerta, u'001')
+        self.assertEqual(t1.cliente.direccion.tipo_aclarador_finca, u'BI')
+        self.assertEqual(t1.cliente.direccion.tipo_via, u'PZ')
+        # DireccionPS
+        self.assertEqual(t1.direccion_ps.pais, u'España')
+        self.assertEqual(t1.direccion_ps.provincia, u'17')
+        self.assertEqual(t1.direccion_ps.municipio, u'17079')
+        self.assertEqual(t1.direccion_ps.cod_postal, u'17003')
+        self.assertEqual(t1.direccion_ps.calle, u'Nom carrer')
+        self.assertEqual(t1.direccion_ps.numero_finca, u'3')
+        self.assertEqual(t1.direccion_ps.escalera, u'1')
+        self.assertEqual(t1.direccion_ps.piso, u'1')
+        self.assertEqual(t1.direccion_ps.puerta, u'1')
+        # RegistrosDocumento
+        self.assertEqual(len(t1.registros_documento), 2)
+        self.assertEqual(t1.registros_documento[0].tipo_doc_aportado, u'08')
+        self.assertEqual(t1.registros_documento[0].direccion_url, u'http://eneracme.com/docs/NIF11111111H.pdf')
+        self.assertEqual(t1.registros_documento[1].tipo_doc_aportado, u'07')
+        self.assertEqual(t1.registros_documento[1].direccion_url, u'http://eneracme.com/docs/NIF11111111H.pdf')
+
+    def test_t102_accept(self):
+        t1 = T1(self.xml_t102_accept)
+        t1.parse_xml()
+        self.assertEqual(t1.datos_aceptacion.fecha_aceptacion, u'2016-06-06')
+
+    def test_t102_reject(self):
+        t1 = T1(self.xml_t102_reject)
+        t1.parse_xml()
+
+        self.assertEqual(t1.fecha_rechazo, u'2016-07-20')
+        self.assertEqual(len(t1.registros_documento), 2)
+        self.assertEqual(len(t1.rechazos), 2)
+        rej1 = t1.rechazos[0]
+        rej2 = t1.rechazos[1]
+        self.assertEqual(rej1.secuencial, u'1')
+        self.assertEqual(rej1.codigo_motivo, u'08')
+        self.assertEqual(rej1.comentarios, u'Fecha de finalización del Contrato sin informar o no válida')
+        self.assertEqual(rej2.secuencial, u'2')
+        self.assertEqual(rej2.codigo_motivo, u'E4')
+        self.assertEqual(rej2.comentarios,u'Impago Previo')
+        doc1 = t1.registros_documento[0]
+        doc2 = t1.registros_documento[1]
+        self.assertEqual(doc1.tipo_doc_aportado, u'08')
+        self.assertEqual(doc1.direccion_url, u'http://eneracme.com/docs/NIF11111111H.pdf')
+        self.assertEqual(doc2.tipo_doc_aportado, u'07')
+        self.assertEqual(doc2.direccion_url, u'http://eneracme.com/docs/NIF11111111H.pdf')
+
+    def test_t105(self):
+        t1 = T1(self.xml_t105)
+        t1.parse_xml()
+        self.assertEqual(t1.datos_activacion.fecha_activacion, u'2016-08-21')
+        self.assertEqual(t1.datos_activacion.en_servicio, u'S')
+        # Contrato
+        self.assertEqual(t1.contrato.cod_contrato, u'00001')
+        self.assertEqual(t1.contrato.tipo_autoconsumo, u'00')
+        self.assertEqual(t1.contrato.tipo_contrato_atr, u'02')
+        self.assertEqual(t1.contrato.tarifa_atr, u'003')
+        self.assertEqual(t1.contrato.periodicidad_facturacion, u'01')
+        self.assertEqual(t1.contrato.tipo_de_telegestion, u'01')
+        self.assertEqual(t1.contrato.modo_control_potencia, u'1')
+        self.assertEqual(t1.contrato.marca_medida_con_perdidas, u'S')
+        self.assertEqual(t1.contrato.tension_del_suministro, u'10')
+        self.assertEqual(t1.contrato.vas_trafo, u'50')
+        self.assertEqual(t1.contrato.porcentaje_perdidas, u'05')
+        self.assertEqual(len(t1.contrato.potencias_contratadas), 2)
+        pot1 = t1.contrato.potencias_contratadas[0]
+        pot2 = t1.contrato.potencias_contratadas[1]
+        self.assertEqual(pot1[1], 1000)
+        self.assertEqual(pot2[1], 2000)
+        # Puntos Medida
+        self.assertEqual(len(t1.puntos_medida), 1)
+        pm = t1.puntos_medida[0]
+        self.assertEqual(pm.cod_pm, u'ES1234000000000001JN0F')
+        self.assertEqual(pm.tipo_movimiento, u'A')
+        self.assertEqual(pm.tipo_pm, u'03')
+        self.assertEqual(pm.cod_pm_principal, u'ES1234000000000002JN0F')
+        self.assertEqual(pm.modo_lectura, u'1')
+        self.assertEqual(pm.funcion, u'P')
+        self.assertEqual(pm.direccion_enlace, u'39522')
+        self.assertEqual(pm.direccion_punto_medida, u'000000001')
+        self.assertEqual(pm.num_linea, u'12')
+        self.assertEqual(pm.telefono_telemedida, u'987654321')
+        self.assertEqual(pm.estado_telefono, u'1')
+        self.assertEqual(pm.clave_acceso, u'0000000007')
+        self.assertEqual(pm.tension_pm, u'0')
+        self.assertEqual(pm.fecha_vigor, u'2003-01-01')
+        self.assertEqual(pm.fecha_alta, u'2003-01-01')
+        self.assertEqual(pm.fecha_baja, u'2003-02-01')
+        self.assertEqual(pm.comentarios, u'Comentarios Varios')
+        # Aparatos
+        self.assertEqual(len(pm.aparatos), 1)
+        ap = pm.aparatos[0]
+        self.assertEqual(ap.cod_precinto, u'02')
+        self.assertEqual(ap.constante_energia, u'1.000')
+        self.assertEqual(ap.constante_maximetro, u'1.000')
+        self.assertEqual(ap.funcion_aparato, u'M')
+        self.assertEqual(ap.lectura_directa, u'N')
+        self.assertEqual(ap.marca_aparato, u'132')
+        self.assertEqual(ap.modelo_marca, u'011')
+        self.assertEqual(ap.modo_medida_potencia, u'1')
+        self.assertEqual(ap.num_integradores, u'18')
+        self.assertEqual(ap.numero_serie, u'0000539522')
+        self.assertEqual(ap.periodo_fabricacion, u'2005')
+        self.assertEqual(ap.propietario, u'Desc. Propietario')
+        self.assertEqual(ap.ruedas_decimales, u'02')
+        self.assertEqual(ap.ruedas_enteras, u'08')
+        self.assertEqual(ap.tipo_aparato, u'CG')
+        self.assertEqual(ap.tipo_dhedm, u'6')
+        self.assertEqual(ap.tipo_equipo_medida, u'L03')
+        self.assertEqual(ap.tipo_movimiento, u'CX')
+        self.assertEqual(ap.tipo_propiedad_aparato, u'1')
+        # Medidas
+        self.assertEqual(len(ap.medidas), 2)
+        md = ap.medidas[0]
+        self.assertEqual(md.anomalia, u'01')
+        self.assertEqual(md.comentarios, u'Comentario sobre anomalia')
+        self.assertEqual(md.fecha_lectura_firme, u'2003-01-02')
+        self.assertEqual(md.magnitud_medida, u'PM')
+        self.assertEqual(md.periodo, u'65')
+        self.assertEqual(md.procedencia, u'30')
+        self.assertEqual(md.tipo_dhedm, u'6')
+        self.assertEqual(md.ultima_lectura_firme, u'0.00')
+        md2 = ap.medidas[1]
+        self.assertFalse(md2.anomalia)
+        self.assertFalse(md2.comentarios)
+        self.assertEqual(md2.fecha_lectura_firme, u'2003-01-03')
+
+    def test_t106(self):
+        t1 = T1(self.xml_t106)
+        t1.parse_xml()
+        self.assertEqual(t1.datos_notificacion.fecha_activacion, u'2016-08-21')
+        # Contrato
+        self.assertEqual(t1.contrato.cod_contrato, u'00001')
+        # Puntos Medida
+        self.assertEqual(len(t1.puntos_medida), 1)
+        pm = t1.puntos_medida[0]
+        self.assertEqual(pm.cod_pm, u'ES1234000000000001JN0F')
+        self.assertEqual(pm.tipo_movimiento, u'A')
+        self.assertEqual(pm.tipo_pm, u'03')
+        self.assertEqual(pm.cod_pm_principal, u'ES1234000000000002JN0F')
+        self.assertEqual(pm.modo_lectura, u'1')
+        self.assertEqual(pm.funcion, u'P')
+        self.assertEqual(pm.direccion_enlace, u'39522')
+        self.assertEqual(pm.direccion_punto_medida, u'000000001')
+        self.assertEqual(pm.num_linea, u'12')
+        self.assertEqual(pm.telefono_telemedida, u'987654321')
+        self.assertEqual(pm.estado_telefono, u'1')
+        self.assertEqual(pm.clave_acceso, u'0000000007')
+        self.assertEqual(pm.tension_pm, u'0')
+        self.assertEqual(pm.fecha_vigor, u'2003-01-01')
+        self.assertEqual(pm.fecha_alta, u'2003-01-01')
+        self.assertEqual(pm.fecha_baja, u'2003-02-01')
+        self.assertEqual(pm.comentarios, u'Comentarios Varios')
+        # Aparatos
+        self.assertEqual(len(pm.aparatos), 1)
+        ap = pm.aparatos[0]
+        self.assertEqual(ap.cod_precinto, u'02')
+        self.assertEqual(ap.constante_energia, u'1.000')
+        self.assertEqual(ap.constante_maximetro, u'1.000')
+        self.assertEqual(ap.funcion_aparato, u'M')
+        self.assertEqual(ap.lectura_directa, u'N')
+        self.assertEqual(ap.marca_aparato, u'132')
+        self.assertEqual(ap.modelo_marca, u'011')
+        self.assertEqual(ap.modo_medida_potencia, u'1')
+        self.assertEqual(ap.num_integradores, u'18')
+        self.assertEqual(ap.numero_serie, u'0000539522')
+        self.assertEqual(ap.periodo_fabricacion, u'2005')
+        self.assertEqual(ap.propietario, u'Desc. Propietario')
+        self.assertEqual(ap.ruedas_decimales, u'02')
+        self.assertEqual(ap.ruedas_enteras, u'08')
+        self.assertEqual(ap.tipo_aparato, u'CG')
+        self.assertEqual(ap.tipo_dhedm, u'6')
+        self.assertEqual(ap.tipo_equipo_medida, u'L03')
+        self.assertEqual(ap.tipo_movimiento, u'CX')
+        self.assertEqual(ap.tipo_propiedad_aparato, u'1')
+        # Medidas
+        self.assertEqual(len(ap.medidas), 2)
+        md = ap.medidas[0]
+        self.assertEqual(md.anomalia, u'01')
+        self.assertEqual(md.comentarios, u'Comentario sobre anomalia')
+        self.assertEqual(md.fecha_lectura_firme, u'2003-01-02')
+        self.assertEqual(md.magnitud_medida, u'PM')
+        self.assertEqual(md.periodo, u'65')
+        self.assertEqual(md.procedencia, u'30')
+        self.assertEqual(md.tipo_dhedm, u'6')
+        self.assertEqual(md.ultima_lectura_firme, u'0.00')
+        md2 = ap.medidas[1]
+        self.assertFalse(md2.anomalia)
+        self.assertFalse(md2.comentarios)
+        self.assertEqual(md2.fecha_lectura_firme, u'2003-01-03')
+
+    def test_t110(self):
+        t1 = T1(self.xml_t110)
+        t1.parse_xml()
+        self.assertEqual(t1.fecha_aceptacion, u'2016-06-06')
 
 
 class test_MessageGas(unittest.TestCase):
