@@ -337,3 +337,27 @@ class NotificacionComercializadorSaliente(XmlModel):
 # Paso 10 -> C1 MensajeAceptacionAnulacion
 # Paso 11 -> C1 MensajeAceptacionCambiodeComercializadorSaliente
 # Paso 12 -> C1 MensajeRechazoCambiodeComercializadorSaliente
+
+
+# Paso 13
+class MensajeContestacionIncidencia(XmlModel):
+
+    _sort_order = ('mensaje', 'cabecera', 'contestacion_incidencia')
+
+    def __init__(self):
+        self.mensaje = XmlField('MensajeContestacionIncidencia',
+                                attributes={'xmlns': 'http://localhost/elegibilidad'})
+        self.cabecera = Cabecera()
+        self.contestacion_incidencia = ContestacionIncidencia()
+        super(MensajeContestacionIncidencia, self).__init__('MensajeContestacionIncidencia', 'mensaje')
+
+
+class ContestacionIncidencia(XmlModel):
+
+    _sort_order = ('contestacion_incidencia_node', 'contestacion_incidencia', 'contacto')
+
+    def __init__(self):
+        self.contestacion_incidencia_node = XmlField('ContestacionIncidencia')
+        self.contestacion_incidencia = XmlField('ContestacionIncidencia')
+        self.contacto = Contacto()
+        super(ContestacionIncidencia, self).__init__('ContestacionIncidencia', 'contestacion_incidencia_node')
