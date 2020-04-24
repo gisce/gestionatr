@@ -2602,6 +2602,7 @@ class test_E1(unittest.TestCase):
         self.xml_e104 = open(get_data("e104.xml"), "r")
         self.xml_e105 = open(get_data("e105.xml"), "r")
         self.xml_e106 = open(get_data("e106.xml"), "r")
+        self.xml_e112 = open(get_data("e112.xml"), "r")
         self.xml_e113 = open(get_data("e113.xml"), "r")
 
     def tearDown(self):
@@ -2612,6 +2613,7 @@ class test_E1(unittest.TestCase):
         self.xml_e104.close()
         self.xml_e105.close()
         self.xml_e106.close()
+        self.xml_e112.close()
         self.xml_e113.close()
 
     def test_e101(self):
@@ -2824,6 +2826,11 @@ class test_E1(unittest.TestCase):
         self.assertFalse(md2.anomalia)
         self.assertFalse(md2.comentarios)
         self.assertEqual(md2.fecha_lectura_firme, u'2003-01-03')
+
+    def test_e112(self):
+        e1 = E1(self.xml_e112)
+        e1.parse_xml()
+        self.assertEqual(e1.fecha_rechazo, u'2020-05-01')
 
     def test_e113(self):
         e1 = E1(self.xml_e113)
