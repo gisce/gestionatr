@@ -533,11 +533,13 @@ class test_C2(unittest.TestCase):
         self.xml_c201_completo = open(get_data("c201.xml"), "r")
         self.xml_c202_accept = open(get_data("c202_accept.xml"), "r")
         self.xml_c203 = open(get_data("c203.xml"), "r")
+        self.xml_c213 = open(get_data("c213.xml"), "r")
 
     def tearDown(self):
         self.xml_c201_completo.close()
         self.xml_c202_accept.close()
         self.xml_c203.close()
+        self.xml_c213.close()
 
     def test_create_pas01(self):
         # MensajeCambiodeComercializadorConCambios
@@ -768,6 +770,47 @@ class test_C2(unittest.TestCase):
         mensaje.build_tree()
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_c203.read())
+
+    def test_create_pas13(self):
+        # MensajeContestacionIncidencia
+        mensaje = c2.MensajeContestacionIncidencia()
+
+        # Cabecera
+        cabecera = get_header(process='C2', step='13')
+
+        # Telefono
+        telefono = c2.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '34',
+            'numero': '683834841',
+        }
+        telefono.feed(telefono_fields)
+
+        # Contacto
+        contacto = c2.Contacto()
+        contacto_fields = {
+            'persona_de_contacto': 'Nombre Inventado',
+            'telefonos': [telefono],
+            'correo_electronico': 'mail_falso@dominio.com',
+        }
+        contacto.feed(contacto_fields)
+
+        # ContestacionIncidencia
+        contestacion_incidencia = c2.ContestacionIncidencia()
+        contestacion_incidencia_fields = {
+            'contestacion_incidencia': '02',
+            'contacto': contacto
+        }
+        contestacion_incidencia.feed(contestacion_incidencia_fields)
+
+        mensaje_fields = {
+            'cabecera': cabecera,
+            'contestacion_incidencia': contestacion_incidencia,
+        }
+        mensaje.feed(mensaje_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_c213.read())
 
 
 class test_A1(unittest.TestCase):
