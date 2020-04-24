@@ -5,10 +5,10 @@
         <CodigoREEEmpresaDestino>4321</CodigoREEEmpresaDestino>
         <CodigoDelProceso>E1</CodigoDelProceso>
         <CodigoDePaso>05</CodigoDePaso>
-        <CodigoDeSolicitud>201605219497</CodigoDeSolicitud>
-        <SecuencialDeSolicitud>00</SecuencialDeSolicitud>
-        <FechaSolicitud>2016-06-08T04:24:09</FechaSolicitud>
-        <CUPS>ES0116000000011531LK0F</CUPS>
+        <CodigoDeSolicitud>201607211259</CodigoDeSolicitud>
+        <SecuencialDeSolicitud>01</SecuencialDeSolicitud>
+        <FechaSolicitud>2016-07-21T12:59:47</FechaSolicitud>
+        <CUPS>ES1234000000000001JN0F</CUPS>
     </Cabecera>
     <ActivacionDesistimiento>
         <DatosNotificacion>
