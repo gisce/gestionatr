@@ -30,6 +30,7 @@
                 </PotenciasContratadas>
                 <ModoControlPotencia>1</ModoControlPotencia>
             </CondicionesContractuales>
+            <PeriodicidadFacturacion>01</PeriodicidadFacturacion>
             <ConsumoAnualEstimado>5000</ConsumoAnualEstimado>
             <Contacto>
                 <PersonaDeContacto>Nombre Inventado</PersonaDeContacto>
@@ -41,6 +42,7 @@
                     <PrefijoPais>34</PrefijoPais>
                     <Numero>666777999</Numero>
                 </Telefono>
+                <CorreoElectronico>email@host</CorreoElectronico>
             </Contacto>
         </Contrato>
         <Cliente>
