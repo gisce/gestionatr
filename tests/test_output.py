@@ -5648,7 +5648,7 @@ class test_A1_48(unittest.TestCase):
             'incidentlocationdesc': 'calle pequeña',
             'incidentlocationprovince': '01',
             'incidentlocationcity': '000001',
-            'incidentlocationcitysubdivision': '20AA',
+            'incidentlocationcitysubdivision': '17079000503',
             'incidentlocationzipcode': '17888',
         }
         incidentlocation.feed(incidentlocation_fields)
@@ -5835,7 +5835,7 @@ class test_A1_48(unittest.TestCase):
             'incidentlocationdesc': 'calle pequeña',
             'incidentlocationprovince': '01',
             'incidentlocationcity': '000001',
-            'incidentlocationcitysubdivision': '20AA',
+            'incidentlocationcitysubdivision': '17079000503',
             'incidentlocationzipcode': '17888',
         }
         incidentlocation.feed(incidentlocation_fields)

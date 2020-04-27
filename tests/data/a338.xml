@@ -9,7 +9,7 @@
       <processcode>38</processcode>
       <messagetype>A3</messagetype>
   </heading>
-  <a3>
+  <a338>
     <reqcode>10_Qb9POo4</reqcode>
     <comreferencenum>987654</comreferencenum>
     <responsedate>2020-03-13</responsedate>
@@ -21,8 +21,6 @@
     <interventiondate>2020-03-13</interventiondate>
     <interventionhour>14:48:40</interventionhour>
     <canonircperiodicity>01</canonircperiodicity>
-    <resultinspection>01</resultinspection>
-    <resultinspectiondesc>CORRECTO</resultinspectiondesc>
     <nationality>SB</nationality>
     <documenttype>01</documenttype>
     <documentnum>20_lhGlhEgKWo4lNBRTV</documentnum>
@@ -106,5 +104,5 @@
             <correctedlecture>3300</correctedlecture>
         </corrector>
     </correctorlist>
-  </a3>
+  </a338>
 </sctdapplication>

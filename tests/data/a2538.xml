@@ -9,7 +9,7 @@
       <processcode>38</processcode>
       <messagetype>A25</messagetype>
   </heading>
-  <a25>
+  <a2538>
     <reqcode>10_p62j9fh</reqcode>
     <visitdate>2020-03-13</visitdate>
     <visithour>14:26:35</visithour>
@@ -20,32 +20,9 @@
     <interventionhourfrom>14:26:35</interventionhourfrom>
     <interventionhourto>14:26:35</interventionhourto>
     <cups>20alzDPKUDB5HhZDhn5X</cups>
-    <resultinspection>01</resultinspection>
-    <resultinspectiondesc>CORRECTO</resultinspectiondesc>
     <visitnumber>228</visitnumber>
     <operationnum>40_tQzwG5OT6YTye1UiYVtoV3r9VymR5B</operationnum>
     <extrainfo>400_C9BEFQSmU4c7fJcqlXEYL79KyKwcZ9</extrainfo>
-    <conceptnumber>37</conceptnumber>
-    <conceptlist>
-        <concept>
-            <level>2</level>
-            <code>0002</code>
-            <description>Desc</description>
-            <periodicity>03</periodicity>
-            <units>2</units>
-            <unitimport>23.8</unitimport>
-            <import>23.8</import>
-        </concept>
-        <concept>
-            <level>1</level>
-            <code>0002</code>
-            <description>Desc</description>
-            <periodicity>03</periodicity>
-            <units>1</units>
-            <unitimport>23.8</unitimport>
-            <import>23.8</import>
-        </concept>
-    </conceptlist>
     <defectlist>
         <defect>
             <code>001</code>
@@ -56,5 +33,5 @@
             <description>Desc2</description>
         </defect>
     </defectlist>
-  </a25>
+  </a2538>
 </sctdapplication>

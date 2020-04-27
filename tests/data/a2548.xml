@@ -33,18 +33,6 @@
         <resultinspection>01</resultinspection>
         <visitnumber>590</visitnumber>
         <extrainfo>coments</extrainfo>
-        <conceptnumber>74</conceptnumber>
-        <conceptlist>
-            <concept>
-                <level>1</level>
-                <code>0000</code>
-                <description>Importe Total Factura</description>
-                <periodicity>01</periodicity>
-                <units>185</units>
-                <unitimport>10534.1</unitimport>
-                <import>1240977.69</import>
-            </concept>
-        </conceptlist>
         <counterlist>
             <counter>
                 <countermodel>model</countermodel>
