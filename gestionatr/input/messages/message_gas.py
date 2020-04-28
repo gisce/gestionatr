@@ -86,7 +86,11 @@ XSD_DATA.update({
         'A3S': 'A3S49.xsd',
         'A4': 'A449.xsd',
         'A4S': 'A4S49.xsd',
+    },
+    '50': {
+        'A15S': 'A15S50.xsd'
     }
+
 })
 
 MAIN_MESSAGE_XSD.update({
@@ -156,7 +160,8 @@ MAIN_MESSAGE_XSD.update({
     'A3S49': 'a3s49',
     'A449': 'a449',
     'A4S49': 'a4s49',
-
+    # 50
+    'A15S50': 'a15s50',
 })
 
 
