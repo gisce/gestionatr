@@ -256,7 +256,8 @@ class Message(MessageBase):
                 trobat = False
                 root = objectify.fromstring(self.str_xml)
                 for fitxer in XSD_DATA[self.tipus][self.pas]:
-                    if fitxer.split(".xsd")[0] in root.tag:
+                    if fitxer.split(".xsd")[0] in root.tag or \
+                            ("Mensaje" in root.tag and root.tag.split("Mensaje")[1] in fitxer.split(".xsd")[0]):
                         trobat = True
                         break
                 if not trobat:

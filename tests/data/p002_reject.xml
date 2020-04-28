@@ -14,8 +14,8 @@
     <FechaRechazo>2016-07-20</FechaRechazo>
     <Rechazo>
       <Secuencial>1</Secuencial>
-      <CodigoMotivo>F1</CodigoMotivo>
-      <Comentarios>Motiu de rebuig F1</Comentarios>
+      <CodigoMotivo>01</CodigoMotivo>
+      <Comentarios>No existe Punto de Suministro asociado al CUPS</Comentarios>
     </Rechazo>
   </RechazosPeticion>
 </MensajeRechazo>
