@@ -2050,8 +2050,8 @@ class test_P0(unittest.TestCase):
         rechazo = p0.Rechazo()
         rechazo_fields = {
             'secuencial': '1',
-            'codigo_motivo': 'F1',
-            'comentarios': 'Motiu de rebuig F1'
+            'codigo_motivo': '01',
+            'comentarios': 'No existe Punto de Suministro asociado al CUPS'
         }
         rechazo.feed(rechazo_fields)
 

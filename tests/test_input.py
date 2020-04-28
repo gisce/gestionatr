@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from gestionatr.input.messages import A1, A3, B1, B2, C1, C2, D1, E1, M1, P0, Q1, R1, T1, W1, F1, Deadlines
 from gestionatr.input.messages import A1_41, A1_02, A1_05, A1_44, A1_03, A1_48, A1_04, A1_46, A1_38, A1_49
-from gestionatr.input.messages import B7031, B7032, A12_24, A12_26, A19_45, A20_36
+from gestionatr.input.messages import B7031, B7032, A12_24, A12_26, A19_45, A20_36, A13_50
 from gestionatr.input.messages.F1 import agrupar_lectures_per_data, obtenir_data_inici_i_final
 from . import unittest
 from .utils import get_data
@@ -5085,6 +5085,45 @@ class test_A1_49(unittest.TestCase):
         self.assertEqual(a4s49.resultreason, 'R01')
         self.assertEqual(a4s49.resultreasondesc, u'Cliente suministrado desde planta satélite.')
         self.assertEqual(a4s49.extrainfo, '400_ssYcpvXKXUF3DuQzltLLSTHWo2SDsC')
+
+
+class test_A13_50(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a15s50 = open(get_data("a15s50.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a15s50.close()
+
+    def test_a15s50(self):
+        a15s50 = A13_50(self.xml_a15s50)
+        a15s50.parse_xml()
+        self.assertEqual(a15s50.reqcode, '0123456789')
+        self.assertEqual(a15s50.responsedate, '2018-05-01')
+        self.assertEqual(a15s50.responsehour, '13:00:00')
+        self.assertEqual(a15s50.nationality, 'ES')
+        self.assertEqual(a15s50.documenttype, '07')
+        self.assertEqual(a15s50.documentnum, '11111111H')
+        self.assertEqual(a15s50.cups, 'ES1234000000000001JN')
+        self.assertEqual(a15s50.previousatrcode, '000111222333444555666777')
+        self.assertEqual(a15s50.transfereffectivedate, '2018-07-01')
+        self.assertEqual(a15s50.readingtype, '1')
+        self.assertEqual(a15s50.extrainfo, 'comentarios extras')
+        self.assertEqual(len(a15s50.correctorlist), 2)
+        corrector = a15s50.correctorlist[0]
+        self.assertEqual(corrector.correctedlecture, u'2200')
+        self.assertEqual(corrector.correctormodel, u'modelo1')
+        self.assertEqual(corrector.correctornumber, u'D123456')
+        self.assertEqual(corrector.correctorproperty, u'01')
+        self.assertEqual(corrector.correctortype, u'01')
+        self.assertEqual(len(a15s50.counterlist), 2)
+        counter = a15s50.counterlist[1]
+        self.assertEqual(counter.countermodel, u'marca2')
+        self.assertEqual(counter.counternumber, u'C123456')
+        self.assertEqual(counter.counterpressure, u'13245.321')
+        self.assertEqual(counter.counterproperty, u'06')
+        self.assertEqual(counter.countertype, u'tipo2')
+        self.assertEqual(counter.reallecture, u'3000')
 
 
 class test_A21_36(unittest.TestCase):
