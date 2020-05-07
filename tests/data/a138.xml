@@ -9,7 +9,7 @@
       <processcode>38</processcode>
       <messagetype>A1</messagetype>
   </heading>
-  <a1>
+  <a138>
     <comreferencenum>12345</comreferencenum>
     <reqdate>2020-03-01</reqdate>
     <reqhour>08:00:00</reqhour>
@@ -77,5 +77,5 @@
             <extrainfo>404 page not found</extrainfo>
         </registerdoc>
     </registerdoclist>
-  </a1>
+  </a138>
 </sctdapplication>
