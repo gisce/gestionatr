@@ -3881,6 +3881,9 @@ class test_R1(unittest.TestCase):
         self.xml_r103_intervenciones = open(get_data("r103_intervenciones.xml"), "r")
         self.xml_r104 = open(get_data("r104.xml"), "r")
         self.xml_r105 = open(get_data("r105.xml"), "r")
+        self.xml_r108 = open(get_data("r108.xml"), "r")
+        self.xml_r109 = open(get_data("r109.xml"), "r")
+        self.xml_r109_rej = open(get_data("r109_rej.xml"), "r")
 
     def tearDown(self):
         self.xml_r101.close()
@@ -3889,6 +3892,9 @@ class test_R1(unittest.TestCase):
         self.xml_r103_intervenciones.close()
         self.xml_r104.close()
         self.xml_r105.close()
+        self.xml_r108.close()
+        self.xml_r109.close()
+        self.xml_r109_rej.close()
 
     def test_create_pas01(self):
         # MensajeReclamacionPeticion
@@ -4610,6 +4616,107 @@ class test_R1(unittest.TestCase):
         xml = str(mensaje_cierre_reclamacion)
         assertXmlEqual(xml, self.xml_r105.read())
 
+    def test_create_pas09(self):
+        # MensajeAceptacionAnulacion
+        mensaje_aceptacion_anulacion = r1.MensajeAceptacionAnulacionReclamacion()
+
+        # Cabecera
+        cabecera = r1.CabeceraReclamacion()
+        cabecera_reclamacion_fields = {
+            'codigo_ree_empresa_emisora': '1234',
+            'codigo_ree_empresa_destino': '4321',
+            'codigo_del_proceso': 'R1',
+            'codigo_del_paso': '09',
+            'codigo_de_solicitud': '201607211259',
+            'secuencial_de_solicitud': '01',
+            'fecha': '2016-07-21T12:59:47',
+            'cups': 'ES1234000000000001JN0F',
+        }
+        cabecera.feed(cabecera_reclamacion_fields)
+
+        # AceptacionAnulacion
+        aceptacion_anulacion = r1.AceptacionAnulacion()
+        aceptacion_anulacion_fields = {
+            'fecha_aceptacion': '2017-02-03',
+        }
+        aceptacion_anulacion.feed(aceptacion_anulacion_fields)
+
+        mensaje_aceptacion_anulacion_fields = {
+            'cabecera': cabecera,
+            'aceptacion_anulacion': aceptacion_anulacion,
+        }
+        mensaje_aceptacion_anulacion.feed(mensaje_aceptacion_anulacion_fields)
+        mensaje_aceptacion_anulacion.build_tree()
+        xml = str(mensaje_aceptacion_anulacion)
+        assertXmlEqual(xml, self.xml_r109.read())
+
+    def test_create_pas09_rej(self):
+        # Cabecera
+        cabecera = r1.CabeceraReclamacion()
+        cabecera_reclamacion_fields = {
+            'codigo_ree_empresa_emisora': '1234',
+            'codigo_ree_empresa_destino': '4321',
+            'codigo_del_proceso': 'R1',
+            'codigo_del_paso': '09',
+            'codigo_de_solicitud': '201607211259',
+            'secuencial_de_solicitud': '01',
+            'fecha': '2016-07-21T12:59:47',
+            'cups': 'ES1234000000000001JN0F',
+        }
+        cabecera.feed(cabecera_reclamacion_fields)
+
+        # Rechazos
+        rechazo = r1.Rechazo()
+        rechazo_fields = {
+            'secuencial': '1',
+            'codigo_motivo': 'F1',
+            'comentarios': 'Motiu de rebuig F1'
+        }
+        rechazo.feed(rechazo_fields)
+
+        # RegistroDoc
+        doc1 = r1.RegistroDoc()
+        registro_doc_fields1 = {
+            'tipo_doc_aportado': '08',
+            'direccion_url': 'http://eneracme.com/docs/NIF11111111H.pdf',
+        }
+        doc1.feed(registro_doc_fields1)
+
+        # RegistroDoc
+        doc2 = r1.RegistroDoc()
+        registro_doc_fields2 = {
+            'tipo_doc_aportado': '07',
+            'direccion_url': 'http://eneracme.com/docs/NIF11111111H.pdf',
+        }
+        doc2.feed(registro_doc_fields2)
+
+        # RegistrosDocumento
+        registros = r1.RegistrosDocumento()
+        registros_documento_fields = {
+            'registro_doc_list': [doc1, doc2],
+        }
+        registros.feed(registros_documento_fields)
+
+        # Rechazos
+        rechazos = r1.Rechazos()
+        rechazos_fields = {
+            'fecha_rechazo': '2016-07-20',
+            'rechazo_list': [rechazo],
+            'registros_documento': registros,
+        }
+        rechazos.feed(rechazos_fields)
+
+        # MensajeRechazo
+        mensaje_rechazo = r1.MensajeRechazoReclamacion()
+        mensaje_rechazo_fields = {
+            'cabecera_reclamacion': cabecera,
+            'rechazos': rechazos,
+        }
+        mensaje_rechazo.feed(mensaje_rechazo_fields)
+
+        mensaje_rechazo.build_tree()
+        xml = str(mensaje_rechazo)
+        assertXmlEqual(xml, self.xml_r109_rej.read())
 
 class test_F1(unittest.TestCase):
 

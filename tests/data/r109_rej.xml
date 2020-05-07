@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<MensajeRechazoReclamacion xmlns="http://localhost/elegibilidad">
+  <CabeceraReclamacion>
+    <CodigoREEEmpresaEmisora>1234</CodigoREEEmpresaEmisora>
+    <CodigoREEEmpresaDestino>4321</CodigoREEEmpresaDestino>
+    <CodigoDelProceso>R1</CodigoDelProceso>
+    <CodigoDePaso>09</CodigoDePaso>
+    <CodigoDeSolicitud>201607211259</CodigoDeSolicitud>
+    <SecuencialDeSolicitud>01</SecuencialDeSolicitud>
+    <FechaSolicitud>2016-07-21T12:59:47</FechaSolicitud>
+    <CUPS>ES1234000000000001JN0F</CUPS>
+  </CabeceraReclamacion>
+  <Rechazos>
+    <FechaRechazo>2016-07-20</FechaRechazo>
+    <Rechazo>
+      <Secuencial>1</Secuencial>
+      <CodigoMotivo>F1</CodigoMotivo>
+      <Comentarios>Motiu de rebuig F1</Comentarios>
+    </Rechazo>
+    <RegistrosDocumento>
+      <RegistroDoc>
+        <TipoDocAportado>08</TipoDocAportado>
+        <DireccionUrl>http://eneracme.com/docs/NIF11111111H.pdf</DireccionUrl>
+      </RegistroDoc>
+      <RegistroDoc>
+        <TipoDocAportado>07</TipoDocAportado>
+        <DireccionUrl>http://eneracme.com/docs/NIF11111111H.pdf</DireccionUrl>
+      </RegistroDoc>
+    </RegistrosDocumento>
+  </Rechazos>
+</MensajeRechazoReclamacion>

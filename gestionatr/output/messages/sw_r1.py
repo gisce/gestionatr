@@ -503,3 +503,16 @@ class DatosCierre(XmlModel):
         self.num_expediente_anomalia_fraude = XmlField('NumExpedienteAnomaliaFraude')
         self.fecha_movimiento = XmlField('FechaMovimiento')
         super(DatosCierre, self).__init__('DatosCierre', 'datos_cierre')
+
+
+# Paso 09
+class MensajeAceptacionAnulacionReclamacion(XmlModel):
+
+    _sort_order = ('mensaje', 'cabecera', 'aceptacion_anulacion')
+
+    def __init__(self):
+        self.mensaje = XmlField('MensajeAceptacionAnulacionReclamacion',
+                                attributes={'xmlns': 'http://localhost/elegibilidad'})
+        self.cabecera = Cabecera()
+        self.aceptacion_anulacion = AceptacionAnulacion()
+        super(MensajeAceptacionAnulacionReclamacion, self).__init__('MensajeAceptacionAnulacionReclamacion', 'mensaje')

@@ -1240,6 +1240,9 @@ class test_R1(unittest.TestCase):
         self.xml_r103_no_add_info = open(get_data("r103_no_add_info.xml"), "r")
         self.xml_r104 = open(get_data("r104.xml"), "r")
         self.xml_r105 = open(get_data("r105.xml"), "r")
+        self.xml_r108 = open(get_data("r108.xml"), "r")
+        self.xml_r109 = open(get_data("r109.xml"), "r")
+        self.xml_r109_rej = open(get_data("r109_rej.xml"), "r")
 
     def tearDown(self):
         self.xml_r101.close()
@@ -1249,6 +1252,9 @@ class test_R1(unittest.TestCase):
         self.xml_r103_no_add_info.close()
         self.xml_r104.close()
         self.xml_r105.close()
+        self.xml_r108.close()
+        self.xml_r109.close()
+        self.xml_r109_rej.close()
 
     def test_r101(self):
         r1 = R1(self.xml_r101)
@@ -1546,6 +1552,32 @@ class test_R1(unittest.TestCase):
         # Cod Contrato
         self.assertEqual(r1.cod_contrato, u'383922379')
 
+    def test_r108(self):
+        c = R1(self.xml_r108)
+        c.parse_xml()
+        self.assertEqual(c.pas, u'08')
+
+    def test_r109(self):
+        c = R1(self.xml_r109)
+        c.parse_xml()
+        self.assertEqual(c.fecha_aceptacion, u'2017-02-03')
+
+    def test_r109_reject(self):
+        d1 = R1(self.xml_r109_rej)
+        d1.parse_xml()
+        self.assertEqual(d1.fecha_rechazo, u'2016-07-20')
+        self.assertEqual(len(d1.registros_documento), 2)
+        doc1 = d1.registros_documento[0]
+        doc2 = d1.registros_documento[1]
+        self.assertEqual(doc1.tipo_doc_aportado, u'08')
+        self.assertEqual(doc1.direccion_url, u'http://eneracme.com/docs/NIF11111111H.pdf')
+        self.assertEqual(doc2.tipo_doc_aportado, u'07')
+        self.assertEqual(doc2.direccion_url, u'http://eneracme.com/docs/NIF11111111H.pdf')
+        self.assertEqual(len(d1.rechazos), 1)
+        rej = d1.rechazos[0]
+        self.assertEqual(rej.secuencial, u'1')
+        self.assertEqual(rej.codigo_motivo, u'F1')
+        self.assertEqual(rej.comentarios, u'Motiu de rebuig F1')
 
 class test_F1(unittest.TestCase):
     def setUp(self):
