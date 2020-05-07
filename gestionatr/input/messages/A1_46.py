@@ -108,3 +108,38 @@ class A1_46(A1_48):
         else:
             return False
 
+    @property
+    def comreferencenumdes(self):
+        tree = '{0}.comreferencenumdes'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def annulmentreason(self):
+        tree = '{0}.annulmentreason'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def claimtype(self):
+        tree = '{0}.claimtype'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def claimsubtype(self):
+        tree = '{0}.claimsubtype'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False

@@ -4473,8 +4473,11 @@ class test_A1_46(unittest.TestCase):
         self.assertEqual(a246.responsehour, u"13:00:00")
         self.assertEqual(a246.comreferencenum, u"000123456789")
         self.assertEqual(a246.operationtype, u"A20002")
+        self.assertEqual(a246.annulmentreason, u"101")
         self.assertEqual(a246.cups, u"ES1234000000000001JN")
         self.assertEqual(a246.reqcodetoanul, u"0123456790")
+        self.assertEqual(a246.claimtype, u"01")
+        self.assertEqual(a246.claimsubtype, u"001")
         self.assertEqual(a246.result, u"01")
         self.assertEqual(a246.resultdesc, u"Aceptada")
         self.assertEqual(a246.resultreason, u"R01")
@@ -4568,7 +4571,7 @@ class test_A12_24(unittest.TestCase):
     def tearDown(self):
         self.xml_a1224.close()
 
-    def test_a246(self):
+    def test_a1224(self):
         a1224 = A12_24(self.xml_a1224)
         a1224.parse_xml()
 

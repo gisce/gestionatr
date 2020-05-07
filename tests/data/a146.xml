@@ -9,12 +9,16 @@
         <processcode>46</processcode>
         <messagetype>A1</messagetype>
     </heading>
-    <a1>
+    <a146>
         <comreferencenum>000123456789</comreferencenum>
+        <comreferencenumdes>999123456789</comreferencenumdes>
         <reqdate>2018-05-01</reqdate>
         <reqhour>13:00:00</reqhour>
+        <annulmentreason>102</annulmentreason>
         <operationtype>A20002</operationtype>
         <cups>ES1234000000000001JN</cups>
+        <claimtype>01</claimtype>
+        <claimsubtype>001</claimsubtype>
         <extrainfo>comentarios extra</extrainfo>
         <registerdoclist>
             <registerdoc>
@@ -30,5 +34,5 @@
                 <extrainfo>Comments</extrainfo>
             </registerdoc>
         </registerdoclist>
-    </a1>
+    </a146>
 </sctdapplication>

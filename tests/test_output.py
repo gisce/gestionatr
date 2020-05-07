@@ -6043,6 +6043,10 @@ class test_A1_46(unittest.TestCase):
             'reqdate': '2018-05-01',
             'reqhour': '13:00:00',
             'comreferencenum': '000123456789',
+            'comreferencenumdes': '999123456789',
+            'annulmentreason': '102',
+            'claimtype': '01',
+            'claimsubtype': '001',
             'cups': 'ES1234000000000001JN',
             'operationtype': 'A20002',
             'extrainfo': 'comentarios extra',
@@ -6051,7 +6055,7 @@ class test_A1_46(unittest.TestCase):
         a146.feed(a146_fields)
         mensaje_a146_fields = {
             'heading': heading,
-            'a1': a146,
+            'a146': a146,
         }
         mensaje.feed(mensaje_a146_fields)
         mensaje.build_tree()
