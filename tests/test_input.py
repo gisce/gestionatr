@@ -182,6 +182,7 @@ class test_C1(unittest.TestCase):
         self.assertEqual(c.datos_activacion.fecha, u'2016-08-21')
         # Contrato
         self.assertEqual(c.contrato.cod_contrato, u'00001')
+        self.assertEqual(c.contrato.data_finalitzacio, u'2020-01-01')
         self.assertEqual(c.contrato.tipo_autoconsumo, u'00')
         self.assertEqual(c.contrato.tipo_contrato_atr, u'02')
         self.assertEqual(c.contrato.tarifa_atr, u'003')
@@ -1377,6 +1378,14 @@ class test_R1(unittest.TestCase):
         self.assertEqual(sol_ret.tipo, u'03')
         # Comentarios
         self.assertEqual(r1.comentarios, u'R1 03.')
+        # Parametros Comunicacion
+        self.assertEqual(r1.parametros_comunicacion[0].direccion_enlace, u'a1b2c3d4e5')
+        self.assertEqual(r1.parametros_comunicacion[0].num_linea, u'2')
+        self.assertEqual(r1.parametros_comunicacion[0].telefono_telemedida, u'999888444333')
+        self.assertEqual(r1.parametros_comunicacion[0].telefono_velocidad_comunicacion, u'20')
+        self.assertEqual(r1.parametros_comunicacion[0].telefono_bit_datos, u'1')
+        self.assertEqual(r1.parametros_comunicacion[0].telefono_paridad, u'0')
+        self.assertEqual(r1.parametros_comunicacion[0].telefono_bit_stop, u'1')
         # Intervenciones
         r1_int = R1(self.xml_r103_intervenciones)
         r1_int.parse_xml()
@@ -1529,6 +1538,11 @@ class test_R1(unittest.TestCase):
         self.assertEqual(dc.resultado_reclamacion, u'02')
         self.assertEqual(dc.subtipo, u'013')
         self.assertEqual(dc.tipo, u'03')
+        self.assertEqual(r1.parametros_comunicacion[0].direccion_enlace, u'a1b2c3d4e5')
+        self.assertEqual(r1.parametros_comunicacion[0].num_linea, u'2')
+        self.assertEqual(r1.parametros_comunicacion[0].ip_direccion, u'0.0.0.0')
+        self.assertEqual(r1.parametros_comunicacion[0].ip_puerto_enlace, u'8080')
+
         # Cod Contrato
         self.assertEqual(r1.cod_contrato, u'383922379')
 

@@ -458,6 +458,15 @@ class Contrato(object):
         return data
 
     @property
+    def data_finalitzacio(self):
+        data = ''
+        try:
+            data = self.contrato.FechaFinalizacion.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
     def tipo_autoconsumo(self):
         data = ''
         try:

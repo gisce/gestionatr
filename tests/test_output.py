@@ -385,6 +385,7 @@ class test_C1(unittest.TestCase):
 
         contrato_fields = {
             'id_contrato': id_contrato,
+            'data_finalitzacio': '2020-01-01',
             'tipo_autoconsumo': '00',
             'tipo_contrato_atr': '02',
             'condiciones_contractuales': condiciones_contractuales,
@@ -4223,13 +4224,28 @@ class test_R1(unittest.TestCase):
             'solicitud_informacion_adicional_para_retipificacion': siar
         }
         solicitudes_informacion_adicional.feed(solicitudes_informacion_adicional_fields)
-
+        parametres = r1.ParametrosComunicacion()
+        tlfn = r1.TelefonoTelemedida()
+        tlfn.feed({
+            'num_telefono': '999888444333',
+            'velocidad_comunicacion': '20',
+            'bit_datos': '1',
+            'paridad': '0',
+            'bit_stop': '1',
+        })
+        parametres.feed({
+            'direccion_enlace': 'a1b2c3d4e5',
+            'num_linea': '2',
+            'clave_lectura': '25',
+            'telefono': tlfn
+        })
         informacion_adicional_fields = {
             'datos_informacion': datos_informacion,
             'informacion_intermedia': informacion_intermedia,
             'retipificacion': retipificacion,
             'solicitudes_informacion_adicional': solicitudes_informacion_adicional,
             'comentarios': 'R1 03.',
+            'parametros_comunicacion': parametres
         }
         informacion_adicional.feed(informacion_adicional_fields)
 
@@ -4565,11 +4581,23 @@ class test_R1(unittest.TestCase):
             'fecha_movimiento': '2016-04-12',
         }
         datos_cierre.feed(datos_cierre_fields)
-
+        parametres = r1.ParametrosComunicacion()
+        tlfn = r1.IP()
+        tlfn.feed({
+            'direccion_ip': '0.0.0.0',
+            'puerto_enlace': '8080',
+        })
+        parametres.feed({
+            'direccion_enlace': 'a1b2c3d4e5',
+            'num_linea': '2',
+            'clave_lectura': '25',
+            'ip': tlfn
+        })
         cierre_reclamacion_fields = {
             'datos_cierre': datos_cierre,
             'cod_contrato': '383922379',
             'comentarios': 'Comentarios generales',
+            'parametros_comunicacion': parametres
         }
         cierre_reclamacion.feed(cierre_reclamacion_fields)
 
