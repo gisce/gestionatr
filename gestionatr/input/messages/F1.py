@@ -366,6 +366,9 @@ class Factura(object):
         if hasattr(self.factura, 'IVA'):
             for d in self.factura.IVA:
                 data.append(IVA(d))
+        if hasattr(self.factura, 'IVAReducido'):
+            for d in self.factura.IVAReducido:
+                data.append(IVA(d))
         return data
 
     @property
