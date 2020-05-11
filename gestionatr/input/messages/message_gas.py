@@ -254,12 +254,21 @@ class MessageGas(Message):
             data = get_rec_attr(self.obj, tree, False)
             if data not in [None, False]:
                 return data.text
-            if self.processcode == '26':
+            if self.processcode in ('26', '24'):
                 tree = '{0}.atrcode'.format(self._header)
                 data = get_rec_attr(self.obj, tree, False)
                 if data not in [None, False]:
                     return data.text
             raise except_f1('Error', u'Documento sin código de solicitud')
+
+    @property
+    def seq_sollicitud(self):
+        tree = '{0}.sequential'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data not in [None, False]:
+            return data.text
+        else:
+            return '01'
 
     @property
     def data_sollicitud(self):
