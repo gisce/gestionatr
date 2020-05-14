@@ -92,15 +92,25 @@ def repartir_consums_entre_lectures(consums, lectures_xml):
             res[l] = consums[i]
             i += 1
     elif len(consums) == 1:
-        consum = consums[0]
-        import math
-        parte_decimal, parte_entera = math.modf(consum)
-        part_igual = int(parte_entera) / len(lectures_xml)
-        residu = (int(parte_entera) % len(lectures_xml)) + parte_decimal
+        periodes = list(set([l.periode for l in lectures_xml]))
+        if len(periodes) > 1:
+            consum_acumulat = 0
+            for l in lectures_xml:
+                res[l] = l.consumo_calculado
+                if l != lectures_xml[0]:
+                    consum_acumulat += l.consumo_calculado
+            if res:
+                res[lectures_xml[0]] = consums[0] - consum_acumulat
+        else:
+            consum = consums[0]
+            import math
+            parte_decimal, parte_entera = math.modf(consum)
+            part_igual = int(parte_entera) / len(lectures_xml)
+            residu = (int(parte_entera) % len(lectures_xml)) + parte_decimal
 
-        l = None
-        for l in lectures_xml:
-            res[l] = part_igual
-        if l:
-            res[l] += residu
+            l = None
+            for l in lectures_xml:
+                res[l] = part_igual
+            if l:
+                res[l] += residu
     return res
