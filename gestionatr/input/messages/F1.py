@@ -1221,7 +1221,25 @@ class FacturaATR(Factura):
 
     def get_lectures_amb_ajust_autoconsum(self, tipus='S', ajust_balancejat=True, motiu_ajust="98"):
         return self.get_lectures_amb_ajust_quadrat_amb_consum(tipus=tipus, ajust_balancejat=ajust_balancejat, motiu_ajust=motiu_ajust)
-    
+
+    def periodes_facturats_agrupats(self, nperiodes_lectures, tipus='A'):
+        if tipus not in ['A', 'S']:
+            return None
+
+        res = {}
+        if tipus == 'A' and self.energia_activa:
+            for activa in self.energia_activa.terminos_energia_activa:
+                for periode_activa in activa.periodos:
+                    if periode_activa.nombre not in res:
+                        res[periode_activa.nombre] = True
+
+        else:  # if tipus == 'S':
+            for concepte in self.conceptos_repercutibles:
+                if concepte.concepto_repercutible[0] == '7' and concepte.concepto_repercutible not in res:
+                    res[concepte.concepto_repercutible] = True
+
+        return len(res.keys()) != nperiodes_lectures
+
     def get_lectures_amb_ajust_quadrat_amb_consum(self, tipus='S', ajust_balancejat=True, motiu_ajust="98"):
         lectures_per_periode = {}
         for comptador in self.get_comptadors():
@@ -1231,6 +1249,16 @@ class FacturaATR(Factura):
                 if not lectures_per_periode.get(periode):
                     lectures_per_periode[periode] = []
                 lectures_per_periode[periode].append(lectura)
+
+            nperiodes = len([l for l in lectures_per_periode.keys() if l])
+            if self.periodes_facturats_agrupats(nperiodes, tipus=tipus) and ajust_balancejat:
+                for periode in lectures_per_periode.keys():
+                    if not periode:
+                        continue
+                    periode_agrupat = "P{0}".format(int(periode[1:]) + nperiodes/2)
+                    if lectures_per_periode.get(periode_agrupat):
+                        lectures_per_periode[periode].extend(lectures_per_periode.get(periode_agrupat))
+                        del lectures_per_periode[periode_agrupat]
 
         res = {}
         for periode, lectures in lectures_per_periode.iteritems():
