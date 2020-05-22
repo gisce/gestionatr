@@ -157,6 +157,7 @@
 			10	Deficiencia subsanable en el Equipo de Medida
 			11	Trabajos pendientes de finalizar
 			12	Telefono de contacto erroneo
+			13	El consumidor en campo no quiere la baja
 			14	Pendiente resto solicitudes asociadas al autoconsumo colectivo
 		</xs:documentation>
 		</xs:annotation>
@@ -167,6 +168,7 @@
 			<xs:enumeration value="10"/>
 			<xs:enumeration value="11"/>
 			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
 			<xs:enumeration value="14"/>
 		</xs:restriction>
 	</xs:simpleType>

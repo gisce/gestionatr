@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- editado con XMLSpy v2020 rel. 2 (x64) (http://www.altova.com) por teresa.marco (INECO) -->
 <xs:schema xmlns="http://localhost/elegibilidad" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposComplejos.xsd"/>
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
@@ -32,7 +33,7 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element name="ParametrosComunicacion" type="ParametrosComunicacion" minOccurs="0"/>
+			<xs:element name="ParametrosComunicacion" type="ParametrosComunicacion" minOccurs="0" maxOccurs="10"/>
 			<xs:element name="RegistrosDocumento" type="RegistrosDocs" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -313,7 +314,7 @@
 	<xs:complexType name="CierreReclamacion">
 		<xs:sequence>
 			<xs:element name="DatosCierre" type="DatosCierre"/>
-			<xs:element name="ParametrosComunicacion" type="ParametrosComunicacion" minOccurs="0"/>
+			<xs:element name="ParametrosComunicacion" type="ParametrosComunicacion" minOccurs="0" maxOccurs="10"/>
 			<xs:element name="CodContrato" type="CodigoContrato" minOccurs="0"/>
 			<xs:element name="Comentarios" type="X4000"/>
 			<xs:element name="RegistrosDocumento" type="RegistrosDocs" minOccurs="0"/>

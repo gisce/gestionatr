@@ -837,7 +837,7 @@ class ParametrosComunicacion(object):
     def telefono_telemedida(self):
         data = False
         try:
-            data = self.sol.Telefono.NumTelefono.text
+            data = self.sol.Telefono.TelefonoTelemedida.text
         except AttributeError:
             pass
         return data

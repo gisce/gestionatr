@@ -43,11 +43,14 @@
         </SolicitudesInformacionAdicional>
         <Comentarios>R1 03.</Comentarios>
         <ParametrosComunicacion>
+            <CodPM>1234567890123456789012</CodPM>
+            <CodPMPrincipal>1234567890123456789012</CodPMPrincipal>
+            <Funcion>P</Funcion>
             <DireccionEnlace>a1b2c3d4e5</DireccionEnlace>
             <NumLinea>2</NumLinea>
-            <ClaveLectura>25</ClaveLectura>
+            <ClaveAcceso>25</ClaveAcceso>
             <Telefono>
-                <NumTelefono>999888444333</NumTelefono>
+                <TelefonoTelemedida>999888444333</TelefonoTelemedida>
                 <VelocidadComunicacion>20</VelocidadComunicacion>
                 <BitDatos>1</BitDatos>
                 <Paridad>0</Paridad>

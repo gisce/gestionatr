@@ -1545,7 +1545,14 @@
 	</xs:complexType>
 	<xs:complexType name="TelefonoReclamacion">
 		<xs:sequence>
-			<xs:element name="NumTelefono" type="X21"/>
+			<xs:element name="TelefonoTelemedida">
+				<xs:simpleType>
+					<xs:restriction base="X21">
+						<xs:minLength value="9"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
 			<xs:element name="VelocidadComunicacion" type="X6"/>
 			<xs:element name="BitDatos" type="X1"/>
 			<xs:element name="Paridad" type="X1"/>
@@ -1560,6 +1567,19 @@
 	</xs:complexType>
 	<xs:complexType name="ParametrosComunicacion">
 		<xs:sequence>
+			<xs:element name="CodPM">
+				<xs:simpleType>
+					<xs:restriction base="CodPM">
+						<xs:length value="22"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="CodPMPrincipal" type="CodPM" minOccurs="0"/>
+			<xs:element name="Funcion" type="FuncionPM">
+				<xs:annotation>
+					<xs:documentation>Tabla 40</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="DireccionEnlace" type="X10"/>
 			<xs:element name="NumLinea">
 				<xs:simpleType>
@@ -1568,7 +1588,7 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element name="ClaveLectura" type="X10"/>
+			<xs:element name="ClaveAcceso" type="X10"/>
 			<xs:choice>
 				<xs:element name="Telefono" type="TelefonoReclamacion"/>
 				<xs:element name="IP" type="IP"/>

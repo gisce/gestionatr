@@ -1385,6 +1385,9 @@ class test_R1(unittest.TestCase):
         # Comentarios
         self.assertEqual(r1.comentarios, u'R1 03.')
         # Parametros Comunicacion
+        self.assertEqual(r1.parametros_comunicacion[0].cod_pm, u'1234567890123456789012')
+        self.assertEqual(r1.parametros_comunicacion[0].cod_pm_principal, u'1234567890123456789012')
+        self.assertEqual(r1.parametros_comunicacion[0].funcion, u'P')
         self.assertEqual(r1.parametros_comunicacion[0].direccion_enlace, u'a1b2c3d4e5')
         self.assertEqual(r1.parametros_comunicacion[0].num_linea, u'2')
         self.assertEqual(r1.parametros_comunicacion[0].telefono_telemedida, u'999888444333')

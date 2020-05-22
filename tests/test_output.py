@@ -4240,6 +4240,9 @@ class test_R1(unittest.TestCase):
             'bit_stop': '1',
         })
         parametres.feed({
+            'cod_pm': '1234567890123456789012',
+            'cod_pm_principal': '1234567890123456789012',
+            'funcion': 'P',
             'direccion_enlace': 'a1b2c3d4e5',
             'num_linea': '2',
             'clave_lectura': '25',
@@ -4594,6 +4597,9 @@ class test_R1(unittest.TestCase):
             'puerto_enlace': '8080',
         })
         parametres.feed({
+            'cod_pm': '1234567890123456789012',
+            'cod_pm_principal': '1234567890123456789012',
+            'funcion': 'P',
             'direccion_enlace': 'a1b2c3d4e5',
             'num_linea': '2',
             'clave_lectura': '25',

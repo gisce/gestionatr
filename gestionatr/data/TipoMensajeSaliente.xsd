@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- editado con XMLSpy v2020 sp1 (http://www.altova.com) por teresa (INECO) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposComplejos.xsd"/>
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
@@ -48,7 +49,7 @@
 					<xs:documentation>Table 121</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="Contacto" type="Contactoconemail" minOccurs="0"/>
+			<xs:element name="Contacto" type="Contactoconemail" minOccurs="0" maxOccurs="5"/>
 		</xs:sequence>
 	</xs:complexType>
 </xs:schema>

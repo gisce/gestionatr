@@ -48,13 +48,17 @@ class DatosSolicitud(XmlModel):
 
 class ParametrosComunicacion(XmlModel):
 
-    _sort_order = ('parametros_comunicacion', 'direccion_enlace', 'num_linea', 'clave_lectura', 'telefono', 'ip')
+    _sort_order = ('parametros_comunicacion', 'cod_pm', 'cod_pm_principal', 'funcion', 'direccion_enlace',
+                   'num_linea', 'clave_lectura', 'telefono', 'ip')
 
     def __init__(self):
         self.parametros_comunicacion = XmlField('ParametrosComunicacion')
+        self.cod_pm = XmlField('CodPM')
+        self.cod_pm_principal = XmlField('CodPMPrincipal')
+        self.funcion = XmlField('Funcion')
         self.direccion_enlace = XmlField('DireccionEnlace')
         self.num_linea = XmlField('NumLinea')
-        self.clave_lectura = XmlField('ClaveLectura')
+        self.clave_lectura = XmlField('ClaveAcceso')
         self.telefono = TelefonoTelemedida()
         self.ip = IP()
         super(ParametrosComunicacion, self).__init__('ParametrosComunicacion', 'parametros_comunicacion')
@@ -66,7 +70,7 @@ class TelefonoTelemedida(XmlModel):
 
     def __init__(self):
         self.telefono_telemedida = XmlField('Telefono')
-        self.num_telefono = XmlField('NumTelefono')
+        self.num_telefono = XmlField('TelefonoTelemedida')
         self.velocidad_comunicacion = XmlField('VelocidadComunicacion')
         self.bit_datos = XmlField('BitDatos')
         self.paridad = XmlField('Paridad')

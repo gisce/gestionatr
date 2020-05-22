@@ -998,7 +998,7 @@ TABLA_27 = [
     ('38', 'Existencia de Solicitud previa en curso C1'),
     ('39', 'Existencia de Solicitud previa en curso C2'),
     ('40', 'Existencia de Solicitud previa en curso M1'),
-    ('42', 'No es posible anulación. OT ya en campo'),
+    ('42', 'No es posible anulación. OT ya en campo o acciones no anulables en una reclamación'),
     ('43', 'No es posible anulación. Solicitud ya activada'),
     ('44', 'Error en las horas de utilización (Eventuales)'),
     ('46', 'Fecha de la operación solicitada con carácter retroactivo'),
@@ -1102,7 +1102,7 @@ TABLA_27 = [
     ('F5', 'Instalación de >100kW en BT o Instalación en AT'),
     ('G1', 'Sólo se podrá modificar: -el tipo de identificador y el identificador o, -nombre y apellidos (razón social).'),
     ('G2', 'Revisión interior incorrecta, debe aportar documentación técnica posterior a la revisión'),
-    ('G3', 'Código solicitud ATR inexistente'),
+    ('G3', 'Código solicitud ATR/reclamación anterior inexistente'),
     ('99', 'Otros'),
 ]
 
