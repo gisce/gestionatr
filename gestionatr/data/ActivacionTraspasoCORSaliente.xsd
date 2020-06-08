@@ -3,11 +3,11 @@
 	<xs:include schemaLocation="TiposComplejos.xsd"/>
 	<xs:include schemaLocation="TipoMensajeSaliente.xsd"/>
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
-	<xs:element name="MensajeActivacionComercializadorSaliente">
+	<xs:element name="MensajeActivacionComercializadorSalienteT1">
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="Cabecera" type="Cabecera"/>
-				<xs:element name="NotificacionComercializadorSaliente" type="ActivacionComercializadorSalienteT"/>
+				<xs:element name="NotificacionComercializadorSalienteT1" type="ActivacionComercializadorSalienteT"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

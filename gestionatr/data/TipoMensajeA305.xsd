@@ -19,6 +19,7 @@
 	<xs:complexType name="ContratoAltaA305">
 		<xs:sequence>
 			<xs:element name="IdContrato" type="IdContrato"/>
+			<xs:element name="FechaFinalizacion" type="xs:date" minOccurs="0"/>
 			<xs:element name="TipoAutoconsumo" type="TipoAutoconsumo">
 				<xs:annotation>
 					<xs:documentation>Tabla 113</xs:documentation>

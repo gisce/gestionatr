@@ -2,7 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposComplejos.xsd"/>
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
-	<xs:complexType name="NotificacionBajaATRB105">
+	<xs:complexType name="NotificacionBajaATRB201">
 		<xs:sequence>
 			<xs:element name="DatosActivacionBaja" type="DatosNotificacionBajaATRB201"/>
 			<xs:element name="Contrato" type="ContratoNotificacionBajaATRB201"/>

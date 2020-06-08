@@ -7,7 +7,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="Cabecera" type="Cabecera"/>
-				<xs:element name="ActivacionBaja" type="NotificacionBajaATRB105"/>
+				<xs:element name="ActivacionBaja" type="NotificacionBajaATRB201"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

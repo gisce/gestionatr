@@ -2,7 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TipoMensajeRechazo.xsd"/>
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
-	<xs:element name="MensajeRechazo">
+	<xs:element name="MensajeRechazoP0">
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="Cabecera" type="Cabecera"/>
