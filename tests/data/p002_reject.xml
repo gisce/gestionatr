@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<MensajeRechazo xmlns="http://localhost/elegibilidad">
+<MensajeRechazoP0 xmlns="http://localhost/elegibilidad">
   <Cabecera>
     <CodigoREEEmpresaEmisora>1234</CodigoREEEmpresaEmisora>
     <CodigoREEEmpresaDestino>4321</CodigoREEEmpresaDestino>
@@ -18,4 +18,4 @@
       <Comentarios>No existe Punto de Suministro asociado al CUPS</Comentarios>
     </Rechazo>
   </RechazosPeticion>
-</MensajeRechazo>
+</MensajeRechazoP0>

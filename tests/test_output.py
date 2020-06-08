@@ -3831,7 +3831,7 @@ class test_T1(unittest.TestCase):
         puntos_de_medida = self.puntos_de_medida
 
         # NotificacionComercializadorSaliente
-        notificacion_comercializador_saliente = t1.NotificacionComercializadorSaliente()
+        notificacion_comercializador_saliente = t1.NotificacionComercializadorSalienteT1()
         notificacion_comercializador_saliente_fields = {
             'datos_notificacion': datos_notificacion,
             'contrato': contrato,
@@ -3841,7 +3841,7 @@ class test_T1(unittest.TestCase):
 
         mensaje_fields = {
             'cabecera': cabecera,
-            'notificacion_comercializador_saliente': notificacion_comercializador_saliente,
+            'notificacion_comercializador_saliente_t1': notificacion_comercializador_saliente,
         }
         mensaje.feed(mensaje_fields)
         mensaje.build_tree()
