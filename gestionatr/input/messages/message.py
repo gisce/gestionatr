@@ -141,7 +141,7 @@ MAIN_MESSAGE_XSD = {
     'AceptacionTraspasoCOR': 'AceptacionTraspasoCOR',
     'RechazoTraspasoCOR': 'Rechazos',
     'ActivacionTraspasoCOR': 'ActivacionTraspasoCOR',
-    'ActivacionTraspasoCORSaliente': 'NotificacionComercializadorSaliente',
+    'ActivacionTraspasoCORSaliente': 'NotificacionComercializadorSalienteT1',
     'EnvioInformacionPS': 'EnvioInformacionPS',
     'RechazoPeticion': 'RechazosPeticion',
     'ModificacionDeATR': 'ModificacionDeATR',
@@ -259,8 +259,11 @@ class Message(MessageBase):
                 trobat = False
                 root = objectify.fromstring(self.str_xml)
                 for fitxer in XSD_DATA[self.tipus][self.pas]:
-                    if fitxer.split(".xsd")[0] in root.tag or \
-                            ("Mensaje" in root.tag and root.tag.split("Mensaje")[1] in fitxer.split(".xsd")[0]):
+                    if 'MensajeRechazoP0' in root.tag:
+                        fitxer = "RechazoPeticion.xsd"
+                        trobat = True
+                        break
+                    if fitxer.split(".xsd")[0] in root.tag:
                         trobat = True
                         break
                 if not trobat:

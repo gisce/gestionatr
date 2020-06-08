@@ -154,14 +154,26 @@ class DatosActivacion(XmlModel):
 
 class MensajeActivacionTraspasoCORSaliente(XmlModel):
 
-    _sort_order = ('mensaje', 'cabecera', 'notificacion_comercializador_saliente')
+    _sort_order = ('mensaje', 'cabecera', 'notificacion_comercializador_saliente_t1')
 
     def __init__(self):
-        self.mensaje = XmlField('MensajeActivacionComercializadorSaliente',
+        self.mensaje = XmlField('MensajeActivacionComercializadorSalienteT1',
                                 attributes={'xmlns': 'http://localhost/elegibilidad'})
         self.cabecera = Cabecera()
-        self.notificacion_comercializador_saliente = NotificacionComercializadorSaliente()
-        super(MensajeActivacionTraspasoCORSaliente, self).__init__('MensajeActivacionTraspasoCORSaliente', 'mensaje')
+        self.notificacion_comercializador_saliente_t1 = NotificacionComercializadorSalienteT1()
+        super(MensajeActivacionTraspasoCORSaliente, self).__init__('MensajeActivacionTraspasoCORSalienteT1', 'mensaje')
+
+
+class NotificacionComercializadorSalienteT1(XmlModel):
+
+    _sort_order = ('notificacion_comercializador_saliente_t1', 'datos_notificacion', 'contrato', 'puntos_de_medida')
+
+    def __init__(self):
+        self.notificacion_comercializador_saliente_t1 = XmlField('NotificacionComercializadorSalienteT1')
+        self.datos_notificacion = DatosNotificacion()
+        self.contrato = Contrato()
+        self.puntos_de_medida = PuntosDeMedida()
+        super(NotificacionComercializadorSalienteT1, self).__init__('NotificacionComercializadorSalienteT1', 'notificacion_comercializador_saliente_t1')
 
 
 class Medida(Medida):

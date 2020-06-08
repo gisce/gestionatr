@@ -276,11 +276,11 @@ class MensajeRechazo(XmlModel):
     _sort_order = ('mensaje_rechazo', 'cabecera', 'rechazos_peticion')
 
     def __init__(self):
-        self.mensaje_rechazo = XmlField('MensajeRechazo',
+        self.mensaje_rechazo = XmlField('MensajeRechazoP0',
                                         attributes={'xmlns': 'http://localhost/elegibilidad'})
         self.cabecera = Cabecera()
         self.rechazos_peticion = RechazosPeticion()
-        super(MensajeRechazo, self).__init__('MensajeRechazo', 'mensaje_rechazo')
+        super(MensajeRechazo, self).__init__('MensajeRechazoP0', 'mensaje_rechazo')
 
 
 class RechazosPeticion(XmlModel):
