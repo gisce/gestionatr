@@ -873,6 +873,7 @@ class Integrador(object):
         self._lectura_hasta = None
         self._magnitud = None
         self._periode = None
+        self._numero_ruedas_enteras = None
         self._ajuste = None
         self.comptador = None
 
@@ -912,9 +913,15 @@ class Integrador(object):
 
     @property
     def numero_ruedas_enteras(self):
+        if self._numero_ruedas_enteras:
+            return self._numero_ruedas_enteras
         if hasattr(self.integrador, 'NumeroRuedasEnteras'):
             return float(self.integrador.NumeroRuedasEnteras.text.strip())
         return None
+
+    @numero_ruedas_enteras.setter
+    def numero_ruedas_enteras(self, value):
+        self._numero_ruedas_enteras = value
 
     @property
     def numero_ruedas_decimales(self):
@@ -1324,6 +1331,7 @@ class FacturaATR(Factura):
                     l2.procedencia = base_info.lectura_hasta.procedencia
                     new_integrador = Integrador(None)
                     new_integrador.magnitud = "AS"
+                    new_integrador.numero_ruedas_enteras = base_info.numero_ruedas_enteras
                     new_integrador.codigo_periodo = base_info.codigo_periodo[0] + concepte.concepto_repercutible[1]
                     new_integrador.lectura_desde = l1
                     new_integrador.lectura_hasta = l2
