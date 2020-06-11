@@ -1348,43 +1348,15 @@ class FacturaATR(Factura):
                     lectures_per_periode[periode] = []
                 lectures_per_periode[periode].append(lectura)
 
-        if tipus == "S" and not lectures_per_periode and self.get_consum_facturat(tipus='S', periode=None):
-            # Si ens han facturat excedents pero no ens han informat de cap lectura AS,
-            # ens inventem lectures amb valor 0 (puta ENDESA que ens fa perdre el temps)
-            comptador_amb_lectures = None
-            for c in self.get_comptadors():
-                if c.get_lectures_activa_entrant():
-                    comptador_amb_lectures = c
-                    break
-            if comptador_amb_lectures:
-                base_info = comptador_amb_lectures.get_lectures_activa_entrant()[0]
-                for concepte in self.conceptos_repercutibles:
-                    if concepte.concepto_repercutible[0] == '7':
-                        l1 = Lectura(None)
-                        l1.fecha = base_info.lectura_desde.fecha
-                        l1.lectura = 0
-                        l2 = Lectura(None)
-                        l2.fecha = base_info.lectura_hasta.fecha
-                        l2.lectura = 0
-                        new_integrador = Integrador(None)
-                        new_integrador.magnitud = "AS"
-                        new_integrador.codigo_periodo = base_info.codigo_periodo[0] + concepte.concepto_repercutible[1]
-                        new_integrador.lectura_desde = l1
-                        new_integrador.lectura_hasta = l2
-                        periode = 'P'+concepte.concepto_repercutible[1]
-                        if not lectures_per_periode.get(periode):
-                            lectures_per_periode[periode] = []
-                        lectures_per_periode[periode].append(new_integrador)
-
-        nperiodes = len([l for l in lectures_per_periode.keys() if l])
-        if self.periodes_facturats_agrupats(nperiodes, tipus=tipus) and ajust_balancejat:
-            for periode in lectures_per_periode.keys():
-                if not periode:
-                    continue
-                periode_agrupat = "P{0}".format(int(periode[1:]) + nperiodes/2)
-                if lectures_per_periode.get(periode_agrupat):
-                    lectures_per_periode[periode].extend(lectures_per_periode.get(periode_agrupat))
-                    del lectures_per_periode[periode_agrupat]
+            nperiodes = len([l for l in lectures_per_periode.keys() if l])
+            if self.periodes_facturats_agrupats(nperiodes, tipus=tipus) and ajust_balancejat:
+                for periode in lectures_per_periode.keys():
+                    if not periode:
+                        continue
+                    periode_agrupat = "P{0}".format(int(periode[1:]) + nperiodes/2)
+                    if lectures_per_periode.get(periode_agrupat):
+                        lectures_per_periode[periode].extend(lectures_per_periode.get(periode_agrupat))
+                        del lectures_per_periode[periode_agrupat]
 
         res = {}
         for periode, lectures in lectures_per_periode.iteritems():
