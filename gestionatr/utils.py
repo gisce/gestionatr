@@ -96,11 +96,25 @@ def repartir_consums_entre_lectures(consums, lectures_xml):
         if len(periodes) > 1:
             consum_acumulat = 0
             for l in lectures_xml:
-                res[l] = l.consumo_calculado
-                if l != lectures_xml[0]:
-                    consum_acumulat += l.consumo_calculado
+                # Calculem el consum que te aquesta lectura
+                consumo_calculado = l.lectura_hasta.lectura + (l.ajuste and l.ajuste.ajuste_por_integrador or 0.0) - l.lectura_desde.lectura
+                if consumo_calculado < 0:
+                    consumo_calculado += l.gir_comptador
+                res[l] = consumo_calculado
+                consum_acumulat += consumo_calculado
             if res:
-                res[lectures_xml[0]] = consums[0] - consum_acumulat
+                if consums[0] >= consum_acumulat:
+                    res[lectures_xml[0]] += consums[0] - consum_acumulat
+                else:
+                    a_repartir = abs(consums[0] - consum_acumulat)
+                    for l in sorted(res.keys(), key=lambda *a: a[0].periode):
+                        if res[l] >= a_repartir:
+                            res[l] -= a_repartir
+                            break
+                        else:
+                            a_repartir -= res[l]
+                            res[l] = 0
+
         else:
             consum = consums[0]
             import math

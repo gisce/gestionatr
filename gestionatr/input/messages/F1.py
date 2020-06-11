@@ -1277,7 +1277,7 @@ class FacturaATR(Factura):
                         lectura.ajuste = Ajuste(lectura.ajuste.ajuste)
                     old_ajust = lectura.ajuste and lectura.ajuste.ajuste_por_integrador or 0.0
                     new_val = consum - (lectura.lectura_hasta.lectura - lectura.lectura_desde.lectura + old_ajust)
-                    if new_val != 0.0:
+                    if new_val != (lectura.lectura_hasta.lectura - lectura.lectura_desde.lectura + old_ajust):
                         lectura.ajuste.ajuste_por_integrador = consum - (lectura.lectura_hasta.lectura - lectura.lectura_desde.lectura)
                         lectura.ajuste.codigo_motivo = motiu_ajust  # normalment 98 - Autoconsumo
             for l in lectures:
