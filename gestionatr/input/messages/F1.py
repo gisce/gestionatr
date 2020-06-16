@@ -1333,6 +1333,8 @@ class FacturaATR(Factura):
                     new_integrador.magnitud = "AS"
                     new_integrador.numero_ruedas_enteras = base_info.numero_ruedas_enteras
                     new_integrador.codigo_periodo = base_info.codigo_periodo[0] + concepte.concepto_repercutible[1]
+                    if not new_integrador.periode:
+                        new_integrador.codigo_periodo = base_info.codigo_periodo
                     new_integrador.lectura_desde = l1
                     new_integrador.lectura_hasta = l2
                     res.append(new_integrador)
