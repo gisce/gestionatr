@@ -250,11 +250,14 @@ TAULA_PROCESO = [
     ('04', 'Solicitud de Baja'),
     ('05', 'Solicitud de Modificación'),
     ('08', 'Mediciones'),
+    ('09', 'Reparto ATR'),
+    ('19', 'Solicitud de Anulación del distribuidor'),
+    ('24', 'Comunicación de baja desde la distribuidora'),
     ('26', 'Comunicación Datos'),
     ('31', 'Facturación individual por CUPS'),
     ('32', 'Facturación agregada (datos por CUPS)'),
     ('33', 'Facturación agregada (datos por factura)'),
-    ('36', 'Petición Datos CUPS Disponible On-Line'),
+    ('36', 'Petición Datos CUPS sin contrato'),
     ('37', 'Petición Datos CUPS Disponible'),
     ('38', 'Puesta en Servicio Nuevos Suministros'),
     ('41', 'Cambio de Comercializador con Modificación de Datos'),
@@ -262,7 +265,11 @@ TAULA_PROCESO = [
     ('45', 'Comunicación operaciones iniciativa distribuidor'),
     ('46', 'Anulación de actuaciones domiciliarias'),
     ('48', 'Reclamaciones'),
+    ('49', 'Desistimientos'),
+    ('50', 'Traspaso a la CUR'),
+    ('61', 'Notificación CUPS sin contrato en vigor disponibles para la contratación'),
 ]
+
 TAULA_RESULTADO = [
     ('01', 'Aceptada'),
     ('05', 'Rechazada'),
@@ -905,10 +912,10 @@ TAULA_MOTIVOS_DE_RECHAZO_CNMC = [
     ('R07', 'Si el modelo fecha efecto que solicita es "03" o “04” debe '
             'cumplimentar el campo "Fecha efecto solicitada" '),
     ('R08', 'La fecha de efecto solicitada "@replace1@" no puede ser '
-            'mayor que la fecha "@replace2@".'),
+            'menor que la fecha "@replace2@" de la cabecera.'),
     ('R11', 'El municipio "@replace1@" no pertenece a la '
             'provincia "@replace2@".'),
-    ('R12', 'Error de integridad: DNI no coherente con CUPS. '),
+    ('R12', 'Error de integridad: DNI no coherente con DNI del contrato en vigor en CUPS. '),
     ('R14', 'El día de la fecha efecto solicitada es errónea, tiene que ser el '
             '1, 11 ó 21 del mes. '),
     ('R19', 'Si el motivo de modificación es @replace1@, los '
@@ -978,7 +985,7 @@ TAULA_MOTIVOS_DE_RECHAZO_CNMC = [
     ('R91', 'No se puede suspender el suministro por trámites judiciales'),
     ('R92', 'Contrato de ATR en suspensión de suministro por motivos técnicos'),
     ('R93', 'Se rechaza por concurrencia con baja por impago/cese de actividad'),
-    ('R94', 'No es posible solicitar un cambio/alta/modificación a '
+    ('R94', 'No es posible solicitar un cambio/alta/modificación/baja a '
             'fecha fija para una fecha > 30 días naturales'),
     ('R95', 'Existe una solicitud previa de baja ya en campo o '
             'realizada (pendiente de activar) de otra comercializadora.'),
@@ -999,6 +1006,7 @@ TAULA_MOTIVOS_DE_RECHAZO_CNMC = [
     ('S15', 'Disponible pendiente finalización infraestructura'),
     ('S16', 'Desistimiento fuera de plazo (activación realizada hace más de un año)'),
     ('S17', 'Solo se podrá modificar (i) el tipo de identificador y el identificador o, (ii) nombre y apellidos (razón social)'),
+    ('S18', 'Contrato ATR cortado por impago'),
 ]
 TAULA_MOTIVO_RECHAZO_OCSUM = TAULA_MOTIVOS_DE_RECHAZO_CNMC
 TAULA_MES = [
