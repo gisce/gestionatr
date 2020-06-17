@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- editado con XMLSpy v2020 sp1 (http://www.altova.com) por teresa (INECO) -->
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A238" targetNamespace="http://localhost/sctd/A238" elementFormDefault="qualified">
 	<include schemaLocation="CommonTagsCONT.xsd"/>
 	<element name="sctdapplication" type="tns:SctdapplicationA238Type"/>
@@ -116,12 +115,13 @@
 			</element>
 			<element name="outgoingpressuregranted" type="tns:PressureType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Presión de Salida Concedida (bar)</documentation>
+					<documentation>Presión de Salida Concedida (bar)
+					</documentation>
 				</annotation>
 			</element>
 			<element name="clientyearlyconsumption" type="tns:QaType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Consumo anual (kwh/año)</documentation>
+					<documentation>Consumo anual (kwh/año).</documentation>
 				</annotation>
 			</element>
 			<element name="tolltype" type="tns:TollType" minOccurs="0" maxOccurs="1">

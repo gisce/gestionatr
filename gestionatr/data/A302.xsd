@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- editado con XMLSpy v2020 sp1 (http://www.altova.com) por teresa (INECO) -->
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A302" targetNamespace="http://localhost/sctd/A302" elementFormDefault="qualified">
 	<include schemaLocation="CommonTagsCONT.xsd"/>
 	<element name="sctdapplication" type="tns:SctdapplicationA302Type"/>
@@ -102,7 +101,7 @@
 			</element>
 			<element name="atrcode" type="tns:AtrcodeType">
 				<annotation>
-					<documentation>Código Contrato ATR </documentation>
+					<documentation>Código Contrato ATR. </documentation>
 				</annotation>
 			</element>
 			<element name="transfereffectivedate" type="date" minOccurs="1" maxOccurs="1">
@@ -117,7 +116,7 @@
 			</element>
 			<element name="finalclientyearlyconsumption" type="tns:QaType">
 				<annotation>
-					<documentation>Caudal Anual Actual Final </documentation>
+					<documentation>Caudal Anual Actual Final. </documentation>
 				</annotation>
 			</element>
 			<element name="readingtype" type="tns:ReadingType" minOccurs="1" maxOccurs="1">

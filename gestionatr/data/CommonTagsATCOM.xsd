@@ -1099,6 +1099,7 @@ Deberá estar formada por un texto seguido del carácter @ y un nombre de dominio.
 			<xs:enumeration value="S15"/>
 			<xs:enumeration value="S16"/>
 			<xs:enumeration value="S17"/>
+			<xs:enumeration value="S18"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="NameType">

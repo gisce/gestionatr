@@ -1009,6 +1009,7 @@
 			<xs:enumeration value="S15"/>
 			<xs:enumeration value="S16"/>
 			<xs:enumeration value="S17"/>
+			<xs:enumeration value="S18"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TollType">
@@ -1192,8 +1193,12 @@
 			<xs:enumeration value="002"/>
 			<xs:enumeration value="003"/>
 			<xs:enumeration value="004"/>
+			<xs:enumeration value="014"/>
+			<xs:enumeration value="016"/>
+			<xs:enumeration value="017"/>
 			<xs:enumeration value="018"/>
 			<xs:enumeration value="019"/>
+			<xs:enumeration value="020"/>
 			<xs:enumeration value="022"/>
 			<xs:enumeration value="023"/>
 			<xs:enumeration value="024"/>

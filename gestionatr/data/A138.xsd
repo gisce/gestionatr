@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- editado con XMLSpy v2020 sp1 (http://www.altova.com) por teresa (INECO) -->
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A138" targetNamespace="http://localhost/sctd/A138" elementFormDefault="qualified">
 	<include schemaLocation="CommonTagsCONT.xsd"/>
 	<element name="sctdapplication" type="tns:SctdapplicationA138Type"/>
@@ -231,7 +230,7 @@
 			</element>
 			<element name="reqqd" type="tns:QdType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Caudal máximo diario solicitado (kWh/ día)  </documentation>
+					<documentation>Caudal máximo diario solicitado (kWh/ día).  </documentation>
 				</annotation>
 			</element>
 			<element name="reqqh" type="tns:QhType" minOccurs="0" maxOccurs="1">
@@ -241,7 +240,7 @@
 			</element>
 			<element name="reqestimatedqa" type="tns:QaType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Consumo caudal anual estimado (kWh/ año) </documentation>
+					<documentation>Consumo caudal anual estimado (kWh/ año). </documentation>
 				</annotation>
 			</element>
 			<element name="reqoutgoingpressure" type="tns:PressureType" minOccurs="0" maxOccurs="1">
@@ -317,7 +316,7 @@
 			</element>
 			<element name="modeffectdate" type="tns:ModeloFechaSolicitudType" minOccurs="1" maxOccurs="1">
 				<annotation>
-					<documentation>Modelo de Fecha Efecto </documentation>
+					<documentation>Modelo de Fecha Efecto. </documentation>
 				</annotation>
 			</element>
 			<element name="reqactivationdate" type="date" minOccurs="0" maxOccurs="1">

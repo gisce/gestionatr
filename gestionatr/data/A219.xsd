@@ -83,7 +83,7 @@
 					<documentation>Codigo solicitud</documentation>
 				</annotation>
 			</element>
-			<element name="annulmentcomreferencenum" type="tns:ComreferencenumType" minOccurs="1" maxOccurs="1">
+			<element name="annulmentcomreferencenum" type="tns:ComreferencenumType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Nº Referencia Solicitud Comercializadora</documentation>
 				</annotation>

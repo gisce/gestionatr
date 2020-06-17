@@ -85,12 +85,12 @@
 			</element>
 			<element name="reqqd" type="tns:QdType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Caudal Diario Qd </documentation>
+					<documentation>Caudal Diario Qd. </documentation>
 				</annotation>
 			</element>
-			<element name="reqestimatedqa" type="tns:QaType">
+			<element name="reqestimatedqa" type="tns:QaType" >
 				<annotation>
-					<documentation>Caudal Estimado Anual Qa </documentation>
+					<documentation>Caudal Estimado Anual Qa. </documentation>
 				</annotation>
 			</element>
 			<element name="modeffectdate" type="tns:ModeloFechaSolicitudType" minOccurs="1" maxOccurs="1">

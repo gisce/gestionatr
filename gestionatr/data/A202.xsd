@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- editado con XMLSpy v2020 sp1 (http://www.altova.com) por teresa (INECO) -->
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A202" targetNamespace="http://localhost/sctd/A202" elementFormDefault="qualified">
 	<include schemaLocation="CommonTagsCONT.xsd"/>
 	<element name="sctdapplication" type="tns:SctdapplicationA202Type"/>
@@ -106,12 +105,12 @@
 			</element>
 			<element name="tolltype" type="tns:TollType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Tipo de Peaje </documentation>
+					<documentation>Tipo de Peaje. .</documentation>
 				</annotation>
 			</element>
 			<element name="qdgranted" type="tns:QdType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Caudal Diario Concedido </documentation>
+					<documentation>Caudal Diario Concedido. </documentation>
 				</annotation>
 			</element>
 			<element name="outgoingpressuregranted" type="tns:PressureType" minOccurs="0" maxOccurs="1">
