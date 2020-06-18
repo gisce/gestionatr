@@ -350,11 +350,13 @@ class test_C2(unittest.TestCase):
         self.xml_c201_completo = open(get_data("c201.xml"), "r")
         self.xml_c202_accept = open(get_data("c202_accept.xml"), "r")
         self.xml_c203 = open(get_data("c203.xml"), "r")
+        self.xml_c213 = open(get_data("c213.xml"), "r")
 
     def tearDown(self):
         self.xml_c201_completo.close()
         self.xml_c202_accept.close()
         self.xml_c203.close()
+        self.xml_c213.close()
 
     def test_c201_completo(self):
         c = C2(self.xml_c201_completo)
@@ -495,6 +497,18 @@ class test_C2(unittest.TestCase):
         self.assertEqual(i2.secuencial, u'2')
         self.assertEqual(i2.comentarios, u'Com 2')
 
+    def test_c213(self):
+        c = C2(self.xml_c213)
+        c.parse_xml()
+        self.assertEqual(c.contestacion_incidencia, u'02')
+        con = c.contacto
+        self.assertEqual(con.persona_de_contacto, u'Nombre Inventado')
+        self.assertEqual(con.correo_electronico, u'mail_falso@dominio.com')
+        tels = con.telefonos
+        self.assertEqual(len(tels), 1)
+        self.assertEqual(tels[0][0], u'34')
+        self.assertEqual(tels[0][1], u'683834841')
+
 
 class test_A1(unittest.TestCase):
 
@@ -626,6 +640,7 @@ class test_A3(unittest.TestCase):
     def setUp(self):
         self.xml_a301 = open(get_data("a301.xml"), "r")
         self.xml_a301_correos = open(get_data("a301_correos.xml"), "r")
+        self.xml_a313 = open(get_data("a313.xml"), "r")
 
     def tearDown(self):
         self.xml_a301.close()
@@ -729,6 +744,18 @@ class test_A3(unittest.TestCase):
         self.assertEqual(direccion.poblacion, u'17079000501')
         self.assertEqual(direccion.provincia, u'17')
         self.assertEqual(direccion.apartado_de_correos, u'A1234')
+
+    def test_a313(self):
+        a = A3(self.xml_a313)
+        a.parse_xml()
+        self.assertEqual(a.contestacion_incidencia, u'02')
+        con = a.contacto
+        self.assertEqual(con.persona_de_contacto, u'Nombre Inventado')
+        self.assertEqual(con.correo_electronico, u'mail_falso@dominio.com')
+        tels = con.telefonos
+        self.assertEqual(len(tels), 1)
+        self.assertEqual(tels[0][0], u'34')
+        self.assertEqual(tels[0][1], u'683834841')
 
 
 class test_B1(unittest.TestCase):
