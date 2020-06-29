@@ -1,17 +1,12 @@
 # -*- coding: utf-8 -*-
-from message_gas import MessageGas
-from Deadlines import ProcessDeadline, DeadLine, Workdays, Naturaldays
-from gestionatr.utils import get_rec_attr
-from A1_48 import *
+from A1_38 import *
 
 
-class A1_46(A1_48):
-
-    steps = []
+class A20_36(A1_38):
 
     @property
-    def responsedate(self):
-        tree = '{0}.responsedate'.format(self._header)
+    def solcode(self):
+        tree = '{0}.solcode'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -19,8 +14,8 @@ class A1_46(A1_48):
             return False
 
     @property
-    def responsehour(self):
-        tree = '{0}.responsehour'.format(self._header)
+    def resultdescr(self):
+        tree = '{0}.resultdescr'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -28,8 +23,8 @@ class A1_46(A1_48):
             return False
 
     @property
-    def comreferencenum(self):
-        tree = '{0}.comreferencenum'.format(self._header)
+    def reason(self):
+        tree = '{0}.reason'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -37,8 +32,8 @@ class A1_46(A1_48):
             return False
 
     @property
-    def operationtype(self):
-        tree = '{0}.operationtype'.format(self._header)
+    def reasondescr(self):
+        tree = '{0}.reasondescr'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -46,8 +41,8 @@ class A1_46(A1_48):
             return False
 
     @property
-    def cups(self):
-        tree = '{0}.cups'.format(self._header)
+    def permissionreq(self):
+        tree = '{0}.permissionreq'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -55,8 +50,8 @@ class A1_46(A1_48):
             return False
 
     @property
-    def reqcodetoanul(self):
-        tree = '{0}.reqcodetoanul'.format(self._header)
+    def expecteddate(self):
+        tree = '{0}.expecteddate'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -64,8 +59,8 @@ class A1_46(A1_48):
             return False
 
     @property
-    def result(self):
-        tree = '{0}.result'.format(self._header)
+    def infraestructurestatus(self):
+        tree = '{0}.infraestructurestatus'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -73,8 +68,8 @@ class A1_46(A1_48):
             return False
 
     @property
-    def resultdesc(self):
-        tree = '{0}.resultdesc'.format(self._header)
+    def comunitypressure(self):
+        tree = '{0}.comunitypressure'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -82,8 +77,8 @@ class A1_46(A1_48):
             return False
 
     @property
-    def resultreason(self):
-        tree = '{0}.resultreason'.format(self._header)
+    def aptransind(self):
+        tree = '{0}.aptransind'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -91,8 +86,8 @@ class A1_46(A1_48):
             return False
 
     @property
-    def resultreasondesc(self):
-        tree = '{0}.resultreasondesc'.format(self._header)
+    def aptransnumber(self):
+        tree = '{0}.aptransnumber'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -100,8 +95,8 @@ class A1_46(A1_48):
             return False
 
     @property
-    def extrainfo(self):
-        tree = '{0}.extrainfo'.format(self._header)
+    def reig(self):
+        tree = '{0}.reig'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -109,8 +104,8 @@ class A1_46(A1_48):
             return False
 
     @property
-    def comreferencenumdes(self):
-        tree = '{0}.comreferencenumdes'.format(self._header)
+    def iricertificateneeded(self):
+        tree = '{0}.iricertificateneeded'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -118,8 +113,8 @@ class A1_46(A1_48):
             return False
 
     @property
-    def annulmentreason(self):
-        tree = '{0}.annulmentreason'.format(self._header)
+    def iricertificatedate(self):
+        tree = '{0}.iricertificatedate'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -127,8 +122,8 @@ class A1_46(A1_48):
             return False
 
     @property
-    def claimtype(self):
-        tree = '{0}.claimtype'.format(self._header)
+    def designpower(self):
+        tree = '{0}.designpower'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -136,8 +131,8 @@ class A1_46(A1_48):
             return False
 
     @property
-    def claimsubtype(self):
-        tree = '{0}.claimsubtype'.format(self._header)
+    def terminstexist(self):
+        tree = '{0}.terminstexist'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
