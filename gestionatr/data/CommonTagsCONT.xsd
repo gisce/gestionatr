@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- editado con XMLSpy v2020 rel. 2 (x64) (http://www.altova.com) por teresa.marco (INECO) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 	<xs:simpleType name="AgenteType">
 		<xs:restriction base="xs:string">
@@ -166,9 +167,7 @@
 			</xs:element>
 			<xs:element name="counterproperty" type="PropiedadEquipoType" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>
-    					Propiedad del Contador
-    				</xs:documentation>
+					<xs:documentation>Propiedad del Contador</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="reallecture" type="LectureType" minOccurs="1" maxOccurs="1">
@@ -192,8 +191,7 @@
 		<xs:sequence>
 			<xs:element name="correctormodel" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Marca del Corrector
-</xs:documentation>
+					<xs:documentation>Marca del Corrector</xs:documentation>
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
@@ -205,8 +203,7 @@
 			</xs:element>
 			<xs:element name="correctortype" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Tipo de Corrector
-</xs:documentation>
+					<xs:documentation>Tipo de Corrector</xs:documentation>
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
@@ -233,9 +230,7 @@
 			</xs:element>
 			<xs:element name="correctorproperty" type="PropiedadEquipoType" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>
-    					Propiedad del Corrector
-    				</xs:documentation>
+					<xs:documentation>Propiedad del Corrector</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="correctedlecture" type="LectureType" minOccurs="1" maxOccurs="1">
@@ -289,13 +284,13 @@
 			<xs:element name="date" type="xs:date" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Fecha del Documento
-</xs:documentation>
+					</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="doctype" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Tipo de Documento
-</xs:documentation>
+					</xs:documentation>
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
@@ -518,9 +513,13 @@
 			<xs:enumeration value="041"/>
 			<xs:enumeration value="050"/>
 			<xs:enumeration value="051"/>
+			<xs:enumeration value="060"/>
+			<xs:enumeration value="061"/>
 			<xs:enumeration value="907"/>
 			<xs:enumeration value="909"/>
 			<xs:enumeration value="910"/>
+			<xs:enumeration value="911"/>
+			<xs:enumeration value="912"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="InformationdescType">
@@ -799,7 +798,6 @@
 			<xs:length value="2"/>
 			<xs:enumeration value="01"/>
 			<xs:enumeration value="02"/>
-			<xs:enumeration value="03"/>
 			<xs:enumeration value="04"/>
 			<xs:enumeration value="05"/>
 		</xs:restriction>
@@ -809,7 +807,6 @@
 			<xs:length value="2"/>
 			<xs:enumeration value="01"/>
 			<xs:enumeration value="02"/>
-			<xs:enumeration value="03"/>
 			<xs:enumeration value="04"/>
 			<xs:enumeration value="11"/>
 			<xs:enumeration value="12"/>
@@ -817,6 +814,8 @@
 			<xs:enumeration value="14"/>
 			<xs:enumeration value="15"/>
 			<xs:enumeration value="16"/>
+			<xs:enumeration value="17"/>
+			<xs:enumeration value="18"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="CodProvinciaType">
@@ -996,6 +995,22 @@
 			<xs:enumeration value="R94"/>
 			<xs:enumeration value="R95"/>
 			<xs:enumeration value="R96"/>
+			<xs:enumeration value="R98"/>
+			<xs:enumeration value="R99"/>
+			<xs:enumeration value="S01"/>
+			<xs:enumeration value="S02"/>
+			<xs:enumeration value="S03"/>
+			<xs:enumeration value="S04"/>
+			<xs:enumeration value="S05"/>
+			<xs:enumeration value="S06"/>
+			<xs:enumeration value="S08"/>
+			<xs:enumeration value="S11"/>
+			<xs:enumeration value="S12"/>
+			<xs:enumeration value="S14"/>
+			<xs:enumeration value="S15"/>
+			<xs:enumeration value="S16"/>
+			<xs:enumeration value="S17"/>
+			<xs:enumeration value="S18"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TollType">
@@ -1010,12 +1025,6 @@
 			<xs:enumeration value="24"/>
 			<xs:enumeration value="25"/>
 			<xs:enumeration value="26"/>
-			<xs:enumeration value="1B"/>
-			<xs:enumeration value="2B"/>
-			<xs:enumeration value="3B"/>
-			<xs:enumeration value="4B"/>
-			<xs:enumeration value="5B"/>
-			<xs:enumeration value="6B"/>
 			<xs:enumeration value="31"/>
 			<xs:enumeration value="32"/>
 			<xs:enumeration value="33"/>
@@ -1028,18 +1037,6 @@
 			<xs:enumeration value="45"/>
 			<xs:enumeration value="46"/>
 			<xs:enumeration value="47"/>
-			<xs:enumeration value="A1"/>
-			<xs:enumeration value="A2"/>
-			<xs:enumeration value="A3"/>
-			<xs:enumeration value="B1"/>
-			<xs:enumeration value="B2"/>
-			<xs:enumeration value="C1"/>
-			<xs:enumeration value="C2"/>
-			<xs:enumeration value="D1"/>
-			<xs:enumeration value="D2"/>
-			<xs:enumeration value="M1"/>
-			<xs:enumeration value="M2"/>
-			<xs:enumeration value="99"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="ResultInspectionType">
@@ -1059,23 +1056,6 @@
 			<xs:enumeration value="12"/>
 			<xs:enumeration value="13"/>
 			<xs:enumeration value="14"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="UsoGasCambioType">
-		<xs:restriction base="xs:string">
-			<xs:length value="2"/>
-			<xs:enumeration value="01"/>
-			<xs:enumeration value="02"/>
-			<xs:enumeration value="03"/>
-			<xs:enumeration value="04"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="UsoGasNnssType">
-		<xs:restriction base="xs:string">
-			<xs:length value="2"/>
-			<xs:enumeration value="01"/>
-			<xs:enumeration value="02"/>
-			<xs:enumeration value="04"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="PeriodicidadLecturaType">
@@ -1220,6 +1200,12 @@
 			<xs:enumeration value="018"/>
 			<xs:enumeration value="019"/>
 			<xs:enumeration value="020"/>
+			<xs:enumeration value="022"/>
+			<xs:enumeration value="023"/>
+			<xs:enumeration value="024"/>
+			<xs:enumeration value="035"/>
+			<xs:enumeration value="036"/>
+			<xs:enumeration value="039"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="PropiedadEquipoType">
@@ -1233,6 +1219,629 @@
 			<xs:enumeration value="10"/>
 			<xs:enumeration value="11"/>
 			<xs:enumeration value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="restdirectionType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="23"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="origenPSType">
+		<xs:annotation>
+			<xs:documentation>
+			00 Puntos de suministro consolidados
+			01 Nuevo Punto de Suministro (SCR)			
+			02 Transformación de GLP			
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="00"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="infraestructurestatusType">
+		<xs:annotation>
+			<xs:documentation>
+			01 Creado/Planificado
+			02 Anulado			
+			03 Ausente
+			04 Finalizado		
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="contractstatusType">
+		<xs:annotation>
+			<xs:documentation>
+			01 Sin solicitudes recibidas
+			02 Con Pre-Reserva para otra comercializadora			
+			03 Con Pre-Reserva por comercializadora que consulta
+			04 Con Solicitud de NNSS de otra comercializadora
+			05 Con Solicitud de NNSS por comercializadora que consulta
+			06 Anulado
+			07 Contratado
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
+			<xs:enumeration value="07"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="provincedescType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="40"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="citydescType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="60"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="plantsatType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="255"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoDesistimiento">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StateIncidence">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ResActivacion">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TransferReasonType">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Client">
+		<xs:sequence>
+			<xs:element name="nationality" type="NationalityType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Nacionalidad documento</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="documenttype" type="IdDocumentType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo de documento del nuevo cliente</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="documentnum" type="DocumentnumType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Número de documento del nuevo cliente</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="firstname" type="FirstnameType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Nombre de nuevo cliente</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="familyname1" type="FamilynameType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Apellido 1 / Razón Social de nuevo cliente</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="familyname2" type="FamilynameType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Apellido 2 de nuevo cliente</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="titulartype" type="TitularType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo de Titular de nuevo cliente</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="telephone1" type="TelephoneType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Teléfono</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="telephone2" type="TelephoneType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Teléfono2</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="telephone3" type="TelephoneType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Teléfono3</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="email" type="EmailType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Correo electrónico</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="language" type="IdiomaType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Idioma</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="TypeFiscalAddress">
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:enumeration value="S"/>
+			<xs:enumeration value="F"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Address">
+		<xs:sequence>
+			<xs:element name="province" type="CodProvinciaType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Código de Provincia INE</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="city" type="CodAlpha5Type" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Código de Municipio INE</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="zipcode" type="CodAlpha5Type" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Código postal</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="street" type="Street">
+					<xs:annotation>
+						<xs:documentation>Dirección</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="postofficebox" type="PostOfficeBox" minOccurs="1" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>Apartado de Correos</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Street">
+		<xs:sequence>
+			<xs:element name="streettype" type="TipoViaType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo de vía</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="street" type="StreetnameType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Nombre Calle</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="streetnumber" type="StreetnumberType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Número de finca</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="portal" type="CodAlpha5Type" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Portal</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="staircase" type="CodAlpha5Type" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Escalera</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="floor" type="CodAlpha5Type" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Piso</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="door" type="CodAlpha5Type" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Puerta</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="PostOfficeBox">
+		<xs:restriction base="xs:string">
+			<xs:length value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MotivoRechazoTypeTraspasoCUR">
+		<xs:restriction base="xs:string">
+			<xs:length value="3"/>
+			<xs:enumeration value="R11"/>
+			<xs:enumeration value="R43"/>
+			<xs:enumeration value="R78"/>
+			<xs:enumeration value="R97"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ResultRechazo">
+		<xs:sequence>
+			<xs:element name="resultreason" type="MotivoRechazoTypeTraspasoCUR" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Código Motivo Resultado OCSUM</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="newClientType">
+		<xs:sequence>
+			<xs:element name="newnationality" type="NationalityType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Nacionalidad documento</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="newdocumenttype" type="IdDocumentType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo de documento de Identificación del nuevo cliente</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="newdocumentnum" type="DocumentnumType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Número de documento del nuevo cliente</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="newfirstname" type="FirstnameType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Nombre de nuevo cliente</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="newfamilyname1" type="FamilynameType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Apellido 1 / Razón Social de nuevo cliente</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="newfamilyname2" type="FamilynameType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Apellido 2 de nuevo cliente</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="newtitulartype" type="TitularType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo de Titular de nuevo cliente</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="newtelephone1" type="TelephoneType" minOccurs="1" maxOccurs="3">
+				<xs:annotation>
+					<xs:documentation>Teléfono</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="newemail" type="EmailType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Correo electrónico</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="newlanguage" type="IdiomaType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Idioma</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="addressPSType">
+		<xs:sequence>
+			<xs:element name="province" type="CodProvinciaType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Código de Provincia INE</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="city" type="CodAlpha5Type" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Código de Municipio INE</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="zipcode" type="CodAlpha5Type" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Código postal</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="street" type="Street" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Dirección</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="newownerType">
+		<xs:sequence>
+			<xs:element name="newclient" type="newClientType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="newregularaddress" type="FlagType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Indicador de vivienda habitual</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="typefiscaladdress" type="TypeFiscalAddress" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="addressPS" type="addressPSType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="address" type="Address" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="caecodeType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="13"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="customervalidationType">
+		<xs:sequence>
+			<xs:element name="documenttype" type="IdDocumentType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo Identificación cliente</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="documentnum" type="DocumentnumType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Número identificador cliente</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="AtrversionType">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="3"/>
+			<xs:fractionDigits value="0"/>
+			<xs:minInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="operationnumType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="40"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NombreContactoType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="100"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ContactType">
+		<xs:sequence>
+			<xs:element name="contactname" type="NombreContactoType">
+				<xs:annotation>
+					<xs:documentation>Nombre Completo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contacttelephone1" type="TelephoneType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Número de Teléfono1</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contacttelephone2" type="TelephoneType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Número de Teléfono</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contacttelephone3" type="TelephoneType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Número de Teléfono</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contactemail" type="EmailType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Dirección de Correo Electrónico. Deberá estar formada por un texto seguido del carácter @ y un nombre de dominio.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="stateincidenceType">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ContactinciType">
+		<xs:sequence>
+			<xs:element name="contactname" type="NombreContactoType">
+				<xs:annotation>
+					<xs:documentation>Nombre Completo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contacttelephone1" type="TelephoneType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Número de Teléfono1</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contacttelephone2" type="TelephoneType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Número de Teléfono</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contacttelephone3" type="TelephoneType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Número de Teléfono</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contactemail" type="EmailType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Dirección de Correo Electrónico. Deberá estar formada por un texto seguido del carácter @ y un nombre de dominio.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="CupsTypeFilter">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+			<xs:pattern value="[a-zA-Z0-9 ]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UsoGasType">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CodAlpha10Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CodAlpha20Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CodAlpha50Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="50"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CodAlpha100Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="100"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PressureRangeType">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ResultRevisionType">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ConsumoPeriodoType">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="16"/>
+			<xs:fractionDigits value="2"/>
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="99999999999999.99"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CorrectortypeType">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PerfilConsumoType">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TelemedidaType">
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:enumeration value="N"/>
+			<xs:enumeration value="R"/>
+			<xs:enumeration value="E"/>
+			<xs:enumeration value="C"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="PCTDType">
+		<xs:sequence>
+			<xs:element name="codpctd" minOccurs="1" maxOccurs="1">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="12"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ListaPCTDType">
+		<xs:sequence>
+			<xs:element name="pctd" type="PCTDType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MunicipioRedType">
+		<xs:sequence>
+			<xs:element name="codmunicipiored" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Código de Municipio-Red</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:length value="5"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ListaMunicipioRedType">
+		<xs:sequence>
+			<xs:element name="municipiored" type="MunicipioRedType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="TipoEnvioRepartoType">
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:enumeration value="D"/>
+			<xs:enumeration value="P"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ZonaClimaticaType">
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

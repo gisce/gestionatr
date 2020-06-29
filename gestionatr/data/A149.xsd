@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A149" targetNamespace="http://localhost/sctd/A149" elementFormDefault="qualified">
+	<include schemaLocation="CommonTagsCONT.xsd"/>
+	<element name="sctdapplication" type="tns:SctdapplicationA149Type"/>
+	<complexType name="SctdapplicationA149Type">
+		<sequence>
+			<element name="heading" type="tns:HeadingA149Type" minOccurs="1" maxOccurs="1"/>
+			<element name="a149" type="tns:A149Type" minOccurs="1" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="HeadingA149Type">
+		<sequence>
+			<element name="dispatchingcode" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="3"/>
+						<enumeration value="GML"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dispatchingcompany" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="destinycompany" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="communicationsdate" type="date" minOccurs="1" maxOccurs="1"/>
+			<element name="communicationshour" type="time" minOccurs="1" maxOccurs="1"/>
+			<element name="processcode" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"/>
+						<enumeration value="49"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="messagetype" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="3"/>
+						<enumeration value="A1"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="A149Type">
+		<sequence>
+			<element name="comreferencenum" type="tns:ComreferencenumType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Nº Referencia Solicitud Comercializadora</documentation>
+				</annotation>
+			</element>
+			<element name="reqdate" type="date" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha de Solicitud</documentation>
+				</annotation>
+			</element>
+			<element name="reqhour" type="time" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Hora de Solicitud</documentation>
+				</annotation>
+			</element>
+			<element name="cups" type="tns:CupsType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>CUPS Solicitud</documentation>
+				</annotation>
+			</element>
+			<element name="comreferencenumdes" type="tns:ComreferencenumType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Nº Referencia Solicitud Comercializadora, sobre la que se produce el desistimiento</documentation>
+				</annotation>
+			</element>
+			<element name="tipodesistimiento" type="tns:TipoDesistimiento" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de desistimiento</documentation>
+				</annotation>
+			</element>
+			<element name="documenttype" type="tns:IdDocumentType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de documento de Identificación</documentation>
+				</annotation>
+			</element>
+			<element name="documentnum" type="tns:DocumentnumType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Número de documento</documentation>
+				</annotation>
+			</element>
+			<element name="titulartype" type="tns:TitularType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de Persona</documentation>
+				</annotation>
+			</element>
+			<element name="extrainfo" type="tns:ExtrainfoType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Observaciones 1</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+</schema>
