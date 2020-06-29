@@ -1946,6 +1946,7 @@ TABLA_79 = [
 TABLA_80 = [('01', u'Procedente / Favorable'),
             ('02', u'Improcedente / Desfavorable'),
             ('03', u'No gestionable'),
+            ('04', u'Anulada'),
             ('05', u'Duplicada')
             ]
 
