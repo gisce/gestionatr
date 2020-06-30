@@ -9,18 +9,21 @@
         <processcode>46</processcode>
         <messagetype>A2</messagetype>
     </heading>
-    <a2>
+    <a246>
         <reqcode>0123456789</reqcode>
         <responsedate>2018-05-01</responsedate>
         <responsehour>13:00:00</responsehour>
         <comreferencenum>000123456789</comreferencenum>
+        <annulmentreason>101</annulmentreason>
         <operationtype>A20002</operationtype>
         <cups>ES1234000000000001JN</cups>
+        <claimtype>01</claimtype>
+        <claimsubtype>001</claimsubtype>
         <reqcodetoanul>0123456790</reqcodetoanul>
         <result>01</result>
         <resultdesc>Aceptada</resultdesc>
         <resultreason>R01</resultreason>
         <resultreasondesc>Cliente suministrado desde planta satélite.</resultreasondesc>
         <extrainfo>comentarios extras</extrainfo>
-    </a2>
+    </a246>
 </sctdapplication>

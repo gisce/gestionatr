@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sctdapplication xmlns="http://localhost/sctd/A2136">
+    <heading>
+        <dispatchingcode>GML</dispatchingcode>
+        <dispatchingcompany>1234</dispatchingcompany>
+        <destinycompany>4321</destinycompany>
+        <communicationsdate>2018-05-01</communicationsdate>
+        <communicationshour>12:00:00</communicationshour>
+        <processcode>36</processcode>
+        <messagetype>A21</messagetype>
+    </heading>
+    <a21>
+        <solcode>1234567890</solcode>
+        <reqdate>2020-03-01</reqdate>
+        <reqhour>08:00:00</reqhour>
+        <cups>ES1234000000000001JN</cups>
+        <result>01</result>
+        <resultdescr>Aceptada</resultdescr>
+        <reason>R01</reason>
+        <reasondescr>Cliente suministrado desde planta satélite.</reasondescr>
+        <expecteddate>2020-04-30</expecteddate>
+        <infraestructurestatus>01</infraestructurestatus>
+        <permissionreq>S</permissionreq>
+        <province>17</province>
+        <city>17001</city>
+        <streettype>ACCE</streettype>
+        <street>Carrer inventat</street>
+        <streetnumber>1</streetnumber>
+        <portal>2</portal>
+        <staircase>3</staircase>
+        <floor>4</floor>
+        <door>5</door>
+        <zipcode>17001</zipcode>
+        <comunitypressure>B5</comunitypressure>
+        <aptransind>S</aptransind>
+        <aptransnumber>1234</aptransnumber>
+        <reig>123456</reig>
+        <iricertificateneeded>S</iricertificateneeded>
+        <iricertificatedate>2020-01-01</iricertificatedate>
+        <designpower>10000</designpower>
+        <terminstexist>S</terminstexist>
+    </a21>
+</sctdapplication>

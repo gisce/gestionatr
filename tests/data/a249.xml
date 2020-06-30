@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sctdapplication xmlns="http://localhost/sctd/A249">
+    <heading>
+        <dispatchingcode>GML</dispatchingcode>
+        <dispatchingcompany>1234</dispatchingcompany>
+        <destinycompany>4321</destinycompany>
+        <communicationsdate>2018-05-01</communicationsdate>
+        <communicationshour>12:00:00</communicationshour>
+        <processcode>49</processcode>
+        <messagetype>A2</messagetype>
+    </heading>
+    <a249>
+        <reqcode>1234567890</reqcode>
+        <reqdate>2020-03-01</reqdate>
+        <reqhour>08:00:00</reqhour>
+        <responsedate>2020-03-01</responsedate>
+        <responsehour>08:00:00</responsehour>
+        <comreferencenum>12345</comreferencenum>
+        <cups>ES1234000000000001JN</cups>
+        <result>01</result>
+        <resultdesc>Aceptada</resultdesc>
+        <resultreason>R01</resultreason>
+        <resultreasondesc>Cliente suministrado desde planta satélite.</resultreasondesc>
+        <indanulable>S</indanulable>
+        <indactcampo>S</indactcampo>
+        <foreseentransferdate>2020-05-01</foreseentransferdate>
+        <extrainfo>EXTRA EXTRA! EL GAS NO TE SENTIT!</extrainfo>
+    </a249>
+</sctdapplication>

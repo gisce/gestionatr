@@ -9,7 +9,7 @@
       <processcode>38</processcode>
       <messagetype>A4</messagetype>
   </heading>
-  <a4>
+  <a438>
     <reqcode>10_z9f2k6S</reqcode>
     <comreferencenum>123456789</comreferencenum>
     <responsedate>2020-03-13</responsedate>
@@ -37,5 +37,5 @@
             <description>Desc2</description>
         </defect>
     </defectlist>
-  </a4>
+  </a438>
 </sctdapplication>

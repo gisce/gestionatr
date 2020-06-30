@@ -3355,7 +3355,7 @@ class test_A1_44(unittest.TestCase):
         self.assertEqual(a444.reqdate, u"2018-09-03")
         self.assertEqual(a444.reqhour, u"15:53:48")
         self.assertEqual(a444.comreferencenum, u"123456789")
-        self.assertEqual(a444.cups, u"20_BuEWbkISNj3eThQu8")
+        self.assertEqual(a444.cups, u"20aXn4jOtXkA8PF9JCHH")
         self.assertEqual(a444.operationtype, u"A10001")
         self.assertEqual(a444.responsedate, u"2018-09-03")
         self.assertEqual(a444.responsehour, u"15:53:48")
@@ -3620,7 +3620,7 @@ class test_A1_48(unittest.TestCase):
         self.assertEqual(incidentlocation.incidentlocationdesc, u"calle pequeña")
         self.assertEqual(incidentlocation.incidentlocationprovince, u"01")
         self.assertEqual(incidentlocation.incidentlocationcity, u"000001")
-        self.assertEqual(incidentlocation.incidentlocationcitysubdivision, u"20AA")
+        self.assertEqual(incidentlocation.incidentlocationcitysubdivision, u"17079000503")
         self.assertEqual(incidentlocation.incidentlocationzipcode, u"17888")
         reading = claimreference.reading
         self.assertEqual(reading.readingdate, u"2018-09-21")
@@ -3711,15 +3711,6 @@ class test_A1_48(unittest.TestCase):
         self.assertEqual(a2548.resultinspection, u"01")
         self.assertEqual(a2548.visitnumber, u"590")
         self.assertEqual(a2548.extrainfo, u"coments")
-        self.assertEqual(a2548.conceptnumber, u"74")
-        concept = a2548.conceptlist[0]
-        self.assertEqual(concept.level, u"1")
-        self.assertEqual(concept.code, u"0000")
-        self.assertEqual(concept.description, u"Importe Total Factura")
-        self.assertEqual(concept.periodicity, u"01")
-        self.assertEqual(concept.units, u"185")
-        self.assertEqual(concept.unitimport, u"10534.1")
-        self.assertEqual(concept.import_, u"1240977.69")
         counter = a2548.counterlist[0]
         self.assertEqual(counter.countermodel, u"model")
         self.assertEqual(counter.countertype, u"55")
@@ -3774,7 +3765,7 @@ class test_A1_48(unittest.TestCase):
         self.assertEqual(incidentlocation.incidentlocationdesc, u"calle pequeña")
         self.assertEqual(incidentlocation.incidentlocationprovince, u"01")
         self.assertEqual(incidentlocation.incidentlocationcity, u"000001")
-        self.assertEqual(incidentlocation.incidentlocationcitysubdivision, u"20AA")
+        self.assertEqual(incidentlocation.incidentlocationcitysubdivision, u"17079000503")
         self.assertEqual(incidentlocation.incidentlocationzipcode, u"17888")
         reading = claimreference.reading
         self.assertEqual(reading.readingdate, u"2018-09-21")
@@ -3862,8 +3853,11 @@ class test_A1_46(unittest.TestCase):
         self.assertEqual(a246.responsehour, u"13:00:00")
         self.assertEqual(a246.comreferencenum, u"000123456789")
         self.assertEqual(a246.operationtype, u"A20002")
+        self.assertEqual(a246.annulmentreason, u"101")
         self.assertEqual(a246.cups, u"ES1234000000000001JN")
         self.assertEqual(a246.reqcodetoanul, u"0123456790")
+        self.assertEqual(a246.claimtype, u"01")
+        self.assertEqual(a246.claimsubtype, u"001")
         self.assertEqual(a246.result, u"01")
         self.assertEqual(a246.resultdesc, u"Aceptada")
         self.assertEqual(a246.resultreason, u"R01")
@@ -3931,7 +3925,6 @@ class test_A12_26(unittest.TestCase):
         self.assertEqual(a1226.transnet, u"14_0jldeS2u13Y")
         self.assertEqual(a1226.gasusetype, u"01")
         self.assertEqual(a1226.caecode, u"13_h1c6VEDs7V")
-        self.assertEqual(a1226.updatereason, u"01")
         self.assertEqual(a1226.communicationreason, u"01")
         self.assertEqual(a1226.titulartype, u"F")
         self.assertEqual(a1226.regularaddress, u"S")
@@ -3950,6 +3943,64 @@ class test_A12_26(unittest.TestCase):
         self.assertEqual(corrector.correctorproperty, u'01')
         self.assertEqual(corrector.correctortype, u'01')
 
+class test_A12_24(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a1224 = open(get_data("a1224.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a1224.close()
+
+    def test_a1224(self):
+        a1224 = A12_24(self.xml_a1224)
+        a1224.parse_xml()
+
+        self.assertEqual(a1224.reqdate, u"2018-05-01")
+        self.assertEqual(a1224.reqhour, u"12:00:00")
+        self.assertEqual(a1224.atrcode, u"000111222333444555666777")
+        self.assertEqual(a1224.atrversion, u"2")
+        self.assertEqual(a1224.nationality, u"ES")
+        self.assertEqual(a1224.documenttype, u"01")
+        self.assertEqual(a1224.documentnum, u"11111111H")
+        self.assertEqual(a1224.cups, u"ES1234000000000001JN")
+
+        self.assertEqual(a1224.operationnum, u"4444448877787879894898189881848844894894")
+        self.assertEqual(a1224.communicationreason, u"01")
+        self.assertEqual(a1224.transfereffectivedate, u"2018-07-01")
+        self.assertEqual(a1224.readingtype, u"1")
+
+        counter = a1224.counterlist[0]
+        self.assertEqual(counter.countermodel, u"marca1")
+        self.assertEqual(counter.countertype, u"tipo1")
+        self.assertEqual(counter.counternumber, u"B123456")
+        self.assertEqual(counter.counterproperty, u"04")
+        self.assertEqual(counter.reallecture, u"2000")
+        self.assertEqual(counter.counterpressure, u"54321.123")
+
+        counter2 = a1224.counterlist[1]
+
+        self.assertEqual(counter2.countermodel, u"marca2")
+        self.assertEqual(counter2.countertype, u"tipo2")
+        self.assertEqual(counter2.counternumber, u"C123456")
+        self.assertEqual(counter2.counterproperty, u"06")
+        self.assertEqual(counter2.reallecture, u"3000")
+        self.assertEqual(counter2.counterpressure, u"13245.321")
+
+        corrector = a1224.correctorlist[0]
+        self.assertEqual(corrector.correctedlecture, u'2200')
+        self.assertEqual(corrector.correctormodel, u'modelo1')
+        self.assertEqual(corrector.correctornumber, u'D123456')
+        self.assertEqual(corrector.correctorproperty, u'01')
+        self.assertEqual(corrector.correctortype, u'01')
+
+        corrector2 = a1224.correctorlist[1]
+        self.assertEqual(corrector2.correctedlecture, u'3300')
+        self.assertEqual(corrector2.correctormodel, u'modelo2')
+        self.assertEqual(corrector2.correctornumber, u'E654321')
+        self.assertEqual(corrector2.correctorproperty, u'02')
+        self.assertEqual(corrector2.correctortype, u'02')
+
+        self.assertEqual(len(a1224.counterlist), 2)
 
 class test_A19_45(unittest.TestCase):
 
@@ -4080,20 +4131,9 @@ class test_A1_38(unittest.TestCase):
         self.assertEqual(a2538.interventionhourfrom, u"14:26:35")
         self.assertEqual(a2538.interventionhourto, u"14:26:35")
         self.assertEqual(a2538.cups, u"20alzDPKUDB5HhZDhn5X")
-        self.assertEqual(a2538.resultinspection, u"01")
-        self.assertEqual(a2538.resultinspectiondesc, u"CORRECTO")
         self.assertEqual(a2538.visitnumber, u"228")
         self.assertEqual(a2538.operationnum, u"40_tQzwG5OT6YTye1UiYVtoV3r9VymR5B")
         self.assertEqual(a2538.extrainfo, u"400_C9BEFQSmU4c7fJcqlXEYL79KyKwcZ9")
-        self.assertEqual(a2538.conceptnumber, u"37")
-        concept = a2538.conceptlist[1]
-        self.assertEqual(concept.level, u'1')
-        self.assertEqual(concept.code, u'0002')
-        self.assertEqual(concept.description, u'Desc')
-        self.assertEqual(concept.periodicity, u'03')
-        self.assertEqual(concept.units, u'1')
-        self.assertEqual(concept.unitimport, u'23.8')
-        self.assertEqual(concept.import_, u'23.8')
         self.assertEqual(len(a2538.defectlist), 2)
         defect = a2538.defectlist[1]
         self.assertEqual(defect.code, u'002')
@@ -4113,8 +4153,6 @@ class test_A1_38(unittest.TestCase):
         self.assertEqual(a338.interventiondate, u"2020-03-13")
         self.assertEqual(a338.interventionhour, u"14:48:40")
         self.assertEqual(a338.canonircperiodicity, u"01")
-        self.assertEqual(a338.resultinspection, u"01")
-        self.assertEqual(a338.resultinspectiondesc, u"CORRECTO")
         self.assertEqual(a338.nationality, u"SB")
         self.assertEqual(a338.documenttype, u"01")
         self.assertEqual(a338.documentnum, u"20_lhGlhEgKWo4lNBRTV")
@@ -4193,3 +4231,322 @@ class test_A1_38(unittest.TestCase):
         defect = a438.defectlist[1]
         self.assertEqual(defect.code, u'002')
         self.assertEqual(defect.description, u'Desc2')
+
+
+class test_A1_49(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a249 = open(get_data("a249.xml"), "r")
+        self.xml_a2s49 = open(get_data("a2s49.xml"), "r")
+        self.xml_a2549 = open(get_data("a2549.xml"), "r")
+        self.xml_a349 = open(get_data("a349.xml"), "r")
+        self.xml_a3s49 = open(get_data("a3s49.xml"), "r")
+        self.xml_a449 = open(get_data("a449.xml"), "r")
+        self.xml_a4s49 = open(get_data("a4s49.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a249.close()
+        self.xml_a2s49.close()
+        self.xml_a2549.close()
+        self.xml_a349.close()
+        self.xml_a3s49.close()
+        self.xml_a449.close()
+        self.xml_a4s49.close()
+
+    def test_a249(self):
+        a249 = A1_49(self.xml_a249)
+        a249.parse_xml()
+        self.assertEqual(a249.reqcode, '1234567890')
+        self.assertEqual(a249.reqdate, '2020-03-01')
+        self.assertEqual(a249.reqhour, '08:00:00')
+        self.assertEqual(a249.responsedate, '2020-03-01')
+        self.assertEqual(a249.responsehour, '08:00:00')
+        self.assertEqual(a249.comreferencenum, '12345')
+        self.assertEqual(a249.cups, 'ES1234000000000001JN')
+        self.assertEqual(a249.result, '01')
+        self.assertEqual(a249.resultdesc, 'Aceptada')
+        self.assertEqual(a249.resultreason, 'R01')
+        self.assertEqual(a249.resultreasondesc, u'Cliente suministrado desde planta satélite.')
+        self.assertEqual(a249.indanulable, 'S')
+        self.assertEqual(a249.indactcampo, 'S')
+        self.assertEqual(a249.foreseentransferdate, '2020-05-01')
+        self.assertEqual(a249.extrainfo, 'EXTRA EXTRA! EL GAS NO TE SENTIT!')
+
+    def test_a2s49(self):
+        a2s49 = A1_49(self.xml_a2s49)
+        a2s49.parse_xml()
+        self.assertEqual(a2s49.reqcode, '1234567890')
+        self.assertEqual(a2s49.responsedate, '2020-03-01')
+        self.assertEqual(a2s49.responsehour, '08:00:00')
+        self.assertEqual(a2s49.cups, 'ES1234000000000001JN')
+        self.assertEqual(a2s49.indanulable, 'S')
+        self.assertEqual(a2s49.indactcampo, 'S')
+        self.assertEqual(a2s49.foreseentransferdate, '2020-05-01')
+        self.assertEqual(a2s49.extrainfo, 'EXTRA EXTRA! EL GAS NO TE SENTIT!')
+
+    def test_a2549(self):
+        a2549 = A1_49(self.xml_a2549)
+        a2549.parse_xml()
+        self.assertEqual(a2549.reqcode, '123456789')
+        self.assertEqual(a2549.cups, 'ES1234000000000001JN')
+        self.assertEqual(a2549.visitdate, '2018-09-24')
+        self.assertEqual(a2549.visithour, '15:25:18')
+        self.assertEqual(a2549.comreferencenum, '987654321')
+        self.assertEqual(a2549.informationtype, '002')
+        self.assertEqual(a2549.informationtypedesc, 'Orden de Trabajo pendiente')
+        self.assertEqual(a2549.interventiondate, '2018-09-24')
+        self.assertEqual(a2549.interventionhourfrom, '15:25:18')
+        self.assertEqual(a2549.interventionhourto, '15:25:18')
+        self.assertEqual(a2549.visitnumber, '590')
+        self.assertEqual(a2549.operationnum, '741')
+        self.assertEqual(a2549.extrainfo, 'coments')
+        defect = a2549.defectlist[0]
+        self.assertEqual(defect.code, u"001")
+        self.assertEqual(defect.description, u"FUGA DE GAS")
+
+    def test_a349(self):
+        a349 = A1_49(self.xml_a349)
+        a349.parse_xml()
+        self.assertEqual(a349.reqcode, '10_Qb9POo4')
+        self.assertEqual(a349.comreferencenum, '987654')
+        self.assertEqual(a349.responsedate, '2020-03-13')
+        self.assertEqual(a349.responsehour, '14:48:40')
+        self.assertEqual(a349.cups, 'ES1234000000000001JN')
+        self.assertEqual(a349.atrcode, '000111222333444555666777')
+        self.assertEqual(a349.resactivacion, '01')
+        self.assertEqual(a349.transfereffectivedate, '2020-05-01')
+        self.assertEqual(a349.enservicio, 'S')
+        self.assertEqual(a349.telemetering, 'S')
+        self.assertEqual(a349.finalqdgranted, '210355200.787')
+        self.assertEqual(a349.finalqhgranted, '654846713')
+        self.assertEqual(a349.finalclientyearlyconsumption, '252744160122')
+        self.assertEqual(a349.gasusetype, '01')
+        self.assertEqual(a349.result, '09')
+        self.assertEqual(a349.resultdesc, 'Aceptada')
+        self.assertEqual(a349.indanulable, 'S')
+        self.assertEqual(a349.interventiondate, '2020-03-13')
+        self.assertEqual(a349.interventionhourfrom, '14:48:40')
+        self.assertEqual(a349.interventionhourto, '15:48:40')
+        self.assertEqual(a349.visitnumber, '521')
+        self.assertEqual(a349.canonircperiodicity, '01')
+        self.assertEqual(a349.lastinspectionsdate, '2019-01-01')
+        self.assertEqual(a349.lastinspectionsresult, '01')
+        self.assertEqual(a349.StatusPS, '1')
+        self.assertEqual(a349.readingtype, '1')
+        self.assertEqual(a349.lectureperiodicity, '01')
+        self.assertEqual(a349.extrainfo, '400_ylDyrpjutezfQ2ojWqcyjdpQqN7UG7')
+
+        counter = a349.counterlist[0]
+
+        self.assertEqual(counter.countermodel, u"marca1")
+        self.assertEqual(counter.countertype, u"tipo1")
+        self.assertEqual(counter.counternumber, u"B123456")
+        self.assertEqual(counter.counterproperty, u"04")
+        self.assertEqual(counter.reallecture, u"2000")
+        self.assertEqual(counter.counterpressure, u"54321.123")
+
+        counter2 = a349.counterlist[1]
+
+        self.assertEqual(counter2.countermodel, u"marca2")
+        self.assertEqual(counter2.countertype, u"tipo2")
+        self.assertEqual(counter2.counternumber, u"C123456")
+        self.assertEqual(counter2.counterproperty, u"06")
+        self.assertEqual(counter2.reallecture, u"3000")
+        self.assertEqual(counter2.counterpressure, u"13245.321")
+
+    def test_a3s49(self):
+        a3s49 = A1_49(self.xml_a3s49)
+        a3s49.parse_xml()
+        self.assertEqual(a3s49.reqcode, '0123456789')
+        self.assertEqual(a3s49.comreferencenum, '123456789')
+        self.assertEqual(a3s49.responsedate, '2018-05-01')
+        self.assertEqual(a3s49.responsehour, '13:00:00')
+        self.assertEqual(a3s49.cups, 'ES1234000000000001JN')
+        self.assertEqual(a3s49.atrcode, '000111222333444555666777')
+        self.assertEqual(a3s49.resactivacion, '01')
+        self.assertEqual(a3s49.transfereffectivedate, '2020-05-01')
+        self.assertEqual(a3s49.enservicio, 'S')
+        self.assertEqual(a3s49.telemetering, 'S')
+        self.assertEqual(a3s49.finalqdgranted, '210355200.787')
+        self.assertEqual(a3s49.finalqhgranted, '654846713')
+        self.assertEqual(a3s49.finalclientyearlyconsumption, '252744160122')
+        self.assertEqual(a3s49.gasusetype, '01')
+        self.assertEqual(a3s49.result, '09')
+        self.assertEqual(a3s49.resultdesc, 'Aceptada')
+        self.assertEqual(a3s49.indanulable, 'S')
+        self.assertEqual(a3s49.interventiondate, '2020-03-13')
+        self.assertEqual(a3s49.interventionhourfrom, '14:48:40')
+        self.assertEqual(a3s49.interventionhourto, '15:48:40')
+        self.assertEqual(a3s49.visitnumber, '521')
+        self.assertEqual(a3s49.firstname, 'Gas')
+        self.assertEqual(a3s49.familyname1, 'Al')
+        self.assertEqual(a3s49.familyname2, 'Matalas')
+        self.assertEqual(a3s49.telephone1, '999888777')
+        self.assertEqual(a3s49.telephone2, '666555444')
+        self.assertEqual(a3s49.email, 'gasalmatalas@atr')
+        self.assertEqual(a3s49.language, '02')
+        self.assertEqual(a3s49.provinceowner, '16')
+        self.assertEqual(a3s49.cityowner, '17000')
+        self.assertEqual(a3s49.zipcodeowner, '17001')
+        self.assertEqual(a3s49.streettypeowner, 'ACCE')
+        self.assertEqual(a3s49.streetowner, 'Carrer inventat 2')
+        self.assertEqual(a3s49.streetnumberowner, '12')
+        self.assertEqual(a3s49.portalowner, '22')
+        self.assertEqual(a3s49.staircaseowner, '32')
+        self.assertEqual(a3s49.floorowner, '42')
+        self.assertEqual(a3s49.doorowner, '52')
+        self.assertEqual(a3s49.canonircperiodicity, '01')
+        self.assertEqual(a3s49.lastinspectionsdate, '2017-01-01')
+        self.assertEqual(a3s49.lastinspectionsresult, '01')
+        self.assertEqual(a3s49.StatusPS, '1')
+        self.assertEqual(a3s49.readingtype, '1')
+        self.assertEqual(a3s49.lectureperiodicity, '02')
+        self.assertEqual(a3s49.extrainfo, 'comentarios extras')
+
+        counter = a3s49.counterlist[0]
+
+        self.assertEqual(counter.countermodel, u"marca1")
+        self.assertEqual(counter.countertype, u"tipo1")
+        self.assertEqual(counter.counternumber, u"B123456")
+        self.assertEqual(counter.counterproperty, u"04")
+        self.assertEqual(counter.reallecture, u"2000")
+        self.assertEqual(counter.counterpressure, u"54321.123")
+
+        counter2 = a3s49.counterlist[1]
+
+        self.assertEqual(counter2.countermodel, u"marca2")
+        self.assertEqual(counter2.countertype, u"tipo2")
+        self.assertEqual(counter2.counternumber, u"C123456")
+        self.assertEqual(counter2.counterproperty, u"06")
+        self.assertEqual(counter2.reallecture, u"3000")
+        self.assertEqual(counter2.counterpressure, u"13245.321")
+
+        corrector = a3s49.correctorlist[0]
+
+        self.assertEqual(corrector.correctedlecture, u'2200')
+        self.assertEqual(corrector.correctormodel, u'modelo1')
+        self.assertEqual(corrector.correctornumber, u'D123456')
+        self.assertEqual(corrector.correctorproperty, u'01')
+        self.assertEqual(corrector.correctortype, u'01')
+
+        corrector2 = a3s49.correctorlist[1]
+
+        self.assertEqual(corrector2.correctedlecture, u'3300')
+        self.assertEqual(corrector2.correctormodel, u'modelo2')
+        self.assertEqual(corrector2.correctornumber, u'E654321')
+        self.assertEqual(corrector2.correctorproperty, u'02')
+        self.assertEqual(corrector2.correctortype, u'02')
+
+    def test_a449(self):
+        a449 = A1_49(self.xml_a449)
+        a449.parse_xml()
+        self.assertEqual(a449.reqcode, '10_z9f2k6S')
+        self.assertEqual(a449.comreferencenum, '123456789')
+        self.assertEqual(a449.responsedate, '2020-03-13')
+        self.assertEqual(a449.responsehour, '15:09:09')
+        self.assertEqual(a449.cups, '20aXn4jOtXkA8PF9JCHH')
+        self.assertEqual(a449.resultreason, 'R01')
+        self.assertEqual(a449.interventiondate, '2020-03-13')
+        self.assertEqual(a449.interventionhourfrom, '15:09:09')
+        self.assertEqual(a449.interventionhourto, '15:09:09')
+        self.assertEqual(a449.visitnumber, '987')
+        self.assertEqual(a449.extrainfo, '400_ssYcpvXKXUF3DuQzltLLSTHWo2SDsC')
+
+    def test_a4s49(self):
+        a4s49 = A1_49(self.xml_a4s49)
+        a4s49.parse_xml()
+        self.assertEqual(a4s49.reqcode, '10_z9f2k6S')
+        self.assertEqual(a4s49.responsedate, '2020-03-13')
+        self.assertEqual(a4s49.responsehour, '15:09:09')
+        self.assertEqual(a4s49.nationality, 'ES')
+        self.assertEqual(a4s49.documenttype, '01')
+        self.assertEqual(a4s49.documentnum, '11111111H')
+        self.assertEqual(a4s49.cups, '20aXn4jOtXkA8PF9JCHH')
+        self.assertEqual(a4s49.previousatrcode, '000111222333444555666777')
+        self.assertEqual(a4s49.result, '13')
+        self.assertEqual(a4s49.resultdesc, 'Aceptada')
+        self.assertEqual(a4s49.resultreason, 'R01')
+        self.assertEqual(a4s49.resultreasondesc, u'Cliente suministrado desde planta satélite.')
+        self.assertEqual(a4s49.extrainfo, '400_ssYcpvXKXUF3DuQzltLLSTHWo2SDsC')
+
+
+class test_A13_50(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a15s50 = open(get_data("a15s50.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a15s50.close()
+
+    def test_a15s50(self):
+        a15s50 = A13_50(self.xml_a15s50)
+        a15s50.parse_xml()
+        self.assertEqual(a15s50.reqcode, '0123456789')
+        self.assertEqual(a15s50.responsedate, '2018-05-01')
+        self.assertEqual(a15s50.responsehour, '13:00:00')
+        self.assertEqual(a15s50.nationality, 'ES')
+        self.assertEqual(a15s50.documenttype, '07')
+        self.assertEqual(a15s50.documentnum, '11111111H')
+        self.assertEqual(a15s50.cups, 'ES1234000000000001JN')
+        self.assertEqual(a15s50.previousatrcode, '000111222333444555666777')
+        self.assertEqual(a15s50.transfereffectivedate, '2018-07-01')
+        self.assertEqual(a15s50.readingtype, '1')
+        self.assertEqual(a15s50.extrainfo, 'comentarios extras')
+        self.assertEqual(len(a15s50.correctorlist), 2)
+        corrector = a15s50.correctorlist[0]
+        self.assertEqual(corrector.correctedlecture, u'2200')
+        self.assertEqual(corrector.correctormodel, u'modelo1')
+        self.assertEqual(corrector.correctornumber, u'D123456')
+        self.assertEqual(corrector.correctorproperty, u'01')
+        self.assertEqual(corrector.correctortype, u'01')
+        self.assertEqual(len(a15s50.counterlist), 2)
+        counter = a15s50.counterlist[1]
+        self.assertEqual(counter.countermodel, u'marca2')
+        self.assertEqual(counter.counternumber, u'C123456')
+        self.assertEqual(counter.counterpressure, u'13245.321')
+        self.assertEqual(counter.counterproperty, u'06')
+        self.assertEqual(counter.countertype, u'tipo2')
+        self.assertEqual(counter.reallecture, u'3000')
+
+
+class test_A21_36(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a2136 = open(get_data("a2136.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a2136.close()
+
+    def test_a2136(self):
+        a2136 = A20_36(self.xml_a2136)
+        a2136.parse_xml()
+        self.assertEqual(a2136.solcode, '1234567890')
+        self.assertEqual(a2136.reqdate, '2020-03-01')
+        self.assertEqual(a2136.reqhour, '08:00:00')
+        self.assertEqual(a2136.cups, 'ES1234000000000001JN')
+        self.assertEqual(a2136.result, '01')
+        self.assertEqual(a2136.resultdescr, 'Aceptada')
+        self.assertEqual(a2136.reason, 'R01')
+        self.assertEqual(a2136.reasondescr, u'Cliente suministrado desde planta satélite.')
+        self.assertEqual(a2136.permissionreq, 'S')
+        self.assertEqual(a2136.expecteddate, '2020-04-30')
+        self.assertEqual(a2136.infraestructurestatus, '01')
+        self.assertEqual(a2136.province, '17')
+        self.assertEqual(a2136.city, '17001')
+        self.assertEqual(a2136.zipcode, '17001')
+        self.assertEqual(a2136.streettype, 'ACCE')
+        self.assertEqual(a2136.street, 'Carrer inventat')
+        self.assertEqual(a2136.streetnumber, '1')
+        self.assertEqual(a2136.portal, '2')
+        self.assertEqual(a2136.staircase, '3')
+        self.assertEqual(a2136.floor, '4')
+        self.assertEqual(a2136.door, '5')
+        self.assertEqual(a2136.zipcode, '17001')
+        self.assertEqual(a2136.comunitypressure, 'B5')
+        self.assertEqual(a2136.aptransind, 'S')
+        self.assertEqual(a2136.aptransnumber, '1234')
+        self.assertEqual(a2136.reig, '123456')
+        self.assertEqual(a2136.iricertificateneeded, 'S')
+        self.assertEqual(a2136.iricertificatedate, '2020-01-01')
+        self.assertEqual(a2136.designpower, '10000')
+        self.assertEqual(a2136.terminstexist, 'S')
