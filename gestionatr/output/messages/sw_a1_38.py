@@ -7,7 +7,7 @@ from gestionatr.output.messages.sw_a1_41 import Registerdoclist, Registerdoc
 
 # Paso 01
 class MensajeA138(XmlModel):
-    _sort_order = ('mensaje', 'heading', 'a1')
+    _sort_order = ('mensaje', 'heading', 'a138')
 
     def __init__(self):
         self.doc_root = None
@@ -15,14 +15,14 @@ class MensajeA138(XmlModel):
             'sctdapplication', attributes={'xmlns': 'http://localhost/sctd/A138'}
         )
         self.heading = Heading()
-        self.a1 = A138()
+        self.a138 = A138()
         super(MensajeA138, self).__init__('sctdapplication', 'mensaje')
 
 
 class A138(XmlModel):
 
     _sort_order = (
-        'a1', 'comreferencenum', 'reqdate', 'reqhour', 'titulartype', 'nationality', 'documenttype', 'documentnum',
+        'a138', 'comreferencenum', 'reqdate', 'reqhour', 'titulartype', 'nationality', 'documenttype', 'documentnum',
         'firstname', 'familyname1', 'familyname2', 'telephone1', 'telephone2', 'fax', 'email', 'language', 'province',
         'city', 'zipcode', 'streettype', 'street', 'streetnumber', 'portal', 'staircase', 'floor', 'door',
         'regularaddress', 'provinceowner', 'cityowner', 'zipcodeowner', 'streettypeowner', 'streetowner',
@@ -33,7 +33,7 @@ class A138(XmlModel):
     )
 
     def __init__(self):
-        self.a1 = XmlField('a1')
+        self.a138 = XmlField('a138')
         self.comreferencenum = XmlField('comreferencenum')
         self.reqdate = XmlField('reqdate')
         self.reqhour = XmlField('reqhour')
@@ -88,4 +88,4 @@ class A138(XmlModel):
         self.reqactivationdate = XmlField('reqactivationdate')
         self.extrainfo = XmlField('extrainfo')
         self.registerdoclist = Registerdoclist()
-        super(A138, self).__init__('a1', 'a1')
+        super(A138, self).__init__('a138', 'a138')

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sctdapplication xmlns="http://localhost/sctd/A2036">
+    <heading>
+        <dispatchingcode>GML</dispatchingcode>
+        <dispatchingcompany>1234</dispatchingcompany>
+        <destinycompany>4321</destinycompany>
+        <communicationsdate>2018-05-01</communicationsdate>
+        <communicationshour>12:00:00</communicationshour>
+        <processcode>36</processcode>
+        <messagetype>A20</messagetype>
+    </heading>
+    <a20>
+        <reqdate>2020-03-01</reqdate>
+        <reqhour>08:00:00</reqhour>
+        <cups>ES1234000000000001JN</cups>
+        <province>17</province>
+        <city>17001</city>
+        <zipcode>17001</zipcode>
+        <streettype>ACCE</streettype>
+        <street>Carrer inventat</street>
+        <streetnumber>1</streetnumber>
+        <portal>2</portal>
+        <staircase>3</staircase>
+        <floor>4</floor>
+        <door>5</door>
+    </a20>
+</sctdapplication>

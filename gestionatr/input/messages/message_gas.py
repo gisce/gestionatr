@@ -58,11 +58,18 @@ XSD_DATA.update({
         'A1': 'A146.xsd',
         'A2': 'A246.xsd',
     },
+    '24': {
+        'A12': 'A1224.xsd',
+    },
     '26': {
         'A12': 'A1226.xsd',
     },
     '45': {
         'A19': 'A1945.xsd',
+    },
+    '36': {
+        'A20': 'A20.xsd',
+        'A21': 'A21.xsd',
     },
     '38': {
         'A1': 'A138.xsd',
@@ -70,7 +77,21 @@ XSD_DATA.update({
         'A25': 'A2538.xsd',
         'A3': 'A338.xsd',
         'A4': 'A438.xsd',
+    },
+    '49': {
+        'A1': 'A149.xsd',
+        'A2': 'A249.xsd',
+        'A2S': 'A2S49.xsd',
+        'A25': 'A2549.xsd',
+        'A3': 'A349.xsd',
+        'A3S': 'A3S49.xsd',
+        'A4': 'A449.xsd',
+        'A4S': 'A4S49.xsd',
+    },
+    '50': {
+        'A15S': 'A15S50.xsd'
     }
+
 })
 
 MAIN_MESSAGE_XSD.update({
@@ -115,18 +136,34 @@ MAIN_MESSAGE_XSD.update({
     'A304': 'a304',
     'A404': 'a404',
     # 46
-    'A146': 'a1',
-    'A246': 'a2',
+    'A146': 'a146',
+    'A246': 'a246',
+    # 24
+    'A1224': 'a1224',
     # 26
     'A1226': 'a1226',
     # 45
     'A1945': 'a19',
+    # 36
+    'A20': 'a20',
+    'A21': 'a21',
     # 38
-    'A138': 'a1',
-    'A238': 'a2',
-    'A2538': 'a25',
-    'A338': 'a3',
-    'A438': 'a4',
+    'A138': 'a138',
+    'A238': 'a238',
+    'A2538': 'a2538',
+    'A338': 'a338',
+    'A438': 'a438',
+    # 49
+    'A149': 'a149',
+    'A249': 'a249',
+    'A2S49': 'a2s49',
+    'A2549': 'a2549',
+    'A349': 'a349',
+    'A3S49': 'a3s49',
+    'A449': 'a449',
+    'A4S49': 'a4s49',
+    # 50
+    'A15S50': 'a15s50',
 })
 
 
@@ -219,12 +256,21 @@ class MessageGas(Message):
             data = get_rec_attr(self.obj, tree, False)
             if data not in [None, False]:
                 return data.text
-            if self.processcode == '26':
+            if self.processcode in ('26', '24'):
                 tree = '{0}.atrcode'.format(self._header)
                 data = get_rec_attr(self.obj, tree, False)
                 if data not in [None, False]:
                     return data.text
             raise except_f1('Error', u'Documento sin código de solicitud')
+
+    @property
+    def seq_sollicitud(self):
+        tree = '{0}.sequential'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data not in [None, False]:
+            return data.text
+        else:
+            return '01'
 
     @property
     def data_sollicitud(self):

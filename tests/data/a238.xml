@@ -9,7 +9,7 @@
       <processcode>38</processcode>
       <messagetype>A2</messagetype>
   </heading>
-  <a2>
+  <a238>
     <reqcode>10_4E4mh15</reqcode>
     <comreferencenum>123456789123</comreferencenum>
     <responsedate>2020-03-13</responsedate>
@@ -51,5 +51,5 @@
             <import>23.8</import>
         </concept>
     </conceptlist>
-  </a2>
+  </a238>
 </sctdapplication>

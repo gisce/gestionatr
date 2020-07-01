@@ -11,6 +11,8 @@ from gestionatr.output.messages import sw_a1_41 as a1_41
 from gestionatr.output.messages import sw_a1_44 as a1_44
 from gestionatr.output.messages import sw_a1_46 as a1_46
 from gestionatr.output.messages import sw_a1_48 as a1_48
+from gestionatr.output.messages import sw_a1_49 as a1_49
+from gestionatr.output.messages import sw_a20_36 as a20_36
 from gestionatr.output.messages import sw_a1 as a1
 from gestionatr.output.messages import sw_a3 as a3
 from gestionatr.output.messages import sw_b1 as b1
@@ -4086,7 +4088,7 @@ class test_A1_48(unittest.TestCase):
             'incidentlocationdesc': 'calle pequeña',
             'incidentlocationprovince': '01',
             'incidentlocationcity': '000001',
-            'incidentlocationcitysubdivision': '20AA',
+            'incidentlocationcitysubdivision': '17079000503',
             'incidentlocationzipcode': '17888',
         }
         incidentlocation.feed(incidentlocation_fields)
@@ -4273,7 +4275,7 @@ class test_A1_48(unittest.TestCase):
             'incidentlocationdesc': 'calle pequeña',
             'incidentlocationprovince': '01',
             'incidentlocationcity': '000001',
-            'incidentlocationcitysubdivision': '20AA',
+            'incidentlocationcitysubdivision': '17079000503',
             'incidentlocationzipcode': '17888',
         }
         incidentlocation.feed(incidentlocation_fields)
@@ -4481,6 +4483,10 @@ class test_A1_46(unittest.TestCase):
             'reqdate': '2018-05-01',
             'reqhour': '13:00:00',
             'comreferencenum': '000123456789',
+            'comreferencenumdes': '999123456789',
+            'annulmentreason': '102',
+            'claimtype': '01',
+            'claimsubtype': '001',
             'cups': 'ES1234000000000001JN',
             'operationtype': 'A20002',
             'extrainfo': 'comentarios extra',
@@ -4489,7 +4495,7 @@ class test_A1_46(unittest.TestCase):
         a146.feed(a146_fields)
         mensaje_a146_fields = {
             'heading': heading,
-            'a1': a146,
+            'a146': a146,
         }
         mensaje.feed(mensaje_a146_fields)
         mensaje.build_tree()
@@ -4607,9 +4613,116 @@ class test_A1_38(unittest.TestCase):
 
         mensaje_a138_fields = {
             'heading': heading,
-            'a1': a138,
+            'a138': a138,
         }
         mensaje_a138.feed(mensaje_a138_fields)
         mensaje_a138.build_tree()
         xml = str(mensaje_a138)
         assertXmlEqual(xml, self.xml_a138.read())
+
+
+class test_A1_49(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a149 = open(get_data("a149.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a149.close()
+
+    def test_create_a149(self):
+        # Mensajea149
+        mensaje_a149 = a1_49.MensajeA149()
+
+        # Heading
+        heading = a1_49.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '49',
+            'messagetype': 'A1'
+        }
+        heading.feed(heading_fields)
+
+        # a149
+        a149 = a1_49.A149()
+
+        a149_fields = {
+            'comreferencenum': '12345',
+            'reqdate': "2020-03-01",
+            'reqhour': "08:00:00",
+            'cups': "ES1234000000000001JN",
+            'comreferencenumdes': '123456789012',
+            'tipodesistimiento': '01',
+            'documenttype': '01',
+            'documentnum': '11111111H',
+            'titulartype': 'F',
+            'extrainfo': 'EXTRA EXTRA! EL GAS NO TE SENTIT!'
+        }
+        a149.feed(a149_fields)
+
+        mensaje_a149_fields = {
+            'heading': heading,
+            'a149': a149,
+        }
+        mensaje_a149.feed(mensaje_a149_fields)
+        mensaje_a149.build_tree()
+        xml = str(mensaje_a149)
+        assertXmlEqual(xml, self.xml_a149.read())
+
+
+class test_A20_36(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a2036 = open(get_data("a2036.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a2036.close()
+
+    def test_create_a2036(self):
+        # Mensajea2036
+        mensaje_a2036 = a20_36.MensajeA2036()
+
+        # Heading
+        heading = a20_36.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '36',
+            'messagetype': 'A20'
+        }
+        heading.feed(heading_fields)
+
+        # a20
+        a20 = a20_36.A20()
+
+        a20_fields = {
+            'reqdate': "2020-03-01",
+            'reqhour': "08:00:00",
+            'cups': "ES1234000000000001JN",
+            'province': "17",
+            'city': "17001",
+            'zipcode': "17001",
+            'streettype': "ACCE",
+            'street': "Carrer inventat",
+            'streetnumber': "1",
+            'portal': "2",
+            'staircase': "3",
+            'floor': "4",
+            'door': "5"
+        }
+        a20.feed(a20_fields)
+
+        mensaje_a2036_fields = {
+            'heading': heading,
+            'a20': a20,
+        }
+        mensaje_a2036.feed(mensaje_a2036_fields)
+        mensaje_a2036.build_tree()
+        xml = str(mensaje_a2036)
+        assertXmlEqual(xml, self.xml_a2036.read())
