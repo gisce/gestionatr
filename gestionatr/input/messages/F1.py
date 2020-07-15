@@ -527,7 +527,7 @@ class Termino(object):
                 period_number += 1
             # Per les 6.1 en juny que el P5 no es factura i ens l'envien en preu i quantitat 0 pero igualment sha de
             # tenir en compte
-            if len(periodes_no_facturables) == 1 and period_number == 6:
+            if len(periodes_no_facturables) == 1 and period_number >= 6:
                 for d, period_number in periodes_no_facturables:
                     period_name = 'P{0}'.format(period_number)
                     period = self.PERIODO_TYPE(
