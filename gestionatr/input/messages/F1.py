@@ -511,6 +511,7 @@ class Termino(object):
     @property
     def periodos(self):
         data = []
+        periodes_no_facturables = []
         if hasattr(self.termino, 'Periodo'):
             period_number = 1
 
@@ -521,7 +522,19 @@ class Termino(object):
                 )
                 if period.es_facturable():
                     data.append(period)
-                    period_number += 1
+                else:
+                    periodes_no_facturables.append((d, period_number))
+                period_number += 1
+            # Per les 6.1 en juny que el P5 no es factura i ens l'envien en preu i quantitat 0 pero igualment sha de
+            # tenir en compte
+            if len(periodes_no_facturables) == 1 and period_number >= 6:
+                for d, period_number in periodes_no_facturables:
+                    period_name = 'P{0}'.format(period_number)
+                    period = self.PERIODO_TYPE(
+                        d, period_name, self.fecha_desde, self.fecha_hasta
+                    )
+                    data.append(period)
+
         return data
 
     @property
