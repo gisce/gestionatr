@@ -523,7 +523,7 @@ class Termino(object):
                 if period.es_facturable():
                     data.append(period)
                 else:
-                    periodes_no_facturables.append((period, period_number))
+                    periodes_no_facturables.append((d, period_number))
                 period_number += 1
             # Per les 6.1 en juny que el P5 no es factura i ens l'envien en preu i quantitat 0 pero igualment sha de
             # tenir en compte
