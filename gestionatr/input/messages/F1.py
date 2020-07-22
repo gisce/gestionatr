@@ -930,7 +930,7 @@ class Integrador(object):
 
     @property
     def numero_ruedas_enteras(self):
-        if self._numero_ruedas_enteras:
+        if self._numero_ruedas_enteras is not None:
             return self._numero_ruedas_enteras
         if hasattr(self.integrador, 'NumeroRuedasEnteras'):
             return float(self.integrador.NumeroRuedasEnteras.text.strip())
