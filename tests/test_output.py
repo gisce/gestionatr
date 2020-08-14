@@ -2389,12 +2389,14 @@ class test_B1(unittest.TestCase):
         self.xml_b102_accept = open(get_data("b102_accept.xml"), "r")
         self.xml_b104_accept = open(get_data("b104_accept.xml"), "r")
         self.xml_b105 = open(get_data("b105.xml"), "r")
+        self.xml_b116 = open(get_data("b116.xml"), "r")
 
     def tearDown(self):
         self.xml_b101.close()
         self.xml_b102_accept.close()
         self.xml_b104_accept.close()
         self.xml_b105.close()
+        self.xml_b116.close()
 
     def test_create_pas01(self):
         # MensajeBajaSuspension
@@ -2652,6 +2654,46 @@ class test_B1(unittest.TestCase):
         mensaje.build_tree()
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_b105.read())
+
+    def test_create_pas16(self):
+        mensaje = b1.MensajeContestacionIncidencia()
+
+        # Cabecera
+        cabecera = get_header(process='B1', step='16')
+
+        # Telefono
+        telefono = b1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '34',
+            'numero': '683834841',
+        }
+        telefono.feed(telefono_fields)
+
+        # Contacto
+        contacto = b1.Contacto()
+        contacto_fields = {
+            'persona_de_contacto': 'Nombre Inventado',
+            'telefonos': [telefono],
+            'correo_electronico': 'mail_falso@dominio.com',
+        }
+        contacto.feed(contacto_fields)
+
+        # ContestacionIncidencia
+        contestacion_incidencia = b1.ContestacionIncidencia()
+        contestacion_incidencia_fields = {
+            'contestacion_incidencia': '02',
+            'contacto': contacto
+        }
+        contestacion_incidencia.feed(contestacion_incidencia_fields)
+
+        mensaje_fields = {
+            'cabecera': cabecera,
+            'contestacion_incidencia': contestacion_incidencia,
+        }
+        mensaje.feed(mensaje_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_b116.read())
 
 
 class test_B2(unittest.TestCase):

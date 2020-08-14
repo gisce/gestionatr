@@ -765,12 +765,14 @@ class test_B1(unittest.TestCase):
         self.xml_b102_accept = open(get_data("b102_accept.xml"), "r")
         self.xml_b104_accept = open(get_data("b104_accept.xml"), "r")
         self.xml_b105 = open(get_data("b105.xml"), "r")
+        self.xml_b116 = open(get_data("b116.xml"), "r")
 
     def tearDown(self):
         self.xml_b101.close()
         self.xml_b102_accept.close()
         self.xml_b104_accept.close()
         self.xml_b105.close()
+        self.xml_b116.close()
 
     def test_b101(self):
         b1 = B1(self.xml_b101)
@@ -872,6 +874,15 @@ class test_B1(unittest.TestCase):
         self.assertFalse(md2.anomalia)
         self.assertFalse(md2.comentarios)
         self.assertEqual(md2.fecha_lectura_firme, u'2003-01-03')
+
+    def test_b116(self):
+        b1 = B1(self.xml_b116)
+        b1.parse_xml()
+        self.assertEqual(b1.contestacion_incidencia, u'02')
+        self.assertEqual(b1.contacto.persona_de_contacto, u'Nombre Inventado')
+        self.assertEqual(b1.contacto.telefonos[0][0], u'34')
+        self.assertEqual(b1.contacto.telefonos[0][1], u'683834841')
+        self.assertEqual(b1.contacto.correo_electronico, u'mail_falso@dominio.com')
 
 
 class test_B2(unittest.TestCase):
