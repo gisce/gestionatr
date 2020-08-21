@@ -1170,6 +1170,8 @@ class test_A3(unittest.TestCase):
             'cnae': '2222',
             'ind_activacion': 'L',
             'fecha_prevista_accion': '2016-06-06',
+            'solicitud_tension': 'S',
+            'tension_solicitada': '01',
         }
         datos_solicitud.feed(datos_solicitud_fields)
 
