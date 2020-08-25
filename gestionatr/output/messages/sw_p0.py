@@ -124,13 +124,17 @@ class CondicionesContractuales(XmlModel):
 
 
 class PotenciasContratadas(XmlModel):
-
-    _sort_order = ('potencias_contratadas', 'potencia')
+    _sort_order = ('potencies', 'p1', 'p2', 'p3', 'p4', 'p5', 'p6')
 
     def __init__(self):
-        self.potencias_contratadas = XmlField('PotenciasContratadas')
-        self.potencia = XmlField('Potencia', attributes={'Periodo': '1'})
-        super(PotenciasContratadas, self).__init__('PotenciasContratadas', 'potencias_contratadas')
+        self.potencies = XmlField('PotenciasContratadas')
+        self.p1 = XmlField('Potencia', attributes={'Periodo': '1'}, rep=lambda x: '%d' % x)
+        self.p2 = XmlField('Potencia', attributes={'Periodo': '2'})
+        self.p3 = XmlField('Potencia', attributes={'Periodo': '3'})
+        self.p4 = XmlField('Potencia', attributes={'Periodo': '4'})
+        self.p5 = XmlField('Potencia', attributes={'Periodo': '5'})
+        self.p6 = XmlField('Potencia', attributes={'Periodo': '6'})
+        super(PotenciasContratadas, self).__init__('PotenciasContratadas', 'potencies')
 
 
 class DerechosReconocidos(XmlModel):

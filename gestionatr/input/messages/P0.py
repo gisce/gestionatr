@@ -411,6 +411,15 @@ class CondicionesContractuales(object):
             pass
         return data
 
+    @property
+    def modo_control_potencia(self):
+        data = ''
+        try:
+            data = self.condiciones_contractuales.ModoControlPotencia.text
+        except AttributeError:
+            pass
+        return data
+
 
 class PotenciasContratadas(object):
 
