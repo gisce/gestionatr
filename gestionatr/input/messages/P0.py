@@ -180,7 +180,7 @@ class P0(Message, ProcessDeadline):
         data = []
         tree = get_rec_attr(self.obj, self._header, False)
         if hasattr(tree, 'Rechazo'):
-            for datos in tree.Equipo:
+            for datos in tree.Rechazo:
                 data.append(Rechazo(datos))
             return data
         else:
