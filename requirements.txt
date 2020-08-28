@@ -2,4 +2,4 @@ lxml
 libcomxml
 workdays
 click
-suds
+zeep
