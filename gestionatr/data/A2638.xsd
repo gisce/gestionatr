@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- editado con XMLSpy v2020 rel. 2 (x64) (http://www.altova.com) por teresa.marco (INECO) -->
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A2638" targetNamespace="http://localhost/sctd/A2638" elementFormDefault="qualified">
 	<include schemaLocation="CommonTagsCONT.xsd"/>
 	<element name="sctdapplication" type="tns:SctdApplicationA2638Type"/>
@@ -45,7 +46,7 @@
 		<sequence>
 			<element name="reqcode" type="tns:ReqcodeType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Código Solicitud</documentation>
+					<documentation>CÃ³digo Solicitud</documentation>
 				</annotation>
 			</element>
 			<element name="cups" type="tns:CupsType" minOccurs="1" maxOccurs="1">
@@ -55,17 +56,17 @@
 			</element>
 			<element name="comreferencenum" type="tns:ComreferencenumType" minOccurs="1" maxOccurs="1">
 				<annotation>
-					<documentation>Nº Referencia Solicitud Comercializadora. Identifica unívocamente cada una de las solicitudes de una Empresa</documentation>
+					<documentation>NÂº Referencia Solicitud Comercializadora. Identifica unÃ­vocamente cada una de las solicitudes de una Empresa</documentation>
 				</annotation>
 			</element>
 			<element name="stateincidence" type="tns:stateincidenceType" minOccurs="1" maxOccurs="1">
 				<annotation>
-					<documentation>Contestación de la incidencia. Estado</documentation>
+					<documentation>ContestaciÃ³n de la incidencia. Estado</documentation>
 				</annotation>
 			</element>
 			<element name="contact" type="tns:ContactinciType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Nodo obligatorio con los datos de la persona de contacto</documentation>
+					<documentation>Nodo con los datos de la persona de contacto</documentation>
 				</annotation>
 			</element>
 			<element name="extrainfo" type="tns:ExtrainfoType" minOccurs="0" maxOccurs="1">

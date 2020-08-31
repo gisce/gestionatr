@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- editado con XMLSpy v2020 rel. 2 (x64) (http://www.altova.com) por teresa.marco (INECO) -->
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A341" targetNamespace="http://localhost/sctd/A341" elementFormDefault="qualified">
 	<include schemaLocation="CommonTagsCONT.xsd"/>
 	<element name="sctdapplication" type="tns:SctdapplicationA341Type"/>
@@ -98,12 +99,12 @@
 					<documentation>Dispone de Telemedida</documentation>
 				</annotation>
 			</element>
-			<element name="finalqdgranted" type="tns:QdType" minOccurs="0" maxOccurs="1">
+			<element name="finalqdgranted" type="tns:QdType" maxOccurs="1">
 				<annotation>
 					<documentation>Caudal Diario Concedido Final. </documentation>
 				</annotation>
 			</element>
-			<element name="finalqhgranted" type="tns:QhType">
+			<element name="finalqhgranted" type="tns:QhType" minOccurs="0">
 				<annotation>
 					<documentation>Caudal Horario Concedido Final</documentation>
 				</annotation>

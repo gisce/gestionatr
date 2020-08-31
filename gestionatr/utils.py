@@ -92,15 +92,39 @@ def repartir_consums_entre_lectures(consums, lectures_xml):
             res[l] = consums[i]
             i += 1
     elif len(consums) == 1:
-        consum = consums[0]
-        import math
-        parte_decimal, parte_entera = math.modf(consum)
-        part_igual = int(parte_entera) / len(lectures_xml)
-        residu = (int(parte_entera) % len(lectures_xml)) + parte_decimal
+        periodes = list(set([l.periode for l in lectures_xml]))
+        if len(periodes) > 1:
+            consum_acumulat = 0
+            for l in lectures_xml:
+                # Calculem el consum que te aquesta lectura
+                consumo_calculado = l.lectura_hasta.lectura + (l.ajuste and l.ajuste.ajuste_por_integrador or 0.0) - l.lectura_desde.lectura
+                if consumo_calculado < 0:
+                    consumo_calculado += l.gir_comptador
+                res[l] = consumo_calculado
+                consum_acumulat += consumo_calculado
+            if res:
+                if consums[0] >= consum_acumulat:
+                    res[lectures_xml[0]] += consums[0] - consum_acumulat
+                else:
+                    a_repartir = abs(consums[0] - consum_acumulat)
+                    for l in sorted(res.keys(), key=lambda *a: a[0].periode):
+                        if res[l] >= a_repartir:
+                            res[l] -= a_repartir
+                            break
+                        else:
+                            a_repartir -= res[l]
+                            res[l] = 0
 
-        l = None
-        for l in lectures_xml:
-            res[l] = part_igual
-        if l:
-            res[l] += residu
+        else:
+            consum = consums[0]
+            import math
+            parte_decimal, parte_entera = math.modf(consum)
+            part_igual = int(parte_entera) / len(lectures_xml)
+            residu = (int(parte_entera) % len(lectures_xml)) + parte_decimal
+
+            l = None
+            for l in lectures_xml:
+                res[l] = part_igual
+            if l:
+                res[l] += residu
     return res

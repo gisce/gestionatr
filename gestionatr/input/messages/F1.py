@@ -366,6 +366,9 @@ class Factura(object):
         if hasattr(self.factura, 'IVA'):
             for d in self.factura.IVA:
                 data.append(IVA(d))
+        if hasattr(self.factura, 'IVAReducido'):
+            for d in self.factura.IVAReducido:
+                data.append(IVA(d))
         return data
 
     @property
@@ -508,8 +511,10 @@ class Termino(object):
     @property
     def periodos(self):
         data = []
+        periodes_no_facturables = []
         if hasattr(self.termino, 'Periodo'):
             period_number = 1
+            max_facturat = period_number
 
             for d in self.termino.Periodo:
                 period_name = 'P{0}'.format(period_number)
@@ -518,7 +523,22 @@ class Termino(object):
                 )
                 if period.es_facturable():
                     data.append(period)
-                    period_number += 1
+                    max_facturat = period_number
+                else:
+                    periodes_no_facturables.append((d, period_number))
+                period_number += 1
+
+            if periodes_no_facturables:
+                max_no_facturat = max([x[1] for x in periodes_no_facturables])
+                # Per les 6.1 ens envien periodes amb preu i quantitat 0 pero si que els hem de gestionar
+                if max_facturat > max_no_facturat:
+                    for d, period_number in periodes_no_facturables:
+                        period_name = 'P{0}'.format(period_number)
+                        period = self.PERIODO_TYPE(
+                            d, period_name, self.fecha_desde, self.fecha_hasta
+                        )
+                        data.append(period)
+
         return data
 
     @property
@@ -776,24 +796,45 @@ class Lectura(object):
 
     def __init__(self, data):
         self.lectura_data = data
+        self._fecha = None
+        self._lectura = None
+        self._procedencia = None
 
     @property
     def fecha(self):
+        if self._fecha:
+            return self._fecha
         if hasattr(self.lectura_data, 'Fecha'):
             return self.lectura_data.Fecha.text.strip()
         return None
 
+    @fecha.setter
+    def fecha(self, value):
+        self._fecha = value
+
     @property
     def procedencia(self):
+        if self._procedencia:
+            return self._procedencia
         if hasattr(self.lectura_data, 'Procedencia'):
             return self.lectura_data.Procedencia.text.strip()
         return None
 
+    @procedencia.setter
+    def procedencia(self, value):
+        self._procedencia = value
+
     @property
     def lectura(self):
+        if self._lectura is not None:
+            return self._lectura
         if hasattr(self.lectura_data, 'Lectura'):
             return float(self.lectura_data.Lectura.text.strip())
         return None
+
+    @lectura.setter
+    def lectura(self, value):
+        self._lectura = value
 
 
 class Ajuste(object):
@@ -845,7 +886,11 @@ class Integrador(object):
 
     def __init__(self, data):
         self.integrador = data
+        self._lectura_desde = None
+        self._lectura_hasta = None
+        self._magnitud = None
         self._periode = None
+        self._numero_ruedas_enteras = None
         self._ajuste = None
         self.comptador = None
 
@@ -854,9 +899,15 @@ class Integrador(object):
 
     @property
     def magnitud(self):
+        if self._magnitud:
+            return self._magnitud
         if hasattr(self.integrador, 'Magnitud'):
             return self.integrador.Magnitud.text.strip()
         return None
+
+    @magnitud.setter
+    def magnitud(self, value):
+        self._magnitud = value
 
     @property
     def codigo_periodo(self):
@@ -879,9 +930,15 @@ class Integrador(object):
 
     @property
     def numero_ruedas_enteras(self):
+        if self._numero_ruedas_enteras is not None:
+            return self._numero_ruedas_enteras
         if hasattr(self.integrador, 'NumeroRuedasEnteras'):
             return float(self.integrador.NumeroRuedasEnteras.text.strip())
         return None
+
+    @numero_ruedas_enteras.setter
+    def numero_ruedas_enteras(self, value):
+        self._numero_ruedas_enteras = value
 
     @property
     def numero_ruedas_decimales(self):
@@ -893,19 +950,31 @@ class Integrador(object):
     def consumo_calculado(self):
         if hasattr(self.integrador, 'ConsumoCalculado'):
             return float(self.integrador.ConsumoCalculado.text.strip())
-        return None
+        return 0
 
     @property
     def lectura_desde(self):
+        if self._lectura_desde:
+            return self._lectura_desde
         if hasattr(self.integrador, 'LecturaDesde'):
             return Lectura(self.integrador.LecturaDesde)
         return None
 
+    @lectura_desde.setter
+    def lectura_desde(self, value):
+        self._lectura_desde = value
+
     @property
     def lectura_hasta(self):
+        if self._lectura_hasta:
+            return self._lectura_hasta
         if hasattr(self.integrador, 'LecturaHasta'):
             return Lectura(self.integrador.LecturaHasta)
         return None
+
+    @lectura_hasta.setter
+    def lectura_hasta(self, value):
+        self._lectura_hasta = value
 
     @property
     def tipus(self):
@@ -940,8 +1009,9 @@ class Integrador(object):
 
 class ModeloAparato(object):
 
-    def __init__(self, data):
+    def __init__(self, data, factura=None):
         self.modelo_aparato = data
+        self.factura = factura
 
     @property
     def tipo_aparato(self):
@@ -1036,6 +1106,11 @@ class ModeloAparato(object):
                     lectures.append(integrador)
         except AttributeError:
             pass
+
+        if (not tipus or "S" in tipus) and self.factura and self.factura.get_consum_facturat(tipus='S', periode=None) and not self.factura.has_AS_lectures():
+            # Si no tenim lectures AS pero si que ens han cobrat excedents,
+            # creem unes lectures AS ficticies a 0 (puta ENDESA)
+            lectures.extend(self.factura.get_fake_AS_lectures())
         return lectures
 
     def get_lectures_activa(self):
@@ -1063,9 +1138,9 @@ class MultiModeloAparato(ModeloAparato):
     repeat both the field Medidas and ModeloAparato despite the fact that they
     are only providing two different periods for the same meter"""
 
-    def __init__(self, meter_list):
+    def __init__(self, meter_list, factura=None):
         self.meters = meter_list
-        super(MultiModeloAparato, self).__init__(meter_list[0])
+        super(MultiModeloAparato, self).__init__(meter_list[0], factura=factura)
 
     def _get_single_attribute(self, attribute):
         for meter in self.meters:
@@ -1198,7 +1273,7 @@ class FacturaATR(Factura):
                 data.append(Medida(d))
         return data
 
-    def get_consum_facturat(self, tipus, periode):
+    def get_consum_facturat(self, tipus, periode=None):
         if tipus not in ['A', 'S']:
             return None
 
@@ -1206,14 +1281,14 @@ class FacturaATR(Factura):
             res = []
             for activa in self.energia_activa.terminos_energia_activa:
                 for periode_activa in activa.periodos:
-                    if periode_activa.nombre == periode:
+                    if periode_activa.nombre == periode or not periode:
                         res.append(periode_activa.cantidad)
             return res
 
         if tipus == 'S':
             res = []
             for concepte in self.conceptos_repercutibles:
-                if concepte.concepto_repercutible[0] == '7' and concepte.concepto_repercutible[1] == periode[1]:
+                if concepte.concepto_repercutible[0] == '7' and (not periode or concepte.concepto_repercutible[1] == periode[1]):
                     res.append(concepte.unidades)
             return res
 
@@ -1221,7 +1296,67 @@ class FacturaATR(Factura):
 
     def get_lectures_amb_ajust_autoconsum(self, tipus='S', ajust_balancejat=True, motiu_ajust="98"):
         return self.get_lectures_amb_ajust_quadrat_amb_consum(tipus=tipus, ajust_balancejat=ajust_balancejat, motiu_ajust=motiu_ajust)
-    
+
+    def periodes_facturats_agrupats(self, nperiodes_lectures, tipus='A'):
+        if tipus not in ['A', 'S']:
+            return None
+
+        res = {}
+        if tipus == 'A' and self.energia_activa:
+            for activa in self.energia_activa.terminos_energia_activa:
+                for periode_activa in activa.periodos:
+                    if periode_activa.nombre not in res:
+                        res[periode_activa.nombre] = True
+
+        else:  # if tipus == 'S':
+            for concepte in self.conceptos_repercutibles:
+                if concepte.concepto_repercutible[0] == '7' and concepte.concepto_repercutible not in res:
+                    res[concepte.concepto_repercutible] = True
+
+        return len(res.keys()) != nperiodes_lectures
+
+    def has_AS_lectures(self):
+        for medida in self.medidas:
+            for aparell in medida.modelos_aparatos:
+                try:
+                    for integrador in aparell.integradores:
+                        if integrador.tipus == 'S':
+                            return True
+                except AttributeError:
+                    pass
+        return False
+
+    def get_fake_AS_lectures(self):
+        res = []
+        comptador_amb_lectures = None
+        for medida in self.medidas:
+            for c in medida.modelos_aparatos:
+                if c.get_lectures_activa_entrant():
+                    comptador_amb_lectures = c
+                    break
+        if comptador_amb_lectures:
+            base_info = comptador_amb_lectures.get_lectures_activa_entrant()[0]
+            for concepte in self.conceptos_repercutibles:
+                if concepte.concepto_repercutible[0] == '7':
+                    l1 = Lectura(None)
+                    l1.fecha = base_info.lectura_desde.fecha
+                    l1.lectura = 0
+                    l1.procedencia = base_info.lectura_desde.procedencia
+                    l2 = Lectura(None)
+                    l2.fecha = base_info.lectura_hasta.fecha
+                    l2.lectura = 0
+                    l2.procedencia = base_info.lectura_hasta.procedencia
+                    new_integrador = Integrador(None)
+                    new_integrador.magnitud = "AS"
+                    new_integrador.numero_ruedas_enteras = base_info.numero_ruedas_enteras
+                    new_integrador.codigo_periodo = base_info.codigo_periodo[0] + concepte.concepto_repercutible[1]
+                    if not new_integrador.periode:
+                        new_integrador.codigo_periodo = base_info.codigo_periodo
+                    new_integrador.lectura_desde = l1
+                    new_integrador.lectura_hasta = l2
+                    res.append(new_integrador)
+        return res
+
     def get_lectures_amb_ajust_quadrat_amb_consum(self, tipus='S', ajust_balancejat=True, motiu_ajust="98"):
         lectures_per_periode = {}
         for comptador in self.get_comptadors():
@@ -1231,6 +1366,16 @@ class FacturaATR(Factura):
                 if not lectures_per_periode.get(periode):
                     lectures_per_periode[periode] = []
                 lectures_per_periode[periode].append(lectura)
+
+            nperiodes = len([l for l in lectures_per_periode.keys() if l])
+            if self.periodes_facturats_agrupats(nperiodes, tipus=tipus) and ajust_balancejat:
+                for periode in lectures_per_periode.keys():
+                    if not periode:
+                        continue
+                    periode_agrupat = "P{0}".format(int(periode[1:]) + nperiodes/2)
+                    if lectures_per_periode.get(periode_agrupat):
+                        lectures_per_periode[periode].extend(lectures_per_periode.get(periode_agrupat))
+                        del lectures_per_periode[periode_agrupat]
 
         res = {}
         for periode, lectures in lectures_per_periode.iteritems():
@@ -1246,7 +1391,7 @@ class FacturaATR(Factura):
                         lectura.ajuste = Ajuste(lectura.ajuste.ajuste)
                     old_ajust = lectura.ajuste and lectura.ajuste.ajuste_por_integrador or 0.0
                     new_val = consum - (lectura.lectura_hasta.lectura - lectura.lectura_desde.lectura + old_ajust)
-                    if new_val != 0.0:
+                    if new_val != (lectura.lectura_hasta.lectura - lectura.lectura_desde.lectura + old_ajust):
                         lectura.ajuste.ajuste_por_integrador = consum - (lectura.lectura_hasta.lectura - lectura.lectura_desde.lectura)
                         lectura.ajuste.codigo_motivo = motiu_ajust  # normalment 98 - Autoconsumo
             for l in lectures:
@@ -1273,7 +1418,7 @@ class FacturaATR(Factura):
 
         comptadors = []
         for llista_aparells in comptadors_agrupats.values():
-            aparell_multi = MultiModeloAparato(llista_aparells)
+            aparell_multi = MultiModeloAparato(llista_aparells, self)
 
             di, df = aparell_multi.get_dates_inici_i_final()
             comptadors.append((di, df, aparell_multi))
