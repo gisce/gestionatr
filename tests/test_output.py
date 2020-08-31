@@ -1859,7 +1859,7 @@ class test_P0(unittest.TestCase):
         # PotenciasContratadas
         potencias_contratadas = p0.PotenciasContratadas()
         potencias_contratadas_fields = {
-            'potencia': '6000',
+            'p1': 6000,
         }
         potencias_contratadas.feed(potencias_contratadas_fields)
 
