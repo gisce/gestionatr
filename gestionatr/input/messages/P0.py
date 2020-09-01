@@ -440,7 +440,7 @@ class DerechosReconocidos(object):
     def derecho_extension(self):
         data = ''
         try:
-            data = self.derechos_reconocidos.DerechoExtension.text
+            data = self.derechos_reconocidos.DerechosExtension.text
         except AttributeError:
             pass
         return data
