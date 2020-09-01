@@ -404,11 +404,12 @@ class CondicionesContractuales(object):
 
     @property
     def potencias_contratadas(self):
-        data = ''
-        try:
-            data = PotenciasContratadas(self.condiciones_contractuales.PotenciasContratadas)
-        except AttributeError:
-            pass
+        data = []
+        obj = self.condiciones_contractuales.CondicionesContractuales
+        if (hasattr(obj, 'PotenciasContratadas') and
+                hasattr(obj.PotenciasContratadas, 'Potencia')):
+            for d in obj.PotenciasContratadas.Potencia:
+                data.append((int(d.get('Periodo')), int(d.text)))
         return data
 
     @property
@@ -416,21 +417,6 @@ class CondicionesContractuales(object):
         data = ''
         try:
             data = self.condiciones_contractuales.ModoControlPotencia.text
-        except AttributeError:
-            pass
-        return data
-
-
-class PotenciasContratadas(object):
-
-    def __init__(self, data):
-        self.potencias_contratadas = data
-
-    @property
-    def potencia(self):
-        data = ''
-        try:
-            data = self.potencias_contratadas.Potencia.text
         except AttributeError:
             pass
         return data

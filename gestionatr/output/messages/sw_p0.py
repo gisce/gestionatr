@@ -44,12 +44,12 @@ class EnvioInformacionPS(XmlModel):
 
     _sort_order = ('envio_informacion_ps', 'resultado_validacion_cliente', 'en_vigor', 'estado_contratable',
                    'existe_solicitud_en_curso', 'tipo_solicitud_en_curso', 'contrato', 'potencia_maxima_autorizada',
-                   'tension_del_suministro', 'derechos_reconocidos', 'caracteristicas_pm', 'historia', 'equipo',
+                   'tension_del_suministro', 'derechos_reconocidos', 'caracteristicas_pm', 'historia', 'equipo_list',
                    'doc_tecnica', 'expediente_anomalia_fraude', 'expediente_acometida')
 
     def __init__(self):
         self.envio_informacion_ps = XmlField('EnvioInformacionPS')
-        self.resultado_validacion_cliente =  XmlField('ResultadoValidacionCliente')
+        self.resultado_validacion_cliente = XmlField('ResultadoValidacionCliente')
         self.en_vigor = XmlField('EnVigor')
         self.estado_contratable = EstadoContratable()
         self.existe_solicitud_en_curso = XmlField('ExisteSolicitudEnCurso')
@@ -60,7 +60,7 @@ class EnvioInformacionPS(XmlModel):
         self.derechos_reconocidos = DerechosReconocidos()
         self.caracteristicas_pm = CaracteristicasPM()
         self.historia = Historia()
-        self.equipo = Equipo()
+        self.equipo_list = []
         self.doc_tecnica = DocTecnica()
         self.expediente_anomalia_fraude = ExpedienteAnomaliaFraude()
         self.expediente_acometida = ExpedienteAcometida()
