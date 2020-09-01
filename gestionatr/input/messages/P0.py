@@ -405,7 +405,7 @@ class CondicionesContractuales(object):
     @property
     def potencias_contratadas(self):
         data = []
-        obj = self.condiciones_contractuales.CondicionesContractuales
+        obj = self.condiciones_contractuales
         if (hasattr(obj, 'PotenciasContratadas') and
                 hasattr(obj.PotenciasContratadas, 'Potencia')):
             for d in obj.PotenciasContratadas.Potencia:
