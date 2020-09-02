@@ -3,3 +3,4 @@ libcomxml
 workdays
 click
 zeep
+suds
