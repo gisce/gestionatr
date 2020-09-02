@@ -68,7 +68,7 @@ def request_p0(url, user, password, xml_file):
     return client.service.sync(xml_str)
 
 
-@atr.command(name='request_p0')
+@atr.command(name='p0')
 @click.option('-u', '--url', default='http://localhost', help=u'URL del webservice', show_default=True)
 @click.option('-s', '--user', default='admin', help=u'User del webservice', show_default=True)
 @click.option('-p', '--password', default='admin', help=u'Password del webservice', show_default=True)
