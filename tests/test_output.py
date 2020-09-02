@@ -2015,7 +2015,7 @@ class test_P0(unittest.TestCase):
             'derechos_reconocidos': derechos_reconocidos,
             'caracteristicas_pm': caracteristicas_pm,
             'historia': historia,
-            'equipo': [equipo1, equipo2],
+            'equipo_list': [equipo1, equipo2],
             'doc_tecnica': doc_tecnica,
             'expediente_anomalia_fraude': expediente_anomalia_fraude,
             'expediente_acometida': expediente_acometida
