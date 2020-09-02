@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 import sys
 import click
-from zeep import Client
-from zeep.wsse.username import UsernameToken
+from suds.cache import NoCache
+from suds.client import Client
+from suds.transport.http import HttpAuthenticated
 
 from gestionatr.input.messages import message
 from gestionatr.input.messages import message_gas
@@ -56,7 +57,8 @@ def test(filename, sector):
 
 
 def request_p0(url, user, password, xml_file):
-    client = Client(url, wsse=UsernameToken(user or 'admin', password or 'admin'))
+    t = HttpAuthenticated(username=user, password=password)
+    client = Client(url, transport=t, cache=NoCache())
 
     if isinstance(xml_file, str):
         xml_str = xml_file
