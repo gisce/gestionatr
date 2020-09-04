@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- editado con XMLSpy v2020 rel. 2 (x64) (http://www.altova.com) por teresa.marco (INECO) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="TiposComplejos.xsd"/>
+	<xs:include schemaLocation="TiposSencillos.xsd"/>
+	<!-- Tipos secundarios del E01 -->
+	<xs:complexType name="Desistimiento01">
+		<xs:sequence>
+			<xs:element name="CodigoDeSolicitudRef">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[0-9]{12}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="TipoDeSolicitud" type="TipoDesistimiento">
+				<xs:annotation>
+					<xs:documentation>Tabla 122</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IdCliente" type="IdCliente"/>
+			<xs:element name="RegistrosDocumento" type="RegistrosDocs" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Tipos secundarios del E02Aceptacion -->
+	<xs:complexType name="Desistimiento02">
+		<xs:sequence>
+			<xs:element name="FechaAceptacion" type="xs:date"/>
+			<xs:element name="IndAnulable" type="Indicativo">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ActuacionCampo" type="Indicativo">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaActivacionPrevista" type="xs:date" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Tipos secundarios del E16 Notificación Activación -->
+	<xs:complexType name="NotificacionActivacionPorDesistimiento">
+		<xs:sequence>
+			<xs:element name="DatosActivacion" type="DatosActivacionDesistimiento"/>
+			<xs:element name="Contrato" type="ContratoDesistimiento"/>
+			<xs:element name="PuntosDeMedida" type="PuntosDeMedida"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DatosActivacionDesistimiento">
+		<xs:sequence>
+			<xs:element name="Fecha" type="xs:date"/>
+			<xs:element name="EnServicio" type="Indicativo">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IndAnulable" type="Indicativo">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ContratoDesistimiento">
+		<xs:sequence>
+			<xs:element name="IdContrato" type="IdContrato"/>
+			<xs:element name="TipoAutoconsumo" type="TipoAutoconsumo"/>
+			<xs:element name="TipoContratoATR" type="TipoContratoATR"/>
+			<xs:element name="CondicionesContractuales" type="CondicionesContractualesC"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Tipos secundarios del E15 Activacion-->
+	<xs:complexType name="NotificacionActivacionPorDesistimientoSaliente">
+		<xs:sequence>
+			<xs:element name="DatosNotificacion" type="DatosActivacionDesistimientoSaliente"/>
+			<xs:element name="Contrato" type="ContratoDesistimientoSaliente" minOccurs="0"/>
+			<xs:element name="PuntosDeMedida" type="PuntosDeMedida" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DatosActivacionDesistimientoSaliente">
+		<xs:sequence>
+			<xs:element name="FechaActivacion" type="xs:date"/>
+			<xs:element name="ResultadoActivacion" type="ResultadoDesistimiento">
+				<xs:annotation>
+					<xs:documentation>Tabla 118</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IndAnulable" type="Indicativo">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ContratoDesistimientoSaliente">
+		<xs:sequence>
+			<xs:element name="IdContrato" type="IdContrato"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RechazoDesistimiento">
+		<xs:sequence>
+			<xs:element name="FechaRechazo" type="xs:date"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

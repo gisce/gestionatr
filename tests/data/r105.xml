@@ -25,6 +25,18 @@
             <NumExpedienteAnomaliaFraude>22222</NumExpedienteAnomaliaFraude>
             <FechaMovimiento>2016-04-12</FechaMovimiento>
         </DatosCierre>
+        <ParametrosComunicacion>
+            <CodPM>1234567890123456789012</CodPM>
+            <CodPMPrincipal>1234567890123456789012</CodPMPrincipal>
+            <Funcion>P</Funcion>
+            <DireccionEnlace>a1b2c3d4e5</DireccionEnlace>
+            <NumLinea>2</NumLinea>
+            <ClaveAcceso>25</ClaveAcceso>
+            <IP>
+                <DireccionIP>0.0.0.0</DireccionIP>
+                <PuertoEnlace>8080</PuertoEnlace>
+            </IP>
+        </ParametrosComunicacion>
         <CodContrato>383922379</CodContrato>
         <Comentarios>Comentarios generales</Comentarios>
     </CierreReclamacion>

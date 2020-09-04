@@ -84,7 +84,7 @@ def get_cliente(dir=False, tipo_dir=None):
             'pais': 'España',
             'provincia': '17',
             'municipio': '17079',
-            'poblacion': '17079',
+            'poblacion': '17079000501',
             'apartado_de_correos': "A1234",
             'cod_postal': '17001',
         }
@@ -106,7 +106,7 @@ def get_cliente(dir=False, tipo_dir=None):
             'pais': 'España',
             'provincia': '17',
             'municipio': '17079',
-            'poblacion': '17079',
+            'poblacion': '17079000501',
             'via': via,
             'cod_postal': '17001',
         }

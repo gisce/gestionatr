@@ -1,6 +1,9 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import sys
 import click
+from suds.cache import NoCache
+from suds.client import Client
+from suds.transport.http import HttpAuthenticated
 
 from gestionatr.input.messages import message
 from gestionatr.input.messages import message_gas
@@ -24,6 +27,7 @@ def get_gestionatr_version(ctx, param, value):
               expose_value=False, is_eager=True, help="ATR library version")
 def atr():
     pass
+
 
 @atr.command(name='test')
 @click.option("--filename", "-f", help="path to XML filename", required=True)
@@ -50,3 +54,27 @@ def test(filename, sector):
             )
         finally:
             sys.stdout.flush()
+
+
+def request_p0(url, user, password, xml_file):
+    t = HttpAuthenticated(username=user, password=password)
+    client = Client(url, transport=t, cache=NoCache())
+
+    if isinstance(xml_file, str):
+        xml_str = xml_file
+    else:
+        f = open(xml_file, "r")
+        xml_str = f.read()
+    return client.service.sync(xml_str)
+
+
+@atr.command(name='p0')
+@click.option('-u', '--url', default='http://localhost', help=u'URL del webservice', show_default=True)
+@click.option('-s', '--user', default='admin', help=u'User del webservice', show_default=True)
+@click.option('-p', '--password', default='admin', help=u'Password del webservice', show_default=True)
+@click.option('-f', '--file', help=u'Fitxer P0 pas 01 per enviar', show_default=True)
+def sollicitar_p0(url, user, password, file):
+    res = request_p0(url, user, password, file)
+    print(res)
+
+

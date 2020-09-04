@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xs:schema xmlns="http://localhost/elegibilidad" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="TiposComplejos.xsd"/>
+	<xs:include schemaLocation="TiposSencillos.xsd"/>
+	<xs:element name="MensajeAceptacionAnulacionReclamacion">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CabeceraReclamacion" type="CabeceraReclamacion"/>
+				<xs:element name="AceptacionAnulacion">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="FechaAceptacion" type="xs:date"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

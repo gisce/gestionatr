@@ -46,7 +46,7 @@
 		<sequence>
 			<element name="reqcode" type="tns:ReqcodeType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Código Solicitud</documentation>
+					<documentation>CÃ³digo Solicitud</documentation>
 				</annotation>
 			</element>
 			<element name="cups" type="tns:CupsType" minOccurs="1" maxOccurs="1">
@@ -56,12 +56,12 @@
 			</element>
 			<element name="comreferencenum" type="tns:ComreferencenumType" minOccurs="1" maxOccurs="1">
 				<annotation>
-					<documentation>Nº Referencia Solicitud Comercializadora. Identifica unívocamente cada una de las solicitudes de una Empresa</documentation>
+					<documentation>NÂº Referencia Solicitud Comercializadora. Identifica unÃ­vocamente cada una de las solicitudes de una Empresa</documentation>
 				</annotation>
 			</element>
 			<element name="stateincidence" type="tns:stateincidenceType" minOccurs="1" maxOccurs="1">
 				<annotation>
-					<documentation>Contestación de la incidencia. Estado</documentation>
+					<documentation>ContestaciÃ³n de la incidencia. Estado</documentation>
 				</annotation>
 			</element>
 			<element name="contact" type="tns:ContactinciType" minOccurs="0" maxOccurs="1">

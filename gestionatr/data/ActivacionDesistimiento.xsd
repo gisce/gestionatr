@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- editado con XMLSpy v2020 rel. 2 (x64) (http://www.altova.com) por teresa.marco (INECO) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="TiposComplejos.xsd"/>
+	<xs:include schemaLocation="TipoMensajeE.xsd"/>
+	<xs:include schemaLocation="TiposSencillos.xsd"/>
+	<xs:element name="MensajeActivacionDesistimiento">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Cabecera" type="Cabecera"/>
+				<xs:element name="ActivacionDesistimiento" type="NotificacionActivacionPorDesistimientoSaliente"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

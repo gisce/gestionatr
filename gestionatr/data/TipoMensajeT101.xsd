@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="TiposComplejos.xsd"/>
+	<xs:include schemaLocation="TiposSencillos.xsd"/>
+	<!-- Mensaje de Solicitud de traspaso a la COR -->
+	<xs:complexType name="SolicitudTraspasoCORT101">
+		<xs:sequence>
+			<xs:element name="DatosSolicitud" type="DatosSolicitudTraspasoCORT1"/>
+			<xs:element name="Contrato" type="ContratoTraspasoCORT1"/>
+			<xs:element name="Cliente" type="ClienteConDireccion"/>
+			<xs:element name="DireccionPS" type="Direccion"/>
+			<xs:element name="RegistrosDocumento" type="RegistrosDocs" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Tipos secundarios de la transaccion actual -->
+	<!-- Datos de la Solicitud -->
+	<xs:complexType name="DatosSolicitudTraspasoCORT1">
+		<xs:sequence>
+			<xs:element name="MotivoTraspaso" type="MotivoTraspaso">
+				<xs:annotation>
+					<xs:documentation>Tabla 119</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaPrevistaAccion" type="date-or-nothing"/>
+			<xs:element name="CNAE" type="CNAE">
+				<xs:annotation>
+					<xs:documentation>Tabla 66</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IndEsencial" type="Indicativo">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SuspBajaImpagoEnCurso" type="Indicativo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<!-- Informacion contractual para el alta de la solicitud-->
+	</xs:complexType>
+	<xs:complexType name="ContratoTraspasoCORT1">
+		<xs:sequence>
+			<xs:element name="FechaFinalizacion" type="xs:date" minOccurs="0"/>
+			<xs:element name="TipoAutoconsumo" type="TipoAutoconsumo">
+				<xs:annotation>
+					<xs:documentation>Tabla 113</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TipoContratoATR" type="TipoContratoATR">
+				<xs:annotation>
+					<xs:documentation>Tabla 9</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CondicionesContractuales" type="CondicionesContractuales"/>
+			<xs:element name="PeriodicidadFacturacion" type="PeriodicidadFacturacion" minOccurs="0"/>
+			<xs:element name="ConsumoAnualEstimado" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="Decimal11V2">
+						<xs:minInclusive value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Contacto" type="Contactoconemail"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

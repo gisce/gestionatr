@@ -46,6 +46,49 @@ class DatosSolicitud(XmlModel):
         super(DatosSolicitud, self).__init__('DatosSolicitud', 'datos_solicitud')
 
 
+class ParametrosComunicacion(XmlModel):
+
+    _sort_order = ('parametros_comunicacion', 'cod_pm', 'cod_pm_principal', 'funcion', 'direccion_enlace',
+                   'num_linea', 'clave_lectura', 'telefono', 'ip')
+
+    def __init__(self):
+        self.parametros_comunicacion = XmlField('ParametrosComunicacion')
+        self.cod_pm = XmlField('CodPM')
+        self.cod_pm_principal = XmlField('CodPMPrincipal')
+        self.funcion = XmlField('Funcion')
+        self.direccion_enlace = XmlField('DireccionEnlace')
+        self.num_linea = XmlField('NumLinea')
+        self.clave_lectura = XmlField('ClaveAcceso')
+        self.telefono = TelefonoTelemedida()
+        self.ip = IP()
+        super(ParametrosComunicacion, self).__init__('ParametrosComunicacion', 'parametros_comunicacion')
+
+
+class TelefonoTelemedida(XmlModel):
+
+    _sort_order = ('telefono_telemedida', 'num_telefono', 'velocidad_comunicacion', 'bit_datos', 'paridad', 'bit_stop')
+
+    def __init__(self):
+        self.telefono_telemedida = XmlField('Telefono')
+        self.num_telefono = XmlField('TelefonoTelemedida')
+        self.velocidad_comunicacion = XmlField('VelocidadComunicacion')
+        self.bit_datos = XmlField('BitDatos')
+        self.paridad = XmlField('Paridad')
+        self.bit_stop = XmlField('BitStop')
+        super(TelefonoTelemedida, self).__init__('Telefono', 'telefono_telemedida')
+
+
+class IP(XmlModel):
+
+    _sort_order = ('ip', 'direccion_ip', 'puerto_enlace')
+
+    def __init__(self):
+        self.ip = XmlField('IP')
+        self.direccion_ip = XmlField('DireccionIP')
+        self.puerto_enlace = XmlField('PuertoEnlace')
+        super(IP, self).__init__('IP', 'ip')
+
+
 class VariablesDetalleReclamacion(XmlModel):
 
     _sort_order = ('variables_detalle_reclamacion', 'variable_detalle_reclamacion_list')
@@ -207,7 +250,7 @@ class MensajePeticionInformacionAdicionalReclamacion(XmlModel):
 
 class InformacionAdicional(XmlModel):
 
-    _sort_order = ('informacion_adicional', 'datos_informacion', 'informacion_intermedia', 'retipificacion', 'solicitudes_informacion_adicional', 'comentarios', 'registros_documento')
+    _sort_order = ('informacion_adicional', 'datos_informacion', 'informacion_intermedia', 'retipificacion', 'solicitudes_informacion_adicional', 'comentarios', 'parametros_comunicacion', 'registros_documento')
 
     def __init__(self):
         self.informacion_adicional = XmlField('InformacionAdicional')
@@ -216,6 +259,7 @@ class InformacionAdicional(XmlModel):
         self.retipificacion = Retipificacion()
         self.solicitudes_informacion_adicional = SolicitudesInformacionAdicional()
         self.comentarios = XmlField('Comentarios')
+        self.parametros_comunicacion = ParametrosComunicacion()
         self.registros_documento = RegistrosDocumento()
         super(InformacionAdicional, self).__init__('InformacionAdicional', 'informacion_adicional')
 
@@ -432,13 +476,14 @@ class MensajeCierreReclamacion(XmlModel):
 
 class CierreReclamacion(XmlModel):
 
-    _sort_order = ('cierre_reclamacion', 'datos_cierre', 'cod_contrato', 'comentarios', 'registros_documento')
+    _sort_order = ('cierre_reclamacion', 'datos_cierre',  'parametros_comunicacion', 'cod_contrato', 'comentarios', 'registros_documento')
 
     def __init__(self):
         self.cierre_reclamacion = XmlField('CierreReclamacion')
         self.datos_cierre = DatosCierre()
         self.cod_contrato = XmlField('CodContrato')
         self.comentarios = XmlField('Comentarios')
+        self.parametros_comunicacion = ParametrosComunicacion()
         self.registros_documento = RegistrosDocumento()
         super(CierreReclamacion, self).__init__('CierreReclamacion', 'cierre_reclamacion')
 
@@ -462,3 +507,16 @@ class DatosCierre(XmlModel):
         self.num_expediente_anomalia_fraude = XmlField('NumExpedienteAnomaliaFraude')
         self.fecha_movimiento = XmlField('FechaMovimiento')
         super(DatosCierre, self).__init__('DatosCierre', 'datos_cierre')
+
+
+# Paso 09
+class MensajeAceptacionAnulacionReclamacion(XmlModel):
+
+    _sort_order = ('mensaje', 'cabecera', 'aceptacion_anulacion')
+
+    def __init__(self):
+        self.mensaje = XmlField('MensajeAceptacionAnulacionReclamacion',
+                                attributes={'xmlns': 'http://localhost/elegibilidad'})
+        self.cabecera = Cabecera()
+        self.aceptacion_anulacion = AceptacionAnulacion()
+        super(MensajeAceptacionAnulacionReclamacion, self).__init__('MensajeAceptacionAnulacionReclamacion', 'mensaje')
