@@ -3,7 +3,7 @@ import sys
 import click
 from suds.cache import NoCache
 from suds.client import Client
-from suds.transport.http import HttpAuthenticated
+from suds.transport.https import HttpAuthenticated
 
 from gestionatr.input.messages import message
 from gestionatr.input.messages import message_gas
@@ -60,11 +60,11 @@ def request_p0(url, user, password, xml_file):
     t = HttpAuthenticated(username=user, password=password)
     import urllib2
     try:
-        client = Client(url, transport=t, cache=NoCache())
+        client = Client(url, transport=t)
     except urllib2.URLError as e:
         import ssl
         ssl._create_default_https_context = ssl._create_unverified_context
-        client = Client(url, transport=t, cache=NoCache())
+        client = Client(url, transport=t)
 
     if isinstance(xml_file, str):
         xml_str = xml_file
