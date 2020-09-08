@@ -58,7 +58,13 @@ def test(filename, sector):
 
 def request_p0(url, user, password, xml_file):
     t = HttpAuthenticated(username=user, password=password)
-    client = Client(url, transport=t, cache=NoCache())
+    import urllib2
+    try:
+        client = Client(url, transport=t, cache=NoCache())
+    except urllib2.URLError as e:
+        import ssl
+        ssl._create_default_https_context = ssl._create_unverified_context
+        client = Client(url, transport=t, cache=NoCache())
 
     if isinstance(xml_file, str):
         xml_str = xml_file
