@@ -4,6 +4,9 @@ import click
 from suds.cache import NoCache
 from suds.client import Client
 from suds.transport.https import HttpAuthenticated
+import urllib2
+import base64
+from suds.sax.text import Raw
 
 from gestionatr.input.messages import message
 from gestionatr.input.messages import message_gas
@@ -58,19 +61,23 @@ def test(filename, sector):
 
 def request_p0(url, user, password, xml_file):
     t = HttpAuthenticated(username=user, password=password)
-    import urllib2
+    base64string = base64.encodestring('%s:%s' % (user, password)).replace('\n', '')
+    authenticationHeader = {
+        "Authorization": "Basic %s" % base64string
+    }
     try:
         client = Client(url, transport=t)
     except urllib2.URLError as e:
         import ssl
         ssl._create_default_https_context = ssl._create_unverified_context
         client = Client(url, transport=t)
-
+    client.set_options(headers=authenticationHeader)
     if isinstance(xml_file, str):
         xml_str = xml_file
     else:
-        f = open(xml_file, "r")
-        xml_str = f.read()
+        xml_str = xml_file
+
+    xml_str = Raw(xml_str)
     return client.service.sync(xml_str)
 
 
