@@ -92,7 +92,7 @@ def request_p0(url, user, password, xml_file):
                 return element
             for child in element:
                 res = find_child(child, child_name)
-                if res:
+                if res is not None:
                     break
             return res
 
