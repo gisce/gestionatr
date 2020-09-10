@@ -66,11 +66,11 @@ def request_p0(url, user, password, xml_file):
         "Authorization": "Basic %s" % base64string
     }
     try:
-        client = Client(url, transport=t)
+        client = Client(url, transport=t, retxml=True)
     except urllib2.URLError as e:
         import ssl
         ssl._create_default_https_context = ssl._create_unverified_context
-        client = Client(url, transport=t)
+        client = Client(url, transport=t, retxml=True)
     client.set_options(headers=authenticationHeader)
     if isinstance(xml_file, str):
         xml_str = xml_file
@@ -83,7 +83,8 @@ def request_p0(url, user, password, xml_file):
     xml_str = xml_str.replace("<?xml version='1.0' encoding='UTF-8'?>", "")
     xml_str = Raw(xml_str)
     # Send request
-    return client.service.sync(xml_str)
+    res = client.service.sync(xml_str)
+    return res
 
 
 @atr.command(name='p0')
