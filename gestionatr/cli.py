@@ -7,6 +7,7 @@ from suds.transport.https import HttpAuthenticated
 import urllib2
 import base64
 from suds.sax.text import Raw
+from lxml import objectify, etree
 
 from gestionatr.input.messages import message
 from gestionatr.input.messages import message_gas
@@ -84,9 +85,11 @@ def request_p0(url, user, password, xml_file):
     xml_str = Raw(xml_str)
     # Send request
     res = client.service.sync(xml_str)
-    if res and "MensajeEnvioInformacionPS" in res and res.startswith("<soap"):
-        res = res.split("MensajeEnvioInformacionPS")[1]
-        res = "<MensajeEnvioInformacionPS"+res+"MensajeEnvioInformacionPS>"
+    try:
+        aux = etree.fromstring(res)
+        res = etree.tostring(aux[0][0][0][0])
+    except Exception:
+        pass
     return res
 
 
