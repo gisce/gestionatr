@@ -77,7 +77,12 @@ def request_p0(url, user, password, xml_file):
     else:
         xml_str = xml_file
 
+    # Clean XML
+    xml_str = xml_str.strip()
+    xml_str = xml_str.replace("'utf-8'", "'UTF-8'")
+    xml_str = xml_str.replace("<?xml version='1.0' encoding='UTF-8'?>", "")
     xml_str = Raw(xml_str)
+    # Send request
     return client.service.sync(xml_str)
 
 
