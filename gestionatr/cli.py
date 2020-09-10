@@ -84,6 +84,9 @@ def request_p0(url, user, password, xml_file):
     xml_str = Raw(xml_str)
     # Send request
     res = client.service.sync(xml_str)
+    if res and "MensajeEnvioInformacionPS" in res and res.startswith("<soap"):
+        res = res.split("MensajeEnvioInformacionPS")[1]
+        res = "<MensajeEnvioInformacionPS"+res+"MensajeEnvioInformacionPS>"
     return res
 
 

@@ -238,10 +238,7 @@ class Message(MessageBase):
         try:
             self.head = obj.Cabecera
         except Exception:
-            try:
-                self.head = obj.CabeceraReclamacion
-            except Exception:
-                self.head = obj.MensajeEnvioInformacionPS.Cabecera
+            self.head = obj.CabeceraReclamacion
 
     def set_tipus(self):
         """Definir tipo del mensaje"""
@@ -265,8 +262,6 @@ class Message(MessageBase):
             if isinstance(XSD_DATA[self.tipus][self.pas], tuple):
                 trobat = False
                 root = objectify.fromstring(self.str_xml)
-                if root.tag.lower() == "envelope":
-                    root = root.MensajeEnvioInformacionPS
                 for fitxer in XSD_DATA[self.tipus][self.pas]:
                     if 'MensajeRechazoP0' in root.tag:
                         fitxer = "RechazoPeticion.xsd"
