@@ -86,8 +86,20 @@ def request_p0(url, user, password, xml_file):
     # Send request
     res = client.service.sync(xml_str)
     try:
+        def find_child(element, child_name):
+            res = None
+            if child_name in element.tag:
+                return element
+            for child in element:
+                res = find_child(child, child_name)
+                if res:
+                    break
+            return res
+
         aux = etree.fromstring(res)
-        res = etree.tostring(aux[0][0][0][0])
+        aux_res = find_child(aux, "MensajeEnvioInformacionPS")
+
+        res = etree.tostring(aux_res)
     except Exception:
         pass
     return res
