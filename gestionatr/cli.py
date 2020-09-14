@@ -60,7 +60,7 @@ def test(filename, sector):
             sys.stdout.flush()
 
 
-def request_p0(url, user, password, xml_file):
+def request_p0(url, user, password, xml_str):
     t = HttpAuthenticated(username=user, password=password)
     base64string = base64.encodestring('%s:%s' % (user, password)).replace('\n', '')
     authenticationHeader = {
@@ -73,10 +73,6 @@ def request_p0(url, user, password, xml_file):
         ssl._create_default_https_context = ssl._create_unverified_context
         client = Client(url, transport=t, retxml=True)
     client.set_options(headers=authenticationHeader)
-    if isinstance(xml_file, str):
-        xml_str = xml_file
-    else:
-        xml_str = xml_file
 
     # Clean XML
     xml_str = xml_str.strip()
