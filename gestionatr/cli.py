@@ -4,6 +4,10 @@ import click
 from suds.cache import NoCache
 from suds.client import Client
 from suds.transport.https import HttpAuthenticated
+import urllib2
+import base64
+from suds.sax.text import Raw
+from lxml import objectify, etree
 
 from gestionatr.input.messages import message
 from gestionatr.input.messages import message_gas
@@ -58,20 +62,47 @@ def test(filename, sector):
 
 def request_p0(url, user, password, xml_file):
     t = HttpAuthenticated(username=user, password=password)
-    import urllib2
+    base64string = base64.encodestring('%s:%s' % (user, password)).replace('\n', '')
+    authenticationHeader = {
+        "Authorization": "Basic %s" % base64string
+    }
     try:
-        client = Client(url, transport=t)
+        client = Client(url, transport=t, retxml=True)
     except urllib2.URLError as e:
         import ssl
         ssl._create_default_https_context = ssl._create_unverified_context
-        client = Client(url, transport=t)
-
+        client = Client(url, transport=t, retxml=True)
+    client.set_options(headers=authenticationHeader)
     if isinstance(xml_file, str):
         xml_str = xml_file
     else:
-        f = open(xml_file, "r")
-        xml_str = f.read()
-    return client.service.sync(xml_str)
+        xml_str = xml_file
+
+    # Clean XML
+    xml_str = xml_str.strip()
+    xml_str = xml_str.replace("'utf-8'", "'UTF-8'")
+    xml_str = xml_str.replace("<?xml version='1.0' encoding='UTF-8'?>", "")
+    xml_str = Raw(xml_str)
+    # Send request
+    res = client.service.sync(xml_str)
+    try:
+        def find_child(element, child_name):
+            res = None
+            if child_name in element.tag:
+                return element
+            for child in element:
+                res = find_child(child, child_name)
+                if res is not None:
+                    break
+            return res
+
+        aux = etree.fromstring(res)
+        aux_res = find_child(aux, "MensajeEnvioInformacionPS")
+
+        res = etree.tostring(aux_res)
+    except Exception:
+        pass
+    return res
 
 
 @atr.command(name='p0')
