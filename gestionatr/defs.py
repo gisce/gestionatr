@@ -2374,13 +2374,17 @@ TABLA_126 = [
             u'aerotérmica, la de las olas, la de las mareas, la de las rocas calientes y secas, la oceanotérmica y la '
             u'energía de las corrientes marinas.'),
     ('b41', u'[B41] - Centrales hidroeléctricas cuyas instalaciones hidráulicas (presa o azud, toma, canal y otras) '
-            u'hayan sido construidas exclusivamente para uso hidroeléctrico.'),
+            u'hayan sido construidas exclusivamente para uso hidroeléctrico. '
+            u'Potencia instalada NO Superior a 10 MW'),
     ('b42', u'[B42] - Centrales hidroeléctricas que hayan sido construidas en infraestructuras existentes (presas, '
-            u'canales o conducciones) o dedicadas a otros usos distintos al hidroeléctrico.'),
+            u'canales o conducciones) o dedicadas a otros usos distintos al hidroeléctrico. '
+            u'Potencia instalada NO Superior a 10 MW'),
     ('b51', u'[B51] - Centrales hidroeléctricas cuyas instalaciones hidráulicas (presa o azud, toma, canal y otras) '
-            u'hayan sido construidas exclusivamente para uso hidroeléctrico.'),
+            u'hayan sido construidas exclusivamente para uso hidroeléctrico. '
+            u'Potencia instalada Superior a 10 MW'),
     ('b52', u'[B52] - Centrales hidroeléctricas que hayan sido construidas en infraestructuras existentes (presa, '
-            u'canales o conducciones) o dedicadas a otros usos distintos al hidroeléctrico.'),
+            u'canales o conducciones) o dedicadas a otros usos distintos al hidroeléctrico. '
+            u'Potencia instalada a Superior a 10 MW'),
     ('b60', u'[B60] - Centrales de generación eléctrica o de cogeneración que utilicen como combustible principal '
             u'biomasa procedente de cultivos energéticos, de actividades agrícolas, ganaderas o de jardinerías, de '
             u'aprovechamientos forestales y otras operaciones silvícolas en las masas forestales y espacios verdes, '
