@@ -548,7 +548,6 @@
 			<xs:element name="Poblacion" minOccurs="0">
 				<xs:simpleType>
 					<xs:restriction base="X11">
-						<xs:minLength value="11"/>
 						<xs:pattern value="[0-9]*"/>
 					</xs:restriction>
 				</xs:simpleType>
@@ -646,7 +645,6 @@
 			<xs:element name="Poblacion" minOccurs="0">
 				<xs:simpleType>
 					<xs:restriction base="X11">
-						<xs:minLength value="11"/>
 						<xs:pattern value="[0-9]*"/>
 					</xs:restriction>
 				</xs:simpleType>
@@ -1232,7 +1230,6 @@
 			<xs:element name="Poblacion" minOccurs="0">
 				<xs:simpleType>
 					<xs:restriction base="X11">
-						<xs:minLength value="11"/>
 						<xs:pattern value="[0-9]*"/>
 					</xs:restriction>
 				</xs:simpleType>
@@ -1411,7 +1408,6 @@
 			<xs:element name="Poblacion" minOccurs="0">
 				<xs:simpleType>
 					<xs:restriction base="X11">
-						<xs:minLength value="11"/>
 						<xs:pattern value="[0-9]*"/>
 					</xs:restriction>
 				</xs:simpleType>

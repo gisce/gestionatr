@@ -3401,7 +3401,7 @@ la reclamacion
 	</xs:simpleType>
 	<xs:simpleType name="X11">
 		<xs:restriction base="xs:string">
-			<xs:minLength value="11"/>
+			<xs:minLength value="5"/>
 			<xs:maxLength value="11"/>
 		</xs:restriction>
 	</xs:simpleType>
