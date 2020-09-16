@@ -461,7 +461,7 @@ class Contrato(object):
     def data_finalitzacio(self):
         data = ''
         try:
-            data = self.contrato.FechaFinalizacion.text
+            data = self.contrato.IdContrato.FechaFinalizacion.text
         except AttributeError:
             pass
         return data
@@ -470,7 +470,7 @@ class Contrato(object):
     def fecha_finalizacion(self):
         data = ''
         try:
-            data = self.contrato.FechaFinalizacion.text
+            data = self.contrato.IdContrato.FechaFinalizacion.text
         except AttributeError:
             pass
         return data
