@@ -61,18 +61,17 @@ def test(filename, sector):
 
 
 def request_p0(url, user, password, xml_str):
-    t = HttpAuthenticated(username=user, password=password)
     base64string = base64.encodestring('%s:%s' % (user, password)).replace('\n', '')
-    authenticationHeader = {
+    auth_header = {
         "Authorization": "Basic %s" % base64string
     }
     try:
-        client = Client(url, transport=t, retxml=True, cache=NoCache())
+        client = Client(url, retxml=True, cache=NoCache())
     except urllib2.URLError as e:
         import ssl
         ssl._create_default_https_context = ssl._create_unverified_context
-        client = Client(url, transport=t, retxml=True, cache=NoCache())
-    client.set_options(headers=authenticationHeader)
+        client = Client(url, retxml=True, cache=NoCache())
+    client.set_options(headers=auth_header)
 
     # Clean XML
     xml_str = xml_str.strip()
