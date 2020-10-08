@@ -4666,6 +4666,32 @@ class test_R1(unittest.TestCase):
         xml = str(mensaje_cierre_reclamacion)
         assertXmlEqual(xml, self.xml_r105.read())
 
+    def test_create_pas08(self):
+        # MensajeAnulacionSolicitudReclamacion
+        mensaje_anulacion_solicitud_reclamacion = r1.MensajeAnulacionSolicitudReclamacion()
+
+        # Cabecera
+        cabecera_reclamacion = r1.CabeceraReclamacion()
+        cabecera_reclamacion_fields = {
+            'codigo_ree_empresa_emisora': '1234',
+            'codigo_ree_empresa_destino': '4321',
+            'codigo_del_proceso': 'R1',
+            'codigo_del_paso': '08',
+            'codigo_de_solicitud': '201607211259',
+            'secuencial_de_solicitud': '01',
+            'fecha': '2016-07-21T12:59:47',
+            'cups': 'ES1234000000000001JN0F',
+        }
+        cabecera_reclamacion.feed(cabecera_reclamacion_fields)
+
+        mensaje_anulacion_solicitud_reclamacion_fields = {
+            'cabecera_reclamacion': cabecera_reclamacion,
+        }
+        mensaje_anulacion_solicitud_reclamacion.feed(mensaje_anulacion_solicitud_reclamacion_fields)
+        mensaje_anulacion_solicitud_reclamacion.build_tree()
+        xml = str(mensaje_anulacion_solicitud_reclamacion)
+        assertXmlEqual(xml, self.xml_r108.read())
+
     def test_create_pas09(self):
         # MensajeAceptacionAnulacion
         mensaje_aceptacion_anulacion = r1.MensajeAceptacionAnulacionReclamacion()
