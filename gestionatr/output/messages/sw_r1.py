@@ -509,6 +509,18 @@ class DatosCierre(XmlModel):
         super(DatosCierre, self).__init__('DatosCierre', 'datos_cierre')
 
 
+# Paso 08
+class MensajeAnulacionSolicitudReclamacion(XmlModel):
+
+    _sort_order = ('mensaje', 'cabecera_reclamacion')
+
+    def __init__(self):
+        self.mensaje = XmlField('MensajeAnulacionSolicitudReclamacion',
+                                attributes={'xmlns': 'http://localhost/elegibilidad'})
+        self.cabecera_reclamacion = CabeceraReclamacion()
+        super(MensajeAnulacionSolicitudReclamacion, self).__init__('MensajeAnulacionSolicitudReclamacion', 'mensaje')
+
+
 # Paso 09
 class MensajeAceptacionAnulacionReclamacion(XmlModel):
 
