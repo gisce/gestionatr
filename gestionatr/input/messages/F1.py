@@ -379,6 +379,15 @@ class Factura(object):
                 data.append(ConceptoRepercutible(d))
         return data
 
+    def get_coeficient_repartiment(self):
+        try:
+            for concepte in self.conceptos_repercutibles:
+                if concepte.concepto_repercutible == '82':
+                    return concepte.unidades
+        except AttributeError:
+            # We might not have any "Coeficient de repartiment"
+            pass
+
     def get_info_conceptes_repercutibles(self):
         conceptes = []
         total = 0
