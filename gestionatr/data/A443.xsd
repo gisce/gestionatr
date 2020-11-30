@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A404" targetNamespace="http://localhost/sctd/A404" elementFormDefault="qualified">
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A443" targetNamespace="http://localhost/sctd/A443" elementFormDefault="qualified">
 	<include schemaLocation="CommonTagsCONT.xsd"/>
-	<element name="sctdapplication" type="tns:SctdapplicationA404Type"/>
-	<complexType name="SctdapplicationA404Type">
+	<element name="sctdapplication" type="tns:SctdapplicationA443Type"/>
+	<complexType name="SctdapplicationA443Type">
 		<sequence>
-			<element name="heading" type="tns:HeadingA404Type" minOccurs="1" maxOccurs="1"/>
-			<element name="a404" type="tns:A404Type" minOccurs="1" maxOccurs="unbounded"/>
+			<element name="heading" type="tns:HeadingA443Type" minOccurs="1" maxOccurs="1"/>
+			<element name="a443" type="tns:A443Type" minOccurs="1" maxOccurs="unbounded"/>
 		</sequence>
 	</complexType>
-	<complexType name="HeadingA404Type">
+	<complexType name="HeadingA443Type">
 		<sequence>
 			<element name="dispatchingcode" minOccurs="1" maxOccurs="1">
 				<simpleType>
@@ -26,7 +26,7 @@
 				<simpleType>
 					<restriction base="string">
 						<length value="2"/>
-						<enumeration value="04"/>
+						<enumeration value="43"/>
 					</restriction>
 				</simpleType>
 			</element>
@@ -41,7 +41,7 @@
 			</element>
 		</sequence>
 	</complexType>
-	<complexType name="A404Type">
+	<complexType name="A443Type">
 		<sequence>
 			<element name="reqcode" type="tns:ReqcodeType" minOccurs="0" maxOccurs="1">
 				<annotation>
@@ -63,11 +63,6 @@
 					<documentation>Hora de Respuesta</documentation>
 				</annotation>
 			</element>
-			<element name="titulartype" type="tns:TitularType" minOccurs="0" maxOccurs="1">
-				<annotation>
-					<documentation>Tipo de Titular</documentation>
-				</annotation>
-			</element>
 			<element name="nationality" type="tns:NationalityType" minOccurs="1" maxOccurs="1">
 				<annotation>
 					<documentation>Nacionalidad</documentation>
@@ -81,6 +76,11 @@
 			<element name="documentnum" type="tns:DocumentnumType" minOccurs="1" maxOccurs="1">
 				<annotation>
 					<documentation>Nº Documento</documentation>
+				</annotation>
+			</element>
+			<element name="cups" type="tns:CupsType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>CUPS Solicitud</documentation>
 				</annotation>
 			</element>
 			<element name="result" type="tns:ResultadoA4Type" minOccurs="1" maxOccurs="1">
@@ -103,31 +103,52 @@
 					<documentation>Descripción de Resultado Intervención</documentation>
 				</annotation>
 			</element>
-			<element name="cups" type="tns:CupsType" minOccurs="1" maxOccurs="1">
+			<element name="closingtype" type="tns:ClosingCodeType" minOccurs="1" maxOccurs="1">
 				<annotation>
-					<documentation>CUPS Solicitud</documentation>
+					<documentation>Tipo de Cierre</documentation>
 				</annotation>
 			</element>
-			<element name="operationnum" minOccurs="0" maxOccurs="1">
+			<element name="closingtypedesc" minOccurs="1" maxOccurs="1">
 				<annotation>
-					<documentation>Número de Operación Generado</documentation>
+					<documentation>Descripción del Tipo de Cierre</documentation>
 				</annotation>
 				<simpleType>
 					<restriction base="string">
 						<minLength value="1"/>
-						<maxLength value="40"/>
+						<maxLength value="100"/>
 						<whiteSpace value="collapse"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="interventiondate" type="date" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha Intervención</documentation>
+				</annotation>
+			</element>
+			<element name="interventionhourfrom" type="time" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Hora de inicio de intervención</documentation>
+				</annotation>
+			</element>
+			<element name="interventionhourto" type="time" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Hora de fin de intervención</documentation>
+				</annotation>
+			</element>
+			<element name="visitnumber" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Número de Visita</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="0"/>
+						<maxInclusive value="999"/>
 					</restriction>
 				</simpleType>
 			</element>
 			<element name="extrainfo" type="tns:ExtrainfoType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Observaciones de Rechazo tras Intervención</documentation>
-				</annotation>
-			</element>
-			<element name="registerdoclist" type="tns:RegisterdocListType" minOccurs="0" maxOccurs="1">
-				<annotation>
-					<documentation>Lista de documentos</documentation>
 				</annotation>
 			</element>
 		</sequence>

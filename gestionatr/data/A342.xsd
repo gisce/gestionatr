@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A302" targetNamespace="http://localhost/sctd/A302" elementFormDefault="qualified">
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A342" targetNamespace="http://localhost/sctd/A342" elementFormDefault="qualified">
 	<include schemaLocation="CommonTagsCONT.xsd"/>
-	<element name="sctdapplication" type="tns:SctdapplicationA302Type"/>
-	<complexType name="SctdapplicationA302Type">
+	<element name="sctdapplication" type="tns:SctdapplicationA342Type"/>
+	<complexType name="SctdapplicationA342Type">
 		<sequence>
-			<element name="heading" type="tns:HeadingA302Type" minOccurs="1" maxOccurs="1"/>
-			<element name="a302" type="tns:A302Type" minOccurs="1" maxOccurs="unbounded"/>
+			<element name="heading" type="tns:HeadingA342Type" minOccurs="1" maxOccurs="1"/>
+			<element name="a342" type="tns:A342Type" minOccurs="1" maxOccurs="unbounded"/>
 		</sequence>
 	</complexType>
-	<complexType name="HeadingA302Type">
+	<complexType name="HeadingA342Type">
 		<sequence>
 			<element name="dispatchingcode" minOccurs="1" maxOccurs="1">
 				<simpleType>
@@ -26,7 +26,7 @@
 				<simpleType>
 					<restriction base="string">
 						<length value="2"/>
-						<enumeration value="02"/>
+						<enumeration value="42"/>
 					</restriction>
 				</simpleType>
 			</element>
@@ -41,11 +41,11 @@
 			</element>
 		</sequence>
 	</complexType>
-	<complexType name="A302Type">
+	<complexType name="A342Type">
 		<sequence>
 			<element name="reqcode" type="tns:ReqcodeType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Código de Solicitud</documentation>
+					<documentation>Código Solicitud</documentation>
 				</annotation>
 			</element>
 			<element name="comreferencenum" type="tns:ComreferencenumType" minOccurs="1" maxOccurs="1">
@@ -65,7 +65,7 @@
 			</element>
 			<element name="titulartype" type="tns:TitularType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Tipo de Titular</documentation>
+					<documentation>Tipo de titular</documentation>
 				</annotation>
 			</element>
 			<element name="nationality" type="tns:NationalityType" minOccurs="1" maxOccurs="1">
@@ -90,33 +90,22 @@
 			</element>
 			<element name="lastinspectionsdate" type="date" minOccurs="1" maxOccurs="1">
 				<annotation>
-					<documentation>Fecha última inspección
-</documentation>
+					<documentation>Fecha Ultima Inspeción</documentation>
 				</annotation>
 			</element>
 			<element name="lastinspectionsresult" type="tns:ResultInspectionType" minOccurs="1" maxOccurs="1">
 				<annotation>
-					<documentation>Resultado de última inspección</documentation>
-				</annotation>
-			</element>
-			<element name="atrcode" type="tns:AtrcodeType" minOccurs="0" maxOccurs="1">
-				<annotation>
-					<documentation>Código Contrato ATR. No se debe informar para suministros del grupo 1 o 2</documentation>
+					<documentation>Resultado Ultima Inspección</documentation>
 				</annotation>
 			</element>
 			<element name="transfereffectivedate" type="date" minOccurs="1" maxOccurs="1">
 				<annotation>
-					<documentation>Fecha de efecto del cambio</documentation>
+					<documentation>Fecha Efecto Solicitud</documentation>
 				</annotation>
 			</element>
 			<element name="telemetering" type="tns:FlagType" minOccurs="1" maxOccurs="1">
 				<annotation>
 					<documentation>Dispone de Telemedida</documentation>
-				</annotation>
-			</element>
-			<element name="finalclientyearlyconsumption" type="tns:QaType" minOccurs="0" maxOccurs="1">
-				<annotation>
-					<documentation>Caudal Anual Actual Final. No se debe informar para suministros del grupo 1 o 2</documentation>
 				</annotation>
 			</element>
 			<element name="readingtype" type="tns:ReadingType" minOccurs="1" maxOccurs="1">
@@ -129,26 +118,40 @@
 					<documentation>Tipo de Uso del Gas</documentation>
 				</annotation>
 			</element>
-			<element name="caecode" minOccurs="0" maxOccurs="1">
+			<element name="updatereason" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Código CAE
-					</documentation>
+					<documentation>Motivo de Modificación</documentation>
 				</annotation>
 				<simpleType>
 					<restriction base="string">
-						<minLength value="1"/>
-						<maxLength value="13"/>
+						<length value="2"/>
+						<enumeration value="01"/>
 					</restriction>
 				</simpleType>
 			</element>
-			<element name="canonircperiodicity" type="tns:PeriodicidadCanonIRCType" minOccurs="0" maxOccurs="1">
+			<element name="activationtype" type="tns:ActivationType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Periodicidad Canon IRC</documentation>
+					<documentation>Tipo de Activación</documentation>
 				</annotation>
 			</element>
-			<element name="StatusPS" minOccurs="1" maxOccurs="1">
+			<element name="closingtype" type="tns:ClosingCodeType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Situación del Punto de Suministro</documentation>
+					<documentation>Tipo de Cierre</documentation>
+				</annotation>
+			</element>
+			<element name="caecode" type="tns:caecodeType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Código CAE</documentation>
+				</annotation>
+			</element>
+			<element name="canonircperiodicity" type="tns:PeriodicidadCanonIRCType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Periodicidad de Canon IRC</documentation>
+				</annotation>
+			</element>
+			<element name="StatusPS" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Situación del PS</documentation>
 				</annotation>
 				<simpleType>
 					<restriction base="string">

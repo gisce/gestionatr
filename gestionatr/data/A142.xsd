@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A404" targetNamespace="http://localhost/sctd/A404" elementFormDefault="qualified">
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A142" targetNamespace="http://localhost/sctd/A142" elementFormDefault="qualified">
 	<include schemaLocation="CommonTagsCONT.xsd"/>
-	<element name="sctdapplication" type="tns:SctdapplicationA404Type"/>
-	<complexType name="SctdapplicationA404Type">
+	<element name="sctdapplication" type="tns:SctdapplicationA142Type"/>
+	<complexType name="SctdapplicationA142Type">
 		<sequence>
-			<element name="heading" type="tns:HeadingA404Type" minOccurs="1" maxOccurs="1"/>
-			<element name="a404" type="tns:A404Type" minOccurs="1" maxOccurs="unbounded"/>
+			<element name="heading" type="tns:HeadingA142Type" minOccurs="1" maxOccurs="1"/>
+			<element name="a142" type="tns:A142Type" minOccurs="1" maxOccurs="unbounded"/>
 		</sequence>
 	</complexType>
-	<complexType name="HeadingA404Type">
+	<complexType name="HeadingA142Type">
 		<sequence>
 			<element name="dispatchingcode" minOccurs="1" maxOccurs="1">
 				<simpleType>
@@ -26,7 +26,7 @@
 				<simpleType>
 					<restriction base="string">
 						<length value="2"/>
-						<enumeration value="04"/>
+						<enumeration value="42"/>
 					</restriction>
 				</simpleType>
 			</element>
@@ -35,32 +35,28 @@
 					<restriction base="string">
 						<minLength value="1"/>
 						<maxLength value="3"/>
-						<enumeration value="A4"/>
+						<enumeration value="A1"/>
 					</restriction>
 				</simpleType>
 			</element>
 		</sequence>
 	</complexType>
-	<complexType name="A404Type">
+	<complexType name="A142Type">
 		<sequence>
-			<element name="reqcode" type="tns:ReqcodeType" minOccurs="0" maxOccurs="1">
-				<annotation>
-					<documentation>Código de Solicitud</documentation>
-				</annotation>
-			</element>
 			<element name="comreferencenum" type="tns:ComreferencenumType" minOccurs="1" maxOccurs="1">
 				<annotation>
-					<documentation>Nº Referencia Solicitud Comercializadora</documentation>
+					<documentation>Nº Referencia Solicitud Comercializadora
+					</documentation>
 				</annotation>
 			</element>
-			<element name="responsedate" type="date" minOccurs="1" maxOccurs="1">
+			<element name="reqdate" type="date" minOccurs="1" maxOccurs="1">
 				<annotation>
-					<documentation>Fecha de Respuesta</documentation>
+					<documentation>Fecha de Solicitud</documentation>
 				</annotation>
 			</element>
-			<element name="responsehour" type="time" minOccurs="1" maxOccurs="1">
+			<element name="reqhour" type="time" minOccurs="1" maxOccurs="1">
 				<annotation>
-					<documentation>Hora de Respuesta</documentation>
+					<documentation>Hora de Solicitud</documentation>
 				</annotation>
 			</element>
 			<element name="titulartype" type="tns:TitularType" minOccurs="0" maxOccurs="1">
@@ -83,46 +79,56 @@
 					<documentation>Nº Documento</documentation>
 				</annotation>
 			</element>
-			<element name="result" type="tns:ResultadoA4Type" minOccurs="1" maxOccurs="1">
-				<annotation>
-					<documentation>Código de Resultado</documentation>
-				</annotation>
-			</element>
-			<element name="resultdesc" type="tns:ResultdescType" minOccurs="1" maxOccurs="1">
-				<annotation>
-					<documentation>Descripción de Resultado</documentation>
-				</annotation>
-			</element>
-			<element name="resultreason" type="tns:MotivoRechazoType" minOccurs="1" maxOccurs="1">
-				<annotation>
-					<documentation>Motivo Resultado</documentation>
-				</annotation>
-			</element>
-			<element name="resultreasondesc" type="tns:ResultreasondescType" minOccurs="1" maxOccurs="1">
-				<annotation>
-					<documentation>Descripción de Resultado Intervención</documentation>
-				</annotation>
-			</element>
 			<element name="cups" type="tns:CupsType" minOccurs="1" maxOccurs="1">
 				<annotation>
 					<documentation>CUPS Solicitud</documentation>
 				</annotation>
 			</element>
-			<element name="operationnum" minOccurs="0" maxOccurs="1">
+			<element name="modeffectdate" type="tns:ModeloFechaSolicitudType" minOccurs="1" maxOccurs="1">
 				<annotation>
-					<documentation>Número de Operación Generado</documentation>
+					<documentation>Modelo de Fecha Efecto</documentation>
+				</annotation>
+			</element>
+			<element name="reqtransferdate" type="date" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha de Efecto Solicitada
+					</documentation>
+				</annotation>
+			</element>
+			<element name="updatereason" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Motivo de Modificación-Cambio de Titular</documentation>
 				</annotation>
 				<simpleType>
 					<restriction base="string">
-						<minLength value="1"/>
-						<maxLength value="40"/>
-						<whiteSpace value="collapse"/>
+						<length value="2"/>
+						<enumeration value="01"/>
 					</restriction>
 				</simpleType>
 			</element>
+			<element name="surrogacy" type="tns:FlagType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Indicador de Subrogación</documentation>
+				</annotation>
+			</element>
+			<element name="newowner" type="tns:newownerType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Datos del nuevo de titular</documentation>
+				</annotation>
+			</element>
+			<element name="disconnectedserviceaccepted" type="tns:FlagType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Indicador de que se quiere contratar el suministro independientemente de su estado (suspendido o en proceso de baja por impago)</documentation>
+				</annotation>
+			</element>
 			<element name="extrainfo" type="tns:ExtrainfoType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Observaciones de Rechazo tras Intervención</documentation>
+					<documentation>Observaciones 1</documentation>
+				</annotation>
+			</element>
+			<element name="productlist" type="tns:productlistTypeAltaSinHora" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Lista de productos solicitados</documentation>
 				</annotation>
 			</element>
 			<element name="registerdoclist" type="tns:RegisterdocListType" minOccurs="0" maxOccurs="1">

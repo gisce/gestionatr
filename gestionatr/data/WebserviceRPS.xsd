@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tnswsrps="http://localhost/sctd/wsrps" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tnsa5="http://localhost/sctd/A529" xmlns:tnsa6="http://localhost/sctd/A629" targetNamespace="http://localhost/sctd/wsrps" elementFormDefault="qualified" version="1.0">
+	<xs:import namespace="http://localhost/sctd/A529" schemaLocation="A529.xsd"/>
+	<xs:import namespace="http://localhost/sctd/A629" schemaLocation="A629.xsd"/>
+	<xs:element name="consultaCups" type="tnswsrps:consultaCups"/>
+	<xs:element name="consultaCupsResponse" type="tnswsrps:consultaCupsResponse"/>
+	<xs:complexType name="consultaCups">
+		<xs:sequence>
+			<xs:element name="consultaCups" type="tnsa5:SctdapplicationA529Type" form="unqualified" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="consultaCupsResponse">
+		<xs:sequence>
+			<xs:element name="consultaCupsResponse" type="tnsa6:sctdrpdsA629Type" form="unqualified" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

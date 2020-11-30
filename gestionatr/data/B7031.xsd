@@ -46,6 +46,26 @@
 	<complexType name="FacturaB7031Type">
 		<sequence>
 			<element name="cups" type="tns:CupsType" minOccurs="1" maxOccurs="1"/>
+			<element name="contratosimultaneo" type="tns:FlagType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Marca de contratos simultáneos</documentation>
+				</annotation>
+			</element>
+			<element name="codigoproducto" type="tns:productcodeType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Código identificativo del producto</documentation>
+				</annotation>
+			</element>
+			<element name="tipoproducto" type="tns:producttypeType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de producto</documentation>
+				</annotation>
+			</element>
+			<element name="arrastrapenalizacion" type="tns:FlagType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Marca de arrastre de penalizaciones</documentation>
+				</annotation>
+			</element>
 			<element name="provincia" type="tns:CodProvinciaType" minOccurs="1" maxOccurs="1"/>
 			<element name="municipio" type="tns:CodAlpha5Type" minOccurs="1" maxOccurs="1"/>
 			<element name="codpostal" type="tns:CodAlpha5Type" minOccurs="1" maxOccurs="1"/>

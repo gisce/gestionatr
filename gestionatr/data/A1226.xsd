@@ -53,22 +53,10 @@
 					<documentation>Hora de Respuesta</documentation>
 				</annotation>
 			</element>
-			<element name="atrcode" type="tns:AtrcodeType" minOccurs="1" maxOccurs="1">
+			<element name="atrcode" type="tns:AtrcodeType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Código de Contrato ATR modificado.</documentation>
 				</annotation>
-			</element>
-			<element name="atrversion" minOccurs="1" maxOccurs="1">
-				<annotation>
-					<documentation>Versión del Contrato Modificado</documentation>
-				</annotation>
-				<simpleType>
-					<restriction base="decimal">
-						<totalDigits value="3"/>
-						<fractionDigits value="0"/>
-						<minInclusive value="0"/>
-					</restriction>
-				</simpleType>
 			</element>
 			<element name="cups" type="tns:CupsType" minOccurs="1" maxOccurs="1">
 				<annotation>

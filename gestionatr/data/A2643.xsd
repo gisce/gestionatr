@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A2649" targetNamespace="http://localhost/sctd/A2649" elementFormDefault="qualified">
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A2643" targetNamespace="http://localhost/sctd/A2643" elementFormDefault="qualified">
 	<include schemaLocation="CommonTagsCONT.xsd"/>
-	<element name="sctdapplication" type="tns:SctdApplicationA2649Type"/>
-	<complexType name="SctdApplicationA2649Type">
+	<element name="sctdapplication" type="tns:SctdApplicationA2643Type"/>
+	<complexType name="SctdApplicationA2643Type">
 		<sequence>
-			<element name="heading" type="tns:HeadingA2649Type" minOccurs="1" maxOccurs="1"/>
-			<element name="a2649" type="tns:A2649Type" minOccurs="1" maxOccurs="unbounded"/>
+			<element name="heading" type="tns:HeadingA2643Type" minOccurs="1" maxOccurs="1"/>
+			<element name="a2643" type="tns:A2643Type" minOccurs="1" maxOccurs="unbounded"/>
 		</sequence>
 	</complexType>
-	<complexType name="HeadingA2649Type">
+	<complexType name="HeadingA2643Type">
 		<sequence>
 			<element name="dispatchingcode" minOccurs="1" maxOccurs="1">
 				<simpleType>
@@ -26,7 +26,7 @@
 				<simpleType>
 					<restriction base="string">
 						<length value="2"/>
-						<enumeration value="49"/>
+						<enumeration value="43"/>
 					</restriction>
 				</simpleType>
 			</element>
@@ -41,7 +41,7 @@
 			</element>
 		</sequence>
 	</complexType>
-	<complexType name="A2649Type">
+	<complexType name="A2643Type">
 		<sequence>
 			<element name="reqcode" type="tns:ReqcodeType" minOccurs="0" maxOccurs="1">
 				<annotation>
