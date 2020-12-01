@@ -288,7 +288,7 @@ TAULA_MOTIVOS_DE_RECHAZO = [
     ('05', 'Sistema de OCSUM'),
 ]
 
-# CAUSA DE COMUNICACIÓN no es fa.
+# CAUSA DE COMUNICACIÓN no es fa. CAUSA_DE_COMUNICACIÓN
 
 TAULA_TIPO_ENVIO = [
     ("P", "Provisional"),
@@ -1525,6 +1525,12 @@ TAULA_TIPO_PRODUCTO = [
     ('06', 'Intradiario'),
 ]
 
+TAULA_TIPO_SOLICITUD_PRODUCTO = [
+    ('01', 'Nuevo producto consecutivo al existente manteniendo condiciones'),
+    ('02', 'Nuevo producto consecutivo al existente modificando condiciones'),
+    ('03', 'Nuevo producto'),
+]
+
 TAULA_TIPO_PEAJE = [
     ('11', '11 - Presión > 60 bares y Consumo <= 200 GWh/año'),
     ('12', '12 - Presión > de 60 bares y  200 GWh/año < Consumo <= 1000 GWh/año'),
@@ -1620,6 +1626,8 @@ TAULA_MOTIVO_BAJA = [
     ('04', 'A solicitud del comercializador por problemas de '
            'seguridad derivados de inspección'),
     ('05', 'A solicitud del comercializador por fin de contrato de energía'),
+    ('09', 'Baja de producto indefinido para gestión solo con productos temporales'),
+
 ]
 TAULA_MOTIVO_MODIFICACION = [
     ('01', 'Cambio de Titular'),
@@ -1665,6 +1673,8 @@ TAULA_MOTIVO_ANULACION = [
     ('024', 'Anulación de NNSS por Ausente'),
     ('035', 'Anulación de solicitud de desistimiento'),
     ('036', 'Anulación de solicitud de traspaso a la CUR por concurrencia con cambio de comercializador/baja por cese/ alta de NNSS en transformación del GLP'),
+    ('037', 'Anulación de Solicitud de Cambio de Comercializadora con nuevos productos adicionales'),
+    ('038', 'Anulación de Solicitud de nuevo Producto/Contrato'),
     ('039', 'Anulación de solicitud de traspaso a la CUR por aceptación de anulación a iniciativa del comercializador sobre la solicitud que motivó tal traspaso'),
 ]
 TAULA_ESTADO_PUNTO_DE_SUMINISTRO = [
