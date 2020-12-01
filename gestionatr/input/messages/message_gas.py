@@ -90,8 +90,16 @@ XSD_DATA.update({
     },
     '50': {
         'A15S': 'A15S50.xsd'
-    }
-
+    },
+    '42': {
+        'A2': 'A242.xsd',
+        'A3': 'A342.xsd',
+        'A4': 'A442.xsd',
+        'A25': 'A2542.xsd',
+        'A2S': 'A2S42.xsd',
+        'A3S': 'A3S42.xsd',
+        'A4S': 'A4S42.xsd',
+    },
 })
 
 MAIN_MESSAGE_XSD.update({
@@ -164,6 +172,14 @@ MAIN_MESSAGE_XSD.update({
     'A4S49': 'a4s49',
     # 50
     'A15S50': 'a15s50',
+    # 42
+    'A242': 'a242',
+    'A342': 'a342',
+    'A442': 'a442',
+    'A2542': 'a2542',
+    'A2S42': 'a2s42',
+    'A3S42': 'a3s42',
+    'A4S42': 'a4s42',
 })
 
 

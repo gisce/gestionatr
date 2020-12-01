@@ -611,6 +611,16 @@ class A1_41(MessageGas, ProcessDeadline):
                 data.append(corrector(d))
         return data
 
+    @property
+    def productlist(self):
+        data = []
+        obj = get_rec_attr(self.obj, self._header, False)
+        if (hasattr(obj, 'productlist') and
+                hasattr(obj.productlist, 'product')):
+            for d in obj.productlist.product:
+                data.append(product(d))
+        return data
+
     # Datos paso a441
     # Ya está soportado con los atributos que tenemos
 
@@ -734,3 +744,74 @@ class corrector(object):
             return data.text
         else:
             return False
+
+
+class product(object):
+
+    def __init__(self, data):
+        self.obj = data
+
+    @property
+    def productcode(self):
+        tree = 'productcode'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def producttype(self):
+        tree = 'producttype'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def producttolltype(self):
+        tree = 'producttolltype'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def productqd(self):
+        tree = 'productqd'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def productqa(self):
+        tree = 'productqa'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def productstartdate(self):
+        tree = 'productstartdate'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def productenddate(self):
+        tree = 'productenddate'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+

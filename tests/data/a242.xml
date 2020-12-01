@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sctdapplication xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://localhost/sctd/A242">
+  <heading>
+      <dispatchingcode>GML</dispatchingcode>
+      <dispatchingcompany>1234</dispatchingcompany>
+      <destinycompany>4321</destinycompany>
+      <communicationsdate>2018-05-01</communicationsdate>
+      <communicationshour>12:00:00</communicationshour>
+      <processcode>42</processcode>
+      <messagetype>A2</messagetype>
+  </heading>
+  <a242>
+    <reqcode>10_4E4mh15</reqcode>
+    <comreferencenum>123456789123</comreferencenum>
+    <responsedate>2020-03-13</responsedate>
+    <responsehour>13:52:14</responsehour>
+    <result>01</result>
+    <resultdesc>Aceptada</resultdesc>
+    <resultreason>R01</resultreason>
+    <resultreasondesc>Cliente suministrado desde planta satélite.</resultreasondesc>
+    <nationality>SB</nationality>
+    <documenttype>01</documenttype>
+    <documentnum>20_f8aQW2mqoLv4GLJ8M</documentnum>
+    <cups>20ai6Nmki1j8m5qCDmuG</cups>
+    <updatereason>01</updatereason>
+    <outgoingpressuregranted>87952.239</outgoingpressuregranted>
+    <singlenomination>S</singlenomination>
+    <netsituation>Girona</netsituation>
+    <newmodeffectdate>01</newmodeffectdate>
+    <foreseentransferdate>2020-03-13</foreseentransferdate>
+    <StatusPS>1</StatusPS>
+    <extrainfo>400_Y1cLoMJo2SXTeCdHmJCodtnOvEsmDn</extrainfo>
+    <productlist>
+        <product>
+            <productcode>TESTCODE1</productcode>
+            <producttype>03</producttype>
+            <producttolltype>31</producttolltype>
+            <productqd>23.6</productqd>
+            <productqa>12345</productqa>
+            <productstartdate>2020-01-01</productstartdate>
+            <productenddate>2020-02-01</productenddate>
+       </product>
+        <product>
+            <productcode>TESTCODE2</productcode>
+            <producttype>02</producttype>
+            <producttolltype>32</producttolltype>
+            <productqd>23.5</productqd>
+            <productqa>1234</productqa>
+            <productstartdate>2020-01-02</productstartdate>
+            <productenddate>2020-02-02</productenddate>
+       </product>
+    </productlist>
+  </a242>
+</sctdapplication>

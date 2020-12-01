@@ -1,33 +1,32 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<sctdapplication xmlns="http://localhost/sctd/A302">
+<sctdapplication xmlns="http://localhost/sctd/A342">
     <heading>
         <dispatchingcode>GML</dispatchingcode>
         <dispatchingcompany>1234</dispatchingcompany>
         <destinycompany>4321</destinycompany>
         <communicationsdate>2018-05-01</communicationsdate>
         <communicationshour>12:00:00</communicationshour>
-        <processcode>02</processcode>
+        <processcode>42</processcode>
         <messagetype>A3</messagetype>
     </heading>
-    <a302>
+    <a342>
         <reqcode>0123456789</reqcode>
         <comreferencenum>000123456789</comreferencenum>
         <responsedate>2018-05-01</responsedate>
         <responsehour>13:00:00</responsehour>
-        <titulartype>F</titulartype>
         <nationality>ES</nationality>
         <documenttype>01</documenttype>
         <documentnum>11111111H</documentnum>
         <cups>ES1234000000000001JN</cups>
-        <lastinspectionsdate>2017-01-01</lastinspectionsdate>
+        <lastinspectionsdate>2018-07-01</lastinspectionsdate>
         <lastinspectionsresult>01</lastinspectionsresult>
-        <atrcode>000111222333444555666777</atrcode>
-        <transfereffectivedate>2018-07-01</transfereffectivedate>
+        <transfereffectivedate>2018-07-02</transfereffectivedate>
         <telemetering>S</telemetering>
-        <finalclientyearlyconsumption>665544332211</finalclientyearlyconsumption>
         <readingtype>1</readingtype>
         <gasusetype>01</gasusetype>
-        <caecode>123456</caecode>
+        <updatereason>01</updatereason>
+        <activationtype>001</activationtype>
+        <closingtype>001</closingtype>
         <canonircperiodicity>01</canonircperiodicity>
         <StatusPS>1</StatusPS>
         <lectureperiodicity>02</lectureperiodicity>
@@ -67,15 +66,24 @@
             </corrector>
         </correctorlist>
         <productlist>
-            <product>
-                <productcode>TESTCODE1</productcode>
-                <producttype>03</producttype>
-                <producttolltype>31</producttolltype>
-                <productqd>23.6</productqd>
-                <productqa>12345</productqa>
-                <productstartdate>2020-01-01</productstartdate>
-                <productenddate>2020-02-01</productenddate>
-            </product>
-        </productlist>
-    </a302>
+        <product>
+            <productcode>TESTCODE1</productcode>
+            <producttype>03</producttype>
+            <producttolltype>31</producttolltype>
+            <productqd>23.6</productqd>
+            <productqa>12345</productqa>
+            <productstartdate>2020-01-01</productstartdate>
+            <productenddate>2020-02-01</productenddate>
+       </product>
+        <product>
+            <productcode>TESTCODE2</productcode>
+            <producttype>02</producttype>
+            <producttolltype>32</producttolltype>
+            <productqd>23.5</productqd>
+            <productqa>1234</productqa>
+            <productstartdate>2020-01-02</productstartdate>
+            <productenddate>2020-02-02</productenddate>
+       </product>
+    </productlist>
+    </a342>
 </sctdapplication>

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from gestionatr.input.messages import A1, A3, B1, B2, C1, C2, D1, E1, M1, P0, Q1, R1, T1, W1, F1, Deadlines
-from gestionatr.input.messages import A1_41, A1_02, A1_05, A1_44, A1_03, A1_48, A1_04, A1_46, A1_38, A1_49
+from gestionatr.input.messages import A1_41, A1_02, A1_05, A1_44, A1_03, A1_48, A1_04, A1_46, A1_38, A1_49, A1_42
 from gestionatr.input.messages import B7031, B7032, A12_24, A12_26, A19_45, A20_36, A13_50
 from gestionatr.input.messages.F1 import agrupar_lectures_per_data, obtenir_data_inici_i_final
 from . import unittest
@@ -3744,7 +3744,7 @@ class test_A1_02(unittest.TestCase):
         self.xml_a3s02.close()
         self.xml_a402.close()
 
-    def test_a241(self):
+    def test_a202(self):
         a202 = A1_02(self.xml_a202)
         a202.parse_xml()
         self.assertEqual(a202.reqcode, u'0123456789')
@@ -3769,7 +3769,7 @@ class test_A1_02(unittest.TestCase):
         self.assertEqual(a202.StatusPS, u'1')
         self.assertEqual(a202.extrainfo, u'comentarios extras')
 
-    def test_a341(self):
+    def test_a302(self):
         a302 = A1_02(self.xml_a302)
         a302.parse_xml()
         self.assertEqual(a302.reqcode, u'0123456789')
@@ -5257,3 +5257,221 @@ class test_A21_36(unittest.TestCase):
         self.assertEqual(a2136.iricertificatedate, '2020-01-01')
         self.assertEqual(a2136.designpower, '10000')
         self.assertEqual(a2136.terminstexist, 'S')
+
+class test_A1_42(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a242 = open(get_data("a242.xml"), "r")
+        self.xml_a342 = open(get_data("a342.xml"), "r")
+        self.xml_a442 = open(get_data("a442.xml"), "r")
+        self.xml_a2542 = open(get_data("a2542.xml"), "r")
+        self.xml_a2s42 = open(get_data("a2s42.xml"), "r")
+        self.xml_a3s42 = open(get_data("a3s42.xml"), "r")
+        self.xml_a4s42 = open(get_data("a4s42.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a242.close()
+        self.xml_a342.close()
+
+    def test_a242(self):
+        a242 = A1_42(self.xml_a242)
+        a242.parse_xml()
+        self.assertEqual(a242.reqcode, u'10_4E4mh15')
+        self.assertEqual(a242.comreferencenum, u'123456789123')
+        self.assertEqual(a242.responsedate, u'2020-03-13')
+        self.assertEqual(a242.responsehour, u'13:52:14')
+        self.assertEqual(a242.result, u'01')
+        self.assertEqual(a242.resultdesc, u'Aceptada')
+        self.assertEqual(a242.resultreason, u'R01')
+        self.assertEqual(a242.resultreasondesc, u'Cliente suministrado desde planta satélite.')
+        self.assertEqual(a242.nationality, u'SB')
+        self.assertEqual(a242.documenttype, u'01')
+        self.assertEqual(a242.documentnum, u'20_f8aQW2mqoLv4GLJ8M')
+        self.assertEqual(a242.cups, u'20ai6Nmki1j8m5qCDmuG')
+        self.assertEqual(a242.updatereason, u'01')
+        self.assertEqual(a242.outgoingpressuregranted, u'87952.239')
+        self.assertEqual(a242.singlenomination, u'S')
+        self.assertEqual(a242.netsituation, u'Girona')
+        self.assertEqual(a242.newmodeffectdate, u'01')
+        self.assertEqual(a242.foreseentransferdate, u'2020-03-13')
+        self.assertEqual(a242.StatusPS, u'1')
+        self.assertEqual(a242.extrainfo, u'400_Y1cLoMJo2SXTeCdHmJCodtnOvEsmDn')
+
+        self.assertEqual(a242.productlist[0].productcode, u'TESTCODE1')
+        self.assertEqual(a242.productlist[0].producttype, u'03')
+        self.assertEqual(a242.productlist[0].producttolltype, u'31')
+        self.assertEqual(a242.productlist[0].productqd, u'23.6')
+        self.assertEqual(a242.productlist[0].productqa, u'12345')
+        self.assertEqual(a242.productlist[0].productstartdate, u'2020-01-01')
+        self.assertEqual(a242.productlist[0].productenddate, u'2020-02-01')
+
+        self.assertEqual(a242.productlist[1].productcode, u'TESTCODE2')
+        self.assertEqual(a242.productlist[1].producttype, u'02')
+        self.assertEqual(a242.productlist[1].producttolltype, u'32')
+        self.assertEqual(a242.productlist[1].productqd, u'23.5')
+        self.assertEqual(a242.productlist[1].productqa, u'1234')
+        self.assertEqual(a242.productlist[1].productstartdate, u'2020-01-02')
+        self.assertEqual(a242.productlist[1].productenddate, u'2020-02-02')
+
+    def test_a342(self):
+        a342 = A1_42(self.xml_a342)
+        a342.parse_xml()
+        self.assertEqual(a342.reqcode, '0123456789')
+        self.assertEqual(a342.comreferencenum, '000123456789')
+        self.assertEqual(a342.responsedate, '2018-05-01')
+        self.assertEqual(a342.responsehour, '13:00:00')
+        self.assertEqual(a342.nationality, 'ES')
+        self.assertEqual(a342.documenttype, '01')
+        self.assertEqual(a342.documentnum, '11111111H')
+        self.assertEqual(a342.cups, 'ES1234000000000001JN')
+        self.assertEqual(a342.lastinspectionsdate, '2018-07-01')
+        self.assertEqual(a342.lastinspectionsresult, '01')
+        self.assertEqual(a342.transfereffectivedate, '2018-07-02')
+        self.assertEqual(a342.telemetering, 'S')
+        self.assertEqual(a342.readingtype, '1')
+        self.assertEqual(a342.gasusetype, '01')
+        self.assertEqual(a342.updatereason, '01')
+        self.assertEqual(a342.activationtype, '001')
+        self.assertEqual(a342.closingtype, '001')
+        self.assertEqual(a342.canonircperiodicity, '01')
+        self.assertEqual(a342.StatusPS, '1')
+        self.assertEqual(a342.lectureperiodicity, '02')
+        self.assertEqual(a342.extrainfo, 'comentarios extras')
+
+        self.assertEqual(len(a342.correctorlist), 2)
+        corrector = a342.correctorlist[0]
+        self.assertEqual(corrector.correctedlecture, u'2200')
+        self.assertEqual(corrector.correctormodel, u'modelo1')
+        self.assertEqual(corrector.correctornumber, u'D123456')
+        self.assertEqual(corrector.correctorproperty, u'01')
+        self.assertEqual(corrector.correctortype, u'01')
+        self.assertEqual(len(a342.counterlist), 2)
+        counter = a342.counterlist[1]
+        self.assertEqual(counter.countermodel, u'marca2')
+        self.assertEqual(counter.counternumber, u'C123456')
+        self.assertEqual(counter.counterpressure, u'13245.321')
+        self.assertEqual(counter.counterproperty, u'06')
+        self.assertEqual(counter.countertype, u'tipo2')
+        self.assertEqual(counter.reallecture, u'3000')
+
+        self.assertEqual(a342.productlist[0].productcode, u'TESTCODE1')
+        self.assertEqual(a342.productlist[0].producttype, u'03')
+        self.assertEqual(a342.productlist[0].producttolltype, u'31')
+        self.assertEqual(a342.productlist[0].productqd, u'23.6')
+        self.assertEqual(a342.productlist[0].productqa, u'12345')
+        self.assertEqual(a342.productlist[0].productstartdate, u'2020-01-01')
+        self.assertEqual(a342.productlist[0].productenddate, u'2020-02-01')
+
+        self.assertEqual(a342.productlist[1].productcode, u'TESTCODE2')
+        self.assertEqual(a342.productlist[1].producttype, u'02')
+        self.assertEqual(a342.productlist[1].producttolltype, u'32')
+        self.assertEqual(a342.productlist[1].productqd, u'23.5')
+        self.assertEqual(a342.productlist[1].productqa, u'1234')
+        self.assertEqual(a342.productlist[1].productstartdate, u'2020-01-02')
+        self.assertEqual(a342.productlist[1].productenddate, u'2020-02-02')
+
+    def test_a442(self):
+        a4_42 = A1_42(self.xml_a442)
+        a4_42.parse_xml()
+        self.assertEqual(a4_42.codi_sollicitud, u'000123456789')
+        self.assertEqual(a4_42.comreferencenum, u'000123456789')
+        self.assertEqual(a4_42.cups, u'ES1234000000000001JN')
+        self.assertEqual(a4_42.documentnum, u'11111111H')
+        self.assertEqual(a4_42.documenttype, u'01')
+        self.assertEqual(a4_42.extrainfo, u'comentarios extras')
+        self.assertEqual(a4_42.nationality, u'ES')
+        self.assertEqual(a4_42.reqcode, u'0123456789')
+        self.assertEqual(a4_42.responsedate, u'2018-05-01')
+        self.assertEqual(a4_42.responsehour, u'13:00:00')
+        self.assertEqual(a4_42.resultreason, u'R32')
+        self.assertEqual(a4_42.resultreasondesc, u'Fecha efecto solicitada anterior al día actual.')
+        self.assertEqual(a4_42.updatereason, u'01')
+        self.assertEqual(a4_42.closingtype, u'064')
+        self.assertEqual(a4_42.closingtypedesc, u'No quiere gas')
+        self.assertEqual(a4_42.interventiondate, u'2016-01-01')
+        self.assertEqual(a4_42.interventionhourfrom, u'09:00:00')
+        self.assertEqual(a4_42.interventionhourto, u'12:00:00')
+        self.assertEqual(a4_42.visitnumber, u'987')
+
+    def test_a2542(self):
+        a25_42 = A1_42(self.xml_a2542)
+        a25_42.parse_xml()
+        self.assertEqual(a25_42.reqcode, u"10_p62j9fh")
+        self.assertEqual(a25_42.visitdate, u"2020-03-13")
+        self.assertEqual(a25_42.visithour, u"14:26:35")
+        self.assertEqual(a25_42.comreferencenum, u"123456789")
+        self.assertEqual(a25_42.informationtype, u"002")
+        self.assertEqual(a25_42.informationtypedesc,
+                         u"0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001")
+        self.assertEqual(a25_42.interventiondate, u"2020-03-13")
+        self.assertEqual(a25_42.interventionhourfrom, u"14:26:35")
+        self.assertEqual(a25_42.interventionhourto, u"14:26:35")
+        self.assertEqual(a25_42.cups, u"20alzDPKUDB5HhZDhn5X")
+        self.assertEqual(a25_42.visitnumber, u"228")
+        self.assertEqual(a25_42.operationnum, u"40_tQzwG5OT6YTye1UiYVtoV3r9VymR5B")
+        self.assertEqual(a25_42.extrainfo, u"400_C9BEFQSmU4c7fJcqlXEYL79KyKwcZ9")
+        self.assertEqual(len(a25_42.defectlist), 2)
+        defect = a25_42.defectlist[1]
+        self.assertEqual(defect.code, u'002')
+        self.assertEqual(defect.description, u'Desc2')
+
+    def test_a2s42(self):
+        a2s42 = A1_42(self.xml_a2s42)
+        a2s42.parse_xml()
+        self.assertEqual(a2s42.reqcode, u'0123456789')
+        self.assertEqual(a2s42.responsedate, u'2018-05-01')
+        self.assertEqual(a2s42.responsehour, u'13:00:00')
+        self.assertEqual(a2s42.nationality, u"ES")
+        self.assertEqual(a2s42.documenttype, u"01")
+        self.assertEqual(a2s42.documentnum, u"ES11111111H")
+        self.assertEqual(a2s42.cups, u'ES1234000000000001JN')
+        self.assertEqual(a2s42.foreseentransferdate, u'2018-05-09')
+        self.assertEqual(a2s42.extrainfo, u'Coments')
+
+    def test_a3s42(self):
+        a1_42 = A1_42(self.xml_a3s42)
+        a1_42.parse_xml()
+        self.assertEqual(a1_42.nationality, u'ES')
+        self.assertEqual(a1_42.readingtype, u'1')
+        self.assertEqual(a1_42.cups, u'ES1234000000000001JN')
+        self.assertEqual(a1_42.documentnum, u'11111111H')
+        self.assertEqual(a1_42.documenttype, u'01')
+        self.assertEqual(a1_42.extrainfo, u'comentarios extras')
+        self.assertEqual(a1_42.reqcode, u'0123456789')
+        self.assertEqual(a1_42.responsedate, u'2018-05-01')
+        self.assertEqual(a1_42.responsehour, u'13:00:00')
+        self.assertEqual(a1_42.transfereffectivedate, u'2018-07-01')
+        self.assertEqual(len(a1_42.correctorlist), 2)
+        corrector = a1_42.correctorlist[0]
+        self.assertEqual(corrector.correctedlecture, u'2200')
+        self.assertEqual(corrector.correctormodel, u'modelo1')
+        self.assertEqual(corrector.correctornumber, u'D123456')
+        self.assertEqual(corrector.correctorproperty, u'01')
+        self.assertEqual(corrector.correctortype, u'01')
+        self.assertEqual(len(a1_42.counterlist), 2)
+        counter = a1_42.counterlist[1]
+        self.assertEqual(counter.countermodel, u'marca2')
+        self.assertEqual(counter.counternumber, u'C123456')
+        self.assertEqual(counter.counterpressure, u'13245.321')
+        self.assertEqual(counter.counterproperty, u'06')
+        self.assertEqual(counter.countertype, u'tipo2')
+        self.assertEqual(counter.reallecture, u'3000')
+
+    def test_a4s42(self):
+        a4s42 = A1_42(self.xml_a4s42)
+        a4s42.parse_xml()
+        self.assertEqual(a4s42.reqcode, '10_z9f2k6S')
+        self.assertEqual(a4s42.responsedate, '2020-03-13')
+        self.assertEqual(a4s42.responsehour, '15:09:09')
+        self.assertEqual(a4s42.nationality, 'ES')
+        self.assertEqual(a4s42.documenttype, '01')
+        self.assertEqual(a4s42.documentnum, '11111111H')
+        self.assertEqual(a4s42.cups, '20aXn4jOtXkA8PF9JCHH')
+        self.assertEqual(a4s42.previousatrcode, '000111222333444555666777')
+        self.assertEqual(a4s42.resultreason, 'R01')
+        self.assertEqual(a4s42.resultreasondesc, u'Cliente suministrado desde planta satélite.')
+        self.assertEqual(a4s42.extrainfo, '400_ssYcpvXKXUF3DuQzltLLSTHWo2SDsC')
+
+
+
+
