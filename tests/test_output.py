@@ -9,6 +9,7 @@ from gestionatr.output.messages import sw_a1_04 as a1_04
 from gestionatr.output.messages import sw_a1_05 as a1_05
 from gestionatr.output.messages import sw_a1_41 as a1_41
 from gestionatr.output.messages import sw_a1_42 as a1_42
+from gestionatr.output.messages import sw_a1_43 as a1_43
 from gestionatr.output.messages import sw_a1_44 as a1_44
 from gestionatr.output.messages import sw_a1_46 as a1_46
 from gestionatr.output.messages import sw_a1_48 as a1_48
@@ -4796,6 +4797,7 @@ class test_R1(unittest.TestCase):
         xml = str(mensaje_rechazo)
         assertXmlEqual(xml, self.xml_r109_rej.read())
 
+
 class test_F1(unittest.TestCase):
 
     def setUp(self):
@@ -5687,6 +5689,7 @@ class test_A1_03(unittest.TestCase):
 
         a103_fields = {
             'comreferencenum': '000123456789',
+            'comreferencenumanul': '1234',
             'titulartype': 'F',
             'nationality': 'ES',
             'documenttype': '01',
@@ -6326,6 +6329,29 @@ class test_A1_38(unittest.TestCase):
             'registerdoc_list': [rd1, rd2],
         })
 
+        # ProductosDocumento
+        productos_documento = a1_38.ProductList()
+        p1 = a1_38.Product()
+        producto_fields = {
+            'producttype': '03',
+            'producttolltype': '31',
+            'productqd': '23.6',
+            'productqa': '12345',
+        }
+        p1.feed(producto_fields)
+        p2 = a1_42.Product()
+        producto2_fields = {
+            'producttype': '02',
+            'producttolltype': '32',
+            'productqd': '23.5',
+            'productqa': '1234',
+        }
+        p2.feed(producto2_fields)
+
+        productos_documento.feed({
+            'product_list': [p1, p2],
+        })
+
         a138_fields = {
             'comreferencenum': "12345",
             'reqdate': "2020-03-01",
@@ -6380,6 +6406,7 @@ class test_A1_38(unittest.TestCase):
             'modeffectdate': "05",
             'reqactivationdate': "2020-02-01",
             'extrainfo': "EXTRA EXTRA! EL GAS NO TE SENTIT!",
+            'productlist': productos_documento,
             'registerdoclist': registros_documento,
         }
         a138.feed(a138_fields)
@@ -6499,6 +6526,7 @@ class test_A20_36(unittest.TestCase):
         mensaje_a2036.build_tree()
         xml = str(mensaje_a2036)
         assertXmlEqual(xml, self.xml_a2036.read())
+
 
 class test_A1_42(unittest.TestCase):
 
@@ -6650,6 +6678,7 @@ class test_A1_42(unittest.TestCase):
         xml = str(mensaje_a142)
         assertXmlEqual(xml, self.xml_a142.read())
 
+
 class test_A25_42(unittest.TestCase):
 
     def setUp(self):
@@ -6720,3 +6749,107 @@ class test_A25_42(unittest.TestCase):
         mensaje_a2542.build_tree()
         xml = str(mensaje_a2542)
         assertXmlEqual(xml, self.xml_a2542.read())
+
+
+class test_A1_43(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a143 = open(get_data("a143.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a143.close()
+
+    def test_create_a143(self):
+        # MensajeA142
+        mensaje_a143 = a1_43.MensajeA143()
+
+        # Heading
+        heading = a1_43.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '43',
+            'messagetype': 'A1'
+        }
+        heading.feed(heading_fields)
+
+        # A143
+        a143 = a1_43.A143()
+
+        # ProductosDocumento
+        productos_documento = a1_43.ProductList()
+        p1 = a1_43.Product()
+        producto_fields = {
+            'reqtype': '02',
+            'productcode': '01010101323',
+            'producttype': '03',
+            'producttolltype': '11',
+            'productqd': '123123.1',
+            'productqa': '6263',
+        }
+        p1.feed(producto_fields)
+        p2 = a1_42.Product()
+        producto2_fields = {
+            'reqtype': '03',
+            'productcode': '51010101323',
+            'producttype': '02',
+            'producttolltype': '12',
+            'productqd': '5555.1',
+            'productqa': '2222',
+        }
+        p2.feed(producto2_fields)
+
+        productos_documento.feed({
+            'product_list': [p1, p2],
+        })
+
+        # RegistrosDocumento
+        registros_documento = a1_42.Registerdoclist()
+        rd1 = a1_42.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-02',
+            'doctype': 'CC',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd1.feed(registro_doc_fields)
+        rd2 = a1_42.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-03',
+            'doctype': '01',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd2.feed(registro_doc_fields)
+        registros_documento.feed({
+            'registerdoc_list': [rd1, rd2],
+        })
+
+        a143_fields = {
+            'comreferencenum': '000123456789',
+            'reqdate': '2018-05-01',
+            'reqhour': '13:00:00',
+            'titulartype': 'F',
+            'nationality': 'ES',
+            'documenttype': '01',
+            'documentnum': '11111111H',
+            'cups': 'ES1234000000000001JN',
+            'modeffectdate': '05',
+            'reqtransferdate': '2018-06-01',
+            'productlist': productos_documento,
+            'extrainfo': 'comentarios extras',
+            'registerdoclist': registros_documento,
+        }
+        a143.feed(a143_fields)
+
+        mensaje_a143_fields = {
+            'heading': heading,
+            'a143': a143,
+        }
+        mensaje_a143.feed(mensaje_a143_fields)
+        mensaje_a143.build_tree()
+        xml = str(mensaje_a143)
+        assertXmlEqual(xml, self.xml_a143.read())

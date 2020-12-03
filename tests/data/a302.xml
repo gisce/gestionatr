@@ -76,6 +76,15 @@
                 <productstartdate>2020-01-01</productstartdate>
                 <productenddate>2020-02-01</productenddate>
             </product>
+            <product>
+                <productcode>TESTCODE2</productcode>
+                <producttype>02</producttype>
+                <producttolltype>32</producttolltype>
+                <productqd>23.5</productqd>
+                <productqa>1234</productqa>
+                <productstartdate>2020-01-02</productstartdate>
+                <productenddate>2020-02-02</productenddate>
+            </product>
         </productlist>
     </a302>
 </sctdapplication>

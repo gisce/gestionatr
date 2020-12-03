@@ -35,5 +35,25 @@
         <foreseentransferdate>2018-06-01</foreseentransferdate>
         <StatusPS>1</StatusPS>
         <extrainfo>comentarios extras</extrainfo>
+        <productlist>
+            <product>
+                <productcode>TESTCODE1</productcode>
+                <producttype>03</producttype>
+                <producttolltype>31</producttolltype>
+                <productqd>23.6</productqd>
+                <productqa>12345</productqa>
+                <productstartdate>2020-01-01</productstartdate>
+                <productenddate>2020-02-01</productenddate>
+           </product>
+            <product>
+                <productcode>TESTCODE2</productcode>
+                <producttype>02</producttype>
+                <producttolltype>32</producttolltype>
+                <productqd>23.5</productqd>
+                <productqa>1234</productqa>
+                <productstartdate>2020-01-02</productstartdate>
+                <productenddate>2020-02-02</productenddate>
+           </product>
+        </productlist>
     </a241>
 </sctdapplication>

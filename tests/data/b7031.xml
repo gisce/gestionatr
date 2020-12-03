@@ -24,6 +24,10 @@
     </datosempresadestino>
     <factura>
         <cups>ES1234000000000001JN</cups>
+        <contratosimultaneo>S</contratosimultaneo>
+        <codigoproducto>123456</codigoproducto>
+        <tipoproducto>01</tipoproducto>
+        <arrastrapenalizacion>N</arrastrapenalizacion>
         <provincia>22</provincia>
         <municipio>22158</municipio>
         <codpostal>22400</codpostal>

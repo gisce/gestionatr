@@ -63,6 +63,20 @@
     <modeffectdate>05</modeffectdate>
     <reqactivationdate>2020-02-01</reqactivationdate>
     <extrainfo>EXTRA EXTRA! EL GAS NO TE SENTIT!</extrainfo>
+      <productlist>
+            <product>
+                <producttype>03</producttype>
+                <producttolltype>31</producttolltype>
+                <productqd>23.6</productqd>
+                <productqa>12345</productqa>
+            </product>
+            <product>
+                <producttype>02</producttype>
+                <producttolltype>32</producttolltype>
+                <productqd>23.5</productqd>
+                <productqa>1234</productqa>
+            </product>
+        </productlist>
     <registerdoclist>
         <registerdoc>
             <date>2018-05-02</date>
