@@ -1163,6 +1163,11 @@ class Medidor(object):
             factor_k = float(meter.factork)
             pcs = float(meter.pcs)
             pressio_subministrament = float(meter.presionsuministro)
+            qdaplicado = float(meter.qdaplicado)
+            qdmaximo = float(meter.qdmaximo)
+            fecqdmax = meter.fecqdmax
+            dqmedio = float(meter.dqmedio)
+            qdcontratado = float(meter.qdcontratado)
 
             for numerador in meter.listanumeradores:
                 lectura_desde_m3 = float(numerador.lectant)
@@ -1191,7 +1196,13 @@ class Medidor(object):
                     'pcs': pcs,
                     'ometre': numerador.aparatorelevante == 'N',
                     'consum_m3': float(numerador.consumo),
-                    'consum': float(numerador.consumo) * float(meter.factorconver)
+                    'consum': float(numerador.consumo) * float(meter.factorconver),
+                    'qdaplicado': float(qdaplicado),
+                    'qdmaximo': float(qdmaximo),
+                    'fecqdmax': fecqdmax,
+                    'dqmedio': float(dqmedio),
+                    'qdcontratado': float(qdcontratado),
+
                 }
                 res.append(vals)
         return res
