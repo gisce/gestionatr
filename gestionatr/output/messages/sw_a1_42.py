@@ -159,8 +159,9 @@ class Newowner(XmlModel):
         super(Newowner, self).__init__('newowner','newowner')
 
 class Product(XmlModel):
-
-    _sort_order = ('product', 'reqtype', 'productcode', 'producttype', 'producttolltype', 'productqd', 'productqa')
+    _sort_order = (
+    'product', 'reqtype', 'productcode', 'producttype', 'producttolltype', 'productqd', 'productqa', 'productstartdate',
+    'productenddate',)
 
     def __init__(self):
         self.product = XmlField('product')
@@ -170,4 +171,6 @@ class Product(XmlModel):
         self.producttolltype = XmlField('producttolltype')
         self.productqd = XmlField('productqd')
         self.productqa = XmlField('productqa')
+        self.productstartdate = XmlField('productstartdate')
+        self.productenddate = XmlField('productenddate')
         super(Product, self).__init__('product', 'product')

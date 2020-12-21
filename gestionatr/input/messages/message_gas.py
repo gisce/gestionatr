@@ -304,6 +304,15 @@ class MessageGas(Message):
             return '01'
 
     @property
+    def comreferencenumanul(self):
+        tree = '{0}.comreferencenumanul'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data not in [None, False]:
+            return data.text
+        else:
+            return '123456789012'
+
+    @property
     def data_sollicitud(self):
         try:
             ref = self.head.communicationsdate.text
