@@ -135,7 +135,7 @@ class Street(XmlModel):
 
 class Address(XmlModel):
 
-    _sort_order = ('address', 'province','city','zipcode','street')
+    _sort_order = ('address', 'province', 'city', 'zipcode', 'street')
 
     def __init__(self):
         self.address = XmlField('address')
@@ -145,16 +145,29 @@ class Address(XmlModel):
         self.street = Street()
         super(Address, self).__init__('address','address')
 
+class AddressPS(XmlModel):
+
+    _sort_order = ('addressPS', 'province', 'city', 'zipcode', 'street')
+
+    def __init__(self):
+        self.addressPS = XmlField('addressPS')
+        self.province = XmlField('province')
+        self.city = XmlField('city')
+        self.zipcode = XmlField('zipcode')
+        self.street = Street()
+        super(AddressPS, self).__init__('addressPS', 'addressPS')
+
 
 class Newowner(XmlModel):
 
-    _sort_order = ('newowner', 'newclient','newregularaddress','typefiscaladdress','address')
+    _sort_order = ('newowner', 'newclient','newregularaddress','typefiscaladdress','addressPS','address')
 
     def __init__(self):
         self.newowner = XmlField('newowner')
         self.newclient = Newclient()
         self.newregularaddress = XmlField('newregularaddress')
         self.typefiscaladdress = XmlField('typefiscaladdress')
+        self.addressPS = AddressPS()
         self.address = Address()
         super(Newowner, self).__init__('newowner','newowner')
 

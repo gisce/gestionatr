@@ -39,6 +39,20 @@
             </newclient>
             <newregularaddress>S</newregularaddress>
             <typefiscaladdress>S</typefiscaladdress>
+            <addressPS>
+                <province>17</province>
+                <city>0792</city>
+                <zipcode>17003</zipcode>
+                <street>
+                    <streettype>C</streettype>
+                    <street>nou</street>
+                    <streetnumber>3</streetnumber>
+                    <portal>2</portal>
+                    <staircase>1</staircase>
+                    <floor>1</floor>
+                    <door>2</door>
+                </street>
+            </addressPS>
             <address>
                 <province>17</province>
                 <city>0792</city>

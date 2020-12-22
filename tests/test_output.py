@@ -6632,6 +6632,25 @@ class test_A1_42(unittest.TestCase):
             'door': '2',
         })
 
+        stps = a1_42.Street()
+        stps.feed({
+            'streettype': 'C',
+            'street_name': 'nou',
+            'streetnumber': '3',
+            'portal': '2',
+            'staircase': '1',
+            'floor': '1',
+            'door': '2',
+        })
+
+        adps = a1_42.AddressPS()
+        adps.feed({
+            'province': '17',
+            'city': '0792',
+            'zipcode': '17003',
+            'street': stps,
+        })
+
         ad = a1_42.Address()
         ad.feed({
             'province': '17',
@@ -6645,6 +6664,7 @@ class test_A1_42(unittest.TestCase):
             'newclient': cl,
             'newregularaddress': 'S',
             'typefiscaladdress': 'S',
+            'addressPS': adps,
             'address': ad,
         })
 
@@ -6676,7 +6696,8 @@ class test_A1_42(unittest.TestCase):
         mensaje_a142.feed(mensaje_a142_fields)
         mensaje_a142.build_tree()
         xml = str(mensaje_a142)
-        assertXmlEqual(xml, self.xml_a142.read())
+        expected = self.xml_a142.read()
+        assertXmlEqual(xml, expected)
 
 
 class test_A25_42(unittest.TestCase):
