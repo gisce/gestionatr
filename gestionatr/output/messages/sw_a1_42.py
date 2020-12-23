@@ -2,6 +2,9 @@
 
 from libcomxml.core import XmlModel, XmlField
 from gestionatr.output.messages.base_gas import Heading
+
+from gestionatr.output.messages.base import rep_decimal
+
 from sw_a1_41 import Registerdoc, Registerdoclist
 
 
@@ -182,7 +185,7 @@ class Product(XmlModel):
         self.productcode = XmlField('productcode')
         self.producttype = XmlField('producttype')
         self.producttolltype = XmlField('producttolltype')
-        self.productqd = XmlField('productqd')
+        self.productqd = XmlField('productqd', rep=rep_decimal(7))
         self.productqa = XmlField('productqa')
         self.productstartdate = XmlField('productstartdate')
         self.productenddate = XmlField('productenddate')
