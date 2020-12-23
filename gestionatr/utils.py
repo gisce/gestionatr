@@ -39,6 +39,12 @@ def get_description(code, table_name):
     return res
 
 
+def rodes(giro):
+    """Retorna el nombre de rodes senceres segons el giro
+    """
+    return len(str(giro)) - 1
+
+
 def get_description_gas(code, table_name):
     table = getattr(defs_gas, table_name, None)
     if not table:
