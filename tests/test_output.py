@@ -6335,16 +6335,16 @@ class test_A1_38(unittest.TestCase):
         producto_fields = {
             'producttype': '03',
             'producttolltype': '31',
-            'productqd': '23.6',
-            'productqa': '12345',
+            'productqd': 23.6,
+            'productqa': 12345,
         }
         p1.feed(producto_fields)
         p2 = a1_42.Product()
         producto2_fields = {
             'producttype': '02',
             'producttolltype': '32',
-            'productqd': '23.5',
-            'productqa': '1234',
+            'productqd': 23.5,
+            'productqa': 1234,
         }
         p2.feed(producto2_fields)
 
@@ -6564,8 +6564,8 @@ class test_A1_42(unittest.TestCase):
             'productcode': '01010101323',
             'producttype': '03',
             'producttolltype': '11',
-            'productqd': '123123.1',
-            'productqa': '6263',
+            'productqd': 123123.1,
+            'productqa': 6263,
         }
         p1.feed(producto_fields)
         p2 = a1_42.Product()
@@ -6574,8 +6574,8 @@ class test_A1_42(unittest.TestCase):
             'productcode': '51010101323',
             'producttype': '02',
             'producttolltype': '12',
-            'productqd': '5555.1',
-            'productqa': '2222',
+            'productqd': 5555.1,
+            'productqa': 2222,
         }
         p2.feed(producto2_fields)
 
@@ -6808,8 +6808,8 @@ class test_A1_43(unittest.TestCase):
             'productcode': '01010101323',
             'producttype': '03',
             'producttolltype': '11',
-            'productqd': '123123.1',
-            'productqa': '6263',
+            'productqd': 123123.1,
+            'productqa': 6263,
         }
         p1.feed(producto_fields)
         p2 = a1_42.Product()
@@ -6818,8 +6818,8 @@ class test_A1_43(unittest.TestCase):
             'productcode': '51010101323',
             'producttype': '02',
             'producttolltype': '12',
-            'productqd': '5555.1',
-            'productqa': '2222',
+            'productqd': 5555.1,
+            'productqa': 2222,
         }
         p2.feed(producto2_fields)
 

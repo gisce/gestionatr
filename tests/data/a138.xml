@@ -67,13 +67,13 @@
             <product>
                 <producttype>03</producttype>
                 <producttolltype>31</producttolltype>
-                <productqd>23.6</productqd>
+                <productqd>23.6000000</productqd>
                 <productqa>12345</productqa>
             </product>
             <product>
                 <producttype>02</producttype>
                 <producttolltype>32</producttolltype>
-                <productqd>23.5</productqd>
+                <productqd>23.5000000</productqd>
                 <productqa>1234</productqa>
             </product>
         </productlist>

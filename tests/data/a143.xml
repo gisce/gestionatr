@@ -26,7 +26,7 @@
                 <productcode>01010101323</productcode>
                 <producttype>03</producttype>
                 <producttolltype>11</producttolltype>
-                <productqd>123123.1</productqd>
+                <productqd>123123.1000000</productqd>
                 <productqa>6263</productqa>
             </product>
             <product>
@@ -34,7 +34,7 @@
                 <productcode>51010101323</productcode>
                 <producttype>02</producttype>
                 <producttolltype>12</producttolltype>
-                <productqd>5555.1</productqd>
+                <productqd>5555.1000000</productqd>
                 <productqa>2222</productqa>
             </product>
         </productlist>
