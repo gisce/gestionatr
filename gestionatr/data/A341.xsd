@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- editado con XMLSpy v2020 rel. 2 (x64) (http://www.altova.com) por teresa.marco (INECO) -->
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A341" targetNamespace="http://localhost/sctd/A341" elementFormDefault="qualified">
 	<include schemaLocation="CommonTagsCONT.xsd"/>
 	<element name="sctdapplication" type="tns:SctdapplicationA341Type"/>
@@ -51,7 +50,9 @@
 			</element>
 			<element name="comreferencenum" type="tns:ComreferencenumType" minOccurs="1" maxOccurs="1">
 				<annotation>
-					<documentation>Nº Referencia Solicitud Comercializadora</documentation>
+					<documentation>
+						Nº Referencia Solicitud Comercializadora
+					</documentation>
 				</annotation>
 			</element>
 			<element name="responsedate" type="date" minOccurs="1" maxOccurs="1">
@@ -71,7 +72,9 @@
 			</element>
 			<element name="documenttype" type="tns:IdDocumentType" minOccurs="1" maxOccurs="1">
 				<annotation>
-					<documentation>Tipo Documento de Identificación</documentation>
+					<documentation>
+						Tipo Documento de Identificación
+					</documentation>
 				</annotation>
 			</element>
 			<element name="documentnum" type="tns:DocumentnumType" minOccurs="1" maxOccurs="1">
@@ -84,9 +87,9 @@
 					<documentation>CUPS Solicitud</documentation>
 				</annotation>
 			</element>
-			<element name="atrcode" type="tns:AtrcodeType">
+			<element name="atrcode" type="tns:AtrcodeType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Código Contrato ATR. </documentation>
+					<documentation>Código Contrato ATR. No se debe informar para suministros del grupo 1 o 2</documentation>
 				</annotation>
 			</element>
 			<element name="transfereffectivedate" type="date" minOccurs="1" maxOccurs="1">
@@ -99,19 +102,19 @@
 					<documentation>Dispone de Telemedida</documentation>
 				</annotation>
 			</element>
-			<element name="finalqdgranted" type="tns:QdType" maxOccurs="1">
+			<element name="finalqdgranted" type="tns:QdType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Caudal Diario Concedido Final. </documentation>
+					<documentation>Caudal Diario Concedido Final. No se debe informar para suministros del grupo 1 o 2</documentation>
 				</annotation>
 			</element>
-			<element name="finalqhgranted" type="tns:QhType" minOccurs="0">
+			<element name="finalqhgranted" type="tns:QhType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Caudal Horario Concedido Final</documentation>
 				</annotation>
 			</element>
-			<element name="finalclientyearlyconsumption" type="tns:QaType">
+			<element name="finalclientyearlyconsumption" type="tns:QaType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Caudal Anual Actual Final. </documentation>
+					<documentation>Caudal Anual Actual Final. No se debe informar para suministros del grupo 1 o 2</documentation>
 				</annotation>
 			</element>
 			<element name="gasusetype" type="tns:UsoGasType" minOccurs="1" maxOccurs="1">
@@ -349,6 +352,11 @@
 			<element name="correctorlist" type="tns:CorrectorListType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Lista de Correctores</documentation>
+				</annotation>
+			</element>
+			<element name="productlist" type="tns:productlistTypeActivacion" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Listado de productos activos en la aceptación de la solicitud</documentation>
 				</annotation>
 			</element>
 		</sequence>

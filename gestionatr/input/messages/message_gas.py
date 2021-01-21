@@ -90,8 +90,25 @@ XSD_DATA.update({
     },
     '50': {
         'A15S': 'A15S50.xsd'
-    }
-
+    },
+    '42': {
+        'A1': 'A142.xsd',
+        'A2': 'A242.xsd',
+        'A3': 'A342.xsd',
+        'A4': 'A442.xsd',
+        'A25': 'A2542.xsd',
+        'A2S': 'A2S42.xsd',
+        'A3S': 'A3S42.xsd',
+        'A4S': 'A4S42.xsd',
+    },
+    '43': {
+            'A1': 'A143.xsd',
+            'A2': 'A243.xsd',
+            'A3': 'A343.xsd',
+            'A4': 'A443.xsd',
+            'A25': 'A2543.xsd',
+            'A26': 'A2643.xsd',
+    },
 })
 
 MAIN_MESSAGE_XSD.update({
@@ -164,6 +181,20 @@ MAIN_MESSAGE_XSD.update({
     'A4S49': 'a4s49',
     # 50
     'A15S50': 'a15s50',
+    # 42
+    'A242': 'a242',
+    'A342': 'a342',
+    'A442': 'a442',
+    'A2542': 'a2542',
+    'A2S42': 'a2s42',
+    'A3S42': 'a3s42',
+    'A4S42': 'a4s42',
+    # 43
+    'A243': 'a243',
+    'A343': 'a343',
+    'A443': 'a443',
+    'A2543': 'a2543',
+    'A2643': 'a2643',
 })
 
 
@@ -271,6 +302,15 @@ class MessageGas(Message):
             return data.text
         else:
             return '01'
+
+    @property
+    def comreferencenumanul(self):
+        tree = '{0}.comreferencenumanul'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data not in [None, False]:
+            return data.text
+        else:
+            return '123456789012'
 
     @property
     def data_sollicitud(self):

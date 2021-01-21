@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A629" targetNamespace="http://localhost/sctd/A629" elementFormDefault="qualified">
+	<include schemaLocation="CommonTagsCONT.xsd"/>
+	<element name="sctdrpds" type="tns:sctdrpdsA629Type"/>
+	<complexType name="sctdrpdsA629Type">
+		<sequence>
+			<element name="cabecera" type="tns:HeadingA629Type" minOccurs="1" maxOccurs="1"/>
+			<element name="a629" type="tns:A629Type" minOccurs="1" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	<complexType name="HeadingA629Type">
+		<sequence>
+			<element name="codenvio" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="3"/>
+						<enumeration value="GML"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="empresaemisora" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="empresadestino" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="fechacomunicacion" type="date" minOccurs="1" maxOccurs="1"/>
+			<element name="horacomunicacion" type="time" minOccurs="1" maxOccurs="1"/>
+			<element name="codproceso" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"/>
+						<enumeration value="29"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="tipomensaje" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="3"/>
+						<enumeration value="A6"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="A629Type">
+		<sequence>
+			<element name="codrpds" type="tns:ReqcodeType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Código Petición</documentation>
+				</annotation>
+			</element>
+			<element name="fechacreacion" type="date" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha de Petición</documentation>
+				</annotation>
+			</element>
+			<element name="horacreacion" type="time" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Hora de Petición</documentation>
+				</annotation>
+			</element>
+			<element name="codresultado" type="tns:ResultadoA2Type" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Código de Resultado</documentation>
+				</annotation>
+			</element>
+			<element name="descresultado" type="tns:ResultdescType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Descripción de Resultado</documentation>
+				</annotation>
+			</element>
+			<element name="codmotivo" type="tns:MotivoRechazoType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Código Motivo Resultado CNMC</documentation>
+				</annotation>
+			</element>
+			<element name="descmotresultado" type="tns:ResultreasondescType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Descripción de Motivo Resultado CNMC</documentation>
+				</annotation>
+			</element>
+			<element name="resvalidacioncliente" type="tns:FlagType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Validación del Cliente informado en la solicitud de la comercializadora</documentation>
+				</annotation>
+			</element>
+			<element name="datosdis" type="tns:DatosDisA629Type" minOccurs="1" maxOccurs="1"/>
+			<element name="datoscom" type="tns:DatosComA629Type" minOccurs="0" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	<complexType name="DatosDisA629Type">
+		<sequence>
+			<element name="cups" type="tns:CupsType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>CUPS</documentation>
+				</annotation>
+			</element>
+			<element name="distribuidor" type="tns:AgenteType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Código Distribuidor</documentation>
+				</annotation>
+			</element>
+			<element name="razonsocial" type="tns:CodAlpha100Type" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Razón Social del Distribuidor</documentation>
+				</annotation>
+			</element>
+			<element name="codprovincia" type="tns:CodProvinciaType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Provincia del PS</documentation>
+				</annotation>
+			</element>
+			<element name="descprovincia" type="tns:provincedescType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Descripción Provincia del PS</documentation>
+				</annotation>
+			</element>
+			<element name="codpostal" type="tns:CodAlpha5Type" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Código Postal del PS</documentation>
+				</annotation>
+			</element>
+			<element name="codmunicipio" type="tns:CodAlpha5Type" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Municipio del PS</documentation>
+				</annotation>
+			</element>
+			<element name="descmunicipio" type="tns:citydescType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Descripción Municipio del PS</documentation>
+				</annotation>
+			</element>
+			<element name="tipovia" type="tns:TipoViaType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de Vía del PS</documentation>
+				</annotation>
+			</element>
+			<element name="via" type="tns:CodAlpha50Type" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Nombre de Calle del PS</documentation>
+				</annotation>
+			</element>
+			<element name="numfinca" type="tns:NumFincaType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Número de Finca del PS</documentation>
+				</annotation>
+			</element>
+			<element name="restodireccion" type="tns:CodAlpha20Type" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Resto Dirección del PS</documentation>
+				</annotation>
+			</element>
+			<element name="viviendahabitual" type="tns:FlagType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Indicador de vivienda habitual</documentation>
+				</annotation>
+			</element>
+			<element name="fechaalta" type="date" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha de alta</documentation>
+				</annotation>
+			</element>
+			<element name="fechaultimalectura" type="date" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha de la última lectura</documentation>
+				</annotation>
+			</element>
+			<element name="puntocortado" type="tns:FlagType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>IIndicador de si el punto de suministro está cortado, ya sea por impago o por inspección</documentation>
+				</annotation>
+			</element>
+			<element name="rangopresiondiseno" type="tns:PressureRangeType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Rango de Presión</documentation>
+				</annotation>
+			</element>
+			<element name="qh" type="tns:QdType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Caudal Horario</documentation>
+				</annotation>
+			</element>
+			<element name="qmax" type="tns:QdType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Caudal Máximo Contratado</documentation>
+				</annotation>
+			</element>
+			<element name="derechotur" type="tns:FlagType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Derecho a TUR</documentation>
+				</annotation>
+			</element>
+			<element name="tarifapeaje" type="tns:TollType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de peaje</documentation>
+				</annotation>
+			</element>
+			<element name="fechaultimainspeccion" type="date" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha Ultima Inspección</documentation>
+				</annotation>
+			</element>
+			<element name="resultimainspeccion" type="tns:ResultInspectionType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Resultado de última inspección</documentation>
+				</annotation>
+			</element>
+			<element name="fechaultimarevision" type="date" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha Ultima Revisión</documentation>
+				</annotation>
+			</element>
+			<element name="resultimarevision" type="tns:ResultRevisionType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Resultado de última inspección</documentation>
+				</annotation>
+			</element>
+			<element name="historicoConsumo" type="tns:historicoConsumoType" minOccurs="0" maxOccurs="24">
+				<annotation>
+					<documentation>Histórico del consumo de los dos últimos años (24 meses)</documentation>
+				</annotation>
+			</element>
+			<element name="pctjeconsumonoct" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Porcentaje Consumo Nocturno</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="decimal">
+						<totalDigits value="7"/>
+						<fractionDigits value="2"/>
+						<minInclusive value="0"/>
+						<maxInclusive value="99999.99"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="codequipo" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Código del Equipo de Medida</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="17"/>
+						<whiteSpace value="collapse"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="contelemedida" type="tns:FlagType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Dispone de Telemedida</documentation>
+				</annotation>
+			</element>
+			<element name="marcamodelocont" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Marca y Modelo de Contador</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="50"/>
+						<whiteSpace value="collapse"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="marcamodelocorr" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Marca y Modelo de Corrector</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="50"/>
+						<whiteSpace value="collapse"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="propiedad" type="tns:FlagType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Propiedad Equipo Medida</documentation>
+				</annotation>
+			</element>
+			<element name="tipocorrector" type="tns:CorrectortypeType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de Corrector</documentation>
+				</annotation>
+			</element>
+			<element name="fecultcambiotarifa" type="date" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha Último Cambio de Tarifa</documentation>
+				</annotation>
+			</element>
+			<element name="fecultcontrato" type="date" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha Último Contrato</documentation>
+				</annotation>
+			</element>
+			<element name="fecultcambiocom" type="date" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha Último Cambio de Comercializadora</documentation>
+				</annotation>
+			</element>
+			<element name="perfil" type="tns:PerfilConsumoType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Perfil Consumo</documentation>
+				</annotation>
+			</element>
+			<element name="indconectadoplantasatelite" type="tns:FlagType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Indicador de conexión a planta satélite</documentation>
+				</annotation>
+			</element>
+			<element name="fecactdist" type="date" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha Actualización Datos por Parte del Distribuidor</documentation>
+				</annotation>
+			</element>
+			<element name="listaproductos" type="tns:listaproductosType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Listado de productos activos en el momento de la consulta</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="DatosComA629Type">
+		<sequence>
+			<element name="nombre" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Nombre Titular</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+						<whiteSpace value="collapse"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="apellido1" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Apellido 1 / Razón Social</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="40"/>
+						<whiteSpace value="collapse"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="apellido2" type="tns:FamilynameType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Apellido 2</documentation>
+				</annotation>
+			</element>
+			<element name="codprovincia" type="tns:CodProvinciaType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Código Provincia</documentation>
+				</annotation>
+			</element>
+			<element name="descprovincia" type="tns:provincedescType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Descripción de Provincia</documentation>
+				</annotation>
+			</element>
+			<element name="codpostal" type="tns:CodAlpha5Type" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Código Postal</documentation>
+				</annotation>
+			</element>
+			<element name="codmunicipio" type="tns:CodAlpha5Type" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Municipio</documentation>
+				</annotation>
+			</element>
+			<element name="descmunicipio" type="tns:citydescType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Nombre del Municipio</documentation>
+				</annotation>
+			</element>
+			<element name="tipovia" type="tns:TipoViaType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de Vía</documentation>
+				</annotation>
+			</element>
+			<element name="via" type="tns:CodAlpha50Type" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Nombre de la Vía</documentation>
+				</annotation>
+			</element>
+			<element name="numfinca" type="tns:NumFincaType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Número de Finca</documentation>
+				</annotation>
+			</element>
+			<element name="portal" type="tns:CodAlpha5Type" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Portal</documentation>
+				</annotation>
+			</element>
+			<element name="escalera" type="tns:CodAlpha5Type" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Escalera</documentation>
+				</annotation>
+			</element>
+			<element name="piso" type="tns:CodAlpha5Type" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Piso</documentation>
+				</annotation>
+			</element>
+			<element name="puerta" type="tns:CodAlpha5Type" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Puerta</documentation>
+				</annotation>
+			</element>
+			<element name="tipopersona" type="tns:TitularType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de Persona</documentation>
+				</annotation>
+			</element>
+			<element name="viviendahabitual" type="tns:FlagType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Vivienda Habitual</documentation>
+				</annotation>
+			</element>
+			<element name="impagos" type="tns:FlagType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Impagos</documentation>
+				</annotation>
+			</element>
+			<element name="fecimpagos" type="date" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha Actualización del Indicador Impagos</documentation>
+				</annotation>
+			</element>
+			<element name="catimpagos" type="tns:CodAlpha5Type" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Categoría Usuario que Actualiza el Indicador Impagos</documentation>
+				</annotation>
+			</element>
+			<element name="usuimpagos" type="tns:CodAlpha10Type" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Categoría Usuario que Actualiza el Indicador Impagos</documentation>
+				</annotation>
+			</element>
+			<element name="prohibpublicdatcli" type="tns:FlagType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Cliente se acoge a la LOPD y Solicita no Divulgar sus Datos</documentation>
+				</annotation>
+			</element>
+			<element name="fecactprohibpublic" type="date" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha Actualización del Indicador si el Cliente Solicita no Divulgar sus Datos</documentation>
+				</annotation>
+			</element>
+			<element name="catactprohibpublic" type="tns:CodAlpha5Type" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Categoría Usuario que Actualiza el Indicador si el Cliente Solicita no Divulgar sus Datos</documentation>
+				</annotation>
+			</element>
+			<element name="usuactprohibpublic" type="tns:CodAlpha10Type" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Usuario Actualización del Indicador si el Cliente Solicita no Divulgar sus Datos</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

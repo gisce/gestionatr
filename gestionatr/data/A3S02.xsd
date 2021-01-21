@@ -80,7 +80,7 @@
 			</element>
 			<element name="previousatrcode" type="tns:AtrcodeType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Contrato ATR Vigente antes del Cambio. </documentation>
+					<documentation>Contrato ATR Vigente antes del Cambio. No se debe informar para suministros del grupo 1 o 2</documentation>
 				</annotation>
 			</element>
 			<element name="transfereffectivedate" type="date" minOccurs="1" maxOccurs="1">

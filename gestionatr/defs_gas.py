@@ -254,6 +254,7 @@ TAULA_PROCESO = [
     ('19', 'Solicitud de Anulación del distribuidor'),
     ('24', 'Comunicación de baja desde la distribuidora'),
     ('26', 'Comunicación Datos'),
+    ('29', 'Solicitud de información de Producto/Contrato'),
     ('31', 'Facturación individual por CUPS'),
     ('32', 'Facturación agregada (datos por CUPS)'),
     ('33', 'Facturación agregada (datos por factura)'),
@@ -261,6 +262,8 @@ TAULA_PROCESO = [
     ('37', 'Petición Datos CUPS Disponible'),
     ('38', 'Puesta en Servicio Nuevos Suministros'),
     ('41', 'Cambio de Comercializador con Modificación de Datos'),
+    ('42', 'Cambio de Comercializador con Nuevos Productos Adicionales'),
+    ('43', 'Solicitud de Nuevo Producto/Contrato'),
     ('44', 'Actuaciones domiciliarias'),
     ('45', 'Comunicación operaciones iniciativa distribuidor'),
     ('46', 'Anulación de actuaciones domiciliarias'),
@@ -285,7 +288,7 @@ TAULA_MOTIVOS_DE_RECHAZO = [
     ('05', 'Sistema de OCSUM'),
 ]
 
-# CAUSA DE COMUNICACIÓN no es fa.
+# CAUSA DE COMUNICACIÓN no es fa. CAUSA_DE_COMUNICACIÓN
 
 TAULA_TIPO_ENVIO = [
     ("P", "Provisional"),
@@ -999,14 +1002,26 @@ TAULA_MOTIVOS_DE_RECHAZO_CNMC = [
     ('S04', 'Rechazo por Desistimiento de proceso subyacente anulable'),
     ('S05', 'Desistimiento sobre un proceso de contratación en curso'),
     ('S06', 'Desistimiento no posible por movimiento de contratación posterior'),
+    ('S07', 'Punto de suministro con multicomercializador'),
     ('S08', 'Concurrencia con solicitud de modificación de cambio de titular por traspaso'),
+    ('S09', 'Motivo de modificación no válido para el tipo de producto'),
+    ('S10', 'No existirá contrato ATR en vigor en la fecha solicitada'),
     ('S11', 'Capacidad superior a la máxima permitida'),
     ('S12', 'El nuevo Caudal Diario debe ser mayor que el actual'),
+    ('S13', 'CUPS sujeto a LOPD'),
     ('S14', 'Disponible sin contrato'),
     ('S15', 'Disponible pendiente finalización infraestructura'),
     ('S16', 'Desistimiento fuera de plazo (activación realizada hace más de un año)'),
     ('S17', 'Solo se podrá modificar (i) el tipo de identificador y el identificador o, (ii) nombre y apellidos (razón social)'),
     ('S18', 'Contrato ATR cortado por impago'),
+    ('S19', 'No se puede solicitar más de un producto indefinido'),
+    ('S20', 'Todos los peajes asociados al CUPS deben estar asociados al mismo grupo'),
+    ('S21', 'No se pueden solicitar productos no indefinidos con fecha de activación anterior a la actual. Ni productos diarios con fecha igual a la actual'),
+    ('S22', 'La fecha de inicio del producto no se corresponde con el día 1 del mes o trimestre'),
+    ('S23', 'Rechazo por cambio de comercializador/baja sobre producto no activado'),
+    ('S24', 'Tipo de producto 01 no permitido en nodo productlist'),
+    ('S25', 'Telemedida obligatoria'),
+
 ]
 TAULA_MOTIVO_RECHAZO_OCSUM = TAULA_MOTIVOS_DE_RECHAZO_CNMC
 TAULA_MES = [
@@ -1064,6 +1079,38 @@ TAULA_TIPO_DE_ACTIVACION = [
     ('001', 'Realizada puesta en servicio'),
     ('002', 'No realizada técnicamente en campo'),
 ]
+
+TAULA_TIPO_MENSAJE = [
+    ('A1', 'Envío de Solicitudes'),
+    ('A2', 'Respuesta de Acepto/Rechazo de Solicitudes'),
+    ('A2S', 'Aviso de Cambio a Comercializador saliente'),
+    ('A3', 'Respuesta de Realización de Solicitudes'),
+    ('A3S', 'Respuesta de Activación de Cambio a Comercializador saliente'),
+    ('A4', 'Respuesta de rechazo tras actuaciones en campo de Solicitudes'),
+    ('A4S', 'Notificación de rechazo tras actuaciones en campo a Comercializador saliente'),
+    ('A5', 'Petición de Registro de Puntos de Suministro'),
+    ('A6', 'Respuesta a Petición de Registro de Puntos de Suministro'),
+    ('A7', 'Consulta de lecturas de clientes con consumo 3.4 y superior (fichero)'),
+    ('A12', 'Notificación al COM/CC de Comunicaciones Contrato ATR'),
+    ('A13', 'Recepción de Solicitud iniciada por la Distribuidora'),
+    ('A14', 'Respuesta de COM de Acepto/Rechazo de Solicitudes'),
+    ('A15', 'Respuesta de Realización de Solicitudes'),
+    ('A15S', 'Respuesta de Realización de Solicitudes a Comercializador saliente'),
+    ('A19', 'Notificación al COM/CC de Comunicaciones de Operaciones'),
+    ('A20', 'Envío petición datos CUPS disponible'),
+    ('A21', 'Extracción respuesta de petición datos CUPS disponible'),
+    ('A25', 'Respuesta Estado Intervención/incidencia'),
+    ('A26', 'Envío de información adicional reclamación'),
+    ('B70', 'Facturación'),
+    ('A61', 'Notificación CUPS sin contrato en vigor disponibles para la contratación'),
+    ('A80', 'Notificación a COM de Repartos a nivel de CUPS'),
+    ('A81', 'Notificación a COM de Repartos a nivel de PCTD'),
+    ('A84', 'Notificación a COM de Repartos Mensual a nivel de CUPS'),
+    ('A85', 'Notificación a COM de Repartos Mensual a nivel de PCTD'),
+    ('A86', 'Notificación a COM del Número de Puntos de Suministro con Reparto Diario por PC y Peaje'),
+]
+
+
 TAULA_ANOMALIA_INSTALACION = [
     ('001', 'FUGA DE GAS'),
     ('002', 'APAR.CIRCUITO ABIERTO BAÑO-DORMITORIO'),
@@ -1469,6 +1516,21 @@ TAULA_MODELO_FECHA_EFECTO_PREVISTA = [
     ('18', 'Fecha fija por concurrencia con Traspaso al CUR'),
 ]
 
+TAULA_TIPO_PRODUCTO = [
+    ('01', 'Indefinido'),
+    ('02', 'Anual'),
+    ('03', 'Trimestral'),
+    ('04', 'Mensual'),
+    ('05', 'Diario'),
+    ('06', 'Intradiario'),
+]
+
+TAULA_TIPO_SOLICITUD_PRODUCTO = [
+    ('01', 'Nuevo producto consecutivo al existente manteniendo condiciones'),
+    ('02', 'Nuevo producto consecutivo al existente modificando condiciones'),
+    ('03', 'Nuevo producto'),
+]
+
 TAULA_TIPO_PEAJE = [
     ('11', '11 - Presión > 60 bares y Consumo <= 200 GWh/año'),
     ('12', '12 - Presión > de 60 bares y  200 GWh/año < Consumo <= 1000 GWh/año'),
@@ -1564,6 +1626,8 @@ TAULA_MOTIVO_BAJA = [
     ('04', 'A solicitud del comercializador por problemas de '
            'seguridad derivados de inspección'),
     ('05', 'A solicitud del comercializador por fin de contrato de energía'),
+    ('09', 'Baja de producto indefinido para gestión solo con productos temporales'),
+
 ]
 TAULA_MOTIVO_MODIFICACION = [
     ('01', 'Cambio de Titular'),
@@ -1609,6 +1673,8 @@ TAULA_MOTIVO_ANULACION = [
     ('024', 'Anulación de NNSS por Ausente'),
     ('035', 'Anulación de solicitud de desistimiento'),
     ('036', 'Anulación de solicitud de traspaso a la CUR por concurrencia con cambio de comercializador/baja por cese/ alta de NNSS en transformación del GLP'),
+    ('037', 'Anulación de Solicitud de Cambio de Comercializadora con nuevos productos adicionales'),
+    ('038', 'Anulación de Solicitud de nuevo Producto/Contrato'),
     ('039', 'Anulación de solicitud de traspaso a la CUR por aceptación de anulación a iniciativa del comercializador sobre la solicitud que motivó tal traspaso'),
 ]
 TAULA_ESTADO_PUNTO_DE_SUMINISTRO = [

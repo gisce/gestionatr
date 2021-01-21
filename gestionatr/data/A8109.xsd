@@ -2,14 +2,12 @@
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A8109" targetNamespace="http://localhost/sctd/A8109" elementFormDefault="qualified">
 	<include schemaLocation="CommonTagsCONT.xsd"/>
 	<element name="sctdapplication" type="tns:SctdapplicationA8109Type"/>
-	
 	<complexType name="SctdapplicationA8109Type">
 		<sequence>
 			<element name="heading" type="tns:HeadingA8109Type" minOccurs="1" maxOccurs="1"/>
 			<element name="a8109" type="tns:A8109Type" minOccurs="1" maxOccurs="unbounded"/>
 		</sequence>
 	</complexType>
-	
 	<complexType name="HeadingA8109Type">
 		<sequence>
 			<element name="dispatchingcode" minOccurs="1" maxOccurs="1">
@@ -50,9 +48,8 @@
 			</element>
 		</sequence>
 	</complexType>
-	
 	<complexType name="A8109Type">
-		<sequence>			
+		<sequence>
 			<element name="pc" minOccurs="1" maxOccurs="1">
 				<annotation>
 					<documentation>Código de punto de conexión</documentation>
@@ -62,13 +59,13 @@
 						<minLength value="1"/>
 						<maxLength value="12"/>
 					</restriction>
-				</simpleType>				
-			</element>			
+				</simpleType>
+			</element>
 			<element name="fecreparto" type="date" minOccurs="1" maxOccurs="1">
 				<annotation>
 					<documentation>Fecha del reparto</documentation>
-				</annotation>				
-			</element>					
+				</annotation>
+			</element>
 			<element name="totalkwh" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Total de KWh consumidos en el punto de conexión (incluyendo los desglosados por CUPS del mensaje A80)</documentation>
@@ -80,7 +77,7 @@
 						<minInclusive value="0"/>
 					</restriction>
 				</simpleType>
-			</element>					
+			</element>
 			<element name="ctemp" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Coeficiente corrector de temperatura</documentation>
@@ -93,25 +90,24 @@
 						<maxInclusive value="999.9999999"/>
 					</restriction>
 				</simpleType>
-			</element>			
+			</element>
 			<element name="listsumariopeajeperfil" type="tns:ListaSumarioPeajePerfilType" minOccurs="1" maxOccurs="1">
 				<annotation>
 					<documentation>Lista de Reparto desglosado por peaje y perfil de consumo</documentation>
 				</annotation>
-			</element>								
+			</element>
 			<element name="listpctd" type="tns:ListaPCTDType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Lista de PCTD's o PCDD's</documentation>
 				</annotation>
-			</element>			
+			</element>
 			<element name="listmunicipiored" type="tns:ListaMunicipioRedType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Lista de Municipios-Red</documentation>
 				</annotation>
-			</element>			
+			</element>
 		</sequence>
 	</complexType>
-	
 	<simpleType name="PeajeType">
 		<restriction base="string">
 			<length value="2"/>
@@ -120,7 +116,6 @@
 			<enumeration value="33"/>
 		</restriction>
 	</simpleType>
-	
 	<complexType name="SumarioPeajePerfilType">
 		<sequence>
 			<element name="peaje" type="tns:PeajeType" minOccurs="1" maxOccurs="1"/>
@@ -146,11 +141,9 @@
 			</element>
 		</sequence>
 	</complexType>
-	
 	<complexType name="ListaSumarioPeajePerfilType">
 		<sequence>
 			<element name="sumariopeajeperfil" type="tns:SumarioPeajePerfilType" minOccurs="1" maxOccurs="unbounded"/>
 		</sequence>
-	</complexType>	
-	
+	</complexType>
 </schema>

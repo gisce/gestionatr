@@ -2,14 +2,12 @@
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A8509" targetNamespace="http://localhost/sctd/A8509" elementFormDefault="qualified">
 	<include schemaLocation="CommonTagsCONT.xsd"/>
 	<element name="sctdapplication" type="tns:SctdapplicationA8509Type"/>
-	
 	<complexType name="SctdapplicationA8509Type">
 		<sequence>
 			<element name="heading" type="tns:HeadingA8509Type" minOccurs="1" maxOccurs="1"/>
 			<element name="a8509" type="tns:A8509Type" minOccurs="1" maxOccurs="unbounded"/>
 		</sequence>
 	</complexType>
-	
 	<complexType name="HeadingA8509Type">
 		<sequence>
 			<element name="dispatchingcode" minOccurs="1" maxOccurs="1">
@@ -50,9 +48,8 @@
 			</element>
 		</sequence>
 	</complexType>
-	
 	<complexType name="A8509Type">
-		<sequence>			
+		<sequence>
 			<element name="mesreparto" minOccurs="1" maxOccurs="1">
 				<annotation>
 					<documentation>Mes de Reparto</documentation>
@@ -61,13 +58,13 @@
 					<restriction base="string">
 						<length value="6"/>
 					</restriction>
-				</simpleType>				
-			</element>		
+				</simpleType>
+			</element>
 			<element name="tipoenvio" type="tns:TipoEnvioRepartoType" minOccurs="1" maxOccurs="1">
 				<annotation>
 					<documentation>Tipo de Envío</documentation>
 				</annotation>
-			</element>			
+			</element>
 			<element name="pc" minOccurs="1" maxOccurs="1">
 				<annotation>
 					<documentation>Código de punto de conexión</documentation>
@@ -77,37 +74,34 @@
 						<minLength value="1"/>
 						<maxLength value="12"/>
 					</restriction>
-				</simpleType>				
-			</element>			
+				</simpleType>
+			</element>
 			<element name="listdatosconsumodiarioperfil" type="tns:ListaDatosConsumoDiarioPerfilType" minOccurs="1" maxOccurs="1">
 				<annotation>
 					<documentation>Consumo desglosado por fecha reparto</documentation>
 				</annotation>
-			</element>										
+			</element>
 		</sequence>
 	</complexType>
-	
 	<complexType name="DatosConsumoDiarioPerfilType">
 		<sequence>
 			<element name="fecreparto" type="date" minOccurs="1" maxOccurs="1">
 				<annotation>
 					<documentation>Fecha del reparto</documentation>
-				</annotation>				
-			</element>			
+				</annotation>
+			</element>
 			<element name="listsumariopeajeperfil" type="tns:ListaSumarioPeajePerfilType" minOccurs="1" maxOccurs="1">
 				<annotation>
 					<documentation>Consumo desglosado por peaje y perfil de consumo</documentation>
 				</annotation>
-			</element>										
+			</element>
 		</sequence>
 	</complexType>
-	
 	<complexType name="ListaDatosConsumoDiarioPerfilType">
 		<sequence>
 			<element name="datosconsumodiarioperfil" type="tns:DatosConsumoDiarioPerfilType" minOccurs="1" maxOccurs="unbounded"/>
 		</sequence>
-	</complexType>	
-	
+	</complexType>
 	<simpleType name="PeajeType">
 		<restriction base="string">
 			<length value="2"/>
@@ -116,7 +110,6 @@
 			<enumeration value="33"/>
 		</restriction>
 	</simpleType>
-	
 	<complexType name="SumarioPeajePerfilType">
 		<sequence>
 			<element name="peaje" type="tns:PeajeType" minOccurs="1" maxOccurs="1"/>
@@ -142,10 +135,9 @@
 			</element>
 		</sequence>
 	</complexType>
-	
 	<complexType name="ListaSumarioPeajePerfilType">
 		<sequence>
 			<element name="sumariopeajeperfil" type="tns:SumarioPeajePerfilType" minOccurs="1" maxOccurs="unbounded"/>
 		</sequence>
-	</complexType>	
+	</complexType>
 </schema>

@@ -97,7 +97,8 @@
 			</element>
 			<element name="interventionhour" type="time" minOccurs="1" maxOccurs="1">
 				<annotation>
-					<documentation>Hora de intervención</documentation>
+					<documentation>Hora de intervención
+					</documentation>
 				</annotation>
 			</element>
 			<element name="canonircperiodicity" type="tns:PeriodicidadCanonIRCType" minOccurs="0" maxOccurs="1">
@@ -195,9 +196,9 @@
 					<documentation>CUPS Solicitud</documentation>
 				</annotation>
 			</element>
-			<element name="atr" type="tns:AtrcodeType">
+			<element name="atr" type="tns:AtrcodeType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Código Contrato ATR. </documentation>
+					<documentation>Código Contrato ATR. No se debe informar para suministros del grupo 1 o 2</documentation>
 				</annotation>
 			</element>
 			<element name="operationnum" minOccurs="0" maxOccurs="1">
@@ -233,14 +234,14 @@
 					</restriction>
 				</simpleType>
 			</element>
-			<element name="tolltype" type="tns:TollType">
+			<element name="tolltype" type="tns:TollType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Tipo de Peaje</documentation>
 				</annotation>
 			</element>
 			<element name="finalqdgranted" type="tns:QdType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Caudal máximo diario concedido final (kWh/ día). </documentation>
+					<documentation>Caudal máximo diario concedido final (kWh/ día). No se debe informar para suministros del grupo 1 o 2</documentation>
 				</annotation>
 			</element>
 			<element name="finalqhgranted" type="tns:QhType" minOccurs="0" maxOccurs="1">
@@ -250,7 +251,7 @@
 			</element>
 			<element name="finalclientyearlyconsumption" type="tns:QaType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Caudal anual actual final (kWh/ año).</documentation>
+					<documentation>Caudal anual actual final (kWh/ año). No se debe informar para suministros del grupo 1 o 2</documentation>
 				</annotation>
 			</element>
 			<element name="extrainfo" type="tns:ExtrainfoType" minOccurs="0" maxOccurs="1">
@@ -283,6 +284,11 @@
 			<element name="correctorlist" type="tns:CorrectorListType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Lista de Correctores</documentation>
+				</annotation>
+			</element>
+			<element name="productlist" type="tns:productlistTypeActivacion" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Listado de productos activos en la aceptación de la solicitud</documentation>
 				</annotation>
 			</element>
 		</sequence>

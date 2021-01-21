@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sctdapplication xmlns="http://localhost/sctd/A343">
+    <heading>
+        <dispatchingcode>GML</dispatchingcode>
+        <dispatchingcompany>1234</dispatchingcompany>
+        <destinycompany>4321</destinycompany>
+        <communicationsdate>2018-05-01</communicationsdate>
+        <communicationshour>12:00:00</communicationshour>
+        <processcode>43</processcode>
+        <messagetype>A3</messagetype>
+    </heading>
+    <a343>
+        <reqcode>0123456789</reqcode>
+        <comreferencenum>000123456789</comreferencenum>
+        <responsedate>2020-01-01</responsedate>
+        <responsehour>13:37:00</responsehour>
+        <result>09</result>
+        <resultdesc>Correcto</resultdesc>
+        <cups>ES1234000000000001JN</cups>
+        <extrainfo>comentarios extras</extrainfo>
+        <productlist>
+        <product>
+            <productcode>TESTCODE1</productcode>
+            <producttype>03</producttype>
+            <producttolltype>31</producttolltype>
+            <productqd>23.6</productqd>
+            <productqa>12345</productqa>
+            <productstartdate>2020-01-01</productstartdate>
+            <productenddate>2020-02-01</productenddate>
+       </product>
+        <product>
+            <productcode>TESTCODE2</productcode>
+            <producttype>02</producttype>
+            <producttolltype>32</producttolltype>
+            <productqd>23.5</productqd>
+            <productqa>1234</productqa>
+            <productstartdate>2020-01-02</productstartdate>
+            <productenddate>2020-02-02</productenddate>
+       </product>
+    </productlist>
+    </a343>
+</sctdapplication>

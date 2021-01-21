@@ -8,11 +8,14 @@ from gestionatr.output.messages import sw_a1_03 as a1_03
 from gestionatr.output.messages import sw_a1_04 as a1_04
 from gestionatr.output.messages import sw_a1_05 as a1_05
 from gestionatr.output.messages import sw_a1_41 as a1_41
+from gestionatr.output.messages import sw_a1_42 as a1_42
+from gestionatr.output.messages import sw_a1_43 as a1_43
 from gestionatr.output.messages import sw_a1_44 as a1_44
 from gestionatr.output.messages import sw_a1_46 as a1_46
 from gestionatr.output.messages import sw_a1_48 as a1_48
 from gestionatr.output.messages import sw_a1_49 as a1_49
 from gestionatr.output.messages import sw_a20_36 as a20_36
+from gestionatr.output.messages import sw_a25_42 as a25_42
 from gestionatr.output.messages import sw_a1 as a1
 from gestionatr.output.messages import sw_a3 as a3
 from gestionatr.output.messages import sw_b1 as b1
@@ -4794,6 +4797,7 @@ class test_R1(unittest.TestCase):
         xml = str(mensaje_rechazo)
         assertXmlEqual(xml, self.xml_r109_rej.read())
 
+
 class test_F1(unittest.TestCase):
 
     def setUp(self):
@@ -5685,6 +5689,7 @@ class test_A1_03(unittest.TestCase):
 
         a103_fields = {
             'comreferencenum': '000123456789',
+            'comreferencenumanul': '1234',
             'titulartype': 'F',
             'nationality': 'ES',
             'documenttype': '01',
@@ -6324,6 +6329,29 @@ class test_A1_38(unittest.TestCase):
             'registerdoc_list': [rd1, rd2],
         })
 
+        # ProductosDocumento
+        productos_documento = a1_38.ProductList()
+        p1 = a1_38.Product()
+        producto_fields = {
+            'producttype': '03',
+            'producttolltype': '31',
+            'productqd': 23.6,
+            'productqa': 12345,
+        }
+        p1.feed(producto_fields)
+        p2 = a1_42.Product()
+        producto2_fields = {
+            'producttype': '02',
+            'producttolltype': '32',
+            'productqd': 23.5,
+            'productqa': 1234,
+        }
+        p2.feed(producto2_fields)
+
+        productos_documento.feed({
+            'product_list': [p1, p2],
+        })
+
         a138_fields = {
             'comreferencenum': "12345",
             'reqdate': "2020-03-01",
@@ -6378,6 +6406,7 @@ class test_A1_38(unittest.TestCase):
             'modeffectdate': "05",
             'reqactivationdate': "2020-02-01",
             'extrainfo': "EXTRA EXTRA! EL GAS NO TE SENTIT!",
+            'productlist': productos_documento,
             'registerdoclist': registros_documento,
         }
         a138.feed(a138_fields)
@@ -6497,3 +6526,351 @@ class test_A20_36(unittest.TestCase):
         mensaje_a2036.build_tree()
         xml = str(mensaje_a2036)
         assertXmlEqual(xml, self.xml_a2036.read())
+
+
+class test_A1_42(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a142 = open(get_data("a142.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a142.close()
+
+    def test_create_a142(self):
+        # MensajeA142
+        mensaje_a142 = a1_42.MensajeA142()
+
+        # Heading
+        heading = a1_42.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '42',
+            'messagetype': 'A1'
+        }
+        heading.feed(heading_fields)
+
+        # A141
+        a142 = a1_42.A142()
+
+        # ProductosDocumento
+        productos_documento = a1_42.ProductList()
+        p1 = a1_42.Product()
+        producto_fields = {
+            'reqtype': '02',
+            'productcode': '01010101323',
+            'producttype': '03',
+            'producttolltype': '11',
+            'productqd': 123123.1,
+            'productqa': 6263,
+        }
+        p1.feed(producto_fields)
+        p2 = a1_42.Product()
+        producto2_fields = {
+            'reqtype': '03',
+            'productcode': '51010101323',
+            'producttype': '02',
+            'producttolltype': '12',
+            'productqd': 5555.1,
+            'productqa': 2222,
+        }
+        p2.feed(producto2_fields)
+
+        productos_documento.feed({
+            'product_list': [p1, p2],
+        })
+
+        # RegistrosDocumento
+        registros_documento = a1_42.Registerdoclist()
+        rd1 = a1_42.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-02',
+            'doctype': 'CC',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd1.feed(registro_doc_fields)
+        rd2 = a1_42.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-03',
+            'doctype': '01',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd2.feed(registro_doc_fields)
+        registros_documento.feed({
+            'registerdoc_list': [rd1, rd2],
+        })
+
+        cl = a1_42.Newclient()
+        cl.feed({
+            'newnationality': 'ES',
+            'newdocumenttype': '01',
+            'newdocumentnum': '4321',
+            'newfirstname': 'Mi',
+            'newfamilyname1': 'Pana',
+            'newfamilyname2': 'Miguel',
+            'newtitulartype': 'F',
+            'newtelephone1': '123123123',
+            'newtelephone2': '321321321',
+            'newtelephone3': '231231231',
+            'newemail': 'test@test.test',
+            'newlanguage': '01',
+        })
+
+        st = a1_42.Street()
+        st.feed({
+            'streettype': 'C',
+            'street_name': 'nou',
+            'streetnumber': '3',
+            'portal': '2',
+            'staircase': '1',
+            'floor': '1',
+            'door': '2',
+        })
+
+        stps = a1_42.Street()
+        stps.feed({
+            'streettype': 'C',
+            'street_name': 'nou',
+            'streetnumber': '3',
+            'portal': '2',
+            'staircase': '1',
+            'floor': '1',
+            'door': '2',
+        })
+
+        adps = a1_42.AddressPS()
+        adps.feed({
+            'province': '17',
+            'city': '0792',
+            'zipcode': '17003',
+            'street': stps,
+        })
+
+        ad = a1_42.Address()
+        ad.feed({
+            'province': '17',
+            'city': '0792',
+            'zipcode': '17003',
+            'street': st,
+        })
+
+        no = a1_42.Newowner()
+        no.feed({
+            'newclient': cl,
+            'newregularaddress': 'S',
+            'typefiscaladdress': 'S',
+            'addressPS': adps,
+            'address': ad,
+        })
+
+        a142_fields = {
+            'comreferencenum': '000123456789',
+            'reqdate': '2018-05-01',
+            'reqhour': '13:00:00',
+            'titulartype': 'F',
+            'nationality': 'ES',
+            'documenttype': '01',
+            'documentnum': '11111111H',
+            'cups': 'ES1234000000000001JN',
+            'modeffectdate': '05',
+            'reqtransferdate': '2018-06-01',
+            'updatereason': '01',
+            'surrogacy': 'S',
+            'newowner': no,
+            'disconnectedserviceaccepted': 'N',
+            'extrainfo': 'comentarios extras',
+            'productlist': productos_documento,
+            'registerdoclist': registros_documento,
+        }
+        a142.feed(a142_fields)
+
+        mensaje_a142_fields = {
+            'heading': heading,
+            'a142': a142,
+        }
+        mensaje_a142.feed(mensaje_a142_fields)
+        mensaje_a142.build_tree()
+        xml = str(mensaje_a142)
+        expected = self.xml_a142.read()
+        assertXmlEqual(xml, expected)
+
+
+class test_A25_42(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a2542 = open(get_data("a2542.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a2542.close()
+
+    def test_create_a2542(self):
+        # MensajeA2542
+        mensaje_a2542 = a25_42.MensajeA2542()
+
+        # Heading
+        heading = a25_42.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '42',
+            'messagetype': 'A25'
+        }
+        heading.feed(heading_fields)
+
+        # A2541
+        a2542 = a25_42.A2542()
+
+        # DefectList
+        defects = a25_42.Defectlist()
+        d1 = a25_42.Defect()
+        d1.feed({
+            'code':'001',
+            'description': 'Desc1',
+        })
+        d2 = a25_42.Defect()
+        d2.feed({
+            'code': '002',
+            'description': 'Desc2',
+        })
+        defects.feed({
+            'defectlist': [d1,d2],
+        })
+
+        a2542_fields = {
+            'reqcode': '10_p62j9fh',
+            'cups': '20alzDPKUDB5HhZDhn5X',
+            'visitdate': '2020-03-13',
+            'visithour': '14:26:35',
+            'comreferencenum': '123456789',
+            'informationtype': '002',
+            'informationtypedesc': '0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001',
+            'interventiondate': '2020-03-13',
+            'interventionhourfrom': '14:26:35',
+            'interventionhourto': '14:26:35',
+            'visitnumber': '228',
+            'operationnum': '40_tQzwG5OT6YTye1UiYVtoV3r9VymR5B',
+            'extrainfo': '400_C9BEFQSmU4c7fJcqlXEYL79KyKwcZ9',
+            'defectlist': defects,
+        }
+        a2542.feed(a2542_fields)
+
+        mensaje_a2542_fields = {
+            'heading': heading,
+            'a2542': a2542,
+        }
+        mensaje_a2542.feed(mensaje_a2542_fields)
+        mensaje_a2542.build_tree()
+        xml = str(mensaje_a2542)
+        assertXmlEqual(xml, self.xml_a2542.read())
+
+
+class test_A1_43(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a143 = open(get_data("a143.xml"), "r")
+
+    def tearDown(self):
+        self.xml_a143.close()
+
+    def test_create_a143(self):
+        # MensajeA142
+        mensaje_a143 = a1_43.MensajeA143()
+
+        # Heading
+        heading = a1_43.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '43',
+            'messagetype': 'A1'
+        }
+        heading.feed(heading_fields)
+
+        # A143
+        a143 = a1_43.A143()
+
+        # ProductosDocumento
+        productos_documento = a1_43.ProductList()
+        p1 = a1_43.Product()
+        producto_fields = {
+            'reqtype': '02',
+            'productcode': '01010101323',
+            'producttype': '03',
+            'producttolltype': '11',
+            'productqd': 123123.1,
+            'productqa': 6263,
+        }
+        p1.feed(producto_fields)
+        p2 = a1_42.Product()
+        producto2_fields = {
+            'reqtype': '03',
+            'productcode': '51010101323',
+            'producttype': '02',
+            'producttolltype': '12',
+            'productqd': 5555.1,
+            'productqa': 2222,
+        }
+        p2.feed(producto2_fields)
+
+        productos_documento.feed({
+            'product_list': [p1, p2],
+        })
+
+        # RegistrosDocumento
+        registros_documento = a1_42.Registerdoclist()
+        rd1 = a1_42.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-02',
+            'doctype': 'CC',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd1.feed(registro_doc_fields)
+        rd2 = a1_42.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-03',
+            'doctype': '01',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd2.feed(registro_doc_fields)
+        registros_documento.feed({
+            'registerdoc_list': [rd1, rd2],
+        })
+
+        a143_fields = {
+            'comreferencenum': '000123456789',
+            'reqdate': '2018-05-01',
+            'reqhour': '13:00:00',
+            'titulartype': 'F',
+            'nationality': 'ES',
+            'documenttype': '01',
+            'documentnum': '11111111H',
+            'cups': 'ES1234000000000001JN',
+            'modeffectdate': '05',
+            'reqtransferdate': '2018-06-01',
+            'productlist': productos_documento,
+            'extrainfo': 'comentarios extras',
+            'registerdoclist': registros_documento,
+        }
+        a143.feed(a143_fields)
+
+        mensaje_a143_fields = {
+            'heading': heading,
+            'a143': a143,
+        }
+        mensaje_a143.feed(mensaje_a143_fields)
+        mensaje_a143.build_tree()
+        xml = str(mensaje_a143)
+        assertXmlEqual(xml, self.xml_a143.read())

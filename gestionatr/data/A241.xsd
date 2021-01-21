@@ -118,7 +118,7 @@
 			</element>
 			<element name="reqqd" type="tns:QdType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Caudal Diario Qd. </documentation>
+					<documentation>Caudal Diario Qd. No se debe informar para suministros del grupo 1 o 2</documentation>
 				</annotation>
 			</element>
 			<element name="reqqh" minOccurs="0" maxOccurs="1">
@@ -134,7 +134,7 @@
 			</element>
 			<element name="reqestimatedqa" type="tns:QaType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Caudal Estimado Anual Qa. </documentation>
+					<documentation>Caudal Estimado Anual Qa. No se debe informar para suministros del grupo 1 o 2</documentation>
 				</annotation>
 			</element>
 			<element name="reqoutgoingpressure" type="tns:PressureType" minOccurs="0" maxOccurs="1">
@@ -144,12 +144,12 @@
 			</element>
 			<element name="tolltype" type="tns:TollType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Tipo de Peaje.</documentation>
+					<documentation>Tipo de Peaje. No se debe informar para suministros del grupo 1 o 2</documentation>
 				</annotation>
 			</element>
 			<element name="qdgranted" type="tns:QdType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Caudal Diario Concedido.</documentation>
+					<documentation>Caudal Diario Concedido. No se debe informar para suministros del grupo 1 o 2</documentation>
 				</annotation>
 			</element>
 			<element name="singlenomination" type="tns:SinglenominationType" minOccurs="0" maxOccurs="1">
@@ -190,6 +190,11 @@ Podría ser diferente del indicada en el A1 (ej. por concurrencia con baja o nece
 			<element name="extrainfo" type="tns:ExtrainfoType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Observaciones de la Validación</documentation>
+				</annotation>
+			</element>
+			<element name="productlist" type="tns:productlistTypeAceptacion" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Listado de productos activos en la aceptación de la solicitud</documentation>
 				</annotation>
 			</element>
 		</sequence>

@@ -137,6 +137,42 @@ class Factura(object):
             return False
 
     @property
+    def contratosimultaneo(self):
+        tree = 'contratosimultaneo'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def codigoproducto(self):
+        tree = 'codigoproducto'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def tipoproducto(self):
+        tree = 'tipoproducto'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def arrastrapenalizacion(self):
+        tree = 'arrastrapenalizacion'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
     def provincia(self):
         tree = 'provincia'
         data = get_rec_attr(self.obj, tree, False)

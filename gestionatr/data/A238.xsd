@@ -105,7 +105,7 @@
 			</element>
 			<element name="qdgranted" type="tns:QdType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Caudal Diario Concedido.</documentation>
+					<documentation>Caudal Diario Concedido. No se debe informar para suministros del grupo 1 o 2</documentation>
 				</annotation>
 			</element>
 			<element name="qhgranted" type="tns:QhType" minOccurs="0" maxOccurs="1">
@@ -121,7 +121,7 @@
 			</element>
 			<element name="clientyearlyconsumption" type="tns:QaType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Consumo anual (kwh/año).</documentation>
+					<documentation>Consumo anual (kwh/año). No se debe informar para suministros del grupo 1 o 2</documentation>
 				</annotation>
 			</element>
 			<element name="tolltype" type="tns:TollType" minOccurs="0" maxOccurs="1">
@@ -159,6 +159,11 @@
 			<element name="conceptlist" type="tns:ConceptListType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Lista de Conceptos de Facturación</documentation>
+				</annotation>
+			</element>
+			<element name="productlist" type="tns:productlistTypeAceptacion" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Listado de productos activos en la aceptación de la solicitud</documentation>
 				</annotation>
 			</element>
 		</sequence>

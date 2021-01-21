@@ -11,6 +11,7 @@
     </heading>
     <a103>
         <comreferencenum>000123456789</comreferencenum>
+        <comreferencenumanul>1234</comreferencenumanul>
         <reqdate>2018-05-01</reqdate>
         <reqhour>13:00:00</reqhour>
         <titulartype>F</titulartype>

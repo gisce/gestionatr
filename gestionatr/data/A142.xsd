@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A142" targetNamespace="http://localhost/sctd/A142" elementFormDefault="qualified">
+	<include schemaLocation="CommonTagsCONT.xsd"/>
+	<element name="sctdapplication" type="tns:SctdapplicationA142Type"/>
+	<complexType name="SctdapplicationA142Type">
+		<sequence>
+			<element name="heading" type="tns:HeadingA142Type" minOccurs="1" maxOccurs="1"/>
+			<element name="a142" type="tns:A142Type" minOccurs="1" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="HeadingA142Type">
+		<sequence>
+			<element name="dispatchingcode" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="3"/>
+						<enumeration value="GML"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dispatchingcompany" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="destinycompany" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="communicationsdate" type="date" minOccurs="1" maxOccurs="1"/>
+			<element name="communicationshour" type="time" minOccurs="1" maxOccurs="1"/>
+			<element name="processcode" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"/>
+						<enumeration value="42"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="messagetype" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="3"/>
+						<enumeration value="A1"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="A142Type">
+		<sequence>
+			<element name="comreferencenum" type="tns:ComreferencenumType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Nº Referencia Solicitud Comercializadora
+					</documentation>
+				</annotation>
+			</element>
+			<element name="reqdate" type="date" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha de Solicitud</documentation>
+				</annotation>
+			</element>
+			<element name="reqhour" type="time" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Hora de Solicitud</documentation>
+				</annotation>
+			</element>
+			<element name="titulartype" type="tns:TitularType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de Titular</documentation>
+				</annotation>
+			</element>
+			<element name="nationality" type="tns:NationalityType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Nacionalidad</documentation>
+				</annotation>
+			</element>
+			<element name="documenttype" type="tns:IdDocumentType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo Documento de Identificación</documentation>
+				</annotation>
+			</element>
+			<element name="documentnum" type="tns:DocumentnumType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Nº Documento</documentation>
+				</annotation>
+			</element>
+			<element name="cups" type="tns:CupsType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>CUPS Solicitud</documentation>
+				</annotation>
+			</element>
+			<element name="modeffectdate" type="tns:ModeloFechaSolicitudType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Modelo de Fecha Efecto</documentation>
+				</annotation>
+			</element>
+			<element name="reqtransferdate" type="date" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha de Efecto Solicitada
+					</documentation>
+				</annotation>
+			</element>
+			<element name="updatereason" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Motivo de Modificación-Cambio de Titular</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<length value="2"/>
+						<enumeration value="01"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="surrogacy" type="tns:FlagType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Indicador de Subrogación</documentation>
+				</annotation>
+			</element>
+			<element name="newowner" type="tns:newownerType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Datos del nuevo de titular</documentation>
+				</annotation>
+			</element>
+			<element name="disconnectedserviceaccepted" type="tns:FlagType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Indicador de que se quiere contratar el suministro independientemente de su estado (suspendido o en proceso de baja por impago)</documentation>
+				</annotation>
+			</element>
+			<element name="extrainfo" type="tns:ExtrainfoType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Observaciones 1</documentation>
+				</annotation>
+			</element>
+			<element name="productlist" type="tns:productlistTypeAltaSinHora" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Lista de productos solicitados</documentation>
+				</annotation>
+			</element>
+			<element name="registerdoclist" type="tns:RegisterdocListType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Lista de documentos</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

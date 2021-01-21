@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- editado con XMLSpy v2020 rel. 2 (x64) (http://www.altova.com) por teresa.marco (INECO) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 	<xs:simpleType name="AgenteType">
 		<xs:restriction base="xs:string">
@@ -1003,14 +1002,25 @@
 			<xs:enumeration value="S04"/>
 			<xs:enumeration value="S05"/>
 			<xs:enumeration value="S06"/>
+			<xs:enumeration value="S07"/>
 			<xs:enumeration value="S08"/>
+			<xs:enumeration value="S09"/>
+			<xs:enumeration value="S10"/>
 			<xs:enumeration value="S11"/>
 			<xs:enumeration value="S12"/>
+			<xs:enumeration value="S13"/>
 			<xs:enumeration value="S14"/>
 			<xs:enumeration value="S15"/>
 			<xs:enumeration value="S16"/>
 			<xs:enumeration value="S17"/>
 			<xs:enumeration value="S18"/>
+			<xs:enumeration value="S19"/>
+			<xs:enumeration value="S20"/>
+			<xs:enumeration value="S21"/>
+			<xs:enumeration value="S22"/>
+			<xs:enumeration value="S23"/>
+			<xs:enumeration value="S24"/>
+			<xs:enumeration value="S25"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TollType">
@@ -1155,6 +1165,7 @@
 			<xs:enumeration value="02"/>
 			<xs:enumeration value="04"/>
 			<xs:enumeration value="05"/>
+			<xs:enumeration value="09"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="MotivoModificacionType">
@@ -1194,17 +1205,15 @@
 			<xs:enumeration value="002"/>
 			<xs:enumeration value="003"/>
 			<xs:enumeration value="004"/>
-			<xs:enumeration value="014"/>
-			<xs:enumeration value="016"/>
-			<xs:enumeration value="017"/>
 			<xs:enumeration value="018"/>
 			<xs:enumeration value="019"/>
-			<xs:enumeration value="020"/>
 			<xs:enumeration value="022"/>
 			<xs:enumeration value="023"/>
 			<xs:enumeration value="024"/>
 			<xs:enumeration value="035"/>
 			<xs:enumeration value="036"/>
+			<xs:enumeration value="037"/>
+			<xs:enumeration value="038"/>
 			<xs:enumeration value="039"/>
 		</xs:restriction>
 	</xs:simpleType>
@@ -1219,6 +1228,358 @@
 			<xs:enumeration value="10"/>
 			<xs:enumeration value="11"/>
 			<xs:enumeration value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="productlistTypeAlta">
+		<xs:sequence>
+			<xs:element name="product" type="ProductAlta" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProductAlta">
+		<xs:sequence>
+			<xs:element name="producttype" type="producttypeType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo de producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="producttolltype" type="producttolltypeType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo de peaje del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productqd" type="QdType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Caudal diario Qd</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productqa" type="QaType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Caudal Estimado Anual Qa</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="productlistTypeAceptacion">
+		<xs:sequence>
+			<xs:element name="product" type="ProductAceptacion" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProductAceptacion">
+		<xs:sequence>
+			<xs:element name="productcode" type="productcodeType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Código identificativo del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="producttype" type="producttypeType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo de producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="producttolltype" type="producttolltypeType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo de peaje del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productqd" type="QdType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Caudal diario Qd</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productqa" type="QaType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Caudal Estimado Anual Qa</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productstartdate" type="xs:date" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Fecha de inicio del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productenddate" type="xs:date" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Fecha de finalización del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="productlistTypeAceptacionP">
+		<xs:sequence>
+			<xs:element name="product" type="ProductAceptacionP" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProductAceptacionP">
+		<xs:sequence>
+			<xs:element name="productcode" type="productcodeType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Código identificativo del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="producttype" type="producttypeType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo de producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="producttolltype" type="producttolltypeType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo de peaje del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productqd" type="QdType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Caudal diario Qd</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productqa" type="QaType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Caudal Estimado Anual Qa</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productstartdate" type="xs:date" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Fecha de inicio del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productstarthour" type="xs:time" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Hora de inicio del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productenddate" type="xs:date" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Fecha de finalización del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="productlistTypeActivacion">
+		<xs:sequence>
+			<xs:element name="product" type="ProductActivacion" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProductActivacion">
+		<xs:sequence>
+			<xs:element name="productcode" type="productcodeType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Código identificativo del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="producttype" type="producttypeType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo de producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="producttolltype" type="producttolltypeType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo de peaje del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productqd" type="QdType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Caudal diario Qd</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productqa" type="QaType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Caudal Estimado Anual Qa</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productstartdate" type="xs:date" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Fecha de inicio del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productenddate" type="xs:date" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Fecha de finalización del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="productlistTypeActivacionP">
+		<xs:sequence>
+			<xs:element name="product" type="ProductActivacionP" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProductActivacionP">
+		<xs:sequence>
+			<xs:element name="productcode" type="productcodeType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Código identificativo del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="producttype" type="producttypeType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo de producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="producttolltype" type="producttolltypeType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo de peaje del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productqd" type="QdType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Caudal diario Qd</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productqa" type="QaType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Caudal Estimado Anual Qa</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productstartdate" type="xs:date" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Fecha de inicio del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productstarthour" type="xs:time" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Hora de inicio del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productenddate" type="xs:date" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Fecha de finalización del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="productlistTypeAltaP">
+		<xs:sequence>
+			<xs:element name="product" type="ProductAltaP" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProductAltaP">
+		<xs:sequence>
+			<xs:element name="reqtype" type="reqType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo de solicitud</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productcode" type="productcodeType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Código identificativo del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="producttype" type="producttypeType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo de producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="producttolltype" type="producttolltypeType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo de peaje del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productqd" type="QdType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Caudal diario Qd</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productqa" type="QaType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Caudal Estimado Anual Qa</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productstarthour" type="xs:time" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Hora de inicio del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="productlistTypeAltaSinHora">
+		<xs:sequence>
+			<xs:element name="product" type="ProductAltaSinHora" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProductAltaSinHora">
+		<xs:sequence>
+			<xs:element name="reqtype" type="reqType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo de solicitud</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productcode" type="productcodeType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Código identificativo del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="producttype" type="producttypeType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo de producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="producttolltype" type="producttolltypeType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo de peaje del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productqd" type="QdType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Caudal diario Qd</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productqa" type="QaType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Caudal Estimado Anual Qa</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="producttypeType">
+		<xs:annotation>
+			<xs:documentation>Tipo producto (tabla TIPO PRODUCTO)		
+				01	Indefinido
+				02	Anual
+				03	Trimestral
+				04	Mensual
+				05	Diario
+				06	Intradiario
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="producttolltypeType">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="21"/>
+			<xs:enumeration value="22"/>
+			<xs:enumeration value="23"/>
+			<xs:enumeration value="24"/>
+			<xs:enumeration value="25"/>
+			<xs:enumeration value="26"/>
+			<xs:enumeration value="31"/>
+			<xs:enumeration value="32"/>
+			<xs:enumeration value="33"/>
+			<xs:enumeration value="34"/>
+			<xs:enumeration value="35"/>
+			<xs:enumeration value="41"/>
+			<xs:enumeration value="42"/>
+			<xs:enumeration value="43"/>
+			<xs:enumeration value="44"/>
+			<xs:enumeration value="45"/>
+			<xs:enumeration value="46"/>
+			<xs:enumeration value="47"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="productcodeType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="26"/>
+			<xs:whiteSpace value="collapse"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="restdirectionType">
@@ -1302,6 +1663,21 @@
 			<xs:minLength value="1"/>
 			<xs:maxLength value="255"/>
 			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="reqType">
+		<xs:annotation>
+			<xs:documentation>
+			01 Nuevo producto consecutivo al existente manteniendo condiciones
+			02 Nuevo producto consecutivo al existente modificando condiciones		
+			03 Nuevo producto				
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TipoDesistimiento">
@@ -1425,18 +1801,11 @@
 					<xs:documentation>Código postal</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:choice>
-				<xs:element name="street" type="Street">
-					<xs:annotation>
-						<xs:documentation>Dirección</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="postofficebox" type="PostOfficeBox" minOccurs="1" maxOccurs="1">
-					<xs:annotation>
-						<xs:documentation>Apartado de Correos</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-			</xs:choice>
+			<xs:element name="street" type="Street">
+				<xs:annotation>
+					<xs:documentation>Dirección</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Street">
@@ -1518,7 +1887,7 @@
 					<xs:documentation>Número de documento del nuevo cliente</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="newfirstname" type="FirstnameType" minOccurs="1" maxOccurs="1">
+			<xs:element name="newfirstname" type="FirstnameType" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Nombre de nuevo cliente</xs:documentation>
 				</xs:annotation>
@@ -1538,9 +1907,19 @@
 					<xs:documentation>Tipo de Titular de nuevo cliente</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="newtelephone1" type="TelephoneType" minOccurs="1" maxOccurs="3">
+			<xs:element name="newtelephone1" type="TelephoneType" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Teléfono</xs:documentation>
+					<xs:documentation>Teléfono 1</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="newtelephone2" type="TelephoneType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Teléfono 2</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="newtelephone3" type="TelephoneType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Teléfono 3</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="newemail" type="EmailType" minOccurs="0" maxOccurs="1">
@@ -1582,13 +1961,13 @@
 	<xs:complexType name="newownerType">
 		<xs:sequence>
 			<xs:element name="newclient" type="newClientType" minOccurs="1" maxOccurs="1"/>
-			<xs:element name="newregularaddress" type="FlagType" minOccurs="1" maxOccurs="1">
+			<xs:element name="newregularaddress" type="FlagType" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Indicador de vivienda habitual</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="typefiscaladdress" type="TypeFiscalAddress" minOccurs="1" maxOccurs="1"/>
-			<xs:element name="addressPS" type="addressPSType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="addressPS" type="addressPSType" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="address" type="Address" minOccurs="0" maxOccurs="1"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -1612,13 +1991,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:simpleType name="AtrversionType">
-		<xs:restriction base="xs:decimal">
-			<xs:totalDigits value="3"/>
-			<xs:fractionDigits value="0"/>
-			<xs:minInclusive value="0"/>
-		</xs:restriction>
-	</xs:simpleType>
 	<xs:simpleType name="operationnumType">
 		<xs:restriction base="xs:string">
 			<xs:minLength value="1"/>
@@ -1783,6 +2155,55 @@
 			<xs:enumeration value="02"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:complexType name="listaproductosType">
+		<xs:sequence>
+			<xs:element name="producto" type="ProductoType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProductoType">
+		<xs:sequence>
+			<xs:element name="codigoproducto" type="productcodeType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Código identificativo del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tipoproducto" type="producttypeType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo de producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tarifaproducto" type="producttolltypeType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tipo de peaje del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="qdproducto" type="QdType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Caudal diario del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="qaproducto" type="QaType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Caudal anual del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fechainicioproducto" type="xs:date" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Fecha de inicio del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="horainicioproducto" type="xs:time" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Hora de inicio del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fechafinproducto" type="xs:date" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Fecha de finalización del producto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:simpleType name="TelemedidaType">
 		<xs:restriction base="xs:string">
 			<xs:length value="1"/>
@@ -1844,4 +2265,38 @@
 			<xs:enumeration value="4"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:complexType name="historicoConsumoType">
+		<xs:sequence>
+			<xs:element name="fecinicioperiodo" type="xs:date" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Fecha de inicio de periodo de consumo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fecfinperiodo" type="xs:date" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Fecha de fin de periodo de consumo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="consumoperiodo" type="ConsumoPeriodoType" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Consumo Periodo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="caudalminperiodo" type="QdType" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Caudal Mínimo Periodo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="caudalmedperiodo" type="QdType" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Caudal Medio Periodo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="caudalmaxperiodo" type="QdType" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Caudal Máximo Periodo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 </xs:schema>
