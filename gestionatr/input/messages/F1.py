@@ -1292,6 +1292,8 @@ class FacturaATR(Factura):
                 for periode_activa in activa.periodos:
                     if periode_activa.nombre == periode or not periode:
                         res.append(periode_activa.cantidad)
+            if not res:
+                res.append(0.0)
             return res
 
         if tipus == 'S':
