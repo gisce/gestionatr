@@ -838,7 +838,7 @@ class Lectura(object):
         if self._lectura is not None:
             return self._lectura
         if hasattr(self.lectura_data, 'Lectura'):
-            return float(self.lectura_data.Lectura.text.strip())
+            return int(float(self.lectura_data.Lectura.text.strip()))
         return None
 
     @lectura.setter
@@ -1292,6 +1292,8 @@ class FacturaATR(Factura):
                 for periode_activa in activa.periodos:
                     if periode_activa.nombre == periode or not periode:
                         res.append(periode_activa.cantidad)
+            if not res:
+                res.append(0.0)
             return res
 
         if tipus == 'S':
