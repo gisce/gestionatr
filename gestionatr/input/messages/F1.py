@@ -1120,6 +1120,10 @@ class ModeloAparato(object):
             # Si no tenim lectures AS pero si que ens han cobrat excedents,
             # creem unes lectures AS ficticies a 0 (puta ENDESA)
             lectures.extend(self.factura.get_fake_AS_lectures())
+        if (not tipus or "S" in tipus) and self.factura and self.factura.has_AS_lectures_only_p0() and len(self.factura.get_consum_facturat(tipus='S', periode=None)) > 1:
+            # Si nomes ens envien el P0 de excedents pero ens cobren varis periodes
+            # creem una lectura e P2 AS ficticies a 0 (puta FENOSA)
+            lectures.extend(self.factura.get_fake_AS_p2_lectures())
         return lectures
 
     def get_lectures_activa(self):
@@ -1337,6 +1341,20 @@ class FacturaATR(Factura):
                     pass
         return False
 
+    def has_AS_lectures_only_p0(self):
+        has_p0 = False
+        for medida in self.medidas:
+            for aparell in medida.modelos_aparatos:
+                try:
+                    for integrador in aparell.integradores:
+                        if integrador.tipus == 'S' and  integrador.codigo_periodo not in ('10', '20', '30'):
+                            return False
+                        elif integrador.tipus == 'S' and  integrador.codigo_periodo in ('10', '20', '30'):
+                            has_p0 = True
+                except AttributeError:
+                    pass
+        return has_p0
+
     def get_fake_AS_lectures(self):
         res = []
         comptador_amb_lectures = None
@@ -1349,6 +1367,37 @@ class FacturaATR(Factura):
             base_info = comptador_amb_lectures.get_lectures_activa_entrant()[0]
             for concepte in self.conceptos_repercutibles:
                 if concepte.concepto_repercutible[0] == '7':
+                    l1 = Lectura(None)
+                    l1.fecha = base_info.lectura_desde.fecha
+                    l1.lectura = 0
+                    l1.procedencia = base_info.lectura_desde.procedencia
+                    l2 = Lectura(None)
+                    l2.fecha = base_info.lectura_hasta.fecha
+                    l2.lectura = 0
+                    l2.procedencia = base_info.lectura_hasta.procedencia
+                    new_integrador = Integrador(None)
+                    new_integrador.magnitud = "AS"
+                    new_integrador.numero_ruedas_enteras = base_info.numero_ruedas_enteras
+                    new_integrador.codigo_periodo = base_info.codigo_periodo[0] + concepte.concepto_repercutible[1]
+                    if not new_integrador.periode:
+                        new_integrador.codigo_periodo = base_info.codigo_periodo
+                    new_integrador.lectura_desde = l1
+                    new_integrador.lectura_hasta = l2
+                    res.append(new_integrador)
+        return res
+
+    def get_fake_AS_p2_lectures(self):
+        res = []
+        comptador_amb_lectures = None
+        for medida in self.medidas:
+            for c in medida.modelos_aparatos:
+                if c.get_lectures_activa_sortint():
+                    comptador_amb_lectures = c
+                    break
+        if comptador_amb_lectures:
+            base_info = comptador_amb_lectures.get_lectures_activa_sortint()[0]
+            for concepte in self.conceptos_repercutibles:
+                if concepte.concepto_repercutible[0] == '7' and concepte.concepto_repercutible[1] != '1':
                     l1 = Lectura(None)
                     l1.fecha = base_info.lectura_desde.fecha
                     l1.lectura = 0
