@@ -133,4 +133,9 @@ def repartir_consums_entre_lectures(consums, lectures_xml):
                 res[l] = part_igual
             if l:
                 res[l] += residu
+    elif len(consums) == 2*len(lectures_xml):
+        i = 0
+        for l in lectures_xml:
+            res[l] = consums[i] + consums[i+len(lectures_xml)]
+            i += 1
     return res
