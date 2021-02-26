@@ -766,6 +766,14 @@ TABLA_17 = [
     ('015', '6.4'),
     ('016', '6.5'),
     ('017', '6.1B'),
+    ('018', '2.0TD'),
+    ('019', '3.0TD'),
+    ('020', '6.1TD'),
+    ('021', '6.2TD'),
+    ('022', '6.3TD'),
+    ('023', '6.4TD'),
+    ('024', '3.0TDVE'),
+    ('025', '6.1TDVE'),
 ]
 
 TABLA_20 = [
@@ -1156,6 +1164,8 @@ TABLA_35 = [
     ('4', 'Tres períodos, con discriminación de sábados y festivos'),
     ('6', 'Seis períodos'),
     ('8', 'DH Supervalle'),
+    ('9', 'Tres periodos'),
+    ('A', 'Seis periodos')
 ]
 TIPO_DH_APARATO = TABLA_35
 
@@ -1223,6 +1233,17 @@ TABLA_42 = [
     ('81', 'Punta+Llano'),
     ('82', 'Valle'),
     ('83', 'SuperValle'),
+    ('90', 'Totalizador'),
+    ('91', 'Punta (P1)'),
+    ('92', 'Llano (P2)'),
+    ('93', 'Valle (P3)'),
+    ('A0', 'Totalizador'),
+    ('A1', 'P1'),
+    ('A2', 'P2'),
+    ('A3', 'P3'),
+    ('A4', 'P4'),
+    ('A5', 'P5'),
+    ('A6', 'P6'),
 ]
 PERIODO = TABLA_42
 
@@ -1266,6 +1287,9 @@ TABLA_50 = [
     ('2', 'Una sola potencia contratada con maxímetro'),
     ('4', 'Modo 4 con tres maxímetros'),
     ('8', 'Tarifa de 6 máximas'),
+    ('9', 'Dos potencias contratadas sin maxímetro'),
+    ('A', 'Dos potencias contratadas con maxímetro'),
+    ('R', 'Tarifa de 6 máximas')
 ]
 TIPO_DH_MAX = TABLA_50
 
@@ -1309,7 +1333,8 @@ TABLA_61 = [
     ('07', u'Otra documentación del cliente'),
     ('08', u'Otros'),
     ('09', u'Acuerdo reparto'),
-    ('10', u'CIE generación')
+    ('10', u'CIE generación'),
+    ('11', u'Declaración relativa a puntos de recarga de vehículos eléctricos de acceso público'),
 ]
 
 TABLA_62 = [
@@ -2135,6 +2160,7 @@ TABLA_103 = [
     ('76', u'Excedente del periodo 6'),
     ('81', u'Tipo de autoconsumo'),
     ('82', u'Coeficiente de reparto'),
+    ('83', u'Recargo por la no dedicación exclusiva de la carga a vehículos eléctricos'),
 ]
 
 CONCEPTOS_CON_FECHA_OPERACION = [
@@ -2185,6 +2211,14 @@ TABLA_107 = [
     ('015', u'6.4'),
     ('016', u'6.5'),
     ('017', u'6.1B'),
+    ('018',  u'2.0TD'),
+    ('019',  u'3.0TD'),
+    ('020',  u'6.1TD'),
+    ('021',  u'6.2TD'),
+    ('022',  u'6.3TD'),
+    ('023',  u'6.4TD'),
+    ('024',  u'3.0TDVE'),
+    ('025',  u'6.1TDVE'),
 ]
 
 TABLA_108 = [('01', u'Mensual'),
@@ -2197,7 +2231,10 @@ TABLA_109 = [('01', u'Telegestión Operativa con CCH'),
              ('05', u'Modificación de tipo de autoconsumo'),
              ('06', u'Modificación coeficiente de reparto'),
              ('07', u'Modificación potencia generación'),
-             ('08', u'Baja en autoconsumo'), ]
+             ('08', u'Baja en autoconsumo'),
+             ('09', u'Modificación desde peaje 3.1A a peaje 6.1TD'),
+             ('10', u'Modificación desde peaje 3.1A a peaje 6.2TD'),
+             ]
 
 TABLA_110 = [('01', u'Acompaña curva de carga'),
              ('02', u'Perfilado'),
@@ -2331,7 +2368,8 @@ TABLA_124 = [
     ('B101', u'Baja por cese de actividad'),
     ('B102', u'Baja por fin de contrato de suministro'),
     ('B103', u'Corte o suspensión del suministro por impago'),
-    ('B104', u'Baja por Impago')
+    ('B104', u'Baja por Impago'),
+    ('M100', u'Solicitud de modificación contractual'),
 ]
 
 TABLA_125 = [
