@@ -360,6 +360,7 @@
 			76	Excedente del periodo 6
 			81	Tipo de autoconsumo
 			82	Coeficiente de reparto
+			83  Recargo por la no dedicación exclusiva de la carga a vehículos eléctricos
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -412,6 +413,7 @@
 			<xs:enumeration value="76"/>
 			<xs:enumeration value="81"/>
 			<xs:enumeration value="82"/>
+			<xs:enumeration value="83"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Decimal10">
@@ -1520,6 +1522,14 @@
 			<xs:minInclusive value="-9999999999.99"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="RecargoInAnio">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="5"/>
+			<xs:fractionDigits value="2"/>
+			<xs:maxInclusive value="99999.99"/>
+			<xs:minInclusive value="-99999.99"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="IndActivacionLectura">
 		<xs:annotation>
 			<xs:documentation>Indicativo tipo de activacion (tabla 8)	
@@ -1668,17 +1678,15 @@
 	<xs:simpleType name="ModoMedidaPotencia">
 		<xs:annotation>
 			<xs:documentation>Modo medida de la potencia (tabla 50)
-			1	Una sola potencia contratada sin maximetro
-			2	Una sola potencia contratada con maximetro
-			4	Tres potencias contratadas con tres maximetros			
-			8	Tarifa de 6 maximas
+				9	Tarifa de dos potencias contratadas sin maxímetro 
+				A	Tarifa de dos potencias contratadas con maxímetro
+				B	Tarifa de 6 máximas
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="1"/>
-			<xs:enumeration value="2"/>
-			<xs:enumeration value="4"/>
-			<xs:enumeration value="8"/>
+			<xs:enumeration value="9"/>
+			<xs:enumeration value="A"/>
+			<xs:enumeration value="B"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="MotivoBaja">
@@ -1708,6 +1716,8 @@
 			06	Modificación coeficiente de reparto
 			07	Modificación potencia generación
 			08	Baja en autoconsumo
+			09	Modificación desde peaje 3.1A a peaje 6.1DT
+			10	Modificación desde peaje 3.1A a peaje 6.2DT
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -1719,6 +1729,8 @@
 			<xs:enumeration value="06"/>
 			<xs:enumeration value="07"/>
 			<xs:enumeration value="08"/>
+			<xs:enumeration value="09"/>
+			<xs:enumeration value="10"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="MotivoFacturacion">
@@ -2057,7 +2069,7 @@
 			004	2.0DHA
 			005	2.1.A
 			006	2.1.DHA
-			007     2.0 DHS
+			007 2.0 DHS
 			008	2.1 DHS		
 			011	3.1A	
 			012	6.1A	
@@ -2065,7 +2077,15 @@
 			014	6.3	
 			015	6.4	
 			016	6.5
-			017 	6.1B
+			017 6.1B
+			018	2.0DT
+			019	3.0DT
+			020	6.1DT
+			021	6.2DT
+			022	6.3DT
+			023	6.4DT
+			024	3.0DTVE
+			025	6.1DTVE
 		</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2083,6 +2103,14 @@
 			<xs:enumeration value="015"/>
 			<xs:enumeration value="016"/>
 			<xs:enumeration value="017"/>
+			<xs:enumeration value="018"/>
+			<xs:enumeration value="019"/>
+			<xs:enumeration value="020"/>
+			<xs:enumeration value="021"/>
+			<xs:enumeration value="022"/>
+			<xs:enumeration value="023"/>
+			<xs:enumeration value="024"/>
+			<xs:enumeration value="025"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TarifaATRFact">
@@ -2103,6 +2131,14 @@
 			015	6.4	
 			016	6.5
 			017	6.1B	
+			018	2.0DT
+			019	3.0DT
+			020	6.1DT
+			021	6.2DT
+			022	6.3DT
+			023	6.4DT
+			024	3.0DTVE
+			025	6.1DTVE
 		</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2121,6 +2157,14 @@
 			<xs:enumeration value="015"/>
 			<xs:enumeration value="016"/>
 			<xs:enumeration value="017"/>
+			<xs:enumeration value="018"/>
+			<xs:enumeration value="019"/>
+			<xs:enumeration value="020"/>
+			<xs:enumeration value="021"/>
+			<xs:enumeration value="022"/>
+			<xs:enumeration value="023"/>
+			<xs:enumeration value="024"/>
+			<xs:enumeration value="025"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Tension">
@@ -2432,6 +2476,17 @@
 			81	Punta + Llano				
 			82	Valle
 			83	Supervalle
+			90	Totalizador
+			91	Periodo 1 (Punta)
+			92	Periodo 2 (Llano)
+			93	Periodo 3 (Valle)
+			A0	Totalizador
+			A1	Periodo 1
+			A2	Periodo 2
+			A3	Periodo 3
+			A4	Periodo 4
+			A5	Periodo 5
+			A6	Periodo 6
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2458,6 +2513,17 @@
 			<xs:enumeration value="81"/>
 			<xs:enumeration value="82"/>
 			<xs:enumeration value="83"/>
+			<xs:enumeration value="90"/>
+			<xs:enumeration value="91"/>
+			<xs:enumeration value="92"/>
+			<xs:enumeration value="93"/>
+			<xs:enumeration value="A0"/>
+			<xs:enumeration value="A1"/>
+			<xs:enumeration value="A2"/>
+			<xs:enumeration value="A3"/>
+			<xs:enumeration value="A4"/>
+			<xs:enumeration value="A5"/>
+			<xs:enumeration value="A6"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TipoComunicacionReclamacion">
@@ -2572,13 +2638,14 @@ la reclamacion
 	<xs:simpleType name="TipoDHEdM">
 		<xs:annotation>
 			<xs:documentation>Tipo discriminacion horaria del Equipo de Medida (tabla 35)
-		
-			1	Sin Discriminacion Horaria - aplica a tarifas 2.0A y 2.1A
-			2	Dos periodos - aplica a tarifa 2.0DH y 2.1DH
-			3	Tres periodos, sin discriminacion de sabados y festivos - aplica a tarifa 3.0A con equipo de medida transitorio
-			4	Tres periodos, con discriminacion de sabados y festivos	- aplica a tarifa 3.1A
-			6	Seis periodos - aplica a tarifas 3.0A, 3.1A tipo 4 (contador que registra 6 periodos) y 6.X
-			8	DH Supervalle - aplica a tarifas 2.0DHS y 2.1DHS
+				1	Sin Discriminacion Horaria - aplica a tarifas 2.0A y 2.1A
+				2	Dos periodos - aplica a tarifa 2.0DH y 2.1DH
+				3	Tres periodos, sin discriminacion de sabados y festivos - aplica a tarifa 3.0A con equipo de medida transitorio
+				4	Tres periodos, con discriminacion de sabados y festivos	- aplica a tarifa 3.1A
+				6	Seis periodos 
+				8	DH Supervalle - aplica a tarifas 2.0DHS y 2.1DHS
+				9	Tres periodos
+				A	Seis periodos
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2588,6 +2655,8 @@ la reclamacion
 			<xs:enumeration value="4"/>
 			<xs:enumeration value="6"/>
 			<xs:enumeration value="8"/>
+			<xs:enumeration value="9"/>
+			<xs:enumeration value="A"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TipoEquipoMedida">
@@ -2923,6 +2992,7 @@ la reclamacion
 			08	Otros		
 			09	Acuerdo reparto
 			10	CIE generación	
+			11  Declaración relativa a puntos de recarga de vehículos eléctricos de acceso público
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2936,6 +3006,7 @@ la reclamacion
 			<xs:enumeration value="08"/>
 			<xs:enumeration value="09"/>
 			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TipoSolicitudAdministrativa">
@@ -3401,7 +3472,7 @@ la reclamacion
 	</xs:simpleType>
 	<xs:simpleType name="X11">
 		<xs:restriction base="xs:string">
-			<xs:minLength value="5"/>
+			<xs:minLength value="11"/>
 			<xs:maxLength value="11"/>
 		</xs:restriction>
 	</xs:simpleType>
@@ -3739,6 +3810,7 @@ la reclamacion
 			B102	Baja por fin de contrato de suministro
 			B103	Corte o suspensión del suministro por impago
 			B104	Baja por impago
+			M100	Solicitud de modificación contractual
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -3749,6 +3821,7 @@ la reclamacion
 			<xs:enumeration value="B102"/>
 			<xs:enumeration value="B103"/>
 			<xs:enumeration value="B104"/>
+			<xs:enumeration value="M100"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TensionPM">
@@ -3885,6 +3958,20 @@ la reclamacion
 			<xs:enumeration value="03"/>
 			<xs:enumeration value="04"/>
 			<xs:enumeration value="05"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoCargoType">
+		<xs:annotation>
+			<xs:documentation>Tipo de cargo (tabla 132)
+			01	
+			02	
+			03	
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>
