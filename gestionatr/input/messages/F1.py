@@ -1111,7 +1111,7 @@ class ModeloAparato(object):
             for integrador in self.integradores:
                 # If we don't have any type requirements or the current
                 # reading is in them
-                if not tipus or integrador.tipus in tipus:
+                if not tipus or (integrador.tipus and integrador.tipus in tipus):
                     lectures.append(integrador)
         except AttributeError:
             pass
