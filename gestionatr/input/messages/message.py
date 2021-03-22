@@ -370,7 +370,7 @@ class Message(MessageBase):
         ref = self.head.FechaSolicitud.text
         if not ref:
             raise except_f1('Error', u'Documento sin fecha de solicitud')
-        return ' '.join(ref.split('T'))
+        return ' '.join(ref.split('T')).split('.')[0]
 
 
 class except_f1(Exception):
