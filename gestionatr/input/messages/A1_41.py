@@ -238,6 +238,62 @@ class A1_41(MessageGas, ProcessDeadline):
         else:
             return False
 
+    # Datos paso a2541
+    @property
+    def visitdate(self):
+        tree = '{0}.visitdate'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def visithour(self):
+        tree = '{0}.visithour'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def informationtype(self):
+        tree = '{0}.informationtype'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def informationtypedesc(self):
+        tree = '{0}.informationtypedesc'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def operationnum(self):
+        tree = '{0}.operationnum'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def defectlist(self):
+        data = []
+        obj = get_rec_attr(self.obj, self._header, False)
+        if (hasattr(obj, 'defectlist') and
+                hasattr(obj.defectlist, 'defect')):
+            for d in obj.defectlist.defect:
+                data.append(defect(d))
+        return data
+
     # Datos paso a341
     @property
     def atrcode(self):
@@ -628,6 +684,30 @@ class A1_41(MessageGas, ProcessDeadline):
     @property
     def previousatrcode(self):
         tree = '{0}.previousatrcode'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+
+class defect(object):
+
+    def __init__(self, data):
+        self.obj = data
+
+    @property
+    def code(self):
+        tree = 'code'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def description(self):
+        tree = 'description'
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text

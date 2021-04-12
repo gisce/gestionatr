@@ -94,15 +94,6 @@ class A1_48(A1_04):
             return False
 
     @property
-    def interventiontype(self):
-        tree = '{0}.interventiontype'.format(self._header)
-        data = get_rec_attr(self.obj, tree, False)
-        if data is not None and data is not False:
-            return data.text
-        else:
-            return False
-
-    @property
     def newclaimtype(self):
         tree = '{0}.newclaimtype'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)

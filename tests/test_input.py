@@ -3209,12 +3209,14 @@ class test_A1_41(unittest.TestCase):
 
     def setUp(self):
         self.xml_a241 = open(get_data("a241.xml"), "r")
+        self.xml_a2541 = open(get_data("a2541.xml"), "r")
         self.xml_a341 = open(get_data("a341.xml"), "r")
         self.xml_a441 = open(get_data("a441.xml"), "r")
         self.xml_a3s41 = open(get_data("a3s41.xml"), "r")
 
     def tearDown(self):
         self.xml_a241.close()
+        self.xml_a2541.close()
         self.xml_a341.close()
         self.xml_a441.close()
         self.xml_a3s41.close()
@@ -3263,6 +3265,26 @@ class test_A1_41(unittest.TestCase):
         self.assertEqual(a1_41.productlist[1].productqa, u'1234')
         self.assertEqual(a1_41.productlist[1].productstartdate, u'2020-01-02')
         self.assertEqual(a1_41.productlist[1].productenddate, u'2020-02-02')
+
+    def test_a2541(self):
+        a2541 = A1_41(self.xml_a2541)
+        a2541.parse_xml()
+        self.assertEqual(a2541.reqcode, '123456789')
+        self.assertEqual(a2541.visitdate, '2018-09-24')
+        self.assertEqual(a2541.visithour, '15:25:18')
+        self.assertEqual(a2541.comreferencenum, '987654321')
+        self.assertEqual(a2541.informationtype, '002')
+        self.assertEqual(a2541.informationtypedesc, 'Orden de Trabajo pendiente')
+        self.assertEqual(a2541.interventiondate, '2018-09-24')
+        self.assertEqual(a2541.interventionhourfrom, '15:25:18')
+        self.assertEqual(a2541.interventionhourto, '15:25:18')
+        self.assertEqual(a2541.cups, 'ES1234000000000001JN')
+        self.assertEqual(a2541.visitnumber, '590')
+        self.assertEqual(a2541.operationnum, '741')
+        self.assertEqual(a2541.extrainfo, 'coments')
+        defect = a2541.defectlist[0]
+        self.assertEqual(defect.code, u"001")
+        self.assertEqual(defect.description, u"FUGA DE GAS")
 
     def test_a341(self):
         a1_41 = A1_41(self.xml_a341)
@@ -3936,11 +3958,13 @@ class test_A1_05(unittest.TestCase):
 
     def setUp(self):
         self.xml_a205 = open(get_data("a205.xml"), "r")
+        self.xml_a2505 = open(get_data("a2505.xml"), "r")
         self.xml_a305 = open(get_data("a305.xml"), "r")
         self.xml_a405 = open(get_data("a405.xml"), "r")
 
     def tearDown(self):
         self.xml_a205.close()
+        self.xml_a2505.close()
         self.xml_a305.close()
         self.xml_a405.close()
 
@@ -3965,6 +3989,26 @@ class test_A1_05(unittest.TestCase):
         self.assertEqual(a205.newmodeffectdate, u'04')
         self.assertEqual(a205.foreseentransferdate, u'2018-06-01')
         self.assertEqual(a205.extrainfo, u'comentarios extras')
+
+    def test_a2505(self):
+        a2505 = A1_05(self.xml_a2505)
+        a2505.parse_xml()
+        self.assertEqual(a2505.reqcode, '123456789')
+        self.assertEqual(a2505.visitdate, '2018-09-24')
+        self.assertEqual(a2505.visithour, '15:25:18')
+        self.assertEqual(a2505.comreferencenum, '987654321')
+        self.assertEqual(a2505.informationtype, '002')
+        self.assertEqual(a2505.informationtypedesc, 'Orden de Trabajo pendiente')
+        self.assertEqual(a2505.interventiondate, '2018-09-24')
+        self.assertEqual(a2505.interventionhourfrom, '15:25:18')
+        self.assertEqual(a2505.interventionhourto, '15:25:18')
+        self.assertEqual(a2505.cups, 'ES1234000000000001JN')
+        self.assertEqual(a2505.visitnumber, '590')
+        self.assertEqual(a2505.operationnum, '741')
+        self.assertEqual(a2505.extrainfo, 'coments')
+        defect = a2505.defectlist[0]
+        self.assertEqual(defect.code, u"001")
+        self.assertEqual(defect.description, u"FUGA DE GAS")
 
     def test_a305(self):
         a305 = A1_05(self.xml_a305)
@@ -4041,11 +4085,13 @@ class test_A1_44(unittest.TestCase):
 
     def setUp(self):
         self.xml_a244 = open(get_data("a244.xml"), "r")
+        self.xml_a2544 = open(get_data("a2544.xml"), "r")
         self.xml_a344 = open(get_data("a344.xml"), "r")
         self.xml_a444 = open(get_data("a444.xml"), "r")
 
     def tearDown(self):
         self.xml_a244.close()
+        self.xml_a2544.close()
         self.xml_a344.close()
         self.xml_a444.close()
 
@@ -4067,6 +4113,32 @@ class test_A1_44(unittest.TestCase):
         self.assertEqual(a244.srcode, u'998877665544332211')
         self.assertEqual(a244.extrainfo, u'Coments')
 
+    def test_a2544(self):
+        a2544 = A1_44(self.xml_a2544)
+        a2544.parse_xml()
+        self.assertEqual(a2544.reqcode, u"123456789")
+        self.assertEqual(a2544.comreferencenum, u"987654321")
+        self.assertEqual(a2544.cups, u"ES1234000000000001JN")
+        self.assertEqual(a2544.operationtype, u"A10003")
+        self.assertEqual(a2544.interventiontype, u"01")
+        self.assertEqual(a2544.newoperationtype, u"A10010")
+        self.assertEqual(a2544.moreinformation, u"more information")
+        self.assertEqual(a2544.operationnum, u"741")
+        self.assertEqual(a2544.visitdate, u"2018-09-24")
+        self.assertEqual(a2544.visithour, u"15:25:18")
+        self.assertEqual(a2544.informationtype, u"002")
+        self.assertEqual(a2544.informationtypedesc, u"Orden de Trabajo pendiente")
+        self.assertEqual(a2544.interventiondate, u"2018-09-24")
+        self.assertEqual(a2544.interventionhourfrom, u"15:25:18")
+        self.assertEqual(a2544.interventionhourto, u"15:25:18")
+        self.assertEqual(a2544.resultinspection, u"01")
+        self.assertEqual(a2544.resultinspectiondesc, u"Correcto")
+        self.assertEqual(a2544.visitnumber, u"590")
+        self.assertEqual(a2544.extrainfo, u"coments")
+        defect = a2544.defectlist[0]
+        self.assertEqual(defect.code, u"001")
+        self.assertEqual(defect.description, u"FUGA DE GAS")
+        
     def test_a344(self):
         a344 = A1_44(self.xml_a344)
         a344.parse_xml()
@@ -4232,6 +4304,7 @@ class test_A1_04(unittest.TestCase):
 
     def setUp(self):
         self.xml_a204 = open(get_data("a204.xml"), "r")
+        self.xml_a2504 = open(get_data("a2504.xml"), "r")
         self.xml_a304 = open(get_data("a304.xml"), "r")
         self.xml_a404 = open(get_data("a404.xml"), "r")
 
@@ -4261,6 +4334,26 @@ class test_A1_04(unittest.TestCase):
             a204.extrainfo,
             u'Información adicional con la ubicación del tesoro de Mary Read'
         )
+
+    def test_a2504(self):
+        a2504 = A1_04(self.xml_a2504)
+        a2504.parse_xml()
+        self.assertEqual(a2504.reqcode, '123456789')
+        self.assertEqual(a2504.visitdate, '2018-09-24')
+        self.assertEqual(a2504.visithour, '15:25:18')
+        self.assertEqual(a2504.comreferencenum, '987654321')
+        self.assertEqual(a2504.informationtype, '002')
+        self.assertEqual(a2504.informationtypedesc, 'Orden de Trabajo pendiente')
+        self.assertEqual(a2504.interventiondate, '2018-09-24')
+        self.assertEqual(a2504.interventionhourfrom, '15:25:18')
+        self.assertEqual(a2504.interventionhourto, '15:25:18')
+        self.assertEqual(a2504.cups, 'ES1234000000000001JN')
+        self.assertEqual(a2504.visitnumber, '590')
+        self.assertEqual(a2504.operationnum, '741')
+        self.assertEqual(a2504.extrainfo, 'coments')
+        defect = a2504.defectlist[0]
+        self.assertEqual(defect.code, u"001")
+        self.assertEqual(defect.description, u"FUGA DE GAS")
 
     def test_a304(self):
         a304 = A1_04(self.xml_a304)
