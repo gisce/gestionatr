@@ -1435,25 +1435,25 @@ class FacturaATR(Factura):
                     periode_agrupat = "P{0}".format(int(periode[1:]) + nperiodes/2)
                     if lectures_per_periode.get(periode_agrupat):
                         lectures_per_periode[periode].extend(lectures_per_periode.get(periode_agrupat))
-                        del lectures_per_periode[periode_agrupat]
+                        if periode_agrupat != periode:
+                            del lectures_per_periode[periode_agrupat]
 
         res = {}
         for periode, lectures in lectures_per_periode.iteritems():
             if ajust_balancejat:
                 consums_desitjats = self.get_consum_facturat(tipus=tipus, periode=periode)
-                if not consums_desitjats:
-                    continue
-                consums_repartits = repartir_consums_entre_lectures(consums_desitjats, lectures)
-                for lectura, consum in consums_repartits.iteritems():
-                    if not lectura.ajuste:
-                        lectura.ajuste = Ajuste(None)
-                    else:
-                        lectura.ajuste = Ajuste(lectura.ajuste.ajuste)
-                    old_ajust = lectura.ajuste and lectura.ajuste.ajuste_por_integrador or 0.0
-                    new_val = consum - (lectura.lectura_hasta.lectura - lectura.lectura_desde.lectura + old_ajust)
-                    if new_val != (lectura.lectura_hasta.lectura - lectura.lectura_desde.lectura + old_ajust):
-                        lectura.ajuste.ajuste_por_integrador = consum - (lectura.lectura_hasta.lectura - lectura.lectura_desde.lectura)
-                        lectura.ajuste.codigo_motivo = motiu_ajust  # normalment 98 - Autoconsumo
+                if consums_desitjats:
+                    consums_repartits = repartir_consums_entre_lectures(consums_desitjats, lectures)
+                    for lectura, consum in consums_repartits.iteritems():
+                        if not lectura.ajuste:
+                            lectura.ajuste = Ajuste(None)
+                        else:
+                            lectura.ajuste = Ajuste(lectura.ajuste.ajuste)
+                        old_ajust = lectura.ajuste and lectura.ajuste.ajuste_por_integrador or 0.0
+                        new_val = consum - (lectura.lectura_hasta.lectura - lectura.lectura_desde.lectura + old_ajust)
+                        if new_val != (lectura.lectura_hasta.lectura - lectura.lectura_desde.lectura + old_ajust):
+                            lectura.ajuste.ajuste_por_integrador = consum - (lectura.lectura_hasta.lectura - lectura.lectura_desde.lectura)
+                            lectura.ajuste.codigo_motivo = motiu_ajust  # normalment 98 - Autoconsumo
             for l in lectures:
                 if not res.get(l.comptador):
                     res[l.comptador] = []
