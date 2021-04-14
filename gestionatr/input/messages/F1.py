@@ -1435,7 +1435,8 @@ class FacturaATR(Factura):
                     periode_agrupat = "P{0}".format(int(periode[1:]) + nperiodes/2)
                     if lectures_per_periode.get(periode_agrupat):
                         lectures_per_periode[periode].extend(lectures_per_periode.get(periode_agrupat))
-                        del lectures_per_periode[periode_agrupat]
+                        if periode_agrupat != periode:
+                            del lectures_per_periode[periode_agrupat]
 
         res = {}
         for periode, lectures in lectures_per_periode.iteritems():
