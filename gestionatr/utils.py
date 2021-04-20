@@ -39,6 +39,12 @@ def get_description(code, table_name):
     return res
 
 
+def rodes(giro):
+    """Retorna el nombre de rodes senceres segons el giro
+    """
+    return len(str(giro)) - 1
+
+
 def get_description_gas(code, table_name):
     table = getattr(defs_gas, table_name, None)
     if not table:
@@ -127,4 +133,9 @@ def repartir_consums_entre_lectures(consums, lectures_xml):
                 res[l] = part_igual
             if l:
                 res[l] += residu
+    elif len(consums) == 2*len(lectures_xml):
+        i = 0
+        for l in lectures_xml:
+            res[l] = consums[i] + consums[i+len(lectures_xml)]
+            i += 1
     return res

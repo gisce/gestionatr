@@ -58,6 +58,34 @@ class A1_44(A1_05):
         else:
             return False
 
+    # Datos paso a2544
+    @property
+    def interventiontype(self):
+        tree = '{0}.interventiontype'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def newoperationtype(self):
+        tree = '{0}.newoperationtype'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def moreinformation(self):
+        tree = '{0}.moreinformation'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
     # Datos paso a344
     @property
     def reqdescription(self):

@@ -56,14 +56,9 @@
 					<documentation>Hora de Solicitud</documentation>
 				</annotation>
 			</element>
-			<element name="atrcode" type="tns:AtrcodeType" minOccurs="1" maxOccurs="1">
+			<element name="productcode" type="tns:productcodeType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Código ATR previo</documentation>
-				</annotation>
-			</element>
-			<element name="atrversion" type="tns:AtrversionType" minOccurs="1" maxOccurs="1">
-				<annotation>
-					<documentation>Versión del Contrato ATR</documentation>
+					<documentation>Código identificativo del producto</documentation>
 				</annotation>
 			</element>
 			<element name="nationality" type="tns:NationalityType" minOccurs="1" maxOccurs="1">
@@ -100,6 +95,7 @@
 						<length value="2"/>
 						<enumeration value="01"/>
 						<enumeration value="07"/>
+						<enumeration value="12"/>
 						<enumeration value="13"/>
 					</restriction>
 				</simpleType>

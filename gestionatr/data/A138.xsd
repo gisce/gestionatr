@@ -230,7 +230,7 @@
 			</element>
 			<element name="reqqd" type="tns:QdType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Caudal máximo diario solicitado (kWh/ día).  </documentation>
+					<documentation>Caudal máximo diario solicitado (kWh/ día). No se debe informar para suministros del grupo 1 o 2 </documentation>
 				</annotation>
 			</element>
 			<element name="reqqh" type="tns:QhType" minOccurs="0" maxOccurs="1">
@@ -240,7 +240,7 @@
 			</element>
 			<element name="reqestimatedqa" type="tns:QaType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Consumo caudal anual estimado (kWh/ año). </documentation>
+					<documentation>Consumo caudal anual estimado (kWh/ año). No se debe informar para suministros del grupo 1 o 2</documentation>
 				</annotation>
 			</element>
 			<element name="reqoutgoingpressure" type="tns:PressureType" minOccurs="0" maxOccurs="1">
@@ -253,7 +253,7 @@
 					<documentation>Tipo de uso del gas</documentation>
 				</annotation>
 			</element>
-			<element name="tolltype" type="tns:TollType">
+			<element name="tolltype" type="tns:TollType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Tipo de peaje solicitado</documentation>
 				</annotation>
@@ -316,7 +316,7 @@
 			</element>
 			<element name="modeffectdate" type="tns:ModeloFechaSolicitudType" minOccurs="1" maxOccurs="1">
 				<annotation>
-					<documentation>Modelo de Fecha Efecto. </documentation>
+					<documentation>Modelo de Fecha Efecto. Para suministros del grupo 1 o 2, sólo se permitirá a Fecha de Efecto concreta (Cód. '04').</documentation>
 				</annotation>
 			</element>
 			<element name="reqactivationdate" type="date" minOccurs="0" maxOccurs="1">
@@ -327,6 +327,11 @@
 			<element name="extrainfo" type="tns:ExtrainfoType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Observaciones de la Solicitud</documentation>
+				</annotation>
+			</element>
+			<element name="productlist" type="tns:productlistTypeAlta" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Lista de productos solicitados</documentation>
 				</annotation>
 			</element>
 			<element name="registerdoclist" type="tns:RegisterdocListType" minOccurs="0" maxOccurs="1">

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por PGARCIA (Comisión Nacional de los Mercados y la Competencia) -->
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A3S41" targetNamespace="http://localhost/sctd/A3S41" elementFormDefault="qualified">
 	<include schemaLocation="CommonTagsCONT.xsd"/>
 	<element name="sctdapplication" type="tns:SctdapplicationA3S41Type"/>
@@ -66,7 +65,9 @@
 			</element>
 			<element name="documenttype" type="tns:IdDocumentType" minOccurs="1" maxOccurs="1">
 				<annotation>
-					<documentation>Tipo Documento de Identificación</documentation>
+					<documentation>
+						Tipo Documento de Identificación
+					</documentation>
 				</annotation>
 			</element>
 			<element name="documentnum" type="tns:DocumentnumType" minOccurs="1" maxOccurs="1">
@@ -81,7 +82,7 @@
 			</element>
 			<element name="previousatrcode" type="tns:AtrcodeType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Contrato ATR Vigente antes del Cambio. </documentation>
+					<documentation>Contrato ATR Vigente antes del Cambio. No se debe informar para suministros del grupo 1 o 2</documentation>
 				</annotation>
 			</element>
 			<element name="transfereffectivedate" type="date" minOccurs="1" maxOccurs="1">

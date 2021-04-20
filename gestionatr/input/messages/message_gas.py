@@ -8,6 +8,7 @@ XSD_DATA.update({
     '41': {
         'A1': 'A141.xsd',
         'A2': 'A241.xsd',
+        'A25': 'A2541.xsd',
         'A3': 'A341.xsd',
         'A4': 'A441.xsd',
         'A3S': 'A3S41.xsd',
@@ -27,12 +28,14 @@ XSD_DATA.update({
     '05': {
         'A1': 'A105.xsd',
         'A2': 'A205.xsd',
+        'A25': 'A2505.xsd',
         'A3': 'A305.xsd',
         'A4': 'A405.xsd',
     },
     '44': {
         'A1': 'A144.xsd',
         'A2': 'A244.xsd',
+        'A25': 'A2544.xsd',
         'A3': 'A344.xsd',
         'A4': 'A444.xsd',
     },
@@ -44,6 +47,7 @@ XSD_DATA.update({
     '04': {
         'A1': 'A104.xsd',
         'A2': 'A204.xsd',
+        'A25': 'A2504.xsd',
         'A3': 'A304.xsd',
         'A4': 'A404.xsd',
     },
@@ -90,14 +94,32 @@ XSD_DATA.update({
     },
     '50': {
         'A15S': 'A15S50.xsd'
-    }
-
+    },
+    '42': {
+        'A1': 'A142.xsd',
+        'A2': 'A242.xsd',
+        'A3': 'A342.xsd',
+        'A4': 'A442.xsd',
+        'A25': 'A2542.xsd',
+        'A2S': 'A2S42.xsd',
+        'A3S': 'A3S42.xsd',
+        'A4S': 'A4S42.xsd',
+    },
+    '43': {
+            'A1': 'A143.xsd',
+            'A2': 'A243.xsd',
+            'A3': 'A343.xsd',
+            'A4': 'A443.xsd',
+            'A25': 'A2543.xsd',
+            'A26': 'A2643.xsd',
+    },
 })
 
 MAIN_MESSAGE_XSD.update({
     # 41
     'A141': 'a141',
     'A241': 'a241',
+    'A2541': 'a2541',
     'A341': 'a341',
     'A441': 'a441',
     'A3S41': 'a3s41',
@@ -113,11 +135,13 @@ MAIN_MESSAGE_XSD.update({
     # 05
     'A105': 'a105',
     'A205': 'a205',
+    'A2505': 'a2505',
     'A305': 'a305',
     'A405': 'a405',
     # 44
     'A144': 'a1',
     'A244': 'a2',
+    'A2544': 'a25',
     'A344': 'a3',
     'A444': 'a4',
     # 03
@@ -133,6 +157,7 @@ MAIN_MESSAGE_XSD.update({
     # 04
     'A104': 'a104',
     'A204': 'a204',
+    'A2504': 'a2504',
     'A304': 'a304',
     'A404': 'a404',
     # 46
@@ -164,6 +189,20 @@ MAIN_MESSAGE_XSD.update({
     'A4S49': 'a4s49',
     # 50
     'A15S50': 'a15s50',
+    # 42
+    'A242': 'a242',
+    'A342': 'a342',
+    'A442': 'a442',
+    'A2542': 'a2542',
+    'A2S42': 'a2s42',
+    'A3S42': 'a3s42',
+    'A4S42': 'a4s42',
+    # 43
+    'A243': 'a243',
+    'A343': 'a343',
+    'A443': 'a443',
+    'A2543': 'a2543',
+    'A2643': 'a2643',
 })
 
 
@@ -271,6 +310,15 @@ class MessageGas(Message):
             return data.text
         else:
             return '01'
+
+    @property
+    def comreferencenumanul(self):
+        tree = '{0}.comreferencenumanul'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data not in [None, False]:
+            return data.text
+        else:
+            return '123456789012'
 
     @property
     def data_sollicitud(self):

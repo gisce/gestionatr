@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sctdapplication xmlns="http://localhost/sctd/A143">
+    <heading>
+        <dispatchingcode>GML</dispatchingcode>
+        <dispatchingcompany>1234</dispatchingcompany>
+        <destinycompany>4321</destinycompany>
+        <communicationsdate>2018-05-01</communicationsdate>
+        <communicationshour>12:00:00</communicationshour>
+        <processcode>43</processcode>
+        <messagetype>A1</messagetype>
+    </heading>
+    <a143>
+        <comreferencenum>000123456789</comreferencenum>
+        <reqdate>2018-05-01</reqdate>
+        <reqhour>13:00:00</reqhour>
+        <titulartype>F</titulartype>
+        <nationality>ES</nationality>
+        <documenttype>01</documenttype>
+        <documentnum>11111111H</documentnum>
+        <cups>ES1234000000000001JN</cups>
+        <modeffectdate>05</modeffectdate>
+        <reqtransferdate>2018-06-01</reqtransferdate>
+        <productlist>
+            <product>
+                <reqtype>02</reqtype>
+                <productcode>01010101323</productcode>
+                <producttype>03</producttype>
+                <producttolltype>11</producttolltype>
+                <productqd>123123.1000000</productqd>
+                <productqa>6263</productqa>
+            </product>
+            <product>
+                <reqtype>03</reqtype>
+                <productcode>51010101323</productcode>
+                <producttype>02</producttype>
+                <producttolltype>12</producttolltype>
+                <productqd>5555.1000000</productqd>
+                <productqa>2222</productqa>
+            </product>
+        </productlist>
+        <extrainfo>comentarios extras</extrainfo>
+        <registerdoclist>
+            <registerdoc>
+                <date>2018-05-02</date>
+                <doctype>CC</doctype>
+                <url>http://www.gasalmatalas.com</url>
+                <extrainfo>404 page not found</extrainfo>
+            </registerdoc>
+            <registerdoc>
+                <date>2018-05-03</date>
+                <doctype>01</doctype>
+                <url>http://www.gasalmatalas.com</url>
+                <extrainfo>404 page not found</extrainfo>
+            </registerdoc>
+        </registerdoclist>
+    </a143>
+</sctdapplication>

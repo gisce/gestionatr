@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sctdapplication xmlns="http://localhost/sctd/A442">
+    <heading>
+        <dispatchingcode>GML</dispatchingcode>
+        <dispatchingcompany>1234</dispatchingcompany>
+        <destinycompany>4321</destinycompany>
+        <communicationsdate>2018-05-01</communicationsdate>
+        <communicationshour>12:00:00</communicationshour>
+        <processcode>42</processcode>
+        <messagetype>A4</messagetype>
+    </heading>
+    <a442>
+        <reqcode>0123456789</reqcode>
+        <comreferencenum>000123456789</comreferencenum>
+        <responsedate>2018-05-01</responsedate>
+        <responsehour>13:00:00</responsehour>
+        <nationality>ES</nationality>
+        <documenttype>01</documenttype>
+        <documentnum>11111111H</documentnum>
+        <cups>ES1234000000000001JN</cups>
+        <updatereason>01</updatereason>
+        <resultreason>R32</resultreason>
+        <resultreasondesc>Fecha efecto solicitada anterior al día actual.</resultreasondesc>
+        <closingtype>064</closingtype>
+        <closingtypedesc>No quiere gas</closingtypedesc>
+        <interventiondate>2016-01-01</interventiondate>
+        <interventionhourfrom>09:00:00</interventionhourfrom>
+        <interventionhourto>12:00:00</interventionhourto>
+        <visitnumber>987</visitnumber>
+        <extrainfo>comentarios extras</extrainfo>
+    </a442>
+</sctdapplication>

@@ -12,8 +12,7 @@
     <a1224>
         <reqdate>2018-05-01</reqdate>
         <reqhour>12:00:00</reqhour>
-        <atrcode>000111222333444555666777</atrcode>
-        <atrversion>2</atrversion>
+        <productcode>12345</productcode>
         <nationality>ES</nationality>
         <documenttype>01</documenttype>
         <documentnum>11111111H</documentnum>

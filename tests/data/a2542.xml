@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sctdapplication xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://localhost/sctd/A2542">
+  <heading>
+      <dispatchingcode>GML</dispatchingcode>
+      <dispatchingcompany>1234</dispatchingcompany>
+      <destinycompany>4321</destinycompany>
+      <communicationsdate>2018-05-01</communicationsdate>
+      <communicationshour>12:00:00</communicationshour>
+      <processcode>42</processcode>
+      <messagetype>A25</messagetype>
+  </heading>
+  <a2542>
+    <reqcode>10_p62j9fh</reqcode>
+    <cups>20alzDPKUDB5HhZDhn5X</cups>
+    <visitdate>2020-03-13</visitdate>
+    <visithour>14:26:35</visithour>
+    <comreferencenum>123456789</comreferencenum>
+    <informationtype>002</informationtype>
+    <informationtypedesc>0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001</informationtypedesc>
+    <interventiondate>2020-03-13</interventiondate>
+    <interventionhourfrom>14:26:35</interventionhourfrom>
+    <interventionhourto>14:26:35</interventionhourto>
+    <visitnumber>228</visitnumber>
+    <operationnum>40_tQzwG5OT6YTye1UiYVtoV3r9VymR5B</operationnum>
+    <extrainfo>400_C9BEFQSmU4c7fJcqlXEYL79KyKwcZ9</extrainfo>
+    <defectlist>
+        <defect>
+            <code>001</code>
+            <description>Desc1</description>
+        </defect>
+        <defect>
+            <code>002</code>
+            <description>Desc2</description>
+        </defect>
+    </defectlist>
+  </a2542>
+</sctdapplication>

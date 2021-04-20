@@ -99,9 +99,9 @@
 					<documentation>Resultado de última inspección</documentation>
 				</annotation>
 			</element>
-			<element name="atrcode" type="tns:AtrcodeType">
+			<element name="atrcode" type="tns:AtrcodeType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Código Contrato ATR. </documentation>
+					<documentation>Código Contrato ATR. No se debe informar para suministros del grupo 1 o 2</documentation>
 				</annotation>
 			</element>
 			<element name="transfereffectivedate" type="date" minOccurs="1" maxOccurs="1">
@@ -114,9 +114,9 @@
 					<documentation>Dispone de Telemedida</documentation>
 				</annotation>
 			</element>
-			<element name="finalclientyearlyconsumption" type="tns:QaType">
+			<element name="finalclientyearlyconsumption" type="tns:QaType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Caudal Anual Actual Final. </documentation>
+					<documentation>Caudal Anual Actual Final. No se debe informar para suministros del grupo 1 o 2</documentation>
 				</annotation>
 			</element>
 			<element name="readingtype" type="tns:ReadingType" minOccurs="1" maxOccurs="1">
@@ -176,6 +176,11 @@
 			<element name="correctorlist" type="tns:CorrectorListType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Lista de Correctores</documentation>
+				</annotation>
+			</element>
+			<element name="productlist" type="tns:productlistTypeActivacion" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Listado de productos activos en la aceptación de la solicitud</documentation>
 				</annotation>
 			</element>
 		</sequence>

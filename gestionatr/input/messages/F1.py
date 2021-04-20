@@ -838,7 +838,7 @@ class Lectura(object):
         if self._lectura is not None:
             return self._lectura
         if hasattr(self.lectura_data, 'Lectura'):
-            return float(self.lectura_data.Lectura.text.strip())
+            return int(float(self.lectura_data.Lectura.text.strip()))
         return None
 
     @lectura.setter
@@ -1111,7 +1111,7 @@ class ModeloAparato(object):
             for integrador in self.integradores:
                 # If we don't have any type requirements or the current
                 # reading is in them
-                if not tipus or integrador.tipus in tipus:
+                if not tipus or (integrador.tipus and integrador.tipus in tipus):
                     lectures.append(integrador)
         except AttributeError:
             pass
@@ -1120,6 +1120,10 @@ class ModeloAparato(object):
             # Si no tenim lectures AS pero si que ens han cobrat excedents,
             # creem unes lectures AS ficticies a 0 (puta ENDESA)
             lectures.extend(self.factura.get_fake_AS_lectures())
+        if (not tipus or "S" in tipus) and self.factura and self.factura.has_AS_lectures_only_p0() and len(self.factura.get_consum_facturat(tipus='S', periode=None)) > 1:
+            # Si nomes ens envien el P0 de excedents pero ens cobren varis periodes
+            # creem una lectura e P2 AS ficticies a 0 (puta FENOSA)
+            lectures.extend(self.factura.get_fake_AS_p2_lectures())
         return lectures
 
     def get_lectures_activa(self):
@@ -1292,6 +1296,8 @@ class FacturaATR(Factura):
                 for periode_activa in activa.periodos:
                     if periode_activa.nombre == periode or not periode:
                         res.append(periode_activa.cantidad)
+            if not res:
+                res.append(0.0)
             return res
 
         if tipus == 'S':
@@ -1335,6 +1341,20 @@ class FacturaATR(Factura):
                     pass
         return False
 
+    def has_AS_lectures_only_p0(self):
+        has_p0 = False
+        for medida in self.medidas:
+            for aparell in medida.modelos_aparatos:
+                try:
+                    for integrador in aparell.integradores:
+                        if integrador.tipus == 'S' and  integrador.codigo_periodo not in ('10', '20', '30'):
+                            return False
+                        elif integrador.tipus == 'S' and  integrador.codigo_periodo in ('10', '20', '30'):
+                            has_p0 = True
+                except AttributeError:
+                    pass
+        return has_p0
+
     def get_fake_AS_lectures(self):
         res = []
         comptador_amb_lectures = None
@@ -1347,6 +1367,37 @@ class FacturaATR(Factura):
             base_info = comptador_amb_lectures.get_lectures_activa_entrant()[0]
             for concepte in self.conceptos_repercutibles:
                 if concepte.concepto_repercutible[0] == '7':
+                    l1 = Lectura(None)
+                    l1.fecha = base_info.lectura_desde.fecha
+                    l1.lectura = 0
+                    l1.procedencia = base_info.lectura_desde.procedencia
+                    l2 = Lectura(None)
+                    l2.fecha = base_info.lectura_hasta.fecha
+                    l2.lectura = 0
+                    l2.procedencia = base_info.lectura_hasta.procedencia
+                    new_integrador = Integrador(None)
+                    new_integrador.magnitud = "AS"
+                    new_integrador.numero_ruedas_enteras = base_info.numero_ruedas_enteras
+                    new_integrador.codigo_periodo = base_info.codigo_periodo[0] + concepte.concepto_repercutible[1]
+                    if not new_integrador.periode:
+                        new_integrador.codigo_periodo = base_info.codigo_periodo
+                    new_integrador.lectura_desde = l1
+                    new_integrador.lectura_hasta = l2
+                    res.append(new_integrador)
+        return res
+
+    def get_fake_AS_p2_lectures(self):
+        res = []
+        comptador_amb_lectures = None
+        for medida in self.medidas:
+            for c in medida.modelos_aparatos:
+                if c.get_lectures_activa_sortint():
+                    comptador_amb_lectures = c
+                    break
+        if comptador_amb_lectures:
+            base_info = comptador_amb_lectures.get_lectures_activa_sortint()[0]
+            for concepte in self.conceptos_repercutibles:
+                if concepte.concepto_repercutible[0] == '7' and concepte.concepto_repercutible[1] != '1':
                     l1 = Lectura(None)
                     l1.fecha = base_info.lectura_desde.fecha
                     l1.lectura = 0
@@ -1384,25 +1435,25 @@ class FacturaATR(Factura):
                     periode_agrupat = "P{0}".format(int(periode[1:]) + nperiodes/2)
                     if lectures_per_periode.get(periode_agrupat):
                         lectures_per_periode[periode].extend(lectures_per_periode.get(periode_agrupat))
-                        del lectures_per_periode[periode_agrupat]
+                        if periode_agrupat != periode:
+                            del lectures_per_periode[periode_agrupat]
 
         res = {}
         for periode, lectures in lectures_per_periode.iteritems():
             if ajust_balancejat:
                 consums_desitjats = self.get_consum_facturat(tipus=tipus, periode=periode)
-                if not consums_desitjats:
-                    continue
-                consums_repartits = repartir_consums_entre_lectures(consums_desitjats, lectures)
-                for lectura, consum in consums_repartits.iteritems():
-                    if not lectura.ajuste:
-                        lectura.ajuste = Ajuste(None)
-                    else:
-                        lectura.ajuste = Ajuste(lectura.ajuste.ajuste)
-                    old_ajust = lectura.ajuste and lectura.ajuste.ajuste_por_integrador or 0.0
-                    new_val = consum - (lectura.lectura_hasta.lectura - lectura.lectura_desde.lectura + old_ajust)
-                    if new_val != (lectura.lectura_hasta.lectura - lectura.lectura_desde.lectura + old_ajust):
-                        lectura.ajuste.ajuste_por_integrador = consum - (lectura.lectura_hasta.lectura - lectura.lectura_desde.lectura)
-                        lectura.ajuste.codigo_motivo = motiu_ajust  # normalment 98 - Autoconsumo
+                if consums_desitjats:
+                    consums_repartits = repartir_consums_entre_lectures(consums_desitjats, lectures)
+                    for lectura, consum in consums_repartits.iteritems():
+                        if not lectura.ajuste:
+                            lectura.ajuste = Ajuste(None)
+                        else:
+                            lectura.ajuste = Ajuste(lectura.ajuste.ajuste)
+                        old_ajust = lectura.ajuste and lectura.ajuste.ajuste_por_integrador or 0.0
+                        new_val = consum - (lectura.lectura_hasta.lectura - lectura.lectura_desde.lectura + old_ajust)
+                        if new_val != (lectura.lectura_hasta.lectura - lectura.lectura_desde.lectura + old_ajust):
+                            lectura.ajuste.ajuste_por_integrador = consum - (lectura.lectura_hasta.lectura - lectura.lectura_desde.lectura)
+                            lectura.ajuste.codigo_motivo = motiu_ajust  # normalment 98 - Autoconsumo
             for l in lectures:
                 if not res.get(l.comptador):
                     res[l.comptador] = []

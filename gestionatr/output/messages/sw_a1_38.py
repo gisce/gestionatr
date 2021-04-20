@@ -3,6 +3,7 @@
 from libcomxml.core import XmlModel, XmlField
 from gestionatr.output.messages.base_gas import Heading
 from gestionatr.output.messages.sw_a1_41 import Registerdoclist, Registerdoc
+from gestionatr.output.messages.sw_a1_42 import ProductList, Product
 
 
 # Paso 01
@@ -29,7 +30,7 @@ class A138(XmlModel):
         'streetnumberowner', 'portalowner', 'staircaseowner', 'floorowner', 'doorowner', 'cups', 'reqqd', 'reqqh',
         'reqestimatedqa', 'reqoutgoingpressure', 'gasusetype', 'tolltype', 'counterproperty', 'aptransind',
         'aptransnumber', 'reig', 'designpower', 'iricertificatedate', 'terminstexist', 'modeffectdate',
-        'reqactivationdate', 'extrainfo', 'registerdoclist'
+        'reqactivationdate', 'extrainfo', 'productlist', 'registerdoclist'
     )
 
     def __init__(self):
@@ -87,5 +88,6 @@ class A138(XmlModel):
         self.modeffectdate = XmlField('modeffectdate')
         self.reqactivationdate = XmlField('reqactivationdate')
         self.extrainfo = XmlField('extrainfo')
+        self.productlist = ProductList()
         self.registerdoclist = Registerdoclist()
         super(A138, self).__init__('a138', 'a138')

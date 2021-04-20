@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A529" targetNamespace="http://localhost/sctd/A529" elementFormDefault="qualified">
+	<include schemaLocation="CommonTagsCONT.xsd"/>
+	<element name="sctdapplication" type="tns:SctdapplicationA529Type"/>
+	<complexType name="SctdapplicationA529Type">
+		<sequence>
+			<element name="cabecera" type="tns:HeadingA529Type" minOccurs="1" maxOccurs="1"/>
+			<element name="a529" type="tns:A529Type" minOccurs="1" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	<complexType name="HeadingA529Type">
+		<sequence>
+			<element name="codenvio" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="3"/>
+						<enumeration value="GML"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="empresaemisora" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="empresadestino" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="fechacomunicacion" type="date" minOccurs="1" maxOccurs="1"/>
+			<element name="horacomunicacion" type="time" minOccurs="1" maxOccurs="1"/>
+			<element name="codproceso" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"/>
+						<enumeration value="29"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="tipomensaje" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="3"/>
+						<enumeration value="A5"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="A529Type">
+		<sequence>
+			<element name="fechacreacion" type="date" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha de Petición</documentation>
+				</annotation>
+			</element>
+			<element name="horacreacion" type="time" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Hora de Petición</documentation>
+				</annotation>
+			</element>
+			<element name="cups" type="tns:CupsType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>CUPS</documentation>
+				</annotation>
+			</element>
+			<element name="historicoconsumo" type="tns:FlagType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Solicitar historico de consumos de los dos últimos años</documentation>
+				</annotation>
+			</element>
+			<element name="validacioncliente" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Datos para la validación de cliente del contrato vigente</documentation>
+				</annotation>
+				<complexType>
+					<sequence>
+						<element name="tipodocumento" type="tns:IdDocumentType" minOccurs="1" maxOccurs="1"/>
+						<element name="numdocumento" type="tns:DocumentnumType" minOccurs="1" maxOccurs="1"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+</schema>
