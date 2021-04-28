@@ -556,7 +556,7 @@ class Factura(object):
             'check_total': abs(self.importetotal),
             'origin': self.get_origin(),
             'origin_date_invoice': self.fecfactura,
-            'reference': self.numfactorigen or self.numfacturarect,
+            'reference': self.get_origin(),
             'tipo_factura': self.tipofactura
         }
 
