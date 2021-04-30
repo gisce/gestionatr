@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://localhost/elegibilidad" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Sync" targetNamespace="http://localhost/elegibilidad">
+	<types>
+		<xsd:schema>
+			<xsd:import namespace="http://localhost/elegibilidad" schemaLocation="WebserviceSync.xsd"/>
+		</xsd:schema>
+	</types>
+	<message name="sync">
+		<part name="parameters" element="tns:sync"/>
+	</message>
+	<message name="syncResponse">
+		<part name="parameters" element="tns:syncResponse"/>
+	</message>
+	<portType name="Sync">
+		<operation name="sync">
+			<input message="tns:sync" wsam:Action="http://localhost/elegibilidad/Sync/syncRequest"/>
+			<output message="tns:syncResponse" wsam:Action="http://localhost/elegibilidad/Sync/syncResponse"/>
+		</operation>
+	</portType>
+	<binding name="SyncPortBinding" type="tns:Sync">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="sync">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+		</operation>
+	</binding>
+	<service name="Sync">
+		<port name="SyncPort" binding="tns:SyncPortBinding">
+			<soap:address location="http://localhost:9999/Sync"/>
+		</port>
+	</service>
+</definitions>

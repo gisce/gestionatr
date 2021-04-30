@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://localhost/elegibilidad" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" version="1.0">
+	<xs:include schemaLocation="SolicitudInformacionAlRegistrodePS.xsd"/>
+	<xs:include schemaLocation="EnvioInformacionPS.xsd"/>
+	<xs:include schemaLocation="RechazoPeticion.xsd"/>
+	<xs:element name="sync" type="tns:sync"/>
+	<xs:element name="syncResponse" type="tns:syncResponse"/>
+	<xs:complexType name="sync">
+		<xs:sequence>
+			<xs:element name="Paso01" type="tns:Paso01" form="unqualified" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Paso01">
+		<xs:sequence>
+			<xs:element ref="tns:MensajeSolicitudInformacionAlRegistroDePS" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="syncResponse">
+		<xs:sequence>
+			<xs:element name="return" type="tns:Paso02" form="unqualified" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Paso02">
+		<xs:sequence>
+			<xs:element ref="tns:MensajeEnvioInformacionPS" minOccurs="0"/>
+			<xs:element ref="tns:MensajeRechazoP0" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
