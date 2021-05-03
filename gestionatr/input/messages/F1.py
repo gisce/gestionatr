@@ -38,6 +38,16 @@ PERIODE_OCSUM = {
     '81': 'P1',  # P1 Tarifa 007
     '82': 'P2',  # P2 Tarifa 007
     '83': 'P3',  # P3 Tarifa 007
+    '91': 'P1',  # P1 de peaje de acceso 2.0TD.
+    '92': 'P2',  # P2 de peaje de acceso 2.0TD.
+    '93': 'P3',  # P3 de peaje de acceso 2.0TD.
+    'A1': 'P1',  # P1 de los peajes de acceso 3.0TD, 3.0TDVE, 6.1TD, 6.1TDVE, 6.2TD. 6.3TD. 6.4TD
+    'A2': 'P2',  # P2 de los peajes de acceso 3.0TD, 3.0TDVE, 6.1TD, 6.1TDVE, 6.2TD. 6.3TD. 6.4TD
+    'A3': 'P3',  # P3 de los peajes de acceso 3.0TD, 3.0TDVE, 6.1TD, 6.1TDVE, 6.2TD. 6.3TD. 6.4TD
+    'A4': 'P4',  # P4 de los peajes de acceso 3.0TD, 3.0TDVE, 6.1TD, 6.1TDVE, 6.2TD. 6.3TD. 6.4TD
+    'A5': 'P5',  # P5 de los peajes de acceso 3.0TD, 3.0TDVE, 6.1TD, 6.1TDVE, 6.2TD. 6.3TD. 6.4TD
+    'A6': 'P6',  # P6 de los peajes de acceso 3.0TD, 3.0TDVE, 6.1TD, 6.1TDVE, 6.2TD. 6.3TD. 6.4TD
+
 }
 
 CODIS_REG_REFACT = {
@@ -233,6 +243,21 @@ class DatosGeneralesATR(DatosGenerales):
         return None
 
     @property
+    def tipo_autoconsumo(self):
+        if hasattr(self._datos_factura_atr, 'TipoAutoconsumo'):
+            return self._datos_factura_atr.TipoAutoconsumo.text.strip()
+
+    @property
+    def cau(self):
+        if hasattr(self._datos_factura_atr, 'CAU'):
+            return self._datos_factura_atr.CAU.text.strip()
+
+    @property
+    def duracion_inf_anio(self):
+        if hasattr(self._datos_factura_atr, 'DuracionInfAnio'):
+            return self._datos_factura_atr.DuracionInfAnio.text.strip()
+
+    @property
     def tarifa_atr_fact(self):
         if hasattr(self._datos_factura_atr, 'TarifaATRFact'):
             return self._datos_factura_atr.TarifaATRFact.text.strip()
@@ -308,6 +333,12 @@ class DatosGeneralesATR(DatosGenerales):
     def numero_dias(self):
         if hasattr(self._periodo, 'NumeroDias'):
             return int(self._periodo.NumeroDias.text.strip())
+        return None
+
+    @property
+    def tipo_pm(self):
+        if hasattr(self._periodo, 'TipoPM'):
+            return int(self._periodo.TipoPM.text.strip())
         return None
 
 
@@ -509,6 +540,12 @@ class PeriodoPotencia(Periodo):
             return int(self.periodo.PotenciaAFacturar.text.strip())
         return None
 
+    @property
+    def recargo_inf_anio(self):
+        if hasattr(self.periodo, 'RecargoInfAnio'):
+            return int(self.periodo.RecargoInfAnio.text.strip())
+        return None
+
 
 class Termino(object):
 
@@ -699,9 +736,157 @@ class PeriodoEnergiaReactiva(Periodo):
         return None
 
 
+class PeriodoEnergiaCapacitiva(Periodo):
+
+    NOMBRE_PRECIO = 'PrecioEnergiaCapacitiva'
+    NOMBRE_CANTIDAD = 'ValorEnergiaCapacitiva'
+
+    @property
+    def valor_energia_capacitiva(self):
+        if hasattr(self.periodo, 'ValorEnergiaCapacitiva'):
+            return float(self.periodo.ValorEnergiaCapacitiva.text.strip())
+        return None
+
+
+class PeriodoEnergiaNetaGen(object):
+
+    def __init__(self, data):
+        self.periodo = data
+
+    @property
+    def valor_energia_neta_gen(self):
+        if hasattr(self.periodo, 'ValorEnergiaNetaGen'):
+            return float(self.periodo.ValorEnergiaNetaGen.text.strip())
+        return None
+
+    @property
+    def beta(self):
+        if hasattr(self.periodo, 'Beta'):
+            return float(self.periodo.Beta.text.strip())
+        return None
+
+    @property
+    def relacion_generacion(self):
+        if hasattr(self.periodo, 'RelacionGeneracion'):
+            return float(self.periodo.RelacionGeneracion.text.strip())
+        return None
+
+
+class PeriodoEnergiaAutoconsumida(object):
+
+    def __init__(self, data):
+        self.periodo = data
+
+    @property
+    def valor_energia_autoconsumida(self):
+        if hasattr(self.periodo, 'ValorEnergiaAutoconsumida'):
+            return float(self.periodo.ValorEnergiaAutoconsumida.text.strip())
+        return None
+
+    @property
+    def pago_tda(self):
+        if hasattr(self.periodo, 'PagoTDA'):
+            return float(self.periodo.PagoTDA.text.strip())
+        return None
+
+
+class PeriodoEnergiaExcedentaria(object):
+
+    def __init__(self, data):
+        self.periodo = data
+
+    @property
+    def valor_energia_excedentaria(self):
+        if hasattr(self.periodo, 'ValorEnergiaExcedentaria'):
+            return float(self.periodo.ValorEnergiaExcedentaria.text.strip())
+        return None
+
+
+class PeriodoCargo(object):
+
+    def __init__(self, data):
+        self.periodo = data
+
+    @property
+    def energia(self):
+        if hasattr(self.periodo, 'Energia'):
+            return float(self.periodo.Energia.text.strip())
+        return None
+
+    @property
+    def potencia(self):
+        if hasattr(self.periodo, 'Potencia'):
+            return float(self.periodo.Potencia.text.strip())
+        return None
+
+    @property
+    def precio_cargo(self):
+        if hasattr(self.periodo, 'PrecioCargo'):
+            return float(self.periodo.PrecioCargo.text.strip())
+        return None
+
+
 class TerminoEnergiaReactiva(TerminoEnergiaActiva):
 
     PERIODO_TYPE = PeriodoEnergiaReactiva
+
+
+class TerminoEnergiaCapacitiva(TerminoEnergiaActiva):
+
+    PERIODO_TYPE = PeriodoEnergiaCapacitiva
+
+
+class TerminoEnergiaNetaGen(TerminoEnergiaActiva):
+
+    PERIODO_TYPE = PeriodoEnergiaNetaGen
+
+
+class TerminoEnergiaAutoconsumida(TerminoEnergiaActiva):
+
+    PERIODO_TYPE = PeriodoEnergiaAutoconsumida
+
+
+class TerminoEnergiaExcedentaria(TerminoEnergiaActiva):
+
+    PERIODO_TYPE = PeriodoEnergiaExcedentaria
+
+
+class TerminoCargo(TerminoEnergiaActiva):
+
+    PERIODO_TYPE = PeriodoCargo
+
+
+class InstalacionGenAutoconsumo(object):
+    def __init__(self, data):
+        self.instalacion_gen_autoconsumo = data
+
+    @property
+    def tipo_instalacion(self):
+        if hasattr(self.instalacion_gen_autoconsumo, 'TipoInstalacion'):
+            return self.instalacion_gen_autoconsumo.TipoInstalacion.text.strip()
+        return None
+
+    @property
+    def exento_cargos(self):
+        if hasattr(self.instalacion_gen_autoconsumo, 'ExentoCargos'):
+            return self.instalacion_gen_autoconsumo.ExentoCargos.text.strip()
+        return None
+
+    @property
+    def energia_neta_gen(self):
+        data = []
+        if hasattr(self.instalacion_gen_autoconsumo, 'EnergiaNetaGen'):
+            for d in self.instalacion_gen_autoconsumo.EnergiaNetaGen:
+                data.append(EnergiaNetaGen(d))
+        return data
+
+    @property
+    def energia_autoconsumida(self):
+        data = []
+        if hasattr(self.instalacion_gen_autoconsumo, 'EnergiaAutoconsumida'):
+            for d in self.instalacion_gen_autoconsumo.EnergiaAutoconsumida:
+                data.append(EnergiaAutoconsumida(d))
+        return data
 
 
 class EnergiaReactiva(object):
@@ -721,6 +906,154 @@ class EnergiaReactiva(object):
     def importe_total(self):
         if hasattr(self.energia_reactiva, 'ImporteTotalEnergiaReactiva'):
             return float(self.energia_reactiva.ImporteTotalEnergiaReactiva.text.strip())
+        return None
+
+
+class EnergiaCapacitiva(object):
+
+    def __init__(self, data):
+        self.energia_capacitiva = data
+
+    @property
+    def terminos_energia_capacitiva(self):
+        data = []
+        if hasattr(self.energia_capacitiva, 'TerminoEnergiaCapacitiva'):
+            for d in self.energia_capacitiva.TerminoEnergiaCapacitiva:
+                data.append(TerminoEnergiaCapacitiva(d))
+        return data
+
+    @property
+    def importe_total(self):
+        if hasattr(self.energia_capacitiva, 'ImporteTotalEnergiaCapcitiva'):
+            return float(self.energia_capacitiva.ImporteTotalEnergiaCapcitiva.text.strip())
+        return None
+
+
+class EnergiaNetaGen(object):
+
+    def __init__(self, data):
+        self.energia_neta_gen = data
+
+    @property
+    def terminos_energia_neta_gen(self):
+        data = []
+        if hasattr(self.energia_neta_gen, 'TerminoEnergiaNetaGen'):
+            for d in self.energia_neta_gen.TerminoEnergiaNetaGen:
+                data.append(TerminoEnergiaNetaGen(d))
+        return data
+
+    @property
+    def importe_total(self):
+        if hasattr(self.energia_neta_gen, 'TotalEnergiaNetaGenBeta'):
+            return float(self.energia_neta_gen.TotalEnergiaNetaGenBeta.text.strip())
+        return None
+
+
+class EnergiaAutoconsumida(object):
+
+    def __init__(self, data):
+        self.energia_autoconsumida = data
+
+    @property
+    def terminos_energia_autoconsumida(self):
+        data = []
+        if hasattr(self.energia_autoconsumida, 'TerminoEnergiaAutoconsumida'):
+            for d in self.energia_autoconsumida.TerminoEnergiaAutoconsumida:
+                data.append(TerminoEnergiaAutoconsumida(d))
+        return data
+
+    @property
+    def importe_total(self):
+        if hasattr(self.energia_autoconsumida, 'ImporteTotalEnergiaActivaAutoconsumida'):
+            return float(self.energia_autoconsumida.ImporteTotalEnergiaActivaAutoconsumida.text.strip())
+        return None
+
+
+class EnergiaExcedentaria(object):
+
+    def __init__(self, data):
+        self.energia_excedentaria = data
+
+    @property
+    def terminos_energia_excedentaria(self):
+        data = []
+        if hasattr(self.energia_excedentaria, 'TerminoEnergiaExcedentaria'):
+            for d in self.energia_excedentaria.TerminoEnergiaExcedentaria:
+                data.append(TerminoEnergiaExcedentaria(d))
+        return data
+
+    @property
+    def importe_total(self):
+        if hasattr(self.energia_excedentaria, 'ValorTotalEnergiaExcedentaria'):
+            return float(self.energia_excedentaria.ValorTotalEnergiaExcedentaria.text.strip())
+        return None
+
+
+class Cargo(object):
+
+    def __init__(self, data):
+        self.cargo = data
+
+    @property
+    def tipo_cargo(self):
+        if hasattr(self.cargo, 'TipoCargo'):
+            return float(self.cargo.TipoCargo.text.strip())
+        return None
+
+    @property
+    def termino_cargo(self):
+        data = []
+        if hasattr(self.cargo, 'TerminoCargo'):
+            for d in self.cargo.TerminoCargo:
+                data.append(TerminoCargo(d))
+        return data
+
+    @property
+    def importe_total(self):
+        if hasattr(self.cargo, 'TotalImporteTipoCargo'):
+            return float(self.cargo.TotalImporteTipoCargo.text.strip())
+        return None
+
+
+class Autoconsumo(object):
+
+    def __init__(self, data):
+        self.autoconsumo = data
+
+    @property
+    def instalacion_gen_autoconsumo(self):
+        data = []
+        if hasattr(self.autoconsumo, 'InstalacionGenAutoconsumo'):
+            for d in self.autoconsumo.InstalacionGenAutoconsumo:
+                data.append(InstalacionGenAutoconsumo(d))
+        return data
+
+    @property
+    def energia_autoconsumida(self):
+        data = []
+        if hasattr(self.autoconsumo, 'EnergiaExcedentaria'):
+            for d in self.autoconsumo.EnergiaExcedentaria:
+                data.append(EnergiaExcedentaria(d))
+        return data
+
+
+class Cargos(object):
+
+    def __init__(self, data):
+        self.cargos = data
+
+    @property
+    def cargo(self):
+        data = []
+        if hasattr(self.cargos, 'Cargo'):
+            for d in self.cargos.Cargo:
+                data.append(Cargo(d))
+        return data
+
+    @property
+    def total_cargos(self):
+        if hasattr(self.cargos, 'TotalImporteCargos'):
+            return float(self.cargos.TotalImporteCargos.text.strip())
         return None
 
 
@@ -1264,6 +1597,24 @@ class FacturaATR(Factura):
     def energia_reactiva(self):
         if hasattr(self.factura, 'EnergiaReactiva'):
             return EnergiaReactiva(self.factura.EnergiaReactiva)
+        return None
+
+    @property
+    def energia_capacitiva(self):
+        if hasattr(self.factura, 'EnergiaCapacitiva'):
+            return EnergiaCapacitiva(self.factura.EnergiaCapacitiva)
+        return None
+
+    @property
+    def autoconsumo(self):
+        if hasattr(self.factura, 'Autoconsumo'):
+            return Autoconsumo(self.factura.Autoconsumo)
+        return None
+
+    @property
+    def cargos(self):
+        if hasattr(self.factura, 'Cargos'):
+            return Cargos(self.factura.Cargos)
         return None
 
     @property
