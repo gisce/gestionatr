@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- editado con XMLSpy v2020 sp1 (http://www.altova.com) por pelayo.garcia (INECO) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
 	<xs:include schemaLocation="TiposComplejos.xsd"/>
@@ -478,7 +477,7 @@
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
-							<xs:element name="Cargos">
+							<xs:element name="Cargos" minOccurs="0">
 								<xs:complexType>
 									<xs:sequence>
 										<xs:element name="Cargo" maxOccurs="unbounded">

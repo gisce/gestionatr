@@ -2064,45 +2064,17 @@
 	<xs:simpleType name="TarifaATR">
 		<xs:annotation>
 			<xs:documentation>tipo Tarifa (tabla 17)
-			001	2.0.A	
-			003	3.0A	
-			004	2.0DHA
-			005	2.1.A
-			006	2.1.DHA
-			007 2.0 DHS
-			008	2.1 DHS		
-			011	3.1A	
-			012	6.1A	
-			013	6.2	
-			014	6.3	
-			015	6.4	
-			016	6.5
-			017 6.1B
-			018	2.0DT
-			019	3.0DT
-			020	6.1DT
-			021	6.2DT
-			022	6.3DT
-			023	6.4DT
-			024	3.0DTVE
-			025	6.1DTVE
+			018	2.0TD
+			019	3.0TD
+			020	6.1TD
+			021	6.2TD
+			022	6.3TD
+			023	6.4TD
+			024	3.0TDVE
+			025	6.1TDVE
 		</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="001"/>
-			<xs:enumeration value="003"/>
-			<xs:enumeration value="004"/>
-			<xs:enumeration value="005"/>
-			<xs:enumeration value="006"/>
-			<xs:enumeration value="007"/>
-			<xs:enumeration value="008"/>
-			<xs:enumeration value="011"/>
-			<xs:enumeration value="012"/>
-			<xs:enumeration value="013"/>
-			<xs:enumeration value="014"/>
-			<xs:enumeration value="015"/>
-			<xs:enumeration value="016"/>
-			<xs:enumeration value="017"/>
 			<xs:enumeration value="018"/>
 			<xs:enumeration value="019"/>
 			<xs:enumeration value="020"/>
@@ -2403,7 +2375,7 @@
 			31 	Sin Excedentes Individual - Consumo
 			32 	Sin Excedentes Colectivo - Consumo
 			33	Sin Excedentes Colectivo con acuerdo de compensación - Consumo
-			41 	Con excedentes y compensación Individual - Consumo  
+			41 	Con excedentes y compensación Individual - Consumo
 			42 	Con excedentes y compensación Colectivo - Consumo
 			43    Con excedentes y compensación Colectivo a través de red - Consumo
 			51 	Con excedentes sin compensación Individual sin cto de SSAA en Red Interior - Consumo
@@ -2599,7 +2571,7 @@ la reclamacion
 			01	Anual
 			02	Eventual medido
 			03	Temporada
-			05	Suministro a instalaciones acogidos al regimen especial
+			05	Suministro a instalaciones RECORE
 			07	Suministro de Obras
 			08	Suministro de Socorros
 			09	Eventual a tanto alzado
@@ -3962,16 +3934,14 @@ la reclamacion
 	</xs:simpleType>
 	<xs:simpleType name="TipoCargoType">
 		<xs:annotation>
-			<xs:documentation>Tipo de cargo (tabla 132)
-			01	
-			02	
-			03	
+			<xs:documentation>Tipo de cargo (tabla 132)	
+			01 Cargo correspondiente al término de potencia
+			02 Cargo correspondiente al término de energía
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="01"/>
 			<xs:enumeration value="02"/>
-			<xs:enumeration value="03"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>
