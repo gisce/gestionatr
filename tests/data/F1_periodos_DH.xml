@@ -41,6 +41,8 @@
 				</DatosGeneralesFactura>
 				<DatosFacturaATR>
 					<FechaBOE>2015-12-18</FechaBOE>
+					<TipoAutoconsumo>00</TipoAutoconsumo>
+					<DuracionInfAnio>N</DuracionInfAnio>
 					<TarifaATRFact>004</TarifaATRFact>
 					<ModoControlPotencia>1</ModoControlPotencia>
 					<MarcaMedidaConPerdidas>N</MarcaMedidaConPerdidas>
@@ -50,6 +52,7 @@
 						<FechaHastaFactura>2016-02-29</FechaHastaFactura>
 						<NumeroDias>29</NumeroDias>
 					</Periodo>
+					<TipoPM>01</TipoPM>
 				</DatosFacturaATR>
 			</DatosGeneralesFacturaATR>
 			<Potencia>
@@ -61,6 +64,7 @@
 						<PotenciaMaxDemandada>5750</PotenciaMaxDemandada>
 						<PotenciaAFacturar>5750</PotenciaAFacturar>
 						<PrecioPotencia>0.00010394</PrecioPotencia>
+						<RecargoInfAnio>0.00</RecargoInfAnio>
 					</Periodo>
 				</TerminoPotencia>
 				<PenalizacionNoICP>N</PenalizacionNoICP>

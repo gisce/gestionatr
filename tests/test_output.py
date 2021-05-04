@@ -140,7 +140,7 @@ class test_C1(unittest.TestCase):
             'tipo_propiedad_aparato': '1',
             'propietario': 'Desc. Propietario',
             'tipo_dhedm': '6',
-            'modo_medida_potencia': '1',
+            'modo_medida_potencia': '9',
             'lectura_directa': 'N',
             'cod_precinto': '02',
             'datos_aparato': datos_aparato,
@@ -264,7 +264,7 @@ class test_C1(unittest.TestCase):
         potencias_contratadas = c1.PotenciasContratadas()
         potencias_contratadas.feed({'p1': 1000, 'p2': 2000})
         condiciones_contractuales_fields = {
-            'tarifa_atr': '003',
+            'tarifa_atr': '018',
             'potencias_contratadas': potencias_contratadas,
         }
         condiciones_contractuales.feed(condiciones_contractuales_fields)
@@ -374,7 +374,7 @@ class test_C1(unittest.TestCase):
         potencias_contratadas.feed({'p1': 1000, 'p2': 2000})
 
         condiciones_contractuales_fields = {
-            'tarifa_atr': '003',
+            'tarifa_atr': '018',
             'periodicidad_facturacion': '01',
             'tipode_telegestion': '01',
             'potencias_contratadas': potencias_contratadas,
@@ -584,7 +584,7 @@ class test_C2(unittest.TestCase):
         potencias_contratadas.feed({'p1': 1000, 'p2': 2000})
 
         condiciones_contractuales_fields = {
-            'tarifa_atr': '003',
+            'tarifa_atr': '018',
             'potencias_contratadas': potencias_contratadas,
             'modo_control_potencia': '1',
         }
@@ -706,7 +706,7 @@ class test_C2(unittest.TestCase):
         potencias_contratadas.feed({'p1': 1000, 'p2': 2000})
 
         condiciones_contractuales_fields = {
-            'tarifa_atr': '003',
+            'tarifa_atr': '018',
             'potencias_contratadas': potencias_contratadas,
             'modo_control_potencia': '1',
         }
@@ -1190,7 +1190,7 @@ class test_A3(unittest.TestCase):
         potencias_contratadas.feed({'p1': 1000, 'p2': 2000})
 
         condiciones_contractuales_fields = {
-            'tarifa_atr': '003',
+            'tarifa_atr': '018',
             'potencias_contratadas': potencias_contratadas,
             'modo_control_potencia': '1'
         }
@@ -1304,7 +1304,7 @@ class test_A3(unittest.TestCase):
         potencias_contratadas.feed({'p1': 1000, 'p2': 2000})
 
         condiciones_contractuales_fields = {
-            'tarifa_atr': '003',
+            'tarifa_atr': '018',
             'potencias_contratadas': potencias_contratadas,
             'modo_control_potencia': '1'
         }
@@ -1429,7 +1429,7 @@ class test_M1(unittest.TestCase):
         potencias_contratadas.feed({'p1': 1000, 'p2': 2000})
 
         condiciones_contractuales_fields = {
-            'tarifa_atr': '003',
+            'tarifa_atr': '018',
             'potencias_contratadas': potencias_contratadas,
             'modo_control_potencia': '1',
         }
@@ -1869,7 +1869,7 @@ class test_P0(unittest.TestCase):
         # CondicionesContractuales
         condiciones_contractuales = p0.CondicionesContractuales()
         condiciones_contractuales_fields = {
-            'tarifa_atr': '001',
+            'tarifa_atr': '018',
             'potencias_contratadas': potencias_contratadas,
             'modo_control_potencia': '1'
         }
@@ -1887,7 +1887,7 @@ class test_P0(unittest.TestCase):
             'vivienda_habitual': 'S',
             'cnae': '9820',
             'condiciones_contractuales': condiciones_contractuales,
-            'modo_facturacion_potencia': '1',
+            'modo_facturacion_potencia': '9',
             'no_interrumpible': 'S',
             'potencia_no_interrumpible': '6000',
             'potencia_max_sin_expediente': '8000',
@@ -2605,7 +2605,7 @@ class test_B1(unittest.TestCase):
             'tipo_propiedad_aparato': '1',
             'propietario': 'Desc. Propietario',
             'tipo_dhedm': '6',
-            'modo_medida_potencia': '1',
+            'modo_medida_potencia': '9',
             'lectura_directa': 'N',
             'cod_precinto': '02',
             'datos_aparato': datos_aparato,
@@ -2805,7 +2805,7 @@ class test_B2(unittest.TestCase):
             'tipo_propiedad_aparato': '1',
             'propietario': 'Desc. Propietario',
             'tipo_dhedm': '6',
-            'modo_medida_potencia': '1',
+            'modo_medida_potencia': '9',
             'lectura_directa': 'N',
             'cod_precinto': '02',
             'datos_aparato': datos_aparato,
@@ -2950,7 +2950,7 @@ class test_E1(unittest.TestCase):
             'tipo_propiedad_aparato': '1',
             'propietario': 'Desc. Propietario',
             'tipo_dhedm': '6',
-            'modo_medida_potencia': '1',
+            'modo_medida_potencia': '9',
             'lectura_directa': 'N',
             'cod_precinto': '02',
             'datos_aparato': datos_aparato,
@@ -3335,7 +3335,7 @@ class test_E1(unittest.TestCase):
         # CondicionesContractuales
         condiciones_contractuales = e1.CondicionesContractuales()
         condiciones_contractuales_fields = {
-            'tarifa_atr': '003',
+            'tarifa_atr': '018',
             'periodicidad_facturacion': '01',
             'tipode_telegestion': '01',
             'potencias_contratadas': potencias_contratadas,
@@ -3529,7 +3529,7 @@ class test_T1(unittest.TestCase):
             'tipo_propiedad_aparato': '1',
             'propietario': 'Desc. Propietario',
             'tipo_dhedm': '6',
-            'modo_medida_potencia': '1',
+            'modo_medida_potencia': '9',
             'lectura_directa': 'N',
             'cod_precinto': '02',
             'datos_aparato': datos_aparato,
@@ -3606,7 +3606,7 @@ class test_T1(unittest.TestCase):
         potencias_contratadas.feed({'p1': 1000, 'p2': 2000})
 
         condiciones_contractuales_fields = {
-            'tarifa_atr': '003',
+            'tarifa_atr': '018',
             'potencias_contratadas': potencias_contratadas,
             'modo_control_potencia': '1',
         }
@@ -3811,7 +3811,7 @@ class test_T1(unittest.TestCase):
         # CondicionesContractuales
         condiciones_contractuales = t1.CondicionesContractuales()
         condiciones_contractuales_fields = {
-            'tarifa_atr': '003',
+            'tarifa_atr': '018',
             'periodicidad_facturacion': '01',
             'tipode_telegestion': '01',
             'potencias_contratadas': potencias_contratadas,
@@ -4917,7 +4917,7 @@ class test_F1(unittest.TestCase):
         atr_data.feed(
             {
                 'fecha_boe': '2016-01-01',
-                'tarifa_atr_fact': '001',
+                'tarifa_atr_fact': '001', 'tipo_autoconsumo': '00', 'duracion_inf_anio': 'N',
                 'modo_control_potencia': 1,
                 'marca_medida_con_perdidas': 'N',
                 'vas_trafo': None,
@@ -4925,6 +4925,7 @@ class test_F1(unittest.TestCase):
                 'indicativo_curva_carga': '02',
                 'periodo_cch': None,
                 'periodo': periodo,
+                'tipo_pm': '01'
             }
         )
 
@@ -4933,7 +4934,7 @@ class test_F1(unittest.TestCase):
         self.atr_data_lb.feed(
             {
                 'fecha_boe': '2016-01-01',
-                'tarifa_atr_fact': '001',
+                'tarifa_atr_fact': '001', 'tipo_autoconsumo': '00', 'duracion_inf_anio': 'N',
                 'modo_control_potencia': 1,
                 'marca_medida_con_perdidas': 'S',
                 'vas_trafo': 50000.0,
@@ -4941,6 +4942,7 @@ class test_F1(unittest.TestCase):
                 'indicativo_curva_carga': '02',
                 'periodo_cch': None,
                 'periodo': periodo,
+                'tipo_pm': '01'
             }
         )
 
@@ -4962,6 +4964,7 @@ class test_F1(unittest.TestCase):
                 'potencia_max_demandada': 1000,
                 'potencia_a_facturar': 1000,
                 'precio_potencia': 0.05,
+                'recargo_inf_anio': 0
             }
         )
 

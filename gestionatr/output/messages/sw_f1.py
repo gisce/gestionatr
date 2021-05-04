@@ -136,7 +136,7 @@ class DatosFacturaATR(XmlModel):
         'datos_factura_atr', 'fecha_boe', 'tipo_autoconsumo', 'cau',
         'duracion_inf_anio', 'tarifa_atr_fact', 'modo_control_potencia',
         'marca_medida_con_perdidas', 'vas_trafo', 'porcentaje_perdidas',
-        'indicativo_curva_carga', 'periodo_cch', 'periodo'
+        'indicativo_curva_carga', 'periodo_cch', 'periodo', 'tipo_pm'
     )
 
     def __init__(self):
@@ -155,6 +155,7 @@ class DatosFacturaATR(XmlModel):
         self.indicativo_curva_carga = XmlField('IndicativoCurvaCarga')
         self.periodo_cch = PeriodoCCH()
         self.periodo = Periodo()
+        self.tipo_pm = XmlField('TipoPM')
         super(DatosFacturaATR, self).__init__(
             'DatosFacturaATR', 'datos_factura_atr'
         )
@@ -175,7 +176,7 @@ class Periodo(XmlModel):
 
     _sort_order = (
         'periodo', 'fecha_desde_factura', 'fecha_hasta_factura',
-        'numero_dias', 'tipo_pm'
+        'numero_dias'
     )
 
     def __init__(self):
@@ -187,7 +188,6 @@ class Periodo(XmlModel):
             'FechaHastaFactura', rep=rep_fecha_sin_hora
         )
         self.numero_dias = XmlField('NumeroDias')
-        self.tipo_pm = XmlField('TipoPM')
         super(Periodo, self).__init__('Periodo', 'periodo')
 
 
@@ -226,7 +226,7 @@ class PeriodoPotencia(XmlModel):
 
     _sort_order = (
         'periodo', 'potencia_contratada', 'potencia_max_demandada',
-        'potencia_a_facturar', 'precio_potencia'
+        'potencia_a_facturar', 'precio_potencia', 'recargo_inf_anio'
     )
 
     def __init__(self):
@@ -241,6 +241,7 @@ class PeriodoPotencia(XmlModel):
             'PotenciaAFacturar', rep=rep_entera2
         )
         self.precio_potencia = XmlField('PrecioPotencia', rep=rep_decimal(9))
+        self.recargo_inf_anio = XmlField('RecargoInfAnio', rep=rep_decimal(2))
         super(PeriodoPotencia, self).__init__('Periodo', 'periodo')
 
 
