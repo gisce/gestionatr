@@ -1289,7 +1289,7 @@ TABLA_50 = [
     ('8', 'Tarifa de 6 máximas'),
     ('9', 'Dos potencias contratadas sin maxímetro'),
     ('A', 'Dos potencias contratadas con maxímetro'),
-    ('R', 'Tarifa de 6 máximas')
+    ('B', 'Tarifa de 6 máximas')
 ]
 TIPO_DH_MAX = TABLA_50
 
@@ -2267,7 +2267,7 @@ TABLA_113 = [
     ('31', u'Sin Excedentes Individual – Consumo'),
     ('32', u'Sin Excedentes Colectivo – Consumo'),
     ('33', u'Sin Excedentes Colectivo con acuerdo de compensación – Consumo'),
-    ('41', u'Con excedentes y compensación Individual - Consumo '),
+    ('41', u'Con excedentes y compensación Individual - Consumo'),
     ('42', u'Con excedentes y compensación Colectivo– Consumo'),
     ('43', u'Con excedentes y compensación Colectivo a través de red– Consumo'),
     ('51', u'Con excedentes sin compensación Individual sin cto de SSAA en Red Interior– Consumo'),
