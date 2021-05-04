@@ -133,7 +133,7 @@ class Expediente(XmlModel):
 class DatosFacturaATR(XmlModel):
 
     _sort_order = (
-        'datos_factura_atr', 'fecha_boe', 'TipoAutoconsumo', 'cau',
+        'datos_factura_atr', 'fecha_boe', 'tipo_autoconsumo', 'cau',
         'duracion_inf_anio', 'tarifa_atr_fact', 'modo_control_potencia',
         'marca_medida_con_perdidas', 'vas_trafo', 'porcentaje_perdidas',
         'indicativo_curva_carga', 'periodo_cch', 'periodo'
