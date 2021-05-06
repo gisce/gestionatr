@@ -2476,5 +2476,5 @@ TABLA_130 = [('A', u'EdM Bidireccional en PF'),
 TABLA_131 = [('01', u'Consumo'),
              ('02', u'Servicios Auxiliares'), ]
 
-TABLA_132 = [('BT', u'Baja tensión, si tensión <= 1kV'),
-             ('AT', u'Alta tensión, si tensión >1kV'), ]
+TABLA_132 = [('01', u'Cargo correspondiente al término de potencia'),
+             ('02', u'Cargo correspondiente al término de energía'), ]
