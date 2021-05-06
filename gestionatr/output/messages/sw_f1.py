@@ -210,13 +210,13 @@ class Potencia(XmlModel):
 
 class TerminoPotencia(XmlModel):
 
-    _sort_order = ('termino_potencia', 'fecha_desde', 'fecha_hasta', 'periodo')
+    _sort_order = ('termino_potencia', 'fecha_desde', 'fecha_hasta', 'periodos')
 
     def __init__(self):
         self.termino_potencia = XmlField('TerminoPotencia')
         self.fecha_desde = XmlField('FechaDesde', rep=rep_fecha_sin_hora)
         self.fecha_hasta = XmlField('FechaHasta', rep=rep_fecha_sin_hora)
-        self.periodo = PeriodoPotencia()
+        self.periodos = PeriodoPotencia()
         super(TerminoPotencia, self).__init__(
             'TerminoPotencia', 'termino_potencia'
         )
@@ -508,7 +508,7 @@ class TerminoEnergiaExcedentaria(XmlModel):
 class TerminoCargo(XmlModel):
 
     _sort_order = (
-        'termino_energia_excedentaria', 'fecha_desde', 'fecha_hasta', 'periodos'
+        'termino_cargo', 'fecha_desde', 'fecha_hasta', 'periodos'
     )
 
     def __init__(self):
@@ -592,13 +592,13 @@ class PeriodoEnergiaExcedentaria(XmlModel):
 
 class PeriodoCargo(XmlModel):
 
-    _sort_order = ('periodo', 'valor_energia_excedentaria')
+    _sort_order = ('periodo', 'energia', 'potencia', 'precio_cargo')
 
     def __init__(self):
         self.periodo = XmlField('Periodo')
         self.energia = XmlField('Energia', rep=rep_decimal(2))
         self.potencia = XmlField('Potencia', rep=rep_decimal(2))
-        self.precio_cargo = XmlField('PrecioCargo', rep=rep_decimal(2))
+        self.precio_cargo = XmlField('PrecioCargo', rep=rep_decimal(9))
         super(PeriodoCargo, self).__init__('Periodo', 'periodo')
 
 
