@@ -51,7 +51,7 @@
             <TipoPropiedadAparato>1</TipoPropiedadAparato>
             <Propietario>Desc. Propietario</Propietario>
             <TipoDHEdM>6</TipoDHEdM>
-            <ModoMedidaPotencia>1</ModoMedidaPotencia>
+            <ModoMedidaPotencia>9</ModoMedidaPotencia>
             <LecturaDirecta>N</LecturaDirecta>
             <CodPrecinto>02</CodPrecinto>
             <DatosAparato>

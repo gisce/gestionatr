@@ -95,3 +95,7 @@ def codi_dh(tarifa, nlectures=6):
             return '3'
     elif tarifa in ('007', '008'):
         return '8'
+    elif tarifa == '018':
+        return '9'
+    elif tarifa in ('019', '020', '021', '022', '023', '024', '025'):
+        return 'A'

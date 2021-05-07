@@ -29,13 +29,13 @@
             <ViviendaHabitual>S</ViviendaHabitual>
             <CNAE>9820</CNAE>
             <CondicionesContractuales>
-                <TarifaATR>001</TarifaATR>
+                <TarifaATR>018</TarifaATR>
                 <PotenciasContratadas>
                     <Potencia Periodo="1">6000</Potencia>
                 </PotenciasContratadas>
                 <ModoControlPotencia>1</ModoControlPotencia>
             </CondicionesContractuales>
-            <ModoFacturacionPotencia>1</ModoFacturacionPotencia>
+            <ModoFacturacionPotencia>9</ModoFacturacionPotencia>
             <NoInterrumpible>S</NoInterrumpible>
             <PotenciaNoInterrumpible>6000</PotenciaNoInterrumpible>
             <PotenciaMaxSinExpediente>8000</PotenciaMaxSinExpediente>
