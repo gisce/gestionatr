@@ -10,6 +10,7 @@ MAGNITUDS_OCSUM = {
     'AE': 'A',
     'AS': 'S',
     'R1': 'R',
+    'R4': 'RC',
     'PM': 'M',
     'EP': 'EP'
 }
@@ -446,16 +447,39 @@ class Factura(object):
 
     def get_linies_factura_by_type(self):
         res = {}
+        res_to_join = {}
 
+        to_join = {
+            'potencia_cargos': 'potencia',
+            'energia_cargos': 'energia'
+        }
         for type, method in self.GETTERS_LINEAS_FACTURA:
             lines, sub_total = method()
 
             if lines:
-                res.setdefault(type, {'total': 0.0, 'lines': []})
+                if type in to_join.keys():
+                    aux_res = res_to_join
+                else:
+                    aux_res = res
 
-                res[type]['lines'] += lines
-                new_total = res[type]['total'] + sub_total
-                res[type]['total'] = round(new_total, 2)
+                aux_res.setdefault(type, {'total': 0.0, 'lines': []})
+
+                aux_res[type]['lines'] += lines
+                new_total = aux_res[type]['total'] + sub_total
+                aux_res[type]['total'] = round(new_total, 2)
+
+        for tipus, info in res_to_join.items():
+            tipus_join = to_join.get(tipus)
+            if not res.get(tipus_join):
+                continue
+            base = 1.0
+            if tipus == 'potencia_cargos':
+                base = 0.001
+            res[tipus_join]['total'] += info['total']
+            for l in info['lines']:
+                for l2 in res[tipus_join]['lines']:
+                    if l2.nombre == l.nombre and l2.cantidad == l.cantidad:
+                        l2.precio += round(l.precio*base, 9)
 
         return res
 
@@ -490,6 +514,7 @@ class Periodo(object):
         self._name = name
         self.fecha_desde = fecha_desde
         self.fecha_hasta = fecha_hasta
+        self._precio = 0.0
 
     @property
     def nombre(self):
@@ -497,10 +522,16 @@ class Periodo(object):
 
     @property
     def precio(self):
-        if self.NOMBRE_PRECIO:
+        if self._precio:
+            return self._precio
+        elif self.NOMBRE_PRECIO:
             if hasattr(self.periodo, self.NOMBRE_PRECIO):
                 return float(getattr(self.periodo, self.NOMBRE_PRECIO).text.strip())
         return None
+
+    @precio.setter
+    def precio(self, value):
+        self._precio = value
 
     @property
     def cantidad(self):
@@ -802,10 +833,9 @@ class PeriodoEnergiaExcedentaria(object):
         return None
 
 
-class PeriodoCargo(object):
+class PeriodoCargo(Periodo):
 
-    def __init__(self, data):
-        self.periodo = data
+    NOMBRE_PRECIO = "PrecioCargo"
 
     @property
     def energia(self):
@@ -825,6 +855,12 @@ class PeriodoCargo(object):
             return float(self.periodo.PrecioCargo.text.strip())
         return None
 
+    def es_facturable(self):
+        return self.precio_cargo or self.potencia or self.energia
+
+    @property
+    def cantidad(self):
+        return self.potencia or self.energia or 0.0
 
 class TerminoEnergiaReactiva(TerminoEnergiaActiva):
 
@@ -1472,7 +1508,7 @@ class ModeloAparato(object):
         return self.get_lectures(['R'])
 
     def get_lectures_energia(self):
-        return self.get_lectures(['A', 'S', 'R'])
+        return self.get_lectures(['A', 'S', 'R', 'RC'])
 
     def get_lectures_maximetre(self):
         return self.get_lectures(['M'])
@@ -1563,8 +1599,10 @@ class FacturaATR(Factura):
 
         self.GETTERS_LINEAS_FACTURA += [
             ('potencia', self.get_info_potencia),
+            ('potencia_cargos', self.get_info_potencia_cargos),
             ('exces_potencia', self.get_info_exces),
             ('energia', self.get_info_activa),
+            ('energia_cargos', self.get_info_energia_cargos),
             ('reactiva', self.get_info_reactiva),
             ('lloguer', self.get_info_lloguer),
         ]
@@ -1659,6 +1697,24 @@ class FacturaATR(Factura):
             return res
 
         return None
+
+    def get_consums_reactiva_capacitiva_a_facturar(self):
+        res = {}
+        if not self.energia_capacitiva:
+            return {}
+        if not self.energia_capacitiva.terminos_energia_capacitiva:
+            return {}
+        for capacitiva in self.energia_capacitiva.terminos_energia_capacitiva:
+            for periode in capacitiva.periodos:
+                if periode.nombre not in res:
+                    res[periode.nombre] = 0.0
+                res[periode.nombre] += periode.cantidad
+        # El metode esta preparat per si ens envien 6 periodes, 5 amb valor 0 i l'ultim (el p6) amb valor ple
+        # Pero com que no se si faran aixo o nomes m'enviaran el P6, fem aquesta mandanga:
+        if len(res) == 1 and "P1" in res:
+            res['P6'] = res['P1']
+            del res['P1']
+        return res
 
     def get_lectures_amb_ajust_autoconsum(self, tipus='S', ajust_balancejat=True, motiu_ajust="98"):
         return self.get_lectures_amb_ajust_quadrat_amb_consum(tipus=tipus, ajust_balancejat=ajust_balancejat, motiu_ajust=motiu_ajust)
@@ -1844,6 +1900,26 @@ class FacturaATR(Factura):
                 for pot in self.potencia.terminos_potencia:
                     periodes += pot.periodos
                 total = self.potencia.importe_total
+        except AttributeError:
+            pass
+        return periodes, total
+
+    def get_info_potencia_cargos(self):
+        return self.get_info_cargos(tipo_cargo=1)
+
+    def get_info_energia_cargos(self):
+        return self.get_info_cargos(tipo_cargo=2)
+
+    def get_info_cargos(self, tipo_cargo):
+        periodes = []
+        total = 0
+        try:
+            if self.cargos and self.cargos.cargo:
+                for cargo_by_type in self.cargos.cargo:
+                    if cargo_by_type.tipo_cargo == tipo_cargo:
+                        for termino_pot in cargo_by_type.termino_cargo:
+                            periodes += termino_pot.periodos
+                        total += cargo_by_type.importe_total
         except AttributeError:
             pass
         return periodes, total
