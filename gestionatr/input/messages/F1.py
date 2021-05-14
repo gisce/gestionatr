@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from message import Message
 from gestionatr.input.messages.C2 import Direccion
-from gestionatr.defs import TARIFES_SEMPRE_MAX
+from gestionatr.defs import TARIFES_SEMPRE_MAX, TARIFES_TD
 from datetime import datetime, date
 from gestionatr.utils import repartir_consums_entre_lectures
 
@@ -39,9 +39,11 @@ PERIODE_OCSUM = {
     '81': 'P1',  # P1 Tarifa 007
     '82': 'P2',  # P2 Tarifa 007
     '83': 'P3',  # P3 Tarifa 007
+    '90': 'P1',  # P1 de peaje de acceso 2.0TD.
     '91': 'P1',  # P1 de peaje de acceso 2.0TD.
     '92': 'P2',  # P2 de peaje de acceso 2.0TD.
     '93': 'P3',  # P3 de peaje de acceso 2.0TD.
+    'A0': 'P1',  # P1 de los peajes de acceso 3.0TD, 3.0TDVE, 6.1TD, 6.1TDVE, 6.2TD. 6.3TD. 6.4TD
     'A1': 'P1',  # P1 de los peajes de acceso 3.0TD, 3.0TDVE, 6.1TD, 6.1TDVE, 6.2TD. 6.3TD. 6.4TD
     'A2': 'P2',  # P2 de los peajes de acceso 3.0TD, 3.0TDVE, 6.1TD, 6.1TDVE, 6.2TD. 6.3TD. 6.4TD
     'A3': 'P3',  # P3 de los peajes de acceso 3.0TD, 3.0TDVE, 6.1TD, 6.1TDVE, 6.2TD. 6.3TD. 6.4TD
@@ -50,6 +52,8 @@ PERIODE_OCSUM = {
     'A6': 'P6',  # P6 de los peajes de acceso 3.0TD, 3.0TDVE, 6.1TD, 6.1TDVE, 6.2TD. 6.3TD. 6.4TD
 
 }
+
+PERIODES_NO_TD = [x for x in PERIODE_OCSUM.keys() if x[0] not in ['A', '9']]
 
 CODIS_REG_REFACT = {
     'RGT42011': '40',
@@ -82,6 +86,65 @@ CODIS_AUTOCONSUM = {
 
 # Totalitzadors a ignorar
 SKIP_TOTALITZADORS = ('00', '60')
+
+PERIODES_PER_TARIFA = {
+    '018': {
+        'A': 3,
+        'S': 3,
+        'R': 3,
+        'RC': 3,
+        'M': 2,
+        'EP': 2,
+    },
+    '019': {
+        'A': 6,
+        'S': 6,
+        'R': 6,
+        'RC': 6,
+        'M': 6,
+        'EP': 6,
+    },
+    '021': {
+        'A': 6,
+        'S': 6,
+        'R': 6,
+        'RC': 6,
+        'M': 6,
+        'EP': 6,
+    },
+    '022': {
+        'A': 6,
+        'S': 6,
+        'R': 6,
+        'RC': 6,
+        'M': 6,
+        'EP': 6,
+    },
+    '023': {
+        'A': 6,
+        'S': 6,
+        'R': 6,
+        'RC': 6,
+        'M': 6,
+        'EP': 6,
+    },
+    '024': {
+        'A': 6,
+        'S': 6,
+        'R': 6,
+        'RC': 6,
+        'M': 6,
+        'EP': 6,
+    },
+    '025': {
+        'A': 6,
+        'S': 6,
+        'R': 6,
+        'RC': 6,
+        'M': 6,
+        'EP': 6,
+    },
+}
 
 
 class F1(Message):
@@ -1360,7 +1423,10 @@ class Integrador(object):
 
     @property
     def periode(self):
-        return PERIODE_OCSUM.get(self.codigo_periodo, None)
+        p = PERIODE_OCSUM.get(self.codigo_periodo, None)
+        if not p and self.codigo_periodo in PERIODE_OCSUM.values():
+            return self.codigo_periodo
+        return p
 
     @property
     def gir_comptador(self):
@@ -1458,7 +1524,7 @@ class ModeloAparato(object):
     def get_dates_inici_i_final(self):
         data_inici = ''
         data_final = ''
-        for lect in self.get_lectures():
+        for lect in self.get_lectures(force_no_transforma_no_td_a_td=True):
             data_in_compt = datetime.strptime(
                 lect.lectura_desde.fecha, '%Y-%m-%d'
             )
@@ -1473,7 +1539,7 @@ class ModeloAparato(object):
 
         return data_inici, data_final
 
-    def get_lectures(self, tipus=None):
+    def get_lectures(self, tipus=None, force_no_transforma_no_td_a_td=False):
         """Retorna totes les lectures en una llista de Lectura"""
         lectures = []
         try:
@@ -1493,6 +1559,9 @@ class ModeloAparato(object):
             # Si nomes ens envien el P0 de excedents pero ens cobren varis periodes
             # creem una lectura e P2 AS ficticies a 0 (puta FENOSA)
             lectures.extend(self.factura.get_fake_AS_p2_lectures())
+
+        if not force_no_transforma_no_td_a_td:
+            lectures = self.factura.transforma_no_td_a_td(lectures, tipus=tipus)
         return lectures
 
     def get_lectures_activa(self):
@@ -1613,6 +1682,17 @@ class FacturaATR(Factura):
                 return True
         return False
 
+    def te_lectures_pre_td_amb_tarifa_td(self):
+        if self.datos_factura.tarifa_atr_fact not in TARIFES_TD:
+            return False
+
+        for c in self.get_comptadors():
+            for l in c.get_lectures(force_no_transforma_no_td_a_td=True):
+                if l.codigo_periodo in PERIODES_NO_TD:
+                    return True
+
+        return False
+
     @property
     def potencia(self):
         if hasattr(self.factura, 'Potencia'):
@@ -1675,6 +1755,53 @@ class FacturaATR(Factura):
                 data.append(Medida(d))
         return data
 
+    def transforma_no_td_a_td(self, lectures, tipus=None):
+        if self.datos_factura.tarifa_atr_fact not in TARIFES_TD:
+            return lectures
+
+        if not self.te_lectures_pre_td_amb_tarifa_td():
+            return lectures
+
+        if not tipus:
+            tipus_lectures = ['A', 'S', 'R', 'RC' 'M', 'EP']
+        else:
+            tipus_lectures = tipus
+
+        res = []
+        for t in tipus_lectures:
+            lectures_amb_ajustos = self.get_lectures_amb_periodes_td(lectures, t)
+            res.extend(lectures_amb_ajustos)
+        return res
+
+    def get_lectures_amb_periodes_td(self, lectures, tipus):
+        res = []
+        tarifa_atr = self.datos_factura.tarifa_atr_fact
+        nperiodes_td = PERIODES_PER_TARIFA.get(tarifa_atr, {}).get(tipus, None)
+        if not nperiodes_td:
+            return [x for x in lectures if x.tipus == tipus]
+
+        lectures_per_periode = {}
+        for periode in range(1, nperiodes_td+1):
+            pname = "P"+str(periode)
+            lectures_per_periode[pname] = []
+
+        base_lectura = None
+        for l in lectures:
+            if l.tipus == tipus:
+                lectures_per_periode[l.periode].append(l)
+                base_lectura = l
+
+        if not base_lectura:
+            return [x for x in lectures if x.tipus == tipus]
+
+        for periode in lectures_per_periode:
+            if not lectures_per_periode.get(periode) and base_lectura:
+                aux = self.get_fake_pX_lectura(tipus, periode, base_lectura)
+                res.append(aux)
+            else:
+                res.extend(lectures_per_periode.get(periode))
+        return res
+
     def get_consum_facturat(self, tipus, periode=None):
         if tipus not in ['A', 'S']:
             return None
@@ -1730,7 +1857,7 @@ class FacturaATR(Factura):
                     if periode_activa.nombre not in res:
                         res[periode_activa.nombre] = True
 
-        else:  # if tipus == 'S':
+        elif tipus == 'S':
             for concepte in self.conceptos_repercutibles:
                 if concepte.concepto_repercutible[0] == '7' and concepte.concepto_repercutible not in res:
                     res[concepte.concepto_repercutible] = True
@@ -1792,6 +1919,39 @@ class FacturaATR(Factura):
                     new_integrador.lectura_hasta = l2
                     res.append(new_integrador)
         return res
+
+    def get_fake_pX_lectura(self, tipus, periode, base_info):
+        l1 = Lectura(None)
+        l1.fecha = base_info.lectura_desde.fecha
+        l1.lectura = 0
+        l1.procedencia = base_info.lectura_desde.procedencia
+        l2 = Lectura(None)
+        l2.fecha = base_info.lectura_hasta.fecha
+        l2.lectura = 0
+        l2.procedencia = base_info.lectura_hasta.procedencia
+
+        new_integrador = Integrador(None)
+        new_integrador.magnitud = {v: k for k, v in MAGNITUDS_OCSUM.iteritems()}.get(tipus, tipus)
+        new_integrador.numero_ruedas_enteras = base_info.numero_ruedas_enteras
+        new_integrador.codigo_periodo = periode
+        new_integrador.lectura_desde = l1
+        new_integrador.lectura_hasta = l2
+
+        # consums_desitjats = self.get_consum_facturat(tipus=tipus, periode=periode)
+        # if consums_desitjats and len(consums_desitjats) > 1:
+        #     raise Exception("No es poden calcular els ajustos de les lectures perque hi ha varis consums per 1 periode")
+        # elif consums_desitjats:
+        #     consum = consums_desitjats[0]
+        #     if not new_integrador.ajuste:
+        #         new_integrador.ajuste = Ajuste(None)
+        #     new_integrador.ajuste = Ajuste(new_integrador.ajuste.ajuste)
+        #     old_ajust = new_integrador.ajuste and new_integrador.ajuste.ajuste_por_integrador or 0.0
+        #     new_val = consum - (l2.lectura - l1.lectura + old_ajust)
+        #     if new_val != (l2.lectura - l1.lectura + old_ajust):
+        #         new_integrador.ajuste.ajuste_por_integrador = consum - (l2.lectura - l1.lectura)
+        #         new_integrador.ajuste.codigo_motivo = "99"
+
+        return new_integrador
 
     def get_fake_AS_p2_lectures(self):
         res = []
