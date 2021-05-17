@@ -2065,7 +2065,15 @@
 			014	6.3	
 			015	6.4	
 			016	6.5
-			017 	6.1B
+			017 6.1B
+			018	2.0TD
+			019	3.0TD
+			020	6.1TD
+			021	6.2TD
+			022	6.3TD
+			023	6.4TD
+			024	3.0TDVE
+			025	6.1TDVE
 		</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2083,6 +2091,14 @@
 			<xs:enumeration value="015"/>
 			<xs:enumeration value="016"/>
 			<xs:enumeration value="017"/>
+			<xs:enumeration value="018"/>
+			<xs:enumeration value="019"/>
+			<xs:enumeration value="020"/>
+			<xs:enumeration value="021"/>
+			<xs:enumeration value="022"/>
+			<xs:enumeration value="023"/>
+			<xs:enumeration value="024"/>
+			<xs:enumeration value="025"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TarifaATRFact">
@@ -3401,7 +3417,7 @@ la reclamacion
 	</xs:simpleType>
 	<xs:simpleType name="X11">
 		<xs:restriction base="xs:string">
-			<xs:minLength value="5"/>
+			<xs:minLength value="11"/>
 			<xs:maxLength value="11"/>
 		</xs:restriction>
 	</xs:simpleType>
