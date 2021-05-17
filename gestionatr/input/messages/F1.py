@@ -1560,7 +1560,7 @@ class ModeloAparato(object):
             # creem una lectura e P2 AS ficticies a 0 (puta FENOSA)
             lectures.extend(self.factura.get_fake_AS_p2_lectures())
 
-        if not force_no_transforma_no_td_a_td:
+        if not force_no_transforma_no_td_a_td and self.factura:
             lectures = self.factura.transforma_no_td_a_td(lectures, tipus=tipus)
         return lectures
 
