@@ -203,7 +203,7 @@ class Potencia(XmlModel):
         self.termino_potencia = TerminoPotencia()
         self.penalizacion_no_icp = XmlField('PenalizacionNoICP')
         self.importe_total_termino_potencia = XmlField(
-            'ImporteTotalTerminoPotencia'
+            'ImporteTotalTerminoPotencia', rep=rep_decimal(2)
         )
         super(Potencia, self).__init__('Potencia', 'potencia')
 
@@ -328,7 +328,7 @@ class EnergiaReactiva(XmlModel):
         self.energia_reactiva = XmlField('EnergiaReactiva')
         self.termino_energia_reactiva = TerminoEnergiaReactiva()
         self.importe_total_energia_reactiva = XmlField(
-            'ImporteTotalEnergiaReactiva'
+            'ImporteTotalEnergiaReactiva', rep=rep_decimal(2)
         )
         super(EnergiaReactiva, self).__init__(
             'EnergiaReactiva', 'energia_reactiva'
@@ -346,7 +346,7 @@ class EnergiaCapacitiva(XmlModel):
         self.energia_capacitiva = XmlField('EnergiaCapacitiva')
         self.termino_energia_capacitiva = TerminoEnergiaCapacitiva()
         self.importe_total_energia_capacitiva = XmlField(
-            'ImporteTotalEnergiaCapacitiva'
+            'ImporteTotalEnergiaCapacitiva', rep=rep_decimal(2)
         )
         super(EnergiaCapacitiva, self).__init__(
             'EnergiaCapacitiva', 'energia_capacitiva'
@@ -364,7 +364,7 @@ class EnergiaNetaGen(XmlModel):
         self.energia_neta_gen = XmlField('EnergiaNetaGen')
         self.termino_energia_neta_gen = TerminoEnergiaNetaGen()
         self.total_energia_neta_gen = XmlField(
-            'TotalEnergiaNetaGenBeta'
+            'TotalEnergiaNetaGenBeta', rep=rep_decimal(2)
         )
         super(EnergiaNetaGen, self).__init__(
             'EnergiaNetaGen', 'energia_neta_gen'
@@ -381,7 +381,7 @@ class EnergiaAutoconsumida(XmlModel):
         self.energia_autoconsumida = XmlField('EnergiaAutoconsumida')
         self.termino_energia_autoconsumida = TerminoEnergiaAutoconsumida()
         self.importe_total_energia_activa_autoconsumida = XmlField(
-            'ImporteTotalEnergiaActivaAutoconsumida'
+            'ImporteTotalEnergiaActivaAutoconsumida', rep=rep_decimal(2)
         )
         super(EnergiaAutoconsumida, self).__init__(
             'EnergiaAutoconsumida', 'energia_autoconsumida'
@@ -399,7 +399,7 @@ class EnergiaExcedentaria(XmlModel):
         self.energia_excedentaria = XmlField('EnergiaExcedentaria')
         self.termino_energia_excedentaria = TerminoEnergiaExcedentaria()
         self.valor_total_energia_excedentaria = XmlField(
-            'ValorTotalEnergiaExcedentaria'
+            'ValorTotalEnergiaExcedentaria', rep=rep_decimal(2)
         )
         super(EnergiaExcedentaria, self).__init__(
             'EnergiaExcedentaria', 'energia_excedentaria'
@@ -418,7 +418,7 @@ class Cargo(XmlModel):
         self.tipo_cargo = XmlField('TipoCargo')
         self.termino_cargo = TerminoCargo()
         self.total_importe_tipo_cargo = XmlField(
-            'TotalImporteTipoCargo'
+            'TotalImporteTipoCargo', rep=rep_decimal(2)
         )
         super(Cargo, self).__init__(
             'Cargo', 'cargo'
@@ -643,7 +643,7 @@ class Cargos(XmlModel):
     def __init__(self):
         self.cargos = XmlField('Cargos')
         self.cargo_list = Cargo()
-        self.total_importe_cargos = XmlField('TotalImporteCargos')
+        self.total_importe_cargos = XmlField('TotalImporteCargos', rep=rep_decimal(2))
         super(Cargos, self).__init__(
             'Cargos', 'cargos'
         )
