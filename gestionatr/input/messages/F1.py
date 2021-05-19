@@ -842,10 +842,9 @@ class PeriodoEnergiaCapacitiva(Periodo):
         return None
 
 
-class PeriodoEnergiaNetaGen(object):
+class PeriodoEnergiaNetaGen(Periodo):
 
-    def __init__(self, data):
-        self.periodo = data
+    NOMBRE_CANTIDAD = 'ValorEnergiaNetaGen'
 
     @property
     def valor_energia_neta_gen(self):
@@ -866,10 +865,10 @@ class PeriodoEnergiaNetaGen(object):
         return None
 
 
-class PeriodoEnergiaAutoconsumida(object):
+class PeriodoEnergiaAutoconsumida(Periodo):
 
-    def __init__(self, data):
-        self.periodo = data
+    NOMBRE_CANTIDAD = 'ValorEnergiaAutoconsumida'
+    NOMBRE_PRECIO = "PagoTDA"
 
     @property
     def valor_energia_autoconsumida(self):
@@ -884,10 +883,9 @@ class PeriodoEnergiaAutoconsumida(object):
         return None
 
 
-class PeriodoEnergiaExcedentaria(object):
+class PeriodoEnergiaExcedentaria(Periodo):
 
-    def __init__(self, data):
-        self.periodo = data
+    NOMBRE_CANTIDAD = 'ValorEnergiaExcedentaria'
 
     @property
     def valor_energia_excedentaria(self):
@@ -973,19 +971,15 @@ class InstalacionGenAutoconsumo(object):
 
     @property
     def energia_neta_gen(self):
-        data = []
         if hasattr(self.instalacion_gen_autoconsumo, 'EnergiaNetaGen'):
-            for d in self.instalacion_gen_autoconsumo.EnergiaNetaGen:
-                data.append(EnergiaNetaGen(d))
-        return data
+            return EnergiaNetaGen(self.instalacion_gen_autoconsumo.EnergiaNetaGen)
+        return None
 
     @property
     def energia_autoconsumida(self):
-        data = []
         if hasattr(self.instalacion_gen_autoconsumo, 'EnergiaAutoconsumida'):
-            for d in self.instalacion_gen_autoconsumo.EnergiaAutoconsumida:
-                data.append(EnergiaAutoconsumida(d))
-        return data
+            return EnergiaAutoconsumida(self.instalacion_gen_autoconsumo.EnergiaAutoconsumida)
+        return None
 
 
 class EnergiaReactiva(object):
@@ -1128,12 +1122,10 @@ class Autoconsumo(object):
         return data
 
     @property
-    def energia_autoconsumida(self):
-        data = []
+    def energia_excedentaria(self):
         if hasattr(self.autoconsumo, 'EnergiaExcedentaria'):
-            for d in self.autoconsumo.EnergiaExcedentaria:
-                data.append(EnergiaExcedentaria(d))
-        return data
+            return EnergiaExcedentaria(self.autoconsumo.EnergiaExcedentaria)
+        return None
 
 
 class Cargos(object):
@@ -1426,6 +1418,8 @@ class Integrador(object):
         p = PERIODE_OCSUM.get(self.codigo_periodo, None)
         if not p and self.codigo_periodo in PERIODE_OCSUM.values():
             return self.codigo_periodo
+        if self.codigo_periodo == '93' and p == 'P3' and self.magnitud in ('PM', 'EP'):
+            return "P2"
         return p
 
     @property
@@ -1674,9 +1668,14 @@ class FacturaATR(Factura):
             ('energia_cargos', self.get_info_energia_cargos),
             ('reactiva', self.get_info_reactiva),
             ('lloguer', self.get_info_lloguer),
+            ('generacio', self.get_info_generacio),
+            ('generacio_neta', self.get_info_generacio_neta),
+            ('autoconsum', self.get_info_autoconsumo),
         ]
 
     def te_autoconsum(self):
+        if self.datos_factura and self.datos_factura.tipo_autoconsumo and self.datos_factura.tipo_autoconsumo not in ['00', '01', '2A', '2B', '2G']:
+            return True
         for concepte in self.conceptos_repercutibles:
             if concepte.concepto_repercutible in CODIS_AUTOCONSUM.keys():
                 return True
@@ -1818,9 +1817,15 @@ class FacturaATR(Factura):
 
         if tipus == 'S':
             res = []
-            for concepte in self.conceptos_repercutibles:
-                if concepte.concepto_repercutible[0] == '7' and (not periode or concepte.concepto_repercutible[1] == periode[1]):
-                    res.append(concepte.unidades)
+            if self.autoconsumo and self.autoconsumo.energia_excedentaria:
+                for terme in self.autoconsumo.energia_excedentaria.terminos_energia_excedentaria:
+                    for periode_ex in terme.periodos:
+                        if periode_ex.nombre == periode or not periode:
+                            res.append(periode_ex.cantidad)
+            else:
+                for concepte in self.conceptos_repercutibles:
+                    if concepte.concepto_repercutible[0] == '7' and (not periode or concepte.concepto_repercutible[1] == periode[1]):
+                        res.append(concepte.unidades)
             return res
 
         return None
@@ -1843,6 +1848,15 @@ class FacturaATR(Factura):
             del res['P1']
         return res
 
+    def get_consums_autoconsumida_a_facturar(self):
+        res = {}
+        info, total = self.get_info_autoconsumo()
+        for periode in info:
+            if periode.nombre not in res:
+                res[periode.nombre] = 0.0
+            res[periode.nombre] += periode.cantidad
+        return res
+
     def get_lectures_amb_ajust_autoconsum(self, tipus='S', ajust_balancejat=True, motiu_ajust="98"):
         return self.get_lectures_amb_ajust_quadrat_amb_consum(tipus=tipus, ajust_balancejat=ajust_balancejat, motiu_ajust=motiu_ajust)
 
@@ -1861,6 +1875,11 @@ class FacturaATR(Factura):
             for concepte in self.conceptos_repercutibles:
                 if concepte.concepto_repercutible[0] == '7' and concepte.concepto_repercutible not in res:
                     res[concepte.concepto_repercutible] = True
+            if self.autoconsumo and self.autoconsumo.energia_excedentaria:
+                for excedent in self.autoconsumo.energia_excedentaria.terminos_energia_excedentaria:
+                    for periode in excedent.periodos:
+                        if periode.nombre not in res:
+                            res[periode.nombre] = True
 
         return len(res.keys()) != nperiodes_lectures
 
@@ -2105,6 +2124,41 @@ class FacturaATR(Factura):
 
             for activa in self.energia_activa.terminos_energia_activa:
                 periodes += activa.periodos
+
+        return periodes, total
+
+    def get_info_generacio(self):
+        periodes = []
+        total = 0
+
+        if self.autoconsumo and self.autoconsumo.energia_excedentaria:
+            total = 0
+
+            for activa in self.autoconsumo.energia_excedentaria.terminos_energia_excedentaria:
+                periodes += activa.periodos
+
+        return periodes, total
+
+    def get_info_generacio_neta(self):
+        periodes = []
+        total = 0
+
+        if self.autoconsumo and self.autoconsumo.instalacion_gen_autoconsumo:
+            for inst in self.autoconsumo.instalacion_gen_autoconsumo:
+                for activa in inst.energia_neta_gen.terminos_energia_neta_gen:
+                    periodes += activa.periodos
+
+        return periodes, total
+
+    def get_info_autoconsumo(self):
+        periodes = []
+        total = 0
+
+        if self.autoconsumo and self.autoconsumo.instalacion_gen_autoconsumo:
+            for inst in self.autoconsumo.instalacion_gen_autoconsumo:
+                total += inst.energia_autoconsumida.importe_total
+                for activa in inst.energia_autoconsumida.terminos_energia_autoconsumida:
+                    periodes += activa.periodos
 
         return periodes, total
 
