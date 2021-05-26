@@ -392,7 +392,7 @@ class EnergiaExcedentaria(XmlModel):
 
     _sort_order = (
         'energia_excedentaria', 'termino_energia_excedentaria',
-        'importe_total_energia_excedentaria'
+        'valor_total_energia_excedentaria'
     )
 
     def __init__(self):

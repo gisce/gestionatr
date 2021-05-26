@@ -476,11 +476,25 @@ class Factura(object):
 
     def get_coeficient_repartiment(self):
         try:
+            if self.factura.Autoconsumo and self.factura.Autoconsumo.InstalacionGenAutoconsumo:
+                beta_list = []
+                for instalacio in self.factura.Autoconsumo.InstalacionGenAutoconsumo:
+                    if instalacio.EnergiaNetaGen:
+                        for terme in instalacio.EnergiaNetaGen.TerminoEnergiaNetaGen:
+                            for periode in terme.Periodo:
+                                beta_list.append(float(periode.Beta.text))
+                return list(set(beta_list))
+        except AttributeError:
+            # We might not have any "Coeficient de repartiment" in EnergiaNetaGen
+            pass
+
+    def get_coeficient_repartiment_from_cr(self):
+        try:
             for concepte in self.conceptos_repercutibles:
                 if concepte.concepto_repercutible == '82':
                     return concepte.unidades
         except AttributeError:
-            # We might not have any "Coeficient de repartiment"
+            # We might not have any "Coeficient de repartiment" in conceptos repercutibles
             pass
 
     def get_info_conceptes_repercutibles(self):
