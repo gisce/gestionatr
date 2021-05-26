@@ -41,6 +41,8 @@
                 </DatosGeneralesFactura>
                 <DatosFacturaATR>
                     <FechaBOE>2016-12-23</FechaBOE>
+					<TipoAutoconsumo>00</TipoAutoconsumo>
+					<DuracionInfAnio>N</DuracionInfAnio>
                     <TarifaATRFact>017</TarifaATRFact>
                     <ModoControlPotencia>2</ModoControlPotencia>
                     <MarcaMedidaConPerdidas>N</MarcaMedidaConPerdidas>
@@ -50,6 +52,7 @@
                         <FechaHastaFactura>2017-03-31</FechaHastaFactura>
                         <NumeroDias>31</NumeroDias>
                     </Periodo>
+					<TipoPM>01</TipoPM>
                 </DatosFacturaATR>
             </DatosGeneralesFacturaATR>
             <Potencia>
@@ -61,36 +64,42 @@
                         <PotenciaMaxDemandada>450000</PotenciaMaxDemandada>
                         <PotenciaAFacturar>450000</PotenciaAFacturar>
                         <PrecioPotencia>0.000084989</PrecioPotencia>
+						<RecargoInfAnio>0.00</RecargoInfAnio>
                     </Periodo>
                     <Periodo>
                         <PotenciaContratada>500000</PotenciaContratada>
                         <PotenciaMaxDemandada>500000</PotenciaMaxDemandada>
                         <PotenciaAFacturar>500000</PotenciaAFacturar>
                         <PrecioPotencia>0.000042531</PrecioPotencia>
+						<RecargoInfAnio>0.00</RecargoInfAnio>
                     </Periodo>
                     <Periodo>
                         <PotenciaContratada>500000</PotenciaContratada>
                         <PotenciaMaxDemandada>333000</PotenciaMaxDemandada>
                         <PotenciaAFacturar>500000</PotenciaAFacturar>
                         <PrecioPotencia>0.000031126</PrecioPotencia>
+						<RecargoInfAnio>0.00</RecargoInfAnio>
                     </Periodo>
                     <Periodo>
                         <PotenciaContratada>500000</PotenciaContratada>
                         <PotenciaMaxDemandada>618000</PotenciaMaxDemandada>
                         <PotenciaAFacturar>500000</PotenciaAFacturar>
                         <PrecioPotencia>0.000031126</PrecioPotencia>
+						<RecargoInfAnio>0.00</RecargoInfAnio>
                     </Periodo>
                     <Periodo>
                         <PotenciaContratada>500000</PotenciaContratada>
                         <PotenciaMaxDemandada>500000</PotenciaMaxDemandada>
                         <PotenciaAFacturar>500000</PotenciaAFacturar>
                         <PrecioPotencia>0.000031126</PrecioPotencia>
+						<RecargoInfAnio>0.00</RecargoInfAnio>
                     </Periodo>
                     <Periodo>
                         <PotenciaContratada>725000</PotenciaContratada>
                         <PotenciaMaxDemandada>462000</PotenciaMaxDemandada>
                         <PotenciaAFacturar>725000</PotenciaAFacturar>
                         <PrecioPotencia>0.000014202</PrecioPotencia>
+						<RecargoInfAnio>0.00</RecargoInfAnio>
                     </Periodo>
                 </TerminoPotencia>
                 <PenalizacionNoICP>N</PenalizacionNoICP>
