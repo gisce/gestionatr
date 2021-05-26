@@ -1116,11 +1116,14 @@ class ModeloAparato(object):
         except AttributeError:
             pass
 
-        if (not tipus or "S" in tipus) and self.factura and self.factura.get_consum_facturat(tipus='S', periode=None) and not self.factura.has_AS_lectures():
+        if (not tipus or "S" in tipus) and self.factura and self.factura.get_consum_facturat(tipus='S', periode=None) \
+                and not self.factura.has_AS_lectures():
             # Si no tenim lectures AS pero si que ens han cobrat excedents,
             # creem unes lectures AS ficticies a 0 (puta ENDESA)
             lectures.extend(self.factura.get_fake_AS_lectures())
-        if (not tipus or "S" in tipus) and self.factura and self.factura.has_AS_lectures_only_p0() and len(self.factura.get_consum_facturat(tipus='S', periode=None)) > 1:
+        if (not tipus or "S" in tipus) and self.factura and self.factura.has_AS_lectures_only_p0() \
+                and len(self.factura.get_consum_facturat(tipus='S', periode=None)) > 1 \
+                and self.factura.datos_factura.tarifa_atr_fact not in ['001', '005']:
             # Si nomes ens envien el P0 de excedents pero ens cobren varis periodes
             # creem una lectura e P2 AS ficticies a 0 (puta FENOSA)
             lectures.extend(self.factura.get_fake_AS_p2_lectures())
@@ -1328,7 +1331,7 @@ class FacturaATR(Factura):
                 if concepte.concepto_repercutible[0] == '7' and concepte.concepto_repercutible not in res:
                     res[concepte.concepto_repercutible] = True
 
-        return len(res.keys()) != nperiodes_lectures
+        return len(res.keys()) * 2 == nperiodes_lectures
 
     def has_AS_lectures(self):
         for medida in self.medidas:
