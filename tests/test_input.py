@@ -2041,7 +2041,7 @@ class test_F1(unittest.TestCase):
         self.assertEqual(concepto_enganche.tipo_impositivo, u'1')
         self.assertEqual(concepto_enganche.fecha_operacion, u'2016-09-01')
         self.assertEqual(concepto_enganche.unidades, 1)
-        self.assertEqual(concepto_enganche.precio_unidad, 9.04476)
+        self.assertEqual(concepto_enganche.precio_unidad, 9.04)
         self.assertEqual(concepto_enganche.importe, 9.04)
         self.assertEqual(
             concepto_enganche.comentarios,
@@ -2052,7 +2052,7 @@ class test_F1(unittest.TestCase):
         self.assertEqual(concepto_verificacion.tipo_impositivo, u'1')
         self.assertEqual(concepto_verificacion.fecha_operacion, u'2016-09-01')
         self.assertEqual(concepto_verificacion.unidades, 1)
-        self.assertEqual(concepto_verificacion.precio_unidad, 8.011716)
+        self.assertEqual(concepto_verificacion.precio_unidad, 8.01)
         self.assertEqual(concepto_verificacion.importe, 8.01)
         self.assertEqual(
             concepto_verificacion.comentarios, u'Cuota de verificación BT'
@@ -2063,8 +2063,8 @@ class test_F1(unittest.TestCase):
         self.assertEqual(concepto_demora.fecha_desde, u'2016-09-01')
         self.assertEqual(concepto_demora.fecha_hasta, u'2016-10-01')
         self.assertEqual(concepto_demora.unidades, 1)
-        self.assertEqual(concepto_demora.precio_unidad, 1.0)
-        self.assertEqual(concepto_demora.importe, 1.0)
+        self.assertEqual(concepto_demora.precio_unidad, 1.00)
+        self.assertEqual(concepto_demora.importe, 1.00)
         self.assertEqual(
             concepto_demora.comentarios, u'Intereses de demora'
         )
@@ -2290,7 +2290,7 @@ class test_F1(unittest.TestCase):
         self.assertEqual(line_eng.tipo_impositivo, u'1')
         self.assertEqual(line_eng.fecha_operacion, u'2016-09-01')
         self.assertEqual(line_eng.unidades, 1)
-        self.assertEqual(line_eng.precio_unidad, 9.04476)
+        self.assertEqual(line_eng.precio_unidad, 9.04)
         self.assertEqual(line_eng.importe, 9.04)
         self.assertEqual(
             line_eng.comentarios,
@@ -2301,7 +2301,7 @@ class test_F1(unittest.TestCase):
         self.assertEqual(line_ver.tipo_impositivo, u'1')
         self.assertEqual(line_ver.fecha_operacion, u'2016-09-01')
         self.assertEqual(line_ver.unidades, 1)
-        self.assertEqual(line_ver.precio_unidad, 8.011716)
+        self.assertEqual(line_ver.precio_unidad, 8.01)
         self.assertEqual(line_ver.importe, 8.01)
         self.assertEqual(
             line_ver.comentarios, u'Cuota de verificación BT'

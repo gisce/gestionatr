@@ -69,7 +69,7 @@
                     </Periodo>
                 </TerminoPotencia>
                 <PenalizacionNoICP>N</PenalizacionNoICP>
-                <ImporteTotalTerminoPotencia>50</ImporteTotalTerminoPotencia>
+                <ImporteTotalTerminoPotencia>50.00</ImporteTotalTerminoPotencia>
             </Potencia>
             <EnergiaActiva>
                 <TerminoEnergiaActiva>

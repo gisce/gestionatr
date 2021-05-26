@@ -899,7 +899,7 @@ class ConceptoRepercutible(XmlModel):
         'importe_total_concepto_repercutible', 'comentarios'
     )
 
-    def __init__(self):
+    def __init__(self, drop_empty=False):
         self.concepto_repercutible_fact = XmlField('ConceptoRepercutible')
         self.concepto_repercutible = XmlField('ConceptoRepercutible')
         self.tipo_impositivo_concepto_repercutible = XmlField(
@@ -912,10 +912,10 @@ class ConceptoRepercutible(XmlModel):
             'UnidadesConceptoRepercutible'
         )
         self.precio_unidad_concepto_repercutible = XmlField(
-            'PrecioUnidadConceptoRepercutible'
+            'PrecioUnidadConceptoRepercutible', rep=rep_decimal(2)
         )
         self.importe_total_concepto_repercutible = XmlField(
-            'ImporteTotalConceptoRepercutible'
+            'ImporteTotalConceptoRepercutible', rep=rep_decimal(2)
         )
         self.comentarios = XmlField('Comentarios')
         super(ConceptoRepercutible, self).__init__(

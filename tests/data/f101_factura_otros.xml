@@ -47,7 +47,7 @@
                 <TipoImpositivoConceptoRepercutible>1</TipoImpositivoConceptoRepercutible>
                 <FechaOperacion>2016-09-01</FechaOperacion>
                 <UnidadesConceptoRepercutible>1.0</UnidadesConceptoRepercutible>
-                <PrecioUnidadConceptoRepercutible>9.04476</PrecioUnidadConceptoRepercutible>
+                <PrecioUnidadConceptoRepercutible>9.04</PrecioUnidadConceptoRepercutible>
                 <ImporteTotalConceptoRepercutible>9.04</ImporteTotalConceptoRepercutible>
                 <Comentarios>Cuota de enganche / Act. en equipos BT</Comentarios>
             </ConceptoRepercutible>
@@ -56,7 +56,7 @@
                 <TipoImpositivoConceptoRepercutible>1</TipoImpositivoConceptoRepercutible>
                 <FechaOperacion>2016-09-01</FechaOperacion>
                 <UnidadesConceptoRepercutible>1.0</UnidadesConceptoRepercutible>
-                <PrecioUnidadConceptoRepercutible>8.011716</PrecioUnidadConceptoRepercutible>
+                <PrecioUnidadConceptoRepercutible>8.01</PrecioUnidadConceptoRepercutible>
                 <ImporteTotalConceptoRepercutible>8.01</ImporteTotalConceptoRepercutible>
                 <Comentarios>Cuota de verificación BT</Comentarios>
             </ConceptoRepercutible>
@@ -66,8 +66,8 @@
                 <FechaDesde>2016-09-01</FechaDesde>
                 <FechaHasta>2016-10-01</FechaHasta>
                 <UnidadesConceptoRepercutible>1.0</UnidadesConceptoRepercutible>
-                <PrecioUnidadConceptoRepercutible>1.0</PrecioUnidadConceptoRepercutible>
-                <ImporteTotalConceptoRepercutible>1.0</ImporteTotalConceptoRepercutible>
+                <PrecioUnidadConceptoRepercutible>1.00</PrecioUnidadConceptoRepercutible>
+                <ImporteTotalConceptoRepercutible>1.00</ImporteTotalConceptoRepercutible>
                 <Comentarios>Intereses de demora</Comentarios>
             </ConceptoRepercutible>
             <IVA>

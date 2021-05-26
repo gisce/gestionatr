@@ -4976,7 +4976,7 @@ class test_F1(unittest.TestCase):
             {
                 'fecha_desde': '2017-03-31',
                 'fecha_hasta': '2017-04-30',
-                'periodo': periodos_potencia,
+                'periodos': periodos_potencia,
             }
         )
 
