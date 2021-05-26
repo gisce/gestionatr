@@ -536,8 +536,6 @@ class Factura(object):
             if not res.get(tipus_join):
                 continue
             base = 1.0
-            if tipus == 'potencia_cargos':
-                base = 0.001
             res[tipus_join]['total'] += info['total']
             for l in info['lines']:
                 for l2 in res[tipus_join]['lines']:
