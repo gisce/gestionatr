@@ -23,7 +23,7 @@
             <TipoAutoconsumo>00</TipoAutoconsumo>
             <TipoContratoATR>02</TipoContratoATR>
             <CondicionesContractuales>
-                <TarifaATR>003</TarifaATR>
+                <TarifaATR>018</TarifaATR>
                 <PotenciasContratadas>
                     <Potencia Periodo='1'>1000</Potencia>
                     <Potencia Periodo='2'>2000</Potencia>
