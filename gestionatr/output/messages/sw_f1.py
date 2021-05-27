@@ -597,7 +597,7 @@ class PeriodoCargo(XmlModel):
     def __init__(self):
         self.periodo = XmlField('Periodo')
         self.energia = XmlField('Energia', rep=rep_decimal(2))
-        self.potencia = XmlField('Potencia', rep=rep_decimal(2))
+        self.potencia = XmlField('Potencia', rep=rep_entera2)
         self.precio_cargo = XmlField('PrecioCargo', rep=rep_decimal(9))
         super(PeriodoCargo, self).__init__('Periodo', 'periodo')
 
