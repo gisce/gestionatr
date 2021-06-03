@@ -1841,6 +1841,8 @@ class FacturaATR(Factura):
                 for concepte in self.conceptos_repercutibles:
                     if concepte.concepto_repercutible[0] == '7' and (not periode or concepte.concepto_repercutible[1] == periode[1]):
                         res.append(concepte.unidades)
+            if not res:
+                res.append(0.0)
             return res
 
         return None
