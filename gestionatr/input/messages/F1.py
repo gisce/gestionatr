@@ -482,7 +482,8 @@ class Factura(object):
                     if instalacio.EnergiaNetaGen:
                         for terme in instalacio.EnergiaNetaGen.TerminoEnergiaNetaGen:
                             for periode in terme.Periodo:
-                                beta_list.append(float(periode.Beta.text))
+                                if periode.valor_energia_neta_gen:
+                                    beta_list.append(float(periode.Beta.text))
                 return list(set(beta_list))
         except AttributeError:
             # We might not have any "Coeficient de repartiment" in EnergiaNetaGen
