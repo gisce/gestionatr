@@ -1795,6 +1795,12 @@ class FacturaATR(Factura):
         if not nperiodes_td:
             return [x for x in lectures if x.tipus == tipus]
 
+        lectures_by_date = {}
+        for l in lectures:
+            if l.lectura_desde.fecha not in lectures_by_date:
+                lectures_by_date[l.lectura_desde.fecha] = []
+            lectures_by_date[l.lectura_desde.fecha].append(l)
+
         lectures_per_periode = {}
         for periode in range(1, nperiodes_td+1):
             pname = "P"+str(periode)
@@ -1811,10 +1817,28 @@ class FacturaATR(Factura):
 
         for periode in lectures_per_periode:
             if not lectures_per_periode.get(periode) and base_lectura:
-                aux = self.get_fake_pX_lectura(tipus, periode, base_lectura)
-                res.append(aux)
+                try:
+                    for ldate in lectures_by_date.keys():
+                        base_lectura = lectures_by_date[ldate][0]
+                        aux = self.get_fake_pX_lectura(tipus, periode, base_lectura)
+                        res.append(aux)
+                except:
+                    # Lo de dal es una mandanga que es una basura que estem obligats a fer. Si falla, no vull que falli
+                    # la resta del F1. Si es un F1 amb cara i ulls ni hi passara per aqui
+                    pass
             else:
                 res.extend(lectures_per_periode.get(periode))
+                done_reads = [l.lectura_desde.fecha for l in lectures_per_periode.get(periode)]
+                try:
+                    for ldate in lectures_by_date.keys():
+                        if ldate not in done_reads:
+                            base_lectura = lectures_by_date[ldate][0]
+                            aux = self.get_fake_pX_lectura(tipus, periode, base_lectura)
+                            res.append(aux)
+                except:
+                    # Lo de dal es una mandanga que es una basura que estem obligats a fer. Si falla, no vull que falli
+                    # la resta del F1. Si es un F1 amb cara i ulls ni hi passara per aqui
+                    pass
         return res
 
     def get_consum_facturat(self, tipus, periode=None):
