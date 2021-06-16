@@ -1572,6 +1572,7 @@ class ModeloAparato(object):
 
         if not force_no_transforma_no_td_a_td and self.factura:
             lectures = self.factura.transforma_no_td_a_td(lectures, tipus=tipus)
+        lectures = sorted(lectures, key=lambda x: x.lectura_desde.fecha)
         return lectures
 
     def get_lectures_activa(self):
