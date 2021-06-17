@@ -1779,7 +1779,7 @@ class FacturaATR(Factura):
             return lectures
 
         if not tipus:
-            tipus_lectures = ['A', 'S', 'R', 'RC' 'M', 'EP']
+            tipus_lectures = ['A', 'S', 'R', 'RC', 'M', 'EP']
         else:
             tipus_lectures = tipus
 
