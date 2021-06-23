@@ -1834,7 +1834,13 @@ class FacturaATR(Factura):
                     for ldate in lectures_by_date.keys():
                         if ldate not in done_reads:
                             base_lectura = lectures_by_date[ldate][0]
-                            aux = self.get_fake_pX_lectura(tipus, periode, base_lectura)
+                            lectura_desde_val = 0
+                            lectura_hasta_val = 0
+                            for same_period_l in done_reads:
+                                if same_period_l.lectura_desde.fecha == base_lectura.lectura_hasta.fecha:
+                                    lectura_desde_val = same_period_l.lectura_desde.lectura
+                                    lectura_hasta_val = same_period_l.lectura_desde.lectura
+                            aux = self.get_fake_pX_lectura(tipus, periode, base_lectura, lectura_desde=lectura_desde_val, lectura_hasta=lectura_hasta_val)
                             res.append(aux)
                 except:
                     # Lo de dal es una mandanga que es una basura que estem obligats a fer. Si falla, no vull que falli
@@ -1982,14 +1988,14 @@ class FacturaATR(Factura):
                     res.append(new_integrador)
         return res
 
-    def get_fake_pX_lectura(self, tipus, periode, base_info):
+    def get_fake_pX_lectura(self, tipus, periode, base_info, lectura_desde=0, lectura_hasta=0):
         l1 = Lectura(None)
         l1.fecha = base_info.lectura_desde.fecha
-        l1.lectura = base_info.lectura_desde.lectura
+        l1.lectura = lectura_desde
         l1.procedencia = base_info.lectura_desde.procedencia
         l2 = Lectura(None)
         l2.fecha = base_info.lectura_hasta.fecha
-        l2.lectura = base_info.lectura_hasta.lectura
+        l2.lectura = lectura_hasta
         l2.procedencia = base_info.lectura_hasta.procedencia
 
         new_integrador = Integrador(None)
