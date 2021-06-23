@@ -1985,11 +1985,11 @@ class FacturaATR(Factura):
     def get_fake_pX_lectura(self, tipus, periode, base_info):
         l1 = Lectura(None)
         l1.fecha = base_info.lectura_desde.fecha
-        l1.lectura = 0
+        l1.lectura = base_info.lectura_desde.lectura
         l1.procedencia = base_info.lectura_desde.procedencia
         l2 = Lectura(None)
         l2.fecha = base_info.lectura_hasta.fecha
-        l2.lectura = 0
+        l2.lectura = base_info.lectura_hasta.lectura
         l2.procedencia = base_info.lectura_hasta.procedencia
 
         new_integrador = Integrador(None)
