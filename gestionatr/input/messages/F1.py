@@ -1836,7 +1836,7 @@ class FacturaATR(Factura):
                             base_lectura = lectures_by_date[ldate][0]
                             lectura_desde_val = 0
                             lectura_hasta_val = 0
-                            for same_period_l in done_reads:
+                            for same_period_l in lectures_per_periode.get(periode):
                                 if same_period_l.lectura_desde.fecha == base_lectura.lectura_hasta.fecha:
                                     lectura_desde_val = same_period_l.lectura_desde.lectura
                                     lectura_hasta_val = same_period_l.lectura_desde.lectura
