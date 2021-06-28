@@ -1709,6 +1709,17 @@ class FacturaATR(Factura):
 
         return False
 
+    def te_lectures_amb_decimals(self):
+        if self.datos_factura.tarifa_atr_fact not in TARIFES_TD:
+            return False
+
+        for c in self.get_comptadors():
+            for l in c.get_lectures(force_no_transforma_no_td_a_td=True):
+                if not l.ajuste and not l.consumo_calculado.is_integer():
+                    return True
+
+        return False
+
     @property
     def potencia(self):
         if hasattr(self.factura, 'Potencia'):
