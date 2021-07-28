@@ -1839,6 +1839,27 @@ class FacturaATR(Factura):
                     # la resta del F1. Si es un F1 amb cara i ulls ni hi passara per aqui
                     pass
             else:
+                if len(lectures_per_periode.get(periode)) > 1:
+                    oldest = min([l.lectura_desde.fecha for l in lectures_per_periode.get(periode)])
+                    lectua_a_canviar = [x for x in lectures_per_periode.get(periode) if x.lectura_desde.fecha == oldest][0]
+                    must_have_value = [l.lectura_desde.lectura for l in lectures_per_periode.get(periode) if l.lectura_desde.fecha == lectua_a_canviar.lectura_hasta.fecha]
+                    if len(must_have_value) == 1:
+
+                        if not lectua_a_canviar.ajuste:
+                            lectua_a_canviar.ajuste = Ajuste(None)
+                        else:
+                            lectua_a_canviar.ajuste = Ajuste(lectua_a_canviar.ajuste.ajuste)
+                        old_ajust = lectua_a_canviar.ajuste and lectua_a_canviar.ajuste.ajuste_por_integrador or 0.0
+                        consum_original = (lectua_a_canviar.lectura_hasta.lectura - lectua_a_canviar.lectura_desde.lectura + old_ajust)
+
+                        lectua_a_canviar.lectura_hasta = lectua_a_canviar.lectura_hasta
+                        lectua_a_canviar.lectura_hasta.lectura = must_have_value[0]
+
+                        new_val = consum_original - (lectua_a_canviar.lectura_hasta.lectura - lectua_a_canviar.lectura_desde.lectura + old_ajust)
+                        if new_val != (lectua_a_canviar.lectura_hasta.lectura - lectua_a_canviar.lectura_desde.lectura + old_ajust):
+                            lectua_a_canviar.ajuste.ajuste_por_integrador = consum_original - (lectua_a_canviar.lectura_hasta.lectura - lectua_a_canviar.lectura_desde.lectura)
+                            lectua_a_canviar.ajuste.codigo_motivo = '98'
+
                 res.extend(lectures_per_periode.get(periode))
                 done_reads = [l.lectura_desde.fecha for l in lectures_per_periode.get(periode)]
                 try:
