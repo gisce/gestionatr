@@ -2199,6 +2199,7 @@ TAULA_TIPOS_DE_DOCUMENTO = [
     ('04', 'Respuesta a Reclamación'),
     ('05', 'Facturas'),
     ('06', 'Otra documentación del cliente'),
+    ('07', 'Declaración responsable'),
     ('99', 'Otros'),
 ]
 TAULA_TIPOS_DOCUMENTOS_ANEXOS = TAULA_TIPOS_DE_DOCUMENTO
