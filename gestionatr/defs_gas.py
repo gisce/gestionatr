@@ -2187,6 +2187,7 @@ TAULA_TIPOS_DE_SOLICITANTE_RECLAMANTE = [
     ('07', 'Juzgados'),
     ('08', 'Afectado no titular ni usuario del punto de suministro'),
     ('09', 'Asociaciones de Consumidores'),
+    ('11', 'Junta Arbitral de Consumo'),
 ]
 TAULA_TIPO_SOLICITANTE = TAULA_TIPOS_DE_SOLICITANTE_RECLAMANTE
 
