@@ -74,6 +74,24 @@ class A1_38(A1_03):
             return False
 
     @property
+    def gasstationtype(self):
+        tree = '{0}.gasstationtype'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def telemetering(self):
+        tree = '{0}.telemetering'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
     def city(self):
         tree = '{0}.city'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)

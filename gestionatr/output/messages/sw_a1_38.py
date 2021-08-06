@@ -23,14 +23,19 @@ class MensajeA138(XmlModel):
 class A138(XmlModel):
 
     _sort_order = (
-        'a138', 'comreferencenum', 'reqdate', 'reqhour', 'titulartype', 'nationality', 'documenttype', 'documentnum',
-        'firstname', 'familyname1', 'familyname2', 'telephone1', 'telephone2', 'fax', 'email', 'language', 'province',
-        'city', 'zipcode', 'streettype', 'street', 'streetnumber', 'portal', 'staircase', 'floor', 'door',
-        'regularaddress', 'provinceowner', 'cityowner', 'zipcodeowner', 'streettypeowner', 'streetowner',
-        'streetnumberowner', 'portalowner', 'staircaseowner', 'floorowner', 'doorowner', 'cups', 'reqqd', 'reqqh',
-        'reqestimatedqa', 'reqoutgoingpressure', 'gasusetype', 'tolltype', 'counterproperty', 'aptransind',
-        'aptransnumber', 'reig', 'designpower', 'iricertificatedate', 'terminstexist', 'modeffectdate',
-        'reqactivationdate', 'extrainfo', 'productlist', 'registerdoclist'
+        'a138', 'comreferencenum', 'reqdate', 'reqhour', 'titulartype',
+        'nationality', 'documenttype', 'documentnum', 'firstname',
+        'familyname1', 'familyname2', 'telephone1', 'telephone2', 'fax',
+        'email', 'language', 'province', 'city', 'zipcode', 'streettype',
+        'street', 'streetnumber', 'portal', 'staircase', 'floor', 'door',
+        'regularaddress', 'provinceowner', 'cityowner', 'zipcodeowner',
+        'streettypeowner', 'streetowner', 'streetnumberowner', 'portalowner',
+        'staircaseowner', 'floorowner', 'doorowner', 'cups', 'reqqd', 'reqqh',
+        'reqestimatedqa', 'reqoutgoingpressure', 'gasusetype', 'tolltype',
+        'counterproperty', 'aptransind', 'aptransnumber', 'reig',
+        'designpower', 'iricertificatedate', 'terminstexist', 'telemetering',
+        'factmethod', 'gasstationtype', 'modeffectdate', 'reqactivationdate',
+        'extrainfo', 'productlist', 'registerdoclist'
     )
 
     def __init__(self):
@@ -85,6 +90,9 @@ class A138(XmlModel):
         self.designpower = XmlField('designpower')
         self.iricertificatedate = XmlField('iricertificatedate')
         self.terminstexist = XmlField('terminstexist')
+        self.telemetering = XmlField('telemetering')
+        self.factmethod = XmlField('factmethod')
+        self.gasstationtype = XmlField('gasstationtype')
         self.modeffectdate = XmlField('modeffectdate')
         self.reqactivationdate = XmlField('reqactivationdate')
         self.extrainfo = XmlField('extrainfo')
