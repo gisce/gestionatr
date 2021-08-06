@@ -41,3 +41,12 @@ class A1_49(A1_38):
             return data.text
         else:
             return False
+
+    @property
+    def tolltype(self):
+        tree = '{0}.tolltype'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
