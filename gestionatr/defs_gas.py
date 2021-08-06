@@ -2032,6 +2032,20 @@ TAULA_CONCEPTOS_FACTURACION = [
     ('1', '1935', 'Presentación al cobro factura Inspección Periódica de '
                   'IRC realizada por empresa instaladora'),
     ('1', '1936', 'Canon IRC 4'),
+    ('0', '2000', 'Peaje Salida Red Local. Término variable consumo'),
+    ('0', '2001', 'Peaje Salida Red Local. Término fijo cliente'),
+    ('0', '2002', 'Peaje Salida Red Local. Término Fijo Capacidad'),
+    ('0', '2003', 'Peaje Salida Red Local. Caudal demandado'),
+    ('0', '2004', 'Peaje Salida Red Transporte. Término variable consumo'),
+    ('0', '2005', 'Peaje Salida Red Transporte. Término fijo cliente'),
+    ('0', '2006', 'Peaje Salida Red Transporte. Término Fijo Capacidad'),
+    ('0', '2007', 'Peaje Salida Red Transporte. Caudal demandado'),
+    ('0', '2008', 'Otros costes de regasificación. Término fijo cliente'),
+    ('0', '2009', 'Otros costes de regasificación. Término Fijo Capacidad'),
+    ('0', '2010', 'Cargo. Término fijo cliente'),
+    ('0', '2011', 'Cargo. Término Fijo Capacidad'),
+    ('0', '2012', 'Cuota del GTS'),
+    ('0', '2013', 'Tasa CNMC'),
 ]
 TAULA_CONCEPTO_FACTURACION = [(a[1], a[2]) for a in TAULA_CONCEPTOS_FACTURACION]
 
