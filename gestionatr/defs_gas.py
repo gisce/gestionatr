@@ -1732,9 +1732,11 @@ TAULA_RESULTADO_ULTIMA_REVISION = [
     ('02', 'Descripción 02'),
 ]
 TAULA_RANGO_PRESION_DISENO = [
-    ('01', 'Presión <= 4 bar'),
-    ('02', '4 bar < Presión <= 60 bar'),
-    ('03', 'Presión > 60 bar'),
+    ('01', 'NP0: Nivel de presión <= 4 bar'),
+    ('02', 'NP0: Nivel de presión <= 4 bar desde Planta Satélite'),
+    ('03', 'NP1: Nivel de presión 4 bar < Presión <= 16 bar'),
+    ('04', 'NP2: Nivel de presión 16 bar < Presión <= 60 bar'),
+    ('05', 'NP3: Nivel de presión > 60 bar'),
 ]
 TAULA_PERFIL_CONSUMO = [
     ('01', 'Mercado Doméstico'),
