@@ -1648,6 +1648,7 @@ TAULA_MOTIVO_MODIFICACION = [
     ('22', 'Cambio de Peaje, Dirección de Titular y Modificación de Capacidad'),
     ('23', 'Cambio de Titular, Dirección de Titular, Peaje y Modificación de Capacidad'),
     ('24', 'Cambio de Dirección del Punto de Suministro'),
+    ('26', 'Cambio de método de facturación'),
 ]
 TAULA_MOTIVO_DE_MODIFICACION_EN_UN_CAMBIO_DE_COMERCIALIZADOR = [
     ('01', 'Cambio de Titular'),
