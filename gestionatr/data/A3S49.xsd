@@ -88,6 +88,11 @@
 					<documentation>Información sobre si el PS vuelve a la situación anterior en servicio (S) o cortado (N)</documentation>
 				</annotation>
 			</element>
+			<element name="tolltype" type="tns:TollType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de Peaje.</documentation>
+				</annotation>
+			</element>
 			<element name="telemetering" type="tns:FlagType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Dispone de Telemedida</documentation>

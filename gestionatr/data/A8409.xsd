@@ -81,7 +81,7 @@
 					</restriction>
 				</simpleType>
 			</element>
-			<element name="peaje" type="tns:TollType" minOccurs="1" maxOccurs="1">
+			<element name="peaje" type="tns:TollType949C62020" minOccurs="1" maxOccurs="1">
 				<annotation>
 					<documentation>Tipo de Peaje</documentation>
 				</annotation>

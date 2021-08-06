@@ -98,6 +98,11 @@
 					<documentation>Nuevo Peaje.</documentation>
 				</annotation>
 			</element>
+			<element name="finalclientyearlyconsumption" type="tns:QaType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Nuevo caudal anual actual final (kWh/ año).</documentation>
+				</annotation>
+			</element>
 			<element name="nationality" type="tns:NationalityType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Nacionalidad</documentation>
@@ -217,6 +222,11 @@
 			<element name="regularaddress" type="tns:FlagType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Nuevo Uso de la Vivienda del PS</documentation>
+				</annotation>
+			</element>
+			<element name="gasstationtype" type="tns:TipoGasineraType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Indicador de Gasineras</documentation>
 				</annotation>
 			</element>
 			<element name="extrainfo" type="tns:ExtrainfoType" minOccurs="0" maxOccurs="1">

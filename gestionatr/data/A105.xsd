@@ -108,6 +108,11 @@
 					<documentation>Caudal Diario Solicitado.</documentation>
 				</annotation>
 			</element>
+			<element name="newreqestimatedqa" type="tns:QaType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Nuevo consumo caudal anual (kWh/ año).</documentation>
+				</annotation>
+			</element>
 			<element name="newnationality" type="tns:NationalityType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Nueva Nacionalidad.</documentation>
@@ -223,6 +228,16 @@
 			<element name="newdoorowner" type="tns:CodAlpha5Type" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Nueva Puerta del Titular.</documentation>
+				</annotation>
+			</element>
+			<element name="newfactmethod" type="tns:MetodoFacturacionType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Metodo de facturacion</documentation>
+				</annotation>
+			</element>
+			<element name="gasstationtype" type="tns:TipoGasineraType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Indicador de Gasineras</documentation>
 				</annotation>
 			</element>
 			<element name="extrainfo" type="tns:ExtrainfoType" minOccurs="0" maxOccurs="1">

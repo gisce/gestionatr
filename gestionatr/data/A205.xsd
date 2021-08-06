@@ -130,6 +130,11 @@
 					<documentation>Qd Concedida</documentation>
 				</annotation>
 			</element>
+			<element name="clientyearlyconsumption" type="tns:QaType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Consumo anual (kwh/año).</documentation>
+				</annotation>
+			</element>
 			<element name="newmodeffectdate" type="tns:ModeloFechaRespuestaType" minOccurs="0" maxOccurs="1"/>
 			<element name="foreseentransferdate" type="date" minOccurs="0" maxOccurs="1">
 				<annotation>
