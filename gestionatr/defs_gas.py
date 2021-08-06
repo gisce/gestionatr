@@ -1015,13 +1015,13 @@ TAULA_MOTIVOS_DE_RECHAZO_CNMC = [
     ('S17', 'Solo se podrá modificar (i) el tipo de identificador y el identificador o, (ii) nombre y apellidos (razón social)'),
     ('S18', 'Contrato ATR cortado por impago'),
     ('S19', 'No se puede solicitar más de un producto indefinido'),
-    ('S20', 'Todos los peajes asociados al CUPS deben estar asociados al mismo grupo'),
+    ('S20', 'Todos los peajes asociados al CUPS deben ser el mismo peaje'),
     ('S21', 'No se pueden solicitar productos no indefinidos con fecha de activación anterior a la actual. Ni productos diarios con fecha igual a la actual'),
     ('S22', 'La fecha de inicio del producto no se corresponde con el día 1 del mes o trimestre'),
     ('S23', 'Rechazo por cambio de comercializador/baja sobre producto no activado'),
     ('S24', 'Tipo de producto 01 no permitido en nodo productlist'),
     ('S25', 'Telemedida obligatoria'),
-
+    ('S26', 'Incumplimiento condiciones método de facturación'),
 ]
 TAULA_MOTIVO_RECHAZO_OCSUM = TAULA_MOTIVOS_DE_RECHAZO_CNMC
 TAULA_MES = [
