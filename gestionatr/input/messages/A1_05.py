@@ -21,6 +21,15 @@ class A1_05(A1_02):
         else:
             return False
 
+    @property
+    def clientyearlyconsumption(self):
+        tree = '{0}.clientyearlyconsumption'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data not in [None, False]:
+            return data.text
+        else:
+            return False
+
     # Datos paso a305
     @property
     def telephone(self):
@@ -34,6 +43,15 @@ class A1_05(A1_02):
     @property
     def fax(self):
         tree = '{0}.fax'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data not in [None, False]:
+            return data.text
+        else:
+            return False
+
+    @property
+    def finalclientyearlyconsumption(self):
+        tree = '{0}.finalclientyearlyconsumption'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data not in [None, False]:
             return data.text

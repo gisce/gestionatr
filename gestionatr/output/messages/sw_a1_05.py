@@ -24,13 +24,14 @@ class A105(XmlModel):
         'a105', 'comreferencenum', 'reqdate', 'reqhour', 'nationality',
         'documenttype', 'documentnum', 'cups', 'modeffectdate',
         'reqtransferdate', 'updatereason', 'surrogacy', 'newtolltype',
-        'newreqqd', 'newnationality', 'newdocumenttype', 'newdocumentnum',
-        'newfirstname', 'newfamilyname1', 'newfamilyname2', 'newtitulartype',
-        'newregularaddress', 'newtelephone', 'newfax', 'newemail',
-        'newcaecode', 'newprovinceowner', 'newcityowner', 'newzipcodeowner',
-        'newstreettypeowner', 'newstreetowner', 'newstreetnumberowner',
-        'newportalowner', 'newstaircaseowner', 'newfloorowner', 'newdoorowner',
-        'extrainfo', 'registerdoclist'
+        'newreqqd', 'newreqestimatedqa', 'newnationality', 'newdocumenttype',
+        'newdocumentnum', 'newfirstname', 'newfamilyname1', 'newfamilyname2',
+        'newtitulartype', 'newregularaddress', 'newtelephone', 'newfax',
+        'newemail', 'newcaecode', 'newprovinceowner', 'newcityowner',
+        'newzipcodeowner', 'newstreettypeowner', 'newstreetowner',
+        'newstreetnumberowner', 'newportalowner', 'newstaircaseowner',
+        'newfloorowner', 'newdoorowner', 'newfactmethod', 'extrainfo',
+        'registerdoclist'
     )
 
     def __init__(self):
@@ -48,6 +49,7 @@ class A105(XmlModel):
         self.surrogacy = XmlField('surrogacy')
         self.newtolltype = XmlField('newtolltype')
         self.newreqqd = XmlField('newreqqd')
+        self.newreqestimatedqa = XmlField('newreqestimatedqa')
         self.newnationality = XmlField('newnationality')
         self.newdocumenttype = XmlField('newdocumenttype')
         self.newdocumentnum = XmlField('newdocumentnum')
@@ -70,6 +72,7 @@ class A105(XmlModel):
         self.newstaircaseowner = XmlField('newstaircaseowner')
         self.newfloorowner = XmlField('newfloorowner')
         self.newdoorowner = XmlField('newdoorowner')
+        self.newfactmethod = XmlField('newfactmethod')
         self.extrainfo = XmlField('extrainfo')
         self.registerdoclist = Registerdoclist()
         super(A105, self).__init__('a105', 'a105')
