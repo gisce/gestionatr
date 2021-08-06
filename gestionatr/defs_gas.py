@@ -2088,6 +2088,10 @@ TAULA_PERIODICIDAD_LECTURA_FACTURACION = [
     ('S', 'Semestral'),
     ('D', 'Diaria'),
 ]
+TAULA_METODO_FACTURACION = [
+    ('1', 'Facturación capacidad demanda'),
+    ('2', 'Facturación término fijo cliente'),
+]
 TAULA_TIPO_CIERRE = [
     ('001', 'La Actualización de Datos se ha realizado correctamente'),
     ('002', 'Operación Realizada'),
