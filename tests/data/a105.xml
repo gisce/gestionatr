@@ -23,6 +23,7 @@
         <surrogacy>S</surrogacy>
         <newtolltype>31</newtolltype>
         <newreqqd>987654321.1234567</newreqqd>
+        <newreqestimatedqa>111111111</newreqestimatedqa>
         <newnationality>AF</newnationality>
         <newdocumenttype>03</newdocumenttype>
         <newdocumentnum>00000000T</newdocumentnum>
@@ -45,6 +46,8 @@
         <newstaircaseowner>3</newstaircaseowner>
         <newfloorowner>4</newfloorowner>
         <newdoorowner>5</newdoorowner>
+        <newfactmethod>1</newfactmethod>
+        <gasstationtype>00</gasstationtype>
         <extrainfo>comentarios extras</extrainfo>
         <registerdoclist>
             <registerdoc>
