@@ -21,6 +21,7 @@
         <atrcode>000111222333444555666777</atrcode>
         <updatereason>01</updatereason>
         <tolltype>31</tolltype>
+        <finalclientyearlyconsumption>12345</finalclientyearlyconsumption>
         <nationality>ES</nationality>
         <documenttype>01</documenttype>
         <documentnum>11111111H</documentnum>
@@ -44,6 +45,7 @@
         <doorowner>v</doorowner>
         <titulartype>F</titulartype>
         <regularaddress>S</regularaddress>
+        <gasstationtype>00</gasstationtype>
         <extrainfo>comentarios extras</extrainfo>
         <counterlist>
             <counter>
