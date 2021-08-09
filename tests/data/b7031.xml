@@ -195,6 +195,10 @@
                 <observaciones>ObsCon</observaciones>
                 <fecDesdeProrrateo>2018-01-02</fecDesdeProrrateo>
                 <tipoInteresDemora>12</tipoInteresDemora>
+                <diascapacidadcontratada>1</diascapacidadcontratada>
+                <horascapacidadcontratada>1</horascapacidadcontratada>
+                <multexcesocaudal>1</multexcesocaudal>
+                <coeficientecortoplazo>1.1</coeficientecortoplazo>
             </concepto>
         </listaconceptos>
         <listamedidores>
