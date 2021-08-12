@@ -749,12 +749,7 @@ class Potencia(object):
         return None
 
 
-class PeriodoExcesoPotencia(object):
-
-    def __init__(self, data, name):
-        self.periodo = data
-        self._name = name
-
+class PeriodoExcesoPotencia(Periodo):
     @property
     def valor_exceso_potencia(self):
         if hasattr(self.periodo, 'ValorExcesoPotencia'):
