@@ -1798,7 +1798,7 @@ class FacturaATR(Factura):
         res = []
         for t in tipus_lectures:
             lectures_td = self.get_lectures_amb_periodes_td(lectures, t)
-            lectures_amb_ajustos = self.get_lectures_amb_ajust_quadrat_amb_consum(t, lectures=lectures_td)
+            lectures_amb_ajustos = self.get_lectures_amb_ajust_quadrat_amb_consum(t, lectures=lectures_td, motiu_ajust='97')
             for aux in lectures_amb_ajustos.values():
                 res.extend(aux)
         return res
@@ -2102,7 +2102,7 @@ class FacturaATR(Factura):
         lectures_del_tipus = []
         if lectures is None:
             for comptador in self.get_comptadors():
-                for lectura in comptador.get_lectures(tipus):
+                for lectura in comptador.get_lectures(tipus, force_no_transforma_no_td_a_td=True):
                     lectura.comptador = comptador
                     lectures_del_tipus.append(lectura)
         else:
@@ -2163,8 +2163,7 @@ class FacturaATR(Factura):
         return new_val
 
     def get_ajust_from_consum_desitjat_Ax(self, lectura_a_ajustar, consum_desitjat):
-        old_ajust = lectura_a_ajustar.ajuste and lectura_a_ajustar.ajuste.ajuste_por_integrador or 0.0
-        new_val = consum_desitjat - (lectura_a_ajustar.lectura_hasta.lectura - lectura_a_ajustar.lectura_desde.lectura + old_ajust)
+        new_val = consum_desitjat - (lectura_a_ajustar.lectura_hasta.lectura - lectura_a_ajustar.lectura_desde.lectura)
         return new_val
 
     def get_ajust_from_consum_desitjat_Rx(self, lectura_a_ajustar, consum_desitjat):
