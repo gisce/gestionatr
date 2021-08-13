@@ -120,7 +120,7 @@
 					</documentation>
 				</annotation>
 			</element>
-			<element name="finaltolltypegranted" type="tns:TollType" minOccurs="0" maxOccurs="1">
+			<element name="finaltolltypegranted" type="tns:TollType949C62020" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Peaje Concedido</documentation>
 				</annotation>
