@@ -1939,10 +1939,11 @@ class FacturaATR(Factura):
 
         if tipus == 'R':
             res = []
-            for reactiva in self.energia_reactiva.terminos_energia_reactiva:
-                for periode_reactiva in reactiva.periodos:
-                    if periode_reactiva.nombre == periode or not periode:
-                        res.append(periode_reactiva.cantidad)
+            if self.energia_reactiva and self.energia_reactiva.terminos_energia_reactiva:
+                for reactiva in self.energia_reactiva.terminos_energia_reactiva:
+                    for periode_reactiva in reactiva.periodos:
+                        if periode_reactiva.nombre == periode or not periode:
+                            res.append(periode_reactiva.cantidad)
             if not res:
                 res.append(0.0)
             return res
