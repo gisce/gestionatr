@@ -749,12 +749,7 @@ class Potencia(object):
         return None
 
 
-class PeriodoExcesoPotencia(object):
-
-    def __init__(self, data, name):
-        self.periodo = data
-        self._name = name
-
+class PeriodoExcesoPotencia(Periodo):
     @property
     def valor_exceso_potencia(self):
         if hasattr(self.periodo, 'ValorExcesoPotencia'):
@@ -769,8 +764,17 @@ class PeriodoExcesoPotencia(object):
     def nombre(self):
         return self._name
 
+    def es_facturable(self):
+        """Algunas empresas envian periodos que no se deben facturar.
+        Esos tienen precio 0. Pese a eso, si tienen cantidad los facturaremos
+        igual ya que tambien hay empresas que quieren facturar lineas pero dejan
+        el precio a 0"""
+        return bool(self.valor_exceso_potencia)
+
 
 class ExcesoPotencia(object):
+
+    PERIODO_TYPE = PeriodoExcesoPotencia
 
     def __init__(self, data):
         self.exceso_potencia = data
@@ -778,13 +782,34 @@ class ExcesoPotencia(object):
     @property
     def periodos(self):
         data = []
+        periodes_no_facturables = []
         if hasattr(self.exceso_potencia, 'Periodo'):
-            period_name = 1
+            period_number = 1
+            max_facturat = period_number
 
             for d in self.exceso_potencia.Periodo:
-                period = PeriodoExcesoPotencia(d, 'P{0}'.format(period_name))
-                data.append(period)
-                period_name += 1
+                period_name = 'P{0}'.format(period_number)
+                period = self.PERIODO_TYPE(
+                    d, period_name
+                )
+                if period.es_facturable():
+                    data.append(period)
+                    max_facturat = period_number
+                else:
+                    periodes_no_facturables.append((d, period_number))
+                period_number += 1
+
+            if periodes_no_facturables:
+                max_no_facturat = max([x[1] for x in periodes_no_facturables])
+                # Per les 6.1 ens envien periodes amb preu i quantitat 0 pero si que els hem de gestionar
+                if max_facturat > max_no_facturat:
+                    for d, period_number in periodes_no_facturables:
+                        period_name = 'P{0}'.format(period_number)
+                        period = self.PERIODO_TYPE(
+                            d, period_name
+                        )
+                        data.append(period)
+
         return data
 
     @property
