@@ -93,7 +93,7 @@
 					<documentation>Motivo de Modificación</documentation>
 				</annotation>
 			</element>
-			<element name="tolltype" type="tns:TollType" minOccurs="0" maxOccurs="1">
+			<element name="tolltype" type="tns:TollType949C62020" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Nuevo Peaje.</documentation>
 				</annotation>
@@ -224,7 +224,7 @@
 					<documentation>Observaciones de la Realización</documentation>
 				</annotation>
 			</element>
-			<element name="counterlist" type="tns:CounterListType" minOccurs="1" maxOccurs="1">
+			<element name="counterlist" type="tns:CounterListType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Lista de Contadores</documentation>
 				</annotation>

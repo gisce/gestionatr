@@ -98,7 +98,7 @@
 					<documentation>Con/Sin subrrogación (Con/Sin rotura de ciclo de lectura)</documentation>
 				</annotation>
 			</element>
-			<element name="newtolltype" type="tns:TollType" minOccurs="0" maxOccurs="1">
+			<element name="newtolltype" type="tns:TollType949C62020" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Nuevo Peaje.</documentation>
 				</annotation>

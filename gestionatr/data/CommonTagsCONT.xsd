@@ -1049,6 +1049,54 @@
 			<xs:enumeration value="47"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="TollType949C62020">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="21"/>
+			<xs:enumeration value="22"/>
+			<xs:enumeration value="23"/>
+			<xs:enumeration value="24"/>
+			<xs:enumeration value="25"/>
+			<xs:enumeration value="26"/>
+			<xs:enumeration value="31"/>
+			<xs:enumeration value="32"/>
+			<xs:enumeration value="33"/>
+			<xs:enumeration value="34"/>
+			<xs:enumeration value="35"/>
+			<xs:enumeration value="41"/>
+			<xs:enumeration value="42"/>
+			<xs:enumeration value="43"/>
+			<xs:enumeration value="44"/>
+			<xs:enumeration value="45"/>
+			<xs:enumeration value="46"/>
+			<xs:enumeration value="47"/>
+			<xs:enumeration value="R1"/>
+			<xs:enumeration value="R2"/>
+			<xs:enumeration value="R3"/>
+			<xs:enumeration value="R4"/>
+			<xs:enumeration value="R8"/>
+			<xs:enumeration value="R9"/>
+			<xs:enumeration value="L0"/>
+			<xs:enumeration value="L1"/>
+			<xs:enumeration value="A5"/>
+			<xs:enumeration value="A6"/>
+			<xs:enumeration value="A7"/>
+			<xs:enumeration value="B5"/>
+			<xs:enumeration value="B6"/>
+			<xs:enumeration value="B7"/>
+			<xs:enumeration value="S1"/>
+			<xs:enumeration value="S2"/>
+			<xs:enumeration value="S3"/>
+			<xs:enumeration value="S4"/>
+			<xs:enumeration value="S5"/>
+			<xs:enumeration value="S6"/>
+			<xs:enumeration value="S7"/>
+			<xs:enumeration value="S8"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="ResultInspectionType">
 		<xs:restriction base="xs:string">
 			<xs:length value="2"/>
@@ -1189,6 +1237,7 @@
 			<xs:enumeration value="22"/>
 			<xs:enumeration value="23"/>
 			<xs:enumeration value="24"/>
+			<xs:enumeration value="25"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="AmountType">
