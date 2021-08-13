@@ -1740,7 +1740,7 @@ class FacturaATR(Factura):
 
         for c in self.get_comptadors():
             for l in c.get_lectures(force_no_transforma_no_td_a_td=True):
-                if not l.ajuste and not l.consumo_calculado.is_integer():
+                if not l.ajuste and not isinstance(l.consumo_calculado, int):
                     return True
 
         return False
