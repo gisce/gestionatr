@@ -1696,6 +1696,77 @@ class Medida(object):
         return data
 
 
+class PeriodoMaximetroConsumidor(Periodo):
+
+    @property
+    def potencia_max_demandada_anio_movil(self):
+        if hasattr(self.periodo, 'PotenciaMaxDemandadaAnioMovil'):
+            return int(self.periodo.PotenciaMaxDemandadaAnioMovil.text.strip())
+        return None
+
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def nombre(self):
+        return self._name
+
+    def es_facturable(self):
+        """Algunas empresas envian periodos que no se deben facturar.
+        Esos tienen precio 0. Pese a eso, si tienen cantidad los facturaremos
+        igual ya que tambien hay empresas que quieren facturar lineas pero dejan
+        el precio a 0"""
+        return bool(self.potencia_max_demandada_anio_movil)
+
+
+class InformacionAlConsumidor(object):
+
+    PERIODO_TYPE = PeriodoMaximetroConsumidor
+
+    def __init__(self, data):
+        self.informacion_al_consumidor = data
+
+    @property
+    def fecha_inicio_anio_movil(self):
+        if hasattr(self.informacion_al_consumidor, 'FechaInicioAnioMovil'):
+            return self.informacion_al_consumidor.FechaInicioAnioMovil.text.strip()
+        return None
+
+    @property
+    def periodos(self):
+        data = []
+        periodes_no_facturables = []
+        if hasattr(self.informacion_al_consumidor, 'Periodo'):
+            period_number = 1
+            max_facturat = period_number
+
+            for d in self.informacion_al_consumidor.Periodo:
+                period_name = 'P{0}'.format(period_number)
+                period = self.PERIODO_TYPE(
+                    d, period_name
+                )
+                if period.es_facturable():
+                    data.append(period)
+                    max_facturat = period_number
+                else:
+                    periodes_no_facturables.append((d, period_number))
+                period_number += 1
+
+            if periodes_no_facturables:
+                max_no_facturat = max([x[1] for x in periodes_no_facturables])
+                # Per les 6.1 ens envien periodes amb preu i quantitat 0 pero si que els hem de gestionar
+                if max_facturat > max_no_facturat:
+                    for d, period_number in periodes_no_facturables:
+                        period_name = 'P{0}'.format(period_number)
+                        period = self.PERIODO_TYPE(
+                            d, period_name
+                        )
+                        data.append(period)
+
+        return data
+
+
 class FacturaATR(Factura):
     DATOS_GENERALES_NAME = 'DatosGeneralesFacturaATR'
     DATOS_GENERALES_OBJECT = DatosGeneralesATR
@@ -1807,6 +1878,12 @@ class FacturaATR(Factura):
             for d in self.factura.Medidas:
                 data.append(Medida(d))
         return data
+
+    @property
+    def informacion_al_consumidor(self):
+        if hasattr(self.factura, 'InformacionAlConsumidor'):
+            return InformacionAlConsumidor(self.factura.InformacionAlConsumidor)
+        return None
 
     def transforma_no_td_a_td(self, lectures, tipus=None):
         if self.datos_factura.tarifa_atr_fact not in TARIFES_TD:
