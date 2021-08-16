@@ -2037,6 +2037,9 @@ class FacturaATR(Factura):
                     comptador_amb_lectures = c
                     break
         if comptador_amb_lectures:
+            te_autoconsum = (self.autoconsumo and self.autoconsumo.energia_excedentaria) or ([x for x in (self.conceptos_repercutibles or []) if '7' == x.concepto_repercutible[0]])
+            if not te_autoconsum:
+                return res
             base_info = comptador_amb_lectures.get_lectures_activa_entrant()[0]
             i = 0
             for consum in self.get_consum_facturat(tipus='S'):
