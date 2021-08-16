@@ -1811,6 +1811,14 @@ class test_F1(unittest.TestCase):
         self.assertEqual(lectura_hasta.procedencia, u'30')
         self.assertEqual(lectura_hasta.lectura, 400)
 
+        info_al_consumidor = fact.informacion_al_consumidor
+
+        self.assertEqual(len(info_al_consumidor.periodos), 1)
+
+        periodo_max = info_al_consumidor.periodos[0]
+
+        self.assertEqual(periodo_max.potencia_max_demandada_anio_movil, 3000)
+
         registro = f1.registro
 
         self.assertEqual(registro.importe_total, 76.48)

@@ -5109,6 +5109,24 @@ class test_F1(unittest.TestCase):
             }
         )
 
+        periodo_max = f1.PeriodoInfoAlConsumidor()
+
+        periodo_max.feed(
+            {
+                'potencia_max_demandada_anio_movil': 3000
+            }
+        )
+
+        periodos_maximetros = [periodo_max]
+
+        informacion_al_consumidor = f1.InformacionAlConsumidor()
+        informacion_al_consumidor.feed(
+            {
+                'fecha_inicio_anio_movil': '2017-03-31',
+                'periodos': periodos_maximetros
+            }
+        )
+
         self.factura_atr = f1.FacturaATR()
 
         self.factura_atr.feed(
@@ -5125,6 +5143,7 @@ class test_F1(unittest.TestCase):
                 'iva': ivas_atr,
                 'iva_reducido': None,
                 'medidas': medidas,
+                'informacion_al_consumidor': informacion_al_consumidor,
             }
         )
 
