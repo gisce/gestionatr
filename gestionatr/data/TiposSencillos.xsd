@@ -2375,15 +2375,17 @@
 			31 	Sin Excedentes Individual - Consumo
 			32 	Sin Excedentes Colectivo - Consumo
 			33	Sin Excedentes Colectivo con acuerdo de compensación - Consumo
-			41 	Con excedentes y compensación Individual - Consumo
+			41 	Con excedentes y compensación Individual - Consumo  
 			42 	Con excedentes y compensación Colectivo - Consumo
-			43    Con excedentes y compensación Colectivo a través de red - Consumo
+			43  Con excedentes y compensación Colectivo a través de red - Consumo
 			51 	Con excedentes sin compensación Individual sin cto de SSAA en Red Interior - Consumo
 			52 	Con excedentes sin compensación Individual con cto SSAA en Red Interior - Consumo
 			53	Con excedentes sin compensación individual con cto SSAA en Red Interior - SSAA
-			54 	Con excedentes sin compensación Colectivo/en Red Interior - Consumo
+			54 	Con excedentes sin compensación Colectivo en Red Interior - Consumo
 			55 	Con excedentes sin compensación Colectivo con cto de SSAA en Red Interior - Consumo
 			56	Con excedentes sin compensación Colectivo con cto de SSAA en Red Interior - SSAA
+			57  Con excedentes sin compensación Colectivo sin cto de SSAA (despreciable) en red interior - Consumo
+			58  Con excedentes sin compensación Colectivo sin cto de SSAA a través de red - Consumo
 			61 	Con excedentes sin compensación Individual con cto SSAA a través de red - Consumo
 			62 	Con excedentes sin compensación individual con cto SSAA a través de red - SSAA
 			63 	Con excedentes sin compensación Colectivo con cto de SSAA a través de red - Consumo
@@ -2412,6 +2414,8 @@
 			<xs:enumeration value="54"/>
 			<xs:enumeration value="55"/>
 			<xs:enumeration value="56"/>
+			<xs:enumeration value="57"/>
+			<xs:enumeration value="58"/>
 			<xs:enumeration value="61"/>
 			<xs:enumeration value="62"/>
 			<xs:enumeration value="63"/>
@@ -3036,7 +3040,8 @@ la reclamacion
 			TR	Trastero
 			UF	Uso finca
 			UV	Usos varios
-			VI	Vivienda			
+			VI	Vivienda
+			VE	Recarga de vehículo eléctrico			
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -3073,6 +3078,7 @@ la reclamacion
 			<xs:enumeration value="UF"/>
 			<xs:enumeration value="UV"/>
 			<xs:enumeration value="VI"/>
+			<xs:enumeration value="VE"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TipoVia">
