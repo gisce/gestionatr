@@ -2038,25 +2038,26 @@ class FacturaATR(Factura):
                     break
         if comptador_amb_lectures:
             base_info = comptador_amb_lectures.get_lectures_activa_entrant()[0]
-            for concepte in self.conceptos_repercutibles:
-                if concepte.concepto_repercutible[0] == '7':
-                    l1 = Lectura(None)
-                    l1.fecha = base_info.lectura_desde.fecha
-                    l1.lectura = 0
-                    l1.procedencia = base_info.lectura_desde.procedencia
-                    l2 = Lectura(None)
-                    l2.fecha = base_info.lectura_hasta.fecha
-                    l2.lectura = 0
-                    l2.procedencia = base_info.lectura_hasta.procedencia
-                    new_integrador = Integrador(None)
-                    new_integrador.magnitud = "AS"
-                    new_integrador.numero_ruedas_enteras = base_info.numero_ruedas_enteras
-                    new_integrador.codigo_periodo = base_info.codigo_periodo[0] + concepte.concepto_repercutible[1]
-                    if not new_integrador.periode:
-                        new_integrador.codigo_periodo = base_info.codigo_periodo
-                    new_integrador.lectura_desde = l1
-                    new_integrador.lectura_hasta = l2
-                    res.append(new_integrador)
+            i = 0
+            for consum in self.get_consum_facturat(tipus='S'):
+                i += 1
+                l1 = Lectura(None)
+                l1.fecha = base_info.lectura_desde.fecha
+                l1.lectura = 0
+                l1.procedencia = base_info.lectura_desde.procedencia
+                l2 = Lectura(None)
+                l2.fecha = base_info.lectura_hasta.fecha
+                l2.lectura = 0
+                l2.procedencia = base_info.lectura_hasta.procedencia
+                new_integrador = Integrador(base_info.integrador)
+                new_integrador.magnitud = "AS"
+                new_integrador.numero_ruedas_enteras = base_info.numero_ruedas_enteras
+                new_integrador.codigo_periodo = base_info.codigo_periodo[0] + str(i)
+                if not new_integrador.periode:
+                    new_integrador.codigo_periodo = base_info.codigo_periodo
+                new_integrador.lectura_desde = l1
+                new_integrador.lectura_hasta = l2
+                res.append(new_integrador)
         return res
 
     def get_fake_pX_lectura(self, tipus, periode, base_info, lectura_desde=0, lectura_hasta=0):
