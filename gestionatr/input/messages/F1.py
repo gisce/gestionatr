@@ -2,7 +2,7 @@
 from message import Message
 from gestionatr.input.messages.C2 import Direccion
 from gestionatr.defs import TARIFES_SEMPRE_MAX, TARIFES_TD
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from gestionatr.utils import repartir_consums_entre_lectures
 
 # Magnituds d'OCSUM
@@ -2441,6 +2441,34 @@ class FacturaATR(Factura):
             return 'recarrec'
 
         return mode
+
+    def get_maximetres_consumidor(self):
+        data = []
+        if hasattr(self, 'informacion_al_consumidor'):
+            informacion_al_consumidor = self.informacion_al_consumidor
+            fecha_hasta = self.datos_factura.fecha_hasta_factura
+            if hasattr(informacion_al_consumidor, 'fecha_inicio_anio_movil'):
+                fecha_desde = informacion_al_consumidor.fecha_inicio_anio_movil
+            else:
+                data_inici = datetime.strptime(fecha_hasta, '%Y-%m-%d')
+                data_inici = data_inici - timedelta(days=365)
+                fecha_desde = data_inici.strftime('%Y-%m-%d')
+
+            num_periode = 1
+
+            for periodo in informacion_al_consumidor.periodos:
+                period_name = 'P{}'.format(num_periode)
+                maximetro = periodo.potencia_max_demandada_anio_movil
+
+                vals = {
+                    'fecha_desde': fecha_desde,
+                    'fecha_hasta': fecha_hasta,
+                    'periode': period_name,
+                    'maximetre_consumidor': maximetro / 1000,
+                }
+                data.append(vals)
+                num_periode += 1
+        return data
 
 
 class ConceptoRepercutible(object):
