@@ -11,7 +11,7 @@
 	</xs:complexType>
 	<xs:complexType name="consultaCupsResponse">
 		<xs:sequence>
-			<xs:element name="consultaCupsResponse" type="tnsa6:sctdrpdsA629Type" form="unqualified" minOccurs="0"/>
+			<xs:element name="consultaCupsResponse" type="tnsa6:sctdrpdsA629Type" form="qualified" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 </xs:schema>

@@ -63,6 +63,7 @@
 						<enumeration value="07"/>
 						<enumeration value="08"/>
 						<enumeration value="09"/>
+						<enumeration value="11"/>
 					</restriction>
 				</simpleType>
 			</element>

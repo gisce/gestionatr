@@ -163,6 +163,16 @@
 					<documentation>Periodicidad de Lectura</documentation>
 				</annotation>
 			</element>
+			<element name="tolltype" type="tns:TollType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de Peaje</documentation>
+				</annotation>
+			</element>
+			<element name="factmethod" type="tns:MetodoFacturacionType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Metodo de facturacion</documentation>
+				</annotation>
+			</element>
 			<element name="extrainfo" type="tns:ExtrainfoType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Observaciones de la Realización</documentation>

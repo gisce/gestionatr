@@ -128,6 +128,42 @@ class Factura(object):
         self.obj = data
 
     @property
+    def rangopresiondiseno(self):
+        tree = 'rangopresiondiseno'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def telemedida(self):
+        tree = 'telemedida'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def tipogasinera(self):
+        tree = 'tipogasinera'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def metodofacturacion(self):
+        tree = 'metodofacturacion'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
     def cups(self):
         tree = 'cups'
         data = get_rec_attr(self.obj, tree, False)
@@ -631,6 +667,42 @@ class Concepto(object):
         self.obj = data
 
     @property
+    def coeficientecortoplazo(self):
+        tree = 'coeficientecortoplazo'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def multexcesocaudal(self):
+        tree = 'multexcesocaudal'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def diascapacidadcontratada(self):
+        tree = 'diascapacidadcontratada'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def horascapacidadcontratada(self):
+        tree = 'horascapacidadcontratada'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
     def fecdesde(self):
         tree = 'fecdesde'
         data = get_rec_attr(self.obj, tree, False)
@@ -778,6 +850,15 @@ class Concepto(object):
 class Medidor(object):
     def __init__(self, data):
         self.obj = data
+
+    @property
+    def excesocaudal(self):
+        tree = 'excesocaudal'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
 
     @property
     def um(self):

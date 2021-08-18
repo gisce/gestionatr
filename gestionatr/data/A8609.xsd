@@ -75,7 +75,7 @@
 	</complexType>
 	<complexType name="SumarioPeajeType">
 		<sequence>
-			<element name="peaje" type="tns:TollType" minOccurs="1" maxOccurs="1"/>
+			<element name="peaje" type="tns:TollType949C62020" minOccurs="1" maxOccurs="1"/>
 			<element name="numps" minOccurs="1" maxOccurs="1">
 				<simpleType>
 					<restriction base="decimal">

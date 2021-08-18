@@ -142,6 +142,10 @@
 					</restriction>
 				</simpleType>
 			</element>
+			<element name="rangopresiondiseno" type="tns:RangoPresionType" minOccurs="0" maxOccurs="1"/>
+			<element name="telemedida" type="tns:FlagType" minOccurs="0" maxOccurs="1"/>
+			<element name="tipogasinera" type="tns:TipoGasineraType" minOccurs="0" maxOccurs="1"/>
+			<element name="metodofacturacion" type="tns:MetodoFacturacionType" minOccurs="0" maxOccurs="1"/>
 			<element name="observaciones1" type="tns:CodAlpha100Type" minOccurs="0" maxOccurs="1"/>
 			<element name="observaciones2" type="tns:CodAlpha100Type" minOccurs="0" maxOccurs="1"/>
 			<element name="telefurgencias" minOccurs="1" maxOccurs="1">

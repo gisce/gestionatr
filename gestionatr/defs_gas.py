@@ -958,8 +958,7 @@ TAULA_MOTIVOS_DE_RECHAZO_CNMC = [
     ('R51', 'CUPS en servicio con otra comercializadora.'),
     ('R61', 'Si el motivo de modificación es @replace1@, se debe '
             'enviar alguno de los campos @replace2@.'),
-    ('R62', 'Si la presión solicitada es mayor de 4 bares o el peaje es 3.5, '
-            'es obligatorio que el campo Caudal Diario tenga un valor'),
+    ('R62', 'Si dispone de telemedida, es obligatorio que el campo Caudal Diario tenga un valor'),
     ('R64', 'El número de documento informado no cumple con las '
             'validaciones definidas sobre los documentos del tipo enviado'),
     ('R70', 'Otros motivos no contemplados en el resto del listado.'),
@@ -1015,15 +1014,16 @@ TAULA_MOTIVOS_DE_RECHAZO_CNMC = [
     ('S17', 'Solo se podrá modificar (i) el tipo de identificador y el identificador o, (ii) nombre y apellidos (razón social)'),
     ('S18', 'Contrato ATR cortado por impago'),
     ('S19', 'No se puede solicitar más de un producto indefinido'),
-    ('S20', 'Todos los peajes asociados al CUPS deben estar asociados al mismo grupo'),
+    ('S20', 'Todos los peajes asociados al CUPS deben ser el mismo peaje'),
     ('S21', 'No se pueden solicitar productos no indefinidos con fecha de activación anterior a la actual. Ni productos diarios con fecha igual a la actual'),
     ('S22', 'La fecha de inicio del producto no se corresponde con el día 1 del mes o trimestre'),
     ('S23', 'Rechazo por cambio de comercializador/baja sobre producto no activado'),
     ('S24', 'Tipo de producto 01 no permitido en nodo productlist'),
     ('S25', 'Telemedida obligatoria'),
-
+    ('S26', 'Incumplimiento condiciones método de facturación'),
 ]
 TAULA_MOTIVO_RECHAZO_OCSUM = TAULA_MOTIVOS_DE_RECHAZO_CNMC
+
 TAULA_MES = [
     ('01', 'Enero'),
     ('02', 'Febrero'),
@@ -1617,7 +1617,7 @@ TAULA_PROPIEDAD_CONTADOR_CORRECTOR = [
     ('11', 'SUSTITUCION'),
     ('12', 'NUEVO'),
     ('08', 'PROPIO-PLAZOS-12'),
-    ('10', 'PROPIO'),
+    ('10', 'PROPIEDAD DEL CLIENTE'),
 ]
 TAULA_PROPIEDAD_CONTADOR = TAULA_PROPIEDAD_CONTADOR_CORRECTOR
 
@@ -1671,6 +1671,8 @@ TAULA_MOTIVO_MODIFICACION = [
     ('23', 'Cambio de Titular, Dirección de Titular, Peaje y Modificación de Capacidad'),
     ('24', 'Cambio de Dirección del Punto de Suministro'),
     ('25', 'Modificación Peaje circular Peaje 01102021'),
+    ('26', 'Cambio de método de facturación'),
+    ('27', 'Cambio tipo gasinera'),
 ]
 TAULA_MOTIVO_DE_MODIFICACION_EN_UN_CAMBIO_DE_COMERCIALIZADOR = [
     ('01', 'Cambio de Titular'),
@@ -1754,13 +1756,23 @@ TAULA_RESULTADO_ULTIMA_REVISION = [
     ('02', 'Descripción 02'),
 ]
 TAULA_RANGO_PRESION_DISENO = [
-    ('01', 'Presión <= 4 bar'),
-    ('02', '4 bar < Presión <= 60 bar'),
-    ('03', 'Presión > 60 bar'),
+    ('01', 'NP0: Nivel de presión <= 4 bar'),
+    ('02', 'NP0: Nivel de presión <= 4 bar desde Planta Satélite'),
+    ('03', 'NP1: Nivel de presión 4 bar < Presión <= 16 bar'),
+    ('04', 'NP2: Nivel de presión 16 bar < Presión <= 60 bar'),
+    ('06', 'NP3: Nivel de presión > 60 bar'),
 ]
 TAULA_PERFIL_CONSUMO = [
     ('01', 'Mercado Doméstico'),
     ('02', 'Mercado Industrial'),
+]
+TAULA_TIPO_GASINERA = [
+    (00, 'No'),
+    (01, 'Estación abierta (Pública). Exclusiva GNV'),
+    (02, 'Estación abierta (Pública). Mixta'),
+    (03, 'Estación sumin.flota (Privada). Exclusiva GNV'),
+    (04, 'Estación sumin.flota (Privada). Mixta'),
+    (05, 'Estación abierta. Exclusiva GNV con certificado'),
 ]
 TAULA_TIPO_DE_APARATO = [
     ('CO', 'Contador'),
@@ -2054,6 +2066,20 @@ TAULA_CONCEPTOS_FACTURACION = [
     ('1', '1935', 'Presentación al cobro factura Inspección Periódica de '
                   'IRC realizada por empresa instaladora'),
     ('1', '1936', 'Canon IRC 4'),
+    ('0', '2000', 'Peaje Salida Red Local. Término variable consumo'),
+    ('0', '2001', 'Peaje Salida Red Local. Término fijo cliente'),
+    ('0', '2002', 'Peaje Salida Red Local. Término Fijo Capacidad'),
+    ('0', '2003', 'Peaje Salida Red Local. Caudal demandado'),
+    ('0', '2004', 'Peaje Salida Red Transporte. Término variable consumo'),
+    ('0', '2005', 'Peaje Salida Red Transporte. Término fijo cliente'),
+    ('0', '2006', 'Peaje Salida Red Transporte. Término Fijo Capacidad'),
+    ('0', '2007', 'Peaje Salida Red Transporte. Caudal demandado'),
+    ('0', '2008', 'Otros costes de regasificación. Término fijo cliente'),
+    ('0', '2009', 'Otros costes de regasificación. Término Fijo Capacidad'),
+    ('0', '2010', 'Cargo. Término fijo cliente'),
+    ('0', '2011', 'Cargo. Término Fijo Capacidad'),
+    ('0', '2012', 'Cuota del GTS'),
+    ('0', '2013', 'Tasa CNMC'),
 ]
 TAULA_CONCEPTO_FACTURACION = [(a[1], a[2]) for a in TAULA_CONCEPTOS_FACTURACION]
 
@@ -2093,6 +2119,10 @@ TAULA_PERIODICIDAD_LECTURA_FACTURACION = [
     ('A', 'Anual'),
     ('S', 'Semestral'),
     ('D', 'Diaria'),
+]
+TAULA_METODO_FACTURACION = [
+    ('1', 'Facturación capacidad demanda'),
+    ('2', 'Facturación término fijo cliente'),
 ]
 TAULA_TIPO_CIERRE = [
     ('001', 'La Actualización de Datos se ha realizado correctamente'),
@@ -2181,6 +2211,7 @@ TAULA_TIPOS_DE_SOLICITANTE_RECLAMANTE = [
     ('07', 'Juzgados'),
     ('08', 'Afectado no titular ni usuario del punto de suministro'),
     ('09', 'Asociaciones de Consumidores'),
+    ('11', 'Junta Arbitral de Consumo'),
 ]
 TAULA_TIPO_SOLICITANTE = TAULA_TIPOS_DE_SOLICITANTE_RECLAMANTE
 
@@ -2192,6 +2223,7 @@ TAULA_TIPOS_DE_DOCUMENTO = [
     ('04', 'Respuesta a Reclamación'),
     ('05', 'Facturas'),
     ('06', 'Otra documentación del cliente'),
+    ('07', 'Declaración responsable'),
     ('99', 'Otros'),
 ]
 TAULA_TIPOS_DOCUMENTOS_ANEXOS = TAULA_TIPOS_DE_DOCUMENTO
