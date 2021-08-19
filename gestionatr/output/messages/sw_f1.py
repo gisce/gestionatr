@@ -42,7 +42,8 @@ class FacturaATR(XmlModel):
         'exceso_potencia', 'energia_activa', 'energia_reactiva',
         'energia_capacitiva', 'autoconsumo', 'cargos',
         'impuesto_electrico', 'alquileres', 'importe_intereses',
-        'concepto_repercutible', 'iva', 'iva_reducido', 'medidas'
+        'concepto_repercutible', 'iva', 'iva_reducido', 'medidas',
+        'informacion_al_consumidor'
     )
 
     def __init__(self):
@@ -62,6 +63,7 @@ class FacturaATR(XmlModel):
         self.iva = IVA()
         self.iva_reducido = IVAReducido()
         self.medidas = Medidas()
+        self.informacion_al_consumidor = InformacionAlConsumidor()
         super(FacturaATR, self).__init__('FacturaATR', 'factura_atr')
 
 
@@ -814,6 +816,31 @@ class Ajuste(XmlModel):
         self.ajuste_por_integrador = XmlField('AjustePorIntegrador')
         self.comentarios = XmlField('Comentarios')
         super(Ajuste, self).__init__('Ajuste', 'ajuste')
+
+
+class InformacionAlConsumidor(XmlModel):
+
+    _sort_order = (
+        'informacion_al_consumidor', 'fecha_inicio_anio_movil', 'periodos'
+    )
+
+    def __init__(self):
+        self.informacion_al_consumidor = XmlField('InformacionAlConsumidor')
+        self.fecha_inicio_anio_movil = XmlField('FechaInicioAnioMovil', rep=rep_fecha_sin_hora)
+        self.periodos = PeriodoInfoAlConsumidor()
+        super(InformacionAlConsumidor, self).__init__('InformacionAlConsumidor', 'informacion_al_consumidor')
+
+
+class PeriodoInfoAlConsumidor(XmlModel):
+
+    _sort_order = (
+        'periodo', 'potencia_max_demandada_anio_movil'
+    )
+
+    def __init__(self):
+        self.periodo = XmlField('Periodo')
+        self.potencia_max_demandada_anio_movil = XmlField('PotenciaMaxDemandadaAnioMovil', rep=rep_entera2)
+        super(PeriodoInfoAlConsumidor, self).__init__('Periodo', 'periodo')
 
 
 class Anomalia(XmlModel):

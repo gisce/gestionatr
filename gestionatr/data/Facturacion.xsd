@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- editado con XMLSpy v2020 sp1 (http://www.altova.com) por pelayo.garcia (INECO) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
 	<xs:include schemaLocation="TiposComplejos.xsd"/>
@@ -578,6 +579,27 @@
 							<xs:element name="IVA" type="TipoIVAIGIC" maxOccurs="2"/>
 							<xs:element name="IVAReducido" type="TipoIVAIGIC" minOccurs="0" maxOccurs="2"/>
 							<xs:element name="Medidas" type="MedidaFact" minOccurs="0" maxOccurs="10"/>
+							<xs:element name="InformacionAlConsumidor" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="FechaInicioAnioMovil" type="xs:date" minOccurs="0"/>
+										<xs:element name="Periodo" maxOccurs="6">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="PotenciaMaxDemandadaAnioMovil">
+														<xs:simpleType>
+															<xs:restriction base="xs:integer">
+																<xs:minInclusive value="0"/>
+																<xs:totalDigits value="14"/>
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
@@ -628,7 +650,7 @@
 						<xs:element name="TotalRecibos">
 							<xs:simpleType>
 								<xs:restriction base="xs:decimal">
-									<xs:totalDigits value="5"/>
+									<xs:totalDigits value="8"/>
 									<xs:minInclusive value="0"/>
 								</xs:restriction>
 							</xs:simpleType>

@@ -1595,4 +1595,23 @@
 			</xs:choice>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="InformacionAlConsumidor">
+		<xs:sequence>
+			<xs:element name="FechaInicioAnioMovil" type="xs:date" minOccurs="0"/>
+			<xs:element name="Periodo" maxOccurs="6">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="PotenciaMaxDemandadaAnioMovil">
+							<xs:simpleType>
+								<xs:restriction base="xs:integer">
+									<xs:minInclusive value="0"/>
+									<xs:totalDigits value="14"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 </xs:schema>
