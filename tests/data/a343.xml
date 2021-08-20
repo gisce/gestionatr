@@ -22,7 +22,7 @@
         <product>
             <productcode>TESTCODE1</productcode>
             <producttype>03</producttype>
-            <producttolltype>31</producttolltype>
+            <producttolltype>R1</producttolltype>
             <productqd>23.6</productqd>
             <productqa>12345</productqa>
             <productstartdate>2020-01-01</productstartdate>
@@ -31,7 +31,7 @@
         <product>
             <productcode>TESTCODE2</productcode>
             <producttype>02</producttype>
-            <producttolltype>32</producttolltype>
+            <producttolltype>R2</producttolltype>
             <productqd>23.5</productqd>
             <productqa>1234</productqa>
             <productstartdate>2020-01-02</productstartdate>

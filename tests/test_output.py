@@ -5564,9 +5564,12 @@ class test_A1_05(unittest.TestCase):
             'newfloorowner': '4',
             'newdoorowner': '5',
             'newreqqd': '987654321.1234567',
-            'newtolltype': '31',
+            'newtolltype': 'R1',
             'extrainfo': 'comentarios extras',
             'registerdoclist': registros_documento,
+            'newreqestimatedqa': '111111111',
+            'newfactmethod': '1',
+            'gasstationtype': '00',
         }
         a105.feed(a105_fields)
 
@@ -6337,7 +6340,7 @@ class test_A1_38(unittest.TestCase):
         p1 = a1_38.Product()
         producto_fields = {
             'producttype': '03',
-            'producttolltype': '31',
+            'producttolltype': 'R1',
             'productqd': 23.6,
             'productqa': 12345,
         }
@@ -6345,7 +6348,7 @@ class test_A1_38(unittest.TestCase):
         p2 = a1_42.Product()
         producto2_fields = {
             'producttype': '02',
-            'producttolltype': '32',
+            'producttolltype': 'R2',
             'productqd': 23.5,
             'productqa': 1234,
         }
@@ -6398,7 +6401,7 @@ class test_A1_38(unittest.TestCase):
             'reqestimatedqa': "30",
             'reqoutgoingpressure': "40",
             'gasusetype': "01",
-            'tolltype': "31",
+            'tolltype': "R1",
             'counterproperty': "01",
             'aptransind': "S",
             'aptransnumber': "9999",
@@ -6411,6 +6414,9 @@ class test_A1_38(unittest.TestCase):
             'extrainfo': "EXTRA EXTRA! EL GAS NO TE SENTIT!",
             'productlist': productos_documento,
             'registerdoclist': registros_documento,
+            'telemetering': 'N',
+            'factmethod': '2',
+            'gasstationtype': '00',
         }
         a138.feed(a138_fields)
 
@@ -6566,7 +6572,7 @@ class test_A1_42(unittest.TestCase):
             'reqtype': '02',
             'productcode': '01010101323',
             'producttype': '03',
-            'producttolltype': '11',
+            'producttolltype': 'R1',
             'productqd': 123123.1,
             'productqa': 6263,
         }
@@ -6576,7 +6582,7 @@ class test_A1_42(unittest.TestCase):
             'reqtype': '03',
             'productcode': '51010101323',
             'producttype': '02',
-            'producttolltype': '12',
+            'producttolltype': 'R2',
             'productqd': 5555.1,
             'productqa': 2222,
         }
@@ -6810,7 +6816,7 @@ class test_A1_43(unittest.TestCase):
             'reqtype': '02',
             'productcode': '01010101323',
             'producttype': '03',
-            'producttolltype': '11',
+            'producttolltype': 'R1',
             'productqd': 123123.1,
             'productqa': 6263,
         }
@@ -6820,7 +6826,7 @@ class test_A1_43(unittest.TestCase):
             'reqtype': '03',
             'productcode': '51010101323',
             'producttype': '02',
-            'producttolltype': '12',
+            'producttolltype': 'R2',
             'productqd': 5555.1,
             'productqa': 2222,
         }

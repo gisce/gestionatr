@@ -44,10 +44,13 @@
     <netsituation>14_m8MEzzq0q3f</netsituation>
     <lectureperiodicity>01</lectureperiodicity>
     <visitnumber>521</visitnumber>
-    <tolltype>11</tolltype>
+    <tolltype>R1</tolltype>
     <finalqdgranted>210355200.787</finalqdgranted>
     <finalqhgranted>654846713</finalqhgranted>
     <finalclientyearlyconsumption>252744160122</finalclientyearlyconsumption>
+    <telemetering>N</telemetering>
+    <factmethod>2</factmethod>
+    <gasstationtype>00</gasstationtype>
     <extrainfo>400_ylDyrpjutezfQ2ojWqcyjdpQqN7UG7</extrainfo>
     <conceptnumber>29</conceptnumber>
     <conceptlist>
@@ -108,7 +111,7 @@
         <product>
             <productcode>TESTCODE1</productcode>
             <producttype>03</producttype>
-            <producttolltype>31</producttolltype>
+            <producttolltype>R1</producttolltype>
             <productqd>23.6</productqd>
             <productqa>12345</productqa>
             <productstartdate>2020-01-01</productstartdate>
@@ -117,7 +120,7 @@
         <product>
             <productcode>TESTCODE2</productcode>
             <producttype>02</producttype>
-            <producttolltype>32</producttolltype>
+            <producttolltype>R2</producttolltype>
             <productqd>23.5</productqd>
             <productqa>1234</productqa>
             <productstartdate>2020-01-02</productstartdate>

@@ -57,6 +57,10 @@
         <SaldoTotalACobrar>60.20</SaldoTotalACobrar>
         <idremesa>0035194</idremesa>
         <tipopenalizacion>N</tipopenalizacion>
+        <rangopresiondiseno>01</rangopresiondiseno>
+        <telemedida>S</telemedida>
+        <tipogasinera>00</tipogasinera>
+        <metodofacturacion>2</metodofacturacion>
         <observaciones1>Obs1</observaciones1>
         <observaciones2>Obs2</observaciones2>
         <telefurgencias>900900900</telefurgencias>
@@ -191,6 +195,10 @@
                 <observaciones>ObsCon</observaciones>
                 <fecDesdeProrrateo>2018-01-02</fecDesdeProrrateo>
                 <tipoInteresDemora>12</tipoInteresDemora>
+                <diascapacidadcontratada>1</diascapacidadcontratada>
+                <horascapacidadcontratada>1</horascapacidadcontratada>
+                <multexcesocaudal>1</multexcesocaudal>
+                <coeficientecortoplazo>1.1</coeficientecortoplazo>
             </concepto>
         </listaconceptos>
         <listamedidores>
