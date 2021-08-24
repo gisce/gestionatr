@@ -2477,7 +2477,7 @@ class FacturaATR(Factura):
                     'fecha_desde': fecha_desde,
                     'fecha_hasta': fecha_hasta,
                     'periode': period_name,
-                    'maximetre_consumidor': maximetro / 1000,
+                    'maximetre_consumidor': maximetro / 1000.0,
                 }
                 data.append(vals)
                 num_periode += 1
