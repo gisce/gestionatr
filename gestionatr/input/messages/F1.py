@@ -2457,10 +2457,10 @@ class FacturaATR(Factura):
 
     def get_maximetres_consumidor(self):
         data = []
-        if hasattr(self, 'informacion_al_consumidor'):
+        if hasattr(self, 'informacion_al_consumidor') and bool(self.informacion_al_consumidor):
             informacion_al_consumidor = self.informacion_al_consumidor
             fecha_hasta = self.datos_factura.fecha_hasta_factura
-            if hasattr(informacion_al_consumidor, 'fecha_inicio_anio_movil'):
+            if hasattr(informacion_al_consumidor, 'fecha_inicio_anio_movil') and bool(informacion_al_consumidor.fecha_inicio_anio_movil):
                 fecha_desde = informacion_al_consumidor.fecha_inicio_anio_movil
             else:
                 data_inici = datetime.strptime(fecha_hasta, '%Y-%m-%d')
