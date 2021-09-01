@@ -2084,6 +2084,8 @@ TABLA_87 = [
      ),
 ]
 
+TABLA_87_simple = [(item[0], item[2]) for item in TABLA_87]
+
 TABLA_101 = [
     ('01', u'De ciclo'),
     ('02', u'Modificación de Contrato'),
