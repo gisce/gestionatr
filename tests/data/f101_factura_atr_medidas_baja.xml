@@ -121,6 +121,12 @@
                     </Integrador>
                 </ModeloAparato>
             </Medidas>
+            <InformacionAlConsumidor>
+                <FechaInicioAnioMovil>2017-03-31</FechaInicioAnioMovil>
+                <Periodo>
+                    <PotenciaMaxDemandadaAnioMovil>3000</PotenciaMaxDemandadaAnioMovil>
+                </Periodo>
+            </InformacionAlConsumidor>
         </FacturaATR>
         <RegistroFin>
             <ImporteTotal>76.48</ImporteTotal>
