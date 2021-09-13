@@ -1809,7 +1809,8 @@ class FacturaATR(Factura):
     def te_lectures_amb_decimals(self):
         if self.datos_factura.tarifa_atr_fact not in TARIFES_TD:
             return False
-
+        if self.datos_factura.tipo_factura in ('G', 'C'):
+            return False
         for c in self.get_comptadors():
             for l in c.get_lectures(force_no_transforma_no_td_a_td=True):
                 if isinstance(l.consumo_calculado, int):
