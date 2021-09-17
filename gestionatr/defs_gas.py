@@ -1595,6 +1595,10 @@ TAULA_TIPO_PEAJE = [
     ('99', '99 (99) - Factura agregada D-C'),
 ]
 
+PEAJES_SEMPRE_CAPACIDAD = [
+    'L1', 'L0', 'R9', 'R8', 'A7', 'B7'
+]
+
 TAULA_TIPOS_DE_USO_DEL_GAS = [
     ('01', 'Combustible'),
     ('02', 'Carburantes'),
@@ -2847,6 +2851,18 @@ TIPUS_CONCEPTES = {
     # '0015': 'altres',
     '0016': 'tfixe',
     '0017': 'tvariable',
+    '2000': 'tvariable',
+    '2001': 'tfixe',
+    '2002': 'tfixe',
+    '2003': 'tfixe_demandad',
+    '2004': 'tvariable',
+    '2005': 'tfixe',
+    '2006': 'tfixe',
+    '2007': 'tfixe_demandad',
+    '2008': 'tfixe',
+    '2009': 'tfixe_demandad',
+    '2010': 'tfixe_cargos',
+    '2011': 'tfixe_cargos',
     '1212': 'demora',  # Es diferent perque no te impostos, s'ha de tractar per separat
     # '****': 'altres'
 }
