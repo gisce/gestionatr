@@ -1771,12 +1771,12 @@ TAULA_PERFIL_CONSUMO = [
     ('02', 'Mercado Industrial'),
 ]
 TAULA_TIPO_GASINERA = [
-    (00, 'No'),
-    (01, 'Estación abierta (Pública). Exclusiva GNV'),
-    (02, 'Estación abierta (Pública). Mixta'),
-    (03, 'Estación sumin.flota (Privada). Exclusiva GNV'),
-    (04, 'Estación sumin.flota (Privada). Mixta'),
-    (05, 'Estación abierta. Exclusiva GNV con certificado'),
+    ('00', 'No'),
+    ('01', 'Estación abierta (Pública). Exclusiva GNV'),
+    ('02', 'Estación abierta (Pública). Mixta'),
+    ('03', 'Estación sumin.flota (Privada). Exclusiva GNV'),
+    ('04', 'Estación sumin.flota (Privada). Mixta'),
+    ('05', 'Estación abierta. Exclusiva GNV con certificado'),
 ]
 TAULA_TIPO_DE_APARATO = [
     ('CO', 'Contador'),
