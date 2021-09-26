@@ -612,6 +612,8 @@ class Factura(object):
         res_to_join = {}
         to_join = {
             'tfixe_cargos': 'tfixe',
+            'tfixe_altres': 'tfixe',
+            'tvariable_altres': 'tvariable',
         }
         for concepte in self.listaconceptos:
             tipus = TIPUS_CONCEPTES.get(concepte.codconcepto, "altres")
@@ -629,7 +631,7 @@ class Factura(object):
         for tipus, info in res_to_join.items():
             tipus_join = to_join.get(tipus)
             if not res.get(tipus_join):
-                continue
+                res[tipus_join].setdefault(tipus, {'total': 0.0, 'lines': []})
             base = 1.0
             res[tipus_join]['total'] += info['total']
             for l in info['lines']:
