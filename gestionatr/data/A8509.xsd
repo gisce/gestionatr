@@ -108,6 +108,12 @@
 			<enumeration value="31"/>
 			<enumeration value="32"/>
 			<enumeration value="33"/>
+			<enumeration value="R1"/>
+			<enumeration value="R2"/>
+			<enumeration value="R3"/>
+			<enumeration value="S1"/>
+			<enumeration value="S2"/>
+			<enumeration value="S3"/>
 		</restriction>
 	</simpleType>
 	<complexType name="SumarioPeajePerfilType">

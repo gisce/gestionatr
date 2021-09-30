@@ -52,7 +52,7 @@
     <reqestimatedqa>30</reqestimatedqa>
     <reqoutgoingpressure>40</reqoutgoingpressure>
     <gasusetype>01</gasusetype>
-    <tolltype>31</tolltype>
+    <tolltype>R1</tolltype>
     <counterproperty>01</counterproperty>
     <aptransind>S</aptransind>
     <aptransnumber>9999</aptransnumber>
@@ -60,19 +60,22 @@
     <designpower>97</designpower>
     <iricertificatedate>2020-01-01</iricertificatedate>
     <terminstexist>S</terminstexist>
+    <telemetering>N</telemetering>
+    <factmethod>2</factmethod>
+    <gasstationtype>00</gasstationtype>
     <modeffectdate>05</modeffectdate>
     <reqactivationdate>2020-02-01</reqactivationdate>
     <extrainfo>EXTRA EXTRA! EL GAS NO TE SENTIT!</extrainfo>
       <productlist>
             <product>
                 <producttype>03</producttype>
-                <producttolltype>31</producttolltype>
+                <producttolltype>R1</producttolltype>
                 <productqd>23.6000000</productqd>
                 <productqa>12345</productqa>
             </product>
             <product>
                 <producttype>02</producttype>
-                <producttolltype>32</producttolltype>
+                <producttolltype>R2</producttolltype>
                 <productqd>23.5000000</productqd>
                 <productqa>1234</productqa>
             </product>

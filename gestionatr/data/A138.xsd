@@ -240,7 +240,7 @@
 			</element>
 			<element name="reqestimatedqa" type="tns:QaType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Consumo caudal anual estimado (kWh/ año). No se debe informar para suministros del grupo 1 o 2</documentation>
+					<documentation>Consumo caudal anual estimado (kWh/ año).</documentation>
 				</annotation>
 			</element>
 			<element name="reqoutgoingpressure" type="tns:PressureType" minOccurs="0" maxOccurs="1">
@@ -312,6 +312,21 @@
 			<element name="terminstexist" type="tns:FlagType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Indicador de si existe instalación térmica</documentation>
+				</annotation>
+			</element>
+			<element name="telemetering" type="tns:FlagType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Indicador de Telemedida</documentation>
+				</annotation>
+			</element>
+			<element name="factmethod" type="tns:MetodoFacturacionType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Metodo de facturacion</documentation>
+				</annotation>
+			</element>
+			<element name="gasstationtype" type="tns:TipoGasineraType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Indicador de Gasineras</documentation>
 				</annotation>
 			</element>
 			<element name="modeffectdate" type="tns:ModeloFechaSolicitudType" minOccurs="1" maxOccurs="1">

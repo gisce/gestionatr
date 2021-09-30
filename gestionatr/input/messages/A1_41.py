@@ -323,6 +323,24 @@ class A1_41(MessageGas, ProcessDeadline):
             return False
 
     @property
+    def factmethod(self):
+        tree = '{0}.factmethod'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def gasstationtype(self):
+        tree = '{0}.gasstationtype'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
     def finalqdgranted(self):
         tree = '{0}.finalqdgranted'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
@@ -343,6 +361,15 @@ class A1_41(MessageGas, ProcessDeadline):
     @property
     def finalclientyearlyconsumption(self):
         tree = '{0}.finalclientyearlyconsumption'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def clientyearlyconsumption(self):
+        tree = '{0}.clientyearlyconsumption'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text

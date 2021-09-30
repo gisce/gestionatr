@@ -34,7 +34,7 @@
         <province>01</province>
         <city>00001</city>
         <zipcode>5_MLU</zipcode>
-        <tolltype>11</tolltype>
+        <tolltype>R1</tolltype>
         <qdgranted>5.8689</qdgranted>
         <qhgranted>88</qhgranted>
         <singlenomination>S</singlenomination>

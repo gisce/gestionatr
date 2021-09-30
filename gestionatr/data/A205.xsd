@@ -120,7 +120,7 @@
 					</documentation>
 				</annotation>
 			</element>
-			<element name="finaltolltypegranted" type="tns:TollType949C62020" minOccurs="0" maxOccurs="1">
+			<element name="finaltolltypegranted" type="tns:TollType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Peaje Concedido</documentation>
 				</annotation>
@@ -128,6 +128,11 @@
 			<element name="qdgranted" type="tns:QdType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Qd Concedida</documentation>
+				</annotation>
+			</element>
+			<element name="clientyearlyconsumption" type="tns:QaType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Consumo anual (kwh/año).</documentation>
 				</annotation>
 			</element>
 			<element name="newmodeffectdate" type="tns:ModeloFechaRespuestaType" minOccurs="0" maxOccurs="1"/>

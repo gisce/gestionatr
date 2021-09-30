@@ -19,6 +19,7 @@
         <resactivacion>01</resactivacion>
         <transfereffectivedate>2020-05-01</transfereffectivedate>
         <enservicio>S</enservicio>
+        <tolltype>R1</tolltype>
         <telemetering>S</telemetering>
         <finalqdgranted>210355200.787</finalqdgranted>
         <finalqhgranted>654846713</finalqhgranted>

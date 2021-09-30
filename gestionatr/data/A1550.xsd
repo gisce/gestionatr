@@ -113,7 +113,7 @@
 					<documentation>Tipo de Uso del Gas</documentation>
 				</annotation>
 			</element>
-			<element name="singlenomination" type="tns:SinglenominationType" minOccurs="1" maxOccurs="1">
+			<element name="singlenomination" type="tns:SinglenominationType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Indicador de Nominación Individual</documentation>
 				</annotation>

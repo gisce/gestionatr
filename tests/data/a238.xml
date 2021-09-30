@@ -26,7 +26,7 @@
     <qhgranted>397959673</qhgranted>
     <outgoingpressuregranted>87952.239</outgoingpressuregranted>
     <clientyearlyconsumption>445325674084</clientyearlyconsumption>
-    <tolltype>11</tolltype>
+    <tolltype>R1</tolltype>
     <newmodeffectdate>01</newmodeffectdate>
     <foreseentransferdate>2020-03-13</foreseentransferdate>
     <extrainfo>400_Y1cLoMJo2SXTeCdHmJCodtnOvEsmDn</extrainfo>
@@ -55,7 +55,7 @@
         <product>
             <productcode>TESTCODE1</productcode>
             <producttype>03</producttype>
-            <producttolltype>31</producttolltype>
+            <producttolltype>R1</producttolltype>
             <productqd>23.6</productqd>
             <productqa>12345</productqa>
             <productstartdate>2020-01-01</productstartdate>
@@ -64,7 +64,7 @@
         <product>
             <productcode>TESTCODE2</productcode>
             <producttype>02</producttype>
-            <producttolltype>32</producttolltype>
+            <producttolltype>R2</producttolltype>
             <productqd>23.5</productqd>
             <productqa>1234</productqa>
             <productstartdate>2020-01-02</productstartdate>

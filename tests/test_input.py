@@ -3255,12 +3255,12 @@ class test_A1_41(unittest.TestCase):
         self.assertEqual(a1_41.resultreason, u'R32')
         self.assertEqual(a1_41.resultreasondesc, u'Fecha efecto solicitada anterior al día actual.')
         self.assertEqual(a1_41.singlenomination, u'S')
-        self.assertEqual(a1_41.tolltype, u'31')
+        self.assertEqual(a1_41.tolltype, u'R1')
         self.assertEqual(a1_41.updatereason, u'01')
 
         self.assertEqual(a1_41.productlist[0].productcode, u'TESTCODE1')
         self.assertEqual(a1_41.productlist[0].producttype, u'03')
-        self.assertEqual(a1_41.productlist[0].producttolltype, u'31')
+        self.assertEqual(a1_41.productlist[0].producttolltype, u'R1')
         self.assertEqual(a1_41.productlist[0].productqd, u'23.6')
         self.assertEqual(a1_41.productlist[0].productqa, u'12345')
         self.assertEqual(a1_41.productlist[0].productstartdate, u'2020-01-01')
@@ -3268,7 +3268,7 @@ class test_A1_41(unittest.TestCase):
 
         self.assertEqual(a1_41.productlist[1].productcode, u'TESTCODE2')
         self.assertEqual(a1_41.productlist[1].producttype, u'02')
-        self.assertEqual(a1_41.productlist[1].producttolltype, u'32')
+        self.assertEqual(a1_41.productlist[1].producttolltype, u'R2')
         self.assertEqual(a1_41.productlist[1].productqd, u'23.5')
         self.assertEqual(a1_41.productlist[1].productqa, u'1234')
         self.assertEqual(a1_41.productlist[1].productstartdate, u'2020-01-02')
@@ -3367,7 +3367,7 @@ class test_A1_41(unittest.TestCase):
 
         self.assertEqual(a1_41.productlist[0].productcode, u'TESTCODE1')
         self.assertEqual(a1_41.productlist[0].producttype, u'03')
-        self.assertEqual(a1_41.productlist[0].producttolltype, u'31')
+        self.assertEqual(a1_41.productlist[0].producttolltype, u'R1')
         self.assertEqual(a1_41.productlist[0].productqd, u'23.6')
         self.assertEqual(a1_41.productlist[0].productqa, u'12345')
         self.assertEqual(a1_41.productlist[0].productstartdate, u'2020-01-01')
@@ -3375,7 +3375,7 @@ class test_A1_41(unittest.TestCase):
 
         self.assertEqual(a1_41.productlist[1].productcode, u'TESTCODE2')
         self.assertEqual(a1_41.productlist[1].producttype, u'02')
-        self.assertEqual(a1_41.productlist[1].producttolltype, u'32')
+        self.assertEqual(a1_41.productlist[1].producttolltype, u'R2')
         self.assertEqual(a1_41.productlist[1].productqd, u'23.5')
         self.assertEqual(a1_41.productlist[1].productqa, u'1234')
         self.assertEqual(a1_41.productlist[1].productstartdate, u'2020-01-02')
@@ -3829,7 +3829,7 @@ class test_A1_02(unittest.TestCase):
         self.assertEqual(a202.nationality, u'ES')
         self.assertEqual(a202.documenttype, u'01')
         self.assertEqual(a202.cups, u'ES1234000000000001JN')
-        self.assertEqual(a202.tolltype, u'31')
+        self.assertEqual(a202.tolltype, u'R1')
         self.assertEqual(a202.qdgranted, u'654321.1234')
         self.assertEqual(a202.outgoingpressuregranted, u'12345.123')
         self.assertEqual(a202.singlenomination, u'S')
@@ -3841,7 +3841,7 @@ class test_A1_02(unittest.TestCase):
         producto = a202.productlist[0]
         self.assertEqual(producto.productcode, u'TESTCODE1')
         self.assertEqual(producto.producttype, u'03')
-        self.assertEqual(producto.producttolltype, u'31')
+        self.assertEqual(producto.producttolltype, u'R1')
         self.assertEqual(producto.productqd, u'23.6')
         self.assertEqual(producto.productqa, u'12345')
         self.assertEqual(producto.productstartdate, u'2020-01-01')
@@ -3849,7 +3849,7 @@ class test_A1_02(unittest.TestCase):
         producto = a202.productlist[1]
         self.assertEqual(producto.productcode, u'TESTCODE2')
         self.assertEqual(producto.producttype, u'02')
-        self.assertEqual(producto.producttolltype, u'32')
+        self.assertEqual(producto.producttolltype, u'R2')
         self.assertEqual(producto.productqd, u'23.5')
         self.assertEqual(producto.productqa, u'1234')
         self.assertEqual(producto.productstartdate, u'2020-01-02')
@@ -3878,6 +3878,7 @@ class test_A1_02(unittest.TestCase):
         self.assertEqual(a302.caecode, u'123456')
         self.assertEqual(a302.canonircperiodicity, u'01')
         self.assertEqual(a302.StatusPS, u'1')
+        self.assertEqual(a302.factmethod, u'1')
         self.assertEqual(a302.lectureperiodicity, u'02')
         self.assertEqual(a302.extrainfo, u'comentarios extras')
         self.assertEqual(len(a302.correctorlist), 2)
@@ -3898,7 +3899,7 @@ class test_A1_02(unittest.TestCase):
         producto = a302.productlist[0]
         self.assertEqual(producto.productcode, u'TESTCODE1')
         self.assertEqual(producto.producttype, u'03')
-        self.assertEqual(producto.producttolltype, u'31')
+        self.assertEqual(producto.producttolltype, u'R1')
         self.assertEqual(producto.productqd, u'23.6')
         self.assertEqual(producto.productqa, u'12345')
         self.assertEqual(producto.productstartdate, u'2020-01-01')
@@ -3906,7 +3907,7 @@ class test_A1_02(unittest.TestCase):
         producto = a302.productlist[1]
         self.assertEqual(producto.productcode, u'TESTCODE2')
         self.assertEqual(producto.producttype, u'02')
-        self.assertEqual(producto.producttolltype, u'32')
+        self.assertEqual(producto.producttolltype, u'R2')
         self.assertEqual(producto.productqd, u'23.5')
         self.assertEqual(producto.productqa, u'1234')
         self.assertEqual(producto.productstartdate, u'2020-01-02')
@@ -3992,7 +3993,7 @@ class test_A1_05(unittest.TestCase):
         self.assertEqual(a205.documenttype, u'01')
         self.assertEqual(a205.cups, u'ES1234000000000001JN')
         self.assertEqual(a205.updatereason, u'01')
-        self.assertEqual(a205.finaltolltypegranted, u'31')
+        self.assertEqual(a205.finaltolltypegranted, u'R1')
         self.assertEqual(a205.qdgranted, u'987654321.1234567')
         self.assertEqual(a205.newmodeffectdate, u'04')
         self.assertEqual(a205.foreseentransferdate, u'2018-06-01')
@@ -4021,7 +4022,7 @@ class test_A1_05(unittest.TestCase):
     def test_a305(self):
         a305 = A1_05(self.xml_a305)
         a305.parse_xml()
-        self.assertEqual(a305.tolltype, u'31')
+        self.assertEqual(a305.tolltype, u'R1')
         self.assertEqual(a305.caecode, u'9988')
         self.assertEqual(a305.atrcode, u'000111222333444555666777')
         self.assertEqual(a305.cityowner, u'17001')
@@ -4754,7 +4755,7 @@ class test_A12_26(unittest.TestCase):
     def tearDown(self):
         self.xml_a1226.close()
 
-    def test_a246(self):
+    def test_a1226(self):
         a1226 = A12_26(self.xml_a1226)
         a1226.parse_xml()
         self.assertEqual(a1226.reqhour, u"12:57:59")
@@ -4780,7 +4781,7 @@ class test_A12_26(unittest.TestCase):
         self.assertEqual(a1226.province, u"01")
         self.assertEqual(a1226.city, u"00001")
         self.assertEqual(a1226.zipcode, u"5_MLU")
-        self.assertEqual(a1226.tolltype, u"11")
+        self.assertEqual(a1226.tolltype, u"R1")
         self.assertEqual(a1226.qdgranted, u"5.8689")
         self.assertEqual(a1226.qhgranted, u"88")
         self.assertEqual(a1226.singlenomination, u"S")
@@ -4986,7 +4987,7 @@ class test_A1_38(unittest.TestCase):
         self.assertEqual(a238.qhgranted, u"397959673")
         self.assertEqual(a238.outgoingpressuregranted, u"87952.239")
         self.assertEqual(a238.clientyearlyconsumption, u"445325674084")
-        self.assertEqual(a238.tolltype, u"11")
+        self.assertEqual(a238.tolltype, u"R1")
         self.assertEqual(a238.newmodeffectdate, u"01")
         self.assertEqual(a238.foreseentransferdate, u"2020-03-13")
         self.assertEqual(a238.extrainfo, u"400_Y1cLoMJo2SXTeCdHmJCodtnOvEsmDn")
@@ -5003,7 +5004,7 @@ class test_A1_38(unittest.TestCase):
 
         self.assertEqual(a238.productlist[0].productcode, u'TESTCODE1')
         self.assertEqual(a238.productlist[0].producttype, u'03')
-        self.assertEqual(a238.productlist[0].producttolltype, u'31')
+        self.assertEqual(a238.productlist[0].producttolltype, u'R1')
         self.assertEqual(a238.productlist[0].productqd, u'23.6')
         self.assertEqual(a238.productlist[0].productqa, u'12345')
         self.assertEqual(a238.productlist[0].productstartdate, u'2020-01-01')
@@ -5011,7 +5012,7 @@ class test_A1_38(unittest.TestCase):
 
         self.assertEqual(a238.productlist[1].productcode, u'TESTCODE2')
         self.assertEqual(a238.productlist[1].producttype, u'02')
-        self.assertEqual(a238.productlist[1].producttolltype, u'32')
+        self.assertEqual(a238.productlist[1].producttolltype, u'R2')
         self.assertEqual(a238.productlist[1].productqd, u'23.5')
         self.assertEqual(a238.productlist[1].productqa, u'1234')
         self.assertEqual(a238.productlist[1].productstartdate, u'2020-01-02')
@@ -5075,7 +5076,7 @@ class test_A1_38(unittest.TestCase):
         self.assertEqual(a338.netsituation, u"14_m8MEzzq0q3f")
         self.assertEqual(a338.lectureperiodicity, u"01")
         self.assertEqual(a338.visitnumber, u"521")
-        self.assertEqual(a338.tolltype, u"11")
+        self.assertEqual(a338.tolltype, u"R1")
         self.assertEqual(a338.finalqdgranted, u"210355200.787")
         self.assertEqual(a338.finalqhgranted, u"654846713")
         self.assertEqual(a338.finalclientyearlyconsumption, u"252744160122")
@@ -5108,7 +5109,7 @@ class test_A1_38(unittest.TestCase):
 
         self.assertEqual(a338.productlist[0].productcode, u'TESTCODE1')
         self.assertEqual(a338.productlist[0].producttype, u'03')
-        self.assertEqual(a338.productlist[0].producttolltype, u'31')
+        self.assertEqual(a338.productlist[0].producttolltype, u'R1')
         self.assertEqual(a338.productlist[0].productqd, u'23.6')
         self.assertEqual(a338.productlist[0].productqa, u'12345')
         self.assertEqual(a338.productlist[0].productstartdate, u'2020-01-01')
@@ -5116,7 +5117,7 @@ class test_A1_38(unittest.TestCase):
 
         self.assertEqual(a338.productlist[1].productcode, u'TESTCODE2')
         self.assertEqual(a338.productlist[1].producttype, u'02')
-        self.assertEqual(a338.productlist[1].producttolltype, u'32')
+        self.assertEqual(a338.productlist[1].producttolltype, u'R2')
         self.assertEqual(a338.productlist[1].productqd, u'23.5')
         self.assertEqual(a338.productlist[1].productqa, u'1234')
         self.assertEqual(a338.productlist[1].productstartdate, u'2020-01-02')
@@ -5513,7 +5514,7 @@ class test_A1_42(unittest.TestCase):
 
         self.assertEqual(a242.productlist[0].productcode, u'TESTCODE1')
         self.assertEqual(a242.productlist[0].producttype, u'03')
-        self.assertEqual(a242.productlist[0].producttolltype, u'31')
+        self.assertEqual(a242.productlist[0].producttolltype, u'R1')
         self.assertEqual(a242.productlist[0].productqd, u'23.6')
         self.assertEqual(a242.productlist[0].productqa, u'12345')
         self.assertEqual(a242.productlist[0].productstartdate, u'2020-01-01')
@@ -5521,7 +5522,7 @@ class test_A1_42(unittest.TestCase):
 
         self.assertEqual(a242.productlist[1].productcode, u'TESTCODE2')
         self.assertEqual(a242.productlist[1].producttype, u'02')
-        self.assertEqual(a242.productlist[1].producttolltype, u'32')
+        self.assertEqual(a242.productlist[1].producttolltype, u'R2')
         self.assertEqual(a242.productlist[1].productqd, u'23.5')
         self.assertEqual(a242.productlist[1].productqa, u'1234')
         self.assertEqual(a242.productlist[1].productstartdate, u'2020-01-02')
@@ -5546,6 +5547,7 @@ class test_A1_42(unittest.TestCase):
         self.assertEqual(a342.gasusetype, '01')
         self.assertEqual(a342.updatereason, '01')
         self.assertEqual(a342.activationtype, '001')
+        self.assertEqual(a342.factmethod, '2')
         self.assertEqual(a342.closingtype, '001')
         self.assertEqual(a342.canonircperiodicity, '01')
         self.assertEqual(a342.StatusPS, '1')
@@ -5570,7 +5572,7 @@ class test_A1_42(unittest.TestCase):
 
         self.assertEqual(a342.productlist[0].productcode, u'TESTCODE1')
         self.assertEqual(a342.productlist[0].producttype, u'03')
-        self.assertEqual(a342.productlist[0].producttolltype, u'31')
+        self.assertEqual(a342.productlist[0].producttolltype, u'R1')
         self.assertEqual(a342.productlist[0].productqd, u'23.6')
         self.assertEqual(a342.productlist[0].productqa, u'12345')
         self.assertEqual(a342.productlist[0].productstartdate, u'2020-01-01')
@@ -5578,7 +5580,7 @@ class test_A1_42(unittest.TestCase):
 
         self.assertEqual(a342.productlist[1].productcode, u'TESTCODE2')
         self.assertEqual(a342.productlist[1].producttype, u'02')
-        self.assertEqual(a342.productlist[1].producttolltype, u'32')
+        self.assertEqual(a342.productlist[1].producttolltype, u'R2')
         self.assertEqual(a342.productlist[1].productqd, u'23.5')
         self.assertEqual(a342.productlist[1].productqa, u'1234')
         self.assertEqual(a342.productlist[1].productstartdate, u'2020-01-02')
@@ -5722,7 +5724,7 @@ class test_A1_43(unittest.TestCase):
 
         self.assertEqual(a243.productlist[0].productcode, u'TESTCODE1')
         self.assertEqual(a243.productlist[0].producttype, u'03')
-        self.assertEqual(a243.productlist[0].producttolltype, u'31')
+        self.assertEqual(a243.productlist[0].producttolltype, u'R1')
         self.assertEqual(a243.productlist[0].productqd, u'23.6')
         self.assertEqual(a243.productlist[0].productqa, u'12345')
         self.assertEqual(a243.productlist[0].productstartdate, u'2020-01-01')
@@ -5730,7 +5732,7 @@ class test_A1_43(unittest.TestCase):
 
         self.assertEqual(a243.productlist[1].productcode, u'TESTCODE2')
         self.assertEqual(a243.productlist[1].producttype, u'02')
-        self.assertEqual(a243.productlist[1].producttolltype, u'32')
+        self.assertEqual(a243.productlist[1].producttolltype, u'R2')
         self.assertEqual(a243.productlist[1].productqd, u'23.5')
         self.assertEqual(a243.productlist[1].productqa, u'1234')
         self.assertEqual(a243.productlist[1].productstartdate, u'2020-01-02')
@@ -5754,7 +5756,7 @@ class test_A1_43(unittest.TestCase):
 
         self.assertEqual(a343.productlist[0].productcode, u'TESTCODE1')
         self.assertEqual(a343.productlist[0].producttype, u'03')
-        self.assertEqual(a343.productlist[0].producttolltype, u'31')
+        self.assertEqual(a343.productlist[0].producttolltype, u'R1')
         self.assertEqual(a343.productlist[0].productqd, u'23.6')
         self.assertEqual(a343.productlist[0].productqa, u'12345')
         self.assertEqual(a343.productlist[0].productstartdate, u'2020-01-01')
@@ -5762,7 +5764,7 @@ class test_A1_43(unittest.TestCase):
 
         self.assertEqual(a343.productlist[1].productcode, u'TESTCODE2')
         self.assertEqual(a343.productlist[1].producttype, u'02')
-        self.assertEqual(a343.productlist[1].producttolltype, u'32')
+        self.assertEqual(a343.productlist[1].producttolltype, u'R2')
         self.assertEqual(a343.productlist[1].productqd, u'23.5')
         self.assertEqual(a343.productlist[1].productqa, u'1234')
         self.assertEqual(a343.productlist[1].productstartdate, u'2020-01-02')

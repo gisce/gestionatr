@@ -25,7 +25,7 @@
                 <reqtype>02</reqtype>
                 <productcode>01010101323</productcode>
                 <producttype>03</producttype>
-                <producttolltype>11</producttolltype>
+                <producttolltype>R1</producttolltype>
                 <productqd>123123.1000000</productqd>
                 <productqa>6263</productqa>
             </product>
@@ -33,7 +33,7 @@
                 <reqtype>03</reqtype>
                 <productcode>51010101323</productcode>
                 <producttype>02</producttype>
-                <producttolltype>12</producttolltype>
+                <producttolltype>R2</producttolltype>
                 <productqd>5555.1000000</productqd>
                 <productqa>2222</productqa>
             </product>

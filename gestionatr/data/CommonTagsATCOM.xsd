@@ -177,6 +177,7 @@
 			<xs:enumeration value="07"/>
 			<xs:enumeration value="08"/>
 			<xs:enumeration value="09"/>
+			<xs:enumeration value="11"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="ClaimReferenceListType">
@@ -1279,6 +1280,7 @@ Para un incidente en un día concreto, la fecha hasta será igual a la fecha desde
 						<xs:enumeration value="04"/>
 						<xs:enumeration value="05"/>
 						<xs:enumeration value="06"/>
+						<xs:enumeration value="07"/>
 						<xs:enumeration value="99"/>
 					</xs:restriction>
 				</xs:simpleType>
