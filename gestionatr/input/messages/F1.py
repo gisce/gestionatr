@@ -1518,6 +1518,8 @@ class ModeloAparato(object):
         data = []
         if hasattr(self.modelo_aparato, 'Integrador'):
             integradors_dh_per_data = {}
+            totalitzadors_per_data = {}
+            integradors_per_data_i_periode = {}
             for d in self.modelo_aparato.Integrador:
                 integrador = Integrador(d)
                 if integrador.codigo_periodo in ['21', '22', '81', '82', '83'] and integrador.magnitud == 'PM':
@@ -1526,8 +1528,21 @@ class ModeloAparato(object):
                     # Els guardem per tractarlos despres
                     integradors_dh_per_data.setdefault(integrador.lectura_hasta.fecha, [])
                     integradors_dh_per_data[integrador.lectura_hasta.fecha].append(integrador)
+                elif integrador.codigo_periodo in ['90', 'A0']:
+                    totalitzadors_per_data.setdefault(integrador.lectura_hasta.fecha, [])
+                    totalitzadors_per_data[integrador.lectura_hasta.fecha].append(integrador)
                 else:
+                    integradors_per_data_i_periode.setdefault(integrador.lectura_hasta.fecha, {})
+                    integradors_per_data_i_periode[integrador.lectura_hasta.fecha].setdefault(integrador.periode, [])
+                    integradors_per_data_i_periode[integrador.lectura_hasta.fecha][integrador.periode].append(integrador)
                     data.append(integrador)
+
+            for data_totalitzador, totalitzadors in totalitzadors_per_data.items():
+                for totalitzador in totalitzadors_per_data[data_totalitzador]:
+                    if data_totalitzador not in integradors_per_data_i_periode:
+                        data.append(totalitzador)
+                    elif totalitzador.periode not in integradors_per_data_i_periode[data_totalitzador]:
+                        data.append(totalitzador)
 
             # Per tractar els multiples periodes en una DH nosaltres agafarem
             # la lectura mes gran de cada data com a P1 ja que no hi ha altres
