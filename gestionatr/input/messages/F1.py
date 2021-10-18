@@ -1811,6 +1811,8 @@ class FacturaATR(Factura):
             return False
         if self.datos_factura.tipo_factura in ('G', 'C'):
             return False
+        if self.datos_factura.vas_trafo or self.datos_factura.porcentaje_perdidas:
+            return False
         for c in self.get_comptadors():
             for l in c.get_lectures(force_no_transforma_no_td_a_td=True):
                 if isinstance(l.consumo_calculado, int):
