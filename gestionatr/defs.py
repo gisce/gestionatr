@@ -651,6 +651,14 @@ TABLA_7 = [
           u"técnicos y administrativos")
 ]
 
+TABLA_7_M1 = TABLA_7.extend([
+    ('M', u"(M) Solicitud de aplicación de SMV. Si potencia contratada superior a "
+          u"potencia límite del SMV, el distribuidor adecuará la potencia "
+          u"contratada a la potencia límite"),
+    ('B', u"(B) Baja del SMV, vuelta a suministro normal con restablecimiento del valor "
+          u"de la potencia, en su caso."),
+])
+
 TABLA_8_OLD = [('S', 'Según ciclo de lectura'),
                ('N', 'Al cabo de 15 días (plazo legal)')]
 
@@ -1111,6 +1119,8 @@ TABLA_27 = [
     ('G1', 'Sólo se podrá modificar: -el tipo de identificador y el identificador o, -nombre y apellidos (razón social).'),
     ('G2', 'Revisión interior incorrecta, debe aportar documentación técnica posterior a la revisión'),
     ('G3', 'Código solicitud ATR/reclamación anterior inexistente'),
+    ('G4', 'Suministro Mínimo Vital'),
+    ('G5', 'Este tipo de modificación (“M”/”B”) solo aplica a solicitudes de modificación (formato M1) de suministros en bono social (suministrados por COR)'),
     ('99', 'Otros'),
 ]
 
