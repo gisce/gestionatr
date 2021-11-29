@@ -1371,6 +1371,7 @@ TABLA_62 = [
     ('UF', u'Uso finca'),
     ('UV', u'Usos Varios'),
     ('VI', u'Vivienda'),
+    ('VE', u'Recarga de vehículo eléctrico'),
 ]
 
 TABLA_63 = [
@@ -2278,6 +2279,8 @@ TABLA_113 = [
     ('54', u'Con excedentes sin compensación individual con cto SSAA en Red Interior– SSAA'),
     ('55', u'Con excedentes sin compensación Colectivo/en Red Interior– Consumo'),
     ('56', u'Con excedentes sin compensación Colectivo/en Red Interior - SSAA'),
+    ('57', u'Con excedentes sin compensación Colectivo sin cto de SSAA (despreciable) en red interior – Consumo'),
+    ('58', u'Con excedentes sin compensación Colectivo sin cto de SSAA a través de red - Consumo'),
     ('61', u'Con excedentes sin compensación Individual con cto SSAA a través de red – Consumo'),
     ('62', u'Con excedentes sin compensación individual con cto SSAA a través de red – SSAA'),
     ('63', u'Con excedentes sin compensación Colectivo a través de red – Consumo'),
