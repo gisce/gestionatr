@@ -46,15 +46,6 @@ class A1_46(A1_48):
             return False
 
     @property
-    def cups(self):
-        tree = '{0}.cups'.format(self._header)
-        data = get_rec_attr(self.obj, tree, False)
-        if data is not None and data is not False:
-            return data.text
-        else:
-            return False
-
-    @property
     def reqcodetoanul(self):
         tree = '{0}.reqcodetoanul'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
