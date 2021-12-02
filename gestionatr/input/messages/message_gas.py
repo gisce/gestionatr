@@ -280,7 +280,7 @@ class MessageGas(Message):
         if data not in [None, False]:
             return data.text
         else:
-            tree = tree.replace("s", "S")  # Si, envien a vegades amb minuscula i a vegades amb majuscula. Segons CNMC hauria de ser minuscula
+            tree = '{0}.cups'.format(self._header.replace("s", "S"))  # Si, envien a vegades amb minuscula i a vegades amb majuscula. Segons CNMC hauria de ser minuscula
             data = get_rec_attr(self.obj, tree, False)
             if data not in [None, False]:
                 return data.text
