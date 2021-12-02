@@ -281,7 +281,7 @@ class Message(MessageBase):
                 self._header = fitxer.split(".xsd")[0]
             if "<"+self._header+">" not in self.str_xml:
                 aux = self._header.replace("s", "S")
-                if "<" + aux + ">" not in self.str_xml:
+                if "<" + aux + ">" in self.str_xml:
                     self._header = aux
 
             xsd = utils.get_data(fitxer)
