@@ -12,5 +12,5 @@ with open(sys.argv[1], 'r') as xml_file:
         m.parse_xml()
         sys.stdout.write(u'Fitxer Correcte\n')
     except Exception, e:
-        sys.stdout.write(u'Fitxer Invàlid: {0}\n'.format(str(e.value)))
+        sys.stdout.write(u'Fitxer Invàlid: {0}\n'.format(e.value))
 
