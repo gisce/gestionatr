@@ -279,10 +279,11 @@ class Message(MessageBase):
                 self._header = MAIN_MESSAGE_XSD[fitxer.split(".xsd")[0]]
             except:
                 self._header = fitxer.split(".xsd")[0]
-            if "<"+self._header+">" not in self.str_xml:
-                aux = self._header.replace("s", "S")
-                if "<" + aux + ">" in self.str_xml:
-                    self._header = aux
+            if not isinstance(self._header, (list, tuple)):
+                if "<"+self._header+">" not in self.str_xml:
+                    aux = self._header.replace("s", "S")
+                    if "<" + aux + ">" in self.str_xml:
+                        self._header = aux
 
             xsd = utils.get_data(fitxer)
             self.f_xsd = open(xsd, 'r')
