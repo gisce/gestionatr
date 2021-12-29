@@ -474,6 +474,15 @@ class Factura(object):
                 data.append(ConceptoRepercutible(d))
         return data
 
+    def get_tipus_punt_mesura(self):
+        try:
+            if self.factura.DatosGeneralesFacturaATR and self.factura.DatosGeneralesFacturaATR.DatosFacturaATR:
+                if self.factura.DatosGeneralesFacturaATR.DatosFacturaATR.TipoPM:
+                    return self.factura.DatosGeneralesFacturaATR.DatosFacturaATR.TipoPM.text
+        except AttributeError:
+            # We might not have any "TipoPM" in DatosFacturaATR
+            pass
+
     def get_coeficient_repartiment(self):
         try:
             if self.factura.Autoconsumo and self.factura.Autoconsumo.InstalacionGenAutoconsumo:
