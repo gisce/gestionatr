@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por dgarciar (Comisión Nacional de los Mercados y la Competencia) -->
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/B7032" targetNamespace="http://localhost/sctd/B7032" elementFormDefault="qualified">
 	<include schemaLocation="CommonTagsFACT.xsd"/>
 	<element name="facturasctd" type="tns:FacturaSctdB7032Type"/>
@@ -124,6 +125,7 @@
 			<element name="telemedida" type="tns:FlagType" minOccurs="0" maxOccurs="1"/>
 			<element name="tipogasinera" type="tns:TipoGasineraType" minOccurs="0" maxOccurs="1"/>
 			<element name="metodofacturacion" type="tns:MetodoFacturacionType" minOccurs="0" maxOccurs="1"/>
+			<element name="codtbai" type="tns:CodTBAI" minOccurs="0" maxOccurs="1"/>
 			<element name="observaciones1" type="tns:CodAlpha100Type" minOccurs="0" maxOccurs="1"/>
 			<element name="observaciones2" type="tns:CodAlpha100Type" minOccurs="0" maxOccurs="1"/>
 			<element name="telefurgencias" minOccurs="1" maxOccurs="1">

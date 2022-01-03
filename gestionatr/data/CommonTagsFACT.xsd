@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por dgarciar (Comisión Nacional de los Mercados y la Competencia) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 	<xs:simpleType name="AgenteType">
 		<xs:restriction base="xs:string">
@@ -368,8 +369,8 @@
 					<xs:restriction base="xs:decimal">
 						<xs:totalDigits value="29"/>
 						<xs:fractionDigits value="12"/>
-						<xs:maxInclusive value="99999999999999.99999999"/>
-						<xs:minInclusive value="-99999999999999.99999999"/>
+						<xs:maxInclusive value="99999999999999999.999999"/>
+						<xs:minInclusive value="-99999999999999999.999999"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -378,8 +379,8 @@
 					<xs:restriction base="xs:decimal">
 						<xs:totalDigits value="29"/>
 						<xs:fractionDigits value="12"/>
-						<xs:maxInclusive value="99999999999999.99999999"/>
-						<xs:minInclusive value="-99999999999999.99999999"/>
+						<xs:maxInclusive value="99999999999999999.999999"/>
+						<xs:minInclusive value="-99999999999999999.999999"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -672,8 +673,8 @@
 					<xs:restriction base="xs:decimal">
 						<xs:totalDigits value="29"/>
 						<xs:fractionDigits value="12"/>
-						<xs:maxInclusive value="99999999999999.99999999"/>
-						<xs:minInclusive value="-99999999999999.99999999"/>
+						<xs:maxInclusive value="99999999999999999.999999"/>
+						<xs:minInclusive value="-99999999999999999.999999"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -682,8 +683,8 @@
 					<xs:restriction base="xs:decimal">
 						<xs:totalDigits value="29"/>
 						<xs:fractionDigits value="12"/>
-						<xs:maxInclusive value="99999999999999.99999999"/>
-						<xs:minInclusive value="-99999999999999.99999999"/>
+						<xs:maxInclusive value="99999999999999999.999999"/>
+						<xs:minInclusive value="-99999999999999999.999999"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -692,8 +693,8 @@
 					<xs:restriction base="xs:decimal">
 						<xs:totalDigits value="29"/>
 						<xs:fractionDigits value="12"/>
-						<xs:maxInclusive value="99999999999999.99999999"/>
-						<xs:minInclusive value="-99999999999999.99999999"/>
+						<xs:maxInclusive value="99999999999999999.999999"/>
+						<xs:minInclusive value="-99999999999999999.999999"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -713,8 +714,8 @@
 					<xs:restriction base="xs:decimal">
 						<xs:totalDigits value="29"/>
 						<xs:fractionDigits value="12"/>
-						<xs:maxInclusive value="99999999999999.99999999"/>
-						<xs:minInclusive value="-99999999999999.99999999"/>
+						<xs:maxInclusive value="99999999999999999.999999"/>
+						<xs:minInclusive value="-99999999999999999.999999"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -767,7 +768,7 @@
 					<xs:restriction base="xs:decimal">
 						<xs:totalDigits value="29"/>
 						<xs:fractionDigits value="12"/>
-						<xs:maxInclusive value="99999999999999.99999999"/>
+						<xs:maxInclusive value="99999999999999999.999999"/>
 						<xs:minInclusive value="0"/>
 					</xs:restriction>
 				</xs:simpleType>
@@ -1027,6 +1028,16 @@
 			<xs:enumeration value="03"/>
 			<xs:enumeration value="04"/>
 			<xs:enumeration value="05"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CodTBAI">
+		<xs:annotation>
+			<xs:documentation>Código identificativo TicketBAI, de uso exclusivo en la Comunidad Autónoma Vasca</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="39"/>
+			<xs:maxLength value="39"/>
+			<xs:whiteSpace value="collapse"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>
