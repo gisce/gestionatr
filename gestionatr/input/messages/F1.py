@@ -482,7 +482,7 @@ class Factura(object):
                     if instalacio.EnergiaNetaGen:
                         for terme in instalacio.EnergiaNetaGen.TerminoEnergiaNetaGen:
                             for periode in terme.Periodo:
-                                if periode.valor_energia_neta_gen:
+                                if periode.ValorEnergiaNetaGen:
                                     beta_list.append(float(periode.Beta.text))
                 return list(set(beta_list))
         except AttributeError:
@@ -650,7 +650,7 @@ class PeriodoPotencia(Periodo):
     @property
     def recargo_inf_anio(self):
         if hasattr(self.periodo, 'RecargoInfAnio'):
-            return int(self.periodo.RecargoInfAnio.text.strip())
+            return int(float(self.periodo.RecargoInfAnio.text.strip()))
         return None
 
 
