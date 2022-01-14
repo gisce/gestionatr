@@ -30,7 +30,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install .
-        if [[ $TRAVIS_PYTHON_VERSION == 2.6 ]]; then pip install unittest2; fi
+        # if [[ $TRAVIS_PYTHON_VERSION == 2.6 ]]; then pip install unittest2; fi
         pip install coveralls
     - name: Run test
       run: |
