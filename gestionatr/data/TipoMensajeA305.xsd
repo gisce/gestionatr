@@ -2,11 +2,6 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposComplejos.xsd"/>
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
-	<xs:annotation>
-		<xs:documentation>
-			Version 1.2 CNMC 2016.12.20
-		</xs:documentation>
-	</xs:annotation>
 	<xs:complexType name="ActivacionAltaA305">
 		<xs:sequence>
 			<xs:element name="DatosActivacion" type="DatosActivacionAltaA305"/>
@@ -24,6 +19,7 @@
 	<xs:complexType name="ContratoAltaA305">
 		<xs:sequence>
 			<xs:element name="IdContrato" type="IdContrato"/>
+			<xs:element name="FechaFinalizacion" type="xs:date" minOccurs="0"/>
 			<xs:element name="TipoAutoconsumo" type="TipoAutoconsumo">
 				<xs:annotation>
 					<xs:documentation>Tabla 113</xs:documentation>

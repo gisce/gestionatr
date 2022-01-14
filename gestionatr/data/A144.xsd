@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia León (Comisión Nacional de los Mercados y la Competencia) -->
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A144" targetNamespace="http://localhost/sctd/A144" elementFormDefault="qualified">
 	<include schemaLocation="CommonTagsATCOM.xsd"/>
 	<element name="sctdapplication" type="tns:SctdApplicationA144Type"/>
@@ -64,6 +63,7 @@
 						<enumeration value="07"/>
 						<enumeration value="08"/>
 						<enumeration value="09"/>
+						<enumeration value="11"/>
 					</restriction>
 				</simpleType>
 			</element>

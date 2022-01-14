@@ -84,3 +84,4 @@ class ActivacionAlta(XmlModel):
 
 # Paso 06 -> C1 MensajeAnulacionSolicitud
 # Paso 07 -> C1 MensajeAceptacionAnulacion
+# Paso 13 -> C1 MesajeContestacionIncidencia

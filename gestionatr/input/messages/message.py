@@ -17,7 +17,9 @@ XSD_DATA = {'F1': {'01': 'Facturacion.xsd'},
                    '05': 'ActivacionAlta.xsd',
                    '06': 'AnulacionSolicitud.xsd',
                    '07': ('AceptacionAnulacion.xsd',
-                          'Rechazo.xsd')},
+                          'Rechazo.xsd'),
+                   '13': 'ContestacionIncidencia.xsd'
+                   },
             'B1': {'01': 'BajaSuspension.xsd',
                    '02': ('AceptacionBajaSuspension.xsd',
                           'Rechazo.xsd'),
@@ -26,7 +28,9 @@ XSD_DATA = {'F1': {'01': 'Facturacion.xsd'},
                           'Rechazo.xsd'),
                    '05': 'ActivacionBajaSuspension.xsd',
                    '06': 'IncidenciasATRDistribuidor.xsd',
-                   '07': 'Rechazo.xsd'},
+                   '07': 'Rechazo.xsd',
+                   '16': 'ContestacionIncidencia.xsd'},
+            'B2': {'05': 'ActivacionBaja.xsd'},
             'C1': {'01': 'CambiodeComercializadorSinCambios.xsd',
                    '02': ('AceptacionCambiodeComercializadorSinCambios.xsd',
                           'Rechazo.xsd'),
@@ -52,9 +56,24 @@ XSD_DATA = {'F1': {'01': 'Facturacion.xsd'},
                    '10': 'AceptacionAnulacion.xsd',
                    '11': 'AceptacionCambiodeComercializadorSaliente.xsd',
                    '12': 'RechazoCambiodeComercializadorSaliente.xsd',
+                   '13': 'ContestacionIncidencia.xsd'
                    },
             'D1': {'01': 'NotificacionCambiosATRDesdeDistribuidor.xsd',
                    '02': ('AceptacionNotificacionCambiosATRDesdeDistribuidor.xsd', 'RechazoD1.xsd'),
+                   },
+            'E1': {'01': 'SolicitudDesistimiento.xsd',
+                   '02': ('AceptacionDesistimiento.xsd', 'Rechazo.xsd'),
+                   '03': 'IncidenciasATRDistribuidor.xsd',
+                   '04': 'Rechazo.xsd',
+                   '05': 'ActivacionDesistimiento.xsd',
+                   '06': 'NotificacionActivacionPorDesistimiento.xsd',
+                   '08': 'AnulacionSolicitud.xsd',
+                   '09': ('AceptacionAnulacion.xsd',
+                          'Rechazo.xsd'),
+                   '10': 'AceptacionAnulacion.xsd',
+                   '11': 'AceptacionDesistimiento.xsd',
+                   '12': 'RechazoDesistimiento.xsd',
+                   '13': 'ContestacionIncidencia.xsd'
                    },
             'M1': {'01': 'ModificacionDeATR.xsd',
                    '02': ('AceptacionModificacionDeATR.xsd',
@@ -66,13 +85,27 @@ XSD_DATA = {'F1': {'01': 'Facturacion.xsd'},
                    '07': ('AceptacionAnulacion.xsd',
                           'Rechazo.xsd'),
                    },
+            'P0': {'01': 'SolicitudInformacionAlRegistroDePS.xsd',
+                   '02': ('EnvioInformacionPS.xsd',
+                          'RechazoPeticion.xsd'),
+                   },
             'R1': {'01': 'ReclamacionPeticion.xsd',
                    '02': ('AceptacionReclamacion.xsd',
                           'RechazoReclamacion.xsd'),
                    '03': 'PeticionInformacionAdicionalReclamacion.xsd',
                    '04': 'EnvioInformacionReclamacion.xsd',
                    '05': 'CierreReclamacion.xsd',
+                   '08': 'AnulacionSolicitudReclamacion.xsd',
+                   '09': ('AceptacionAnulacionReclamacion.xsd', 'RechazoReclamacion.xsd'),
                    },
+            'T1': {
+                '01': 'SolicitudTraspasoCOR.xsd',
+                '02': ('AceptacionTraspasoCOR.xsd',
+                       'RechazoTraspasoCOR.xsd'),
+                '05': 'ActivacionTraspasoCOR.xsd',
+                '06': 'ActivacionTraspasoCORSaliente.xsd',
+                '10': 'AceptacionAnulacion.xsd',
+            },
             'W1': {'01': 'SolicitudAportacionLectura.xsd',
                    '02': ('AceptacionAportacionLectura.xsd',
                           'Rechazo.xsd'),
@@ -92,6 +125,7 @@ MAIN_MESSAGE_XSD = {
     'AceptacionBajaSuspension': 'AceptacionBajaSuspension',
     'AceptacionAnulacionBaja': 'AceptacionAnulacion',
     'ActivacionBajaSuspension': 'ActivacionBaja',
+    'ActivacionBajaUnidireccional': 'ActivacionBaja',
     'CambiodeComercializadorSinCambios': 'CambiodeComercializadorSinCambios',
     'AceptacionCambiodeComercializadorSinCambios': 'AceptacionCambiodeComercializadorSinCambios',
     'ActivacionCambiodeComercializadorSinCambios': 'ActivacionCambiodeComercializadorSinCambios',
@@ -103,6 +137,20 @@ MAIN_MESSAGE_XSD = {
     'RechazoD1': 'Rechazos',
     'A101': 'A101',
     'A102e': 'A102',
+    'SolicitudInformacionAlRegistroDePS': 'ValidacionCliente',
+    'SolicitudDesistimiento': 'SolicitudDesistimiento',
+    'AceptacionDesistimiento': 'AceptacionDesistimiento',
+    'RechazoDesistimiento': 'RechazoDesistimiento',
+    'ActivacionDesistimiento': 'ActivacionDesistimiento',
+    'NotificacionActivacionDesistimiento': 'NotificacionActivacionDesistimiento',
+    'ContestacionIncidencia': 'ContestacionIncidencia',
+    'SolicitudTraspasoCOR': 'SolicitudTraspasoCOR',
+    'AceptacionTraspasoCOR': 'AceptacionTraspasoCOR',
+    'RechazoTraspasoCOR': 'Rechazos',
+    'ActivacionTraspasoCOR': 'ActivacionTraspasoCOR',
+    'ActivacionTraspasoCORSaliente': 'NotificacionComercializadorSalienteT1',
+    'EnvioInformacionPS': 'EnvioInformacionPS',
+    'RechazoPeticion': 'RechazosPeticion',
     'ModificacionDeATR': 'ModificacionDeATR',
     'AceptacionModificacionDeATR': 'AceptacionModificacionDeATR',
     'ActivacionModificacionDeATR': 'ActivacionModificaciones',
@@ -112,6 +160,7 @@ MAIN_MESSAGE_XSD = {
     'PeticionInformacionAdicionalReclamacion': 'InformacionAdicional',
     'EnvioInformacionReclamacion': 'EnvioInformacionReclamacion',
     'CierreReclamacion': 'CierreReclamacion',
+    'AceptacionAnulacionReclamacion': 'AceptacionAnulacion',
     'MensajeSolicitudAportacionLectura': ['DatosSolicitudAportacionLectura', 'LecturaAportada'],
     'AceptacionAportacionLectura': 'DatosAceptacionLectura',
     'Facturacion': ['Facturas',  'OtrosDatosFactura'],
@@ -217,6 +266,10 @@ class Message(MessageBase):
                 trobat = False
                 root = objectify.fromstring(self.str_xml)
                 for fitxer in XSD_DATA[self.tipus][self.pas]:
+                    if 'MensajeRechazoP0' in root.tag:
+                        fitxer = "RechazoPeticion.xsd"
+                        trobat = True
+                        break
                     if fitxer.split(".xsd")[0] in root.tag:
                         trobat = True
                         break
@@ -229,7 +282,14 @@ class Message(MessageBase):
                 self._header = MAIN_MESSAGE_XSD[fitxer.split(".xsd")[0]]
             except:
                 self._header = fitxer.split(".xsd")[0]
-            self.xsd = utils.get_data(fitxer)
+            if not isinstance(self._header, (list, tuple)):
+                if "<"+self._header+">" not in self.str_xml:
+                    aux = self._header.replace("s", "S")
+                    if "<" + aux + ">" in self.str_xml:
+                        self._header = aux
+
+            xsd = utils.get_data(fitxer)
+            self.f_xsd = open(xsd, 'rb')
         except except_f1 as e:
             raise e
         except:
@@ -321,7 +381,7 @@ class Message(MessageBase):
         ref = self.head.FechaSolicitud.text
         if not ref:
             raise except_f1('Error', u'Documento sin fecha de solicitud')
-        return ' '.join(ref.split('T'))
+        return ' '.join(ref.split('T')).split('.')[0]
 
 
 class except_f1(Exception):

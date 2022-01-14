@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="TiposComplejos.xsd"/>
+	<xs:include schemaLocation="TiposSencillos.xsd"/>
+	<xs:complexType name="NotificacionBajaATRB201">
+		<xs:sequence>
+			<xs:element name="DatosActivacionBaja" type="DatosNotificacionBajaATRB201"/>
+			<xs:element name="Contrato" type="ContratoNotificacionBajaATRB201"/>
+			<xs:element name="PuntosDeMedida" type="PuntosDeMedida"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Tipos secundarios de la transaccion actual -->
+	<!-- Datos de la activacion de la baja -->
+	<xs:complexType name="DatosNotificacionBajaATRB201">
+		<xs:sequence>
+			<xs:element name="Motivo" type="MotivoBajaB2"/>
+			<xs:element name="FechaActivacion" type="xs:date"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Datos del contrato de la baja -->
+	<xs:complexType name="ContratoNotificacionBajaATRB201">
+		<xs:sequence>
+			<xs:element name="IdContrato" type="IdContrato"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

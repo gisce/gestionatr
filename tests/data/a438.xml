@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sctdapplication xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://localhost/sctd/A438">
+  <heading>
+      <dispatchingcode>GML</dispatchingcode>
+      <dispatchingcompany>1234</dispatchingcompany>
+      <destinycompany>4321</destinycompany>
+      <communicationsdate>2018-05-01</communicationsdate>
+      <communicationshour>12:00:00</communicationshour>
+      <processcode>38</processcode>
+      <messagetype>A4</messagetype>
+  </heading>
+  <a438>
+    <reqcode>10_z9f2k6S</reqcode>
+    <comreferencenum>123456789</comreferencenum>
+    <responsedate>2020-03-13</responsedate>
+    <responsehour>15:09:09</responsehour>
+    <result>13</result>
+    <resultdesc>Aceptada</resultdesc>
+    <resultreason>R01</resultreason>
+    <resultreasondesc>Cliente suministrado desde planta satélite.</resultreasondesc>
+    <interventiondate>2020-03-13</interventiondate>
+    <interventionhour>15:09:09</interventionhour>
+    <cups>20aXn4jOtXkA8PF9JCHH</cups>
+    <nationality>SB</nationality>
+    <documenttype>01</documenttype>
+    <documentnum>20_IebsHNeRmZxuEPuXi</documentnum>
+    <operationnum>40_PFC7QxHLQmOOoIp6PGjE13LnU2cqsI</operationnum>
+    <visitnumber>987</visitnumber>
+    <extrainfo>400_ssYcpvXKXUF3DuQzltLLSTHWo2SDsC</extrainfo>
+    <defectlist>
+        <defect>
+            <code>001</code>
+            <description>FUGA DE GAS</description>
+        </defect>
+        <defect>
+            <code>002</code>
+            <description>Desc2</description>
+        </defect>
+    </defectlist>
+  </a438>
+</sctdapplication>

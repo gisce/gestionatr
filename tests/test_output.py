@@ -3,24 +3,34 @@
 from __future__ import absolute_import, unicode_literals
 import copy
 
+from gestionatr.output.messages import sw_a1_38 as a1_38
 from gestionatr.output.messages import sw_a1_02 as a1_02
 from gestionatr.output.messages import sw_a1_03 as a1_03
 from gestionatr.output.messages import sw_a1_04 as a1_04
 from gestionatr.output.messages import sw_a1_05 as a1_05
 from gestionatr.output.messages import sw_a1_41 as a1_41
+from gestionatr.output.messages import sw_a1_42 as a1_42
+from gestionatr.output.messages import sw_a1_43 as a1_43
 from gestionatr.output.messages import sw_a1_44 as a1_44
 from gestionatr.output.messages import sw_a1_46 as a1_46
 from gestionatr.output.messages import sw_a1_48 as a1_48
+from gestionatr.output.messages import sw_a1_49 as a1_49
+from gestionatr.output.messages import sw_a20_36 as a20_36
+from gestionatr.output.messages import sw_a25_42 as a25_42
 from gestionatr.output.messages import sw_a1 as a1
 from gestionatr.output.messages import sw_a3 as a3
 from gestionatr.output.messages import sw_b1 as b1
+from gestionatr.output.messages import sw_b2 as b2
 from gestionatr.output.messages import sw_c1 as c1
 from gestionatr.output.messages import sw_c2 as c2
 from gestionatr.output.messages import sw_d1 as d1
+from gestionatr.output.messages import sw_e1 as e1
 from gestionatr.output.messages import sw_f1 as f1
 from gestionatr.output.messages import sw_m1 as m1
+from gestionatr.output.messages import sw_p0 as p0
 from gestionatr.output.messages import sw_q1 as q1
 from gestionatr.output.messages import sw_r1 as r1
+from gestionatr.output.messages import sw_t1 as t1
 from gestionatr.output.messages import sw_w1 as w1
 from . import unittest
 from .utils import get_data, assertXmlEqual, get_header, get_cliente, get_contacto, get_medida
@@ -131,7 +141,7 @@ class test_C1(unittest.TestCase):
             'tipo_propiedad_aparato': '1',
             'propietario': 'Desc. Propietario',
             'tipo_dhedm': '6',
-            'modo_medida_potencia': '1',
+            'modo_medida_potencia': '9',
             'lectura_directa': 'N',
             'cod_precinto': '02',
             'datos_aparato': datos_aparato,
@@ -255,7 +265,7 @@ class test_C1(unittest.TestCase):
         potencias_contratadas = c1.PotenciasContratadas()
         potencias_contratadas.feed({'p1': 1000, 'p2': 2000})
         condiciones_contractuales_fields = {
-            'tarifa_atr': '003',
+            'tarifa_atr': '018',
             'potencias_contratadas': potencias_contratadas,
         }
         condiciones_contractuales.feed(condiciones_contractuales_fields)
@@ -365,7 +375,7 @@ class test_C1(unittest.TestCase):
         potencias_contratadas.feed({'p1': 1000, 'p2': 2000})
 
         condiciones_contractuales_fields = {
-            'tarifa_atr': '003',
+            'tarifa_atr': '018',
             'periodicidad_facturacion': '01',
             'tipode_telegestion': '01',
             'potencias_contratadas': potencias_contratadas,
@@ -379,6 +389,7 @@ class test_C1(unittest.TestCase):
 
         contrato_fields = {
             'id_contrato': id_contrato,
+            'data_finalitzacio': '2020-01-01',
             'tipo_autoconsumo': '00',
             'tipo_contrato_atr': '02',
             'condiciones_contractuales': condiciones_contractuales,
@@ -529,11 +540,13 @@ class test_C2(unittest.TestCase):
         self.xml_c201_completo = open(get_data("c201.xml"), "rb")
         self.xml_c202_accept = open(get_data("c202_accept.xml"), "rb")
         self.xml_c203 = open(get_data("c203.xml"), "rb")
+        self.xml_c213 = open(get_data("c213.xml"), "rb")
 
     def tearDown(self):
         self.xml_c201_completo.close()
         self.xml_c202_accept.close()
         self.xml_c203.close()
+        self.xml_c213.close()
 
     def test_create_pas01(self):
         # MensajeCambiodeComercializadorConCambios
@@ -556,7 +569,8 @@ class test_C2(unittest.TestCase):
             'contratacion_incondicional_ps': 'S',
             'contratacion_incondicional_bs': 'N',
             'bono_social': '0',
-            'solicitud_tension': 'T'
+            'solicitud_tension': 'S',
+            'tension_solicitada': '02'
         }
         datos_solicitud.feed(datos_solicitud_fields)
 
@@ -571,7 +585,7 @@ class test_C2(unittest.TestCase):
         potencias_contratadas.feed({'p1': 1000, 'p2': 2000})
 
         condiciones_contractuales_fields = {
-            'tarifa_atr': '003',
+            'tarifa_atr': '018',
             'potencias_contratadas': potencias_contratadas,
             'modo_control_potencia': '1',
         }
@@ -693,7 +707,7 @@ class test_C2(unittest.TestCase):
         potencias_contratadas.feed({'p1': 1000, 'p2': 2000})
 
         condiciones_contractuales_fields = {
-            'tarifa_atr': '003',
+            'tarifa_atr': '018',
             'potencias_contratadas': potencias_contratadas,
             'modo_control_potencia': '1',
         }
@@ -763,6 +777,47 @@ class test_C2(unittest.TestCase):
         mensaje.build_tree()
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_c203.read())
+
+    def test_create_pas13(self):
+        # MensajeContestacionIncidencia
+        mensaje = c2.MensajeContestacionIncidencia()
+
+        # Cabecera
+        cabecera = get_header(process='C2', step='13')
+
+        # Telefono
+        telefono = c2.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '34',
+            'numero': '683834841',
+        }
+        telefono.feed(telefono_fields)
+
+        # Contacto
+        contacto = c2.Contacto()
+        contacto_fields = {
+            'persona_de_contacto': 'Nombre Inventado',
+            'telefonos': [telefono],
+            'correo_electronico': 'mail_falso@dominio.com',
+        }
+        contacto.feed(contacto_fields)
+
+        # ContestacionIncidencia
+        contestacion_incidencia = c2.ContestacionIncidencia()
+        contestacion_incidencia_fields = {
+            'contestacion_incidencia': '02',
+            'contacto': contacto
+        }
+        contestacion_incidencia.feed(contestacion_incidencia_fields)
+
+        mensaje_fields = {
+            'cabecera': cabecera,
+            'contestacion_incidencia': contestacion_incidencia,
+        }
+        mensaje.feed(mensaje_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_c213.read())
 
 
 class test_A1(unittest.TestCase):
@@ -985,30 +1040,40 @@ class test_A1(unittest.TestCase):
             }
             cabecera.feed(cabecera_fields)
 
-            # ActualizacionRegistroAutoconsumo
-            datos_registro = a1.ActualizacionDatosRegistro()
-            actualizacion_datos_registro_fields = {
-                'sub_seccion': 'a0',
+            # Rechazo 1
+            rechazo1 = a1.Rechazo()
+            rechazo1_fields = {
+                'secuencial': '00',
+                'codigo_motivo': '01',
+                'comentarios': 'TODO: ELIMINAR CUANDO LA CNMC ARREGLE EL XSD',
             }
-            datos_registro.feed(actualizacion_datos_registro_fields)
+            rechazo1.feed(rechazo1_fields)
+
+            # Rechazos
+            rechazos = a1.Rechazos()
+            rechazos_fields = {
+                'fecha_rechazo': '2016-06-08',
+                'rechazo_list': [rechazo1],
+            }
+            rechazos.feed(rechazos_fields)
 
             # ActualizacionRegistroAutoconsumo
-            registro = a1.ActualizacionRegistroAutoconsumo()
-            actualizacion_registro_autoconsumo_fields = {
+            a102 = a1.A102()
+            a102_fields = {
                 'cau': 'ES1234000000000001JN0FA001',
-                'actualizacion_datos_registro': datos_registro,
+                'rechazos': rechazos,
                 'comentarios': 'Esto es un comentario',
 
             }
-            registro.feed(actualizacion_registro_autoconsumo_fields)
+            a102.feed(a102_fields)
 
             # MensajeActualizacionRegistroAutoconsumo
-            mensaje = a1.MensajeActualizacionRegistroAutoconsumo()
-            mensaje_actualizacion_registro_autoconsumo_fields = {
+            mensaje = a1.MensajeA102()
+            mensaje_a102_fields = {
                 'cabecera': cabecera,
-                'actualizacion_registro_autoconsumo': registro,
+                'a102': a102,
             }
-            mensaje.feed(mensaje_actualizacion_registro_autoconsumo_fields)
+            mensaje.feed(mensaje_a102_fields)
 
             mensaje.build_tree()
             xml = str(mensaje)
@@ -1031,58 +1096,53 @@ class test_A1(unittest.TestCase):
             # Rechazo 1
             rechazo1 = a1.Rechazo()
             rechazo1_fields = {
-                'fecha_rechazo': '2016-06-08',
                 'secuencial': '00',
                 'codigo_motivo': '01',
-                'cups': 'ES1234000000000001JN0F',
                 'comentarios': 'Comentario del rechazo',
             }
             rechazo1.feed(rechazo1_fields)
             # Rechazo 2
             rechazo2 = a1.Rechazo()
             rechazo2_fields = {
-                'fecha_rechazo': '2016-06-08',
                 'secuencial': '00',
                 'codigo_motivo': 'F1',
-                'cups': 'ES1234000000000001JN0F',
                 'comentarios': 'Comentario del rechazo',
             }
             rechazo2.feed(rechazo2_fields)
             # Rechazo 3
             rechazo3 = a1.Rechazo()
             rechazo3_fields = {
-                'fecha_rechazo': '2016-06-08',
                 'secuencial': '00',
                 'codigo_motivo': 'F4',
-                'cups': 'ES1234000000000001JN0F',
                 'comentarios': 'Comentario del rechazo',
             }
             rechazo3.feed(rechazo3_fields)
 
             # Rechazos
-            rechazos = d1.Rechazos()
+            rechazos = a1.Rechazos()
             rechazos_fields = {
-                'rechazos': [rechazo1, rechazo2, rechazo3],
+                'fecha_rechazo': '2016-06-08',
+                'rechazo_list': [rechazo1, rechazo2, rechazo3],
             }
             rechazos.feed(rechazos_fields)
 
             # ActualizacionRegistroAutoconsumo
-            registro = a1.ActualizacionRegistroAutoconsumo()
-            actualizacion_registro_autoconsumo_fields = {
+            a102 = a1.A102()
+            a102_fields = {
                 'cau': 'ES1234000000000001JN0FA001',
                 'rechazos': rechazos,
                 'comentarios': 'Esto es un comentario',
 
             }
-            registro.feed(actualizacion_registro_autoconsumo_fields)
+            a102.feed(a102_fields)
 
             # MensajeActualizacionRegistroAutoconsumo
-            mensaje = a1.MensajeActualizacionRegistroAutoconsumo()
-            mensaje_actualizacion_registro_autoconsumo_fields = {
+            mensaje = a1.MensajeA102()
+            mensaje_a102_fields = {
                 'cabecera': cabecera,
-                'actualizacion_registro_autoconsumo': registro,
+                'a102': a102,
             }
-            mensaje.feed(mensaje_actualizacion_registro_autoconsumo_fields)
+            mensaje.feed(mensaje_a102_fields)
 
             mensaje.build_tree()
             xml = str(mensaje)
@@ -1114,6 +1174,8 @@ class test_A3(unittest.TestCase):
             'cnae': '2222',
             'ind_activacion': 'L',
             'fecha_prevista_accion': '2016-06-06',
+            'solicitud_tension': 'S',
+            'tension_solicitada': '01',
         }
         datos_solicitud.feed(datos_solicitud_fields)
 
@@ -1129,7 +1191,7 @@ class test_A3(unittest.TestCase):
         potencias_contratadas.feed({'p1': 1000, 'p2': 2000})
 
         condiciones_contractuales_fields = {
-            'tarifa_atr': '003',
+            'tarifa_atr': '018',
             'potencias_contratadas': potencias_contratadas,
             'modo_control_potencia': '1'
         }
@@ -1243,7 +1305,7 @@ class test_A3(unittest.TestCase):
         potencias_contratadas.feed({'p1': 1000, 'p2': 2000})
 
         condiciones_contractuales_fields = {
-            'tarifa_atr': '003',
+            'tarifa_atr': '018',
             'potencias_contratadas': potencias_contratadas,
             'modo_control_potencia': '1'
         }
@@ -1368,7 +1430,7 @@ class test_M1(unittest.TestCase):
         potencias_contratadas.feed({'p1': 1000, 'p2': 2000})
 
         condiciones_contractuales_fields = {
-            'tarifa_atr': '003',
+            'tarifa_atr': '018',
             'potencias_contratadas': potencias_contratadas,
             'modo_control_potencia': '1',
         }
@@ -1727,6 +1789,300 @@ class test_D1(unittest.TestCase):
         assertXmlEqual(xml, self.xml_d102_reject.read())
 
 
+class test_P0(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_p001 = open(get_data("p001.xml"), "rb")
+        self.xml_p002_accept = open(get_data("p002_accept.xml"), "rb")
+        self.xml_p002_accept_min = open(get_data("p002_accept_min.xml"), "rb")
+        self.xml_p002_reject = open(get_data("p002_reject.xml"), "rb")
+
+    def tearDown(self):
+        self.xml_p001.close()
+        self.xml_p002_accept.close()
+        self.xml_p002_reject.close()
+
+    def test_create_pas01(self):
+        # MensajeSolicitudInformacionAlRegistroDePS
+        mensaje = p0.MensajeSolicitudInformacionAlRegistroDePS()
+
+        # Cabecera
+        cabecera = p0.Cabecera()
+        cabecera_fields = {
+            'codigo_ree_empresa_emisora': '1234',
+            'codigo_ree_empresa_destino': '4321',
+            'codigo_del_proceso': 'P0',
+            'codigo_del_paso': '01',
+            'codigo_de_solicitud': '201412111009',
+            'secuencial_de_solicitud': '01',
+            'fecha': '2014-04-16T22:13:37',
+            'cups': 'ES1234000000000001JN0F',
+        }
+        cabecera.feed(cabecera_fields)
+
+        # ValidacionCliente
+        validacion_cliente = p0.ValidacionCliente()
+        validacion_cliente_fields = {
+            'tipo_identificador': 'NI',
+            'identificador': '11111111H',
+        }
+        validacion_cliente.feed(validacion_cliente_fields)
+
+        mensaje_solicitud_informacion_al_registro_de_ps_fields = {
+            'cabecera': cabecera,
+            'validacion_cliente': validacion_cliente,
+        }
+        mensaje.feed(mensaje_solicitud_informacion_al_registro_de_ps_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_p001.read())
+
+    def test_create_pas02_accept(self):
+        # Cabecera
+        cabecera = p0.Cabecera()
+        cabecera_fields = {
+            'codigo_ree_empresa_emisora': '1234',
+            'codigo_ree_empresa_destino': '4321',
+            'codigo_del_proceso': 'P0',
+            'codigo_del_paso': '02',
+            'codigo_de_solicitud': '201607211259',
+            'secuencial_de_solicitud': '01',
+            'fecha': '2016-07-21T12:59:47',
+            'cups': 'ES1234000000000001JN0F',
+        }
+        cabecera.feed(cabecera_fields)
+
+        # EstadoContratable
+        estado_contratable = p0.EstadoContratable()
+        estado_contratable_fields = {
+            'contratable': 'N',
+            'motivo': '03'
+        }
+        estado_contratable.feed(estado_contratable_fields)
+
+        # PotenciasContratadas
+        potencias_contratadas = p0.PotenciasContratadas()
+        potencias_contratadas_fields = {
+            'p1': 6000,
+        }
+        potencias_contratadas.feed(potencias_contratadas_fields)
+
+        # CondicionesContractuales
+        condiciones_contractuales = p0.CondicionesContractuales()
+        condiciones_contractuales_fields = {
+            'tarifa_atr': '018',
+            'potencias_contratadas': potencias_contratadas,
+            'modo_control_potencia': '1'
+        }
+        condiciones_contractuales.feed(condiciones_contractuales_fields)
+
+        # Contrato
+        contrato = p0.Contrato()
+        contrato_fields = {
+            'tipo_contrato_atr': '03',
+            'fecha_finalizacion': '2020-03-31',
+            'tipo_autoconsumo': '01',
+            'fecha_ultimo_movimiento_tipo_autocons': '2020-01-01',
+            'ind_bono_social': 'N',
+            'ind_esencial': 'N',
+            'vivienda_habitual': 'S',
+            'cnae': '9820',
+            'condiciones_contractuales': condiciones_contractuales,
+            'modo_facturacion_potencia': '9',
+            'no_interrumpible': 'S',
+            'potencia_no_interrumpible': '6000',
+            'potencia_max_sin_expediente': '8000',
+            'vas_trafo': '50',
+            'periodicidad_facturacion': '01',
+            'tipo_de_telegestion': '01',
+            'icp_activado_telegestion': 'S',
+            'peaje_directo': 'S',
+            'deposito_garantia': 'N',
+        }
+        contrato.feed(contrato_fields)
+
+        # DerechosReconocidos
+        derechos_reconocidos = p0.DerechosReconocidos()
+        derechos_reconocidos_fields = {
+            'derecho_acceso': '5000',
+            'derechos_extension': '5000',
+            'fecha_limite_derechos_extension': '1900-01-01'
+        }
+        derechos_reconocidos.feed(derechos_reconocidos_fields)
+
+        # CaracteristicasPM
+        caracteristicas_pm = p0.CaracteristicasPM()
+        caracteristicas_pm_fields = {
+            'tipo_pm': '05',
+            'tension_pm': '220',
+            'relacion_transformacion_intensidad': '20/1000'
+        }
+        caracteristicas_pm.feed(caracteristicas_pm_fields)
+
+        # Historia
+        historia = p0.Historia()
+        historia_fields = {
+            'fecha_ultimo_movimiento_contratacion': '1900-01-01',
+            'fecha_cambio_comercializador': '1900-01-01',
+            'fecha_ultima_lectura': '2020-01-01',
+            'fecha_ultima_verificacion': '1900-01-01',
+            'resultado_ultima_lectura': 'S'
+        }
+        historia.feed(historia_fields)
+
+        # Equipo1
+        equipo1 = p0.Equipo()
+        equipo1_fields = {
+            'tipo_aparato': 'TT',
+            'tipo_equipo': 'L09',
+            'tipo_propiedad': '1',
+            'codigo_fases_equipo_medida': 'T',
+            'tipo_dh_edm': '2'
+        }
+        equipo1.feed(equipo1_fields)
+
+        # Equipo2
+        equipo2 = p0.Equipo()
+        equipo2_fields = {
+            'tipo_aparato': 'CG',
+            'tipo_equipo': 'L09',
+            'tipo_propiedad': '1',
+            'codigo_fases_equipo_medida': 'T',
+            'tipo_dh_edm': '2'
+        }
+        equipo2.feed(equipo2_fields)
+
+        # CIEPapel
+        cie_papel = p0.CIEPapel()
+        cie_papel_fields = {
+            'codigo_cie': '12345678901234567890123456789012345',
+            'fecha_emision_cie': '2020-03-01',
+            'fecha_caducidad_cie': '2021-03-01',
+            'tension_suministro_cie': '02',
+            'tipo_suministro': 'IT'
+        }
+        cie_papel.feed(cie_papel_fields)
+
+        # DatosCie
+        datos_cie = p0.DatosCie()
+        datos_cie_fields = {
+            'cie_papel': cie_papel,
+            'validez_cie': 'AU'
+        }
+        datos_cie.feed(datos_cie_fields)
+
+        # DatosAPM
+        datos_apm = p0.DatosAPM()
+        datos_apm_fields = {
+            'codigo_apm': '12345678901234567890123456789012345',
+            'potencia_inst_at': '60000',
+            'fecha_emision_apm': '2020-01-01',
+            'fecha_caducidad_apm': '2021-01-01',
+        }
+        datos_apm.feed(datos_apm_fields)
+
+        # DocTecnica
+        doc_tecnica = p0.DocTecnica()
+        doc_tecnica_fields = {
+            'datos_cie': datos_cie,
+            'datos_apm': datos_apm,
+        }
+        doc_tecnica.feed(doc_tecnica_fields)
+
+        # ExpedienteAnomaliaFraude
+        expediente_anomalia_fraude = p0.ExpedienteAnomaliaFraude()
+        expediente_anomalia_fraude_fields = {
+            'expediente_abierto': 'S',
+            'codigo_motivo_expediente': 'A002',
+        }
+        expediente_anomalia_fraude.feed(expediente_anomalia_fraude_fields)
+
+        # ExpedienteAcometida
+        expediente_acometida = p0.ExpedienteAcometida()
+        expediente_acometida_fields = {
+            'expediente_abierto': 'S',
+            'codigo_motivo_expediente': '02',
+        }
+        expediente_acometida.feed(expediente_acometida_fields)
+
+        # EnvioInformacionPS
+        envio_informacion_ps = p0.EnvioInformacionPS()
+        envio_informacion_ps_fields = {
+            'resultado_validacion_cliente': 'S',
+            'en_vigor': 'S',
+            'estado_contratable': estado_contratable,
+            'existe_solicitud_en_curso': 'S',
+            'tipo_solicitud_en_curso': 'C100',
+            'contrato': contrato,
+            'potencia_maxima_autorizada': '10000',
+            'tension_del_suministro': '02',
+            'derechos_reconocidos': derechos_reconocidos,
+            'caracteristicas_pm': caracteristicas_pm,
+            'historia': historia,
+            'equipo_list': [equipo1, equipo2],
+            'doc_tecnica': doc_tecnica,
+            'expediente_anomalia_fraude': expediente_anomalia_fraude,
+            'expediente_acometida': expediente_acometida
+        }
+        envio_informacion_ps.feed(envio_informacion_ps_fields)
+
+        # MensajeAceptacionCambiodeComercializadorSinCambios
+        mensaje = p0.MensajeEnvioInformacionPS()
+        mensaje_envio_informacion_ps_fields = {
+            'cabecera': cabecera,
+            'envio_informacion_ps': envio_informacion_ps,
+        }
+        mensaje.feed(mensaje_envio_informacion_ps_fields)
+
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_p002_accept.read())
+
+    def test_create_pas02_rej(self):
+        # Cabecera
+        cabecera = p0.Cabecera()
+        cabecera_fields = {
+            'codigo_ree_empresa_emisora': '1234',
+            'codigo_ree_empresa_destino': '4321',
+            'codigo_del_proceso': 'P0',
+            'codigo_del_paso': '02',
+            'codigo_de_solicitud': '201607211259',
+            'secuencial_de_solicitud': '01',
+            'fecha': '2016-07-21T12:59:47',
+            'cups': 'ES1234000000000001JN0F',
+        }
+        cabecera.feed(cabecera_fields)
+
+        # Rechazos
+        rechazo = p0.Rechazo()
+        rechazo_fields = {
+            'secuencial': '1',
+            'codigo_motivo': '01',
+            'comentarios': 'No existe Punto de Suministro asociado al CUPS'
+        }
+        rechazo.feed(rechazo_fields)
+
+        # RechazosPeticion
+        rechazos_peticion = p0.RechazosPeticion()
+        rechazos_peticion_fields = {
+            'fecha_rechazo': '2016-07-20',
+            'rechazo': rechazo,
+        }
+        rechazos_peticion.feed(rechazos_peticion_fields)
+
+        # MensajeRechazo
+        mensaje_rechazo = p0.MensajeRechazo()
+        mensaje_rechazo_fields = {
+            'cabecera': cabecera,
+            'rechazos_peticion': rechazos_peticion,
+        }
+        mensaje_rechazo.feed(mensaje_rechazo_fields)
+
+        mensaje_rechazo.build_tree()
+        xml = str(mensaje_rechazo)
+        assertXmlEqual(xml, self.xml_p002_reject.read())
+
+
 class test_Q1(unittest.TestCase):
 
     def setUp(self):
@@ -2039,12 +2395,14 @@ class test_B1(unittest.TestCase):
         self.xml_b102_accept = open(get_data("b102_accept.xml"), "rb")
         self.xml_b104_accept = open(get_data("b104_accept.xml"), "rb")
         self.xml_b105 = open(get_data("b105.xml"), "rb")
+        self.xml_b116 = open(get_data("b116.xml"), "rb")
 
     def tearDown(self):
         self.xml_b101.close()
         self.xml_b102_accept.close()
         self.xml_b104_accept.close()
         self.xml_b105.close()
+        self.xml_b116.close()
 
     def test_create_pas01(self):
         # MensajeBajaSuspension
@@ -2248,7 +2606,7 @@ class test_B1(unittest.TestCase):
             'tipo_propiedad_aparato': '1',
             'propietario': 'Desc. Propietario',
             'tipo_dhedm': '6',
-            'modo_medida_potencia': '1',
+            'modo_medida_potencia': '9',
             'lectura_directa': 'N',
             'cod_precinto': '02',
             'datos_aparato': datos_aparato,
@@ -2303,6 +2661,1264 @@ class test_B1(unittest.TestCase):
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_b105.read())
 
+    def test_create_pas16(self):
+        mensaje = b1.MensajeContestacionIncidencia()
+
+        # Cabecera
+        cabecera = get_header(process='B1', step='16')
+
+        # Telefono
+        telefono = b1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '34',
+            'numero': '683834841',
+        }
+        telefono.feed(telefono_fields)
+
+        # Contacto
+        contacto = b1.Contacto()
+        contacto_fields = {
+            'persona_de_contacto': 'Nombre Inventado',
+            'telefonos': [telefono],
+            'correo_electronico': 'mail_falso@dominio.com',
+        }
+        contacto.feed(contacto_fields)
+
+        # ContestacionIncidencia
+        contestacion_incidencia = b1.ContestacionIncidencia()
+        contestacion_incidencia_fields = {
+            'contestacion_incidencia': '02',
+            'contacto': contacto
+        }
+        contestacion_incidencia.feed(contestacion_incidencia_fields)
+
+        mensaje_fields = {
+            'cabecera': cabecera,
+            'contestacion_incidencia': contestacion_incidencia,
+        }
+        mensaje.feed(mensaje_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_b116.read())
+
+
+class test_B2(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_b205 = open(get_data("b205.xml"), "rb")
+
+    def tearDown(self):
+        self.xml_b205.close()
+
+    def test_create_pas05(self):
+        # MensajeActivacionBajaUnidireccional
+        mensaje = b2.MensajeActivacionBajaUnidireccional()
+
+        # Cabecera
+        cabecera = get_header(process='B2', step='05')
+
+        # ActivacionBaja
+        activacion_baja = b2.ActivacionBaja()
+
+        # DatosActivacionBaja
+        datos_activacion_baja = b2.DatosActivacionBaja()
+        datos_activacion_baja_fields = {
+            'motivo': '02',
+            'fecha_activacion': '2016-08-21',
+        }
+        datos_activacion_baja.feed(datos_activacion_baja_fields)
+
+        # Contrato
+        contrato = b2.Contrato()
+
+        # IdContrato
+        id_contrato = b2.IdContrato()
+        id_contrato.feed({'cod_contrato': '00001'})
+        contrato.feed({'id_contrato': id_contrato})
+
+        # PuntosDeMedida
+        puntos_de_medida = b2.PuntosDeMedida()
+        # PuntoDeMedida
+        punto_de_medida = b2.PuntoDeMedida()
+        # Aparatos
+        aparatos = b2.Aparatos()
+        # Aparato
+        aparato = b2.Aparato()
+
+        # ModeloAparato
+        modelo_aparato = b2.ModeloAparato()
+        modelo_aparato_fields = {
+            'tipo_aparato': 'CG',
+            'marca_aparato': '132',
+            'modelo_marca': '011',
+        }
+        modelo_aparato.feed(modelo_aparato_fields)
+
+        # DatosAparato
+        datos_aparato = b2.DatosAparato()
+        datos_aparato_fields = {
+            'periodo_fabricacion': '2005',
+            'numero_serie': '0000539522',
+            'funcion_aparato': 'M',
+            'num_integradores': '18',
+            'constante_energia': '1.000',
+            'constante_maximetro': '1.000',
+            'ruedas_enteras': '08',
+            'ruedas_decimales': '02',
+        }
+        datos_aparato.feed(datos_aparato_fields)
+
+        # Medidas
+        medidas = b2.Medidas()
+        # Medida 1
+        medida1 = c1.Medida()
+        medida_fields = {
+            'tipo_dhedm': '6',
+            'periodo': '65',
+            'magnitud_medida': 'PM',
+            'procedencia': '30',
+            'ultima_lectura_firme': '6.00',
+            'fecha_lectura_firme': '2003-01-02',
+            'anomalia': '01',
+            'comentarios': 'Comentario sobre anomalia',
+        }
+        medida1.feed(medida_fields)
+        # Medida 2
+        medida2 = c1.Medida()
+        medida_fields = {
+            'tipo_dhedm': '6',
+            'periodo': '66',
+            'magnitud_medida': 'PM',
+            'procedencia': '30',
+            'ultima_lectura_firme': '6.00',
+            'fecha_lectura_firme': '2003-01-03',
+        }
+        medida2.feed(medida_fields)
+        medidas_fields = {
+            'medida_list': [medida1, medida2],
+        }
+        medidas.feed(medidas_fields)
+
+        aparato_fields = {
+            'modelo_aparato': modelo_aparato,
+            'tipo_movimiento': 'CX',
+            'tipo_equipo_medida': 'L03',
+            'tipo_propiedad_aparato': '1',
+            'propietario': 'Desc. Propietario',
+            'tipo_dhedm': '6',
+            'modo_medida_potencia': '9',
+            'lectura_directa': 'N',
+            'cod_precinto': '02',
+            'datos_aparato': datos_aparato,
+            'medidas': medidas,
+        }
+        aparato.feed(aparato_fields)
+        aparatos_fields = {
+            'aparato_list': [aparato],
+        }
+        aparatos.feed(aparatos_fields)
+
+        punto_de_medida_fields = {
+            'cod_pm': 'ES1234000000000001JN0F',
+            'tipo_movimiento': 'A',
+            'tipo_pm': '03',
+            'cod_pm_principal': 'ES1234000000000002JN0F',
+            'modo_lectura': '1',
+            'funcion': 'P',
+            'direccion_enlace': '39522',
+            'direccion_punto_medida': '000000001',
+            'num_linea': '12',
+            'telefono_telemedida': '987654321',
+            'estado_telefono': '1',
+            'clave_acceso': '0000000007',
+            'tension_pm': '0',
+            'fecha_vigor': '2003-01-01',
+            'fecha_alta': '2003-01-01',
+            'fecha_baja': '2003-02-01',
+            'aparatos': aparatos,
+            'comentarios': 'Comentarios Varios',
+        }
+        punto_de_medida.feed(punto_de_medida_fields)
+
+        puntos_de_medida_fields = {
+            'punto_de_medida_list': [punto_de_medida],
+        }
+        puntos_de_medida.feed(puntos_de_medida_fields)
+
+        activacion_baja_fields = {
+            'datos_activacion_baja': datos_activacion_baja,
+            'contrato': contrato,
+            'puntos_de_medida': puntos_de_medida,
+        }
+        activacion_baja.feed(activacion_baja_fields)
+
+        mensaje_activacion_baja_suspension_fields = {
+            'cabecera': cabecera,
+            'activacion_baja': activacion_baja,
+        }
+        mensaje.feed(mensaje_activacion_baja_suspension_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_b205.read())
+
+
+class test_E1(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_e101 = open(get_data("e101.xml"), "rb")
+        self.xml_e102_accept = open(get_data("e102_accept.xml"), "rb")
+        self.xml_e102_reject = open(get_data("e102_reject.xml"), "rb")
+        self.xml_e103 = open(get_data("e103.xml"), "rb")
+        self.xml_e104 = open(get_data("e104.xml"), "rb")
+        self.xml_e105 = open(get_data("e105.xml"), "rb")
+        self.xml_e106 = open(get_data("e106.xml"), "rb")
+        self.xml_e112 = open(get_data("e112.xml"), "rb")
+        self.xml_e113 = open(get_data("e113.xml"), "rb")
+
+        # PuntosDeMedida
+        self.puntos_de_medida = e1.PuntosDeMedida()
+
+        # PuntoDeMedida
+        punto_de_medida = e1.PuntoDeMedida()
+
+        # Aparatos
+        aparatos = e1.Aparatos()
+
+        # Aparato
+        aparato = e1.Aparato()
+
+        # ModeloAparato
+        modelo_aparato = e1.ModeloAparato()
+        modelo_aparato_fields = {
+            'tipo_aparato': 'CG',
+            'marca_aparato': '132',
+            'modelo_marca': '011',
+        }
+        modelo_aparato.feed(modelo_aparato_fields)
+
+        # DatosAparato
+        datos_aparato = e1.DatosAparato()
+        datos_aparato_fields = {
+            'periodo_fabricacion': '2005',
+            'numero_serie': '0000539522',
+            'funcion_aparato': 'M',
+            'num_integradores': '18',
+            'constante_energia': '1.000',
+            'constante_maximetro': '1.000',
+            'ruedas_enteras': '08',
+            'ruedas_decimales': '02',
+        }
+        datos_aparato.feed(datos_aparato_fields)
+
+        # Medidas
+        medidas = e1.Medidas()
+
+        # Medida 1
+        medida1 = e1.Medida()
+        medida_fields = {
+            'tipo_dhedm': '6',
+            'periodo': '65',
+            'magnitud_medida': 'PM',
+            'procedencia': '30',
+            'ultima_lectura_firme': '0.00',
+            'fecha_lectura_firme': '2003-01-02',
+            'anomalia': '01',
+            'comentarios': 'Comentario sobre anomalia',
+        }
+        medida1.feed(medida_fields)
+
+        # Medida 2
+        medida2 = e1.Medida()
+        medida_fields = {
+            'tipo_dhedm': '6',
+            'periodo': '66',
+            'magnitud_medida': 'PM',
+            'procedencia': '30',
+            'ultima_lectura_firme': '6.00',
+            'fecha_lectura_firme': '2003-01-03',
+        }
+        medida2.feed(medida_fields)
+
+        medidas_fields = {
+            'medida_list': [medida1, medida2],
+        }
+        medidas.feed(medidas_fields)
+
+        aparato_fields = {
+            'modelo_aparato': modelo_aparato,
+            'tipo_movimiento': 'CX',
+            'tipo_equipo_medida': 'L03',
+            'tipo_propiedad_aparato': '1',
+            'propietario': 'Desc. Propietario',
+            'tipo_dhedm': '6',
+            'modo_medida_potencia': '9',
+            'lectura_directa': 'N',
+            'cod_precinto': '02',
+            'datos_aparato': datos_aparato,
+            'medidas': medidas
+        }
+
+        aparato.feed(aparato_fields)
+        aparatos_fields = {
+            'aparato_list': [aparato],
+        }
+        aparatos.feed(aparatos_fields)
+
+        punto_de_medida_fields = {
+            'cod_pm': 'ES1234000000000001JN0F',
+            'tipo_movimiento': 'A',
+            'tipo_pm': '03',
+            'cod_pm_principal': 'ES1234000000000002JN0F',
+            'modo_lectura': '1',
+            'funcion': 'P',
+            'direccion_enlace': '39522',
+            'direccion_punto_medida': '000000001',
+            'num_linea': '12',
+            'telefono_telemedida': '987654321',
+            'estado_telefono': '1',
+            'clave_acceso': '0000000007',
+            'tension_pm': '0',
+            'fecha_vigor': '2003-01-01',
+            'fecha_alta': '2003-01-01',
+            'fecha_baja': '2003-02-01',
+            'aparatos': aparatos,
+            'comentarios': 'Comentarios Varios',
+        }
+        punto_de_medida.feed(punto_de_medida_fields)
+
+        puntos_de_medida_fields = {
+            'punto_de_medida_list': [punto_de_medida],
+        }
+        self.puntos_de_medida.feed(puntos_de_medida_fields)
+
+    def tearDown(self):
+        self.xml_e101.close()
+        self.xml_e102_accept.close()
+        self.xml_e102_reject.close()
+        self.xml_e103.close()
+        self.xml_e104.close()
+        self.xml_e105.close()
+        self.xml_e106.close()
+        self.xml_e112.close()
+        self.xml_e113.close()
+
+    def test_create_pas01(self):
+        # MensajeSolicitudDesistimiento
+        mensaje = e1.MensajeSolicitudDesistimiento()
+
+        # Cabecera
+        cabecera = get_header(process='E1', step='01')
+
+        # IdCliente
+        id_cliente = e1.IdCliente()
+        id_cliente_fields = {
+            'tipo_identificador': 'NI',
+            'identificador': '11111111H',
+            'tipo_persona': 'F',
+        }
+        id_cliente.feed(id_cliente_fields)
+
+        # RegistrosDocumento
+        registros_documento = r1.RegistrosDocumento()
+        # RegistroDoc
+        rd1 = w1.RegistroDoc()
+        registro_doc_fields = {
+            'tipo_doc_aportado': '08',
+            'direccion_url': 'http://eneracme.com/docs/NIF11111111H.pdf',
+        }
+        rd1.feed(registro_doc_fields)
+        rd2 = w1.RegistroDoc()
+        registro_doc_fields = {
+            'tipo_doc_aportado': '07',
+            'direccion_url': 'http://eneracme.com/docs/NIF11111111H.pdf',
+        }
+        rd2.feed(registro_doc_fields)
+        registros_documento_fields = {
+            'registro_doc_list': [rd1, rd2],
+        }
+        registros_documento.feed(registros_documento_fields)
+
+        # SolicitudDesistimiento
+        solicitud_desistimiento = e1.SolicitudDesistimiento()
+        solicitud_desistimiento_fields = {
+            'codigo_de_solicitud_ref': '201605219400',
+            'tipo_de_solicitud': '01',
+            'id_cliente': id_cliente,
+            'registros_Documento': registros_documento,
+        }
+        solicitud_desistimiento.feed(solicitud_desistimiento_fields)
+
+        mensaje_fields = {
+            'cabecera': cabecera,
+            'solicitud_desistimiento': solicitud_desistimiento,
+        }
+        mensaje.feed(mensaje_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_e101.read())
+
+    def test_create_pas02_accept(self):
+        # MensajeAceptacionDesistimiento
+        mensaje = e1.MensajeAceptacionDesistimiento()
+
+        # Cabecera
+        cabecera = get_header(process='E1', step='02')
+
+        # AceptacionDesistimiento
+        aceptacion_desistimiento = e1.AceptacionDesistimiento()
+        aceptacion_desistimiento_fields = {
+            'fecha_aceptacion': '2020-05-01',
+            'ind_anulable': 'S',
+            'actuacion_campo': 'S',
+            'fecha_activacion_prevista': '2020-05-06',
+        }
+        aceptacion_desistimiento.feed(aceptacion_desistimiento_fields)
+
+        mensaje_fields = {
+            'cabecera': cabecera,
+            'aceptacion_desistimiento': aceptacion_desistimiento,
+        }
+        mensaje.feed(mensaje_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_e102_accept.read())
+
+    def test_create_pas02_reject(self):
+        # MensajeRechazo
+        mensaje_rechazo = e1.MensajeRechazo()
+
+        # Cabecera
+        cabecera = get_header(process='E1', step='02')
+
+        # Rechazos
+        rechazos = e1.Rechazos()
+
+        # Rechazo 1
+        reb1 = e1.Rechazo()
+        rechazo1_fields = {
+            'secuencial': '1',
+            'codigo_motivo': '01',
+            'comentarios': 'Motiu de rebuig 01: No existe Punto de Suministro asociado al CUPS',
+        }
+        reb1.feed(rechazo1_fields)
+
+        # Rechazo 2
+        reb2 = e1.Rechazo()
+        rechazo2_fields = {
+            'secuencial': '2',
+            'codigo_motivo': '03',
+            'comentarios': 'Cuando el CIF-NIF no coincide con el que figura en la base de datos del Distribuidor',
+        }
+        reb2.feed(rechazo2_fields)
+
+        # RegistrosDocumento
+        registros_documento = e1.RegistrosDocumento()
+
+        # RegistroDoc 1
+        rd1 = e1.RegistroDoc()
+        registro_doc_fields = {
+            'tipo_doc_aportado': '08',
+            'direccion_url': 'http://eneracme.com/docs/NIF11111111H.pdf',
+        }
+        rd1.feed(registro_doc_fields)
+
+        # RegistroDoc 2
+        rd2 = e1.RegistroDoc()
+        registro_doc2_fields = {
+            'tipo_doc_aportado': '07',
+            'direccion_url': 'http://eneracme.com/docs/NIF11111111H.pdf',
+        }
+        rd2.feed(registro_doc2_fields)
+
+        registros_documento_fields = {
+            'registro_doc_list': [rd1, rd2],
+        }
+        registros_documento.feed(registros_documento_fields)
+
+        rechazos_fields = {
+            'fecha_rechazo': '2016-07-20',
+            'rechazo_list': [reb1, reb2],
+            'registros_documento': registros_documento,
+        }
+        rechazos.feed(rechazos_fields)
+
+        mensaje_rechazo_fields = {
+            'cabecera': cabecera,
+            'rechazos': rechazos,
+        }
+        mensaje_rechazo.feed(mensaje_rechazo_fields)
+        mensaje_rechazo.build_tree()
+        xml = str(mensaje_rechazo)
+        assertXmlEqual(xml, self.xml_e102_reject.read())
+
+    def test_create_pas03(self):
+        # MensajeIncidenciasATRDistribuidor
+        mensaje = e1.MensajeIncidenciasATRDistribuidor()
+
+        # Cabecera
+        cabecera = get_header(process='E1', step='03')
+
+        # IncidenciasATRDistribuidor
+        incidencias_atr_distribuidor = e1.IncidenciasATRDistribuidor()
+
+        # Incidencias 1
+        i1 = e1.Incidencia()
+        incidencia_fields = {
+            'secuencial': '1',
+            'codigo_motivo': '01',
+            'comentarios': 'Com 1',
+        }
+        i1.feed(incidencia_fields)
+
+        # Incidencias 2
+        i2 = e1.Incidencia()
+        incidencia_fields = {
+            'secuencial': '2',
+            'codigo_motivo': '08',
+            'comentarios': 'Com 2',
+        }
+        i2.feed(incidencia_fields)
+
+        incidencias_atr_distribuidor_fields = {
+            'fecha_incidencia': '2016-07-21',
+            'fecha_prevista_accion': '2016-07-22',
+            'incidencia_list': [i1, i2],
+        }
+        incidencias_atr_distribuidor.feed(incidencias_atr_distribuidor_fields)
+
+        mensaje_incidencias_atr_distribuidor_fields = {
+            'cabecera': cabecera,
+            'incidencias_atr_distribuidor': incidencias_atr_distribuidor,
+        }
+        mensaje.feed(mensaje_incidencias_atr_distribuidor_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_e103.read())
+
+    def test_create_pas04(self):
+        # MensajeRechazo
+        mensaje_rechazo = e1.MensajeRechazo()
+
+        # Cabecera
+        cabecera = get_header(process='E1', step='04')
+
+        # Rechazos
+        rechazos = e1.Rechazos()
+
+        # Rechazo 1
+        reb1 = e1.Rechazo()
+        rechazo1_fields = {
+            'secuencial': '1',
+            'codigo_motivo': '01',
+            'comentarios': 'Motiu de rebuig 01: No existe Punto de Suministro asociado al CUPS',
+        }
+        reb1.feed(rechazo1_fields)
+
+        # Rechazo 2
+        reb2 = e1.Rechazo()
+        rechazo2_fields = {
+            'secuencial': '2',
+            'codigo_motivo': '03',
+            'comentarios': 'Cuando el CIF-NIF no coincide con el que figura en la base de datos del Distribuidor',
+        }
+        reb2.feed(rechazo2_fields)
+
+        # RegistrosDocumento
+        registros_documento = e1.RegistrosDocumento()
+
+        # RegistroDoc 1
+        rd1 = e1.RegistroDoc()
+        registro_doc_fields = {
+            'tipo_doc_aportado': '08',
+            'direccion_url': 'http://eneracme.com/docs/NIF11111111H.pdf',
+        }
+        rd1.feed(registro_doc_fields)
+
+        # RegistroDoc 2
+        rd2 = e1.RegistroDoc()
+        registro_doc2_fields = {
+            'tipo_doc_aportado': '07',
+            'direccion_url': 'http://eneracme.com/docs/NIF11111111H.pdf',
+        }
+        rd2.feed(registro_doc2_fields)
+
+        registros_documento_fields = {
+            'registro_doc_list': [rd1, rd2],
+        }
+        registros_documento.feed(registros_documento_fields)
+
+        rechazos_fields = {
+            'fecha_rechazo': '2016-07-20',
+            'rechazo_list': [reb1, reb2],
+            'registros_documento': registros_documento,
+        }
+        rechazos.feed(rechazos_fields)
+
+        mensaje_rechazo_fields = {
+            'cabecera': cabecera,
+            'rechazos': rechazos,
+        }
+        mensaje_rechazo.feed(mensaje_rechazo_fields)
+        mensaje_rechazo.build_tree()
+        xml = str(mensaje_rechazo)
+        assertXmlEqual(xml, self.xml_e104.read())
+
+    def test_create_pas05(self):
+        # MensajeActivacionDesistimiento
+        mensaje = e1.MensajeActivacionDesistimiento()
+
+        # Cabecera
+        cabecera = get_header(process='E1', step='05')
+
+        # DatosNotificacion
+        datos_notificacion = e1.DatosNotificacion()
+        datos_notificacion_fields = {
+            'fecha_activacion': '2016-08-21',
+            'resultado_activacion': '01',
+            'ind_anulable': 'S',
+        }
+        datos_notificacion.feed(datos_notificacion_fields)
+
+        # Contrato
+        contrato = e1.Contrato()
+        id_contrato = e1.IdContrato()
+        id_contrato.feed({'cod_contrato': '00001'})
+        contrato.feed({'id_contrato': id_contrato})
+
+        # PuntosDeMedida
+        puntos_de_medida = self.puntos_de_medida
+
+        # ActivacionDesistimiento
+        activacion_desistimiento = e1.ActivacionDesistimiento()
+        activacion_desistimiento_fields = {
+            'datos_notificacion': datos_notificacion,
+            'contrato': contrato,
+            'puntos_de_medida': puntos_de_medida,
+        }
+        activacion_desistimiento.feed(activacion_desistimiento_fields)
+
+        mensaje_fields = {
+            'cabecera': cabecera,
+            'activacion_desistimiento': activacion_desistimiento,
+        }
+        mensaje.feed(mensaje_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_e105.read())
+
+    def test_create_pas06(self):
+        # MensajeNotificacionActivacionPorDesistimiento
+        mensaje = e1.MensajeNotificacionActivacionPorDesistimiento()
+
+        # Cabecera
+        cabecera = get_header(process='E1', step='06')
+
+        # DatosActivacion
+        datos_activacion = e1.DatosActivacion()
+        datos_activacion_fields = {
+            'fecha': '2016-08-21',
+            'en_servicio': 'S',
+            'ind_anulable': 'S',
+        }
+        datos_activacion.feed(datos_activacion_fields)
+
+        # IdContrato
+        id_contrato = e1.IdContrato()
+        id_contrato_fields = {
+            'cod_contrato': '00001',
+        }
+        id_contrato.feed(id_contrato_fields)
+
+        # PotenciasContratadas
+        potencias_contratadas = e1.PotenciasContratadas()
+        potencias_contratadas.feed({'p1': 1000, 'p2': 2000})
+
+        # CondicionesContractuales
+        condiciones_contractuales = e1.CondicionesContractuales()
+        condiciones_contractuales_fields = {
+            'tarifa_atr': '018',
+            'periodicidad_facturacion': '01',
+            'tipode_telegestion': '01',
+            'potencias_contratadas': potencias_contratadas,
+            'modo_control_potencia': '1',
+            'marca_medida_con_perdidas': 'S',
+            'tension_del_suministro': '10',
+            'vas_trafo': '50',
+            'porcentaje_perdidas': '05',
+        }
+        condiciones_contractuales.feed(condiciones_contractuales_fields)
+
+        # Contrato
+        contrato = e1.Contrato()
+        contrato_fields = {
+            'id_contrato': id_contrato,
+            'tipo_autoconsumo': '00',
+            'tipo_contrato_atr': '02',
+            'condiciones_contractuales': condiciones_contractuales,
+        }
+        contrato.feed(contrato_fields)
+
+        # PuntosDeMedida
+        puntos_de_medida = self.puntos_de_medida
+
+        # ActivacionDesistimiento
+        notificacion_activacion_desistimiento = e1.NotificacionActivacionPorDesistimiento()
+        notificacion_activacion_desistimiento_fields = {
+            'datos_activacion': datos_activacion,
+            'contrato': contrato,
+            'puntos_de_medida': puntos_de_medida,
+        }
+        notificacion_activacion_desistimiento.feed(notificacion_activacion_desistimiento_fields)
+
+        mensaje_fields = {
+            'cabecera': cabecera,
+            'notificacion_activacion_desistimiento': notificacion_activacion_desistimiento,
+        }
+        mensaje.feed(mensaje_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_e106.read())
+
+    def test_create_pas12(self):
+        # MensajeRechazoDesistimiento
+        mensaje = e1.MensajeRechazoDesistimiento()
+
+        # Cabecera
+        cabecera = get_header(process='E1', step='12')
+
+        # RechazoDesistimiento
+        rechazo_desistimiento = e1.RechazoDesistimiento()
+        rechazo_desistimiento_fields = {
+            'fecha_rechazo': '2020-05-01',
+        }
+        rechazo_desistimiento.feed(rechazo_desistimiento_fields)
+
+        mensaje_fields = {
+            'cabecera': cabecera,
+            'rechazo_desistimiento': rechazo_desistimiento,
+        }
+        mensaje.feed(mensaje_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_e112.read())
+
+    def test_create_pas13(self):
+        # MensajeContestacionIncidencia
+        mensaje = e1.MensajeContestacionIncidencia()
+
+        # Cabecera
+        cabecera = get_header(process='E1', step='13')
+
+        # Telefono
+        telefono = e1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '34',
+            'numero': '683834841',
+        }
+        telefono.feed(telefono_fields)
+
+        # Contacto
+        contacto = e1.Contacto()
+        contacto_fields = {
+            'persona_de_contacto': 'Nombre Inventado',
+            'telefonos': [telefono],
+            'correo_electronico': 'mail_falso@dominio.com',
+        }
+        contacto.feed(contacto_fields)
+
+        # ContestacionIncidencia
+        contestacion_incidencia = e1.ContestacionIncidencia()
+        contestacion_incidencia_fields = {
+            'contestacion_incidencia': '02',
+            'contacto': contacto
+        }
+        contestacion_incidencia.feed(contestacion_incidencia_fields)
+
+        mensaje_fields = {
+            'cabecera': cabecera,
+            'contestacion_incidencia': contestacion_incidencia,
+        }
+        mensaje.feed(mensaje_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_e113.read())
+
+
+class test_T1(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_t101 = open(get_data("t101.xml"), "rb")
+        self.xml_t102_accept = open(get_data("t102_accept.xml"), "rb")
+        self.xml_t102_reject = open(get_data("t102_reject.xml"), "rb")
+        self.xml_t105 = open(get_data("t105.xml"), "rb")
+        self.xml_t106 = open(get_data("t106.xml"), "rb")
+        self.xml_t110 = open(get_data("t110.xml"), "rb")
+
+        # PuntosDeMedida
+        self.puntos_de_medida = t1.PuntosDeMedida()
+
+        # PuntoDeMedida
+        punto_de_medida = t1.PuntoDeMedida()
+
+        # Aparatos
+        aparatos = t1.Aparatos()
+
+        # Aparato
+        aparato = t1.Aparato()
+
+        # ModeloAparato
+        modelo_aparato = t1.ModeloAparato()
+        modelo_aparato_fields = {
+            'tipo_aparato': 'CG',
+            'marca_aparato': '132',
+            'modelo_marca': '011',
+        }
+        modelo_aparato.feed(modelo_aparato_fields)
+
+        # DatosAparato
+        datos_aparato = t1.DatosAparato()
+        datos_aparato_fields = {
+            'periodo_fabricacion': '2005',
+            'numero_serie': '0000539522',
+            'funcion_aparato': 'M',
+            'num_integradores': '18',
+            'constante_energia': '1.000',
+            'constante_maximetro': '1.000',
+            'ruedas_enteras': '08',
+            'ruedas_decimales': '02',
+        }
+        datos_aparato.feed(datos_aparato_fields)
+
+        # Medidas
+        medidas = t1.Medidas()
+
+        # Medida 1
+        medida1 = t1.Medida()
+        medida_fields = {
+            'tipo_dhedm': '6',
+            'periodo': '65',
+            'magnitud_medida': 'PM',
+            'procedencia': '30',
+            'ultima_lectura_firme': '0.00',
+            'fecha_lectura_firme': '2003-01-02',
+            'anomalia': '01',
+            'comentarios': 'Comentario sobre anomalia',
+        }
+        medida1.feed(medida_fields)
+
+        # Medida 2
+        medida2 = t1.Medida()
+        medida_fields = {
+            'tipo_dhedm': '6',
+            'periodo': '66',
+            'magnitud_medida': 'PM',
+            'procedencia': '30',
+            'ultima_lectura_firme': '6.00',
+            'fecha_lectura_firme': '2003-01-03',
+        }
+        medida2.feed(medida_fields)
+
+        medidas_fields = {
+            'medida_list': [medida1, medida2],
+        }
+        medidas.feed(medidas_fields)
+
+        aparato_fields = {
+            'modelo_aparato': modelo_aparato,
+            'tipo_movimiento': 'CX',
+            'tipo_equipo_medida': 'L03',
+            'tipo_propiedad_aparato': '1',
+            'propietario': 'Desc. Propietario',
+            'tipo_dhedm': '6',
+            'modo_medida_potencia': '9',
+            'lectura_directa': 'N',
+            'cod_precinto': '02',
+            'datos_aparato': datos_aparato,
+            'medidas': medidas
+        }
+
+        aparato.feed(aparato_fields)
+        aparatos_fields = {
+            'aparato_list': [aparato],
+        }
+        aparatos.feed(aparatos_fields)
+
+        punto_de_medida_fields = {
+            'cod_pm': 'ES1234000000000001JN0F',
+            'tipo_movimiento': 'A',
+            'tipo_pm': '03',
+            'cod_pm_principal': 'ES1234000000000002JN0F',
+            'modo_lectura': '1',
+            'funcion': 'P',
+            'direccion_enlace': '39522',
+            'direccion_punto_medida': '000000001',
+            'num_linea': '12',
+            'telefono_telemedida': '987654321',
+            'estado_telefono': '1',
+            'clave_acceso': '0000000007',
+            'tension_pm': '0',
+            'fecha_vigor': '2003-01-01',
+            'fecha_alta': '2003-01-01',
+            'fecha_baja': '2003-02-01',
+            'aparatos': aparatos,
+            'comentarios': 'Comentarios Varios',
+        }
+        punto_de_medida.feed(punto_de_medida_fields)
+
+        puntos_de_medida_fields = {
+            'punto_de_medida_list': [punto_de_medida],
+        }
+        self.puntos_de_medida.feed(puntos_de_medida_fields)
+
+    def tearDown(self):
+        self.xml_t101.close()
+        self.xml_t102_accept.close()
+        self.xml_t102_reject.close()
+        self.xml_t105.close()
+        self.xml_t106.close()
+        self.xml_t110.close()
+
+    def test_create_pas01(self):
+        # MensajeSolicitudTraspasoCOR
+        mensaje = t1.MensajeSolicitudTraspasoCOR()
+
+        # Cabecera
+        cabecera = get_header(process='T1', step='01')
+
+        # DatosSolicitud
+        datos_solicitud = t1.DatosSolicitud()
+        datos_solicitud_fields = {
+            'motivo_traspaso': '03',
+            'fecha_prevista_accion': '2020-05-01',
+            'cnae': '9820',
+            'ind_esencial': 'S',
+            'susp_baja_impago_en_curso': 'S',
+        }
+        datos_solicitud.feed(datos_solicitud_fields)
+
+        # Contrato
+        contrato = t1.ContratoT101()
+
+        # CondicionesContractuales
+        condiciones_contractuales = t1.CondicionesContractuales()
+
+        # PotenciasContratadas
+        potencias_contratadas = t1.PotenciasContratadas()
+        potencias_contratadas.feed({'p1': 1000, 'p2': 2000})
+
+        condiciones_contractuales_fields = {
+            'tarifa_atr': '018',
+            'potencias_contratadas': potencias_contratadas,
+            'modo_control_potencia': '1',
+        }
+        condiciones_contractuales.feed(condiciones_contractuales_fields)
+
+        # Contacto
+        contacto = get_contacto()
+
+        contrato_fields = {
+            'fecha_finalizacion': '2018-01-01',
+            'tipo_autoconsumo': '00',
+            'tipo_contrato_atr': '02',
+            'condiciones_contractuales': condiciones_contractuales,
+            'periodicidad_facturacion': '01',
+            'consumo_anual_estimado': '5000',
+            'contacto': contacto,
+        }
+        contrato.feed(contrato_fields)
+
+        # Cliente
+        cliente = get_cliente(dir=True, tipo_dir='F')
+
+        # DireccionPS
+        direccion_ps = t1.DireccionPS()
+        direccion_ps_fields = {
+                'pais': u'España',
+                'provincia': '17',
+                'municipio': '17079',
+                'cod_postal': '17003',
+                'calle': 'Nom carrer',
+                'numero_finca': '3',
+                'escalera': '1',
+                'piso': 1,
+                'puerta': 1,
+        }
+        direccion_ps.feed(direccion_ps_fields)
+
+        # RegistrosDocumento
+        registros_documento = t1.RegistrosDocumento()
+        # RegistroDoc
+        rd1 = t1.RegistroDoc()
+        registro_doc_fields = {
+            'tipo_doc_aportado': '08',
+            'direccion_url': 'http://eneracme.com/docs/NIF11111111H.pdf',
+        }
+        rd1.feed(registro_doc_fields)
+        rd2 = t1.RegistroDoc()
+        registro_doc_fields = {
+            'tipo_doc_aportado': '07',
+            'direccion_url': 'http://eneracme.com/docs/NIF11111111H.pdf',
+        }
+        rd2.feed(registro_doc_fields)
+        registros_documento_fields = {
+            'registro_doc_list': [rd1, rd2],
+        }
+        registros_documento.feed(registros_documento_fields)
+
+        # SolicitudTraspasoCOR
+        solicitud_traspaso_cor = t1.SolicitudTraspasoCOR()
+        solicitud_traspaso_cor_fields = {
+            'datos_solicitud': datos_solicitud,
+            'contrato': contrato,
+            'cliente': cliente,
+            'direccion_ps': direccion_ps,
+            'registros_documento': registros_documento,
+        }
+        solicitud_traspaso_cor.feed(solicitud_traspaso_cor_fields)
+
+        mensaje_fields = {
+            'cabecera': cabecera,
+            'solicitud_traspaso_cor': solicitud_traspaso_cor,
+        }
+        mensaje.feed(mensaje_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_t101.read())
+
+    def test_create_pas02_accept(self):
+        # MensajeAceptacionDesistimiento
+        mensaje = t1.MensajeAceptacionTraspasoCOR()
+
+        # Cabecera
+        cabecera = get_header(process='T1', step='02')
+
+        # DatosAceptacion
+        datos_aceptacion = t1.DatosAceptacion()
+        datos_aceptacion_fields = {
+            'fecha_aceptacion': '2016-06-06',
+        }
+        datos_aceptacion.feed(datos_aceptacion_fields)
+
+        # AceptacionTraspasoCOR
+        aceptacion_traspaso_cor = t1.AceptacionTraspasoCOR()
+        aceptacion_traspaso_cor_fields = {
+            'datos_aceptacion': datos_aceptacion,
+        }
+        aceptacion_traspaso_cor.feed(aceptacion_traspaso_cor_fields)
+
+        mensaje_fields = {
+            'cabecera': cabecera,
+            'aceptacion_traspaso_cor': aceptacion_traspaso_cor,
+        }
+        mensaje.feed(mensaje_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_t102_accept.read())
+
+    def test_create_pas02_reject(self):
+        # MensajeRechazo
+        mensaje_rechazo = t1.MensajeRechazoTraspasoCOR()
+
+        # Cabecera
+        cabecera = get_header(process='T1', step='02')
+
+        # Rechazos
+        rechazos = t1.Rechazos()
+
+        # Rechazo 1
+        reb1 = t1.Rechazo()
+        rechazo1_fields = {
+            'secuencial': '1',
+            'codigo_motivo': '08',
+            'comentarios': 'Fecha de finalización del Contrato sin informar o no válida',
+        }
+        reb1.feed(rechazo1_fields)
+
+        # Rechazo 2
+        reb2 = t1.Rechazo()
+        rechazo2_fields = {
+            'secuencial': '2',
+            'codigo_motivo': 'E4',
+            'comentarios': 'Impago Previo',
+        }
+        reb2.feed(rechazo2_fields)
+
+        # RegistrosDocumento
+        registros_documento = t1.RegistrosDocumento()
+
+        # RegistroDoc 1
+        rd1 = t1.RegistroDoc()
+        registro_doc_fields = {
+            'tipo_doc_aportado': '08',
+            'direccion_url': 'http://eneracme.com/docs/NIF11111111H.pdf',
+        }
+        rd1.feed(registro_doc_fields)
+
+        # RegistroDoc 2
+        rd2 = t1.RegistroDoc()
+        registro_doc2_fields = {
+            'tipo_doc_aportado': '07',
+            'direccion_url': 'http://eneracme.com/docs/NIF11111111H.pdf',
+        }
+        rd2.feed(registro_doc2_fields)
+
+        registros_documento_fields = {
+            'registro_doc_list': [rd1, rd2],
+        }
+        registros_documento.feed(registros_documento_fields)
+
+        rechazos_fields = {
+            'fecha_rechazo': '2016-07-20',
+            'rechazo_list': [reb1, reb2],
+            'registros_documento': registros_documento,
+        }
+        rechazos.feed(rechazos_fields)
+
+        mensaje_rechazo_fields = {
+            'cabecera': cabecera,
+            'rechazos': rechazos,
+        }
+        mensaje_rechazo.feed(mensaje_rechazo_fields)
+        mensaje_rechazo.build_tree()
+        xml = str(mensaje_rechazo)
+        assertXmlEqual(xml, self.xml_t102_reject.read())
+
+    def test_create_pas05(self):
+        # MensajeActivacionTraspasoCOR
+        mensaje = t1.MensajeActivacionTraspasoCOR()
+
+        # Cabecera
+        cabecera = get_header(process='T1', step='05')
+
+        # DatosActivacion
+        datos_activacion = t1.DatosActivacion()
+        datos_activacion_fields = {
+            'fecha_activacion': '2016-08-21',
+            'en_servicio': 'S',
+        }
+        datos_activacion.feed(datos_activacion_fields)
+
+        # IdContrato
+        id_contrato = t1.IdContrato()
+        id_contrato_fields = {
+            'cod_contrato': '00001',
+        }
+        id_contrato.feed(id_contrato_fields)
+
+        # PotenciasContratadas
+        potencias_contratadas = t1.PotenciasContratadas()
+        potencias_contratadas.feed({'p1': 1000, 'p2': 2000})
+
+        # CondicionesContractuales
+        condiciones_contractuales = t1.CondicionesContractuales()
+        condiciones_contractuales_fields = {
+            'tarifa_atr': '018',
+            'periodicidad_facturacion': '01',
+            'tipode_telegestion': '01',
+            'potencias_contratadas': potencias_contratadas,
+            'modo_control_potencia': '1',
+            'marca_medida_con_perdidas': 'S',
+            'tension_del_suministro': '10',
+            'vas_trafo': '50',
+            'porcentaje_perdidas': '05',
+        }
+        condiciones_contractuales.feed(condiciones_contractuales_fields)
+
+        # Contrato
+        contrato = t1.Contrato()
+        contrato_fields = {
+            'id_contrato': id_contrato,
+            'tipo_autoconsumo': '00',
+            'tipo_contrato_atr': '02',
+            'condiciones_contractuales': condiciones_contractuales,
+        }
+        contrato.feed(contrato_fields)
+
+        # PuntosDeMedida
+        puntos_de_medida = self.puntos_de_medida
+
+        # ActivacionDesistimiento
+        activacion_traspaso_cor = t1.ActivacionTraspasoCOR()
+        activacion_traspaso_cor_fields = {
+            'datos_activacion': datos_activacion,
+            'contrato': contrato,
+            'puntos_de_medida': puntos_de_medida,
+        }
+        activacion_traspaso_cor.feed(activacion_traspaso_cor_fields)
+
+        mensaje_fields = {
+            'cabecera': cabecera,
+            'activacion_traspaso_cor': activacion_traspaso_cor,
+        }
+        mensaje.feed(mensaje_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_t105.read())
+
+    def test_create_pas06(self):
+        # MensajeActivacionTraspasoCORSaliente
+        mensaje = t1.MensajeActivacionTraspasoCORSaliente()
+
+        # Cabecera
+        cabecera = get_header(process='T1', step='06')
+
+        # DatosNotificacion
+        datos_notificacion = t1.DatosNotificacion()
+        datos_notificacion_fields = {
+            'fecha_activacion': '2016-08-21'
+        }
+        datos_notificacion.feed(datos_notificacion_fields)
+
+        # Contrato
+        contrato = t1.Contrato()
+        id_contrato = t1.IdContrato()
+        id_contrato.feed({'cod_contrato': '00001'})
+        contrato.feed({'id_contrato': id_contrato})
+
+        # PuntosDeMedida
+        puntos_de_medida = self.puntos_de_medida
+
+        # NotificacionComercializadorSaliente
+        notificacion_comercializador_saliente = t1.NotificacionComercializadorSalienteT1()
+        notificacion_comercializador_saliente_fields = {
+            'datos_notificacion': datos_notificacion,
+            'contrato': contrato,
+            'puntos_de_medida': puntos_de_medida,
+        }
+        notificacion_comercializador_saliente.feed(notificacion_comercializador_saliente_fields)
+
+        mensaje_fields = {
+            'cabecera': cabecera,
+            'notificacion_comercializador_saliente_t1': notificacion_comercializador_saliente,
+        }
+        mensaje.feed(mensaje_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_t106.read())
+
+    def test_create_pas10(self):
+        # MensajeAceptacionAnulacion
+        mensaje = t1.MensajeAceptacionAnulacion()
+
+        # Cabecera
+        cabecera = get_header(process='T1', step='10')
+
+        # AceptacionAnulacion
+        aceptacion_anulacion = t1.AceptacionAnulacion()
+        aceptacion_anulacion_fields = {
+            'fecha_aceptacion': '2016-06-06',
+        }
+        aceptacion_anulacion.feed(aceptacion_anulacion_fields)
+
+        mensaje_fields = {
+            'cabecera': cabecera,
+            'aceptacion_anulacion': aceptacion_anulacion,
+        }
+        mensaje.feed(mensaje_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_t110.read())
+
 
 class test_R1(unittest.TestCase):
 
@@ -2313,6 +3929,9 @@ class test_R1(unittest.TestCase):
         self.xml_r103_intervenciones = open(get_data("r103_intervenciones.xml"), "rb")
         self.xml_r104 = open(get_data("r104.xml"), "rb")
         self.xml_r105 = open(get_data("r105.xml"), "rb")
+        self.xml_r108 = open(get_data("r108.xml"), "rb")
+        self.xml_r109 = open(get_data("r109.xml"), "rb")
+        self.xml_r109_rej = open(get_data("r109_rej.xml"), "rb")
 
     def tearDown(self):
         self.xml_r101.close()
@@ -2321,6 +3940,9 @@ class test_R1(unittest.TestCase):
         self.xml_r103_intervenciones.close()
         self.xml_r104.close()
         self.xml_r105.close()
+        self.xml_r108.close()
+        self.xml_r109.close()
+        self.xml_r109_rej.close()
 
     def test_create_pas01(self):
         # MensajeReclamacionPeticion
@@ -2416,7 +4038,7 @@ class test_R1(unittest.TestCase):
             'des_ubicacion_incidencia': 'Destino',
             'provincia': '17',
             'municipio': '17079',
-            'poblacion': '17079',
+            'poblacion': '17079000501',
             'cod_postal': '17001',
         }
         ubicacion_incidencia.feed(ubicacion_incidencia_fields)
@@ -2656,13 +4278,31 @@ class test_R1(unittest.TestCase):
             'solicitud_informacion_adicional_para_retipificacion': siar
         }
         solicitudes_informacion_adicional.feed(solicitudes_informacion_adicional_fields)
-
+        parametres = r1.ParametrosComunicacion()
+        tlfn = r1.TelefonoTelemedida()
+        tlfn.feed({
+            'num_telefono': '999888444333',
+            'velocidad_comunicacion': '20',
+            'bit_datos': '1',
+            'paridad': '0',
+            'bit_stop': '1',
+        })
+        parametres.feed({
+            'cod_pm': '1234567890123456789012',
+            'cod_pm_principal': '1234567890123456789012',
+            'funcion': 'P',
+            'direccion_enlace': 'a1b2c3d4e5',
+            'num_linea': '2',
+            'clave_lectura': '25',
+            'telefono': tlfn
+        })
         informacion_adicional_fields = {
             'datos_informacion': datos_informacion,
             'informacion_intermedia': informacion_intermedia,
             'retipificacion': retipificacion,
             'solicitudes_informacion_adicional': solicitudes_informacion_adicional,
             'comentarios': 'R1 03.',
+            'parametros_comunicacion': parametres
         }
         informacion_adicional.feed(informacion_adicional_fields)
 
@@ -2876,7 +4516,7 @@ class test_R1(unittest.TestCase):
             'des_ubicacion_incidencia': 'Destino',
             'provincia': '17',
             'municipio': '17079',
-            'poblacion': '17079',
+            'poblacion': '17079000501',
             'cod_postal': '17001',
         }
         ubicacion_incidencia.feed(ubicacion_incidencia_fields)
@@ -2998,11 +4638,26 @@ class test_R1(unittest.TestCase):
             'fecha_movimiento': '2016-04-12',
         }
         datos_cierre.feed(datos_cierre_fields)
-
+        parametres = r1.ParametrosComunicacion()
+        tlfn = r1.IP()
+        tlfn.feed({
+            'direccion_ip': '0.0.0.0',
+            'puerto_enlace': '8080',
+        })
+        parametres.feed({
+            'cod_pm': '1234567890123456789012',
+            'cod_pm_principal': '1234567890123456789012',
+            'funcion': 'P',
+            'direccion_enlace': 'a1b2c3d4e5',
+            'num_linea': '2',
+            'clave_lectura': '25',
+            'ip': tlfn
+        })
         cierre_reclamacion_fields = {
             'datos_cierre': datos_cierre,
             'cod_contrato': '383922379',
             'comentarios': 'Comentarios generales',
+            'parametros_comunicacion': parametres
         }
         cierre_reclamacion.feed(cierre_reclamacion_fields)
 
@@ -3014,6 +4669,134 @@ class test_R1(unittest.TestCase):
         mensaje_cierre_reclamacion.build_tree()
         xml = str(mensaje_cierre_reclamacion)
         assertXmlEqual(xml, self.xml_r105.read())
+
+    def test_create_pas08(self):
+        # MensajeAnulacionSolicitudReclamacion
+        mensaje_anulacion_solicitud_reclamacion = r1.MensajeAnulacionSolicitudReclamacion()
+
+        # Cabecera
+        cabecera_reclamacion = r1.CabeceraReclamacion()
+        cabecera_reclamacion_fields = {
+            'codigo_ree_empresa_emisora': '1234',
+            'codigo_ree_empresa_destino': '4321',
+            'codigo_del_proceso': 'R1',
+            'codigo_del_paso': '08',
+            'codigo_de_solicitud': '201607211259',
+            'secuencial_de_solicitud': '01',
+            'fecha': '2016-07-21T12:59:47',
+            'cups': 'ES1234000000000001JN0F',
+        }
+        cabecera_reclamacion.feed(cabecera_reclamacion_fields)
+
+        mensaje_anulacion_solicitud_reclamacion_fields = {
+            'cabecera_reclamacion': cabecera_reclamacion,
+        }
+        mensaje_anulacion_solicitud_reclamacion.feed(mensaje_anulacion_solicitud_reclamacion_fields)
+        mensaje_anulacion_solicitud_reclamacion.build_tree()
+        xml = str(mensaje_anulacion_solicitud_reclamacion)
+        assertXmlEqual(xml, self.xml_r108.read())
+
+    def test_create_pas09(self):
+        # MensajeAceptacionAnulacion
+        mensaje_aceptacion_anulacion = r1.MensajeAceptacionAnulacionReclamacion()
+
+        # Cabecera
+        cabecera = r1.CabeceraReclamacion()
+        cabecera_reclamacion_fields = {
+            'codigo_ree_empresa_emisora': '1234',
+            'codigo_ree_empresa_destino': '4321',
+            'codigo_del_proceso': 'R1',
+            'codigo_del_paso': '09',
+            'codigo_de_solicitud': '201607211259',
+            'secuencial_de_solicitud': '01',
+            'fecha': '2016-07-21T12:59:47',
+            'cups': 'ES1234000000000001JN0F',
+        }
+        cabecera.feed(cabecera_reclamacion_fields)
+
+        # AceptacionAnulacion
+        aceptacion_anulacion = r1.AceptacionAnulacion()
+        aceptacion_anulacion_fields = {
+            'fecha_aceptacion': '2017-02-03',
+        }
+        aceptacion_anulacion.feed(aceptacion_anulacion_fields)
+
+        mensaje_aceptacion_anulacion_fields = {
+            'cabecera': cabecera,
+            'aceptacion_anulacion': aceptacion_anulacion,
+        }
+        mensaje_aceptacion_anulacion.feed(mensaje_aceptacion_anulacion_fields)
+        mensaje_aceptacion_anulacion.build_tree()
+        xml = str(mensaje_aceptacion_anulacion)
+        assertXmlEqual(xml, self.xml_r109.read())
+
+    def test_create_pas09_rej(self):
+        # Cabecera
+        cabecera = r1.CabeceraReclamacion()
+        cabecera_reclamacion_fields = {
+            'codigo_ree_empresa_emisora': '1234',
+            'codigo_ree_empresa_destino': '4321',
+            'codigo_del_proceso': 'R1',
+            'codigo_del_paso': '09',
+            'codigo_de_solicitud': '201607211259',
+            'secuencial_de_solicitud': '01',
+            'fecha': '2016-07-21T12:59:47',
+            'cups': 'ES1234000000000001JN0F',
+        }
+        cabecera.feed(cabecera_reclamacion_fields)
+
+        # Rechazos
+        rechazo = r1.Rechazo()
+        rechazo_fields = {
+            'secuencial': '1',
+            'codigo_motivo': 'F1',
+            'comentarios': 'Motiu de rebuig F1'
+        }
+        rechazo.feed(rechazo_fields)
+
+        # RegistroDoc
+        doc1 = r1.RegistroDoc()
+        registro_doc_fields1 = {
+            'tipo_doc_aportado': '08',
+            'direccion_url': 'http://eneracme.com/docs/NIF11111111H.pdf',
+        }
+        doc1.feed(registro_doc_fields1)
+
+        # RegistroDoc
+        doc2 = r1.RegistroDoc()
+        registro_doc_fields2 = {
+            'tipo_doc_aportado': '07',
+            'direccion_url': 'http://eneracme.com/docs/NIF11111111H.pdf',
+        }
+        doc2.feed(registro_doc_fields2)
+
+        # RegistrosDocumento
+        registros = r1.RegistrosDocumento()
+        registros_documento_fields = {
+            'registro_doc_list': [doc1, doc2],
+        }
+        registros.feed(registros_documento_fields)
+
+        # Rechazos
+        rechazos = r1.Rechazos()
+        rechazos_fields = {
+            'fecha_rechazo': '2016-07-20',
+            'rechazo_list': [rechazo],
+            'registros_documento': registros,
+        }
+        rechazos.feed(rechazos_fields)
+
+        # MensajeRechazo
+        mensaje_rechazo = r1.MensajeRechazoReclamacion()
+        mensaje_rechazo_fields = {
+            'cabecera_reclamacion': cabecera,
+            'rechazos': rechazos,
+        }
+        mensaje_rechazo.feed(mensaje_rechazo_fields)
+
+        mensaje_rechazo.build_tree()
+        xml = str(mensaje_rechazo)
+        assertXmlEqual(xml, self.xml_r109_rej.read())
 
 
 class test_F1(unittest.TestCase):
@@ -3135,7 +4918,7 @@ class test_F1(unittest.TestCase):
         atr_data.feed(
             {
                 'fecha_boe': '2016-01-01',
-                'tarifa_atr_fact': '001',
+                'tarifa_atr_fact': '001', 'tipo_autoconsumo': '00', 'duracion_inf_anio': 'N',
                 'modo_control_potencia': 1,
                 'marca_medida_con_perdidas': 'N',
                 'vas_trafo': None,
@@ -3143,6 +4926,7 @@ class test_F1(unittest.TestCase):
                 'indicativo_curva_carga': '02',
                 'periodo_cch': None,
                 'periodo': periodo,
+                'tipo_pm': '01'
             }
         )
 
@@ -3151,7 +4935,7 @@ class test_F1(unittest.TestCase):
         self.atr_data_lb.feed(
             {
                 'fecha_boe': '2016-01-01',
-                'tarifa_atr_fact': '001',
+                'tarifa_atr_fact': '001', 'tipo_autoconsumo': '00', 'duracion_inf_anio': 'N',
                 'modo_control_potencia': 1,
                 'marca_medida_con_perdidas': 'S',
                 'vas_trafo': 50000.0,
@@ -3159,6 +4943,7 @@ class test_F1(unittest.TestCase):
                 'indicativo_curva_carga': '02',
                 'periodo_cch': None,
                 'periodo': periodo,
+                'tipo_pm': '01'
             }
         )
 
@@ -3180,6 +4965,7 @@ class test_F1(unittest.TestCase):
                 'potencia_max_demandada': 1000,
                 'potencia_a_facturar': 1000,
                 'precio_potencia': 0.05,
+                'recargo_inf_anio': 0
             }
         )
 
@@ -3191,7 +4977,7 @@ class test_F1(unittest.TestCase):
             {
                 'fecha_desde': '2017-03-31',
                 'fecha_hasta': '2017-04-30',
-                'periodo': periodos_potencia,
+                'periodos': periodos_potencia,
             }
         )
 
@@ -3324,6 +5110,24 @@ class test_F1(unittest.TestCase):
             }
         )
 
+        periodo_max = f1.PeriodoInfoAlConsumidor()
+
+        periodo_max.feed(
+            {
+                'potencia_max_demandada_anio_movil': 3000
+            }
+        )
+
+        periodos_maximetros = [periodo_max]
+
+        informacion_al_consumidor = f1.InformacionAlConsumidor()
+        informacion_al_consumidor.feed(
+            {
+                'fecha_inicio_anio_movil': '2017-03-31',
+                'periodos': periodos_maximetros
+            }
+        )
+
         self.factura_atr = f1.FacturaATR()
 
         self.factura_atr.feed(
@@ -3340,6 +5144,7 @@ class test_F1(unittest.TestCase):
                 'iva': ivas_atr,
                 'iva_reducido': None,
                 'medidas': medidas,
+                'informacion_al_consumidor': informacion_al_consumidor,
             }
         )
 
@@ -3782,9 +5587,12 @@ class test_A1_05(unittest.TestCase):
             'newfloorowner': '4',
             'newdoorowner': '5',
             'newreqqd': '987654321.1234567',
-            'newtolltype': '31',
+            'newtolltype': 'R1',
             'extrainfo': 'comentarios extras',
             'registerdoclist': registros_documento,
+            'newreqestimatedqa': '111111111',
+            'newfactmethod': '1',
+            'gasstationtype': '00',
         }
         a105.feed(a105_fields)
 
@@ -3910,6 +5718,7 @@ class test_A1_03(unittest.TestCase):
 
         a103_fields = {
             'comreferencenum': '000123456789',
+            'comreferencenumanul': '1234',
             'titulartype': 'F',
             'nationality': 'ES',
             'documenttype': '01',
@@ -4084,7 +5893,7 @@ class test_A1_48(unittest.TestCase):
             'incidentlocationdesc': 'calle pequeña',
             'incidentlocationprovince': '01',
             'incidentlocationcity': '000001',
-            'incidentlocationcitysubdivision': '20AA',
+            'incidentlocationcitysubdivision': '17079000503',
             'incidentlocationzipcode': '17888',
         }
         incidentlocation.feed(incidentlocation_fields)
@@ -4271,7 +6080,7 @@ class test_A1_48(unittest.TestCase):
             'incidentlocationdesc': 'calle pequeña',
             'incidentlocationprovince': '01',
             'incidentlocationcity': '000001',
-            'incidentlocationcitysubdivision': '20AA',
+            'incidentlocationcitysubdivision': '17079000503',
             'incidentlocationzipcode': '17888',
         }
         incidentlocation.feed(incidentlocation_fields)
@@ -4479,6 +6288,10 @@ class test_A1_46(unittest.TestCase):
             'reqdate': '2018-05-01',
             'reqhour': '13:00:00',
             'comreferencenum': '000123456789',
+            'comreferencenumdes': '999123456789',
+            'annulmentreason': '102',
+            'claimtype': '01',
+            'claimsubtype': '001',
             'cups': 'ES1234000000000001JN',
             'operationtype': 'A20002',
             'extrainfo': 'comentarios extra',
@@ -4487,9 +6300,609 @@ class test_A1_46(unittest.TestCase):
         a146.feed(a146_fields)
         mensaje_a146_fields = {
             'heading': heading,
-            'a1': a146,
+            'a146': a146,
         }
         mensaje.feed(mensaje_a146_fields)
         mensaje.build_tree()
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_a146.read())
+
+
+class test_A1_38(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a138 = open(get_data("a138.xml"), "rb")
+
+    def tearDown(self):
+        self.xml_a138.close()
+
+    def test_create_a138(self):
+        # Mensajea138
+        mensaje_a138 = a1_38.MensajeA138()
+
+        # Heading
+        heading = a1_38.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '38',
+            'messagetype': 'A1'
+        }
+        heading.feed(heading_fields)
+
+        # a138
+        a138 = a1_38.A138()
+
+        # RegistrosDocumento
+        registros_documento = a1_38.Registerdoclist()
+        rd1 = a1_38.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-02',
+            'doctype': 'CC',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd1.feed(registro_doc_fields)
+        rd2 = a1_38.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-03',
+            'doctype': '01',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd2.feed(registro_doc_fields)
+        registros_documento.feed({
+            'registerdoc_list': [rd1, rd2],
+        })
+
+        # ProductosDocumento
+        productos_documento = a1_38.ProductList()
+        p1 = a1_38.Product()
+        producto_fields = {
+            'producttype': '03',
+            'producttolltype': 'R1',
+            'productqd': 23.6,
+            'productqa': 12345,
+        }
+        p1.feed(producto_fields)
+        p2 = a1_42.Product()
+        producto2_fields = {
+            'producttype': '02',
+            'producttolltype': 'R2',
+            'productqd': 23.5,
+            'productqa': 1234,
+        }
+        p2.feed(producto2_fields)
+
+        productos_documento.feed({
+            'product_list': [p1, p2],
+        })
+
+        a138_fields = {
+            'comreferencenum': "12345",
+            'reqdate': "2020-03-01",
+            'reqhour': "08:00:00",
+            'titulartype': "F",
+            'nationality': "ES",
+            'documenttype': "01",
+            'documentnum': "11111111H",
+            'firstname': "Gas",
+            'familyname1': "Al",
+            'familyname2': "Matalas",
+            'telephone1': "999888777",
+            'telephone2': "666555444",
+            'fax': "111444555",
+            'email': "gasalmatalas@atr",
+            'language': "02",
+            'province': "17",
+            'city': "17001",
+            'zipcode': "17002",
+            'streettype': "ACCE",
+            'street': "Carrer inventat",
+            'streetnumber': "1",
+            'portal': "2",
+            'staircase': "3",
+            'floor': "4",
+            'door': "5",
+            'regularaddress': "S",
+            'provinceowner': "16",
+            'cityowner': "17000",
+            'zipcodeowner': "17001",
+            'streettypeowner': "ACCE",
+            'streetowner': "Carrer inventat 2",
+            'streetnumberowner': "12",
+            'portalowner': "22",
+            'staircaseowner': "32",
+            'floorowner': "42",
+            'doorowner': "52",
+            'cups': "ES1234000000000001JN",
+            'reqqd': "10",
+            'reqqh': "20",
+            'reqestimatedqa': "30",
+            'reqoutgoingpressure': "40",
+            'gasusetype': "01",
+            'tolltype': "R1",
+            'counterproperty': "01",
+            'aptransind': "S",
+            'aptransnumber': "9999",
+            'reig': "98",
+            'designpower': "97",
+            'iricertificatedate': "2020-01-01",
+            'terminstexist': "S",
+            'modeffectdate': "05",
+            'reqactivationdate': "2020-02-01",
+            'extrainfo': "EXTRA EXTRA! EL GAS NO TE SENTIT!",
+            'productlist': productos_documento,
+            'registerdoclist': registros_documento,
+            'telemetering': 'N',
+            'factmethod': '2',
+            'gasstationtype': '00',
+        }
+        a138.feed(a138_fields)
+
+        mensaje_a138_fields = {
+            'heading': heading,
+            'a138': a138,
+        }
+        mensaje_a138.feed(mensaje_a138_fields)
+        mensaje_a138.build_tree()
+        xml = str(mensaje_a138)
+        assertXmlEqual(xml, self.xml_a138.read())
+
+
+class test_A1_49(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a149 = open(get_data("a149.xml"), "rb")
+
+    def tearDown(self):
+        self.xml_a149.close()
+
+    def test_create_a149(self):
+        # Mensajea149
+        mensaje_a149 = a1_49.MensajeA149()
+
+        # Heading
+        heading = a1_49.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '49',
+            'messagetype': 'A1'
+        }
+        heading.feed(heading_fields)
+
+        # a149
+        a149 = a1_49.A149()
+
+        a149_fields = {
+            'comreferencenum': '12345',
+            'reqdate': "2020-03-01",
+            'reqhour': "08:00:00",
+            'cups': "ES1234000000000001JN",
+            'comreferencenumdes': '123456789012',
+            'tipodesistimiento': '01',
+            'documenttype': '01',
+            'documentnum': '11111111H',
+            'titulartype': 'F',
+            'extrainfo': 'EXTRA EXTRA! EL GAS NO TE SENTIT!'
+        }
+        a149.feed(a149_fields)
+
+        mensaje_a149_fields = {
+            'heading': heading,
+            'a149': a149,
+        }
+        mensaje_a149.feed(mensaje_a149_fields)
+        mensaje_a149.build_tree()
+        xml = str(mensaje_a149)
+        assertXmlEqual(xml, self.xml_a149.read())
+
+
+class test_A20_36(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a2036 = open(get_data("a2036.xml"), "rb")
+
+    def tearDown(self):
+        self.xml_a2036.close()
+
+    def test_create_a2036(self):
+        # Mensajea2036
+        mensaje_a2036 = a20_36.MensajeA2036()
+
+        # Heading
+        heading = a20_36.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '36',
+            'messagetype': 'A20'
+        }
+        heading.feed(heading_fields)
+
+        # a20
+        a20 = a20_36.A20()
+
+        a20_fields = {
+            'reqdate': "2020-03-01",
+            'reqhour': "08:00:00",
+            'cups': "ES1234000000000001JN",
+            'province': "17",
+            'city': "17001",
+            'zipcode': "17001",
+            'streettype': "ACCE",
+            'street': "Carrer inventat",
+            'streetnumber': "1",
+            'portal': "2",
+            'staircase': "3",
+            'floor': "4",
+            'door': "5"
+        }
+        a20.feed(a20_fields)
+
+        mensaje_a2036_fields = {
+            'heading': heading,
+            'a20': a20,
+        }
+        mensaje_a2036.feed(mensaje_a2036_fields)
+        mensaje_a2036.build_tree()
+        xml = str(mensaje_a2036)
+        assertXmlEqual(xml, self.xml_a2036.read())
+
+
+class test_A1_42(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a142 = open(get_data("a142.xml"), "rb")
+
+    def tearDown(self):
+        self.xml_a142.close()
+
+    def test_create_a142(self):
+        # MensajeA142
+        mensaje_a142 = a1_42.MensajeA142()
+
+        # Heading
+        heading = a1_42.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '42',
+            'messagetype': 'A1'
+        }
+        heading.feed(heading_fields)
+
+        # A141
+        a142 = a1_42.A142()
+
+        # ProductosDocumento
+        productos_documento = a1_42.ProductList()
+        p1 = a1_42.Product()
+        producto_fields = {
+            'reqtype': '02',
+            'productcode': '01010101323',
+            'producttype': '03',
+            'producttolltype': 'R1',
+            'productqd': 123123.1,
+            'productqa': 6263,
+        }
+        p1.feed(producto_fields)
+        p2 = a1_42.Product()
+        producto2_fields = {
+            'reqtype': '03',
+            'productcode': '51010101323',
+            'producttype': '02',
+            'producttolltype': 'R2',
+            'productqd': 5555.1,
+            'productqa': 2222,
+        }
+        p2.feed(producto2_fields)
+
+        productos_documento.feed({
+            'product_list': [p1, p2],
+        })
+
+        # RegistrosDocumento
+        registros_documento = a1_42.Registerdoclist()
+        rd1 = a1_42.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-02',
+            'doctype': 'CC',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd1.feed(registro_doc_fields)
+        rd2 = a1_42.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-03',
+            'doctype': '01',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd2.feed(registro_doc_fields)
+        registros_documento.feed({
+            'registerdoc_list': [rd1, rd2],
+        })
+
+        cl = a1_42.Newclient()
+        cl.feed({
+            'newnationality': 'ES',
+            'newdocumenttype': '01',
+            'newdocumentnum': '4321',
+            'newfirstname': 'Mi',
+            'newfamilyname1': 'Pana',
+            'newfamilyname2': 'Miguel',
+            'newtitulartype': 'F',
+            'newtelephone1': '123123123',
+            'newtelephone2': '321321321',
+            'newtelephone3': '231231231',
+            'newemail': 'test@test.test',
+            'newlanguage': '01',
+        })
+
+        st = a1_42.Street()
+        st.feed({
+            'streettype': 'C',
+            'street_name': 'nou',
+            'streetnumber': '3',
+            'portal': '2',
+            'staircase': '1',
+            'floor': '1',
+            'door': '2',
+        })
+
+        stps = a1_42.Street()
+        stps.feed({
+            'streettype': 'C',
+            'street_name': 'nou',
+            'streetnumber': '3',
+            'portal': '2',
+            'staircase': '1',
+            'floor': '1',
+            'door': '2',
+        })
+
+        adps = a1_42.AddressPS()
+        adps.feed({
+            'province': '17',
+            'city': '0792',
+            'zipcode': '17003',
+            'street': stps,
+        })
+
+        ad = a1_42.Address()
+        ad.feed({
+            'province': '17',
+            'city': '0792',
+            'zipcode': '17003',
+            'street': st,
+        })
+
+        no = a1_42.Newowner()
+        no.feed({
+            'newclient': cl,
+            'newregularaddress': 'S',
+            'typefiscaladdress': 'S',
+            'addressPS': adps,
+            'address': ad,
+        })
+
+        a142_fields = {
+            'comreferencenum': '000123456789',
+            'reqdate': '2018-05-01',
+            'reqhour': '13:00:00',
+            'titulartype': 'F',
+            'nationality': 'ES',
+            'documenttype': '01',
+            'documentnum': '11111111H',
+            'cups': 'ES1234000000000001JN',
+            'modeffectdate': '05',
+            'reqtransferdate': '2018-06-01',
+            'updatereason': '01',
+            'surrogacy': 'S',
+            'newowner': no,
+            'disconnectedserviceaccepted': 'N',
+            'extrainfo': 'comentarios extras',
+            'productlist': productos_documento,
+            'registerdoclist': registros_documento,
+        }
+        a142.feed(a142_fields)
+
+        mensaje_a142_fields = {
+            'heading': heading,
+            'a142': a142,
+        }
+        mensaje_a142.feed(mensaje_a142_fields)
+        mensaje_a142.build_tree()
+        xml = str(mensaje_a142)
+        expected = self.xml_a142.read()
+        assertXmlEqual(xml, expected)
+
+
+class test_A25_42(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a2542 = open(get_data("a2542.xml"), "rb")
+
+    def tearDown(self):
+        self.xml_a2542.close()
+
+    def test_create_a2542(self):
+        # MensajeA2542
+        mensaje_a2542 = a25_42.MensajeA2542()
+
+        # Heading
+        heading = a25_42.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '42',
+            'messagetype': 'A25'
+        }
+        heading.feed(heading_fields)
+
+        # A2541
+        a2542 = a25_42.A2542()
+
+        # DefectList
+        defects = a25_42.Defectlist()
+        d1 = a25_42.Defect()
+        d1.feed({
+            'code':'001',
+            'description': 'Desc1',
+        })
+        d2 = a25_42.Defect()
+        d2.feed({
+            'code': '002',
+            'description': 'Desc2',
+        })
+        defects.feed({
+            'defectlist': [d1,d2],
+        })
+
+        a2542_fields = {
+            'reqcode': '10_p62j9fh',
+            'cups': '20alzDPKUDB5HhZDhn5X',
+            'visitdate': '2020-03-13',
+            'visithour': '14:26:35',
+            'comreferencenum': '123456789',
+            'informationtype': '002',
+            'informationtypedesc': '0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001',
+            'interventiondate': '2020-03-13',
+            'interventionhourfrom': '14:26:35',
+            'interventionhourto': '14:26:35',
+            'visitnumber': '228',
+            'operationnum': '40_tQzwG5OT6YTye1UiYVtoV3r9VymR5B',
+            'extrainfo': '400_C9BEFQSmU4c7fJcqlXEYL79KyKwcZ9',
+            'defectlist': defects,
+        }
+        a2542.feed(a2542_fields)
+
+        mensaje_a2542_fields = {
+            'heading': heading,
+            'a2542': a2542,
+        }
+        mensaje_a2542.feed(mensaje_a2542_fields)
+        mensaje_a2542.build_tree()
+        xml = str(mensaje_a2542)
+        assertXmlEqual(xml, self.xml_a2542.read())
+
+
+class test_A1_43(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a143 = open(get_data("a143.xml"), "rb")
+
+    def tearDown(self):
+        self.xml_a143.close()
+
+    def test_create_a143(self):
+        # MensajeA142
+        mensaje_a143 = a1_43.MensajeA143()
+
+        # Heading
+        heading = a1_43.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '43',
+            'messagetype': 'A1'
+        }
+        heading.feed(heading_fields)
+
+        # A143
+        a143 = a1_43.A143()
+
+        # ProductosDocumento
+        productos_documento = a1_43.ProductList()
+        p1 = a1_43.Product()
+        producto_fields = {
+            'reqtype': '02',
+            'productcode': '01010101323',
+            'producttype': '03',
+            'producttolltype': 'R1',
+            'productqd': 123123.1,
+            'productqa': 6263,
+        }
+        p1.feed(producto_fields)
+        p2 = a1_42.Product()
+        producto2_fields = {
+            'reqtype': '03',
+            'productcode': '51010101323',
+            'producttype': '02',
+            'producttolltype': 'R2',
+            'productqd': 5555.1,
+            'productqa': 2222,
+        }
+        p2.feed(producto2_fields)
+
+        productos_documento.feed({
+            'product_list': [p1, p2],
+        })
+
+        # RegistrosDocumento
+        registros_documento = a1_42.Registerdoclist()
+        rd1 = a1_42.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-02',
+            'doctype': 'CC',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd1.feed(registro_doc_fields)
+        rd2 = a1_42.Registerdoc()
+        registro_doc_fields = {
+            'date': '2018-05-03',
+            'doctype': '01',
+            'url': 'http://www.gasalmatalas.com',
+            'extrainfo': '404 page not found'
+        }
+        rd2.feed(registro_doc_fields)
+        registros_documento.feed({
+            'registerdoc_list': [rd1, rd2],
+        })
+
+        a143_fields = {
+            'comreferencenum': '000123456789',
+            'reqdate': '2018-05-01',
+            'reqhour': '13:00:00',
+            'titulartype': 'F',
+            'nationality': 'ES',
+            'documenttype': '01',
+            'documentnum': '11111111H',
+            'cups': 'ES1234000000000001JN',
+            'modeffectdate': '05',
+            'reqtransferdate': '2018-06-01',
+            'productlist': productos_documento,
+            'extrainfo': 'comentarios extras',
+            'registerdoclist': registros_documento,
+        }
+        a143.feed(a143_fields)
+
+        mensaje_a143_fields = {
+            'heading': heading,
+            'a143': a143,
+        }
+        mensaje_a143.feed(mensaje_a143_fields)
+        mensaje_a143.build_tree()
+        xml = str(mensaje_a143)
+        assertXmlEqual(xml, self.xml_a143.read())

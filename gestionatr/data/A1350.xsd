@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A1350" targetNamespace="http://localhost/sctd/A1350" elementFormDefault="qualified">
+	<include schemaLocation="CommonTagsCONT.xsd"/>
+	<element name="sctdapplication" type="tns:SctdapplicationA1350Type"/>
+	<complexType name="SctdapplicationA1350Type">
+		<sequence>
+			<element name="heading" type="tns:HeadingA1350Type" minOccurs="1" maxOccurs="1"/>
+			<element name="a1350" type="tns:A1350Type" minOccurs="1" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	<complexType name="HeadingA1350Type">
+		<sequence>
+			<element name="dispatchingcode" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="3"/>
+						<enumeration value="GML"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dispatchingcompany" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="destinycompany" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="communicationsdate" type="date" minOccurs="1" maxOccurs="1"/>
+			<element name="communicationshour" type="time" minOccurs="1" maxOccurs="1"/>
+			<element name="processcode" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"/>
+						<enumeration value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="messagetype" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="3"/>
+						<enumeration value="A13"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="A1350Type">
+		<sequence>
+			<element name="reqcode" type="tns:ReqcodeType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Código Solicitud</documentation>
+				</annotation>
+			</element>
+			<element name="reqdate" type="date" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha de Solicitud</documentation>
+				</annotation>
+			</element>
+			<element name="reqhour" type="time" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Hora de Solicitud</documentation>
+				</annotation>
+			</element>
+			<element name="transferreason" type="tns:TransferReasonType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Motivo Traspaso a la CUR</documentation>
+				</annotation>
+			</element>
+			<element name="cups" type="tns:CupsType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>CUPS Solicitud</documentation>
+				</annotation>
+			</element>
+			<element name="reqtransferdate" type="date" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha de Efecto Solicitada
+					</documentation>
+				</annotation>
+			</element>
+			<element name="suspbajaimpagoencurso" type="tns:FlagType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Indicador si el punto de suministro está en un proceso de suspensión o baja por impago o suspendido por impago</documentation>
+				</annotation>
+			</element>
+			<element name="indesencial" type="tns:FlagType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Indicador esencialidad</documentation>
+				</annotation>
+			</element>
+			<element name="contact" type="tns:ContactType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Datos de la persona de contacto</documentation>
+				</annotation>
+			</element>
+			<element name="client" type="tns:Client" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Datos del cliente</documentation>
+				</annotation>
+			</element>
+			<element name="typefiscaladdress" type="tns:TypeFiscalAddress" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de dirección fiscal</documentation>
+				</annotation>
+			</element>
+			<element name="address" type="tns:Address" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Dirección</documentation>
+				</annotation>
+			</element>
+			<element name="addressPS" type="tns:addressPSType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Dirección del PS</documentation>
+				</annotation>
+			</element>
+			<element name="reqqd" type="tns:QdType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Caudal Diario Solicitado
+					</documentation>
+				</annotation>
+			</element>
+			<element name="reqqh" type="tns:QhType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Caudal horario</documentation>
+				</annotation>
+			</element>
+			<element name="reqestimatedqa" type="tns:QaType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Consumo caudal estimado anual</documentation>
+				</annotation>
+			</element>
+			<element name="reqoutgoingpressure" type="tns:PressureType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Presión de Salida</documentation>
+				</annotation>
+			</element>
+			<element name="gasusetype" type="tns:UsoGasType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de uso del gas</documentation>
+				</annotation>
+			</element>
+			<element name="tolltype" type="tns:TollType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de Peaje</documentation>
+				</annotation>
+			</element>
+			<element name="extrainfo" type="tns:ExtrainfoType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Observaciones de la solicitud</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

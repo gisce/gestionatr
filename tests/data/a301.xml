@@ -15,13 +15,15 @@
             <CNAE>2222</CNAE>
             <IndActivacion>L</IndActivacion>
             <FechaPrevistaAccion>2016-06-06</FechaPrevistaAccion>
+            <SolicitudTension>S</SolicitudTension>
+            <TensionSolicitada>01</TensionSolicitada>
         </DatosSolicitud>
         <Contrato>
             <FechaFinalizacion>2018-01-01</FechaFinalizacion>
             <TipoAutoconsumo>00</TipoAutoconsumo>
             <TipoContratoATR>02</TipoContratoATR>
             <CondicionesContractuales>
-                <TarifaATR>003</TarifaATR>
+                <TarifaATR>018</TarifaATR>
                 <PotenciasContratadas>
                     <Potencia Periodo='1'>1000</Potencia>
                     <Potencia Periodo='2'>2000</Potencia>
@@ -68,7 +70,7 @@
                 <Pais>España</Pais>
                 <Provincia>17</Provincia>
                 <Municipio>17079</Municipio>
-                <Poblacion>17079</Poblacion>
+                <Poblacion>17079000501</Poblacion>
                 <CodPostal>17001</CodPostal>
                 <Via>
                     <TipoVia>PZ</TipoVia>

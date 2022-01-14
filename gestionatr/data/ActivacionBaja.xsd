@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="TiposComplejos.xsd"/>
+	<xs:include schemaLocation="TipoMensajeB201.xsd"/>
+	<xs:include schemaLocation="TiposSencillos.xsd"/>
+	<xs:element name="MensajeActivacionBajaUnidireccional">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Cabecera" type="Cabecera"/>
+				<xs:element name="ActivacionBaja" type="NotificacionBajaATRB201"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -160,11 +160,12 @@ class DatosAceptacion(XmlModel):
 
 class Contrato(XmlModel):
 
-    _sort_order = ('contrato', 'id_contrato', 'tipo_autoconsumo', 'tipo_contrato_atr', 'condiciones_contractuales', 'tipo_activacion_prevista', 'fecha_activacion_prevista')
+    _sort_order = ('contrato', 'id_contrato', 'data_finalitzacio', 'tipo_autoconsumo', 'tipo_contrato_atr', 'condiciones_contractuales', 'tipo_activacion_prevista', 'fecha_activacion_prevista')
 
     def __init__(self):
         self.contrato = XmlField('Contrato')
         self.id_contrato = IdContrato()
+        self.data_finalitzacio = XmlField('FechaFinalizacion')
         self.tipo_autoconsumo = XmlField('TipoAutoconsumo')
         self.tipo_contrato_atr = XmlField('TipoContratoATR')
         self.condiciones_contractuales = CondicionesContractuales()

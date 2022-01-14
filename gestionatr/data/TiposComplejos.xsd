@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Comisión Nacional de los Mercados y la Competencia (Comisión Nacional de los Mercados y la Competencia) -->
 <xs:schema xmlns="http://localhost/elegibilidad" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
-	<xs:annotation>
-		<xs:documentation>
-			Version 1.3 CNMC 2016.12.20
-		</xs:documentation>
-	</xs:annotation>
 	<xs:complexType name="AparatoActivacion">
 		<xs:sequence>
 			<xs:element name="ModeloAparato" type="ModeloAparato"/>
@@ -538,6 +532,7 @@
 			<xs:element name="Provincia">
 				<xs:simpleType>
 					<xs:restriction base="X2">
+						<xs:minLength value="2"/>
 						<xs:pattern value="[0-9]*"/>
 					</xs:restriction>
 				</xs:simpleType>
@@ -552,7 +547,8 @@
 			</xs:element>
 			<xs:element name="Poblacion" minOccurs="0">
 				<xs:simpleType>
-					<xs:restriction base="X9">
+					<xs:restriction base="X11">
+						<xs:minLength value="11"/>
 						<xs:pattern value="[0-9]*"/>
 					</xs:restriction>
 				</xs:simpleType>
@@ -634,6 +630,7 @@
 			<xs:element name="Provincia">
 				<xs:simpleType>
 					<xs:restriction base="X2">
+						<xs:minLength value="2"/>
 						<xs:pattern value="[0-9]*"/>
 					</xs:restriction>
 				</xs:simpleType>
@@ -648,7 +645,8 @@
 			</xs:element>
 			<xs:element name="Poblacion" minOccurs="0">
 				<xs:simpleType>
-					<xs:restriction base="X9">
+					<xs:restriction base="X11">
+						<xs:minLength value="11"/>
 						<xs:pattern value="[0-9]*"/>
 					</xs:restriction>
 				</xs:simpleType>
@@ -1065,7 +1063,7 @@
 			<xs:element name="MotivoCambioATRDesdeDistribuidora" type="MotivoCambioATRDesdeDistribuidora"/>
 			<xs:element name="FechaPrevistaAplicacionCambioATR" type="xs:date" minOccurs="0"/>
 			<xs:element name="PeriodicidadFacturacion" type="PeriodicidadFacturacion" minOccurs="0"/>
-			<xs:element name="InfoRegistoAutocons" type="TypeInfoRegistoAutocons" minOccurs="0"/>
+			<xs:element name="InfoRegistroAutocons" type="TypeInfoRegistroAutocons" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Potencias">
@@ -1233,7 +1231,8 @@
 			</xs:element>
 			<xs:element name="Poblacion" minOccurs="0">
 				<xs:simpleType>
-					<xs:restriction base="X9">
+					<xs:restriction base="X11">
+						<xs:minLength value="11"/>
 						<xs:pattern value="[0-9]*"/>
 					</xs:restriction>
 				</xs:simpleType>
@@ -1248,7 +1247,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="TypeInfoRegistoAutocons">
+	<xs:complexType name="TypeInfoRegistroAutocons">
 		<xs:sequence>
 			<xs:element name="Autoconsumo" type="TypeAutoconsumo"/>
 			<xs:element name="DatosSuministro" type="TypeDatosSuministro"/>
@@ -1289,14 +1288,7 @@
 	</xs:complexType>
 	<xs:complexType name="TypeDatosInstGen">
 		<xs:sequence>
-			<xs:element name="CIL" minOccurs="0">
-				<xs:simpleType>
-					<xs:restriction base="CodigoCIL">
-						<xs:minLength value="25"/>
-						<xs:maxLength value="25"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:element>
+			<xs:element name="CIL" type="CodigoCIL" minOccurs="0"/>
 			<xs:element name="TecGenerador" type="TecGenerador">
 				<xs:annotation>
 					<xs:documentation>Tabla 126</xs:documentation>
@@ -1436,6 +1428,190 @@
 				<xs:element name="Via" type="DireccionVia"/>
 				<xs:element name="ApartadoDeCorreos" type="X5"/>
 			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ValidacionCliente">
+		<xs:sequence>
+			<xs:element name="TipoIdentificador" type="TipoIdentificador">
+				<xs:annotation>
+					<xs:documentation>Tabla 6</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Identificador">
+				<xs:simpleType>
+					<xs:restriction base="X14">
+						<xs:minLength value="7"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CondicionesContractualesP0">
+		<xs:sequence>
+			<xs:element name="TarifaATR" type="TarifaATR">
+				<xs:annotation>
+					<xs:documentation>Tabla 17</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PotenciasContratadas" type="Potencias"/>
+			<xs:element name="ModoControlPotencia" type="ModoControlPotencia" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 51</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DerechosReconocidos">
+		<xs:sequence>
+			<xs:element name="DerechoAcceso" type="Potencia"/>
+			<xs:element name="DerechosExtension" type="Potencia"/>
+			<xs:element name="FechaLimiteDerechosExtension" type="xs:date"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DatosCIEP0">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="CIEPapel" type="CIEPapelP0"/>
+				<xs:element name="CIEElectronico" type="CIEElectronicoP0"/>
+			</xs:choice>
+			<xs:element name="ValidezCIE" type="AmbitoValidezCIE" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 65</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CIEPapelP0">
+		<xs:sequence>
+			<xs:element name="CodigoCie">
+				<xs:simpleType>
+					<xs:restriction base="X35">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="FechaEmisionCie" type="xs:date"/>
+			<xs:element name="FechaCaducidadCie" type="xs:date" minOccurs="0"/>
+			<xs:element name="TensionSuministroCIE" type="Tension">
+				<xs:annotation>
+					<xs:documentation>Tabla 64</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TipoSuministro" type="TiposSuministro">
+				<xs:annotation>
+					<xs:documentation>Tabla 62</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CIEElectronicoP0">
+		<xs:sequence>
+			<xs:element name="CodigoCie">
+				<xs:simpleType>
+					<xs:restriction base="X35">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="SelloElectronico">
+				<xs:simpleType>
+					<xs:restriction base="X35">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DatosAPMP0">
+		<xs:sequence>
+			<xs:element name="CodigoApm">
+				<xs:simpleType>
+					<xs:restriction base="X35">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PotenciaInstAT">
+				<xs:simpleType>
+					<xs:restriction base="Potencia">
+						<xs:minInclusive value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="FechaEmisionApm" type="xs:date"/>
+			<xs:element name="FechaCaducidadApm" type="xs:date" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TelefonoReclamacion">
+		<xs:sequence>
+			<xs:element name="TelefonoTelemedida">
+				<xs:simpleType>
+					<xs:restriction base="X21">
+						<xs:minLength value="9"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="VelocidadComunicacion" type="X6"/>
+			<xs:element name="BitDatos" type="X1"/>
+			<xs:element name="Paridad" type="X1"/>
+			<xs:element name="BitStop" type="X1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="IP">
+		<xs:sequence>
+			<xs:element name="DireccionIP" type="X15"/>
+			<xs:element name="PuertoEnlace" type="X10"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ParametrosComunicacion">
+		<xs:sequence>
+			<xs:element name="CodPM">
+				<xs:simpleType>
+					<xs:restriction base="CodPM">
+						<xs:length value="22"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="CodPMPrincipal" type="CodPM" minOccurs="0"/>
+			<xs:element name="Funcion" type="FuncionPM">
+				<xs:annotation>
+					<xs:documentation>Tabla 40</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DireccionEnlace" type="X10"/>
+			<xs:element name="NumLinea">
+				<xs:simpleType>
+					<xs:restriction base="Decimal2">
+						<xs:minInclusive value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ClaveAcceso" type="X10"/>
+			<xs:choice>
+				<xs:element name="Telefono" type="TelefonoReclamacion"/>
+				<xs:element name="IP" type="IP"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="InformacionAlConsumidor">
+		<xs:sequence>
+			<xs:element name="FechaInicioAnioMovil" type="xs:date" minOccurs="0"/>
+			<xs:element name="Periodo" maxOccurs="6">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="PotenciaMaxDemandadaAnioMovil">
+							<xs:simpleType>
+								<xs:restriction base="xs:integer">
+									<xs:minInclusive value="0"/>
+									<xs:totalDigits value="14"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 </xs:schema>

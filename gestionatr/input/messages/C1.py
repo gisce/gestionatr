@@ -459,6 +459,24 @@ class Contrato(object):
         return data
 
     @property
+    def data_finalitzacio(self):
+        data = ''
+        try:
+            data = self.contrato.FechaFinalizacion.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def fecha_finalizacion(self):
+        data = ''
+        try:
+            data = self.contrato.FechaFinalizacion.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
     def tipo_autoconsumo(self):
         data = ''
         try:
@@ -741,7 +759,7 @@ class PuntoDeMedida(object):
     def aparatos(self):
         data = []
         obj = get_rec_attr(self.pm, "Aparatos", False)
-        if obj and hasattr(obj, 'Aparato'):
+        if obj is not None and hasattr(obj, 'Aparato'):
             for d in obj.Aparato:
                 data.append(Aparato(d))
         return data
@@ -927,7 +945,7 @@ class Aparato(object):
     def medidas(self):
         data = []
         obj = get_rec_attr(self.aparato, "Medidas", False)
-        if obj and hasattr(obj, 'Medida'):
+        if obj is not None and hasattr(obj, 'Medida'):
             for d in obj.Medida:
                 data.append(Medida(d))
         return data

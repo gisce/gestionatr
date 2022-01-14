@@ -12,7 +12,7 @@ class A1_02(A1_41):
     # Datos paso a102
     # TODO
 
-    # Datos paso a241
+    # Datos paso a202
     @property
     def outgoingpressuregranted(self):
         tree = '{0}.outgoingpressuregranted'.format(self._header)

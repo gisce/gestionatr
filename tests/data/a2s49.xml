@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sctdapplication xmlns="http://localhost/sctd/A2S49">
+    <heading>
+        <dispatchingcode>GML</dispatchingcode>
+        <dispatchingcompany>1234</dispatchingcompany>
+        <destinycompany>4321</destinycompany>
+        <communicationsdate>2018-05-01</communicationsdate>
+        <communicationshour>12:00:00</communicationshour>
+        <processcode>49</processcode>
+        <messagetype>A2S</messagetype>
+    </heading>
+    <a2s49>
+        <reqcode>1234567890</reqcode>
+        <responsedate>2020-03-01</responsedate>
+        <responsehour>08:00:00</responsehour>
+        <cups>ES1234000000000001JN</cups>
+        <indanulable>S</indanulable>
+        <indactcampo>S</indactcampo>
+        <foreseentransferdate>2020-05-01</foreseentransferdate>
+        <extrainfo>EXTRA EXTRA! EL GAS NO TE SENTIT!</extrainfo>
+    </a2s49>
+</sctdapplication>

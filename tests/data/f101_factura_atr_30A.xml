@@ -41,6 +41,8 @@
                 </DatosGeneralesFactura>
                 <DatosFacturaATR>
                     <FechaBOE>2016-12-23</FechaBOE>
+					<TipoAutoconsumo>00</TipoAutoconsumo>
+					<DuracionInfAnio>N</DuracionInfAnio>
                     <TarifaATRFact>003</TarifaATRFact>
                     <ModoControlPotencia>2</ModoControlPotencia>
                     <MarcaMedidaConPerdidas>N</MarcaMedidaConPerdidas>
@@ -50,6 +52,7 @@
                         <FechaHastaFactura>2017-04-30</FechaHastaFactura>
                         <NumeroDias>30</NumeroDias>
                     </Periodo>
+					<TipoPM>01</TipoPM>
                 </DatosFacturaATR>
             </DatosGeneralesFacturaATR>
             <Potencia>
@@ -61,18 +64,21 @@
                         <PotenciaMaxDemandada>36660</PotenciaMaxDemandada>
                         <PotenciaAFacturar>36660</PotenciaAFacturar>
                         <PrecioPotencia>0.003394074</PrecioPotencia>
+						<RecargoInfAnio>0.00</RecargoInfAnio>
                     </Periodo>
                     <Periodo>
                         <PotenciaContratada>35000</PotenciaContratada>
                         <PotenciaMaxDemandada>37780</PotenciaMaxDemandada>
                         <PotenciaAFacturar>39840</PotenciaAFacturar>
                         <PrecioPotencia>0.002036444</PrecioPotencia>
+						<RecargoInfAnio>0.00</RecargoInfAnio>
                     </Periodo>
                     <Periodo>
                         <PotenciaContratada>35000</PotenciaContratada>
                         <PotenciaMaxDemandada>22520</PotenciaMaxDemandada>
                         <PotenciaAFacturar>29750</PotenciaAFacturar>
                         <PrecioPotencia>0.001357630</PrecioPotencia>
+						<RecargoInfAnio>0.00</RecargoInfAnio>
                     </Periodo>
                 </TerminoPotencia>
                 <PenalizacionNoICP>N</PenalizacionNoICP>

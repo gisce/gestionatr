@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Comisión Nacional de los Mercados y la Competencia (Comisión Nacional de los Mercados y la Competencia) -->
+<!-- creado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Pelayo García Bermejo (Comisión Nacional de los Mercados y la Competencia) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposComplejosCCAA.xsd"/>
 	<xs:include schemaLocation="TiposSencillosCCAA.xsd"/>
 	<xs:annotation>
-		<xs:documentation>Version XX CNMC 201X.XX.XX</xs:documentation>
+		<xs:documentation>Version 1.0 CNMC 2019.11.13</xs:documentation>
 	</xs:annotation>
 	<!-- Mensaje de Información Regsitro de Autoconsumo -->
 	<xs:complexType name="A101">

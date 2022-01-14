@@ -20,10 +20,11 @@
       <IdContrato>
         <CodContrato>00001</CodContrato>
       </IdContrato>
+      <FechaFinalizacion>2020-01-01</FechaFinalizacion>
       <TipoAutoconsumo>00</TipoAutoconsumo>
       <TipoContratoATR>02</TipoContratoATR>
       <CondicionesContractuales>
-        <TarifaATR>003</TarifaATR>
+        <TarifaATR>018</TarifaATR>
         <PeriodicidadFacturacion>01</PeriodicidadFacturacion>
         <TipodeTelegestion>01</TipodeTelegestion>
         <PotenciasContratadas>
@@ -67,7 +68,7 @@
             <TipoPropiedadAparato>1</TipoPropiedadAparato>
             <Propietario>Desc. Propietario</Propietario>
             <TipoDHEdM>6</TipoDHEdM>
-            <ModoMedidaPotencia>1</ModoMedidaPotencia>
+            <ModoMedidaPotencia>9</ModoMedidaPotencia>
             <LecturaDirecta>N</LecturaDirecta>
             <CodPrecinto>02</CodPrecinto>
             <DatosAparato>

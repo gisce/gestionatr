@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A8409" targetNamespace="http://localhost/sctd/A8409" elementFormDefault="qualified">
+	<include schemaLocation="CommonTagsCONT.xsd"/>
+	<element name="sctdapplication" type="tns:SctdapplicationA8409Type"/>
+	<complexType name="SctdapplicationA8409Type">
+		<sequence>
+			<element name="heading" type="tns:HeadingA8409Type" minOccurs="1" maxOccurs="1"/>
+			<element name="a8409" type="tns:A8409Type" minOccurs="1" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="HeadingA8409Type">
+		<sequence>
+			<element name="dispatchingcode" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="3"/>
+						<enumeration value="GML"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="version" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="3"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dispatchingcompany" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="destinycompany" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="communicationsdate" type="date" minOccurs="1" maxOccurs="1"/>
+			<element name="communicationshour" type="time" minOccurs="1" maxOccurs="1"/>
+			<element name="processcode" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"/>
+						<enumeration value="09"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="messagetype" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="3"/>
+						<enumeration value="A84"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="A8409Type">
+		<sequence>
+			<element name="mesreparto" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Mes de Reparto</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<length value="6"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="tipoenvio" type="tns:TipoEnvioRepartoType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de Envío</documentation>
+				</annotation>
+			</element>
+			<element name="cups" type="tns:CupsType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>CUPS</documentation>
+				</annotation>
+			</element>
+			<element name="pc" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Código de punto de conexión</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="12"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="peaje" type="tns:TollType949C62020" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de Peaje</documentation>
+				</annotation>
+			</element>
+			<element name="tipotelemedida" type="tns:TelemedidaType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de Telemedida</documentation>
+				</annotation>
+			</element>
+			<element name="listdatosconsumodiario" type="tns:ListaDatosConsumoDiarioType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Consumo desglosado por fecha reparto</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="DatosConsumoDiarioType">
+		<sequence>
+			<element name="fecreparto" type="date" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha del reparto</documentation>
+				</annotation>
+			</element>
+			<element name="cd" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Reparto diario</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="decimal">
+						<totalDigits value="16"/>
+						<fractionDigits value="7"/>
+						<minInclusive value="-999999999.9999999"/>
+						<maxInclusive value="999999999.9999999"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ListaDatosConsumoDiarioType">
+		<sequence>
+			<element name="datosconsumodiario" type="tns:DatosConsumoDiarioType" minOccurs="1" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+</schema>

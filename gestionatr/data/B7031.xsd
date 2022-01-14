@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Carlos Valencia León (Comisión Nacional de los Mercados y la Competencia) -->
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por dgarciar (Comisión Nacional de los Mercados y la Competencia) -->
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/B7031" targetNamespace="http://localhost/sctd/B7031" elementFormDefault="qualified">
 	<include schemaLocation="CommonTagsFACT.xsd"/>
 	<element name="facturasctd" type="tns:FacturaSctdB7031Type"/>
@@ -47,6 +47,26 @@
 	<complexType name="FacturaB7031Type">
 		<sequence>
 			<element name="cups" type="tns:CupsType" minOccurs="1" maxOccurs="1"/>
+			<element name="contratosimultaneo" type="tns:FlagType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Marca de contratos simultáneos</documentation>
+				</annotation>
+			</element>
+			<element name="codigoproducto" type="tns:productcodeType" minOccurs="0">
+				<annotation>
+					<documentation>Código identificativo del producto</documentation>
+				</annotation>
+			</element>
+			<element name="tipoproducto" type="tns:producttypeType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de producto</documentation>
+				</annotation>
+			</element>
+			<element name="arrastrapenalizacion" type="tns:FlagType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Marca de arrastre de penalizaciones</documentation>
+				</annotation>
+			</element>
 			<element name="provincia" type="tns:CodProvinciaType" minOccurs="1" maxOccurs="1"/>
 			<element name="municipio" type="tns:CodAlpha5Type" minOccurs="1" maxOccurs="1"/>
 			<element name="codpostal" type="tns:CodAlpha5Type" minOccurs="1" maxOccurs="1"/>
@@ -123,6 +143,11 @@
 					</restriction>
 				</simpleType>
 			</element>
+			<element name="rangopresiondiseno" type="tns:RangoPresionType" minOccurs="0" maxOccurs="1"/>
+			<element name="telemedida" type="tns:FlagType" minOccurs="0" maxOccurs="1"/>
+			<element name="tipogasinera" type="tns:TipoGasineraType" minOccurs="0" maxOccurs="1"/>
+			<element name="metodofacturacion" type="tns:MetodoFacturacionType" minOccurs="0" maxOccurs="1"/>
+			<element name="codtbai" type="tns:CodTBAI" minOccurs="0" maxOccurs="1"/>
 			<element name="observaciones1" type="tns:CodAlpha100Type" minOccurs="0" maxOccurs="1"/>
 			<element name="observaciones2" type="tns:CodAlpha100Type" minOccurs="0" maxOccurs="1"/>
 			<element name="telefurgencias" minOccurs="1" maxOccurs="1">

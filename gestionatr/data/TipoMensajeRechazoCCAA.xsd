@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- creado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Pelayo García Bermejo (Comisión Nacional de los Mercados y la Competencia) -->
 <xs:schema xmlns="http://localhost/elegibilidad" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposComplejosCCAA.xsd"/>
 	<xs:include schemaLocation="TiposSencillosCCAA.xsd"/>
 	<xs:annotation>
-		<xs:documentation>
-			Version 1.0 CNMC 2019.XX.XX
-		</xs:documentation>
+		<xs:documentation>Version 1.0 CNMC 2019.11.13</xs:documentation>
 	</xs:annotation>
 	<!-- Rechazo -->
 	<xs:complexType name="RechazoDistribuidorCCAA">
 		<xs:sequence>
+			<xs:element name="FechaRechazo" type="xs:date"/>
 			<xs:element name="Rechazo" type="Rechazo" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Rechazo">
 		<xs:sequence>
-			<xs:element name="FechaRechazo" type="xs:date"/>
 			<xs:element name="Secuencial">
 				<xs:simpleType>
 					<xs:restriction base="Decimal2">
@@ -28,7 +27,6 @@
 					<xs:documentation>Tabla 27</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="CUPS" type="Codigo" minOccurs="0"/>
 			<xs:element name="Comentarios">
 				<xs:simpleType>
 					<xs:restriction base="X4000">

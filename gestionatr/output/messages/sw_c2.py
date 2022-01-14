@@ -39,13 +39,14 @@ class CambiodeComercializadorConCambios(XmlModel):
 
 class DatosSolicitud(DatosSolicitud):
 
-    _sort_order = ('datos_solicitud', 'tipo_modificacion', 'tipo_solicitud_administrativa', 'cnae', 'ind_activacion', 'fecha_prevista_accion', 'contratacion_incondicional_ps', 'contratacion_incondicional_bs', 'bono_social', 'solicitud_tension')
+    _sort_order = ('datos_solicitud', 'tipo_modificacion', 'tipo_solicitud_administrativa', 'cnae', 'ind_activacion', 'fecha_prevista_accion', 'contratacion_incondicional_ps', 'contratacion_incondicional_bs', 'bono_social', 'solicitud_tension', 'tension_solicitada')
 
     def __init__(self):
         super(DatosSolicitud, self).__init__()
         self.tipo_modificacion = XmlField('TipoModificacion')
         self.tipo_solicitud_administrativa = XmlField('TipoSolicitudAdministrativa')
         self.cnae = XmlField('CNAE')
+        self.tension_solicitada = XmlField('TensionSolicitada')
 
 
 class Contrato(Contrato):
@@ -337,3 +338,27 @@ class NotificacionComercializadorSaliente(XmlModel):
 # Paso 10 -> C1 MensajeAceptacionAnulacion
 # Paso 11 -> C1 MensajeAceptacionCambiodeComercializadorSaliente
 # Paso 12 -> C1 MensajeRechazoCambiodeComercializadorSaliente
+
+
+# Paso 13
+class MensajeContestacionIncidencia(XmlModel):
+
+    _sort_order = ('mensaje', 'cabecera', 'contestacion_incidencia')
+
+    def __init__(self):
+        self.mensaje = XmlField('MensajeContestacionIncidencia',
+                                attributes={'xmlns': 'http://localhost/elegibilidad'})
+        self.cabecera = Cabecera()
+        self.contestacion_incidencia = ContestacionIncidencia()
+        super(MensajeContestacionIncidencia, self).__init__('MensajeContestacionIncidencia', 'mensaje')
+
+
+class ContestacionIncidencia(XmlModel):
+
+    _sort_order = ('contestacion_incidencia_node', 'contestacion_incidencia', 'contacto')
+
+    def __init__(self):
+        self.contestacion_incidencia_node = XmlField('ContestacionIncidencia')
+        self.contestacion_incidencia = XmlField('ContestacionIncidencia')
+        self.contacto = Contacto()
+        super(ContestacionIncidencia, self).__init__('ContestacionIncidencia', 'contestacion_incidencia_node')

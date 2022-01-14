@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A6161" targetNamespace="http://localhost/sctd/A6161" elementFormDefault="qualified">
+	<include schemaLocation="CommonTagsCONT.xsd"/>
+	<element name="sctdapplication" type="tns:SctdapplicationA6161Type"/>
+	<complexType name="SctdapplicationA6161Type">
+		<sequence>
+			<element name="heading" type="tns:HeadingA6161Type" minOccurs="1" maxOccurs="1"/>
+			<element name="queryfilter" type="tns:queryfilter" minOccurs="0" maxOccurs="1"/>
+			<element name="a61" type="tns:A6161Type" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="HeadingA6161Type">
+		<sequence>
+			<element name="dispatchingcode" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="3"/>
+						<enumeration value="GML"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dispatchingcompany" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="destinycompany" type="tns:AgenteType" minOccurs="1" maxOccurs="1"/>
+			<element name="communicationsdate" type="date" minOccurs="1" maxOccurs="1"/>
+			<element name="communicationshour" type="time" minOccurs="1" maxOccurs="1"/>
+			<element name="processcode" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"/>
+						<enumeration value="61"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="messagetype" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="3"/>
+						<enumeration value="A61"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="queryfilter">
+		<sequence>
+			<element name="comcompany" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Código del sujeto comercializador</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="20"/>
+						<whiteSpace value="collapse"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="discompany" type="tns:AgenteType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Código del sujeto distribuidor</documentation>
+				</annotation>
+			</element>
+			<element name="cups" type="tns:CupsTypeFilter" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>CUPS</documentation>
+				</annotation>
+			</element>
+			<element name="availabledateini" type="date" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha disponibilidad inicio</documentation>
+				</annotation>
+			</element>
+			<element name="availabledateend" type="date" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha disponibilidad fin</documentation>
+				</annotation>
+			</element>
+			<element name="province" type="tns:CodProvinciaType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Código de provincia</documentation>
+				</annotation>
+			</element>
+			<element name="city" type="tns:CodAlpha5Type" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Código de Municipio</documentation>
+				</annotation>
+			</element>
+			<element name="zipcode" type="tns:CodAlpha5Type" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Código postal del municipio</documentation>
+				</annotation>
+			</element>
+			<element name="streettype" type="tns:TipoViaType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de la vía</documentation>
+				</annotation>
+			</element>
+			<element name="street" type="tns:StreetnameType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Nombre de la vía</documentation>
+				</annotation>
+			</element>
+			<element name="streetnumber" type="tns:StreetnumberType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Número de la vía</documentation>
+				</annotation>
+			</element>
+			<element name="restdirection" type="tns:restdirectionType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Resto de la vía</documentation>
+				</annotation>
+			</element>
+			<element name="origenps" type="tns:origenPSType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Origen del PS</documentation>
+				</annotation>
+			</element>
+			<element name="infraestructurestatus" type="tns:infraestructurestatusType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Estado de la Infraestructura del PS</documentation>
+				</annotation>
+			</element>
+			<element name="contractstatus" type="tns:contractstatusType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Estado de Contratacion del PS</documentation>
+				</annotation>
+			</element>
+			<element name="includefreeps" type="tns:FlagType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Incluir en el listado los PS sin pre-reserva</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="A6161Type">
+		<sequence>
+			<element name="cups" type="tns:CupsType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>CUPS</documentation>
+				</annotation>
+			</element>
+			<element name="comer" type="tns:AgenteType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Comercializadora de la reserva en la solicitud de NNSS o en la pre-reserva</documentation>
+				</annotation>
+			</element>
+			<element name="supplier" type="tns:AgenteType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Código del sujeto distribuidor</documentation>
+				</annotation>
+			</element>
+			<element name="sourceps" type="tns:origenPSType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Origen del PS</documentation>
+				</annotation>
+			</element>
+			<element name="infraestructurestatus" type="tns:infraestructurestatusType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Estado de la Infraestructura del PS</documentation>
+				</annotation>
+			</element>
+			<element name="contractstatus" type="tns:contractstatusType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Estado de Contratacion del PS</documentation>
+				</annotation>
+			</element>
+			<element name="expecteddate" type="date" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Fecha Planificada Infraestructura/Transformación</documentation>
+				</annotation>
+			</element>
+			<element name="province" type="tns:CodProvinciaType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Código de la Provincia del PS</documentation>
+				</annotation>
+			</element>
+			<element name="provincedesc" type="tns:provincedescType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Descripción de la Provincia</documentation>
+				</annotation>
+			</element>
+			<element name="city" type="tns:CodAlpha5Type" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Código del Municipio del PS</documentation>
+				</annotation>
+			</element>
+			<element name="citydesc" type="tns:citydescType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Descripción de Municipio del PS</documentation>
+				</annotation>
+			</element>
+			<element name="zipcode" type="tns:CodAlpha5Type" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Código postal del municipio del PS</documentation>
+				</annotation>
+			</element>
+			<element name="streettype" type="tns:TipoViaType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de vía del PS</documentation>
+				</annotation>
+			</element>
+			<element name="street" type="tns:StreetnameType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Nombre de la vía del PS</documentation>
+				</annotation>
+			</element>
+			<element name="streetnumber" type="tns:StreetnumberType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Número de la vía del PS</documentation>
+				</annotation>
+			</element>
+			<element name="portal" type="tns:CodAlpha5Type" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Portal del PS</documentation>
+				</annotation>
+			</element>
+			<element name="staircase" type="tns:CodAlpha5Type" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Escalera del PS</documentation>
+				</annotation>
+			</element>
+			<element name="floor" type="tns:CodAlpha5Type" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Piso del PS</documentation>
+				</annotation>
+			</element>
+			<element name="door" type="tns:CodAlpha5Type" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Puerta del PS</documentation>
+				</annotation>
+			</element>
+			<element name="plantsat" type="tns:plantsatType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Planta Satélite</documentation>
+				</annotation>
+			</element>
+			<element name="firstname" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Nombre del Cliente disponible en Mercado Regulado (MR)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="familyname1" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Apellido1 / Razón Social disponible en MR</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="familyname2" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Apellido 2 disponible en MR</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="tolltype" type="tns:TollType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Tipo de Peaje. No se debe informar para suministros del grupo 1 o 2</documentation>
+				</annotation>
+			</element>
+			<element name="srcode" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Identificador del código de SCR</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="25"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

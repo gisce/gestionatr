@@ -13,7 +13,6 @@
         <reqdate>2019-01-01</reqdate>
         <reqhour>12:57:59</reqhour>
         <atrcode>24_0mVgXP2mQWbjDIW3Y7DFf</atrcode>
-        <atrversion>151</atrversion>
         <cups>ES1234000000000001JN</cups>
         <nationality>SB</nationality>
         <documenttype>01</documenttype>
@@ -35,7 +34,7 @@
         <province>01</province>
         <city>00001</city>
         <zipcode>5_MLU</zipcode>
-        <tolltype>11</tolltype>
+        <tolltype>R1</tolltype>
         <qdgranted>5.8689</qdgranted>
         <qhgranted>88</qhgranted>
         <singlenomination>S</singlenomination>
@@ -60,7 +59,6 @@
         <transnet>14_0jldeS2u13Y</transnet>
         <gasusetype>01</gasusetype>
         <caecode>13_h1c6VEDs7V</caecode>
-        <updatereason>01</updatereason>
         <communicationreason>01</communicationreason>
         <titulartype>F</titulartype>
         <regularaddress>S</regularaddress>

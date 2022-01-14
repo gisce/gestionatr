@@ -12,25 +12,20 @@
     <A102>
         <CAU>ES1234000000000001JN0FA001</CAU>
         <Rechazos>
+            <FechaRechazo>2016-06-08</FechaRechazo>
             <Rechazo>
-                <FechaRechazo>2016-06-08</FechaRechazo>
                 <Secuencial>00</Secuencial>
                 <CodigoMotivo>01</CodigoMotivo>
-                <CUPS>ES1234000000000001JN0F</CUPS>
                 <Comentarios>Comentario del rechazo</Comentarios>
             </Rechazo>
             <Rechazo>
-                <FechaRechazo>2016-06-08</FechaRechazo>
                 <Secuencial>00</Secuencial>
                 <CodigoMotivo>F1</CodigoMotivo>
-                <CUPS>ES1234000000000001JN0F</CUPS>
                 <Comentarios>Comentario del rechazo</Comentarios>
             </Rechazo>
             <Rechazo>
-                <FechaRechazo>2016-06-08</FechaRechazo>
                 <Secuencial>00</Secuencial>
                 <CodigoMotivo>F4</CodigoMotivo>
-                <CUPS>ES1234000000000001JN0F</CUPS>
                 <Comentarios>Comentario del rechazo</Comentarios>
             </Rechazo>
         </Rechazos>

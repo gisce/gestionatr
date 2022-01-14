@@ -20,13 +20,14 @@ class MensajeA103(XmlModel):
 
 class A103(XmlModel):
 
-    _sort_order = ('a103', 'comreferencenum', 'reqdate', 'reqhour',
+    _sort_order = ('a103', 'comreferencenum', 'comreferencenumanul', 'reqdate', 'reqhour',
                    'titulartype', 'nationality', 'documenttype', 'documentnum',
                    'cups', 'annulmentreason', 'extrainfo')
 
     def __init__(self):
         self.a103 = XmlField('a103')
         self.comreferencenum = XmlField('comreferencenum')
+        self.comreferencenumanul = XmlField('comreferencenumanul')
         self.reqdate = XmlField('reqdate')
         self.reqhour = XmlField('reqhour')
         self.titulartype = XmlField('titulartype')

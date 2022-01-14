@@ -2,7 +2,7 @@
 from __future__ import absolute_import, unicode_literals
 from .message_gas import MessageGas
 from gestionatr.utils import get_rec_attr
-from gestionatr.defs_gas import TIPUS_CONCEPTES
+from gestionatr.defs_gas import TIPUS_CONCEPTES, PEAJES_SEMPRE_CAPACIDAD
 from datetime import datetime
 
 
@@ -129,8 +129,91 @@ class Factura(object):
         self.obj = data
 
     @property
+    def rangopresiondiseno(self):
+        tree = 'rangopresiondiseno'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def telemedida(self):
+        tree = 'telemedida'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def tipogasinera(self):
+        tree = 'tipogasinera'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def metodofacturacion(self):
+        tree = 'metodofacturacion'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            # Si no ens el diuen, el calcularem! En base a la tarifa i a la telemedida ho podem saber
+            tarifa = self.tipopeaje
+            telemedida = self.telemedida
+            if not tarifa or not telemedida:  # No hauria de passar ja que son camps obligatoris en les noves tarifes...
+                return False
+            elif tarifa in PEAJES_SEMPRE_CAPACIDAD:  # A partir de la 7 sempre son capacidad
+                return '1'
+            elif telemedida == 'N':  # Les mes baixes, si no tenen telemedida segur que son per client
+                return '2'
+            # Si arribem a aquest punt vol dir que el F1 esta malament ja que si es una tarifa de les baixes i
+            # te telemedida, ens han de concretar com es factura sempre
+            return False
+
+    @property
     def cups(self):
         tree = 'cups'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def contratosimultaneo(self):
+        tree = 'contratosimultaneo'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def codigoproducto(self):
+        tree = 'codigoproducto'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def tipoproducto(self):
+        tree = 'tipoproducto'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def arrastrapenalizacion(self):
+        tree = 'arrastrapenalizacion'
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -497,6 +580,15 @@ class Factura(object):
         else:
             return False
 
+    @property
+    def codtbai(self):
+        tree = 'codtbai'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
     def get_periode_factura(self):
         """Retorna tupla amb (data inici,  data fi) de la factura:
             - data inici: la mes antiga de les fecdesde dels conceptes
@@ -521,20 +613,41 @@ class Factura(object):
             'check_total': abs(self.importetotal),
             'origin': self.get_origin(),
             'origin_date_invoice': self.fecfactura,
-            'reference': self.numfactorigen or self.numfacturarect,
+            'reference': self.get_origin(),
             'tipo_factura': self.tipofactura
         }
 
     def get_linies_factura_by_type(self):
         res = {}
+        res_to_join = {}
+        to_join = {
+            'tfixe_cargos': 'tfixe',
+            'tfixe_altres': 'tfixe',
+            'tvariable_altres': 'tvariable',
+        }
         for concepte in self.listaconceptos:
             tipus = TIPUS_CONCEPTES.get(concepte.codconcepto, "altres")
             if tipus == "impost":
                 continue
-            res.setdefault(tipus, {'total': 0.0, 'lines': []})
-            res[tipus]['lines'] += [concepte]
-            new_total = res[tipus]['total'] + concepte.importe
-            res[tipus]['total'] = round(new_total, 2)
+            if tipus in to_join.keys():
+                aux_res = res_to_join
+            else:
+                aux_res = res
+            aux_res.setdefault(tipus, {'total': 0.0, 'lines': []})
+            aux_res[tipus]['lines'] += [concepte]
+            new_total = aux_res[tipus]['total'] + concepte.importe
+            aux_res[tipus]['total'] = round(new_total, 2)
+
+        for tipus, info in res_to_join.items():
+            tipus_join = to_join.get(tipus)
+            if not res.get(tipus_join):
+                res[tipus_join].setdefault(tipus, {'total': 0.0, 'lines': []})
+            base = 1.0
+            res[tipus_join]['total'] += info['total']
+            for l in info['lines']:
+                for l2 in res[tipus_join]['lines']:
+                    if l2.unidad == l.unidad:
+                        l2.precunidad += round(l.precunidad * base, 9)
         return res
 
     def get_comptadors(self):
@@ -594,6 +707,43 @@ class Boe(object):
 class Concepto(object):
     def __init__(self, data):
         self.obj = data
+        self._precunidad = 0.0
+
+    @property
+    def coeficientecortoplazo(self):
+        tree = 'coeficientecortoplazo'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def multexcesocaudal(self):
+        tree = 'multexcesocaudal'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def diascapacidadcontratada(self):
+        tree = 'diascapacidadcontratada'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def horascapacidadcontratada(self):
+        tree = 'horascapacidadcontratada'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
 
     @property
     def fecdesde(self):
@@ -624,12 +774,18 @@ class Concepto(object):
 
     @property
     def precunidad(self):
+        if self._precunidad:
+            return self._precunidad
         tree = 'precunidad'
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return float(data.text)
         else:
             return False
+
+    @precunidad.setter
+    def precunidad(self, value):
+        self._precunidad = value
 
     @property
     def importe(self):
@@ -743,6 +899,15 @@ class Concepto(object):
 class Medidor(object):
     def __init__(self, data):
         self.obj = data
+
+    @property
+    def excesocaudal(self):
+        tree = 'excesocaudal'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
 
     @property
     def um(self):
@@ -1128,6 +1293,12 @@ class Medidor(object):
             factor_k = float(meter.factork)
             pcs = float(meter.pcs)
             pressio_subministrament = float(meter.presionsuministro)
+            qdaplicado = float(meter.qdaplicado)
+            qdmaximo = float(meter.qdmaximo)
+            fecqdmax = meter.fecqdmax
+            dqmedio = float(meter.dqmedio)
+            qdcontratado = float(meter.qdcontratado)
+            excesocaudal = float(meter.excesocaudal)
 
             for numerador in meter.listanumeradores:
                 lectura_desde_m3 = float(numerador.lectant)
@@ -1156,7 +1327,13 @@ class Medidor(object):
                     'pcs': pcs,
                     'ometre': numerador.aparatorelevante == 'N',
                     'consum_m3': float(numerador.consumo),
-                    'consum': float(numerador.consumo) * float(meter.factorconver)
+                    'consum': float(numerador.consumo) * float(meter.factorconver),
+                    'qdaplicado': float(qdaplicado),
+                    'qdmaximo': float(qdmaximo),
+                    'fecqdmax': fecqdmax,
+                    'dqmedio': float(dqmedio),
+                    'qdcontratado': float(qdcontratado),
+                    'excesocaudal': float(excesocaudal),
                 }
                 res.append(vals)
         return res

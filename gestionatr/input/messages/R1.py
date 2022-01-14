@@ -99,9 +99,9 @@ class R1(C2):
         data = []
         tree = '{0}.SolicitudesInformacionAdicional'.format(self._header)
         obj = get_rec_attr(self.obj, tree, False)
-        if obj:
+        if obj not in [None, False]:
             sol = get_rec_attr(obj, 'SolicitudInformacionAdicional', False)
-            if sol:
+            if sol not in [None, False]:
                 for d in sol:
                     data.append(SolicitudInformacionAdicional(d))
         return data
@@ -114,6 +114,16 @@ class R1(C2):
             return SolicitudInformacionAdicionalParaRetipificacion(data)
         else:
             return False
+
+    @property
+    def parametros_comunicacion(self):
+        data = []
+        tree = '{0}.ParametrosComunicacion'.format(self._header)
+        obj = get_rec_attr(self.obj, tree, False)
+        if obj not in [None, False]:
+            for d in obj:
+                data.append(ParametrosComunicacion(d))
+        return data
 
     # Datos paso 04
     @property
@@ -130,7 +140,7 @@ class R1(C2):
         data = []
         tree = '{0}.VariablesAportacionInformacion'.format(self._header)
         obj = get_rec_attr(self.obj, tree, False)
-        if obj:
+        if obj not in [None, False]:
             for d in obj.VariableAportacionInformacion:
                 data.append(VariableAportacionInformacion(d))
         return data
@@ -140,7 +150,7 @@ class R1(C2):
         data = []
         tree = '{0}.VariablesAportacionInformacionParaRetipificacion'.format(self._header)
         obj = get_rec_attr(self.obj, tree, False)
-        if obj:
+        if obj not in [None, False]:
             for d in obj.VariableAportacionInformacionParaRetipificacion:
                 data.append(VariableDetalleReclamacion(d))
         return data
@@ -752,6 +762,137 @@ class SolicitudInformacionAdicionalParaRetipificacion(object):
         data = False
         try:
             data = self.sol.FechaLimiteEnvio.text
+        except AttributeError:
+            pass
+        return data
+
+
+class ParametrosComunicacion(object):
+
+    def __init__(self, data):
+        self.sol = data
+
+    @property
+    def cod_pm(self):
+        data = ''
+        try:
+            data = self.sol.CodPM.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def cod_pm_principal(self):
+        data = ''
+        try:
+            data = self.sol.CodPMPrincipal.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def funcion(self):
+        data = False
+        try:
+            data = self.sol.Funcion.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def direccion_enlace(self):
+        data = False
+        try:
+            data = self.sol.DireccionEnlace.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def num_linea(self):
+        data = False
+        try:
+            data = self.sol.NumLinea.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def clave_acceso(self):
+        data = False
+        try:
+            data = self.sol.ClaveAcceso.text
+        except AttributeError:
+            pass
+        return data
+    @property
+    def clave_lectura(self):
+        data = False
+        try:
+            data = self.sol.ClaveLectura.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def telefono_telemedida(self):
+        data = False
+        try:
+            data = self.sol.Telefono.TelefonoTelemedida.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def telefono_velocidad_comunicacion(self):
+        data = False
+        try:
+            data = self.sol.Telefono.VelocidadComunicacion.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def telefono_bit_datos(self):
+        data = False
+        try:
+            data = self.sol.Telefono.BitDatos.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def telefono_paridad(self):
+        data = False
+        try:
+            data = self.sol.Telefono.Paridad.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def telefono_bit_stop(self):
+        data = False
+        try:
+            data = self.sol.Telefono.BitStop.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def ip_direccion(self):
+        data = False
+        try:
+            data = self.sol.IP.DireccionIP.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def ip_puerto_enlace(self):
+        data = False
+        try:
+            data = self.sol.IP.PuertoEnlace.text
         except AttributeError:
             pass
         return data

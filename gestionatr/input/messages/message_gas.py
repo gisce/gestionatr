@@ -9,6 +9,7 @@ XSD_DATA.update({
     '41': {
         'A1': 'A141.xsd',
         'A2': 'A241.xsd',
+        'A25': 'A2541.xsd',
         'A3': 'A341.xsd',
         'A4': 'A441.xsd',
         'A3S': 'A3S41.xsd',
@@ -28,12 +29,14 @@ XSD_DATA.update({
     '05': {
         'A1': 'A105.xsd',
         'A2': 'A205.xsd',
+        'A25': 'A2505.xsd',
         'A3': 'A305.xsd',
         'A4': 'A405.xsd',
     },
     '44': {
         'A1': 'A144.xsd',
         'A2': 'A244.xsd',
+        'A25': 'A2544.xsd',
         'A3': 'A344.xsd',
         'A4': 'A444.xsd',
     },
@@ -45,6 +48,7 @@ XSD_DATA.update({
     '04': {
         'A1': 'A104.xsd',
         'A2': 'A204.xsd',
+        'A25': 'A2504.xsd',
         'A3': 'A304.xsd',
         'A4': 'A404.xsd',
     },
@@ -59,11 +63,56 @@ XSD_DATA.update({
         'A1': 'A146.xsd',
         'A2': 'A246.xsd',
     },
+    '24': {
+        'A12': 'A1224.xsd',
+    },
     '26': {
         'A12': 'A1226.xsd',
     },
     '45': {
         'A19': 'A1945.xsd',
+    },
+    '36': {
+        'A20': 'A20.xsd',
+        'A21': 'A21.xsd',
+    },
+    '38': {
+        'A1': 'A138.xsd',
+        'A2': 'A238.xsd',
+        'A25': 'A2538.xsd',
+        'A3': 'A338.xsd',
+        'A4': 'A438.xsd',
+    },
+    '49': {
+        'A1': 'A149.xsd',
+        'A2': 'A249.xsd',
+        'A2S': 'A2S49.xsd',
+        'A25': 'A2549.xsd',
+        'A3': 'A349.xsd',
+        'A3S': 'A3S49.xsd',
+        'A4': 'A449.xsd',
+        'A4S': 'A4S49.xsd',
+    },
+    '50': {
+        'A15S': 'A15S50.xsd'
+    },
+    '42': {
+        'A1': 'A142.xsd',
+        'A2': 'A242.xsd',
+        'A3': 'A342.xsd',
+        'A4': 'A442.xsd',
+        'A25': 'A2542.xsd',
+        'A2S': 'A2S42.xsd',
+        'A3S': 'A3S42.xsd',
+        'A4S': 'A4S42.xsd',
+    },
+    '43': {
+            'A1': 'A143.xsd',
+            'A2': 'A243.xsd',
+            'A3': 'A343.xsd',
+            'A4': 'A443.xsd',
+            'A25': 'A2543.xsd',
+            'A26': 'A2643.xsd',
     },
 })
 
@@ -71,6 +120,7 @@ MAIN_MESSAGE_XSD.update({
     # 41
     'A141': 'a141',
     'A241': 'a241',
+    'A2541': 'a2541',
     'A341': 'a341',
     'A441': 'a441',
     'A3S41': 'a3s41',
@@ -86,11 +136,13 @@ MAIN_MESSAGE_XSD.update({
     # 05
     'A105': 'a105',
     'A205': 'a205',
+    'A2505': 'a2505',
     'A305': 'a305',
     'A405': 'a405',
     # 44
     'A144': 'a1',
     'A244': 'a2',
+    'A2544': 'a25',
     'A344': 'a3',
     'A444': 'a4',
     # 03
@@ -106,15 +158,52 @@ MAIN_MESSAGE_XSD.update({
     # 04
     'A104': 'a104',
     'A204': 'a204',
+    'A2504': 'a2504',
     'A304': 'a304',
     'A404': 'a404',
     # 46
-    'A146': 'a1',
-    'A246': 'a2',
+    'A146': 'a146',
+    'A246': 'a246',
+    # 24
+    'A1224': 'a1224',
     # 26
     'A1226': 'a1226',
     # 45
     'A1945': 'a19',
+    # 36
+    'A20': 'a20',
+    'A21': 'a21',
+    # 38
+    'A138': 'a138',
+    'A238': 'a238',
+    'A2538': 'a2538',
+    'A338': 'a338',
+    'A438': 'a438',
+    # 49
+    'A149': 'a149',
+    'A249': 'a249',
+    'A2S49': 'a2s49',
+    'A2549': 'a2549',
+    'A349': 'a349',
+    'A3S49': 'a3s49',
+    'A449': 'a449',
+    'A4S49': 'a4s49',
+    # 50
+    'A15S50': 'a15s50',
+    # 42
+    'A242': 'a242',
+    'A342': 'a342',
+    'A442': 'a442',
+    'A2542': 'a2542',
+    'A2S42': 'a2s42',
+    'A3S42': 'a3s42',
+    'A4S42': 'a4s42',
+    # 43
+    'A243': 'a243',
+    'A343': 'a343',
+    'A443': 'a443',
+    'A2543': 'a2543',
+    'A2643': 'a2643',
 })
 
 
@@ -191,8 +280,7 @@ class MessageGas(Message):
         data = get_rec_attr(self.obj, tree, False)
         if data not in [None, False]:
             return data.text
-        else:
-            raise except_f1('Error', u'Documento sin código')
+        raise except_f1('Error', u'Documento sin código')
 
     @property
     def codi_sollicitud(self):
@@ -207,12 +295,30 @@ class MessageGas(Message):
             data = get_rec_attr(self.obj, tree, False)
             if data not in [None, False]:
                 return data.text
-            if self.processcode == '26':
+            if self.processcode in ('26', '24'):
                 tree = '{0}.atrcode'.format(self._header)
                 data = get_rec_attr(self.obj, tree, False)
                 if data not in [None, False]:
                     return data.text
             raise except_f1('Error', u'Documento sin código de solicitud')
+
+    @property
+    def seq_sollicitud(self):
+        tree = '{0}.sequential'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data not in [None, False]:
+            return data.text
+        else:
+            return '01'
+
+    @property
+    def comreferencenumanul(self):
+        tree = '{0}.comreferencenumanul'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data not in [None, False]:
+            return data.text
+        else:
+            return '123456789012'
 
     @property
     def data_sollicitud(self):

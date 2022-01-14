@@ -92,6 +92,24 @@ class C2(C1):
             return data
         return data
 
+    # Datos paso 13
+    @property
+    def contestacion_incidencia(self):
+        tree = '{0}.ContestacionIncidencia'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data:
+            return data.text
+        else:
+            return False
+
+    @property
+    def contacto(self):
+        tree = '{0}.Contacto'.format(self._header)
+        con = get_rec_attr(self.obj, tree, False)
+        if con not in [None, False]:
+            return Contacto(con)
+        else:
+            return False
 
 class DatosSolicitud(DatosSolicitud):
 
@@ -127,6 +145,15 @@ class DatosSolicitud(DatosSolicitud):
         data = ''
         try:
             data = self.datos_solicitud.SolicitudTension.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def tension_solicitada(self):
+        data = ''
+        try:
+            data = self.datos_solicitud.TensionSolicitada.text
         except AttributeError:
             pass
         return data

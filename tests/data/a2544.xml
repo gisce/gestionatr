@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sctdapplication xmlns="http://localhost/sctd/A2544">
+    <heading>
+        <dispatchingcode>GML</dispatchingcode>
+        <dispatchingcompany>1234</dispatchingcompany>
+        <destinycompany>4321</destinycompany>
+        <communicationsdate>2018-05-01</communicationsdate>
+        <communicationshour>12:00:00</communicationshour>
+        <processcode>44</processcode>
+        <messagetype>A25</messagetype>
+    </heading>
+    <a25>
+        <reqcode>123456789</reqcode>
+        <comreferencenum>987654321</comreferencenum>
+        <cups>ES1234000000000001JN</cups>
+        <operationtype>A10003</operationtype>
+        <interventiontype>01</interventiontype>
+        <newoperationtype>A10010</newoperationtype>
+        <moreinformation>more information</moreinformation>
+        <operationnum>741</operationnum>
+        <visitdate>2018-09-24</visitdate>
+        <visithour>15:25:18</visithour>
+        <informationtype>002</informationtype>
+        <informationtypedesc>Orden de Trabajo pendiente</informationtypedesc>
+        <interventiondate>2018-09-24</interventiondate>
+        <interventionhourfrom>15:25:18</interventionhourfrom>
+        <interventionhourto>15:25:18</interventionhourto>
+        <resultinspection>01</resultinspection>
+        <resultinspectiondesc>Correcto</resultinspectiondesc>
+        <visitnumber>590</visitnumber>
+        <extrainfo>coments</extrainfo>
+        <defectlist>
+            <defect>
+                <code>001</code>
+                <description>FUGA DE GAS</description>
+            </defect>
+        </defectlist>
+    </a25>
+</sctdapplication>
