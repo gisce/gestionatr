@@ -6,7 +6,7 @@ import click
 from suds.cache import NoCache
 from suds.client import Client
 from suds.transport.https import HttpAuthenticated
-import urllib2
+from six.moves import urllib
 import base64
 from suds.sax.text import Raw
 from lxml import objectify, etree
@@ -70,7 +70,7 @@ def request_p0(url, user, password, xml_str):
     }
     try:
         client = Client(url, retxml=True, transport=t, cache=NoCache())
-    except urllib2.URLError as e:
+    except urllib.error.URLError as e:
         import ssl
         ssl._create_default_https_context = ssl._create_unverified_context
         client = Client(url, retxml=True, transport=t, cache=NoCache())
