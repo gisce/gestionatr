@@ -288,8 +288,8 @@ class Message(MessageBase):
                     if "<" + aux + ">" in self.str_xml:
                         self._header = aux
 
-            xsd = utils.get_data(fitxer)
-            self.f_xsd = open(xsd, 'rb')
+            self.xsd = utils.get_data(fitxer)
+            self.f_xsd = open(self.xsd, 'rb')
         except except_f1 as e:
             raise e
         except:
@@ -312,7 +312,7 @@ class Message(MessageBase):
             try:
                 self.obj = objectify.fromstring(self.str_xml, parser)
             except Exception as e:
-                self.error = e.message
+                self.error = e
                 if validate:
                     raise except_f1('Error', u'Documento inválido: {0}'.format(e))
                 else:
