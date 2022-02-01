@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 import sys
+import requests
+from hashlib import md5
 import click
-from suds.cache import NoCache
+import suds.reader
+from suds.cache import NoCache, ObjectCache
 from suds.client import Client
 from suds.transport.https import HttpAuthenticated
 import urllib2
@@ -67,11 +70,22 @@ def request_p0(url, user, password, xml_str):
         "Authorization": "Basic %s" % base64string
     }
     try:
-        client = Client(url, retxml=True, transport=t, cache=NoCache())
-    except urllib2.URLError as e:
-        import ssl
-        ssl._create_default_https_context = ssl._create_unverified_context
-        client = Client(url, retxml=True, transport=t, cache=NoCache())
+        session = requests.Session()
+        session.auth = (user, password)
+        response = session.get(url)
+        sax = suds.sax.parser.Parser()
+        wsdl = sax.parse(string=response.content)
+        wsdl_Cache = ObjectCache(days=1)
+        cache_key = md5(url.encode()).hexdigest() + "-document"
+        wsdl_Cache.put(cache_key, wsdl)
+        client = Client(url, retxml=True, transport=t, cache=wsdl_Cache, headers=auth_header, cachingpolicy=0)
+    except Exception as e:
+        try:
+            client = Client(url, retxml=True, transport=t, cache=NoCache())
+        except Exception as e:
+            import ssl
+            ssl._create_default_https_context = ssl._create_unverified_context
+            client = Client(url, retxml=True, transport=t, cache=NoCache())
     client.set_options(headers=auth_header)
 
     # Clean XML
