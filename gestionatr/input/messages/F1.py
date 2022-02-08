@@ -491,7 +491,7 @@ class Factura(object):
                     if instalacio.EnergiaNetaGen:
                         for terme in instalacio.EnergiaNetaGen.TerminoEnergiaNetaGen:
                             for periode in terme.Periodo:
-                                if periode and float(periode.Beta.text):
+                                if periode and (float(periode.Beta.text) or float(periode.Beta.text) == 0.0):
                                     beta_list.append(float(periode.Beta.text))
                 return list(set(beta_list))
         except AttributeError:
