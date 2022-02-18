@@ -579,6 +579,15 @@ class Factura(object):
         else:
             return False
 
+    @property
+    def codtbai(self):
+        tree = 'codtbai'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
     def get_periode_factura(self):
         """Retorna tupla amb (data inici,  data fi) de la factura:
             - data inici: la mes antiga de les fecdesde dels conceptes

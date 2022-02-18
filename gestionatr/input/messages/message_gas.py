@@ -279,8 +279,7 @@ class MessageGas(Message):
         data = get_rec_attr(self.obj, tree, False)
         if data not in [None, False]:
             return data.text
-        else:
-            raise except_f1('Error', u'Documento sin código')
+        raise except_f1('Error', u'Documento sin código')
 
     @property
     def codi_sollicitud(self):

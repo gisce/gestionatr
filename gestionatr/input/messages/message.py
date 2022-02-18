@@ -81,6 +81,7 @@ XSD_DATA = {'F1': {'01': 'Facturacion.xsd'},
                    '06': 'AnulacionSolicitud.xsd',
                    '07': ('AceptacionAnulacion.xsd',
                           'Rechazo.xsd'),
+                   '13': 'ContestacionIncidencia.xsd',
                    },
             'P0': {'01': 'SolicitudInformacionAlRegistroDePS.xsd',
                    '02': ('EnvioInformacionPS.xsd',
@@ -279,6 +280,12 @@ class Message(MessageBase):
                 self._header = MAIN_MESSAGE_XSD[fitxer.split(".xsd")[0]]
             except:
                 self._header = fitxer.split(".xsd")[0]
+            if not isinstance(self._header, (list, tuple)):
+                if "<"+self._header+">" not in self.str_xml:
+                    aux = self._header.replace("s", "S")
+                    if "<" + aux + ">" in self.str_xml:
+                        self._header = aux
+
             xsd = utils.get_data(fitxer)
             self.f_xsd = open(xsd, 'r')
         except except_f1, e:

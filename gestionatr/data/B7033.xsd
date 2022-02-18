@@ -96,6 +96,7 @@
 					</restriction>
 				</simpleType>
 			</element>
+			<element name="codtbai" type="tns:CodTBAI" minOccurs="0" maxOccurs="1"/>
 			<element name="observaciones1" type="tns:CodAlpha100Type" minOccurs="0" maxOccurs="1"/>
 			<element name="observaciones2" type="tns:CodAlpha100Type" minOccurs="0" maxOccurs="1"/>
 			<element name="listaboe" type="tns:ListaBoeType" minOccurs="1" maxOccurs="1"/>
