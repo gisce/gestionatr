@@ -44,6 +44,14 @@
 			<xs:totalDigits value="16"/>
 			<xs:fractionDigits value="7"/>
 			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="999999999.999999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="QiType">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="16"/>
+			<xs:fractionDigits value="7"/>
+			<xs:minInclusive value="0"/>
 			<xs:maxInclusive value="999999999.9999999"/>
 		</xs:restriction>
 	</xs:simpleType>
@@ -1339,7 +1347,7 @@
 					<xs:documentation>Caudal diario Qd</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="productqa" type="QaType" minOccurs="0" maxOccurs="1">
+			<xs:element name="productqa" type="QaType" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Caudal Estimado Anual Qa</xs:documentation>
 				</xs:annotation>
@@ -1378,12 +1386,17 @@
 					<xs:documentation>Tipo de peaje del producto</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="productqd" type="QdType" minOccurs="1" maxOccurs="1">
+			<xs:element name="productqd" type="QdType" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Caudal diario Qd</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="productqa" type="QaType" minOccurs="0" maxOccurs="1">
+			<xs:element name="productqi" type="QiType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Caudal intradiario Qi</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productqa" type="QaType" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Caudal Estimado Anual Qa</xs:documentation>
 				</xs:annotation>
@@ -1471,9 +1484,14 @@
 					<xs:documentation>Tipo de peaje del producto</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="productqd" type="QdType" minOccurs="1" maxOccurs="1">
+			<xs:element name="productqd" type="QdType" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Caudal diario Qd</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productqi" type="QiType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Caudal intradiario Qi</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="productqa" type="QaType" minOccurs="1" maxOccurs="1">
@@ -1528,6 +1546,11 @@
 			<xs:element name="productqd" type="QdType" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Caudal diario Qd</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productqi" type="QiType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Caudal intradiario Qi</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="productqa" type="QaType" minOccurs="0" maxOccurs="1">
