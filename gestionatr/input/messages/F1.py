@@ -1306,8 +1306,6 @@ class Lectura(object):
 
     @property
     def lectura_float(self):
-        if self._lectura is not None:
-            return self._lectura
         if hasattr(self.lectura_data, 'Lectura'):
             return float(self.lectura_data.Lectura.text.strip())
         return None
