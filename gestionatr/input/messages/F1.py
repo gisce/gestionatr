@@ -1305,6 +1305,14 @@ class Lectura(object):
         self._procedencia = value
 
     @property
+    def lectura_float(self):
+        if self._lectura is not None:
+            return self._lectura
+        if hasattr(self.lectura_data, 'Lectura'):
+            return float(self.lectura_data.Lectura.text.strip())
+        return None
+
+    @property
     def lectura(self):
         if self._lectura is not None:
             return self._lectura
@@ -2022,7 +2030,7 @@ class FacturaATR(Factura):
             res = []
             for comptador in self.get_comptadors():
                 for lectura in comptador.get_lectures(tipus, force_no_transforma_no_td_a_td=True):
-                    consum = lectura.lectura_desde.lectura - lectura.lectura_hasta.lectura
+                    consum = lectura.lectura_desde.lectura_float - lectura.lectura_hasta.lectura_float
                     if lectura.ajuste:
                         consum += lectura.ajuste.ajuste_por_integrador
                     res.append(consum)
