@@ -2028,7 +2028,7 @@ class FacturaATR(Factura):
             res = []
             for comptador in self.get_comptadors():
                 for lectura in comptador.get_lectures(tipus, force_no_transforma_no_td_a_td=True):
-                    consum = round(lectura.lectura_desde.lectura_float - lectura.lectura_hasta.lectura_float, 2)
+                    consum = round(lectura.lectura_hasta.lectura_float - lectura.lectura_desde.lectura_float, 2)
                     if lectura.ajuste:
                         consum += lectura.ajuste.ajuste_por_integrador
                     if not periode or periode == lectura.periode:
