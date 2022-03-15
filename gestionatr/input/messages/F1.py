@@ -2031,7 +2031,8 @@ class FacturaATR(Factura):
                     consum = round(lectura.lectura_desde.lectura_float - lectura.lectura_hasta.lectura_float, 2)
                     if lectura.ajuste:
                         consum += lectura.ajuste.ajuste_por_integrador
-                    res.append(consum)
+                    if not periode or periode == lectura.periode:
+                        res.append(consum)
             if not res:
                 res.append(0.0)
             return res
