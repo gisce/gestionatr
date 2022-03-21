@@ -964,11 +964,13 @@ class test_M1(unittest.TestCase):
         self.xml_m101 = open(get_data("m101.xml"), "r")
         self.xml_m101m = open(get_data("m101m.xml"), "r")
         self.xml_m101b = open(get_data("m101b.xml"), "r")
+        self.xml_m101r = open(get_data("m101r.xml"), "r")
 
     def tearDown(self):
         self.xml_m101.close()
         self.xml_m101m.close()
         self.xml_m101b.close()
+        self.xml_m101r.close()
 
     def test_m101(self):
         m1 = M1(self.xml_m101)
@@ -1095,6 +1097,46 @@ class test_M1(unittest.TestCase):
         self.assertFalse(m1.doc_tecnica)
         # Comentarios
         self.assertFalse(m1.comentarios)
+
+    def test_m101r(self):
+        m1 = M1(self.xml_m101r)
+        m1.parse_xml()
+        # Datos Solicitud
+        self.assertEqual(m1.datos_solicitud.cnae, u'2222')
+        self.assertEqual(m1.datos_solicitud.ind_activacion, u'L')
+        self.assertEqual(m1.datos_solicitud.tipo_modificacion, u'S')
+        self.assertEqual(m1.datos_solicitud.tipo_solicitud_administrativa, u'R')
+        self.assertEqual(m1.datos_solicitud.periodicidad_facturacion, u'01')
+        self.assertEqual(m1.datos_solicitud.bono_social, u'1')
+        # Cliente
+        cliente = m1.cliente
+        self.assertEqual(cliente.correo_electronico, u'email@host')
+        self.assertEqual(cliente.identificador, u'B36385870')
+        self.assertEqual(cliente.indicador_tipo_direccion, u'S')
+        self.assertEqual(cliente.nombre, u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
+        self.assertEqual(cliente.razon_social,
+                         u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
+        self.assertEqual(len(cliente.telefonos), 3)
+        self.assertEqual(cliente.telefonos[0][1], u'666777666')
+        self.assertEqual(cliente.telefonos[0][0], u'36')
+        self.assertEqual(cliente.telefonos[2][1], u'666777888')
+        self.assertEqual(cliente.telefonos[2][0], u'38')
+        self.assertEqual(cliente.tipo_identificador, u'NI')
+        self.assertEqual(cliente.tipo_persona, u'J')
+        self.assertFalse(cliente.direccion)
+        # Medida
+        medida = m1.medida
+        self.assertEqual(medida.propiedad_equipo, u'C')
+        self.assertEqual(medida.tipo_equipo_medida, u'L00')
+        mod = medida.modelos_aparato
+        self.assertEqual(len(mod), 0)
+        # DocTec
+        self.assertFalse(m1.doc_tecnica)
+        # Comentarios
+        self.assertFalse(m1.comentarios)
+        documento = m1.registros_documento[0]
+        self.assertEqual(documento.tipo_doc_aportado, u'12')
+
 
 class test_D1(unittest.TestCase):
 
