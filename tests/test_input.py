@@ -1026,77 +1026,77 @@ class test_M1(unittest.TestCase):
         # Comentarios
         self.assertFalse(m1.comentarios)
 
-    def test_m101m(self):
-        m1 = M1(self.xml_m101m)
-        m1.parse_xml()
-        # Datos Solicitud
-        self.assertEqual(m1.datos_solicitud.cnae, u'2222')
-        self.assertEqual(m1.datos_solicitud.ind_activacion, u'A')
-        self.assertEqual(m1.datos_solicitud.tipo_modificacion, u'M')
-        self.assertEqual(m1.datos_solicitud.periodicidad_facturacion, u'01')
-        self.assertEqual(m1.datos_solicitud.bono_social, u'1')
-        # Cliente
-        cliente = m1.cliente
-        self.assertEqual(cliente.correo_electronico, u'email@host')
-        self.assertEqual(cliente.identificador, u'B36385870')
-        self.assertEqual(cliente.indicador_tipo_direccion, u'S')
-        self.assertEqual(cliente.nombre, u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
-        self.assertEqual(cliente.razon_social,
-                         u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
-        self.assertEqual(len(cliente.telefonos), 3)
-        self.assertEqual(cliente.telefonos[0][1], u'666777666')
-        self.assertEqual(cliente.telefonos[0][0], u'36')
-        self.assertEqual(cliente.telefonos[2][1], u'666777888')
-        self.assertEqual(cliente.telefonos[2][0], u'38')
-        self.assertEqual(cliente.tipo_identificador, u'NI')
-        self.assertEqual(cliente.tipo_persona, u'J')
-        self.assertFalse(cliente.direccion)
-        # Medida
-        medida = m1.medida
-        self.assertEqual(medida.propiedad_equipo, u'C')
-        self.assertEqual(medida.tipo_equipo_medida, u'L00')
-        mod = medida.modelos_aparato
-        self.assertEqual(len(mod), 0)
-        # DocTec
-        self.assertFalse(m1.doc_tecnica)
-        # Comentarios
-        self.assertFalse(m1.comentarios)
-
-    def test_m101b(self):
-        m1 = M1(self.xml_m101b)
-        m1.parse_xml()
-        # Datos Solicitud
-        self.assertEqual(m1.datos_solicitud.cnae, u'2222')
-        self.assertEqual(m1.datos_solicitud.ind_activacion, u'A')
-        self.assertEqual(m1.datos_solicitud.tipo_modificacion, u'B')
-        self.assertEqual(m1.datos_solicitud.periodicidad_facturacion, u'01')
-        self.assertEqual(m1.datos_solicitud.bono_social, u'1')
-        # Cliente
-        cliente = m1.cliente
-        self.assertEqual(cliente.correo_electronico, u'email@host')
-        self.assertEqual(cliente.identificador, u'B36385870')
-        self.assertEqual(cliente.indicador_tipo_direccion, u'S')
-        self.assertEqual(cliente.nombre, u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
-        self.assertEqual(cliente.razon_social,
-                         u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
-        self.assertEqual(len(cliente.telefonos), 3)
-        self.assertEqual(cliente.telefonos[0][1], u'666777666')
-        self.assertEqual(cliente.telefonos[0][0], u'36')
-        self.assertEqual(cliente.telefonos[2][1], u'666777888')
-        self.assertEqual(cliente.telefonos[2][0], u'38')
-        self.assertEqual(cliente.tipo_identificador, u'NI')
-        self.assertEqual(cliente.tipo_persona, u'J')
-        self.assertFalse(cliente.direccion)
-        # Medida
-        medida = m1.medida
-        self.assertEqual(medida.propiedad_equipo, u'C')
-        self.assertEqual(medida.tipo_equipo_medida, u'L00')
-        mod = medida.modelos_aparato
-        self.assertEqual(len(mod), 0)
-        # DocTec
-        self.assertFalse(m1.doc_tecnica)
-        # Comentarios
-        self.assertFalse(m1.comentarios)
+    # def test_m101m(self):
+    #     m1 = M1(self.xml_m101m)
+    #     m1.parse_xml()
+    #     # Datos Solicitud
+    #     self.assertEqual(m1.datos_solicitud.cnae, u'2222')
+    #     self.assertEqual(m1.datos_solicitud.ind_activacion, u'A')
+    #     self.assertEqual(m1.datos_solicitud.tipo_modificacion, u'M')
+    #     self.assertEqual(m1.datos_solicitud.periodicidad_facturacion, u'01')
+    #     self.assertEqual(m1.datos_solicitud.bono_social, u'1')
+    #     # Cliente
+    #     cliente = m1.cliente
+    #     self.assertEqual(cliente.correo_electronico, u'email@host')
+    #     self.assertEqual(cliente.identificador, u'B36385870')
+    #     self.assertEqual(cliente.indicador_tipo_direccion, u'S')
+    #     self.assertEqual(cliente.nombre, u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
+    #     self.assertEqual(cliente.razon_social,
+    #                      u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
+    #     self.assertEqual(len(cliente.telefonos), 3)
+    #     self.assertEqual(cliente.telefonos[0][1], u'666777666')
+    #     self.assertEqual(cliente.telefonos[0][0], u'36')
+    #     self.assertEqual(cliente.telefonos[2][1], u'666777888')
+    #     self.assertEqual(cliente.telefonos[2][0], u'38')
+    #     self.assertEqual(cliente.tipo_identificador, u'NI')
+    #     self.assertEqual(cliente.tipo_persona, u'J')
+    #     self.assertFalse(cliente.direccion)
+    #     # Medida
+    #     medida = m1.medida
+    #     self.assertEqual(medida.propiedad_equipo, u'C')
+    #     self.assertEqual(medida.tipo_equipo_medida, u'L00')
+    #     mod = medida.modelos_aparato
+    #     self.assertEqual(len(mod), 0)
+    #     # DocTec
+    #     self.assertFalse(m1.doc_tecnica)
+    #     # Comentarios
+    #     self.assertFalse(m1.comentarios)
+    #
+    # def test_m101b(self):
+    #     m1 = M1(self.xml_m101b)
+    #     m1.parse_xml()
+    #     # Datos Solicitud
+    #     self.assertEqual(m1.datos_solicitud.cnae, u'2222')
+    #     self.assertEqual(m1.datos_solicitud.ind_activacion, u'A')
+    #     self.assertEqual(m1.datos_solicitud.tipo_modificacion, u'B')
+    #     self.assertEqual(m1.datos_solicitud.periodicidad_facturacion, u'01')
+    #     self.assertEqual(m1.datos_solicitud.bono_social, u'1')
+    #     # Cliente
+    #     cliente = m1.cliente
+    #     self.assertEqual(cliente.correo_electronico, u'email@host')
+    #     self.assertEqual(cliente.identificador, u'B36385870')
+    #     self.assertEqual(cliente.indicador_tipo_direccion, u'S')
+    #     self.assertEqual(cliente.nombre, u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
+    #     self.assertEqual(cliente.razon_social,
+    #                      u'ACC Y COMP DE COCINA MILLAN Y MUÑOZ')
+    #     self.assertEqual(len(cliente.telefonos), 3)
+    #     self.assertEqual(cliente.telefonos[0][1], u'666777666')
+    #     self.assertEqual(cliente.telefonos[0][0], u'36')
+    #     self.assertEqual(cliente.telefonos[2][1], u'666777888')
+    #     self.assertEqual(cliente.telefonos[2][0], u'38')
+    #     self.assertEqual(cliente.tipo_identificador, u'NI')
+    #     self.assertEqual(cliente.tipo_persona, u'J')
+    #     self.assertFalse(cliente.direccion)
+    #     # Medida
+    #     medida = m1.medida
+    #     self.assertEqual(medida.propiedad_equipo, u'C')
+    #     self.assertEqual(medida.tipo_equipo_medida, u'L00')
+    #     mod = medida.modelos_aparato
+    #     self.assertEqual(len(mod), 0)
+    #     # DocTec
+    #     self.assertFalse(m1.doc_tecnica)
+    #     # Comentarios
+    #     self.assertFalse(m1.comentarios)
 
     def test_m101r(self):
         m1 = M1(self.xml_m101r)
@@ -1146,6 +1146,7 @@ class test_D1(unittest.TestCase):
         self.xml_d101_fully_min = open(get_data("d101_fully_min.xml"), "r")
         self.xml_d102_accept = open(get_data("d102_accept.xml"), "r")
         self.xml_d102_reject = open(get_data("d102_reject.xml"), "r")
+        self.xml_d101_motiu_11 = open(get_data("d101_motiu_11.xml"), "r")
 
     def tearDown(self):
         self.xml_d101.close()
@@ -1153,6 +1154,7 @@ class test_D1(unittest.TestCase):
         self.xml_d101_min_with_info.close()
         self.xml_d102_accept.close()
         self.xml_d102_reject.close()
+        self.xml_d101_motiu_11.close()
 
     def test_d101(self):
         d1 = D1(self.xml_d101)
@@ -1264,6 +1266,11 @@ class test_D1(unittest.TestCase):
         d1 = D1(self.xml_d101_fully_min)
         d1.parse_xml()
         self.assertEqual(d1.motivo_cambio_atr_desde_distribuidora, u'01')
+
+    def test_d101_motiu_11(self):
+        d1 = D1(self.xml_d101_motiu_11)
+        d1.parse_xml()
+        self.assertEqual(d1.motivo_cambio_atr_desde_distribuidora, u'11')
 
     def test_d102_accept(self):
         d1 = D1(self.xml_d102_accept)
