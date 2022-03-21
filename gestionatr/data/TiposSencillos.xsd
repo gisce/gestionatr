@@ -300,8 +300,7 @@
 			<xs:enumeration value="G1"/>
 			<xs:enumeration value="G2"/>
 			<xs:enumeration value="G3"/>
-			<xs:enumeration value="G4"/>
-			<xs:enumeration value="G5"/>
+			<xs:enumeration value="G6"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="CodPM">
@@ -1720,6 +1719,7 @@
 			08	Baja en autoconsumo
 			09	Modificación desde peaje 3.1A a peaje 6.1DT
 			10	Modificación desde peaje 3.1A a peaje 6.2DT
+			11	Falta fichero coeficientes del año que inicia
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -1733,6 +1733,7 @@
 			<xs:enumeration value="08"/>
 			<xs:enumeration value="09"/>
 			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="MotivoFacturacion">
@@ -2779,16 +2780,12 @@ la reclamacion
 				S	Solicitud de modificacion contractual administrativa
 				N	Solicitud de modificacion contractual tecnica
 				A	Solicitud de modificacion tanto administrativa como tecnica
-				M Solicitud de aplicacion SMV
-				B 	Baja de SMV, vuelta a suministro normal
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="S"/>
 			<xs:enumeration value="N"/>
 			<xs:enumeration value="A"/>
-			<xs:enumeration value="M"/>
-			<xs:enumeration value="B"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TipoMoneda">
@@ -2974,7 +2971,8 @@ la reclamacion
 			08	Otros		
 			09	Acuerdo reparto
 			10	CIE generación	
-			11  Declaración relativa a puntos de recarga de vehículos eléctricos de acceso público
+			11 	Declaración relativa a puntos de recarga de vehículos eléctricos de acceso público
+			12  	Fichero de coeficientes de reparto
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2989,6 +2987,7 @@ la reclamacion
 			<xs:enumeration value="09"/>
 			<xs:enumeration value="10"/>
 			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TipoSolicitudAdministrativa">
