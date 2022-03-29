@@ -2477,7 +2477,7 @@ class FacturaATR(Factura):
         else:
             mode = 'icp'
 
-        if self.potencia.penalizacion_no_icp == 'S':
+        if self.potencia and self.potencia.penalizacion_no_icp == 'S':
             return 'recarrec'
 
         return mode

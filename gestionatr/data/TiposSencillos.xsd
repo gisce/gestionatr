@@ -300,6 +300,8 @@
 			<xs:enumeration value="G1"/>
 			<xs:enumeration value="G2"/>
 			<xs:enumeration value="G3"/>
+			<xs:enumeration value="G4"/>
+			<xs:enumeration value="G5"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="CodPM">
@@ -2777,12 +2779,16 @@ la reclamacion
 				S	Solicitud de modificacion contractual administrativa
 				N	Solicitud de modificacion contractual tecnica
 				A	Solicitud de modificacion tanto administrativa como tecnica
+				M Solicitud de aplicacion SMV
+				B 	Baja de SMV, vuelta a suministro normal
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="S"/>
 			<xs:enumeration value="N"/>
 			<xs:enumeration value="A"/>
+			<xs:enumeration value="M"/>
+			<xs:enumeration value="B"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TipoMoneda">
