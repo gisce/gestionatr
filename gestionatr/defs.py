@@ -2174,6 +2174,7 @@ TABLA_103 = [
     ('81', u'Tipo de autoconsumo'),
     ('82', u'Coeficiente de reparto'),
     ('83', u'Recargo por la no dedicación exclusiva de la carga a vehículos eléctricos'),
+    ('84', u'Descuento en peajes de transporte y distribución de electricidad a la industria electrointensiva')
 ]
 
 CONCEPTOS_CON_FECHA_OPERACION = [
