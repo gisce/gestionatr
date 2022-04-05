@@ -5,7 +5,7 @@
 	<xs:complexType name="ModificacionDeATRM101">
 		<xs:sequence>
 			<xs:element name="DatosSolicitud" type="DatosModificacionDeATRM101"/>
-			<xs:element name="Contrato" type="ContratoConModificacion" minOccurs="0"/>
+			<xs:element name="Contrato" type="ContratoConModificacion"/>
 			<xs:element name="Cliente" type="ClienteConDireccion"/>
 			<xs:element name="Medida" type="MedidaResto" minOccurs="0"/>
 			<xs:element name="DocTecnica" type="DocTecnica" minOccurs="0"/>

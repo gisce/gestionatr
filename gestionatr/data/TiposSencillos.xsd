@@ -300,8 +300,6 @@
 			<xs:enumeration value="G1"/>
 			<xs:enumeration value="G2"/>
 			<xs:enumeration value="G3"/>
-			<xs:enumeration value="G4"/>
-			<xs:enumeration value="G5"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="CodPM">
@@ -362,8 +360,9 @@
 			76	Excedente del periodo 6
 			81	Tipo de autoconsumo
 			82	Coeficiente de reparto
-			83  Recargo por la no dedicación exclusiva de la carga a vehículos eléctricos
-			84  Descuento en peajes de transporte y distribución de electricidad a la industria electrointensiva
+			83     Recargo por la no dedicación exclusiva de la carga a vehículos eléctricos
+			84     Descuento en peajes de transporte y distribución de electricidad a la industria electrointensiva
+			85     Regularización descuento en peajes de transporte y distribución de electricidad a la industria electrointensiva
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -418,6 +417,7 @@
 			<xs:enumeration value="82"/>
 			<xs:enumeration value="83"/>
 			<xs:enumeration value="84"/>
+			<xs:enumeration value="85"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Decimal10">
@@ -2781,16 +2781,12 @@ la reclamacion
 				S	Solicitud de modificacion contractual administrativa
 				N	Solicitud de modificacion contractual tecnica
 				A	Solicitud de modificacion tanto administrativa como tecnica
-				M Solicitud de aplicacion SMV
-				B 	Baja de SMV, vuelta a suministro normal
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="S"/>
 			<xs:enumeration value="N"/>
 			<xs:enumeration value="A"/>
-			<xs:enumeration value="M"/>
-			<xs:enumeration value="B"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TipoMoneda">
