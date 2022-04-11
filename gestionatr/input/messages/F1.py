@@ -580,7 +580,7 @@ class Factura(object):
             'tipo_rectificadora': self.datos_factura.tipo_factura,
             'tipo_factura': self.datos_factura.motivo_facturacion,
             'date_invoice': self.datos_factura.fecha_factura,
-            'check_total': abs(self.datos_factura.importe_total_factura)
+            'check_total': -1 * self.datos_factura.importe_total_factura
             if self.datos_factura.tipo_factura in ('A',)
             else self.datos_factura.importe_total_factura,
             'origin': self.datos_factura.codigo_fiscal_factura,
@@ -2496,7 +2496,7 @@ class FacturaATR(Factura):
         else:
             mode = 'icp'
 
-        if self.potencia.penalizacion_no_icp == 'S':
+        if self.potencia and self.potencia.penalizacion_no_icp == 'S':
             return 'recarrec'
 
         return mode
