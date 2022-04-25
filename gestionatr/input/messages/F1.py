@@ -580,7 +580,7 @@ class Factura(object):
             'tipo_rectificadora': self.datos_factura.tipo_factura,
             'tipo_factura': self.datos_factura.motivo_facturacion,
             'date_invoice': self.datos_factura.fecha_factura,
-            'check_total': abs(self.datos_factura.importe_total_factura)
+            'check_total': -1 * self.datos_factura.importe_total_factura
             if self.datos_factura.tipo_factura in ('A',)
             else self.datos_factura.importe_total_factura,
             'origin': self.datos_factura.codigo_fiscal_factura,
@@ -1305,6 +1305,12 @@ class Lectura(object):
         self._procedencia = value
 
     @property
+    def lectura_float(self):
+        if hasattr(self.lectura_data, 'Lectura'):
+            return float(self.lectura_data.Lectura.text.strip())
+        return None
+
+    @property
     def lectura(self):
         if self._lectura is not None:
             return self._lectura
@@ -1833,7 +1839,7 @@ class FacturaATR(Factura):
     def te_lectures_amb_decimals(self):
         if self.datos_factura.tarifa_atr_fact not in TARIFES_TD:
             return False
-        if self.datos_factura.tipo_factura in ('G', 'C'):
+        if self.datos_factura.tipo_factura in ('C', ):
             return False
         if self.datos_factura.vas_trafo or self.datos_factura.porcentaje_perdidas:
             return False
@@ -2017,6 +2023,19 @@ class FacturaATR(Factura):
     def get_consum_facturat(self, tipus, periode=None):
         if tipus not in ['A', 'S', 'R']:
             return None
+
+        if self.datos_factura.tipo_factura == 'G' and tipus == 'A':
+            res = []
+            for comptador in self.get_comptadors():
+                for lectura in comptador.get_lectures(tipus, force_no_transforma_no_td_a_td=True):
+                    consum = round(lectura.lectura_hasta.lectura_float - lectura.lectura_desde.lectura_float, 2)
+                    if lectura.ajuste:
+                        consum += lectura.ajuste.ajuste_por_integrador
+                    if not periode or periode == lectura.periode:
+                        res.append(consum)
+            if not res:
+                res.append(0.0)
+            return res
 
         if tipus == 'A' and self.energia_activa:
             res = []
@@ -2477,7 +2496,7 @@ class FacturaATR(Factura):
         else:
             mode = 'icp'
 
-        if self.potencia.penalizacion_no_icp == 'S':
+        if self.potencia and self.potencia.penalizacion_no_icp == 'S':
             return 'recarrec'
 
         return mode
