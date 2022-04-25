@@ -491,7 +491,7 @@ class Factura(object):
                     if instalacio.EnergiaNetaGen:
                         for terme in instalacio.EnergiaNetaGen.TerminoEnergiaNetaGen:
                             for periode in terme.Periodo:
-                                if periode and float(periode.Beta.text):
+                                if periode and periode.Beta and float(periode.Beta.text):
                                     beta_list.append(float(periode.Beta.text))
                 return list(set(beta_list))
         except AttributeError:
@@ -964,7 +964,7 @@ class PeriodoCargo(Periodo):
         return None
 
     def es_facturable(self):
-        return self.precio_cargo or self.potencia or self.energia
+        return bool(self.precio_cargo) or bool(self.potencia) or bool(self.energia)
 
     @property
     def cantidad(self):
