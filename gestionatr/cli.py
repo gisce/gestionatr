@@ -94,6 +94,8 @@ def request_p0(url, user, password, xml_str):
 
         aux = etree.fromstring(res)
         aux_res = find_child(aux, "MensajeEnvioInformacionPS")
+        if not aux_res:
+            aux_res = find_child(aux, "MensajeRechazoP0")
 
         res = etree.tostring(aux_res)
     except Exception:
