@@ -1108,7 +1108,7 @@ TABLA_27 = [
     ('E4', 'Impago Previo'),
     ('E5', 'CUPS sujeto a LOPD'),
     ('E6', 'Modificación del tipo de autoconsumo no permitida. No ha trascurrido un año desde la última modificación.'),
-    ('E7', 'Falta acuerdo de reparto/Acuerdo de reparto incorrecto/Faltan coeficientes de reparto en acuerdo'),
+    ('E7', 'Falta acuerdo de reparto o/y fichero de coeficientes/Acuerdo de reparto o/y fichero de coeficientes incorrecto/Faltan coeficientes de reparto en acuerdo fichero'),
     ('E8', 'No recibida información técnica de la CCAA (para BT y <=100kW).'),
     ('E9', 'En el periodo establecido, no se han recibido el resto de solicitudes de modificación del colectivo'),
     ('F1', 'Disconformidad del consumidor a la información sobre autoconsumo'),
@@ -1121,6 +1121,7 @@ TABLA_27 = [
     ('G3', 'Código solicitud ATR/reclamación anterior inexistente'),
     ('G4', 'Suministro Mínimo Vital'),
     ('G5', 'Este tipo de modificación (“M”/”B”) solo aplica a solicitudes de modificación (formato M1) de suministros en bono social (suministrados por COR)'),
+    ('G6', 'No es posible modificar fichero de coeficientes si no ha transcurrido un mínimo de 4 meses desde la última modificación'),
     ('99', 'Otros'),
 ]
 
@@ -1314,7 +1315,7 @@ TABLA_53 = [
      'Cambio datos administrativos (excepto cambio de titular y corrección de datos identificativos del cliente)'),
     ('C', 'Corrección datos que identifican al cliente'),
     ('P', 'La solicitud implica cambio en la periodicidad de la facturación'),
-    ('R', 'Modificación acuerdo de reparto de un autoconsumo colectivo')
+    ('R', 'Modificación acuerdo de reparto/fichero de coeficientes de un autoconsumo colectivo')
 ]
 
 TABLA_55 = [
@@ -1345,6 +1346,7 @@ TABLA_61 = [
     ('09', u'Acuerdo reparto'),
     ('10', u'CIE generación'),
     ('11', u'Declaración relativa a puntos de recarga de vehículos eléctricos de acceso público'),
+    ('12', u'Fichero de coeficientes de reparto'),
 ]
 
 TABLA_62 = [
@@ -2248,6 +2250,7 @@ TABLA_109 = [('01', u'Telegestión Operativa con CCH'),
              ('08', u'Baja en autoconsumo'),
              ('09', u'Modificación desde peaje 3.1A a peaje 6.1TD'),
              ('10', u'Modificación desde peaje 3.1A a peaje 6.2TD'),
+             ('11', u'Pendiente envío de fichero de coeficientes de reparto variables para el año en curso'),
              ]
 
 TABLA_110 = [('01', u'Acompaña curva de carga'),

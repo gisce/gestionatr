@@ -16,7 +16,7 @@
 	</xs:simpleType>
 	<xs:simpleType name="AmbitoValidezCIE">
 		<xs:annotation>
-			<xs:documentation>Ámbito de validez del CIE (tabla 65)
+			<xs:documentation>ï¿½mbito de validez del CIE (tabla 65)
 			ES	ESTATAL
 			AU	AUTONOMICO
 			PR	PROVINCIAL
@@ -92,7 +92,7 @@
 			E1	Desistimientos
 			T1    Traspaso a la COR
 			B2    Baja (unidireccional) del contrato de acceso
-			P0   Información PS para la contratación
+			P0   Informaciï¿½n PS para la contrataciï¿½n
 		</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -127,8 +127,8 @@
 			10	Anulacion de la baja a la comercializadora saliente.  
 			11	Aceptacion a comercializadora saliente
 			12	Notificacion de rechazo como consecuencia de las actuaciones en campo.
-			13    Contestación de incidencia 		
-			16    Contestación de incidencia 		
+			13    Contestaciï¿½n de incidencia 		
+			16    Contestaciï¿½n de incidencia 		
 		</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -300,6 +300,7 @@
 			<xs:enumeration value="G1"/>
 			<xs:enumeration value="G2"/>
 			<xs:enumeration value="G3"/>
+			<xs:enumeration value="G6"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="CodPM">
@@ -338,20 +339,20 @@
 			45 	Exencion cargo fijo autoconsumo
 			46 	Exencion cargo variable autoconsumo
 			47	Derechos de acometida de generacion
-			48	Suplemento territorial por tributos económicos del año 2013 según la Orden ETU/35/2017
-			49 	Suplemento territorial por tributos económicos del año 2013 según la Orden TEC/271/2019
+			48	Suplemento territorial por tributos econï¿½micos del aï¿½o 2013 segï¿½n la Orden ETU/35/2017
+			49 	Suplemento territorial por tributos econï¿½micos del aï¿½o 2013 segï¿½n la Orden TEC/271/2019
 			51	Autoconsumo del periodo 1 
 			52	Autoconsumo del periodo 2
 			53	Autoconsumo del periodo 3
 			54	Autoconsumo del periodo 4
 			55	Autoconsumo del periodo 5
 			56	Autoconsumo del periodo 6
-			61	Generación neta por el coeficiente del periodo 1
-			62	Generación neta por el coeficiente del periodo 2
-			63	Generación neta por el coeficiente del periodo 3
-			64	Generación neta por el coeficiente del periodo 4
-			65	Generación neta por el coeficiente del periodo 5
-			66	Generación neta por el coeficiente del periodo 6
+			61	Generaciï¿½n neta por el coeficiente del periodo 1
+			62	Generaciï¿½n neta por el coeficiente del periodo 2
+			63	Generaciï¿½n neta por el coeficiente del periodo 3
+			64	Generaciï¿½n neta por el coeficiente del periodo 4
+			65	Generaciï¿½n neta por el coeficiente del periodo 5
+			66	Generaciï¿½n neta por el coeficiente del periodo 6
 			71	Excedente del periodo 1
 			72	Excedente del periodo 2
 			73	Excedente del periodo 3
@@ -360,9 +361,9 @@
 			76	Excedente del periodo 6
 			81	Tipo de autoconsumo
 			82	Coeficiente de reparto
-			83     Recargo por la no dedicación exclusiva de la carga a vehículos eléctricos
-			84     Descuento en peajes de transporte y distribución de electricidad a la industria electrointensiva
-			85     Regularización descuento en peajes de transporte y distribución de electricidad a la industria electrointensiva
+			83     Recargo por la no dedicaciï¿½n exclusiva de la carga a vehï¿½culos elï¿½ctricos
+			84     Descuento en peajes de transporte y distribuciï¿½n de electricidad a la industria electrointensiva
+			85     Regularizaciï¿½n descuento en peajes de transporte y distribuciï¿½n de electricidad a la industria electrointensiva
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -572,7 +573,7 @@
 			0030104	Contador parado
 			0030105	Error programacion EdM
 			0030106	ICP inadecuado para la potencia contratada
-			0030107	Se normalizar telemedida. Se aportan parámetros
+			0030107	Se normalizar telemedida. Se aportan parï¿½metros
 			0030201	Equipo correcto
 			0030202	Instalacion correcta
 			0030203	Historico de consumos/ lecturas coherente
@@ -590,8 +591,8 @@
 			0040101	Favorable
 			0040201	Desfavorable con explicacion de motivos en texto resultado 
 			0040202	Sin incidencia
-			0040203	Incidencia que no justifica daños
-			0040204	Trabajos programados que no justifican daños
+			0040203	Incidencia que no justifica daï¿½os
+			0040204	Trabajos programados que no justifican daï¿½os
 			0040205	Averia instalacion particular cliente
 			0040206	Originada por terceros 
 			0040207	Tiempo de interrupcion no justifica perdida de perecederos
@@ -603,7 +604,7 @@
 			0040303	Acceso impedido
 			0040304	Cliente ausente		
 			0050101	Asignamos correctamente y refacturamos
-			0050102 	Informamos correctamente el nº contador (no hay que refacturar)
+			0050102 	Informamos correctamente el nï¿½ contador (no hay que refacturar)
 			0050103	Inversion de contadores
 			0050104  	Corte realizado por distribuidora
 			0050201	El contador es correcto
@@ -635,7 +636,7 @@
 			0080201	Conceptos reclamados correctamente facturados (incluir explicacion en campo comentarios)
 			0080202	ICP no instalado
 			0080203 	Improcedente. Se adjunta explicacion en comentarios			
-			0090101	Equipo de Medida con acceso y consumo acumulado mas de un año se refactura  a un año
+			0090101	Equipo de Medida con acceso y consumo acumulado mas de un aï¿½o se refactura  a un aï¿½o
 			0090102	Se anula estimacion                   
 			0090103	Error Lectura Montaje / Desmontaje                              
 			0090104	Error lectura lector                                        
@@ -644,7 +645,7 @@
 			0090107  	No conforme aplicacion reactiva
 			0090108  	Error cargo / abono realizado
 			0090109  	Se refactura lectura reclamada
-			0090201	Equipo de Medida sin acceso mas de un año, facturacion correcta
+			0090201	Equipo de Medida sin acceso mas de un aï¿½o, facturacion correcta
 			0090202	Consumo correcto  (lectura correcta)                                  
 			0090203	Estimacion correcta                                         
 			0090204	Lectura aportada erronea                                  
@@ -692,7 +693,7 @@
 			0180202	Criterios economicos correctos
 			0180203	Improcedente. Se adjunta explicacion en comentarios
 			0190101	Se modifican criterios tecnicos 
-			0190102	Se reparan desperfectos / se indemnizan daños
+			0190102	Se reparan desperfectos / se indemnizan daï¿½os
 			0190103	Licencia de obra / permisos particulares de obra no solicitados
 			0190104	Ejecucion incorrecta de obras
 			0190105	Asesoramiento tecnico erroneo en contestacion
@@ -711,8 +712,8 @@
 			0210101	Favorable
 			0210201	Desfavorable con explicacion de motivos en texto resultado 
 			0210202	Sin incidencia
-			0210203	Incidencia que no justifica daños
-			0210204	Trabajos programados que no justifican daños
+			0210203	Incidencia que no justifica daï¿½os
+			0210204	Trabajos programados que no justifican daï¿½os
 			0210205	Averia instalacion particular cliente
 			0210206	Originada por terceros 
 			0210207	Tiempo de interrupcion no justifica perdida de perecederos
@@ -738,7 +739,7 @@
 			0230201	Desfavorable con explicacion de motivos en texto resultado 
 			0230202	No legitimada. Relacion extracontractual
 			0230301 	Imposible localizar al cliente
-			0240101	Favorable. Se corrige o resarcen daños
+			0240101	Favorable. Se corrige o resarcen daï¿½os
 			0240201	Desfavorable con explicacion de motivos en texto resultado 
 			0240202	No legitimada. Relacion extracontractual
 			0240203	Improcedente. Se adjunta explicacion en comentarios
@@ -767,28 +768,28 @@
 			0280204	Improcedente. Se adjunta explicacion en comentarios
 			0290101	Se indemniza incumplimiento de calidad de atencion en proxima factura
 			0290102	Se indemniza
-			0290103	Pendiente indemnización. No se ha podido conseguir datos necesarios a través de un paso 04. Contacte con distribuidor
+			0290103	Pendiente indemnizaciï¿½n. No se ha podido conseguir datos necesarios a travï¿½s de un paso 04. Contacte con distribuidor
 			0290201	Reclamacion atendida en plazo
 			0290202	Retraso imputable al cliente/comercializador
 			0290203	Improcedente. Se adjunta explicacion en comentarios
 			0300101	Se indemniza incumplimiento de calidad de atencion en proxima factura
-			0300102	Se indemniza incumplimiento de calidad de atención
-			0300103	Pendiente indemnización. No se ha podido conseguir datos necesarios a través de un paso 04. Contacte con distribuidor
+			0300102	Se indemniza incumplimiento de calidad de atenciï¿½n
+			0300103	Pendiente indemnizaciï¿½n. No se ha podido conseguir datos necesarios a travï¿½s de un paso 04. Contacte con distribuidor
 			0300201	Solicitud de informacion NNSS atendida en plazo
 			0300202	Improcedente. Se adjunta explicacion en comentarios
 			0310101	Se indemniza incumplimiento de calidad de atencion en proxima factura
-			0310102	Se indemniza incumplimiento de calidad de atención
-			0310103	Pendiente indemnización. No se ha podido conseguir datos necesarios a través de un paso 04. Contacte con distribuidor
+			0310102	Se indemniza incumplimiento de calidad de atenciï¿½n
+			0310103	Pendiente indemnizaciï¿½n. No se ha podido conseguir datos necesarios a travï¿½s de un paso 04. Contacte con distribuidor
 			0310201	Ejecucion de NNSS atendido en plazo
 			0310202	Improcedente. Se adjunta explicacion en comentarios
 			0320101	Se indemniza incumplimiento de calidad de atencion en proxima factura
-			0320102	Se indemniza incumplimiento de calidad de atención
-			0320103	Pendiente indemnización. No se ha podido conseguir datos necesarios a través de un paso 04. Contacte con distribuidor
+			0320102	Se indemniza incumplimiento de calidad de atenciï¿½n
+			0320103	Pendiente indemnizaciï¿½n. No se ha podido conseguir datos necesarios a travï¿½s de un paso 04. Contacte con distribuidor
 			0320201	Reconexion atendida en plazo
 			0320202	Incumplimiento por causa imputable al cliente  
 			0320203	Plazo superado por motivos ajenos a la distribuidora (indicar motivo)
 			0320204	Imposible ejecutar reenganche por causa ajena
-			0320205	Expediente por anomalía/ fraude en curso
+			0320205	Expediente por anomalï¿½a/ fraude en curso
 			0320206	Improcedente. Se adjunta explicacion en comentarios
 			0340101	Corregido parametro 
 			0340102  	Corregido parametro potencia
@@ -816,7 +817,7 @@
 			0360202	Lectura anterior a la ultima real                                  
 			0360203	El suministro se liquida con curva de carga
 			0360204	Periodo ajeno a esa comercializadora
-			0360205  	Estimacion superior a un año
+			0360205  	Estimacion superior a un aï¿½o
 			0360206 	Lectura aportada adelantada
 			0360207  	Lectura aportada erronea
 			0360208	Improcedente. Se adjunta explicacion en comentarios
@@ -920,9 +921,9 @@
 			0620203	Improcedente. Se adjunta explicacion en comentarios
 			0630101	Se gestiona la publicacion del paso
 			0630102	Movimiento realizado fuera de plazo
-			0630103	Se indemniza incumplimiento de calidad de atención en próxima factura
-			0630104	Se indemniza incumplimiento de calidad de atención
-			0630105	Pendiente indemnización. No se ha podido conseguir datos necesarios a través de un paso 04. Contacte con distribuidor
+			0630103	Se indemniza incumplimiento de calidad de atenciï¿½n en prï¿½xima factura
+			0630104	Se indemniza incumplimiento de calidad de atenciï¿½n
+			0630105	Pendiente indemnizaciï¿½n. No se ha podido conseguir datos necesarios a travï¿½s de un paso 04. Contacte con distribuidor
 			0630201	No existe solicitud
 			0630202	Movimiento realizado en plazo
 			0630203	Movimiento fuera de plazo imputable al cliente
@@ -966,35 +967,35 @@
 			0670303	Cliente no aporta informacion adicional
 			0670304	Acceso denegado
 			0670305	Visita anulada por cliente
-			0690101	Procedente. Se envía copia del F1 en PDF.
-			0690201	Improcedente. Se adjunta explicación en comentarios. 
-			0700101	Procedente. Se agiliza trámite de reclamación. 
+			0690101	Procedente. Se envï¿½a copia del F1 en PDF.
+			0690201	Improcedente. Se adjunta explicaciï¿½n en comentarios. 
+			0700101	Procedente. Se agiliza trï¿½mite de reclamaciï¿½n. 
 			0700201	Retraso imputable al cliente/comercializador
-			0700202	Improcedente. Se adjunta explicación en comentarios.		
-			0710101	Se gestiona la publicación del paso
+			0700202	Improcedente. Se adjunta explicaciï¿½n en comentarios.		
+			0710101	Se gestiona la publicaciï¿½n del paso
 			0710102	Movimiento realizado fuera de plazo
 			0710201	No existe solicitud
 			0710202	Movimiento realizado en plazo
-			0710203	Improcedente. Se adjunta explicación en comentarios
-			0720101	Se gestiona la publicación del paso
-			0720102	Procedente. Se agiliza trámite de desistimiento
+			0710203	Improcedente. Se adjunta explicaciï¿½n en comentarios
+			0720101	Se gestiona la publicaciï¿½n del paso
+			0720102	Procedente. Se agiliza trï¿½mite de desistimiento
 			0720201	No existe solicitud
-			0720202	Movimiento retrasado imputable al cliente. Se adjunta explicación en comentarios
-			0720203	Improcedente. Se adjunta explicación en comentarios
-			0730101	Se aportan parámetros
+			0720202	Movimiento retrasado imputable al cliente. Se adjunta explicaciï¿½n en comentarios
+			0720203	Improcedente. Se adjunta explicaciï¿½n en comentarios
+			0730101	Se aportan parï¿½metros
 			0730201	Telemedida no obligatoria/ No solicitado modem
 			0730202	Telemedida no operativa/ Comunicaciones propiedad del usuario
-			0730203	Improcedente. Se adjunta explicación en comentarios
+			0730203	Improcedente. Se adjunta explicaciï¿½n en comentarios
 			0730301	Acceso denegado
 			0730302	Visita anulada por el cliente
-			0730303	Cliente no aporta información adicional
+			0730303	Cliente no aporta informaciï¿½n adicional
 			0730304	No se localiza al cliente
-			0740101    Se gestiona la publicación del paso
+			0740101    Se gestiona la publicaciï¿½n del paso
 			0740102    Movimiento realizado fuera de plazo
 			0740201    No existe solicitud
 			0740202    Movimiento realizado en plazo
 			0740203    Movimiento fuera de plazo imputable al cliente
-			0740204    Improcedente. Se adjunta explicación en comentarios
+			0740204    Improcedente. Se adjunta explicaciï¿½n en comentarios
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -1459,8 +1460,8 @@
 			<xs:documentation>Estado telefono (tabla 41)
 			1	CORRECTO	
 			2	NO PROBADO	
-			3	LÍNEA TELEF. FUERA SERVICIO	
-			4	MÓDEM NO ENLAZA	
+			3	Lï¿½NEA TELEF. FUERA SERVICIO	
+			4	Mï¿½DEM NO ENLAZA	
 			5	REGISTRADOR DESPROGRAMADO	
 			6	FALLA LA DIRE DE ENLACE	
 			7	FALLA EL PTO Y CLAVE MEDIDA	
@@ -1596,7 +1597,7 @@
 	<xs:simpleType name="IndicativoCurvaCarga">
 		<xs:annotation>
 			<xs:documentation>Indicativo Curva de Carga  (tabla 110)
-			01	Acompaña curva de carga (Solo tarifas 2.XA integradas en el sistema de Telegestion con capacidad de obtener CCH)
+			01	Acompaï¿½a curva de carga (Solo tarifas 2.XA integradas en el sistema de Telegestion con capacidad de obtener CCH)
 			02	Perfilado (contratos sin CCH)
 			03	No aplica (Tarifas de AT)
 			</xs:documentation>
@@ -1682,9 +1683,9 @@
 	<xs:simpleType name="ModoMedidaPotencia">
 		<xs:annotation>
 			<xs:documentation>Modo medida de la potencia (tabla 50)
-				9	Tarifa de dos potencias contratadas sin maxímetro 
-				A	Tarifa de dos potencias contratadas con maxímetro
-				B	Tarifa de 6 máximas
+				9	Tarifa de dos potencias contratadas sin maxï¿½metro 
+				A	Tarifa de dos potencias contratadas con maxï¿½metro
+				B	Tarifa de 6 mï¿½ximas
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -1716,12 +1717,13 @@
 			02	Telegestion No Operativa
 			03	Telegestion Operativa sin CCH
 			04	Alta en autoconsumo
-			05	Modificación de tipo de autoconsumo
-			06	Modificación coeficiente de reparto
-			07	Modificación potencia generación
+			05	Modificaciï¿½n de tipo de autoconsumo
+			06	Modificaciï¿½n coeficiente de reparto
+			07	Modificaciï¿½n potencia generaciï¿½n
 			08	Baja en autoconsumo
-			09	Modificación desde peaje 3.1A a peaje 6.1DT
-			10	Modificación desde peaje 3.1A a peaje 6.2DT
+			09	Modificaciï¿½n desde peaje 3.1A a peaje 6.1DT
+			10	Modificaciï¿½n desde peaje 3.1A a peaje 6.2DT
+			11	Falta fichero coeficientes del aï¿½o que inicia
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -1735,6 +1737,7 @@
 			<xs:enumeration value="08"/>
 			<xs:enumeration value="09"/>
 			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="MotivoFacturacion">
@@ -1933,68 +1936,68 @@
 			001	ATENCION INCORRECTA
 			002	PRIVACIDAD DE LOS DATOS
 			003	INCIDENCIA EN EQUIPOS DE MEDIDA
-			004	DAÑOS ORIGINADOS POR EQUIPO DE MEDIDA
+			004	DAï¿½OS ORIGINADOS POR EQUIPO DE MEDIDA
 			005	CONTADOR EN FACTURA NO CORRESPONDE CON INSTALADO
 			006	CONTRATOS ATR/PEAJE
 			007	CUPS NO PERTENECE A COMERCIALIZADORA O NO VIGENTE EN PERIODO DE FACTURA
 			008	DISCONFORMIDAD CON CONCEPTOS FACTURADOS
 			009	DISCONFORMIDAD CON LECTURA FACTURADA
-			010	DISCONFORMIDAD EN FACTURA ANOMALÍA / FRAUDE
-			011	RECLAMACIÓN FACTURA  PAGO DUPLICADO
+			010	DISCONFORMIDAD EN FACTURA ANOMALï¿½A / FRAUDE
+			011	RECLAMACIï¿½N FACTURA  PAGO DUPLICADO
 			012	REFACTURACION NO RECIBIDA
 			013	DISCONFORMIDAD CON CAMBIO DE SUMINISTRADOR
-			014	REQUERIMIENTO DE FIANZA / DEPÓSITO DE GARANTÍA
+			014	REQUERIMIENTO DE FIANZA / DEPï¿½SITO DE GARANTï¿½A
 			015	RETRASO CORTE DE SUMINISTRO
-			018	DISCONFORMIDAD CON CRITERIOS ECONÓMICOS / COBROS
-			019	DISCONFORMIDAD CON CRITERIOS TÉCNICOS / OBRA EJECUTADA
+			018	DISCONFORMIDAD CON CRITERIOS ECONï¿½MICOS / COBROS
+			019	DISCONFORMIDAD CON CRITERIOS Tï¿½CNICOS / OBRA EJECUTADA
 			020	CALIDAD DE ONDA
-			021	CON PETICIÓN DE INDEMNIZACIÓN
-			022	SIN PETICIÓN DE INDEMNIZACIÓN
+			021	CON PETICIï¿½N DE INDEMNIZACIï¿½N
+			022	SIN PETICIï¿½N DE INDEMNIZACIï¿½N
 			023	RETRASO EN PAGO INDEMNIZACION
-			024	DAÑOS A TERCEROS POR INSTALACIONES 
+			024	DAï¿½OS A TERCEROS POR INSTALACIONES 
 			025	IMPACTO AMBIENTAL INSTALACIONES
 			026	RECLAMACIONES SOBRE INSTALACIONES
 			027	DISCONFORMIDAD DESCUENTO SERVICIO INDIVIDUAL 
-			028	EJECUCIÓN INDEBIDA DE CORTE
-			029	RETRASO EN LA ATENCIÓN A RECLAMACIONES  
-			030	RETRASO PLAZO DE CONTESTACIÓN NUEVOS SUMINISTROS
-			031	RETRASO PLAZO DE EJECUCIÓN NUEVO SUMINISTRO
+			028	EJECUCIï¿½N INDEBIDA DE CORTE
+			029	RETRASO EN LA ATENCIï¿½N A RECLAMACIONES  
+			030	RETRASO PLAZO DE CONTESTACIï¿½N NUEVOS SUMINISTROS
+			031	RETRASO PLAZO DE EJECUCIï¿½N NUEVO SUMINISTRO
 			032	RETRASO REENGANCHE TRAS CORTE
-			034	DISCONFORMIDAD CON CONCEPTOS DE CONTRATACIÓN ATR/PEAJE
+			034	DISCONFORMIDAD CON CONCEPTOS DE CONTRATACIï¿½N ATR/PEAJE
 			035	DISCONFORMIDAD RECHAZO SOLICITUD ATR/PEAJE
-			036	PETICIÓN DE REFACTURACIÓN APORTANDO LECTURA
+			036	PETICIï¿½N DE REFACTURACIï¿½N APORTANDO LECTURA
 			037	FICHERO XML INCORRECTO
 			038	PRIVACIDAD DE LOS DATOS
 			039	SOLICITUD DE CERTIFICADO / INFORME DE CALIDAD
 			040	SOLICITUD DE DUPLICADO DE FACTURA
-			041	SOLICITUD DE ACTUACIÓN SOBRE INSTALACIONES
+			041	SOLICITUD DE ACTUACIï¿½N SOBRE INSTALACIONES
 			042	SOLICITUD DE DESCARGO
-			043	PETICIÓN DE PRECINTADO / DESPRECINTADO DE EQUIPOS
-			044	PETICIONES CON ORIGEN EN CAMPAÑAS DE TELEGESTIÓN
-			045	ACTUALIZACIÓN  DE DIRECCIÓN  DEL PUNTO DE SUMINISTRO
+			043	PETICIï¿½N DE PRECINTADO / DESPRECINTADO DE EQUIPOS
+			044	PETICIONES CON ORIGEN EN CAMPAï¿½AS DE TELEGESTIï¿½N
+			045	ACTUALIZACIï¿½N  DE DIRECCIï¿½N  DEL PUNTO DE SUMINISTRO
 			046	CERTIFICADO DE LECTURA
 			047	SOLICITUD RECALCULO CCH SIN MODIFICACION CIERRE ATR	FASE 1 PVPC
-			048  	PETICIÓN INFORMACIÓN ADICIONAL RECHAZO 
+			048  	PETICIï¿½N INFORMACIï¿½N ADICIONAL RECHAZO 
 			049	FALTA FICHERO DE MEDIDA
 			055	DISCONFORMIDAD IMPORTE FACTURADO AUTOCONSUMO
-			056	PETICIÓN DESGLOSE IMPORTE FACTURADO AUTOCONSUMO
+			056	PETICIï¿½N DESGLOSE IMPORTE FACTURADO AUTOCONSUMO
 			057	DISCONFORMIDAD CON EXPEDIENTE DE ANOMALIA Y FRAUDE (sin factura emitida)
-			058	RETRASO EN PLAZO ACEPTACIÓN CAMBIO DE COMERCIALIZADOR
-			059	RETRASO EN PLAZO ACTIVACIÓN CAMBIO DE COMERCIALIZADOR
-			060	RETRASO EN PLAZO ACEPTACIÓN MODIFICACIÓN CONTRACTUAL
-			061	RETRASO EN PLAZO ACTIVACIÓN MODIFICACIÓN CONTRACTUAL
-			062	RETRASO EN PLAZO ACEPTACIÓN ALTA DE UN NUEVO SUMINISTRO
-			063	RETRASO EN PLAZO ACTIVACIÓN ALTA DE UN NUEVO SUMINISTRO
-			064	RETRASO EN PLAZO ACEPTACIÓN DE UNA BAJA DE UN SUMINISTRO
-			065	RETRASO EN PLAZO ACTIVACIÓN DE UNA BAJA DE UN SUMINISTRO, también para la baja de contratos inferiores a un año
-			066 	INFORMACIÓN/VALIDACIÓN SOBRE FATOS DEL CONTRATAO ATR/PEAJE
-			067	VERIFICACIÓN DE CONTADOR
+			058	RETRASO EN PLAZO ACEPTACIï¿½N CAMBIO DE COMERCIALIZADOR
+			059	RETRASO EN PLAZO ACTIVACIï¿½N CAMBIO DE COMERCIALIZADOR
+			060	RETRASO EN PLAZO ACEPTACIï¿½N MODIFICACIï¿½N CONTRACTUAL
+			061	RETRASO EN PLAZO ACTIVACIï¿½N MODIFICACIï¿½N CONTRACTUAL
+			062	RETRASO EN PLAZO ACEPTACIï¿½N ALTA DE UN NUEVO SUMINISTRO
+			063	RETRASO EN PLAZO ACTIVACIï¿½N ALTA DE UN NUEVO SUMINISTRO
+			064	RETRASO EN PLAZO ACEPTACIï¿½N DE UNA BAJA DE UN SUMINISTRO
+			065	RETRASO EN PLAZO ACTIVACIï¿½N DE UNA BAJA DE UN SUMINISTRO, tambiï¿½n para la baja de contratos inferiores a un aï¿½o
+			066 	INFORMACIï¿½N/VALIDACIï¿½N SOBRE FATOS DEL CONTRATAO ATR/PEAJE
+			067	VERIFICACIï¿½N DE CONTADOR
 			069	COPIA F1 EN PDF
-			070	RETRASO EN LA ATENCIÓN A RECLAMACIONES NO SUJETAS A ATENCIÓN REGLAMENTARIA
-			071   RETRASO EN PLAZO DE ACEPTACIÓN DESISTIMIENTO
-			072   RETRASO EN PLAZO DE ACTIVACIÓN DESISTIMIENTO
-			073   PARÁMETROS DE COMUNICACIÓN
-			074   RETRASO PLAZO ACEPTACIÓN ANULACIÓN
+			070	RETRASO EN LA ATENCIï¿½N A RECLAMACIONES NO SUJETAS A ATENCIï¿½N REGLAMENTARIA
+			071   RETRASO EN PLAZO DE ACEPTACIï¿½N DESISTIMIENTO
+			072   RETRASO EN PLAZO DE ACTIVACIï¿½N DESISTIMIENTO
+			073   PARï¿½METROS DE COMUNICACIï¿½N
+			074   RETRASO PLAZO ACEPTACIï¿½N ANULACIï¿½N
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2195,7 +2198,7 @@
 			47	3x100
 			48	3x150/260
 			49	3x260
-			99     Otra tensión obsoleta
+			99     Otra tensiï¿½n obsoleta
 			
 			</xs:documentation>
 		</xs:annotation>
@@ -2324,7 +2327,7 @@
 			TC	TRANSFORMADOR COMBINADO	
 			TI	TRANSFORMADOR INTENSIDAD	
 			TP	TRNSFORMADOR POTENCIA	
-			TT	TRNSFORMADOR DE TENSIÓN	
+			TT	TRNSFORMADOR DE TENSIï¿½N	
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2378,26 +2381,26 @@
 			2B	Autoconsumo tipo 2 segun el Art. 13.2.b) del RD 900/2015
 			31 	Sin Excedentes Individual - Consumo
 			32 	Sin Excedentes Colectivo - Consumo
-			33	Sin Excedentes Colectivo con acuerdo de compensación - Consumo
-			41 	Con excedentes y compensación Individual - Consumo  
-			42 	Con excedentes y compensación Colectivo - Consumo
-			43  Con excedentes y compensación Colectivo a través de red - Consumo
-			51 	Con excedentes sin compensación Individual sin cto de SSAA en Red Interior - Consumo
-			52 	Con excedentes sin compensación Individual con cto SSAA en Red Interior - Consumo
-			53	Con excedentes sin compensación individual con cto SSAA en Red Interior - SSAA
-			54 	Con excedentes sin compensación Colectivo en Red Interior - Consumo
-			55 	Con excedentes sin compensación Colectivo con cto de SSAA en Red Interior - Consumo
-			56	Con excedentes sin compensación Colectivo con cto de SSAA en Red Interior - SSAA
-			57  Con excedentes sin compensación Colectivo sin cto de SSAA (despreciable) en red interior - Consumo
-			58  Con excedentes sin compensación Colectivo sin cto de SSAA a través de red - Consumo
-			61 	Con excedentes sin compensación Individual con cto SSAA a través de red - Consumo
-			62 	Con excedentes sin compensación individual con cto SSAA a través de red - SSAA
-			63 	Con excedentes sin compensación Colectivo con cto de SSAA a través de red - Consumo
-			64 	Con excedentes sin compensación Colectivo  con cto de SSAA a través de red - SSAA	
-			71	Con excedentes sin compensación Individual con cto SSAA a través de red y red interior - Consumo
-			72	Con excedentes sin compensación individual con cto SSAA a través de red y red interior - SSAA
-			73	Con excedentes sin compensación Colectivo con cto de SSAA  a través de red y red interior - Consumo
-			74	Con excedentes sin compensación Colectivo con cto de SSAA a través de red y red interior - SSAA
+			33	Sin Excedentes Colectivo con acuerdo de compensaciï¿½n - Consumo
+			41 	Con excedentes y compensaciï¿½n Individual - Consumoï¿½ 
+			42 	Con excedentes y compensaciï¿½n Colectivo - Consumo
+			43  Con excedentes y compensaciï¿½n Colectivo a travï¿½s de red - Consumo
+			51 	Con excedentes sin compensaciï¿½n Individual sin cto de SSAA en Red Interior - Consumo
+			52 	Con excedentes sin compensaciï¿½n Individual con cto SSAA en Red Interior - Consumo
+			53	Con excedentes sin compensaciï¿½n individual con cto SSAA en Red Interior - SSAA
+			54 	Con excedentes sin compensaciï¿½n Colectivo en Red Interior - Consumo
+			55 	Con excedentes sin compensaciï¿½n Colectivo con cto de SSAA en Red Interior - Consumo
+			56	Con excedentes sin compensaciï¿½n Colectivo con cto de SSAA en Red Interior - SSAA
+			57  Con excedentes sin compensaciï¿½n Colectivo sin cto de SSAA (despreciable) en red interior - Consumo
+			58  Con excedentes sin compensaciï¿½n Colectivo sin cto de SSAA a travï¿½s de red - Consumo
+			61 	Con excedentes sin compensaciï¿½n Individual con cto SSAA a travï¿½s de red - Consumo
+			62 	Con excedentes sin compensaciï¿½n individual con cto SSAA a travï¿½s de red - SSAA
+			63 	Con excedentes sin compensaciï¿½n Colectivo con cto de SSAA a travï¿½s de red - Consumo
+			64 	Con excedentes sin compensaciï¿½n Colectivo  con cto de SSAA a travï¿½s de red - SSAA	
+			71	Con excedentes sin compensaciï¿½n Individual con cto SSAA a travï¿½s de red y red interior - Consumo
+			72	Con excedentes sin compensaciï¿½n individual con cto SSAA a travï¿½s de red y red interior - SSAA
+			73	Con excedentes sin compensaciï¿½n Colectivo con cto de SSAA  a travï¿½s de red y red interior - Consumo
+			74	Con excedentes sin compensaciï¿½n Colectivo con cto de SSAA a travï¿½s de red y red interior - SSAA
 		</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2646,13 +2649,13 @@ la reclamacion
 			L01	Tipo 1
 			L02	Tipo 2
 			L03	Tipo 3
-			L04	Tipo 4 – 6 periodos
-			L05	Tipo 4 – horario
+			L04	Tipo 4 ï¿½ 6 periodos
+			L05	Tipo 4 ï¿½ horario
 			L06	Tipo 5 - un periodo
-			L07	Tipo 5 – dos periodos
-			L08	Tipo 5 – seis periodos
-			L09	Tipo 5 – horario
-			L10	Tipo 4 – transitorio
+			L07	Tipo 5 ï¿½ dos periodos
+			L08	Tipo 5 ï¿½ seis periodos
+			L09	Tipo 5 ï¿½ horario
+			L10	Tipo 4 ï¿½ transitorio
 			R00	Sin discriminacion Horaria
 			R01	Sin contador discriminador
 			R02	Dos periodos
@@ -2829,9 +2832,9 @@ la reclamacion
 	</xs:simpleType>
 	<xs:simpleType name="SolicitudTension">
 		<xs:annotation>
-			<xs:documentation> tipo de tensión solicitada (tabla 117)
-			M	Monofásica
-			T	Trifásica
+			<xs:documentation> tipo de tensiï¿½n solicitada (tabla 117)
+			M	Monofï¿½sica
+			T	Trifï¿½sica
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2916,12 +2919,12 @@ la reclamacion
 	<xs:simpleType name="TipoReclamacionPeticion">
 		<xs:annotation>
 			<xs:documentation>Tipo de Reclamacion o Peticion (Tabla 81)
-			01	ATENCIÓN PERSONAL
-			02	FACTURACIÓN Y MEDIDA
-			03	CONTRATACIÓN
-			04	GESTIÓN DE ACOMETIDAS
+			01	ATENCIï¿½N PERSONAL
+			02	FACTURACIï¿½N Y MEDIDA
+			03	CONTRATACIï¿½N
+			04	GESTIï¿½N DE ACOMETIDAS
 			05	CALIDAD DE SUMINISTRO
-			06	SITUACIÓN DE INSTALACIONES
+			06	SITUACIï¿½N DE INSTALACIONES
 			07	ATENCION REGLAMENTARIA
 			</xs:documentation>
 		</xs:annotation>
@@ -2971,8 +2974,9 @@ la reclamacion
 			07	Otra documentacion del cliente
 			08	Otros		
 			09	Acuerdo reparto
-			10	CIE generación	
-			11  Declaración relativa a puntos de recarga de vehículos eléctricos de acceso público
+			10	CIE generaciï¿½n	
+			11 	Declaraciï¿½n relativa a puntos de recarga de vehï¿½culos elï¿½ctricos de acceso pï¿½blico
+			12  	Fichero de coeficientes de reparto
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2987,6 +2991,7 @@ la reclamacion
 			<xs:enumeration value="09"/>
 			<xs:enumeration value="10"/>
 			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TipoSolicitudAdministrativa">
@@ -2997,7 +3002,7 @@ la reclamacion
 			A	Cambio datos administrativos (excepto cambio de titular y correccion de datos identificativos del cliente)
 			C	Correccion de datos que identifican al cliente
 			P	La solicitud implica cambio en la periodicidad de la facturacion
-			R	Modificación acuerdo de reparto de un autoconsumo colectivo
+			R	Modificaciï¿½n acuerdo de reparto de un autoconsumo colectivo
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -3045,7 +3050,7 @@ la reclamacion
 			UF	Uso finca
 			UV	Usos varios
 			VI	Vivienda
-			VE	Recarga de vehículo eléctrico			
+			VE	Recarga de vehï¿½culo elï¿½ctrico			
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -3091,17 +3096,17 @@ la reclamacion
 			AC	ACCESO
 			AD 	ALDEA
 			AF	AFUERAS
-			AG	AGRUPACIÓN
+			AG	AGRUPACIï¿½N
 			AL	ALAMEDA
 			AR	ARRABAL
-			AU	AUTOP/AUTOVÍA
+			AU	AUTOP/AUTOVï¿½A
 			AV	AVENIDA
 			BC	BARRANCO
 			BD	BARRIADA
 			BL	BLOQUE
 			BO	BARRIO
 			CA	COLONIA
-			CF	CALLEJÓN
+			CF	CALLEJï¿½N
 			CH 	CHALET
 			CI	    CARRIL
 			CJ 	CALLEJA
@@ -3120,7 +3125,7 @@ la reclamacion
 			GL	GLORIETA
 			GR	GRUPO
 			LG	LUGAR
-			MA	MASÍA
+			MA	MASï¿½A
 			MU	MUELLE
 			MZ	MANZANA
 			NU	NUCLEO
@@ -3132,9 +3137,9 @@ la reclamacion
 			PI		POL.INDUSTRIAL
 			PJ	PARAJE
 			PL	PANTALAN
-			PO	POLÍGONO
+			PO	POLï¿½GONO
 			PQ	PARQUE
-			PR	PROLONGACIÓN
+			PR	PROLONGACIï¿½N
 			PS	PASAJE
 			PT	PLAZOLETA
 			PY	PLAYA
@@ -3143,8 +3148,8 @@ la reclamacion
 			RD	RONDA
 			RS	RESIDENCIAL
 			SD	SENDA
-			TR	TRAVESÍA
-			UR	URBANIZACIÓN
+			TR	TRAVESï¿½A
+			UR	URBANIZACIï¿½N
 			VI	VIAL
 			ZN	ZONA
 			AD	ALDEA
@@ -3489,7 +3494,7 @@ la reclamacion
 	</xs:simpleType>
 	<xs:simpleType name="SeccionRegistro">
 		<xs:annotation>
-			<xs:documentation> Sección Registro (tabla 127)
+			<xs:documentation> Secciï¿½n Registro (tabla 127)
 				1 - Sin excedentes
 				2 - Con excedentes
 			</xs:documentation>
@@ -3501,10 +3506,10 @@ la reclamacion
 	</xs:simpleType>
 	<xs:simpleType name="SubSeccion">
 		<xs:annotation>
-			<xs:documentation> Subsección (tabla 128)
-				a0 - Con excedentes y mecanismo de compesación simplificado
-				b1 - Con excedentes sin mecanismo de compensación y un único contrato de suministro 
-				b2 - Con excedentes sin mecanismo de compensación y varios contratos de suministro
+			<xs:documentation> Subsecciï¿½n (tabla 128)
+				a0 - Con excedentes y mecanismo de compesaciï¿½n simplificado
+				b1 - Con excedentes sin mecanismo de compensaciï¿½n y un ï¿½nico contrato de suministro 
+				b2 - Con excedentes sin mecanismo de compensaciï¿½n y varios contratos de suministro
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -3515,10 +3520,10 @@ la reclamacion
 	</xs:simpleType>
 	<xs:simpleType name="TipoInstalacion">
 		<xs:annotation>
-			<xs:documentation> Tipo de instalación (tabla 129)
+			<xs:documentation> Tipo de instalaciï¿½n (tabla 129)
 				01 - Red interior
-				02 - Red interior da varios consumidores (instalación de enlace)
-				03 - Próxima a través de red
+				02 - Red interior da varios consumidores (instalaciï¿½n de enlace)
+				03 - Prï¿½xima a travï¿½s de red
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -3534,7 +3539,7 @@ la reclamacion
 				B - EdM Bidireccional en PF y EdM gen. neta
 				C - EdM Consumo Total y EdM bidireccional gen. neta
 				D - EdM Consumo Total y EdM gen bruta y EdM cons SSAA
-				E - Configuración singular
+				E - Configuraciï¿½n singular
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -3573,7 +3578,7 @@ la reclamacion
 	</xs:simpleType>
 	<xs:simpleType name="TecGenerador">
 		<xs:annotation>
-			<xs:documentation> Tecnología de generación (tabla 126)
+			<xs:documentation> Tecnologï¿½a de generaciï¿½n (tabla 126)
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -3690,7 +3695,7 @@ la reclamacion
 			<xs:enumeration value="L"/>
 			<xs:enumeration value="M"/>
 			<xs:enumeration value="N"/>
-			<xs:enumeration value="Ñ"/>
+			<xs:enumeration value="ï¿½"/>
 			<xs:enumeration value="P"/>
 			<xs:enumeration value="Q"/>
 			<xs:enumeration value="R"/>
@@ -3704,8 +3709,8 @@ la reclamacion
 	</xs:simpleType>
 	<xs:simpleType name="typeContestacionIncidencia">
 		<xs:annotation>
-			<xs:documentation> Tipo de contestación indidencia (tabla 121)
-			01 Nuevo teléfono de contacto
+			<xs:documentation> Tipo de contestaciï¿½n indidencia (tabla 121)
+			01 Nuevo telï¿½fono de contacto
 			02 Deficiencia/Trabajos subsanada. Contactar con cliente
 			</xs:documentation>
 		</xs:annotation>
@@ -3717,9 +3722,9 @@ la reclamacion
 	<xs:simpleType name="MotivoTraspaso">
 		<xs:annotation>
 			<xs:documentation>Motivo de posible traspaso a la COR (tabla 119)	
-				01	Solicitud de baja por fin de contrato de energía (B1 motivo 02)
+				01	Solicitud de baja por fin de contrato de energï¿½a (B1 motivo 02)
 				02	Solicitud de desistimiento a un cambio de comercilizador de un nuevo titular 
-				03	Decisión fundada de la Dirección General de Política Energética y Minas, cautelar o definitivamente, se traspasan los puntos de suministro al COR				
+				03	Decisiï¿½n fundada de la Direcciï¿½n General de Polï¿½tica Energï¿½tica y Minas, cautelar o definitivamente, se traspasan los puntos de suministro al COR				
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -3731,8 +3736,8 @@ la reclamacion
 	<xs:simpleType name="TipoDesistimiento">
 		<xs:annotation>
 			<xs:documentation>Tipo de desistimiento (tabla 122)
-			01	Desistimiento en plazo máx. de 14 días naturales
-			02 	Desistimiento por incumplimiento de comercializador en contratación
+			01	Desistimiento en plazo mï¿½x. de 14 dï¿½as naturales
+			02 	Desistimiento por incumplimiento de comercializador en contrataciï¿½n
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -3743,12 +3748,12 @@ la reclamacion
 	<xs:simpleType name="ResultadoDesistimiento">
 		<xs:annotation>
 			<xs:documentation>Resultado de desistimiento (tabla 118)
-			01	Vuelta a la situación anterior - En servicio
-			02	Vuelta a la situación anterior - Sin servicio (Cortado)
+			01	Vuelta a la situaciï¿½n anterior - En servicio
+			02	Vuelta a la situaciï¿½n anterior - Sin servicio (Cortado)
 			03	Traspaso a la COR
 			04	Baja del contrato por rechazo de la COR al traspaso
 			05	Baja por cese de actividad
-			06	Activación de Cambio de Comercializador
+			06	Activaciï¿½n de Cambio de Comercializador
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -3763,13 +3768,13 @@ la reclamacion
 	<xs:simpleType name="MotivoNoContratable">
 		<xs:annotation>
 			<xs:documentation>Motivo No Contratable (tabla 123)
-			01	El PS no ha pasado la inspección de la instalación de enlace (instalación desde la Caja General de Protección, CGP,  al contador)
-			02	Instalación eléctrica peligrosa
+			01	El PS no ha pasado la inspecciï¿½n de la instalaciï¿½n de enlace (instalaciï¿½n desde la Caja General de Protecciï¿½n, CGP,  al contador)
+			02	Instalaciï¿½n elï¿½ctrica peligrosa
 			03	Necesidad de abrir expediente de acometida: Derechos caducados
 			04	Expediente abierto de nuevos suministos
-			05	Expediente abierto de inspección
-			06	Falta licencia de ocupación, cédula de habitabilidad u otra documentación relevante que impide la contratación del NNSS
-			07	Orden o Resolución de la Administración Pública competente, Resolución o Mandato Judicial que impide la contratación en el PS
+			05	Expediente abierto de inspecciï¿½n
+			06	Falta licencia de ocupaciï¿½n, cï¿½dula de habitabilidad u otra documentaciï¿½n relevante que impide la contrataciï¿½n del NNSS
+			07	Orden o Resoluciï¿½n de la Administraciï¿½n Pï¿½blica competente, Resoluciï¿½n o Mandato Judicial que impide la contrataciï¿½n en el PS
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -3784,15 +3789,15 @@ la reclamacion
 	</xs:simpleType>
 	<xs:simpleType name="TipoSolicitudEnCurso">
 		<xs:annotation>
-			<xs:documentation>Solicitud de Contratación (tabla 124)
+			<xs:documentation>Solicitud de Contrataciï¿½n (tabla 124)
 			A300	Solicitud de nuevo suministro
-			C100	Solicitud de cambio de comercializador sin modificación en el contrato de acceso
-			C200	Solicitud de cambio de comercializador con modificación en el contrato de acceso
+			C100	Solicitud de cambio de comercializador sin modificaciï¿½n en el contrato de acceso
+			C200	Solicitud de cambio de comercializador con modificaciï¿½n en el contrato de acceso
 			B101	Baja por cese de actividad 
 			B102	Baja por fin de contrato de suministro
-			B103	Corte o suspensión del suministro por impago
+			B103	Corte o suspensiï¿½n del suministro por impago
 			B104	Baja por impago
-			M100	Solicitud de modificación contractual
+			M100	Solicitud de modificaciï¿½n contractual
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -3814,35 +3819,35 @@ la reclamacion
 	</xs:simpleType>
 	<xs:simpleType name="CdigoMotivoExpedienteAF">
 		<xs:annotation>
-			<xs:documentation>Código Motivo Anomalía/Fraude (tabla 63)
-			A001	Programación/parametrización errónea
-			A002 	Equipo de Medida con conexión errónea
-			A003	Equipo de Medida inadecuado a instalación
+			<xs:documentation>Cï¿½digo Motivo Anomalï¿½a/Fraude (tabla 63)
+			A001	Programaciï¿½n/parametrizaciï¿½n errï¿½nea
+			A002 	Equipo de Medida con conexiï¿½n errï¿½nea
+			A003	Equipo de Medida inadecuado a instalaciï¿½n
 			A004     Contador averiado
 			A005	Transformadores averiados
-			A006	Módem averiado/Fallo comunicación
-			A007	Error medición fuera de margen
-			A008	Programación/parametrización errónea por avería
+			A006	Mï¿½dem averiado/Fallo comunicaciï¿½n
+			A007	Error mediciï¿½n fuera de margen
+			A008	Programaciï¿½n/parametrizaciï¿½n errï¿½nea por averï¿½a
 			A009	Contador no se lee
-			A010	Constante contador no corresponde a constante facturación
-			A011	Lectura errónea
+			A010	Constante contador no corresponde a constante facturaciï¿½n
+			A011	Lectura errï¿½nea
 			A012	Suministro no se factura
 			A013     Corriente directa autorizada
-			A014	Tarifa/Discriminación horaria mal informada o aplicada
+			A014	Tarifa/Discriminaciï¿½n horaria mal informada o aplicada
 			F001		Corriente directa con contrato
 			F002 	Corriente directa con contrato (doble acometida)
 			F003		Corriente directa sin contrato (sin contador)
 			F004     Corriente directa sin contrato (con contador)
-			F005		Inversión entrada-salida
+			F005		Inversiï¿½n entrada-salida
 			F006		Puente entrada-salida en la misma fase (shunt)
-			F007		Puente de tensión aislado/desconectado
+			F007		Puente de tensiï¿½n aislado/desconectado
 			F008		Equipo de medida manipulado
-			F009		Conexión de equipo de medida manipulada
-			F010		Cambio de placa características de transformadores I/T
-			F011		Equipo de medida sustituido sin autorización
-			F012		Programación/parametrización alterada
+			F009		Conexiï¿½n de equipo de medida manipulada
+			F010		Cambio de placa caracterï¿½sticas de transformadores I/T
+			F011		Equipo de medida sustituido sin autorizaciï¿½n
+			F012		Programaciï¿½n/parametrizaciï¿½n alterada
 			F013     ICP puenteado o no ajustado a potencia contratada
-			F014		Cesión de energía
+			F014		Cesiï¿½n de energï¿½a
 		</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -3878,21 +3883,21 @@ la reclamacion
 	</xs:simpleType>
 	<xs:simpleType name="CdigoMotivoExpedienteA">
 		<xs:annotation>
-			<xs:documentation>Código Motivo Expediente Acometida (tabla 125)
+			<xs:documentation>Cï¿½digo Motivo Expediente Acometida (tabla 125)
 			01	Aumento potencia
-			02 	Cambio tensión 
+			02 	Cambio tensiï¿½n 
 			03	Cambio tarifa
 			04     Nuevo suministro
-			05	Colectivo nueva construcción
-			06	Colectivo electrificación rural
-			07	Informativo Plan urbanístico 
+			05	Colectivo nueva construcciï¿½n
+			06	Colectivo electrificaciï¿½n rural
+			07	Informativo Plan urbanï¿½stico 
 			08	Informativo Plan industrial
-			09	Informativo Productor de Régimen Especial
-			10	Colectivo reconstrucción vivienda 
+			09	Informativo Productor de Rï¿½gimen Especial
+			10	Colectivo reconstrucciï¿½n vivienda 
 			11	TCT No relacionado a NNSS
 			12	TCT Relacionado a NNSS.
-			13	Colectivo renovación de Instalaciones de enlace varios suministros
-			14	Renovación de instalaciones de enlace		
+			13	Colectivo renovaciï¿½n de Instalaciones de enlace varios suministros
+			14	Renovaciï¿½n de instalaciones de enlace		
 		</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -3926,12 +3931,12 @@ la reclamacion
 	</xs:simpleType>
 	<xs:simpleType name="MotivoBajaB2">
 		<xs:annotation>
-			<xs:documentation>Motivo Comunicación Baja Unidireccional (tabla 120)
-			01	Baja del contrato de acceso de duración inferior a un año según fecha solicitada por la comercializadora
+			<xs:documentation>Motivo Comunicaciï¿½n Baja Unidireccional (tabla 120)
+			01	Baja del contrato de acceso de duraciï¿½n inferior a un aï¿½o segï¿½n fecha solicitada por la comercializadora
 			02	Baja del contrato de acceso por orden judicial o mandato de organismo oficial
 			03	Baja del contrato de acceso por rechazo del COR al traspaso
 			04	Baja del contrato de acceso a iniciativa de la distribuidora por seguridad de la red.
-			05	Baja del contrato de acceso por haber pasado dos meses desde que se suspendió un punto de suministro tras el desistimiento de un cambio de comercializador activado sobre un punto de suministro suspendido por impago
+			05	Baja del contrato de acceso por haber pasado dos meses desde que se suspendiï¿½ un punto de suministro tras el desistimiento de un cambio de comercializador activado sobre un punto de suministro suspendido por impago
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -3945,8 +3950,8 @@ la reclamacion
 	<xs:simpleType name="TipoCargoType">
 		<xs:annotation>
 			<xs:documentation>Tipo de cargo (tabla 132)	
-			01 Cargo correspondiente al término de potencia
-			02 Cargo correspondiente al término de energía
+			01 Cargo correspondiente al tï¿½rmino de potencia
+			02 Cargo correspondiente al tï¿½rmino de energï¿½a
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">

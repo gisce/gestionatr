@@ -19,6 +19,22 @@ from gestionatr import __version__
 VERSION_TEXT = u'ATR library version (gestionatr) : {0}'.format(__version__)
 
 
+P0_TEMPLATE = """
+        <MensajeSolicitudInformacionAlRegistroDePS xmlns="http://localhost/elegibilidad">
+          <Cabecera>
+            <CodigoREEEmpresaEmisora>{emisora}</CodigoREEEmpresaEmisora>
+            <CodigoREEEmpresaDestino>{destino}</CodigoREEEmpresaDestino>
+            <CodigoDelProceso>P0</CodigoDelProceso>
+            <CodigoDePaso>01</CodigoDePaso>
+            <CodigoDeSolicitud>{solicitud}</CodigoDeSolicitud>
+            <SecuencialDeSolicitud>01</SecuencialDeSolicitud>
+            <FechaSolicitud>{fecha_solicitud}</FechaSolicitud>
+            <CUPS>{cups}</CUPS>
+          </Cabecera>
+        </MensajeSolicitudInformacionAlRegistroDePS>
+"""
+
+
 def get_gestionatr_version(ctx, param, value):
     if not value or ctx.resilient_parsing:
         return
@@ -60,7 +76,18 @@ def test(filename, sector):
             sys.stdout.flush()
 
 
-def request_p0(url, user, password, xml_str):
+def request_p0(url, user, password, xml_str=None, params=None):
+    import random
+    import re
+    from datetime import datetime
+    if xml_str is None and params is None:
+        raise ValueError("XML or params must be passed to request_p0")
+    if xml_str is None and params:
+        params['fecha_solicitud'] = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
+        params['solicitud'] = 10**11 + int((random.random() * 10**11))
+        xml_str = re.sub(r'\s+<', '<', P0_TEMPLATE)
+        xml_str = re.sub(r'\s+$', '', xml_str)
+        xml_str = re.sub(r'\n', '', xml_str).format(**params)
     t = HttpAuthenticated(username=user, password=password)
     base64string = base64.encodestring('%s:%s' % (user, password)).replace('\n', '')
     auth_header = {
@@ -94,6 +121,8 @@ def request_p0(url, user, password, xml_str):
 
         aux = etree.fromstring(res)
         aux_res = find_child(aux, "MensajeEnvioInformacionPS")
+        if not aux_res:
+            aux_res = find_child(aux, "MensajeRechazoP0")
 
         res = etree.tostring(aux_res)
     except Exception:
@@ -106,8 +135,21 @@ def request_p0(url, user, password, xml_str):
 @click.option('-s', '--user', default='admin', help=u'User del webservice', show_default=True)
 @click.option('-p', '--password', default='admin', help=u'Password del webservice', show_default=True)
 @click.option('-f', '--file', help=u'Fitxer P0 pas 01 per enviar', show_default=True)
-def sollicitar_p0(url, user, password, file):
-    res = request_p0(url, user, password, file)
-    print(res)
+@click.option('--emisora', help='Código REE empresa emisora')
+@click.option('--destino', help='Código REE empresa destino')
+@click.option('--cups', help='CUPS')
+def sollicitar_p0(url, user, password, file=None, emisora=None, destino=None, cups=None):
+    params = None
+    from lxml import etree
+    if emisora and destino and cups:
+        params = {
+            'emisora': emisora,
+            'destino': destino,
+            'cups': cups
+        }
+
+    res = request_p0(url, user, password, file, params)
+    res = etree.fromstring(res)
+    print(etree.tostring(res, pretty_print=True))
 
 
