@@ -609,7 +609,7 @@ class Factura(object):
         return {
             'tipo_rectificadora': self.clasefact or self.indfacturarect or 'N',
             'date_invoice': self.fecfactura,
-            'check_total': -1 * self.importetotal if self.tipofactura in ('A',) else self.importetotal,
+            'check_total': -1 * self.importetotal if self.clasefact in ('A',) else self.importetotal,
             'origin': self.get_origin(),
             'origin_date_invoice': self.fecfactura,
             'reference': self.get_origin(),
