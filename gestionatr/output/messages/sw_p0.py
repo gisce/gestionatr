@@ -308,3 +308,85 @@ class Rechazo(XmlModel):
         self.codigo_motivo = XmlField('CodigoMotivo')
         self.comentarios = XmlField('Comentarios')
         super(Rechazo, self).__init__('Rechazo', 'rechazo')
+
+
+ENVELOPE_TEMPLATE_AMB_NAMESPACE_AL_PAS = """
+<soap:Envelope 
+xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:eleg="http://localhost/elegibilidad"
+>
+    <soap:Header />
+    <soap:Body>
+        <eleg:sync>
+            <eleg:Paso01>
+                {xml_str}
+            </eleg:Paso01>
+        </eleg:sync>
+    </soap:Body>
+</soap:Envelope>
+"""
+
+ENVELOPE_TEMPLATE_SENSE_NAMESPACE_AL_PAS01 = """
+<soap:Envelope 
+xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:eleg="http://localhost/elegibilidad"
+>
+    <soap:Header />
+    <soap:Body>
+        <eleg:sync>
+            <Paso01>
+                {xml_str}
+            </Paso01>
+        </eleg:sync>
+    </soap:Body>
+</soap:Envelope>
+"""
+
+ENVELOPE_TEMPLATE_DIELSUR = """
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <sync xmlns="http://localhost/elegibilidad">
+        <Paso01 xmlns="">
+            {xml_str}
+        </Paso01>
+    </sync>
+  </soap:Body>
+</soap:Envelope>
+"""
+
+
+ENVELOP_BY_DISTR = {
+    '0021': {
+        'template': ENVELOPE_TEMPLATE_SENSE_NAMESPACE_AL_PAS01,
+        'extra_headers': {},
+    },
+    '0031': {
+        'template': ENVELOPE_TEMPLATE_SENSE_NAMESPACE_AL_PAS01,
+        'extra_headers': {},
+    },
+    '0022': {
+        'template': ENVELOPE_TEMPLATE_SENSE_NAMESPACE_AL_PAS01,
+        'extra_headers': {},
+    },
+    '0143': {
+        'template': ENVELOPE_TEMPLATE_DIELSUR,
+        'extra_headers': {
+            "SOAPAction": "http://localhost/elegibilidad/sync"
+        },
+    },
+    '0614': {
+        'template': ENVELOPE_TEMPLATE_DIELSUR,
+        'extra_headers': {
+            "SOAPAction": "http://localhost/elegibilidad/Sync/syncRequest"
+        },
+    },
+    'altres': {
+        'template': ENVELOPE_TEMPLATE_SENSE_NAMESPACE_AL_PAS01,
+        'extra_headers': {},
+    },
+    'reintent': {
+        'template': ENVELOPE_TEMPLATE_AMB_NAMESPACE_AL_PAS,
+        'extra_headers': {},
+    },
+}
