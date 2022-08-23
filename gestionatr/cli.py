@@ -133,7 +133,11 @@ def request_p0(url, user, password, xml_str=None, params=None):
             if aux_res is None:
                 aux_res = find_child(aux, "faultstring")
                 if aux_res is not None:
-                    raise P0FaultError(etree.tostring(aux_res))
+                    error_mssg = {
+                        'request': res,
+                        'response': etree.tostring(aux_res)
+                    }
+                    raise P0FaultError(error_mssg)
 
             res = etree.tostring(aux_res)
             return res
