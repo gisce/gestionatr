@@ -107,12 +107,13 @@ def request_p0(url, user, password, xml_str=None, params=None):
     retry_envelop = ENVELOP_BY_DISTR.get("reintent")
     error = None
     for envelop in [distri_envelop, retry_envelop]:
-        soap_content = envelop['template'].format(xml_str=xml_str)
+        xml_str_to_use = xml_str
+        soap_content = envelop['template'].format(xml_str=xml_str_to_use)
 
         # Send request
         h = headers.copy()
         h.update(envelop['extra_headers'])
-        res = requests.post(url, data=soap_content, headers=h)
+        res = requests.post(url, data=soap_content, headers=h, auth=(user, password))
         res = res.content
         try:
             def find_child(element, child_name):
