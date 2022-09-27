@@ -342,19 +342,6 @@ xmlns:eleg="http://localhost/elegibilidad"
 </soap:Envelope>
 """
 
-ENVELOPE_TEMPLATE_DIELSUR = """
-<?xml version="1.0" encoding="utf-8"?>
-<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-  <soap:Body>
-    <sync xmlns="http://localhost/elegibilidad">
-        <Paso01 xmlns="">
-            {xml_str}
-        </Paso01>
-    </sync>
-  </soap:Body>
-</soap:Envelope>
-"""
-
 
 ENVELOP_BY_DISTR = {
     '0021': {
@@ -369,24 +356,16 @@ ENVELOP_BY_DISTR = {
         'template': ENVELOPE_TEMPLATE_SENSE_NAMESPACE_AL_PAS01,
         'extra_headers': {},
     },
-    '0143': {
-        'template': ENVELOPE_TEMPLATE_DIELSUR,
-        'extra_headers': {
-            "SOAPAction": "http://localhost/elegibilidad/sync"
-        },
-    },
-    '0614': {
-        'template': ENVELOPE_TEMPLATE_DIELSUR,
-        'extra_headers': {
-            "SOAPAction": "http://localhost/elegibilidad/Sync/syncRequest"
-        },
-    },
     'altres': {
         'template': ENVELOPE_TEMPLATE_SENSE_NAMESPACE_AL_PAS01,
-        'extra_headers': {},
+        'extra_headers': {
+            "SOAPAction": ""
+        },
     },
     'reintent': {
         'template': ENVELOPE_TEMPLATE_AMB_NAMESPACE_AL_PAS,
-        'extra_headers': {},
+        'extra_headers': {
+            "SOAPAction": ""
+        },
     },
 }
