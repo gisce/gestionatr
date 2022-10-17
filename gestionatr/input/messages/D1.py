@@ -46,6 +46,100 @@ class D1(C1):
                 return InfoRegistroAutocons(data)
             return False
 
+    @property
+    def info_retardo_activ_atuocons(self):
+        data = []
+        tree = '{0}.InfoRetardoActivAutocons'.format(self._header)
+        obj = get_rec_attr(self.obj, tree, False)
+        if obj not in [None, False]:
+            for i in obj.InfoRetardoActivAutocons:
+                data.append(InfoRetardoActivAutocons(i))
+        else:
+            tree = '{0}.InfoRetardoActivAutocons'.format(self._header)
+            obj = get_rec_attr(self.obj, tree, False)
+            if obj not in [None, False]:
+                for i in obj.InfoRetardoActivAutocons:
+                    data.append(InfoRetardoActivAutocons(i))
+        return data
+
+
+class InfoRetardoActivAutocons(object):
+
+    def __init__(self, data):
+        self.info_retardo_activ_atuocons = data
+
+    @property
+    def codigo_fiscal_factura(self):
+        data = ''
+        try:
+            data = self.info_retardo_activ_atuocons.CodigoFiscalFactura.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def fecha_inicio_conteo_activ_autocons(self):
+        data = ''
+        try:
+            data = self.info_retardo_activ_atuocons.FechaInicioConteoActivAutocons.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def fecha_desde(self):
+        data = ''
+        try:
+            data = self.info_retardo_activ_atuocons.FechaDesde.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def fecha_hasta(self):
+        data = ''
+        try:
+            data = self.info_retardo_activ_atuocons.FechaHasta.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def dias_retardo_activ_autocons(self):
+        data = ''
+        try:
+            data = self.info_retardo_activ_atuocons.DiasRetardoActivAutocons.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def valor_energia_anual_calculado(self):
+        data = ''
+        try:
+            data = self.info_retardo_activ_atuocons.ValorEnergiaAnualCalculada.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def valor_energia_horaria_calculada(self):
+        data = ''
+        try:
+            data = self.info_retardo_activ_atuocons.ValorEnergiaHorariaCalculada.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def pot_instalada_gen(self):
+        data = ''
+        try:
+            data = self.info_retardo_activ_atuocons.PotInstaladaGen.text
+        except AttributeError:
+            pass
+        return data
+
 
 class InfoRegistroAutocons(object):
 

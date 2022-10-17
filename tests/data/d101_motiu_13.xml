@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<MensajeNotificacionCambiosATRDesdeDistribuidor xmlns="http://localhost/elegibilidad">
+    <Cabecera>
+        <CodigoREEEmpresaEmisora>1234</CodigoREEEmpresaEmisora>
+        <CodigoREEEmpresaDestino>4321</CodigoREEEmpresaDestino>
+        <CodigoDelProceso>D1</CodigoDelProceso>
+        <CodigoDePaso>01</CodigoDePaso>
+        <CodigoDeSolicitud>201605219497</CodigoDeSolicitud>
+        <SecuencialDeSolicitud>00</SecuencialDeSolicitud>
+        <FechaSolicitud>2016-06-08T04:24:09</FechaSolicitud>
+        <CUPS>ES0116000000011531LK0F</CUPS>
+    </Cabecera>
+    <NotificacionCambiosATRDesdeDistribuidor>
+        <MotivoCambioATRDesdeDistribuidora>13</MotivoCambioATRDesdeDistribuidora>
+        <InfoRetardoActivAutocons>
+            <CodigoFiscalFactura>12345678</CodigoFiscalFactura>
+            <FechaInicioConteoActivAutocons>2022-01-01</FechaInicioConteoActivAutocons>
+            <FechaDesde>2022-01-01</FechaDesde>
+            <FechaHasta>2022-01-01</FechaHasta>
+            <DiasRetardoActivAutocons>15</DiasRetardoActivAutocons>
+            <ValorEnergiaAnualCalculada>100</ValorEnergiaAnualCalculada>
+            <ValorEnergiaHorariaCalculada>200</ValorEnergiaHorariaCalculada>
+            <PotInstaladaGen>6</PotInstaladaGen>
+        </InfoRetardoActivAutocons>
+    </NotificacionCambiosATRDesdeDistribuidor>
+</MensajeNotificacionCambiosATRDesdeDistribuidor>
