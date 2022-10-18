@@ -47,19 +47,13 @@ class D1(C1):
             return False
 
     @property
-    def info_retardo_activ_atuocons(self):
-        data = []
+    def info_retardo_activ_autocons(self):
         tree = '{0}.InfoRetardoActivAutocons'.format(self._header)
         obj = get_rec_attr(self.obj, tree, False)
+        data = []
         if obj not in [None, False]:
-            for i in obj.InfoRetardoActivAutocons:
+            for i in obj:
                 data.append(InfoRetardoActivAutocons(i))
-        else:
-            tree = '{0}.InfoRetardoActivAutocons'.format(self._header)
-            obj = get_rec_attr(self.obj, tree, False)
-            if obj not in [None, False]:
-                for i in obj.InfoRetardoActivAutocons:
-                    data.append(InfoRetardoActivAutocons(i))
         return data
 
 

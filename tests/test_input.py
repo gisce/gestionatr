@@ -1278,6 +1278,15 @@ class test_D1(unittest.TestCase):
         d1 = D1(self.xml_d101_motiu_13)
         d1.parse_xml()
         self.assertEqual(d1.motivo_cambio_atr_desde_distribuidora, u'13')
+        info = d1.info_retardo_activ_autocons[0]
+        self.assertEqual(info.codigo_fiscal_factura, u'12345678')
+        self.assertEqual(info.fecha_inicio_conteo_activ_autocons, u"2022-01-01")
+        self.assertEqual(info.fecha_desde, u"2022-01-01")
+        self.assertEqual(info.fecha_hasta, u"2022-01-01")
+        self.assertEqual(info.dias_retardo_activ_autocons, u'15')
+        self.assertEqual(info.valor_energia_anual_calculado, u'100')
+        self.assertEqual(info.valor_energia_horaria_calculada, u'200')
+        self.assertEqual(info.pot_instalada_gen, u'6')
 
     def test_d102_accept(self):
         d1 = D1(self.xml_d102_accept)
