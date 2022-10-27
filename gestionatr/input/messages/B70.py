@@ -603,8 +603,6 @@ class Factura(object):
             - data inici: la mes antiga de les fecdesde dels conceptes
             - data fi: la mes nova de les fechasta dels conceptes
         """
-        t_variable = "tvariable" in TIPUS_CONCEPTES.get(x.codconcepto, "")
-        t_fix = "tfix" in TIPUS_CONCEPTES.get(x.codconcepto, "")
         return (
             min([x.fecdesde for x in self.listaconceptos if
                  "tvariable" in TIPUS_CONCEPTES.get(x.codconcepto, "") or "tfix" in TIPUS_CONCEPTES.get(x.codconcepto, "")]
