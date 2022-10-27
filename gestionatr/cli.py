@@ -9,6 +9,7 @@ from gestionatr.input.messages import message
 from gestionatr.input.messages import message_gas
 from gestionatr.input.messages.message import except_f1
 from gestionatr.output.messages.sw_p0 import ENVELOP_BY_DISTR
+from gestionatr.exceptions import *
 
 from gestionatr import __version__
 
@@ -130,9 +131,19 @@ def request_p0(url, user, password, xml_str=None, params=None):
             aux_res = find_child(aux, "MensajeEnvioInformacionPS")
             if aux_res is None:
                 aux_res = find_child(aux, "MensajeRechazoP0")
+            if aux_res is None:
+                aux_res = find_child(aux, "faultstring")
+                if aux_res is not None:
+                    error_mssg = {
+                        'request': res,
+                        'response': etree.tostring(aux_res)
+                    }
+                    raise P0FaultError(error_mssg)
 
             res = etree.tostring(aux_res)
             return res
+        except P0FaultError as p0efe:
+            raise
         except Exception as e:
             if not error:
                 error = e
