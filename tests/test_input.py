@@ -1147,6 +1147,7 @@ class test_D1(unittest.TestCase):
         self.xml_d102_accept = open(get_data("d102_accept.xml"), "r")
         self.xml_d102_reject = open(get_data("d102_reject.xml"), "r")
         self.xml_d101_motiu_11 = open(get_data("d101_motiu_11.xml"), "r")
+        self.xml_d101_motiu_13 = open(get_data("d101_motiu_13.xml"), "r")
 
     def tearDown(self):
         self.xml_d101.close()
@@ -1155,6 +1156,7 @@ class test_D1(unittest.TestCase):
         self.xml_d102_accept.close()
         self.xml_d102_reject.close()
         self.xml_d101_motiu_11.close()
+        self.xml_d101_motiu_13.close()
 
     def test_d101(self):
         d1 = D1(self.xml_d101)
@@ -1271,6 +1273,20 @@ class test_D1(unittest.TestCase):
         d1 = D1(self.xml_d101_motiu_11)
         d1.parse_xml()
         self.assertEqual(d1.motivo_cambio_atr_desde_distribuidora, u'11')
+
+    def test_d101_motiu_13(self):
+        d1 = D1(self.xml_d101_motiu_13)
+        d1.parse_xml()
+        self.assertEqual(d1.motivo_cambio_atr_desde_distribuidora, u'13')
+        info = d1.info_retardo_activ_autocons[0]
+        self.assertEqual(info.codigo_fiscal_factura, u'12345678')
+        self.assertEqual(info.fecha_inicio_conteo_activ_autocons, u"2022-01-01")
+        self.assertEqual(info.fecha_desde, u"2022-01-01")
+        self.assertEqual(info.fecha_hasta, u"2022-01-01")
+        self.assertEqual(info.dias_retardo_activ_autocons, u'15')
+        self.assertEqual(info.valor_energia_anual_calculado, u'100')
+        self.assertEqual(info.valor_energia_horaria_calculada, u'200')
+        self.assertEqual(info.pot_instalada_gen, u'6')
 
     def test_d102_accept(self):
         d1 = D1(self.xml_d102_accept)

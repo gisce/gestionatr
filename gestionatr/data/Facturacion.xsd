@@ -787,7 +787,7 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element name="PrecioUnidadConceptoRepercutible" type="PrecioFact"/>
+			<xs:element name="PrecioUnidadConceptoRepercutible" type="Decimal9V9"/>
 			<xs:element name="ImporteTotalConceptoRepercutible" type="ImporteFact"/>
 			<xs:element name="Comentarios" type="X4000" minOccurs="0"/>
 		</xs:sequence>
