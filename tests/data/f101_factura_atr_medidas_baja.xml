@@ -126,6 +126,7 @@
                 <Periodo>
                     <PotenciaMaxDemandadaAnioMovil>3000</PotenciaMaxDemandadaAnioMovil>
                 </Periodo>
+                <ValorEnergiaMediaCP>61083.25</ValorEnergiaMediaCP>
             </InformacionAlConsumidor>
         </FacturaATR>
         <RegistroFin>

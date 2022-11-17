@@ -126,6 +126,7 @@
                         <Periodo>
                             <ValorEnergiaExcedentaria>116.76</ValorEnergiaExcedentaria>
                         </Periodo>
+                        <ValorEnergiaMediaCP>61083.25</ValorEnergiaMediaCP>
                     </TerminoEnergiaExcedentaria>
                     <ValorTotalEnergiaExcedentaria>0.00</ValorTotalEnergiaExcedentaria>
                 </EnergiaExcedentaria>
