@@ -598,6 +598,20 @@ class Factura(object):
             max([x.fechasta for x in self.listaconceptos])
         )
 
+    def get_periode_factura_peatges(self):
+        """Retorna tupla amb (data inici,  data fi) de la factura:
+            - data inici: la mes antiga de les fecdesde dels conceptes
+            - data fi: la mes nova de les fechasta dels conceptes
+        """
+        return (
+            min([x.fecdesde for x in self.listaconceptos if
+                 "tvariable" in TIPUS_CONCEPTES.get(x.codconcepto, "") or "tfix" in TIPUS_CONCEPTES.get(x.codconcepto, "")]
+                ),
+            max([x.fechasta for x in self.listaconceptos if
+                 "tvariable" in TIPUS_CONCEPTES.get(x.codconcepto, "") or "tfix" in TIPUS_CONCEPTES.get(x.codconcepto, "")]
+                )
+        )
+
     def is_only_conceptes(self):
         has_only_conceptes = True
         for type in self.get_linies_factura_by_type():
@@ -609,7 +623,7 @@ class Factura(object):
         return {
             'tipo_rectificadora': self.clasefact or self.indfacturarect or 'N',
             'date_invoice': self.fecfactura,
-            'check_total': -1 * self.importetotal if self.tipofactura in ('A',) else self.importetotal,
+            'check_total': -1 * self.importetotal if self.clasefact in ('A', 'B') else self.importetotal,
             'origin': self.get_origin(),
             'origin_date_invoice': self.fecfactura,
             'reference': self.get_origin(),

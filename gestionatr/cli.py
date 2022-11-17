@@ -1,17 +1,15 @@
 # -*- coding: utf-8 -*-
 import sys
 import click
-from suds.cache import NoCache
-from suds.client import Client
-from suds.transport.https import HttpAuthenticated
-import urllib2
+import requests
 import base64
-from suds.sax.text import Raw
-from lxml import objectify, etree
+from lxml import etree
 
 from gestionatr.input.messages import message
 from gestionatr.input.messages import message_gas
 from gestionatr.input.messages.message import except_f1
+from gestionatr.output.messages.sw_p0 import ENVELOP_BY_DISTR
+from gestionatr.exceptions import *
 
 from gestionatr import __version__
 
@@ -83,50 +81,76 @@ def request_p0(url, user, password, xml_str=None, params=None):
     if xml_str is None and params is None:
         raise ValueError("XML or params must be passed to request_p0")
     if xml_str is None and params:
+        codi_receptor = params['destino']
         params['fecha_solicitud'] = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
         params['solicitud'] = 10**11 + int((random.random() * 10**11))
         xml_str = re.sub(r'\s+<', '<', P0_TEMPLATE)
         xml_str = re.sub(r'\s+$', '', xml_str)
         xml_str = re.sub(r'\n', '', xml_str).format(**params)
-    t = HttpAuthenticated(username=user, password=password)
+    else:
+        codi_receptor = xml_str.split("<CodigoREEEmpresaDestino>")[1].split("</CodigoREEEmpresaDestino>")[0]
+
     base64string = base64.encodestring('%s:%s' % (user, password)).replace('\n', '')
-    auth_header = {
-        "Authorization": "Basic %s" % base64string
+    headers = {
+        "Authorization": "Basic %s" % base64string,
+        "content-type": 'text/xml; charset=utf-8',
     }
-    try:
-        client = Client(url, retxml=True, transport=t, cache=NoCache())
-    except urllib2.URLError as e:
-        import ssl
-        ssl._create_default_https_context = ssl._create_unverified_context
-        client = Client(url, retxml=True, transport=t, cache=NoCache())
-    client.set_options(headers=auth_header)
 
     # Clean XML
     xml_str = xml_str.strip()
     xml_str = xml_str.replace("'utf-8'", "'UTF-8'")
     xml_str = xml_str.replace("<?xml version='1.0' encoding='UTF-8'?>", "")
-    xml_str = Raw(xml_str)
-    # Send request
-    res = client.service.sync(xml_str)
-    try:
-        def find_child(element, child_name):
-            res = None
-            if child_name in element.tag:
-                return element
-            for child in element:
-                res = find_child(child, child_name)
-                if res is not None:
-                    break
+
+    # Fem sempre 2 intents: amb el que esta definit per aquella distri i si va malament amb una plantilla base que
+    # sol funcionar en la majoria. Aixi si una distri no la tenim documentada es fa el intent amb les 2 plantilles
+    # principals que tenim. La "altres" i la "reintent"
+    distri_envelop = ENVELOP_BY_DISTR.get(codi_receptor, ENVELOP_BY_DISTR.get("altres"))
+    retry_envelop = ENVELOP_BY_DISTR.get("reintent")
+    error = None
+    for envelop in [distri_envelop, retry_envelop]:
+        xml_str_to_use = xml_str
+        soap_content = envelop['template'].format(xml_str=xml_str_to_use)
+
+        # Send request
+        h = headers.copy()
+        h.update(envelop['extra_headers'])
+        res = requests.post(url, data=soap_content, headers=h, auth=(user, password))
+        res = res.content
+        try:
+            def find_child(element, child_name):
+                res = None
+                if child_name in element.tag:
+                    return element
+                for child in element:
+                    res = find_child(child, child_name)
+                    if res is not None:
+                        break
+                return res
+
+            aux = etree.fromstring(res)
+            aux_res = find_child(aux, "MensajeEnvioInformacionPS")
+            if aux_res is None:
+                aux_res = find_child(aux, "MensajeRechazoP0")
+            if aux_res is None:
+                aux_res = find_child(aux, "faultstring")
+                if aux_res is not None:
+                    error_mssg = {
+                        'request': res,
+                        'response': etree.tostring(aux_res)
+                    }
+                    raise P0FaultError(error_mssg)
+
+            res = etree.tostring(aux_res)
             return res
+        except P0FaultError as p0efe:
+            raise
+        except Exception as e:
+            if not error:
+                error = e
 
-        aux = etree.fromstring(res)
-        aux_res = find_child(aux, "MensajeEnvioInformacionPS")
-        if not aux_res:
-            aux_res = find_child(aux, "MensajeRechazoP0")
+    if error:
+        print error
 
-        res = etree.tostring(aux_res)
-    except Exception:
-        pass
     return res
 
 

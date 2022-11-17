@@ -821,13 +821,14 @@ class Ajuste(XmlModel):
 class InformacionAlConsumidor(XmlModel):
 
     _sort_order = (
-        'informacion_al_consumidor', 'fecha_inicio_anio_movil', 'periodos'
+        'informacion_al_consumidor', 'fecha_inicio_anio_movil', 'periodos', 'valor_energia_media_cp'
     )
 
     def __init__(self):
         self.informacion_al_consumidor = XmlField('InformacionAlConsumidor')
         self.fecha_inicio_anio_movil = XmlField('FechaInicioAnioMovil', rep=rep_fecha_sin_hora)
         self.periodos = PeriodoInfoAlConsumidor()
+        self.valor_energia_media_cp = XmlField('ValorEnergiaMediaCP')
         super(InformacionAlConsumidor, self).__init__('InformacionAlConsumidor', 'informacion_al_consumidor')
 
 

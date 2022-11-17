@@ -1965,7 +1965,9 @@ TABLA_77 = [
         ('20', u'Derechos de supervisión'),
         ('21', u'Tarifa'),
         ('22', u'Impuesto Eléctrico'),
-        ('23', u'Desglose Suplemento Territorial')
+        ('23', u'Desglose Suplemento Territorial'),
+        ('26', u'Retardo en activación autoconsumo'),
+        ('27', u'Descuento retardo activación autoconsumo superior al valor económico de la energía horaria consumida de la red')
 ]
 
 TABLA_79 = [
@@ -2178,6 +2180,8 @@ TABLA_103 = [
     ('83', u'Recargo por la no dedicación exclusiva de la carga a vehículos eléctricos'),
     ('84', u'Descuento en peajes de transporte y distribución de electricidad a la industria electrointensiva'),
     ('85', u'Regularización descuento en peajes de transporte y distribución de electricidad a la industria electrointensiva'),
+    ('86', u'Descuento por retardo en activación autoconsumo imputable al distribuidor'),
+    ('87', u'Descuento por retardo en activación autoconsumo NO imputable al distribuidor'),
 ]
 
 CONCEPTOS_CON_FECHA_OPERACION = [
@@ -2252,6 +2256,8 @@ TABLA_109 = [('01', u'Telegestión Operativa con CCH'),
              ('09', u'Modificación desde peaje 3.1A a peaje 6.1TD'),
              ('10', u'Modificación desde peaje 3.1A a peaje 6.2TD'),
              ('11', u'Pendiente envío de fichero de coeficientes de reparto variables para el año en curso'),
+             ('13', u'Información aplicación descuento por retardo en activación autoconsumo imputable al distribuidor'),
+             ('14', u'Información aplicación descuento por retardo en activación autoconsumo NO imputable al distribuidor'),
              ]
 
 TABLA_110 = [('01', u'Acompaña curva de carga'),
