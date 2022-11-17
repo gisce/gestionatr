@@ -5275,7 +5275,8 @@ class test_F1(unittest.TestCase):
         informacion_al_consumidor.feed(
             {
                 'fecha_inicio_anio_movil': '2017-03-31',
-                'periodos': periodos_maximetros
+                'periodos': periodos_maximetros,
+                'valor_energia_media_cp': 61083.25
             }
         )
 
