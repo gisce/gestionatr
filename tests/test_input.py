@@ -1962,6 +1962,8 @@ class test_F1(unittest.TestCase):
 
         self.assertEqual(periodo_max.potencia_max_demandada_anio_movil, 3000)
 
+        self.assertEqual(info_al_consumidor.valor_energia_media_cp, 61083.25)
+
         registro = f1.registro
 
         self.assertEqual(registro.importe_total, 76.48)
@@ -2418,6 +2420,8 @@ class test_F1(unittest.TestCase):
 
         periodo_max_2 = info_al_consumidor.periodos[1]
         self.assertEqual(periodo_max_2.potencia_max_demandada_anio_movil, 4045)
+
+        self.assertEqual(info_al_consumidor.valor_energia_media_cp, 61083.25)
 
         registro = f1.registro
 

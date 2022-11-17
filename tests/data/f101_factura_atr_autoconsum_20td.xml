@@ -419,6 +419,7 @@
                 <Periodo>
                     <PotenciaMaxDemandadaAnioMovil>4045</PotenciaMaxDemandadaAnioMovil>
                 </Periodo>
+                <ValorEnergiaMediaCP>61083.25</ValorEnergiaMediaCP>
             </InformacionAlConsumidor>
         </FacturaATR>
         <RegistroFin>
