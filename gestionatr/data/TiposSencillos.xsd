@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- editado con XMLSpy v2020 rel. 2 (x64) (http://www.altova.com) por Teresa Rodriguez-Losada (INECO) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:simpleType name="AltaBajaModificacion">
 		<xs:annotation>
@@ -428,6 +429,8 @@
 			<xs:enumeration value="G3"/>
 			<xs:enumeration value="G6"/>
 			<xs:enumeration value="H4"/>
+			<xs:enumeration value="H5"/>
+			<xs:enumeration value="H6"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="CodigoMotivoRechazoP0">
