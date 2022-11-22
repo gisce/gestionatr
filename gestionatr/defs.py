@@ -419,12 +419,6 @@ SUBTYPES_R101 = [
         'type': '02',
     }),
     ({
-        'min_fields': ['cups', 'comentarios', 'num_fact'],
-        'code': '056',
-        'name': u'PETICIÓN DESGLOSE IMPORTE A FACTURAR AUTOCONSUMO',
-        'type': '02',
-    }),
-    ({
         'min_fields': ['nif_cliente', 'nombre_cliente', 'comentarios', 'numero_expediente_fraude'],
         'code': '057',
         'name': u'DISCONFORMIDAD CON EXPEDIENTE DE ANOMALIA Y FRAUDE (sin factura emitida)',
@@ -648,7 +642,12 @@ TABLA_7 = [
     ('N', u"(N) La solicitud de modificación contractual es únicamente de "
           u"modificaciones técnicas"),
     ('A', u"(A) La solicitud de modificación contractual implica cambios "
-          u"técnicos y administrativos")
+          u"técnicos y administrativos"),
+    ('M', u"(M) Solicitud de aplicación de SMV. Si potencia contratada superior "
+          u"a potencia límite del SMV, el distribuidor adecuará la potencia "
+          u"contratada a la potencia límite"),
+    ('B', u"(B) Baja del SMV, vuelta a suministro normal con restablecimiento "
+          u"del valor de la potencia, en su caso.")
 ]
 
 TABLA_7_M1 = TABLA_7.extend([
@@ -1108,7 +1107,7 @@ TABLA_27 = [
     ('E4', 'Impago Previo'),
     ('E5', 'CUPS sujeto a LOPD'),
     ('E6', 'Modificación del tipo de autoconsumo no permitida. No ha trascurrido un año desde la última modificación.'),
-    ('E7', 'Falta acuerdo de reparto o/y fichero de coeficientes/Acuerdo de reparto o/y fichero de coeficientes incorrecto/Faltan coeficientes de reparto en acuerdo fichero'),
+    ('E7', 'Falta acuerdo de reparto o/y fichero de coeficientes/Acuerdo de reparto o/y fichero de coeficientes incorrecto/Faltan coeficientes de reparto en fichero'),
     ('E8', 'No recibida información técnica de la CCAA (para BT y <=100kW).'),
     ('E9', 'En el periodo establecido, no se han recibido el resto de solicitudes de modificación del colectivo'),
     ('F1', 'Disconformidad del consumidor a la información sobre autoconsumo'),
@@ -1122,6 +1121,15 @@ TABLA_27 = [
     ('G4', 'Suministro Mínimo Vital'),
     ('G5', 'Este tipo de modificación (“M”/”B”) solo aplica a solicitudes de modificación (formato M1) de suministros en bono social (suministrados por COR)'),
     ('G6', 'No es posible modificar fichero de coeficientes si no ha transcurrido un mínimo de 4 meses desde la última modificación'),
+    ('G7', 'Si los SSAA no son despreciables y se da de alta un único contrato, el tipo de instalación no puede ser “03” (próxima a través de red)'),
+    ('G8', 'La solicitud de modificación de autoconsumo coincide con la contratación en vigor.'),
+    ('G9', 'La solicitud de modificación no puede incorporar otras modificaciones técnicas'),
+    ('H1', 'Tipo Autoconsumo no válido'),
+    ('H2', 'Tipo Subsección no válido'),
+    ('H3', 'Autoconsumo colectivo'),
+    ('H4', 'La instalación del cliente no puede tener vertidos a la red'),
+    ('H5', 'No se puede solicitar una segunda modificación de potencia en un mismo ciclo de facturación'),
+    ('H6', 'La reducción de potencia no cumple con los requisitos establecidos en el artículo 7 RDL 18/2022'),
     ('99', 'Otros'),
 ]
 
@@ -1279,6 +1287,7 @@ TABLA_44 = [
     ('40', u'Estimada'),
     ('50', u'Autolectura'),
     ('60', u'Telegestión'),
+    ('70', u'Calculada'),
     ('99', u'Sin lectura'),
 ]
 PROCEDENCIA = TABLA_44
@@ -1311,8 +1320,7 @@ CONTROL_POTENCIA = TABLA_51
 TABLA_53 = [
     ('T', 'Cambio de titular por traspaso'),
     ('S', 'Cambio de titular por subrogación'),
-    ('A',
-     'Cambio datos administrativos (excepto cambio de titular y corrección de datos identificativos del cliente)'),
+    ('A', 'Cambio datos administrativos (excepto cambio de titular y corrección de datos identificativos del cliente)'),
     ('C', 'Corrección datos que identifican al cliente'),
     ('P', 'La solicitud implica cambio en la periodicidad de la facturación'),
     ('R', 'Modificación acuerdo de reparto/fichero de coeficientes de un autoconsumo colectivo')
@@ -1347,6 +1355,7 @@ TABLA_61 = [
     ('10', u'CIE generación'),
     ('11', u'Declaración relativa a puntos de recarga de vehículos eléctricos de acceso público'),
     ('12', u'Fichero de coeficientes de reparto'),
+    ('13', u'Certificado de suelo urbanizado')
 ]
 
 TABLA_62 = [
@@ -1966,6 +1975,8 @@ TABLA_77 = [
         ('21', u'Tarifa'),
         ('22', u'Impuesto Eléctrico'),
         ('23', u'Desglose Suplemento Territorial'),
+        ('24', u'Pago por uso de la red autoconsumo'),
+        ('25', u'Acuerdo de reparto/ fichero de coeficientes'),
         ('26', u'Retardo en activación autoconsumo'),
         ('27', u'Descuento retardo activación autoconsumo superior al valor económico de la energía horaria consumida de la red')
 ]
@@ -1979,7 +1990,14 @@ TABLA_79 = [
     ('06', u'Tipo de contrato'),
     ('07', u'Modo control-potencia'),
     ('08', u'Periodicidad facturación'),
-    ('09', u'Dirección Punto de Suministro')
+    ('09', u'Dirección Punto de Suministro'),
+    ('10', u'Tipo Autoconsumo'),
+    ('11', u'Tipo Subsección'),
+    ('12', u'Colectivo'),
+    ('13', u'Tipo Cups'),
+    ('14', u'SSAA'),
+    ('15', u'Único contrato'),
+    ('16', u'Acuerdo de reparto/ Fichero coeficientes'),
 ]
 
 
@@ -2248,14 +2266,15 @@ TABLA_108 = [('01', u'Mensual'),
 TABLA_109 = [('01', u'Telegestión Operativa con CCH'),
              ('02', u'Telegestión No Operativa'),
              ('03', u'Telegestión Operativa sin CCH'),
-             ('04', u'Alta en autoconsumo'),
+             ('04', u'Alta en autoconsumo comunicada por la Comunidad Autónoma'),
              ('05', u'Modificación de tipo de autoconsumo'),
              ('06', u'Modificación coeficiente de reparto'),
-             ('07', u'Modificación potencia generación'),
+             ('07', u'Modificación potencia generación comunicada por la Comunidad Autónoma'),
              ('08', u'Baja en autoconsumo'),
              ('09', u'Modificación desde peaje 3.1A a peaje 6.1TD'),
              ('10', u'Modificación desde peaje 3.1A a peaje 6.2TD'),
              ('11', u'Pendiente envío de fichero de coeficientes de reparto variables para el año en curso'),
+             ('12', u'Modificación potencia generación'),
              ('13', u'Información aplicación descuento por retardo en activación autoconsumo imputable al distribuidor'),
              ('14', u'Información aplicación descuento por retardo en activación autoconsumo NO imputable al distribuidor'),
              ]
@@ -2310,6 +2329,8 @@ TABLA_113 = [
     ('72', u'Con excedentes sin compensación individual con cto SSAA a través de red y red interior – SSAA'),
     ('73', u'Con excedentes sin compensación Colectivo con cto de SSAA  a través de red y red interior – Consumo'),
     ('74', u'Con excedentes sin compensación Colectivo con cto de SSAA a través de red y red interior - SSAA'),
+    ('11', u'Sin excedentes'),
+    ('12', u'Con excedentes'),
 ]
 
 TENEN_AUTOCONSUM = [x[0] for x in TABLA_113 if x[0] not in ['00', '01', '2A', '2B', '2G']]
@@ -2491,7 +2512,10 @@ TABLA_128 = [('a0', u'Con excedentes y mecanismo de compensación simplificado')
 
 TABLA_129 = [('01', u'Red interior'),
              ('02', u'Red interior da varios consumidores (instalación de enlace)'),
-             ('03', u'Próxima a través de red'), ]
+             ('03', u'Próxima a través de red'),
+             ('04', u'En red interior pero próxima a través de red del resto de los CUPS del colectivo'),
+             ('05', u'Próxima a través de red pero en red interior de otro de los CUPS del colectivo')
+             ]
 
 TABLA_130 = [('A', u'EdM Bidireccional en PF'),
              ('B', u'EdM Bidireccional en PF y EdM gen. Neta'),
@@ -2504,3 +2528,10 @@ TABLA_131 = [('01', u'Consumo'),
 
 TABLA_132 = [('01', u'Cargo correspondiente al término de potencia'),
              ('02', u'Cargo correspondiente al término de energía'), ]
+
+TABLA_133 = [
+    ('10', u'Sin excedentes No acogido a compensación'),
+    ('11', u'Sin excedentes acogido a compensación'),
+    ('20', u'Con excedentes no acogidos a compensación'),
+    ('21', u'Con excedentes acogidos a compensación'),
+]

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from gestionatr.input.messages.C1 import Rechazo
+from gestionatr.input.messages.C1 import Rechazo, Autoconsumo
 from message import Message
 from Deadlines import ProcessDeadline
 from gestionatr.utils import get_rec_attr
@@ -235,10 +235,10 @@ class Contrato(object):
         return data
 
     @property
-    def tipo_autoconsumo(self):
+    def autoconsumo(self):
         data = ''
         try:
-            data = self.contrato.TipoAutoconsumo.text
+            data = Autoconsumo(self.contrato.Autoconsumo)
         except AttributeError:
             pass
         return data

@@ -312,9 +312,15 @@ class DatosGeneralesATR(DatosGenerales):
             return self._datos_factura_atr.TipoAutoconsumo.text.strip()
 
     @property
-    def cau(self):
-        if hasattr(self._datos_factura_atr, 'CAU'):
-            return self._datos_factura_atr.CAU.text.strip()
+    def tipo_subseccion(self):
+        if hasattr(self._datos_factura_atr, 'TipoSubseccion'):
+            return self._datos_factura_atr.TipoSubseccion.text.strip()
+    @property
+    def datos_cau(self):
+        data = []
+        for d in self._datos_factura_atr.DatosCAU:
+            data.append(DatosCAU(d))
+        return data
 
     @property
     def duracion_inf_anio(self):
@@ -404,6 +410,39 @@ class DatosGeneralesATR(DatosGenerales):
         if hasattr(self._periodo, 'TipoPM'):
             return int(self._periodo.TipoPM.text.strip())
         return None
+
+
+class DatosCAU(object):
+
+    def __init__(self, data):
+        self.datos_cau = data
+
+    @property
+    def cau(self):
+        data = ''
+        try:
+            data = self.datos_cau.CAU.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def colectivo(self):
+        data = ''
+        try:
+            data = self.datos_cau.Colectivo.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def tipo_cups(self):
+        data = ''
+        try:
+            data = self.datos_cau.TipoCUPS.text
+        except AttributeError:
+            pass
+        return data
 
 
 class DatosGeneralesOtras(DatosGenerales):
@@ -899,11 +938,6 @@ class PeriodoEnergiaNetaGen(Periodo):
             return float(self.periodo.ValorEnergiaNetaGen.text.strip())
         return None
 
-    @property
-    def beta(self):
-        if hasattr(self.periodo, 'Beta'):
-            return float(self.periodo.Beta.text.strip())
-        return None
 
     @property
     def relacion_generacion(self):
@@ -1014,6 +1048,12 @@ class InstalacionGenAutoconsumo(object):
     def exento_cargos(self):
         if hasattr(self.instalacion_gen_autoconsumo, 'ExentoCargos'):
             return self.instalacion_gen_autoconsumo.ExentoCargos.text.strip()
+        return None
+
+    @property
+    def esquema_medida(self):
+        if hasattr(self.instalacion_gen_autoconsumo, 'EsquemaMedida'):
+            return self.instalacion_gen_autoconsumo.EsquemaMedida.text.strip()
         return None
 
     @property
