@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- editado con XMLSpy v2020 rel. 2 (x64) (http://www.altova.com) por Teresa Rodriguez-Losada (INECO) -->
 <xs:schema xmlns="http://localhost/elegibilidad" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposComplejos.xsd"/>
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
 	<xs:complexType name="ModificacionDeATRM101">
 		<xs:sequence>
 			<xs:element name="DatosSolicitud" type="DatosModificacionDeATRM101"/>
-			<xs:element name="Contrato" type="ContratoConModificacion"/>
+			<xs:element name="Contrato" type="ContratoConModificacion" minOccurs="0"/>
 			<xs:element name="Cliente" type="ClienteConDireccion"/>
 			<xs:element name="Medida" type="MedidaResto" minOccurs="0"/>
 			<xs:element name="DocTecnica" type="DocTecnica" minOccurs="0"/>
