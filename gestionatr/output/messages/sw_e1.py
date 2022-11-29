@@ -144,7 +144,7 @@ class Medida(Medida):
 
 class Contrato(Contrato):
 
-    _sort_order = ('contrato', 'id_contrato', 'tipo_autoconsumo', 'tipo_contrato_atr', 'condiciones_contractuales')
+    _sort_order = ('contrato', 'id_contrato', 'autoconsumo', 'tipo_contrato_atr', 'condiciones_contractuales')
 
     def __init__(self):
         super(Contrato, self).__init__()

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from libcomxml.core import XmlModel, XmlField
 
-from gestionatr.output.messages.sw_d1 import Autoconsumo, DatosSuministro, DatosInstGen
+from gestionatr.output.messages.sw_d1 import Autoconsumo, DatosSuministro, DatosInstGenCompleto
 from gestionatr.output.messages.base import CabeceraAutoconsumo, CabeceraAutoconsumoRechazo
 
 
@@ -28,7 +28,7 @@ class InfoRegistroAutoconsA1(XmlModel):
         self.movimiento = XmlField('Movimiento')
         self.autoconsumo = Autoconsumo()
         self.datos_suministro = DatosSuministro()
-        self.datos_inst_gen = DatosInstGen()
+        self.datos_inst_gen = DatosInstGenCompleto()
         self.comentarios = XmlField('Comentarios')
         super(InfoRegistroAutoconsA1, self).__init__('InfoRegistoAutoconsA1', 'info_registro_autocons')
 

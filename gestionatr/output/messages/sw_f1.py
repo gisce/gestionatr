@@ -3,7 +3,7 @@
 from libcomxml.core import XmlModel, XmlField
 from gestionatr.output.messages.base import Cabecera, rep_fecha, \
     rep_fecha_sin_hora, rep_decimal, rep_entera, rep_entera2, rep_ruedas, rep_cut
-from gestionatr.output.messages.sw_c1 import IdCliente
+from gestionatr.output.messages.sw_c1 import IdCliente, DatosCAU
 from gestionatr.output.messages.sw_c2 import Direccion
 
 
@@ -135,8 +135,8 @@ class Expediente(XmlModel):
 class DatosFacturaATR(XmlModel):
 
     _sort_order = (
-        'datos_factura_atr', 'fecha_boe', 'tipo_autoconsumo', 'cau',
-        'duracion_inf_anio', 'tarifa_atr_fact', 'modo_control_potencia',
+        'datos_factura_atr', 'fecha_boe', 'tipo_autoconsumo', 'tipo_subseccion',
+        'datos_cau', 'duracion_inf_anio', 'tarifa_atr_fact', 'modo_control_potencia',
         'marca_medida_con_perdidas', 'vas_trafo', 'porcentaje_perdidas',
         'indicativo_curva_carga', 'periodo_cch', 'periodo', 'tipo_pm'
     )
@@ -145,7 +145,8 @@ class DatosFacturaATR(XmlModel):
         self.datos_factura_atr = XmlField('DatosFacturaATR')
         self.fecha_boe = XmlField('FechaBOE', rep=rep_fecha_sin_hora)
         self.tipo_autoconsumo = XmlField('TipoAutoconsumo')
-        self.cau = XmlField('CAU')
+        self.tipo_subseccion = XmlField('TipoSubseccion')
+        self.datos_cau = DatosCAU()
         self.duracion_inf_anio = XmlField('DuracionInfAnio')
         self.tarifa_atr_fact = XmlField('TarifaATRFact')
         self.modo_control_potencia = XmlField('ModoControlPotencia')
@@ -555,14 +556,13 @@ class PeriodoEnergiaCapacitiva(XmlModel):
 
 class PeriodoEnergiaNetaGen(XmlModel):
 
-    _sort_order = ('periodo', 'valor_energia_neta_gen', 'beta', 'relacion_generacion')
+    _sort_order = ('periodo', 'valor_energia_neta_gen', 'relacion_generacion')
 
     def __init__(self):
         self.periodo = XmlField('Periodo')
         self.valor_energia_neta_gen = XmlField(
             'ValorEnergiaNetaGen', rep=rep_decimal(2)
         )
-        self.beta = XmlField('Beta')
         self.relacion_generacion = XmlField('RelacionGeneracion')
         super(PeriodoEnergiaNetaGen, self).__init__('Periodo', 'periodo')
 
@@ -607,13 +607,14 @@ class PeriodoCargo(XmlModel):
 class InstalacionGenAutoconsumo(XmlModel):
     _sort_order = (
         'instalacion_gen_autoconsumo', 'tipo_instalacion', 'exento_cargos',
-        'energia_neta_gen', 'energia_autoconsumida'
+        'esquema_medida', 'energia_neta_gen', 'energia_autoconsumida'
     )
 
     def __init__(self):
         self.instalacion_gen_autoconsumo = XmlField('InstalacionGenAutoconsumo')
         self.tipo_instalacion = XmlField('TipoInstalacion')
         self.exento_cargos = XmlField('ExentoCargos')
+        self.esquema_medida = XmlField('EsquemaMedida')
         self.energia_neta_gen = EnergiaNetaGen()
         self.energia_autoconsumida = EnergiaAutoconsumida()
         super(InstalacionGenAutoconsumo, self).__init__(
@@ -624,11 +625,12 @@ class InstalacionGenAutoconsumo(XmlModel):
 class Autoconsumo(XmlModel):
 
     _sort_order = (
-        'autoconsumo', 'instalacion_gen_autoconsumo', 'energia_excedentaria'
+        'autoconsumo', 'cau', 'instalacion_gen_autoconsumo', 'energia_excedentaria'
     )
 
     def __init__(self):
         self.autoconsumo = XmlField('Autoconsumo')
+        self.cau = XmlField('CAU')
         self.instalacion_gen_autoconsumo = InstalacionGenAutoconsumo()
         self.energia_excedentaria = EnergiaExcedentaria()
         super(Autoconsumo, self).__init__(

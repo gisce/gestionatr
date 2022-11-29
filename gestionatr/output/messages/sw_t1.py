@@ -27,7 +27,7 @@ class SolicitudTraspasoCOR(XmlModel):
     def __init__(self):
         self.solicitud_traspaso_cor = XmlField('SolicitudTraspasoCOR')
         self.datos_solicitud = DatosSolicitud()
-        self.contrato = ContratoT101()
+        self.contrato = Contrato()
         self.cliente = Cliente()
         self.direccion_ps = DireccionPS()
         self.registros_documento = RegistrosDocumento()
@@ -50,13 +50,14 @@ class DatosSolicitud(XmlModel):
         super(DatosSolicitud, self).__init__('DatosSolicitud', 'datos_solicitud')
 
 
-class ContratoT101(Contrato):
+class Contrato(Contrato):
 
-    _sort_order = ('contrato', 'fecha_finalizacion', 'tipo_autoconsumo', 'tipo_contrato_atr',
+    _sort_order = ('contrato', 'id_contrato', 'fecha_finalizacion', 'tipo_autoconsumo', 'tipo_contrato_atr',
                    'condiciones_contractuales', 'periodicidad_facturacion', 'consumo_anual_estimado', 'contacto')
 
     def __init__(self):
-        super(ContratoT101, self).__init__()
+        super(Contrato, self).__init__()
+        self.tipo_autoconsumo = XmlField('TipoAutoconsumo')
 
 
 class DireccionPS(DireccionSuministro):
