@@ -386,10 +386,201 @@ class test_C1(unittest.TestCase):
         }
         condiciones_contractuales.feed(condiciones_contractuales_fields)
 
+        # DatosSuministro
+        suministro = d1.DatosSuministro()
+        suministro_fields = {
+            'tipo_cups': '01',
+            'ref_catastro': '1234567890qwertyuiop',
+        }
+        suministro.feed(suministro_fields)
+
+        # UTM
+        utm = c1.UTM()
+        utm_fields = {
+            'x': '100',
+            'y': '200',
+            'huso': '40',
+            'banda': 'E',
+        }
+        utm.feed(utm_fields)
+
+        # IdTitular
+        id_titular = c1.IdTitular()
+        id_titular_fields = {
+            'tipo_identificador': 'NI',
+            'identificador': '111111111H',
+        }
+        id_titular.feed(id_titular_fields)
+
+        # Nombre
+        nombre = c1.Nombre()
+        nombre_fields = {
+            'nombre_de_pila': 'Juan',
+            'primer_apellido': 'López',
+            'segundo_apellido': 'Sánchez',
+        }
+        nombre.feed(nombre_fields)
+
+        # Telefono
+        telefono = c1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '0034',
+            'numero': '933834841',
+        }
+        telefono.feed(telefono_fields)
+
+        # Telefono 2
+        telefono2 = c1.Telefono()
+        telefono2_fields = {
+            'prefijo_pais': '0034',
+            'numero': '633834841',
+        }
+        telefono2.feed(telefono2_fields)
+
+        # Telefono 3
+        telefono3 = c1.Telefono()
+        telefono3_fields = {
+            'prefijo_pais': '0034',
+            'numero': '683834841',
+        }
+        telefono3.feed(telefono3_fields)
+
+        # Via
+        via = c1.Via()
+        via_fields = {
+            'tipo_via': 'CL',
+            'calle': 'Pau Casals',
+            'numero_finca': '18',
+            'duplicador_finca': '1',
+            'escalera': 'D',
+            'piso': '3',
+            'puerta': '2',
+            'tipo_aclarador_finca': 'BI',
+            'aclarador_finca': 'Bar',
+        }
+        via.feed(via_fields)
+
+        # Direccion
+        direccion = c1.Direccion()
+        direccion_fields = {
+            'pais': 'España',
+            'provincia': '17',
+            'municipio': '171181',
+            'poblacion': '17118000400',
+            'cod_postal': '17230',
+            'via': via
+        }
+        direccion.feed(direccion_fields)
+
+        # TitularRepresentanteGen
+        titular = c1.TitularRepresentanteGen()
+        titular_representante_gen_fields = {
+            'id_titular': id_titular,
+            'nombre': nombre,
+            'telefono': [telefono, telefono2, telefono3],
+            'correo_electronico': 'mail_falso@dominio.com',
+            'direccion': direccion,
+        }
+        titular.feed(titular_representante_gen_fields)
+
+        # DatosInstGen
+        datos_1 = c1.DatosInstGenCompleto()
+        datos_inst_gen_fields = {
+            'cil': 'ES1234000000000001JN0F001',
+            'tec_generador': 'b12',
+            'combustible': 'Diesel',
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm,
+            'titular_representante_gen': titular,
+        }
+        datos_1.feed(datos_inst_gen_fields)
+
+        utm2 = copy.deepcopy(utm)
+        titular2 = copy.deepcopy(titular)
+
+        datos_2 = c1.DatosInstGenCompleto()
+        datos_inst_gen_fields = {
+            'cil': 'ES1234000000000001JN0F002',
+            'tec_generador': 'b11',
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm2,
+            'titular_representante_gen': titular2,
+        }
+        datos_2.feed(datos_inst_gen_fields)
+
+        utm3 = copy.deepcopy(utm)
+        titular3 = copy.deepcopy(titular)
+
+        datos_3 = c1.DatosInstGenCompleto()
+        datos_inst_gen_fields = {
+            'cil': 'ES1234000000000001JN0F003',
+            'tec_generador': 'b12',
+            'combustible': 'Diesel',
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm3,
+            'titular_representante_gen': titular3,
+        }
+        datos_3.feed(datos_inst_gen_fields)
+
+        utm4 = copy.deepcopy(utm)
+        titular4 = copy.deepcopy(titular)
+
+        datos_4 = c1.DatosInstGenCompleto()
+        datos_inst_gen_fields = {
+            'cil': 'ES1234000000000001JN0F004',
+            'tec_generador': 'b11',
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm4,
+            'titular_representante_gen': titular4,
+        }
+        datos_4.feed(datos_inst_gen_fields)
+
+        datos_cau1 = c1.DatosCAU()
+        datos_cau1_fields = {
+            'cau': 'ES1234000000000001JN0FA001',
+            'colectivo': 'N',
+            'datos_inst_gen': [datos_1, datos_2],
+        }
+        datos_cau1.feed(datos_cau1_fields)
+
+        datos_cau2 = c1.DatosCAU()
+        datos_cau2_fields = {
+            'cau': 'ES1234000000000001JN0FA002',
+            'colectivo': 'S',
+            'datos_inst_gen': [datos_3, datos_4],
+        }
+        datos_cau2.feed(datos_cau2_fields)
+
+        # Autoconsumo
+        autoconsumo = c1.Autoconsumo()
+        autoconsumo_fields = {
+            'tipo_autoconsumo': '12',
+            'tipo_subseccion': '21',
+            'datos_suministro': suministro,
+            'datos_cau': [datos_cau1, datos_cau2],
+        }
+        autoconsumo.feed(autoconsumo_fields)
+
         contrato_fields = {
             'id_contrato': id_contrato,
             'data_finalitzacio': '2020-01-01',
-            'tipo_autoconsumo': '00',
+            'autoconsumo': autoconsumo,
             'tipo_contrato_atr': '02',
             'condiciones_contractuales': condiciones_contractuales,
         }
@@ -593,9 +784,190 @@ class test_C2(unittest.TestCase):
         # Contacto
         contacto = get_contacto()
 
+        # DatosSuministro
+        suministro = d1.DatosSuministro()
+        suministro_fields = {
+            'tipo_cups': '01',
+            'ref_catastro': '1234567890qwertyuiop',
+        }
+        suministro.feed(suministro_fields)
+
+        # UTM
+        utm = c1.UTM()
+        utm_fields = {
+            'x': '100',
+            'y': '200',
+            'huso': '40',
+            'banda': 'E',
+        }
+        utm.feed(utm_fields)
+
+        # IdTitular
+        id_titular = c1.IdTitular()
+        id_titular_fields = {
+            'tipo_identificador': 'NI',
+            'identificador': '111111111H',
+        }
+        id_titular.feed(id_titular_fields)
+
+        # Nombre
+        nombre = c1.Nombre()
+        nombre_fields = {
+            'nombre_de_pila': 'Juan',
+            'primer_apellido': 'López',
+            'segundo_apellido': 'Sánchez',
+        }
+        nombre.feed(nombre_fields)
+
+        # Telefono
+        telefono = c1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '0034',
+            'numero': '933834841',
+        }
+        telefono.feed(telefono_fields)
+
+        # Telefono 2
+        telefono2 = c1.Telefono()
+        telefono2_fields = {
+            'prefijo_pais': '0034',
+            'numero': '633834841',
+        }
+        telefono2.feed(telefono2_fields)
+
+        # Telefono 3
+        telefono3 = c1.Telefono()
+        telefono3_fields = {
+            'prefijo_pais': '0034',
+            'numero': '683834841',
+        }
+        telefono3.feed(telefono3_fields)
+
+        # Via
+        via = c1.Via()
+        via_fields = {
+            'tipo_via': 'CL',
+            'calle': 'Pau Casals',
+            'numero_finca': '18',
+            'duplicador_finca': '1',
+            'escalera': 'D',
+            'piso': '3',
+            'puerta': '2',
+            'tipo_aclarador_finca': 'BI',
+            'aclarador_finca': 'Bar',
+        }
+        via.feed(via_fields)
+
+        # Direccion
+        direccion = c1.Direccion()
+        direccion_fields = {
+            'pais': 'España',
+            'provincia': '17',
+            'municipio': '171181',
+            'poblacion': '17118000400',
+            'cod_postal': '17230',
+            'via': via
+        }
+        direccion.feed(direccion_fields)
+
+        # TitularRepresentanteGen
+        titular = c1.TitularRepresentanteGen()
+        titular_representante_gen_fields = {
+            'id_titular': id_titular,
+            'nombre': nombre,
+            'telefono': [telefono, telefono2, telefono3],
+            'correo_electronico': 'mail_falso@dominio.com',
+            'direccion': direccion,
+        }
+        titular.feed(titular_representante_gen_fields)
+
+        # DatosInstGen
+        datos_1 = c1.DatosInstGen()
+        datos_inst_gen_fields = {
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm,
+            'titular_representante_gen': titular,
+        }
+        datos_1.feed(datos_inst_gen_fields)
+
+        utm2 = copy.deepcopy(utm)
+        titular2 = copy.deepcopy(titular)
+
+        datos_2 = c1.DatosInstGen()
+        datos_inst_gen_fields = {
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm2,
+            'titular_representante_gen': titular2,
+        }
+        datos_2.feed(datos_inst_gen_fields)
+
+        utm3 = copy.deepcopy(utm)
+        titular3 = copy.deepcopy(titular)
+
+        datos_3 = c1.DatosInstGen()
+        datos_inst_gen_fields = {
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm3,
+            'titular_representante_gen': titular3,
+        }
+        datos_3.feed(datos_inst_gen_fields)
+
+        utm4 = copy.deepcopy(utm)
+        titular4 = copy.deepcopy(titular)
+
+        datos_4 = c1.DatosInstGen()
+        datos_inst_gen_fields = {
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm4,
+            'titular_representante_gen': titular4,
+        }
+        datos_4.feed(datos_inst_gen_fields)
+
+        datos_cau1 = c1.DatosCAU()
+        datos_cau1_fields = {
+            'cau': 'ES1234000000000001JN0FA001',
+            'colectivo': 'N',
+            'datos_inst_gen': [datos_1, datos_2],
+        }
+        datos_cau1.feed(datos_cau1_fields)
+
+        datos_cau2 = c1.DatosCAU()
+        datos_cau2_fields = {
+            'cau': 'ES1234000000000001JN0FA002',
+            'colectivo': 'S',
+            'datos_inst_gen': [datos_3, datos_4],
+        }
+        datos_cau2.feed(datos_cau2_fields)
+
+        # Autoconsumo
+        autoconsumo = c1.Autoconsumo()
+        autoconsumo_fields = {
+            'tipo_autoconsumo': '12',
+            'tipo_subseccion': '21',
+            'datos_suministro': suministro,
+            'datos_cau': [datos_cau1, datos_cau2],
+        }
+        autoconsumo.feed(autoconsumo_fields)
+
         contrato_fields = {
             'fecha_finalizacion': '2018-01-01',
-            'tipo_autoconsumo': '00',
+            'autoconsumo': autoconsumo,
             'tipo_contrato_atr': '02',
             'condiciones_contractuales': condiciones_contractuales,
             'periodicidad_facturacion': '01',
@@ -884,7 +1256,7 @@ class test_A1(unittest.TestCase):
             suministro_3.feed(suministro_fields)
 
             # UTM
-            utm = d1.UTM()
+            utm = c1.UTM()
             utm_fields = {
                 'x': '100',
                 'y': '200',
@@ -894,7 +1266,7 @@ class test_A1(unittest.TestCase):
             utm.feed(utm_fields)
 
             # IdTitular
-            id_titular = d1.IdTitular()
+            id_titular = c1.IdTitular()
             id_titular_fields = {
                 'tipo_identificador': 'NI',
                 'identificador': '111111111H',
@@ -902,7 +1274,7 @@ class test_A1(unittest.TestCase):
             id_titular.feed(id_titular_fields)
 
             # Nombre
-            nombre = d1.Nombre()
+            nombre = c1.Nombre()
             nombre_fields = {
                 'nombre_de_pila': 'Juan',
                 'primer_apellido': 'López',
@@ -911,7 +1283,7 @@ class test_A1(unittest.TestCase):
             nombre.feed(nombre_fields)
 
             # Telefono
-            telefono = d1.Telefono()
+            telefono = c1.Telefono()
             telefono_fields = {
                 'prefijo_pais': '0034',
                 'numero': '933834841',
@@ -919,7 +1291,7 @@ class test_A1(unittest.TestCase):
             telefono.feed(telefono_fields)
 
             # Telefono 2
-            telefono2 = d1.Telefono()
+            telefono2 = c1.Telefono()
             telefono2_fields = {
                 'prefijo_pais': '0034',
                 'numero': '633834841',
@@ -927,7 +1299,7 @@ class test_A1(unittest.TestCase):
             telefono2.feed(telefono2_fields)
 
             # Telefono 3
-            telefono3 = d1.Telefono()
+            telefono3 = c1.Telefono()
             telefono3_fields = {
                 'prefijo_pais': '0034',
                 'numero': '683834841',
@@ -935,7 +1307,7 @@ class test_A1(unittest.TestCase):
             telefono3.feed(telefono3_fields)
 
             # Via
-            via = d1.Via()
+            via = c1.Via()
             via_fields = {
                 'tipo_via': 'CL',
                 'calle': 'Pau Casals',
@@ -950,7 +1322,7 @@ class test_A1(unittest.TestCase):
             via.feed(via_fields)
 
             # Direccion
-            direccion = d1.Direccion()
+            direccion = c1.Direccion()
             direccion_fields = {
                 'pais': 'España',
                 'provincia': '17',
@@ -962,7 +1334,7 @@ class test_A1(unittest.TestCase):
             direccion.feed(direccion_fields)
 
             # TitularRepresentanteGen
-            titular = d1.TitularRepresentanteGen()
+            titular = c1.TitularRepresentanteGen()
             titular_representante_gen_fields = {
                 'id_titular': id_titular,
                 'nombre': nombre,
@@ -973,7 +1345,7 @@ class test_A1(unittest.TestCase):
             titular.feed(titular_representante_gen_fields)
 
             # DatosInstGen
-            datos_1 = d1.DatosInstGen()
+            datos_1 = c1.DatosInstGenCompleto()
             datos_inst_gen_fields = {
                 'cil': 'ES1234000000000001JN0F001',
                 'tec_generador': 'b12',
@@ -991,7 +1363,7 @@ class test_A1(unittest.TestCase):
             # utm2 = copy.deepcopy(utm)
             # titular2 = copy.deepcopy(titular)
 
-            datos_2 = d1.DatosInstGen()
+            datos_2 = c1.DatosInstGenCompleto()
             datos_inst_gen_fields = {
                 'cil': 'ES1234000000000002JN0F001',
                 'tec_generador': 'b11',
@@ -1437,13 +1809,192 @@ class test_M1(unittest.TestCase):
         }
         condiciones_contractuales.feed(condiciones_contractuales_fields)
 
+        # DatosSuministro
+        suministro = d1.DatosSuministro()
+        suministro_fields = {
+            'tipo_cups': '01',
+            'ref_catastro': '1234567890qwertyuiop',
+        }
+        suministro.feed(suministro_fields)
+
+        # UTM
+        utm = c1.UTM()
+        utm_fields = {
+            'x': '100',
+            'y': '200',
+            'huso': '40',
+            'banda': 'E',
+        }
+        utm.feed(utm_fields)
+
+        # IdTitular
+        id_titular = c1.IdTitular()
+        id_titular_fields = {
+            'tipo_identificador': 'NI',
+            'identificador': '111111111H',
+        }
+        id_titular.feed(id_titular_fields)
+
+        # Nombre
+        nombre = c1.Nombre()
+        nombre_fields = {
+            'nombre_de_pila': 'Juan',
+            'primer_apellido': 'López',
+            'segundo_apellido': 'Sánchez',
+        }
+        nombre.feed(nombre_fields)
+
+        # Telefono
+        telefono = c1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '0034',
+            'numero': '933834841',
+        }
+        telefono.feed(telefono_fields)
+
+        # Telefono 2
+        telefono2 = c1.Telefono()
+        telefono2_fields = {
+            'prefijo_pais': '0034',
+            'numero': '633834841',
+        }
+        telefono2.feed(telefono2_fields)
+
+        # Telefono 3
+        telefono3 = c1.Telefono()
+        telefono3_fields = {
+            'prefijo_pais': '0034',
+            'numero': '683834841',
+        }
+        telefono3.feed(telefono3_fields)
+
+        # Via
+        via = c1.Via()
+        via_fields = {
+            'tipo_via': 'CL',
+            'calle': 'Pau Casals',
+            'numero_finca': '18',
+            'duplicador_finca': '1',
+            'escalera': 'D',
+            'piso': '3',
+            'puerta': '2',
+            'tipo_aclarador_finca': 'BI',
+            'aclarador_finca': 'Bar',
+        }
+        via.feed(via_fields)
+
+        # Direccion
+        direccion = c1.Direccion()
+        direccion_fields = {
+            'pais': 'España',
+            'provincia': '17',
+            'municipio': '171181',
+            'poblacion': '17118000400',
+            'cod_postal': '17230',
+            'via': via
+        }
+        direccion.feed(direccion_fields)
+
+        # TitularRepresentanteGen
+        titular = c1.TitularRepresentanteGen()
+        titular_representante_gen_fields = {
+            'id_titular': id_titular,
+            'nombre': nombre,
+            'telefono': [telefono, telefono2, telefono3],
+            'correo_electronico': 'mail_falso@dominio.com',
+            'direccion': direccion,
+        }
+        titular.feed(titular_representante_gen_fields)
+
+        # DatosInstGen
+        datos_1 = c1.DatosInstGen()
+        datos_inst_gen_fields = {
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm,
+            'titular_representante_gen': titular,
+        }
+        datos_1.feed(datos_inst_gen_fields)
+
+        utm2 = copy.deepcopy(utm)
+        titular2 = copy.deepcopy(titular)
+
+        datos_2 = c1.DatosInstGen()
+        datos_inst_gen_fields = {
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm2,
+            'titular_representante_gen': titular2,
+        }
+        datos_2.feed(datos_inst_gen_fields)
+
+        utm3 = copy.deepcopy(utm)
+        titular3 = copy.deepcopy(titular)
+
+        datos_3 = c1.DatosInstGen()
+        datos_inst_gen_fields = {
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm3,
+            'titular_representante_gen': titular3,
+        }
+        datos_3.feed(datos_inst_gen_fields)
+
+        utm4 = copy.deepcopy(utm)
+        titular4 = copy.deepcopy(titular)
+
+        datos_4 = c1.DatosInstGen()
+        datos_inst_gen_fields = {
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm4,
+            'titular_representante_gen': titular4,
+        }
+        datos_4.feed(datos_inst_gen_fields)
+
+        datos_cau1 = c1.DatosCAU()
+        datos_cau1_fields = {
+            'cau': 'ES1234000000000001JN0FA001',
+            'colectivo': 'N',
+            'datos_inst_gen': [datos_1, datos_2],
+        }
+        datos_cau1.feed(datos_cau1_fields)
+
+        datos_cau2 = c1.DatosCAU()
+        datos_cau2_fields = {
+            'cau': 'ES1234000000000001JN0FA002',
+            'colectivo': 'S',
+            'datos_inst_gen': [datos_3, datos_4],
+        }
+        datos_cau2.feed(datos_cau2_fields)
+
+        # Autoconsumo
+        autoconsumo = c1.Autoconsumo()
+        autoconsumo_fields = {
+            'tipo_autoconsumo': '12',
+            'tipo_subseccion': '21',
+            'datos_suministro': suministro,
+            'datos_cau': [datos_cau1, datos_cau2],
+        }
+        autoconsumo.feed(autoconsumo_fields)
 
         # Contacto
         contacto = get_contacto(email=False)
-
         contrato_fields = {
             'fecha_finalizacion': '2018-01-01',
-            'tipo_autoconsumo': '00',
+            'autoconsumo': autoconsumo,
             'tipo_contrato_atr': '02',
             'condiciones_contractuales': condiciones_contractuales,
             'contacto': contacto,
@@ -1629,7 +2180,7 @@ class test_D1(unittest.TestCase):
         suministro.feed(suministro_fields)
 
         # UTM
-        utm = d1.UTM()
+        utm = c1.UTM()
         utm_fields = {
             'x': '100',
             'y': '200',
@@ -1639,7 +2190,7 @@ class test_D1(unittest.TestCase):
         utm.feed(utm_fields)
 
         # IdTitular
-        id_titular = d1.IdTitular()
+        id_titular = c1.IdTitular()
         id_titular_fields = {
             'tipo_identificador': 'NI',
             'identificador': '111111111H',
@@ -1647,7 +2198,7 @@ class test_D1(unittest.TestCase):
         id_titular.feed(id_titular_fields)
 
         # Nombre
-        nombre = d1.Nombre()
+        nombre = c1.Nombre()
         nombre_fields = {
             'nombre_de_pila': 'Juan',
             'primer_apellido': 'López',
@@ -1656,7 +2207,7 @@ class test_D1(unittest.TestCase):
         nombre.feed(nombre_fields)
 
         # Telefono
-        telefono = d1.Telefono()
+        telefono = c1.Telefono()
         telefono_fields = {
             'prefijo_pais': '0034',
             'numero': '933834841',
@@ -1664,7 +2215,7 @@ class test_D1(unittest.TestCase):
         telefono.feed(telefono_fields)
 
         # Telefono 2
-        telefono2 = d1.Telefono()
+        telefono2 = c1.Telefono()
         telefono2_fields = {
             'prefijo_pais': '0034',
             'numero': '633834841',
@@ -1672,7 +2223,7 @@ class test_D1(unittest.TestCase):
         telefono2.feed(telefono2_fields)
 
         # Telefono 3
-        telefono3 = d1.Telefono()
+        telefono3 = c1.Telefono()
         telefono3_fields = {
             'prefijo_pais': '0034',
             'numero': '683834841',
@@ -1680,7 +2231,7 @@ class test_D1(unittest.TestCase):
         telefono3.feed(telefono3_fields)
 
         # Via
-        via = d1.Via()
+        via = c1.Via()
         via_fields = {
             'tipo_via': 'CL',
             'calle': 'Pau Casals',
@@ -1695,7 +2246,7 @@ class test_D1(unittest.TestCase):
         via.feed(via_fields)
 
         # Direccion
-        direccion = d1.Direccion()
+        direccion = c1.Direccion()
         direccion_fields = {
             'pais': 'España',
             'provincia': '17',
@@ -1707,7 +2258,7 @@ class test_D1(unittest.TestCase):
         direccion.feed(direccion_fields)
 
         # TitularRepresentanteGen
-        titular = d1.TitularRepresentanteGen()
+        titular = c1.TitularRepresentanteGen()
         titular_representante_gen_fields = {
             'id_titular': id_titular,
             'nombre': nombre,
@@ -1718,7 +2269,7 @@ class test_D1(unittest.TestCase):
         titular.feed(titular_representante_gen_fields)
 
         # DatosInstGen
-        datos_1 = d1.DatosInstGen()
+        datos_1 = c1.DatosInstGenCompleto()
         datos_inst_gen_fields = {
             'cil': 'ES1234000000000001JN0F001',
             'tec_generador': 'b12',
@@ -1736,7 +2287,7 @@ class test_D1(unittest.TestCase):
         utm2 = copy.deepcopy(utm)
         titular2 = copy.deepcopy(titular)
 
-        datos_2 = d1.DatosInstGen()
+        datos_2 = d1.DatosInstGenCompleto()
         datos_inst_gen_fields = {
             'cil': 'ES1234000000000001JN0F002',
             'tec_generador': 'b11',
@@ -2027,12 +2578,204 @@ class test_P0(unittest.TestCase):
         }
         condiciones_contractuales.feed(condiciones_contractuales_fields)
 
+        # DatosSuministro
+        suministro = d1.DatosSuministro()
+        suministro_fields = {
+            'tipo_cups': '01',
+            'ref_catastro': '1234567890qwertyuiop',
+        }
+        suministro.feed(suministro_fields)
+
+        # UTM
+        utm = c1.UTM()
+        utm_fields = {
+            'x': '100',
+            'y': '200',
+            'huso': '40',
+            'banda': 'E',
+        }
+        utm.feed(utm_fields)
+
+        # IdTitular
+        id_titular = c1.IdTitular()
+        id_titular_fields = {
+            'tipo_identificador': 'NI',
+            'identificador': '111111111H',
+        }
+        id_titular.feed(id_titular_fields)
+
+        # Nombre
+        nombre = c1.Nombre()
+        nombre_fields = {
+            'nombre_de_pila': 'Juan',
+            'primer_apellido': 'López',
+            'segundo_apellido': 'Sánchez',
+        }
+        nombre.feed(nombre_fields)
+
+        # Telefono
+        telefono = c1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '0034',
+            'numero': '933834841',
+        }
+        telefono.feed(telefono_fields)
+
+        # Telefono 2
+        telefono2 = c1.Telefono()
+        telefono2_fields = {
+            'prefijo_pais': '0034',
+            'numero': '633834841',
+        }
+        telefono2.feed(telefono2_fields)
+
+        # Telefono 3
+        telefono3 = c1.Telefono()
+        telefono3_fields = {
+            'prefijo_pais': '0034',
+            'numero': '683834841',
+        }
+        telefono3.feed(telefono3_fields)
+
+        # Via
+        via = c1.Via()
+        via_fields = {
+            'tipo_via': 'CL',
+            'calle': 'Pau Casals',
+            'numero_finca': '18',
+            'duplicador_finca': '1',
+            'escalera': 'D',
+            'piso': '3',
+            'puerta': '2',
+            'tipo_aclarador_finca': 'BI',
+            'aclarador_finca': 'Bar',
+        }
+        via.feed(via_fields)
+
+        # Direccion
+        direccion = c1.Direccion()
+        direccion_fields = {
+            'pais': 'España',
+            'provincia': '17',
+            'municipio': '171181',
+            'poblacion': '17118000400',
+            'cod_postal': '17230',
+            'via': via
+        }
+        direccion.feed(direccion_fields)
+
+        # TitularRepresentanteGen
+        titular = c1.TitularRepresentanteGen()
+        titular_representante_gen_fields = {
+            'id_titular': id_titular,
+            'nombre': nombre,
+            'telefono': [telefono, telefono2, telefono3],
+            'correo_electronico': 'mail_falso@dominio.com',
+            'direccion': direccion,
+        }
+        titular.feed(titular_representante_gen_fields)
+
+        # DatosInstGen
+        datos_1 = c1.DatosInstGenCompleto()
+        datos_inst_gen_fields = {
+            'cil': 'ES1234000000000001JN0F001',
+            'tec_generador': 'b11',
+            'combustible': 'Diesel',
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm,
+            #'titular_representante_gen': titular,
+        }
+        datos_1.feed(datos_inst_gen_fields)
+
+        utm2 = copy.deepcopy(utm)
+        titular2 = copy.deepcopy(titular)
+
+        datos_2 = c1.DatosInstGenCompleto()
+        datos_inst_gen_fields = {
+            'cil': 'ES1234000000000001JN0F002',
+            'tec_generador': 'b12',
+            'combustible': 'Diesel',
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm2,
+            #'titular_representante_gen': titular2,
+        }
+        datos_2.feed(datos_inst_gen_fields)
+
+        utm3 = copy.deepcopy(utm)
+        titular3 = copy.deepcopy(titular)
+
+        datos_3 = c1.DatosInstGenCompleto()
+        datos_inst_gen_fields = {
+            'cil': 'ES1234000000000001JN0F003',
+            'tec_generador': 'b12',
+            'combustible': 'Diesel',
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm3,
+            #'titular_representante_gen': titular3,
+        }
+        datos_3.feed(datos_inst_gen_fields)
+
+        utm4 = copy.deepcopy(utm)
+        titular4 = copy.deepcopy(titular)
+
+        datos_4 = c1.DatosInstGenCompleto()
+        datos_inst_gen_fields = {
+            'cil': 'ES1234000000000001JN0F004',
+            'tec_generador': 'b11',
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm4,
+            #'titular_representante_gen': titular4,
+        }
+        datos_4.feed(datos_inst_gen_fields)
+
+        datos_cau1 = c1.DatosCAU()
+        datos_cau1_fields = {
+            'cau': 'ES1234000000000001JN0FA001',
+            'colectivo': 'N',
+            'datos_inst_gen': [datos_1, datos_2],
+        }
+        datos_cau1.feed(datos_cau1_fields)
+
+        datos_cau2 = c1.DatosCAU()
+        datos_cau2_fields = {
+            'cau': 'ES1234000000000001JN0FA002',
+            'colectivo': 'S',
+            'datos_inst_gen': [datos_3, datos_4],
+        }
+        datos_cau2.feed(datos_cau2_fields)
+
+        # Autoconsumo
+        autoconsumo = c1.Autoconsumo()
+        autoconsumo_fields = {
+            'tipo_autoconsumo': '12',
+            'tipo_subseccion': '21',
+            'datos_suministro': suministro,
+            'datos_cau': [datos_cau1, datos_cau2],
+        }
+        autoconsumo.feed(autoconsumo_fields)
+
         # Contrato
         contrato = p0.Contrato()
         contrato_fields = {
             'tipo_contrato_atr': '03',
             'fecha_finalizacion': '2020-03-31',
-            'tipo_autoconsumo': '01',
+            'autoconsumo': autoconsumo,
             'fecha_ultimo_movimiento_tipo_autocons': '2020-01-01',
             'ind_bono_social': 'N',
             'ind_esencial': 'N',
@@ -2249,6 +2992,470 @@ class test_Q1(unittest.TestCase):
         # Cabecera
         cabecera = get_header(process='Q1', step='01', date='2014-04-16T22:13:37', code='201412111009')
 
+        # Datos
+        datos = q1.Datos()
+
+        # Datos CAU 1
+        datos_cau1 = q1.DatosCAU()
+        datos_cau1_fields = {
+            'cau': 'ES1234000000000001JN0FA001',
+            'colectivo': 'N',
+            'tipo_cups': '01',
+        }
+        datos_cau1.feed(datos_cau1_fields)
+
+        # Datos CAU 2
+        datos_cau2 = q1.DatosCAU()
+        datos_cau2_fields = {
+            'cau': 'ES1234000000000001JN0FA002',
+            'colectivo': 'S',
+            'tipo_cups': '01',
+        }
+        datos_cau2.feed(datos_cau2_fields)
+
+        # Periodo CCH
+        periodo_cch = q1.PeriodoCCH()
+        periodo_cch_fields = {
+            'fecha_desde_cch': '2017-06-28',
+            'fecha_hasta_cch': '2017-07-27'
+        }
+        periodo_cch.feed(periodo_cch_fields)
+
+        # Periodo
+        periodo = q1.Periodo()
+        periodo_fields = {
+            'fecha_desde_factura': '2021-12-31',
+            'fecha_hasta_factura': '2022-01-31',
+            'numero_dias': 31
+        }
+        periodo.feed(periodo_fields)
+
+        datos_fields = {
+            'tipo_autoconsumo': '12',
+            'tipo_subseccion': '21',
+            'datos_cau': [datos_cau1, datos_cau2],
+            'marca_medida_con_perdidas': 'N',
+            'vas_trafo': 100,
+            'porcentaje_perdidas': 90.85,
+            'indicativo_curva_carga': '01',
+            'periodo_cch': periodo_cch,
+            'periodo': periodo,
+            'tipo_pm': '05',
+        }
+        datos.feed(datos_fields)
+
+        # Energia activa
+        energia_activa = q1.EnergiaActiva()
+
+        # Periodo energia activa 1
+        periodo_energia1 = f1.PeriodoEnergiaActiva()
+        periodo_energia1_fields = {
+            'valor_energia_activa': 100.0
+        }
+        periodo_energia1.feed(periodo_energia1_fields)
+
+        # Periodo energia activa 2
+        periodo_energia2 = f1.PeriodoEnergiaActiva()
+        periodo_energia2_fields = {
+            'valor_energia_activa': 200.0
+        }
+        periodo_energia2.feed(periodo_energia2_fields)
+
+        # Periodo energia activa 3
+        periodo_energia3 = f1.PeriodoEnergiaActiva()
+        periodo_energia3_fields = {
+            'valor_energia_activa': 300.0
+        }
+        periodo_energia3.feed(periodo_energia3_fields)
+
+        # Termino energia activa
+        termino = f1.TerminoEnergiaActiva()
+        termino_fields = {
+            'fecha_desde': '2021-12-31',
+            'fecha_hasta': '2022-01-31',
+            'periodos': [periodo_energia1, periodo_energia2, periodo_energia3]
+        }
+        termino.feed(termino_fields)
+
+        energia_activa_fields = {
+            'termino_energia_activa': termino
+        }
+        energia_activa.feed(energia_activa_fields)
+
+        # Autoconsumo
+        autoconsumo1 = q1.Autoconsumo()
+
+        # Instalacion Gen Autoconsumo 1
+        inst_gen1 = f1.InstalacionGenAutoconsumo()
+
+        # Energia neta gen 1
+        energia_gen1 = f1.EnergiaNetaGen()
+
+        # Termino energia neta gen 1
+        termino_gen1 = f1.TerminoEnergiaNetaGen()
+
+        # Periodo Gen 1
+        periodo_gen1 = f1.PeriodoEnergiaNetaGen()
+        periodo_gen1_fields = {
+            'valor_energia_neta_gen': 1.0,
+            'relacion_generacion': 100.0,
+        }
+        periodo_gen1.feed(periodo_gen1_fields)
+
+        # Periodo Gen 2
+        periodo_gen2 = f1.PeriodoEnergiaNetaGen()
+        periodo_gen2_fields = {
+            'valor_energia_neta_gen': 2.0,
+            'relacion_generacion': 100.0,
+        }
+        periodo_gen2.feed(periodo_gen2_fields)
+
+        # Periodo Gen 3
+        periodo_gen3 = f1.PeriodoEnergiaNetaGen()
+        periodo_gen3_fields = {
+            'valor_energia_neta_gen': 3.0,
+            'relacion_generacion': 100.0,
+        }
+        periodo_gen3.feed(periodo_gen3_fields)
+
+        # Periodo Gen 4
+        periodo_gen4 = f1.PeriodoEnergiaNetaGen()
+        periodo_gen4_fields = {
+            'valor_energia_neta_gen': 4.0,
+            'relacion_generacion': 100.0,
+        }
+        periodo_gen4.feed(periodo_gen4_fields)
+
+        # Periodo Gen 5
+        periodo_gen5 = f1.PeriodoEnergiaNetaGen()
+        periodo_gen5_fields = {
+            'valor_energia_neta_gen': 5.0,
+            'relacion_generacion': 100.0,
+        }
+        periodo_gen5.feed(periodo_gen5_fields)
+
+        # Periodo Gen 6
+        periodo_gen6 = f1.PeriodoEnergiaNetaGen()
+        periodo_gen6_fields = {
+            'valor_energia_neta_gen': 6.0,
+            'relacion_generacion': 100.0,
+        }
+        periodo_gen6.feed(periodo_gen6_fields)
+        periodos_gen = [
+            periodo_gen1, periodo_gen2, periodo_gen3,
+            periodo_gen4, periodo_gen5, periodo_gen6
+        ]
+
+        termino_gen1_fields = {
+            'fecha_desde': '2021-05-31',
+            'fecha_hasta': '2021-06-30',
+            'periodos': periodos_gen,
+        }
+        termino_gen1.feed(termino_gen1_fields)
+        energia_gen1_fields = {
+            'termino_energia_neta_gen': termino_gen1,
+            'total_energia_neta_gen': 65.0
+        }
+        energia_gen1.feed(energia_gen1_fields)
+
+        # Energia autoconsumida 1
+        energia_auto1 = f1.EnergiaAutoconsumida()
+
+        # Termino energia autoconsumida 1
+        termino_auto1 = f1.TerminoEnergiaAutoconsumida()
+
+        # Periodo auto 11
+        periodo_auto11 = f1.PeriodoEnergiaAutoconsumida()
+        periodo_auto11_fields = {
+            'valor_energia_autoconsumida': 11.0,
+        }
+        periodo_auto11.feed(periodo_auto11_fields)
+
+        # Periodo auto 12
+        periodo_auto12 = f1.PeriodoEnergiaAutoconsumida()
+        periodo_auto12_fields = {
+            'valor_energia_autoconsumida': 12.0,
+        }
+        periodo_auto12.feed(periodo_auto12_fields)
+
+        # Periodo auto 13
+        periodo_auto13 = f1.PeriodoEnergiaAutoconsumida()
+        periodo_auto13_fields = {
+            'valor_energia_autoconsumida': 13.0,
+        }
+        periodo_auto13.feed(periodo_auto13_fields)
+
+        # Periodo auto 14
+        periodo_auto14 = f1.PeriodoEnergiaAutoconsumida()
+        periodo_auto14_fields = {
+            'valor_energia_autoconsumida': 14.0,
+        }
+        periodo_auto14.feed(periodo_auto14_fields)
+
+        # Periodo auto 15
+        periodo_auto15 = f1.PeriodoEnergiaAutoconsumida()
+        periodo_auto15_fields = {
+            'valor_energia_autoconsumida': 15.0,
+        }
+        periodo_auto15.feed(periodo_auto15_fields)
+
+        # Periodo auto 16
+        periodo_auto16 = f1.PeriodoEnergiaAutoconsumida()
+        periodo_auto16_fields = {
+            'valor_energia_autoconsumida': 16.0,
+        }
+        periodo_auto16.feed(periodo_auto16_fields)
+        periodos_auto = [
+            periodo_auto11, periodo_auto12, periodo_auto13,
+            periodo_auto14, periodo_auto15, periodo_auto16
+        ]
+
+        termino_auto1_fields = {
+            'fecha_desde': '2021-05-31',
+            'fecha_hasta': '2021-06-30',
+            'periodos': periodos_auto,
+        }
+        termino_auto1.feed(termino_auto1_fields)
+        energia_auto1_fields = {
+            'termino_energia_autoconsumida': termino_auto1,
+        }
+        energia_auto1.feed(energia_auto1_fields)
+        
+        inst_gen1_fields = {
+            'tipo_instalacion': '01',
+            'esquema_medida': 'A',
+            'energia_neta_gen': energia_gen1,
+            'energia_autoconsumida': energia_auto1,
+        }
+        inst_gen1.feed(inst_gen1_fields)
+
+        # Instalacion Gen Autoconsumo 2
+        inst_gen2 = f1.InstalacionGenAutoconsumo()
+
+        # Energia neta gen 2
+        energia_gen2 = f1.EnergiaNetaGen()
+
+        # Termino energia neta gen 2
+        termino_gen2 = f1.TerminoEnergiaNetaGen()
+
+        # Periodo Gen 21
+        periodo_gen21 = f1.PeriodoEnergiaNetaGen()
+        periodo_gen21_fields = {
+            'valor_energia_neta_gen': 0.0,
+            'relacion_generacion': 100.0,
+        }
+        periodo_gen21.feed(periodo_gen21_fields)
+
+        # Periodo Gen 22
+        periodo_gen22 = f1.PeriodoEnergiaNetaGen()
+        periodo_gen22_fields = {
+            'valor_energia_neta_gen': 0.0,
+            'relacion_generacion': 100.0,
+        }
+        periodo_gen22.feed(periodo_gen22_fields)
+
+        # Periodo Gen 23
+        periodo_gen23 = f1.PeriodoEnergiaNetaGen()
+        periodo_gen23_fields = {
+            'valor_energia_neta_gen': 30.0,
+            'relacion_generacion': 100.0,
+        }
+        periodo_gen23.feed(periodo_gen23_fields)
+
+        # Periodo Gen 24
+        periodo_gen24 = f1.PeriodoEnergiaNetaGen()
+        periodo_gen24_fields = {
+            'valor_energia_neta_gen': 40.0,
+            'relacion_generacion': 100.0,
+        }
+        periodo_gen24.feed(periodo_gen24_fields)
+
+        # Periodo Gen 25
+        periodo_gen25 = f1.PeriodoEnergiaNetaGen()
+        periodo_gen25_fields = {
+            'valor_energia_neta_gen': 0.0,
+            'relacion_generacion': 100.0,
+        }
+        periodo_gen25.feed(periodo_gen25_fields)
+
+        # Periodo Gen 26
+        periodo_gen26 = f1.PeriodoEnergiaNetaGen()
+        periodo_gen26_fields = {
+            'valor_energia_neta_gen': 60.0,
+            'relacion_generacion': 100.0,
+        }
+        periodo_gen26.feed(periodo_gen26_fields)
+        periodos_gen2 = [
+            periodo_gen21, periodo_gen22, periodo_gen23,
+            periodo_gen24, periodo_gen25, periodo_gen26
+        ]
+
+        termino_gen2_fields = {
+            'fecha_desde': '2021-05-31',
+            'fecha_hasta': '2021-06-30',
+            'periodos': periodos_gen2,
+        }
+        termino_gen2.feed(termino_gen2_fields)
+        energia_gen2_fields = {
+            'termino_energia_neta_gen': termino_gen2,
+            'total_energia_neta_gen': 65.0
+        }
+        energia_gen2.feed(energia_gen2_fields)
+
+        # Energia autoconsumida 2
+        energia_auto2 = f1.EnergiaAutoconsumida()
+
+        # Termino energia autoconsumida 2
+        termino_auto2 = f1.TerminoEnergiaAutoconsumida()
+
+        # Periodo auto 21
+        periodo_auto21 = f1.PeriodoEnergiaAutoconsumida()
+        periodo_auto21_fields = {
+            'valor_energia_autoconsumida': 0.0,
+        }
+        periodo_auto21.feed(periodo_auto21_fields)
+
+        # Periodo auto 22
+        periodo_auto22 = f1.PeriodoEnergiaAutoconsumida()
+        periodo_auto22_fields = {
+            'valor_energia_autoconsumida': 0.0,
+        }
+        periodo_auto22.feed(periodo_auto22_fields)
+
+        # Periodo auto 23
+        periodo_auto23 = f1.PeriodoEnergiaAutoconsumida()
+        periodo_auto23_fields = {
+            'valor_energia_autoconsumida': 15.0,
+        }
+        periodo_auto23.feed(periodo_auto23_fields)
+
+        # Periodo auto 24
+        periodo_auto24 = f1.PeriodoEnergiaAutoconsumida()
+        periodo_auto24_fields = {
+            'valor_energia_autoconsumida': 10.0,
+        }
+        periodo_auto24.feed(periodo_auto24_fields)
+
+        # Periodo auto 25
+        periodo_auto25 = f1.PeriodoEnergiaAutoconsumida()
+        periodo_auto25_fields = {
+            'valor_energia_autoconsumida': 0.0,
+        }
+        periodo_auto25.feed(periodo_auto25_fields)
+
+        # Periodo auto 26
+        periodo_auto26 = f1.PeriodoEnergiaAutoconsumida()
+        periodo_auto26_fields = {
+            'valor_energia_autoconsumida': 6.0,
+        }
+        periodo_auto26.feed(periodo_auto26_fields)
+        periodos_auto2 = [
+            periodo_auto21, periodo_auto22, periodo_auto23,
+            periodo_auto24, periodo_auto25, periodo_auto26
+        ]
+
+        termino_auto2_fields = {
+            'fecha_desde': '2021-05-31',
+            'fecha_hasta': '2021-06-30',
+            'periodos': periodos_auto2,
+        }
+        termino_auto2.feed(termino_auto2_fields)
+        energia_auto2_fields = {
+            'termino_energia_autoconsumida': termino_auto2,
+        }
+        energia_auto2.feed(energia_auto2_fields)
+
+        inst_gen2_fields = {
+            'tipo_instalacion': '01',
+            'esquema_medida': 'A',
+            'energia_neta_gen': energia_gen2,
+            'energia_autoconsumida': energia_auto2,
+        }
+        inst_gen2.feed(inst_gen2_fields)
+
+        # Energia excedentaria 1
+        energia_exc1 = f1.EnergiaExcedentaria()
+
+        # Termino energia excedentaria 1
+        termino_exc1 = f1.TerminoEnergiaExcedentaria()
+
+        # Periodo excedentaria 11
+        periodo_exc11 = f1.PeriodoEnergiaExcedentaria()
+        periodo_exc11_fields = {
+            'valor_energia_excedentaria': 21.0,
+        }
+        periodo_exc11.feed(periodo_exc11_fields)
+
+        # Periodo excedentaria 12
+        periodo_exc12 = f1.PeriodoEnergiaExcedentaria()
+        periodo_exc12_fields = {
+            'valor_energia_excedentaria': 22.0,
+        }
+        periodo_exc12.feed(periodo_exc12_fields)
+
+        # Periodo excedentaria 13
+        periodo_exc13 = f1.PeriodoEnergiaExcedentaria()
+        periodo_exc13_fields = {
+            'valor_energia_excedentaria': 23.0,
+        }
+        periodo_exc13.feed(periodo_exc13_fields)
+
+        # Periodo excedentaria 14
+        periodo_exc14 = f1.PeriodoEnergiaExcedentaria()
+        periodo_exc14_fields = {
+            'valor_energia_excedentaria': 24.0,
+        }
+        periodo_exc14.feed(periodo_exc14_fields)
+
+        # Periodo excedentaria 15
+        periodo_exc15 = f1.PeriodoEnergiaExcedentaria()
+        periodo_exc15_fields = {
+            'valor_energia_excedentaria': 25.0,
+        }
+        periodo_exc15.feed(periodo_exc15_fields)
+
+        # Periodo excedentaria 16
+        periodo_exc16 = f1.PeriodoEnergiaExcedentaria()
+        periodo_exc16_fields = {
+            'valor_energia_excedentaria': 26.0,
+        }
+        periodo_exc16.feed(periodo_exc16_fields)
+        periodos_exc1 = [
+            periodo_exc11, periodo_exc12, periodo_exc13,
+            periodo_exc14, periodo_exc15, periodo_exc16
+        ]
+
+        termino_exc1_fields = {
+            'fecha_desde': '2021-05-31',
+            'fecha_hasta': '2021-06-30',
+            'periodos': periodos_exc1,
+        }
+        termino_exc1.feed(termino_exc1_fields)
+        energia_exc1_fields = {
+            'termino_energia_excedentaria': termino_exc1,
+        }
+        energia_exc1.feed(energia_exc1_fields)
+
+        autoconsumo1_fields = {
+            'cau': 'ES1234000000000001JN0FA001',
+            'instalacion_gen_autoconsumo': [inst_gen1, inst_gen2],
+            'energia_excedentaria': energia_exc1,
+        }
+        autoconsumo1.feed(autoconsumo1_fields)
+
+        # Autoconsumo 2
+        autoconsumo2 = q1.Autoconsumo()
+
+        inst_gen3 = copy.deepcopy(inst_gen1)
+        inst_gen4 = copy.deepcopy(inst_gen2)
+        energia_exc2 = copy.deepcopy(energia_exc1)
+        autoconsumo2_fields = {
+            'cau': 'ES1234000000000001JN0FA002',
+            'instalacion_gen_autoconsumo': [inst_gen3, inst_gen4],
+            'energia_excedentaria': energia_exc2,
+        }
+        autoconsumo2.feed(autoconsumo2_fields)
+
         # Medidas
         medidas = q1.Medidas()
 
@@ -2400,9 +3607,30 @@ class test_Q1(unittest.TestCase):
         }
         medidas.feed(medidas_fields)
 
+        # Informacion al consumidor
+        informacion = f1.InformacionAlConsumidor()
+
+        # Periodo potencia maxi demandada
+        periodo_info = f1.PeriodoInfoAlConsumidor()
+        periodo_info_fields = {
+            'potencia_max_demandada_anio_movil': 3000
+        }
+        periodo_info.feed(periodo_info_fields)
+
+        informacion_fields = {
+            'fecha_inicio_anio_movil': '2017-03-31',
+            'periodos': [periodo_info],
+            'valor_energia_media_cp': 61083.25,
+        }
+        informacion.feed(informacion_fields)
+
         mensaje_saldo_lecturas_facturacion_fields = {
             'cabecera': cabecera,
+            'datos': datos,
+            'energia_activa': energia_activa,
+            'autoconsumo': [autoconsumo1, autoconsumo2],
             'medidas': medidas,
+            'informacion_al_consumidor': informacion,
         }
         mensaje.feed(mensaje_saldo_lecturas_facturacion_fields)
         mensaje.build_tree()
@@ -3499,11 +4727,202 @@ class test_E1(unittest.TestCase):
         }
         condiciones_contractuales.feed(condiciones_contractuales_fields)
 
+        # DatosSuministro
+        suministro = d1.DatosSuministro()
+        suministro_fields = {
+            'tipo_cups': '01',
+            'ref_catastro': '1234567890qwertyuiop',
+        }
+        suministro.feed(suministro_fields)
+
+        # UTM
+        utm = c1.UTM()
+        utm_fields = {
+            'x': '100',
+            'y': '200',
+            'huso': '40',
+            'banda': 'E',
+        }
+        utm.feed(utm_fields)
+
+        # IdTitular
+        id_titular = c1.IdTitular()
+        id_titular_fields = {
+            'tipo_identificador': 'NI',
+            'identificador': '111111111H',
+        }
+        id_titular.feed(id_titular_fields)
+
+        # Nombre
+        nombre = c1.Nombre()
+        nombre_fields = {
+            'nombre_de_pila': 'Juan',
+            'primer_apellido': 'López',
+            'segundo_apellido': 'Sánchez',
+        }
+        nombre.feed(nombre_fields)
+
+        # Telefono
+        telefono = c1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '0034',
+            'numero': '933834841',
+        }
+        telefono.feed(telefono_fields)
+
+        # Telefono 2
+        telefono2 = c1.Telefono()
+        telefono2_fields = {
+            'prefijo_pais': '0034',
+            'numero': '633834841',
+        }
+        telefono2.feed(telefono2_fields)
+
+        # Telefono 3
+        telefono3 = c1.Telefono()
+        telefono3_fields = {
+            'prefijo_pais': '0034',
+            'numero': '683834841',
+        }
+        telefono3.feed(telefono3_fields)
+
+        # Via
+        via = c1.Via()
+        via_fields = {
+            'tipo_via': 'CL',
+            'calle': 'Pau Casals',
+            'numero_finca': '18',
+            'duplicador_finca': '1',
+            'escalera': 'D',
+            'piso': '3',
+            'puerta': '2',
+            'tipo_aclarador_finca': 'BI',
+            'aclarador_finca': 'Bar',
+        }
+        via.feed(via_fields)
+
+        # Direccion
+        direccion = c1.Direccion()
+        direccion_fields = {
+            'pais': 'España',
+            'provincia': '17',
+            'municipio': '171181',
+            'poblacion': '17118000400',
+            'cod_postal': '17230',
+            'via': via
+        }
+        direccion.feed(direccion_fields)
+
+        # TitularRepresentanteGen
+        titular = c1.TitularRepresentanteGen()
+        titular_representante_gen_fields = {
+            'id_titular': id_titular,
+            'nombre': nombre,
+            'telefono': [telefono, telefono2, telefono3],
+            'correo_electronico': 'mail_falso@dominio.com',
+            'direccion': direccion,
+        }
+        titular.feed(titular_representante_gen_fields)
+
+        # DatosInstGen
+        datos_1 = c1.DatosInstGenCompleto()
+        datos_inst_gen_fields = {
+            'cil': 'ES1234000000000001JN0F001',
+            'tec_generador': 'b12',
+            'combustible': 'Diesel',
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm,
+            'titular_representante_gen': titular,
+        }
+        datos_1.feed(datos_inst_gen_fields)
+
+        utm2 = copy.deepcopy(utm)
+        titular2 = copy.deepcopy(titular)
+
+        datos_2 = c1.DatosInstGenCompleto()
+        datos_inst_gen_fields = {
+            'cil': 'ES1234000000000001JN0F002',
+            'tec_generador': 'b11',
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm2,
+            'titular_representante_gen': titular2,
+        }
+        datos_2.feed(datos_inst_gen_fields)
+
+        utm3 = copy.deepcopy(utm)
+        titular3 = copy.deepcopy(titular)
+
+        datos_3 = c1.DatosInstGenCompleto()
+        datos_inst_gen_fields = {
+            'cil': 'ES1234000000000001JN0F003',
+            'tec_generador': 'b12',
+            'combustible': 'Diesel',
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm3,
+            'titular_representante_gen': titular3,
+        }
+        datos_3.feed(datos_inst_gen_fields)
+
+        utm4 = copy.deepcopy(utm)
+        titular4 = copy.deepcopy(titular)
+
+        datos_4 = c1.DatosInstGenCompleto()
+        datos_inst_gen_fields = {
+            'cil': 'ES1234000000000001JN0F004',
+            'tec_generador': 'b11',
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm4,
+            'titular_representante_gen': titular4,
+        }
+        datos_4.feed(datos_inst_gen_fields)
+
+        datos_cau1 = c1.DatosCAU()
+        datos_cau1_fields = {
+            'cau': 'ES1234000000000001JN0FA001',
+            'colectivo': 'N',
+            'datos_inst_gen': [datos_1, datos_2],
+        }
+        datos_cau1.feed(datos_cau1_fields)
+
+        datos_cau2 = c1.DatosCAU()
+        datos_cau2_fields = {
+            'cau': 'ES1234000000000001JN0FA002',
+            'colectivo': 'S',
+            'datos_inst_gen': [datos_3, datos_4],
+        }
+        datos_cau2.feed(datos_cau2_fields)
+
+        # Autoconsumo
+        autoconsumo = c1.Autoconsumo()
+        autoconsumo_fields = {
+            'tipo_autoconsumo': '12',
+            'tipo_subseccion': '21',
+            'datos_suministro': suministro,
+            'datos_cau': [datos_cau1, datos_cau2],
+        }
+        autoconsumo.feed(autoconsumo_fields)
+
         # Contrato
         contrato = e1.Contrato()
         contrato_fields = {
             'id_contrato': id_contrato,
-            'tipo_autoconsumo': '00',
+            'autoconsumo': autoconsumo,
             'tipo_contrato_atr': '02',
             'condiciones_contractuales': condiciones_contractuales,
         }
@@ -3748,7 +5167,7 @@ class test_T1(unittest.TestCase):
         datos_solicitud.feed(datos_solicitud_fields)
 
         # Contrato
-        contrato = t1.ContratoT101()
+        contrato = t1.Contrato()
 
         # CondicionesContractuales
         condiciones_contractuales = t1.CondicionesContractuales()

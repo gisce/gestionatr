@@ -208,6 +208,65 @@
                     <FechaDesde>2021-05-31</FechaDesde>
                     <FechaHasta>2021-06-30</FechaHasta>
                     <Periodo>
+                        <ValorEnergiaNetaGen>1.00</ValorEnergiaNetaGen>
+                        <RelacionGeneracion>100.0</RelacionGeneracion>
+                    </Periodo>
+                    <Periodo>
+                        <ValorEnergiaNetaGen>2.00</ValorEnergiaNetaGen>
+                        <RelacionGeneracion>100.0</RelacionGeneracion>
+                    </Periodo>
+                    <Periodo>
+                        <ValorEnergiaNetaGen>3.00</ValorEnergiaNetaGen>
+                        <RelacionGeneracion>100.0</RelacionGeneracion>
+                    </Periodo>
+                    <Periodo>
+                        <ValorEnergiaNetaGen>4.00</ValorEnergiaNetaGen>
+                        <RelacionGeneracion>100.0</RelacionGeneracion>
+                    </Periodo>
+                    <Periodo>
+                        <ValorEnergiaNetaGen>5.00</ValorEnergiaNetaGen>
+                        <RelacionGeneracion>100.0</RelacionGeneracion>
+                    </Periodo>
+                    <Periodo>
+                        <ValorEnergiaNetaGen>6.00</ValorEnergiaNetaGen>
+                        <RelacionGeneracion>100.0</RelacionGeneracion>
+                    </Periodo>
+                </TerminoEnergiaNetaGen>
+                <TotalEnergiaNetaGenBeta>65.00</TotalEnergiaNetaGenBeta>
+            </EnergiaNetaGen>
+            <EnergiaAutoconsumida>
+                <TerminoEnergiaAutoconsumida>
+                    <FechaDesde>2021-05-31</FechaDesde>
+                    <FechaHasta>2021-06-30</FechaHasta>
+                    <Periodo>
+                        <ValorEnergiaAutoconsumida>11.00</ValorEnergiaAutoconsumida>
+                    </Periodo>
+                    <Periodo>
+                        <ValorEnergiaAutoconsumida>12.00</ValorEnergiaAutoconsumida>
+                    </Periodo>
+                    <Periodo>
+                        <ValorEnergiaAutoconsumida>13.00</ValorEnergiaAutoconsumida>
+                    </Periodo>
+                    <Periodo>
+                        <ValorEnergiaAutoconsumida>14.00</ValorEnergiaAutoconsumida>
+                    </Periodo>
+                    <Periodo>
+                        <ValorEnergiaAutoconsumida>15.00</ValorEnergiaAutoconsumida>
+                    </Periodo>
+                    <Periodo>
+                        <ValorEnergiaAutoconsumida>16.00</ValorEnergiaAutoconsumida>
+                    </Periodo>
+                </TerminoEnergiaAutoconsumida>
+            </EnergiaAutoconsumida>
+        </InstalacionGenAutoconsumo>
+        <InstalacionGenAutoconsumo>
+            <TipoInstalacion>01</TipoInstalacion>
+            <EsquemaMedida>A</EsquemaMedida>
+            <EnergiaNetaGen>
+                <TerminoEnergiaNetaGen>
+                    <FechaDesde>2021-05-31</FechaDesde>
+                    <FechaHasta>2021-06-30</FechaHasta>
+                    <Periodo>
                         <ValorEnergiaNetaGen>0.00</ValorEnergiaNetaGen>
                         <RelacionGeneracion>100.0</RelacionGeneracion>
                     </Periodo>
