@@ -351,5 +351,9 @@
             <pcttasacnmc>0.140</pcttasacnmc>
             <pctcuotagts>0.797</pctcuotagts>
         </imputacionCostes>
+        <mediaconsumo>
+            <mediaconsperiodofact5A>6969.69</mediaconsperiodofact5A>
+            <mediaconsperiodofact>6969.69</mediaconsperiodofact>
+        </mediaconsumo>
     </factura>
 </facturasctd>
