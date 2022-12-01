@@ -5720,6 +5720,7 @@ class test_A1_05(unittest.TestCase):
             'newfamilyname1': 'Al',
             'newfamilyname2': 'Matalas',
             'newtitulartype': 'F',
+            'titularautonomo': 'S',
             'newregularaddress': 'S',
             'newtelephone': '999888777',
             'newfax': '111222333',

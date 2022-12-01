@@ -4214,6 +4214,11 @@ class test_B70(unittest.TestCase):
         self.assertEqual(impc.pcttasacnmc, '0.140')
         self.assertEqual(impc.pctcuotagts, '0.797')
 
+        consumo = fact.mediaconsumo
+        # Consumo medio
+        self.assertEqual(consumo.mediaconsperiodofact5A, '6969.69')
+        self.assertEqual(consumo.mediaconsperiodofact, '6969.69')
+
     def test_b7032(self):
         b7032 = B7032(self.xml_b7032)
         b7032.parse_xml()
@@ -4384,6 +4389,11 @@ class test_B70(unittest.TestCase):
         # Imputacioncostes
         self.assertEqual(impc.pcttasacnmc, '0.140')
         self.assertEqual(impc.pctcuotagts, '0.797')
+
+        consumo = fact.mediaconsumo
+        #Consumo medio
+        self.assertEqual(consumo.mediaconsperiodofact5A, '6969.69')
+        self.assertEqual(consumo.mediaconsperiodofact, '6969.69')
 
 
 class test_A1_02(unittest.TestCase):
