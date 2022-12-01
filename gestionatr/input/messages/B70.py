@@ -580,6 +580,15 @@ class Factura(object):
             return False
 
     @property
+    def mediaconsumo(self):
+        tree = 'mediaconsumo'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return MediaConsumo(data)
+        else:
+            return False
+
+    @property
     def codtbai(self):
         tree = 'codtbai'
         data = get_rec_attr(self.obj, tree, False)
@@ -1580,6 +1589,29 @@ class Imputacioncostes(object):
     @property
     def pctcuotagts(self):
         tree = 'pctcuotagts'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+
+class MediaConsumo(object):
+    def __init__(self, data):
+        self.obj = data
+
+    @property
+    def mediaconsperiodofact5A(self):
+        tree = 'mediaconsperiodofact5A'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def mediaconsperiodofact(self):
+        tree = 'mediaconsperiodofact'
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
