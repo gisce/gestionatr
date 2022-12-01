@@ -1097,7 +1097,6 @@ class test_M1(unittest.TestCase):
     #     self.assertFalse(m1.doc_tecnica)
     #     # Comentarios
     #     self.assertFalse(m1.comentarios)
-
     def test_m101r(self):
         m1 = M1(self.xml_m101r)
         m1.parse_xml()
@@ -1147,6 +1146,7 @@ class test_D1(unittest.TestCase):
         self.xml_d102_accept = open(get_data("d102_accept.xml"), "r")
         self.xml_d102_reject = open(get_data("d102_reject.xml"), "r")
         self.xml_d101_motiu_11 = open(get_data("d101_motiu_11.xml"), "r")
+        self.xml_d101_motiu_13 = open(get_data("d101_motiu_13.xml"), "r")
 
     def tearDown(self):
         self.xml_d101.close()
@@ -1155,6 +1155,7 @@ class test_D1(unittest.TestCase):
         self.xml_d102_accept.close()
         self.xml_d102_reject.close()
         self.xml_d101_motiu_11.close()
+        self.xml_d101_motiu_13.close()
 
     def test_d101(self):
         d1 = D1(self.xml_d101)
@@ -1271,6 +1272,20 @@ class test_D1(unittest.TestCase):
         d1 = D1(self.xml_d101_motiu_11)
         d1.parse_xml()
         self.assertEqual(d1.motivo_cambio_atr_desde_distribuidora, u'11')
+
+    def test_d101_motiu_13(self):
+        d1 = D1(self.xml_d101_motiu_13)
+        d1.parse_xml()
+        self.assertEqual(d1.motivo_cambio_atr_desde_distribuidora, u'13')
+        info = d1.info_retardo_activ_autocons[0]
+        self.assertEqual(info.codigo_fiscal_factura, u'12345678')
+        self.assertEqual(info.fecha_inicio_conteo_activ_autocons, u"2022-01-01")
+        self.assertEqual(info.fecha_desde, u"2022-01-01")
+        self.assertEqual(info.fecha_hasta, u"2022-01-01")
+        self.assertEqual(info.dias_retardo_activ_autocons, u'15')
+        self.assertEqual(info.valor_energia_anual_calculado, u'100')
+        self.assertEqual(info.valor_energia_horaria_calculada, u'200')
+        self.assertEqual(info.pot_instalada_gen, u'6')
 
     def test_d102_accept(self):
         d1 = D1(self.xml_d102_accept)
@@ -1946,6 +1961,8 @@ class test_F1(unittest.TestCase):
 
         self.assertEqual(periodo_max.potencia_max_demandada_anio_movil, 3000)
 
+        self.assertEqual(info_al_consumidor.valor_energia_media_cp, 61083.25)
+
         registro = f1.registro
 
         self.assertEqual(registro.importe_total, 76.48)
@@ -2402,6 +2419,8 @@ class test_F1(unittest.TestCase):
 
         periodo_max_2 = info_al_consumidor.periodos[1]
         self.assertEqual(periodo_max_2.potencia_max_demandada_anio_movil, 4045)
+
+        self.assertEqual(info_al_consumidor.valor_energia_media_cp, 61083.25)
 
         registro = f1.registro
 
@@ -4122,6 +4141,11 @@ class test_B70(unittest.TestCase):
         self.assertEqual(impc.pcttasacnmc, '0.140')
         self.assertEqual(impc.pctcuotagts, '0.797')
 
+        consumo = fact.mediaconsumo
+        # Consumo medio
+        self.assertEqual(consumo.mediaconsperiodofact5A, '6969.69')
+        self.assertEqual(consumo.mediaconsperiodofact, '6969.69')
+
     def test_b7032(self):
         b7032 = B7032(self.xml_b7032)
         b7032.parse_xml()
@@ -4292,6 +4316,11 @@ class test_B70(unittest.TestCase):
         # Imputacioncostes
         self.assertEqual(impc.pcttasacnmc, '0.140')
         self.assertEqual(impc.pctcuotagts, '0.797')
+
+        consumo = fact.mediaconsumo
+        #Consumo medio
+        self.assertEqual(consumo.mediaconsperiodofact5A, '6969.69')
+        self.assertEqual(consumo.mediaconsperiodofact, '6969.69')
 
 
 class test_A1_02(unittest.TestCase):

@@ -1764,6 +1764,12 @@ class InformacionAlConsumidor(object):
         return None
 
     @property
+    def valor_energia_media_cp(self):
+        if hasattr(self.informacion_al_consumidor, 'ValorEnergiaMediaCP'):
+            return float(self.informacion_al_consumidor.ValorEnergiaMediaCP.text.strip())
+        return None
+
+    @property
     def periodos(self):
         data = []
         periodes_no_facturables = []

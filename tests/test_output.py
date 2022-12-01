@@ -1581,11 +1581,13 @@ class test_D1(unittest.TestCase):
 
     def setUp(self):
         self.xml_d101 = open(get_data("d101.xml"), "r")
+        self.xml_d101_motiu_13 = open(get_data("d101_motiu_13.xml"), "r")
         self.xml_d102_accept = open(get_data("d102_accept.xml"), "r")
         self.xml_d102_reject = open(get_data("d102_reject.xml"), "r")
 
     def tearDown(self):
         self.xml_d101.close()
+        self.xml_d101_motiu_13.close()
         self.xml_d102_accept.close()
         self.xml_d102_reject.close()
 
@@ -1777,6 +1779,56 @@ class test_D1(unittest.TestCase):
         mensaje.build_tree()
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_d101.read())
+
+    def test_create_pas01_motiu_13(self):
+        # MensajeNotificacionCambiosATRDesdeDistribuidor
+        mensaje = d1.MensajeNotificacionCambiosATRDesdeDistribuidor()
+
+        # Cabecera
+        cabecera = d1.Cabecera()
+        cabecera_fields = {
+            'codigo_ree_empresa_emisora': '1234',
+            'codigo_ree_empresa_destino': '4321',
+            'codigo_del_proceso': 'D1',
+            'codigo_del_paso': '01',
+            'codigo_de_solicitud': '201605219497',
+            'secuencial_de_solicitud': '00',
+            'fecha': '2016-06-08T04:24:09',
+            'cups': 'ES0116000000011531LK0F',
+        }
+        cabecera.feed(cabecera_fields)
+
+        # InfoRegistroAutocons
+        info_list = []
+        info = d1.InfoRetardoActivAutocons()
+        info_retardo_activ_autocons_fields = {
+            'codigo_fiscal_factura': '12345678',
+            'fecha_inicio_conteo_activ_autocons': '2022-01-01',
+            'fecha_desde': '2022-01-01',
+            'fecha_hasta': '2022-01-01',
+            'dias_retardo_activ_autocons': 15,
+            'valor_energia_anual_calculada': 100,
+            'valor_energia_horaria_calculada': 200,
+            'pot_instalada_gen': 6,
+        }
+        info.feed(info_retardo_activ_autocons_fields)
+        info_list.append(info)
+        # NotificacionCambiosATRDesdeDistribuidor
+        notificacion = d1.NotificacionCambiosATRDesdeDistribuidor()
+        notificacion_cambios_atr_desde_distribuidor_fields = {
+            'motivo_cambio_atr_desde_distribuidora': '13',
+            'info_retardo_activ_autocons_list': info_list,
+        }
+        notificacion.feed(notificacion_cambios_atr_desde_distribuidor_fields)
+
+        mensaje_notificacion_cambios_atr_desde_distribuidor_fields = {
+            'cabecera': cabecera,
+            'notificacion_cambios_atr_desde_distribuidor': notificacion,
+        }
+        mensaje.feed(mensaje_notificacion_cambios_atr_desde_distribuidor_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_d101_motiu_13.read())
 
     def test_create_pas02_accept(self):
         # Cabecera
@@ -5223,7 +5275,8 @@ class test_F1(unittest.TestCase):
         informacion_al_consumidor.feed(
             {
                 'fecha_inicio_anio_movil': '2017-03-31',
-                'periodos': periodos_maximetros
+                'periodos': periodos_maximetros,
+                'valor_energia_media_cp': 61083.25
             }
         )
 
@@ -5667,6 +5720,7 @@ class test_A1_05(unittest.TestCase):
             'newfamilyname1': 'Al',
             'newfamilyname2': 'Matalas',
             'newtitulartype': 'F',
+            'titularautonomo': 'S',
             'newregularaddress': 'S',
             'newtelephone': '999888777',
             'newfax': '111222333',
