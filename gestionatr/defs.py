@@ -2303,6 +2303,12 @@ CONV_T109_T111 = {'01': '01',  # TG with CCH
 
 TABLA_113 = [
     ('00', u'Sin Autoconsumo'),
+    ('11', u'Sin excedentes'),
+    ('12', u'Con excedentes'),
+]
+
+OLD_TABLA_113 = [
+    ('00', u'Sin Autoconsumo'),
     ('01', u'Autoconsumo Tipo 1'),
     ('2A', u'Autoconsumo tipo 2 (según el Art. 13. 2. a) RD 900/2015)'),
     ('2B', u'Autoconsumo tipo 2 (según el Art. 13. 2. b) RD 900/2015)'),
@@ -2329,8 +2335,6 @@ TABLA_113 = [
     ('72', u'Con excedentes sin compensación individual con cto SSAA a través de red y red interior – SSAA'),
     ('73', u'Con excedentes sin compensación Colectivo con cto de SSAA  a través de red y red interior – Consumo'),
     ('74', u'Con excedentes sin compensación Colectivo con cto de SSAA a través de red y red interior - SSAA'),
-    ('11', u'Sin excedentes'),
-    ('12', u'Con excedentes'),
 ]
 
 TENEN_AUTOCONSUM = [x[0] for x in TABLA_113 if x[0] not in ['00', '01', '2A', '2B', '2G']]
