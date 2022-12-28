@@ -84,6 +84,11 @@ CODIS_AUTOCONSUM = {
     '82': 'informacio',
 }
 
+CODIS_INDEMNITZACIO_AUTOCONSUM = {
+    '86': 'Descuento por retardo en activación autoconsumo imputable al distribuidor',
+    '87': 'Descuento por retardo en activación autoconsumo NO imputable al distribuidor',
+}
+
 # Totalitzadors a ignorar
 SKIP_TOTALITZADORS = ('00', '60')
 
@@ -524,7 +529,7 @@ class Factura(object):
                     continue
                 elif concepte.is_autoconsum():
                     conceptes.append(concepte)
-                elif concepte.importe:
+                elif concepte.importe or concepte.is_indemnitzacio():
                     total += concepte.importe
                     conceptes.append(concepte)
         except AttributeError:
@@ -2597,6 +2602,10 @@ class ConceptoRepercutible(object):
 
     def is_autoconsum(self):
         return self.concepto_repercutible in CODIS_AUTOCONSUM.keys()
+
+    def is_indemnitzacio(self):
+        return self.concepto_repercutible in CODIS_INDEMNITZACIO_AUTOCONSUM.keys()
+
 
 class OtraFactura(Factura):
     DATOS_GENERALES_NAME = 'DatosGeneralesOtrasFacturas'
