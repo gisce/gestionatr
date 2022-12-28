@@ -3,7 +3,7 @@
 from libcomxml.core import XmlModel, XmlField
 from gestionatr.output.messages.base import Cabecera, rep_fecha, \
     rep_fecha_sin_hora, rep_decimal, rep_entera, rep_entera2, rep_ruedas, rep_cut
-from gestionatr.output.messages.sw_c1 import IdCliente, DatosCAU
+from gestionatr.output.messages.sw_c1 import IdCliente
 from gestionatr.output.messages.sw_c2 import Direccion
 
 
@@ -162,6 +162,18 @@ class DatosFacturaATR(XmlModel):
         super(DatosFacturaATR, self).__init__(
             'DatosFacturaATR', 'datos_factura_atr'
         )
+
+
+class DatosCAU(XmlModel):
+
+    _sort_order = ('datos_cau', 'cau', 'colectivo', 'tipo_cups')
+
+    def __init__(self):
+        self.datos_cau = XmlField('DatosCAU')
+        self.cau = XmlField('CAU')
+        self.colectivo = XmlField('Colectivo')
+        self.tipo_cups = XmlField('TipoCUPS')
+        super(DatosCAU, self).__init__('DatosCAU', 'datos_cau')
 
 
 class PeriodoCCH(XmlModel):
