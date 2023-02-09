@@ -1321,6 +1321,8 @@ class Medidor(object):
             dqmedio = float(meter.dqmedio)
             qdcontratado = float(meter.qdcontratado)
             excesocaudal = float(meter.excesocaudal)
+            temperatura_gas = float(meter.temp)
+            pressio_atmosferica = float(meter.presatm)
 
             for numerador in meter.listanumeradores:
                 lectura_desde_m3 = float(numerador.lectant)
@@ -1356,6 +1358,8 @@ class Medidor(object):
                     'dqmedio': float(dqmedio),
                     'qdcontratado': float(qdcontratado),
                     'excesocaudal': float(excesocaudal),
+                    'temperatura_gas': float(temperatura_gas),
+                    'pressio_atmosferica': float(pressio_atmosferica),
                 }
                 res.append(vals)
         return res
