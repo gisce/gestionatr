@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from libcomxml.core import XmlModel, XmlField
 from gestionatr.output.messages.base import Cabecera
+from gestionatr.output.messages.sw_c1 import Autoconsumo
 
 
 # Paso 01
@@ -81,7 +82,7 @@ class EstadoContratable(XmlModel):
 
 class Contrato(XmlModel):
 
-    _sort_order = ('contrato', 'tipo_contrato_atr', 'fecha_finalizacion', 'tipo_autoconsumo',
+    _sort_order = ('contrato', 'tipo_contrato_atr', 'fecha_finalizacion', 'autoconsumo',
                    'fecha_ultimo_movimiento_tipo_autocons', 'ind_bono_social', 'ind_esencial', 'vivienda_habitual',
                    'cnae', 'condiciones_contractuales', 'modo_facturacion_potencia', 'no_interrumpible',
                    'potencia_no_interrumpible', 'potencia_max_sin_expediente', 'vas_trafo', 'periodicidad_facturacion',
@@ -91,7 +92,7 @@ class Contrato(XmlModel):
         self.contrato = XmlField('Contrato')
         self.tipo_contrato_atr = XmlField('TipoContratoATR')
         self.fecha_finalizacion = XmlField('FechaFinalizacion')
-        self.tipo_autoconsumo = XmlField('TipoAutoconsumo')
+        self.autoconsumo = Autoconsumo()
         self.fecha_ultimo_movimiento_tipo_autocons = XmlField('FechaUltimoMovimientoTipoAutocons')
         self.ind_bono_social = XmlField('IndBonoSocial')
         self.ind_esencial = XmlField('IndEsencial')

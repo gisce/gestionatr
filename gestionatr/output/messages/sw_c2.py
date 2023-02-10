@@ -50,12 +50,13 @@ class DatosSolicitud(DatosSolicitud):
 
 class Contrato(Contrato):
 
-    _sort_order = ('contrato', 'id_contrato', 'fecha_finalizacion', 'tipo_autoconsumo', 'tipo_contrato_atr', 'condiciones_contractuales', 'periodicidad_facturacion', 'consumo_anual_estimado', 'contacto', 'tipo_activacion_prevista', 'fecha_activacion_prevista')
+    _sort_order = ('contrato', 'id_contrato', 'fecha_finalizacion', 'autoconsumo', 'tipo_contrato_atr', 'condiciones_contractuales', 'periodicidad_facturacion', 'consumo_anual_estimado', 'contacto', 'tipo_activacion_prevista', 'fecha_activacion_prevista')
 
     def __init__(self):
         super(Contrato, self).__init__()
         self.fecha_finalizacion = XmlField('FechaFinalizacion')
         self.tipo_contrato_atr = XmlField('TipoContratoATR')
+        self.autoconsumo = Autoconsumo()
         self.periodicidad_facturacion = XmlField('PeriodicidadFacturacion')
         self.consumo_anual_estimado = XmlField('ConsumoAnualEstimado')
         self.contacto = Contacto()

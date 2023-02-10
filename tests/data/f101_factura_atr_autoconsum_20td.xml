@@ -43,8 +43,13 @@
                 </DatosGeneralesFactura>
                 <DatosFacturaATR>
                     <FechaBOE>2021-12-16</FechaBOE>
-                    <TipoAutoconsumo>53</TipoAutoconsumo>
-                    <CAU>ES0304000016006825GV0FA000</CAU>
+                    <TipoAutoconsumo>12</TipoAutoconsumo>
+                    <TipoSubseccion>21</TipoSubseccion>
+                    <DatosCAU>
+                        <CAU>ES0304000016006825GV0FA000</CAU>
+                        <Colectivo>N</Colectivo>
+                        <TipoCUPS>01</TipoCUPS>
+                    </DatosCAU>
                     <DuracionInfAnio>N</DuracionInfAnio>
                     <TarifaATRFact>018</TarifaATRFact>
                     <ModoControlPotencia>1</ModoControlPotencia>
@@ -113,6 +118,7 @@
                 <ImporteTotalEnergiaActiva>1.21</ImporteTotalEnergiaActiva>
             </EnergiaActiva>
             <Autoconsumo>
+                <CAU>ES0304000016006825GV0FA000</CAU>
                 <EnergiaExcedentaria>
                     <TerminoEnergiaExcedentaria>
                         <FechaDesde>2021-12-31</FechaDesde>

@@ -2,18 +2,56 @@
 
 from libcomxml.core import XmlModel, XmlField
 from gestionatr.output.messages.base import Cabecera
+from gestionatr.output.messages.sw_c1 import DatosCAU
+from gestionatr.output.messages.sw_f1 import PeriodoCCH, Periodo, EnergiaActiva, Autoconsumo, InformacionAlConsumidor
 
 
 class MensajeSaldoLecturasFacturacion(XmlModel):
 
-    _sort_order = ('mensaje', 'cabecera', 'medidas')
+    _sort_order = ('mensaje', 'cabecera', 'datos', 'energia_activa', 'autoconsumo',
+                   'medidas', 'informacion_al_consumidor')
 
     def __init__(self):
         self.mensaje = XmlField('MensajeSaldoLecturasFacturacion',
                                 attributes={'xmlns': 'http://localhost/elegibilidad'})
         self.cabecera = Cabecera()
+        self.datos = Datos()
+        self.energia_activa = EnergiaActiva()
+        self.autoconsumo = Autoconsumo()
         self.medidas = Medidas()
+        self.informacion_al_consumidor = InformacionAlConsumidor()
         super(MensajeSaldoLecturasFacturacion, self).__init__('MensajeSaldoLecturasFacturacion', 'mensaje')
+
+
+class Datos(XmlModel):
+
+    _sort_order = ('datos', 'tipo_autoconsumo', 'tipo_subseccion', 'datos_cau',
+                   'marca_medida_con_perdidas', 'vas_trafo', 'porcentaje_perdidas',
+                   'indicativo_curva_carga', 'periodo_cch', 'periodo', 'tipo_pm'
+                   )
+
+    def __init__(self):
+        self.datos = XmlField('Datos')
+        self.tipo_autoconsumo = XmlField('TipoAutoconsumo')
+        self.tipo_subseccion = XmlField('TipoSubseccion')
+        self.datos_cau = DatosCAU()
+        self.marca_medida_con_perdidas = XmlField('MarcaMedidaConPerdidas')
+        self.vas_trafo = XmlField('VAsTrafo')
+        self.porcentaje_perdidas = XmlField('PorcentajePerdidas')
+        self.indicativo_curva_carga = XmlField('IndicativoCurvaCarga')
+        self.periodo_cch = PeriodoCCH()
+        self.periodo = Periodo()
+        self.tipo_pm = XmlField('TipoPM')
+        super(Datos, self).__init__('Datos', 'datos')
+
+
+class DatosCAU(DatosCAU):
+
+    _sort_order = ('datos_cau', 'cau', 'colectivo', 'tipo_cups')
+
+    def __init__(self):
+        super(DatosCAU, self).__init__()
+        self.tipo_cups = XmlField('TipoCUPS')
 
 
 class Medidas(XmlModel):

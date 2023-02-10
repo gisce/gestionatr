@@ -18,7 +18,6 @@
         </DatosSolicitud>
         <Contrato>
             <FechaFinalizacion>2018-01-01</FechaFinalizacion>
-            <TipoAutoconsumo>00</TipoAutoconsumo>
             <TipoContratoATR>02</TipoContratoATR>
             <CondicionesContractuales>
                 <TarifaATR>018</TarifaATR>
