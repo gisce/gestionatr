@@ -581,6 +581,15 @@ class Factura(object):
             return False
 
     @property
+    def mediaconsumo(self):
+        tree = 'mediaconsumo'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return MediaConsumo(data)
+        else:
+            return False
+
+    @property
     def codtbai(self):
         tree = 'codtbai'
         data = get_rec_attr(self.obj, tree, False)
@@ -599,6 +608,20 @@ class Factura(object):
             max([x.fechasta for x in self.listaconceptos])
         )
 
+    def get_periode_factura_peatges(self):
+        """Retorna tupla amb (data inici,  data fi) de la factura:
+            - data inici: la mes antiga de les fecdesde dels conceptes
+            - data fi: la mes nova de les fechasta dels conceptes
+        """
+        return (
+            min([x.fecdesde for x in self.listaconceptos if
+                 "tvariable" in TIPUS_CONCEPTES.get(x.codconcepto, "") or "tfix" in TIPUS_CONCEPTES.get(x.codconcepto, "")]
+                ),
+            max([x.fechasta for x in self.listaconceptos if
+                 "tvariable" in TIPUS_CONCEPTES.get(x.codconcepto, "") or "tfix" in TIPUS_CONCEPTES.get(x.codconcepto, "")]
+                )
+        )
+
     def is_only_conceptes(self):
         has_only_conceptes = True
         for type in self.get_linies_factura_by_type():
@@ -610,7 +633,7 @@ class Factura(object):
         return {
             'tipo_rectificadora': self.clasefact or self.indfacturarect or 'N',
             'date_invoice': self.fecfactura,
-            'check_total': abs(self.importetotal),
+            'check_total': -1 * self.importetotal if self.clasefact in ('A', 'B') else self.importetotal,
             'origin': self.get_origin(),
             'origin_date_invoice': self.fecfactura,
             'reference': self.get_origin(),
@@ -1299,6 +1322,8 @@ class Medidor(object):
             dqmedio = float(meter.dqmedio)
             qdcontratado = float(meter.qdcontratado)
             excesocaudal = float(meter.excesocaudal)
+            temperatura_gas = float(meter.temp)
+            pressio_atmosferica = float(meter.presatm)
 
             for numerador in meter.listanumeradores:
                 lectura_desde_m3 = float(numerador.lectant)
@@ -1334,6 +1359,8 @@ class Medidor(object):
                     'dqmedio': float(dqmedio),
                     'qdcontratado': float(qdcontratado),
                     'excesocaudal': float(excesocaudal),
+                    'temperatura_gas': float(temperatura_gas),
+                    'pressio_atmosferica': float(pressio_atmosferica),
                 }
                 res.append(vals)
         return res
@@ -1567,6 +1594,29 @@ class Imputacioncostes(object):
     @property
     def pctcuotagts(self):
         tree = 'pctcuotagts'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+
+class MediaConsumo(object):
+    def __init__(self, data):
+        self.obj = data
+
+    @property
+    def mediaconsperiodofact5A(self):
+        tree = 'mediaconsperiodofact5A'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def mediaconsperiodofact(self):
+        tree = 'mediaconsperiodofact'
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text

@@ -1392,9 +1392,11 @@ class test_A3(unittest.TestCase):
 class test_M1(unittest.TestCase):
     def setUp(self):
         self.xml_m101 = open(get_data("m101.xml"), "rb")
+        self.xml_m101r = open(get_data("m101r.xml"), "rb")
 
     def tearDown(self):
         self.xml_m101.close()
+        self.xml_m101r.close()
 
     def test_create_pas01(self):
         # MensajeModificacionDeATR
@@ -1477,16 +1479,116 @@ class test_M1(unittest.TestCase):
         xml = str(mensaje_modificacion_de_atr)
         assertXmlEqual(xml, self.xml_m101.read())
 
+    def test_create_pas01_r(self):
+        # MensajeModificacionDeATR
+        mensaje_modificacion_de_atr = m1.MensajeModificacionDeATR()
+
+        # Cabecera
+        cabecera = get_header(process='M1', step='01', date='2014-04-16T22:13:37', code='201412111009')
+
+        # ModificacionDeATR
+        modificacion_de_atr = m1.ModificacionDeATR()
+
+        # DatosSolicitud
+        datos_solicitud = m1.DatosSolicitud()
+        datos_solicitud_fields = {
+            'tipo_modificacion': 'S',
+            'tipo_solicitud_administrativa': 'R',
+            'periodicidad_facturacion': '01',
+            'ind_activacion': 'L',
+            'fecha_prevista_accion': '2016-06-06',
+            'cnae': '2222',
+            'bono_social': '1'
+        }
+        datos_solicitud.feed(datos_solicitud_fields)
+
+        # Contrato
+        contrato = m1.Contrato()
+
+        # CondicionesContractuales
+        condiciones_contractuales = m1.CondicionesContractuales()
+
+        # PotenciasContratadas
+        potencias_contratadas = a3.PotenciasContratadas()
+        potencias_contratadas.feed({'p1': 1000, 'p2': 2000})
+
+        condiciones_contractuales_fields = {
+            'tarifa_atr': '018',
+            'potencias_contratadas': potencias_contratadas,
+            'modo_control_potencia': '1',
+        }
+        condiciones_contractuales.feed(condiciones_contractuales_fields)
+
+
+        # Contacto
+        contacto = get_contacto(email=False)
+
+        contrato_fields = {
+            'fecha_finalizacion': '2018-01-01',
+            'tipo_autoconsumo': '00',
+            'tipo_contrato_atr': '02',
+            'condiciones_contractuales': condiciones_contractuales,
+            'contacto': contacto,
+        }
+        contrato.feed(contrato_fields)
+
+        # Cliente
+        cliente = get_cliente(dir=False, tipo_dir='S')
+
+        # Medida
+        medida = m1.Medida()
+        medida_fields = {
+            'propiedad_equipo': 'C',
+            'tipo_equipo_medida': 'L00',
+        }
+        medida.feed(medida_fields)
+
+        # RegistroDoc
+        doc = m1.RegistroDoc()
+        registro_doc_fields = {
+            'tipo_doc_aportado': '12',
+            'direccion_url': 'http://eneracme.com/docs/NIF11111111H.pdf',
+        }
+        doc.feed(registro_doc_fields)
+
+        # RegistrosDocumento
+        registros = d1.RegistrosDocumento()
+        registros_documento_fields = {
+            'registro_doc': [doc],
+        }
+        registros.feed(registros_documento_fields)
+
+        modificacion_de_atr_fields = {
+            'datos_solicitud': datos_solicitud,
+            'contrato': contrato,
+            'cliente': cliente,
+            'medida': medida,
+            'registros_documento': registros,
+        }
+        modificacion_de_atr.feed(modificacion_de_atr_fields)
+
+        mensaje_modificacion_de_atr_fields = {
+            'cabecera': cabecera,
+            'modificacion_de_atr': modificacion_de_atr,
+        }
+        mensaje_modificacion_de_atr.feed(mensaje_modificacion_de_atr_fields)
+        mensaje_modificacion_de_atr.build_tree()
+
+        xml = str(mensaje_modificacion_de_atr)
+        assertXmlEqual(xml, self.xml_m101r.read())
+
 
 class test_D1(unittest.TestCase):
 
     def setUp(self):
         self.xml_d101 = open(get_data("d101.xml"), "rb")
+        self.xml_d101_motiu_13 = open(get_data("d101_motiu_13.xml"), "rb")
         self.xml_d102_accept = open(get_data("d102_accept.xml"), "rb")
         self.xml_d102_reject = open(get_data("d102_reject.xml"), "rb")
 
     def tearDown(self):
         self.xml_d101.close()
+        self.xml_d101_motiu_13.close()
         self.xml_d102_accept.close()
         self.xml_d102_reject.close()
 
@@ -1678,6 +1780,56 @@ class test_D1(unittest.TestCase):
         mensaje.build_tree()
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_d101.read())
+
+    def test_create_pas01_motiu_13(self):
+        # MensajeNotificacionCambiosATRDesdeDistribuidor
+        mensaje = d1.MensajeNotificacionCambiosATRDesdeDistribuidor()
+
+        # Cabecera
+        cabecera = d1.Cabecera()
+        cabecera_fields = {
+            'codigo_ree_empresa_emisora': '1234',
+            'codigo_ree_empresa_destino': '4321',
+            'codigo_del_proceso': 'D1',
+            'codigo_del_paso': '01',
+            'codigo_de_solicitud': '201605219497',
+            'secuencial_de_solicitud': '00',
+            'fecha': '2016-06-08T04:24:09',
+            'cups': 'ES0116000000011531LK0F',
+        }
+        cabecera.feed(cabecera_fields)
+
+        # InfoRegistroAutocons
+        info_list = []
+        info = d1.InfoRetardoActivAutocons()
+        info_retardo_activ_autocons_fields = {
+            'codigo_fiscal_factura': '12345678',
+            'fecha_inicio_conteo_activ_autocons': '2022-01-01',
+            'fecha_desde': '2022-01-01',
+            'fecha_hasta': '2022-01-01',
+            'dias_retardo_activ_autocons': 15,
+            'valor_energia_anual_calculada': 100,
+            'valor_energia_horaria_calculada': 200,
+            'pot_instalada_gen': 6,
+        }
+        info.feed(info_retardo_activ_autocons_fields)
+        info_list.append(info)
+        # NotificacionCambiosATRDesdeDistribuidor
+        notificacion = d1.NotificacionCambiosATRDesdeDistribuidor()
+        notificacion_cambios_atr_desde_distribuidor_fields = {
+            'motivo_cambio_atr_desde_distribuidora': '13',
+            'info_retardo_activ_autocons_list': info_list,
+        }
+        notificacion.feed(notificacion_cambios_atr_desde_distribuidor_fields)
+
+        mensaje_notificacion_cambios_atr_desde_distribuidor_fields = {
+            'cabecera': cabecera,
+            'notificacion_cambios_atr_desde_distribuidor': notificacion,
+        }
+        mensaje.feed(mensaje_notificacion_cambios_atr_desde_distribuidor_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_d101_motiu_13.read())
 
     def test_create_pas02_accept(self):
         # Cabecera
@@ -5124,7 +5276,8 @@ class test_F1(unittest.TestCase):
         informacion_al_consumidor.feed(
             {
                 'fecha_inicio_anio_movil': '2017-03-31',
-                'periodos': periodos_maximetros
+                'periodos': periodos_maximetros,
+                'valor_energia_media_cp': 61083.25
             }
         )
 
@@ -5571,6 +5724,7 @@ class test_A1_05(unittest.TestCase):
             'newfamilyname1': 'Al',
             'newfamilyname2': 'Matalas',
             'newtitulartype': 'F',
+            'titularautonomo': 'S',
             'newregularaddress': 'S',
             'newtelephone': '999888777',
             'newfax': '111222333',

@@ -913,4 +913,13 @@ class product(object):
         else:
             return False
 
+    @property
+    def productqi(self):
+        tree = 'productqi'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
 

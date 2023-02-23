@@ -308,3 +308,64 @@ class Rechazo(XmlModel):
         self.codigo_motivo = XmlField('CodigoMotivo')
         self.comentarios = XmlField('Comentarios')
         super(Rechazo, self).__init__('Rechazo', 'rechazo')
+
+
+ENVELOPE_TEMPLATE_AMB_NAMESPACE_AL_PAS = """
+<soap:Envelope 
+xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:eleg="http://localhost/elegibilidad"
+>
+    <soap:Header />
+    <soap:Body>
+        <eleg:sync>
+            <eleg:Paso01>
+                {xml_str}
+            </eleg:Paso01>
+        </eleg:sync>
+    </soap:Body>
+</soap:Envelope>
+"""
+
+ENVELOPE_TEMPLATE_SENSE_NAMESPACE_AL_PAS01 = """
+<soap:Envelope 
+xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:eleg="http://localhost/elegibilidad"
+>
+    <soap:Header />
+    <soap:Body>
+        <eleg:sync>
+            <Paso01>
+                {xml_str}
+            </Paso01>
+        </eleg:sync>
+    </soap:Body>
+</soap:Envelope>
+"""
+
+
+ENVELOP_BY_DISTR = {
+    '0021': {
+        'template': ENVELOPE_TEMPLATE_SENSE_NAMESPACE_AL_PAS01,
+        'extra_headers': {},
+    },
+    '0031': {
+        'template': ENVELOPE_TEMPLATE_SENSE_NAMESPACE_AL_PAS01,
+        'extra_headers': {},
+    },
+    '0022': {
+        'template': ENVELOPE_TEMPLATE_SENSE_NAMESPACE_AL_PAS01,
+        'extra_headers': {},
+    },
+    'altres': {
+        'template': ENVELOPE_TEMPLATE_SENSE_NAMESPACE_AL_PAS01,
+        'extra_headers': {
+            "SOAPAction": ""
+        },
+    },
+    'reintent': {
+        'template': ENVELOPE_TEMPLATE_AMB_NAMESPACE_AL_PAS,
+        'extra_headers': {
+            "SOAPAction": ""
+        },
+    },
+}

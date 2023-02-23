@@ -165,6 +165,7 @@
 			<element name="listaContactos" type="tns:ListaContactosType" minOccurs="0" maxOccurs="1"/>
 			<element name="historialConsumos" type="tns:ListaHistorialConsumosType" minOccurs="0" maxOccurs="1"/>
 			<element name="imputacionCostes" type="tns:ImputacionCostesType" minOccurs="1" maxOccurs="1"/>
+			<element name="mediaconsumo" type="tns:MediaConsumoType" minOccurs="0" maxOccurs="1"/>
 		</sequence>
 	</complexType>
 </schema>

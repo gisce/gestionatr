@@ -21,7 +21,8 @@ class MensajeNotificacionCambiosATRDesdeDistribuidor(XmlModel):
 class NotificacionCambiosATRDesdeDistribuidor(XmlModel):
 
     _sort_order = ('notificacion_cambios_atr_desde_distribuidor', 'motivo_cambio_atr_desde_distribuidora',
-                   'fecha_prevista_aplicacion_cambio_atr', 'periodicidad_facturacion', 'info_registro_autocons')
+                   'fecha_prevista_aplicacion_cambio_atr', 'periodicidad_facturacion', 'info_registro_autocons',
+                   'info_retardo_activ_autocons_list')
 
     def __init__(self):
         self.notificacion_cambios_atr_desde_distribuidor = XmlField('NotificacionCambiosATRDesdeDistribuidor')
@@ -29,6 +30,7 @@ class NotificacionCambiosATRDesdeDistribuidor(XmlModel):
         self.fecha_prevista_aplicacion_cambio_atr = XmlField('FechaPrevistaAplicacionCambioATR')
         self.periodicidad_facturacion = XmlField('PeriodicidadFacturacion')
         self.info_registro_autocons = InfoRegistroAutocons()
+        self.info_retardo_activ_autocons_list = []
         super(NotificacionCambiosATRDesdeDistribuidor, self).__init__('NotificacionCambiosATRDesdeDistribuidor',
                                                                       'notificacion_cambios_atr_desde_distribuidor')
 
@@ -189,6 +191,24 @@ class Via(XmlModel):
         self.tipo_aclarador_finca = XmlField('TipoAclaradorFinca')
         self.aclarador_finca = XmlField('AclaradorFinca')
         super(Via, self).__init__('Via', 'via')
+
+
+class InfoRetardoActivAutocons(XmlModel):
+
+    _sort_order = ('info_retardo_activ_autocons', 'codigo_fiscal_factura', 'fecha_inicio_conteo_activ_autocons',
+                   'fecha_desde', 'fecha_hasta', 'dias_retardo_activ_autocons', 'valor_energia_anual_calculada',
+                   'valor_energia_horaria_calculada', 'pot_instalada_gen')
+    def __init__(self):
+        self.info_retardo_activ_autocons = XmlField('InfoRetardoActivAutocons')
+        self.codigo_fiscal_factura = XmlField('CodigoFiscalFactura')
+        self.fecha_inicio_conteo_activ_autocons = XmlField('FechaInicioConteoActivAutocons')
+        self.fecha_desde = XmlField('FechaDesde')
+        self.fecha_hasta = XmlField('FechaHasta')
+        self.dias_retardo_activ_autocons = XmlField('DiasRetardoActivAutocons')
+        self.valor_energia_anual_calculada = XmlField('ValorEnergiaAnualCalculada')
+        self.valor_energia_horaria_calculada = XmlField('ValorEnergiaHorariaCalculada')
+        self.pot_instalada_gen = XmlField('PotInstaladaGen')
+        super(InfoRetardoActivAutocons, self).__init__('InfoRetardoActivAutocons', 'info_retardo_activ_autocons')
 
 
 # Paso 02 accept

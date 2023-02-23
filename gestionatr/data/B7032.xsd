@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por dgarciar (Comisión Nacional de los Mercados y la Competencia) -->
+<!-- editado con XMLSpy v2020 rel. 2 (x64) (http://www.altova.com) por Teresa Rodriguez-Losada (INECO) -->
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/B7032" targetNamespace="http://localhost/sctd/B7032" elementFormDefault="qualified">
 	<include schemaLocation="CommonTagsFACT.xsd"/>
 	<element name="facturasctd" type="tns:FacturaSctdB7032Type"/>
@@ -143,6 +143,7 @@
 			<element name="listaContactos" type="tns:ListaContactosType" minOccurs="0" maxOccurs="1"/>
 			<element name="historialConsumos" type="tns:ListaHistorialConsumosType" minOccurs="0" maxOccurs="1"/>
 			<element name="imputacionCostes" type="tns:ImputacionCostesType" minOccurs="1" maxOccurs="1"/>
+			<element name="mediaconsumo" type="tns:MediaConsumoType" minOccurs="0" maxOccurs="1"/>
 		</sequence>
 	</complexType>
 </schema>

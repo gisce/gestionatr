@@ -148,6 +148,11 @@
 					<documentation>Nuevo tipo de Persona.</documentation>
 				</annotation>
 			</element>
+			<element name="titularautonomo" type="tns:TitularAutonomoType" minOccurs="0">
+				<annotation>
+					<documentation>Identificativo autónomo.</documentation>
+				</annotation>
+			</element>
 			<element name="newregularaddress" type="tns:FlagType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Nuevo Uso de la Vivienda del PS.</documentation>

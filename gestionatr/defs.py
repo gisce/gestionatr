@@ -652,6 +652,14 @@ TABLA_7 = [
           u"técnicos y administrativos")
 ]
 
+TABLA_7_M1 = TABLA_7.extend([
+    ('M', u"(M) Solicitud de aplicación de SMV. Si potencia contratada superior a "
+          u"potencia límite del SMV, el distribuidor adecuará la potencia "
+          u"contratada a la potencia límite"),
+    ('B', u"(B) Baja del SMV, vuelta a suministro normal con restablecimiento del valor "
+          u"de la potencia, en su caso."),
+])
+
 TABLA_8_OLD = [('S', 'Según ciclo de lectura'),
                ('N', 'Al cabo de 15 días (plazo legal)')]
 
@@ -1101,7 +1109,7 @@ TABLA_27 = [
     ('E4', 'Impago Previo'),
     ('E5', 'CUPS sujeto a LOPD'),
     ('E6', 'Modificación del tipo de autoconsumo no permitida. No ha trascurrido un año desde la última modificación.'),
-    ('E7', 'Falta acuerdo de reparto/Acuerdo de reparto incorrecto/Faltan coeficientes de reparto en acuerdo'),
+    ('E7', 'Falta acuerdo de reparto o/y fichero de coeficientes/Acuerdo de reparto o/y fichero de coeficientes incorrecto/Faltan coeficientes de reparto en acuerdo fichero'),
     ('E8', 'No recibida información técnica de la CCAA (para BT y <=100kW).'),
     ('E9', 'En el periodo establecido, no se han recibido el resto de solicitudes de modificación del colectivo'),
     ('F1', 'Disconformidad del consumidor a la información sobre autoconsumo'),
@@ -1112,6 +1120,9 @@ TABLA_27 = [
     ('G1', 'Sólo se podrá modificar: -el tipo de identificador y el identificador o, -nombre y apellidos (razón social).'),
     ('G2', 'Revisión interior incorrecta, debe aportar documentación técnica posterior a la revisión'),
     ('G3', 'Código solicitud ATR/reclamación anterior inexistente'),
+    ('G4', 'Suministro Mínimo Vital'),
+    ('G5', 'Este tipo de modificación (“M”/”B”) solo aplica a solicitudes de modificación (formato M1) de suministros en bono social (suministrados por COR)'),
+    ('G6', 'No es posible modificar fichero de coeficientes si no ha transcurrido un mínimo de 4 meses desde la última modificación'),
     ('99', 'Otros'),
 ]
 
@@ -1305,7 +1316,7 @@ TABLA_53 = [
      'Cambio datos administrativos (excepto cambio de titular y corrección de datos identificativos del cliente)'),
     ('C', 'Corrección datos que identifican al cliente'),
     ('P', 'La solicitud implica cambio en la periodicidad de la facturación'),
-    ('R', 'Modificación acuerdo de reparto de un autoconsumo colectivo')
+    ('R', 'Modificación acuerdo de reparto/fichero de coeficientes de un autoconsumo colectivo')
 ]
 
 TABLA_55 = [
@@ -1336,6 +1347,7 @@ TABLA_61 = [
     ('09', u'Acuerdo reparto'),
     ('10', u'CIE generación'),
     ('11', u'Declaración relativa a puntos de recarga de vehículos eléctricos de acceso público'),
+    ('12', u'Fichero de coeficientes de reparto'),
 ]
 
 TABLA_62 = [
@@ -1954,7 +1966,9 @@ TABLA_77 = [
         ('20', u'Derechos de supervisión'),
         ('21', u'Tarifa'),
         ('22', u'Impuesto Eléctrico'),
-        ('23', u'Desglose Suplemento Territorial')
+        ('23', u'Desglose Suplemento Territorial'),
+        ('26', u'Retardo en activación autoconsumo'),
+        ('27', u'Descuento retardo activación autoconsumo superior al valor económico de la energía horaria consumida de la red')
 ]
 
 TABLA_79 = [
@@ -2165,6 +2179,10 @@ TABLA_103 = [
     ('81', u'Tipo de autoconsumo'),
     ('82', u'Coeficiente de reparto'),
     ('83', u'Recargo por la no dedicación exclusiva de la carga a vehículos eléctricos'),
+    ('84', u'Descuento en peajes de transporte y distribución de electricidad a la industria electrointensiva'),
+    ('85', u'Regularización descuento en peajes de transporte y distribución de electricidad a la industria electrointensiva'),
+    ('86', u'Descuento por retardo en activación autoconsumo imputable al distribuidor'),
+    ('87', u'Descuento por retardo en activación autoconsumo NO imputable al distribuidor'),
 ]
 
 CONCEPTOS_CON_FECHA_OPERACION = [
@@ -2238,6 +2256,9 @@ TABLA_109 = [('01', u'Telegestión Operativa con CCH'),
              ('08', u'Baja en autoconsumo'),
              ('09', u'Modificación desde peaje 3.1A a peaje 6.1TD'),
              ('10', u'Modificación desde peaje 3.1A a peaje 6.2TD'),
+             ('11', u'Pendiente envío de fichero de coeficientes de reparto variables para el año en curso'),
+             ('13', u'Información aplicación descuento por retardo en activación autoconsumo imputable al distribuidor'),
+             ('14', u'Información aplicación descuento por retardo en activación autoconsumo NO imputable al distribuidor'),
              ]
 
 TABLA_110 = [('01', u'Acompaña curva de carga'),

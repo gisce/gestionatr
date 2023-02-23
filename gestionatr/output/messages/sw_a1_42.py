@@ -176,7 +176,7 @@ class Newowner(XmlModel):
 
 class Product(XmlModel):
     _sort_order = (
-    'product', 'reqtype', 'productcode', 'producttype', 'producttolltype', 'productqd', 'productqa', 'productstartdate',
+    'product', 'reqtype', 'productcode', 'producttype', 'producttolltype', 'productqd', 'productqi', 'productqa', 'productstartdate',
     'productenddate',)
 
     def __init__(self):
@@ -186,6 +186,7 @@ class Product(XmlModel):
         self.producttype = XmlField('producttype')
         self.producttolltype = XmlField('producttolltype')
         self.productqd = XmlField('productqd', rep=rep_decimal(7))
+        self.productqi = XmlField('productqi', rep=rep_decimal(7))
         self.productqa = XmlField('productqa')
         self.productstartdate = XmlField('productstartdate')
         self.productenddate = XmlField('productenddate')

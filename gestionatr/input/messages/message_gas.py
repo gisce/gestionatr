@@ -335,6 +335,21 @@ class MessageGas(Message):
             raise except_f1('Error', u'Documento sin fecha de solicitud')
         return ref + " " + ref2
 
+    def parse_xml(self, validate=True):
+        """Importar contenido del xml"""
+        self.check_fpos(self.f_xsd)
+        schema = etree.XMLSchema(file=self.f_xsd)
+        parser = objectify.makeparser(schema=schema)
+        try:
+            self.obj = objectify.fromstring(self.str_xml, parser)
+        except Exception as e:
+            self.error = e.message
+            if validate:
+                raise except_b70('Error', u'Documento inválido: {0}'.format(e))
+            else:
+                parser = objectify.makeparser(schema=None)
+                self.obj = objectify.fromstring(self.str_xml, parser)
+
 
 class except_b70(except_f1):
     def __init__(self, name, value, values_dict=None):

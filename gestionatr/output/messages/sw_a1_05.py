@@ -25,7 +25,7 @@ class A105(XmlModel):
         'documenttype', 'documentnum', 'cups', 'modeffectdate',
         'reqtransferdate', 'updatereason', 'surrogacy', 'newtolltype',
         'newreqqd', 'newreqestimatedqa', 'newnationality', 'newdocumenttype', 'newdocumentnum',
-        'newfirstname', 'newfamilyname1', 'newfamilyname2', 'newtitulartype',
+        'newfirstname', 'newfamilyname1', 'newfamilyname2', 'newtitulartype', 'titularautonomo',
         'newregularaddress', 'newtelephone', 'newfax', 'newemail',
         'newcaecode', 'newprovinceowner', 'newcityowner', 'newzipcodeowner',
         'newstreettypeowner', 'newstreetowner', 'newstreetnumberowner',
@@ -56,6 +56,7 @@ class A105(XmlModel):
         self.newfamilyname1 = XmlField('newfamilyname1')
         self.newfamilyname2 = XmlField('newfamilyname2')
         self.newtitulartype = XmlField('newtitulartype')
+        self.titularautonomo = XmlField('titularautonomo')
         self.newregularaddress = XmlField('newregularaddress')
         self.newtelephone = XmlField('newtelephone')
         self.newfax = XmlField('newfax')
