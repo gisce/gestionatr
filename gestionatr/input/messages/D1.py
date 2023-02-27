@@ -7,53 +7,63 @@ class D1(C1):
     """Clase que implementa D1."""
 
     @property
+    def notificacion_cambios_atr_desde_distribuidor(self):
+        tree = 'NotificacionCambiosATRDesdeDistribuidor'
+        data = []
+        for d in get_rec_attr(self.obj, tree, False):
+            data.append(NotificacionCambiosATRDesdeDistribuidor(d))
+        return data
+
+
+class NotificacionCambiosATRDesdeDistribuidor(object):
+
+    def __init__(self, data):
+        self.notificacion_cambios_atr_desde_distribuidor = data
+
+    @property
     def motivo_cambio_atr_desde_distribuidora(self):
-        tree = '{0}.MotivoCambioATRDesdeDistribuidora'.format(self._header)
-        data = get_rec_attr(self.obj, tree, False)
-        if data:
-            return data.text
-        else:
-            return False
+        data = ''
+        try:
+            data = self.notificacion_cambios_atr_desde_distribuidor.MotivoCambioATRDesdeDistribuidora.text
+        except AttributeError:
+            pass
+        return data
 
     @property
     def fecha_prevista_aplicacion_cambio_atr(self):
-        tree = '{0}.FechaPrevistaAplicacionCambioATR'.format(self._header)
-        data = get_rec_attr(self.obj, tree, False)
-        if data:
-            return data.text
-        else:
-            return False
+        data = ''
+        try:
+            data = self.notificacion_cambios_atr_desde_distribuidor.FechaPrevistaAplicacionCambioATR.text
+        except AttributeError:
+            pass
+        return data
 
     @property
     def periodicidad_facturacion(self):
-        tree = '{0}.PeriodicidadFacturacion'.format(self._header)
-        data = get_rec_attr(self.obj, tree, False)
-        if data:
-            return data.text
-        else:
-            return False
+        data = ''
+        try:
+            data = self.notificacion_cambios_atr_desde_distribuidor.PeriodicidadFacturacion.text
+        except AttributeError:
+            pass
+        return data
 
     @property
     def info_registro_autocons(self):
-        tree = '{0}.InfoRegistroAutocons'.format(self._header)
-        data = get_rec_attr(self.obj, tree, False)
-        if data not in [None, False]:
-            return InfoRegistroAutocons(data)
-        else:
-            tree = '{0}.InfoRegistroAutocons'.format(self._header)
-            data = get_rec_attr(self.obj, tree, False)
-            if data not in [None, False]:
-                return InfoRegistroAutocons(data)
-            return False
+        data = ''
+        try:
+            data = InfoRegistroAutocons(self.notificacion_cambios_atr_desde_distribuidor.InfoRegistroAutocons)
+        except AttributeError:
+            pass
+        return data
 
     @property
     def info_retardo_activ_autocons(self):
-        tree = '{0}.InfoRetardoActivAutocons'.format(self._header)
-        obj = get_rec_attr(self.obj, tree, False)
         data = []
-        if obj not in [None, False]:
-            for i in obj:
-                data.append(InfoRetardoActivAutocons(i))
+        try:
+            for datos in self.notificacion_cambios_atr_desde_distribuidor.InfoRetardoActivAutocons:
+                data.append(InfoRetardoActivAutocons(datos))
+        except AttributeError:
+            pass
         return data
 
 
