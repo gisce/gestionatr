@@ -1793,7 +1793,7 @@ class test_F1(TestCaseCompat):
             self.xml_f101_empty_rent = f.read()
         with open(get_data("F1_periodos_DH.xml"), "rb") as f:
             self.xml_f101_integradores_dh = f.read()
-        with open(get_data("f101_factura_atr_autoconsum_20td.xml"), "r") as f:
+        with open(get_data("f101_factura_atr_autoconsum_20td.xml"), "rb") as f:
             self.xml_f101_atr_autoconsum_20td = f.read()
 
     def testATRInvoice(self):
