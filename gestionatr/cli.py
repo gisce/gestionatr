@@ -163,7 +163,7 @@ def request_p0(url, user, password, xml_str=None, params=None):
                 error = e
 
     if error:
-        print error
+        print(error)
 
     return res
 
