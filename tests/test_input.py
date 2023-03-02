@@ -1151,7 +1151,7 @@ class test_M1(TestCaseCompat):
 class test_D1(TestCaseCompat):
 
     def setUp(self):
-        self.xml_d101 = open(get_data("d101.xml"), "r")
+        self.xml_d101 = open(get_data("d101.xml"), "rb")
         self.xml_d101_min_with_info = open(get_data("d101_min_with_info.xml"), "rb")
         self.xml_d101_fully_min = open(get_data("d101_fully_min.xml"), "rb")
         self.xml_d102_accept = open(get_data("d102_accept.xml"), "rb")

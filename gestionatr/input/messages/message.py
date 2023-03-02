@@ -298,9 +298,9 @@ class Message(MessageBase):
                 utils.get_data(XSD_DATA[self.tipus])
             )
             raise except_f1('Error', msg)
-        finally:
-            if hasattr(self, 'f_xsd') and self.f_xsd:
-                self.f_xsd.close()
+        # finally:
+        #     if hasattr(self, 'f_xsd') and self.f_xsd:
+        #         self.f_xsd.close()
 
     def get_pas_xml(self):
         """Obtener paso del missatge"""
