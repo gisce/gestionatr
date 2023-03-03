@@ -1953,6 +1953,7 @@ class test_P0(unittest.TestCase):
         self.xml_p001.close()
         self.xml_p002_accept.close()
         self.xml_p002_reject.close()
+        self.xml_p002_accept_min.close()
 
     def test_create_pas01(self):
         # MensajeSolicitudInformacionAlRegistroDePS

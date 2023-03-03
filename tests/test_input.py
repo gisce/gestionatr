@@ -655,6 +655,7 @@ class test_A3(TestCaseCompat):
     def tearDown(self):
         self.xml_a301.close()
         self.xml_a301_correos.close()
+        self.xml_a313.close()
 
     def test_a301_completo(self):
         a3 = A3(self.xml_a301)
@@ -3186,6 +3187,7 @@ class test_P0(unittest.TestCase):
         self.xml_p001.close()
         self.xml_p002_accept.close()
         self.xml_p002_reject.close()
+        self.xml_p002_accept_min.close()
 
     def test_p001(self):
         p0 = P0(self.xml_p001)
@@ -4854,6 +4856,7 @@ class test_A1_04(unittest.TestCase):
         self.xml_a204.close()
         self.xml_a304.close()
         self.xml_a404.close()
+        self.xml_a2504.close()
 
     def test_a204(self):
         a204 = A1_04(self.xml_a204)
