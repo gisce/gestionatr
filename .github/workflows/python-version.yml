@@ -58,6 +58,6 @@ jobs:
             VERSION_TYPE="patch"
           fi
           if [[ $VERSION_TYPE != false ]]; then
-            bump2version $VERSION_TYPE --tag --commit -m "Bump to v{new_version}" __init__.py
+            bump2version $VERSION_TYPE --tag --commit -m "Bump to v{new_version}" gestionatr/__init__.py
             git push origin master --tags
           fi
