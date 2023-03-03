@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-
-from C2 import C2, Contacto
+from __future__ import absolute_import, unicode_literals
+from .C2 import C2, Contacto
 from gestionatr.input.messages.C1 import DatosNotificacion, DatosActivacion
 from gestionatr.utils import get_rec_attr
 

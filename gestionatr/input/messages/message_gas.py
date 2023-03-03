@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import, unicode_literals
 from lxml import objectify, etree
 from gestionatr import utils
-from message import XSD_DATA, MAIN_MESSAGE_XSD, Message, except_f1
+from .message import XSD_DATA, MAIN_MESSAGE_XSD, Message, except_f1
 from gestionatr.utils import get_rec_attr
 
 XSD_DATA.update({
@@ -336,18 +337,20 @@ class MessageGas(Message):
 
     def parse_xml(self, validate=True):
         """Importar contenido del xml"""
-        self.check_fpos(self.f_xsd)
-        schema = etree.XMLSchema(file=self.f_xsd)
-        parser = objectify.makeparser(schema=schema)
-        try:
-            self.obj = objectify.fromstring(self.str_xml, parser)
-        except Exception as e:
-            self.error = e.message
-            if validate:
-                raise except_b70('Error', u'Documento inválido: {0}'.format(e))
-            else:
-                parser = objectify.makeparser(schema=None)
+        with open(self.xsd, 'rb') as f_xsd:
+            self.f_xsd = f_xsd
+            self.check_fpos(self.f_xsd)
+            schema = etree.XMLSchema(file=self.f_xsd)
+            parser = objectify.makeparser(schema=schema)
+            try:
                 self.obj = objectify.fromstring(self.str_xml, parser)
+            except Exception as e:
+                self.error = e.message
+                if validate:
+                    raise except_b70('Error', u'Documento inválido: {0}'.format(e))
+                else:
+                    parser = objectify.makeparser(schema=None)
+                    self.obj = objectify.fromstring(self.str_xml, parser)
 
 
 class except_b70(except_f1):

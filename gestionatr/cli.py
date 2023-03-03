@@ -1,6 +1,12 @@
-# -*- coding: utf-8 -*-
+# -*- encoding: utf-8 -*-
+from __future__ import absolute_import, unicode_literals
+import six
 import sys
 import click
+from suds.cache import NoCache
+from suds.client import Client
+from suds.transport.https import HttpAuthenticated
+from six.moves import urllib
 import requests
 import base64
 from lxml import etree
@@ -51,24 +57,24 @@ def atr():
 @click.option("--filename", "-f", help="path to XML filename", required=True)
 @click.option("--sector", "-s", help="e (power) or g (gas)", default="e")
 def test(filename, sector):
-    with open(filename, 'r') as xml_file:
+    with open(filename, 'rb') as xml_file:
         try:
             data = xml_file.read()
-            if sector == u'e':
+            if sector == 'e':
                 m = message.Message(data)
-            elif sector == u'g':
+            elif sector == 'g':
                 m = message_gas.MessageGas(data)
             m.parse_xml()
-            sys.stdout.write(u'Correct File\n')
+            sys.stdout.write('Correct File\n')
         except except_f1 as e:
-            error_txt = unicode(e.value).encode(errors='ignore')
+            error_txt = six.text_type(e.value).encode(errors='ignore')
             sys.stdout.write(
-                u'WARNING: Invalid File: {0}\n'.format(error_txt)
+                'WARNING: Invalid File: {0}\n'.format(error_txt)
             )
         except Exception as e:
-            error_txt = unicode(e).encode(errors='ignore')
+            error_txt = six.text_type(e).encode(errors='ignore')
             sys.stdout.write(
-                u'WARNING: Invalid File: {0}\n'.format(error_txt)
+                'WARNING: Invalid File: {0}\n'.format(error_txt)
             )
         finally:
             sys.stdout.flush()
@@ -95,6 +101,14 @@ def request_p0(url, user, password, xml_str=None, params=None):
         "Authorization": "Basic %s" % base64string,
         "content-type": 'text/xml; charset=utf-8',
     }
+
+    try:
+        client = Client(url, retxml=True, transport=t, cache=NoCache())
+    except urllib.error.URLError as e:
+        import ssl
+        ssl._create_default_https_context = ssl._create_unverified_context
+        client = Client(url, retxml=True, transport=t, cache=NoCache())
+    client.set_options(headers=auth_header)
 
     # Clean XML
     xml_str = xml_str.strip()
@@ -149,7 +163,7 @@ def request_p0(url, user, password, xml_str=None, params=None):
                 error = e
 
     if error:
-        print error
+        print(error)
 
     return res
 

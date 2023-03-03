@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from message_gas import MessageGas
+from __future__ import absolute_import, unicode_literals
+from .message_gas import MessageGas
 from gestionatr.utils import get_rec_attr
 from gestionatr.defs_gas import TIPUS_CONCEPTES, PEAJES_SEMPRE_CAPACIDAD
 from datetime import datetime

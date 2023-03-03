@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import, unicode_literals
 from gestionatr.input.messages.C1 import Rechazo
-from message import Message
-from Deadlines import ProcessDeadline
+from .message import Message
+from .Deadlines import ProcessDeadline
 from gestionatr.utils import get_rec_attr
 
 

@@ -3,8 +3,9 @@
 # pylint: disable=E1002
 # pylint: disable=E1101
 # pylint: disable=C0111
-
+from __future__ import absolute_import, unicode_literals
 from libcomxml.core import XmlModel, XmlField
+import six
 
 
 class Cabecera(XmlModel):
@@ -127,4 +128,4 @@ def rep_ruedas(n_rodes):
 
 def rep_cut(length):
     # if empty return text to avoid False
-    return lambda text: text and unicode(text)[:length].strip() or text
+    return lambda text: text and six.text_type(text)[:length].strip() or text
