@@ -290,7 +290,7 @@ class Message(MessageBase):
                         self._header = aux
 
             self.xsd = utils.get_data(fitxer)
-            self.f_xsd = open(self.xsd, 'rb')
+            # self.f_xsd = open(self.xsd, 'rb')
         except except_f1 as e:
             raise e
         except:
