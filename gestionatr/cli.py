@@ -102,14 +102,6 @@ def request_p0(url, user, password, xml_str=None, params=None):
         "content-type": 'text/xml; charset=utf-8',
     }
 
-    try:
-        client = Client(url, retxml=True, transport=t, cache=NoCache())
-    except urllib.error.URLError as e:
-        import ssl
-        ssl._create_default_https_context = ssl._create_unverified_context
-        client = Client(url, retxml=True, transport=t, cache=NoCache())
-    client.set_options(headers=auth_header)
-
     # Clean XML
     xml_str = xml_str.strip()
     xml_str = xml_str.replace("'utf-8'", "'UTF-8'")
