@@ -149,13 +149,17 @@ def request_p0(url, user, password, xml_str=None, params=None):
             res = etree.tostring(aux_res)
             return res
         except P0FaultError as p0efe:
-            raise
+            if not error:
+                error = p0efe
         except Exception as e:
             if not error:
                 error = e
 
     if error:
-        print(error)
+        if isinstance(error, P0FaultError):
+            raise error
+        else:
+            print(error)
 
     return res
 
