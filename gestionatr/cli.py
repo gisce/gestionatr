@@ -112,8 +112,9 @@ def request_p0(url, user, password, xml_str=None, params=None):
     # principals que tenim. La "altres" i la "reintent"
     distri_envelop = ENVELOP_BY_DISTR.get(codi_receptor, ENVELOP_BY_DISTR.get("altres"))
     retry_envelop = ENVELOP_BY_DISTR.get("reintent")
+    retry2_envelop = ENVELOP_BY_DISTR.get("reintent_2")
     error = None
-    for envelop in [distri_envelop, retry_envelop]:
+    for envelop in [distri_envelop, retry_envelop, retry2_envelop]:
         xml_str_to_use = xml_str
         soap_content = envelop['template'].format(xml_str=xml_str_to_use)
 
