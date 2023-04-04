@@ -1816,7 +1816,7 @@ class FacturaATR(Factura):
 
     def __init__(self, data):
         super(FacturaATR, self).__init__(data)
-
+        self.has_pre_td_readings = self.te_lectures_pre_td_amb_tarifa_td()
         self.GETTERS_LINEAS_FACTURA += [
             ('potencia', self.get_info_potencia),
             ('potencia_cargos', self.get_info_potencia_cargos),
@@ -2037,7 +2037,7 @@ class FacturaATR(Factura):
         if tipus not in ['A', 'S', 'R']:
             return None
 
-        if self.datos_factura.tipo_factura == 'G' and tipus == 'A':
+        if self.datos_factura.tipo_factura == 'G' and tipus == 'A' and not self.has_pre_td_readings:
             res = []
             for comptador in self.get_comptadors():
                 for lectura in comptador.get_lectures(tipus, force_no_transforma_no_td_a_td=True):
