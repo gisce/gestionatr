@@ -119,7 +119,7 @@ def generate_input_python_code(process_name, info_file, process_file=False, inhe
 
 
 def generate_python_structure(process_name, input_f):
-    print "Generem l'estructura python amb les classes i atributs necessaris."
+    print("Generem l'estructura python amb les classes i atributs necessaris.")
     nonumber_lines = 0
     parent_added_check = True
     python_structure = {
@@ -132,8 +132,8 @@ def generate_python_structure(process_name, input_f):
             aux = line.split(">")[0]
             aux2 = line.split("<")[-1]
             number, field = aux.split("<")
-        except Exception, e:
-            print "    Skip line {0}".format(line.strip())
+        except Exception as e:
+            print("    Skip line {0}".format(line.strip()))
             continue
         number = int(number.strip()) if number.strip() else False
         field = field.strip()[:]
@@ -167,7 +167,7 @@ def generate_python_structure(process_name, input_f):
             field_data = get_field_data(field, aux2)
             python_structure[parents[-1]].append(field_data)
             last_number = number
-    print "    S'han trobat {0} classes python: {1}".format(len(python_structure.keys()), python_structure.keys())
+    print("    S'han trobat {0} classes python: {1}".format(len(python_structure.keys()), python_structure.keys()))
     return python_structure
 
 
@@ -220,7 +220,7 @@ def get_field_data(field, line):
 
 
 def write_python_code(process_name, python_structure, check_repeated=False, inherit_proces=False):
-    print "Emplenem el fitxer ''python_code.txt''."
+    print ("Emplenem el fitxer ''python_code.txt''.")
     if check_repeated:
         check_repeated = __import__(check_repeated)
 
@@ -236,7 +236,7 @@ def write_python_code(process_name, python_structure, check_repeated=False, inhe
                 rep_class = getattr(check_repeated, inherit_proces, False)
             no_rep = [a[0] for a in class_attrs if not hasattr(rep_class, a[0])]
             if not len(no_rep):
-                print "    La classe {0} ja te tots els atributs.".format(python_class)
+                print("    La classe {0} ja te tots els atributs.".format(python_class))
                 continue
         else:
             no_rep = [a[0] for a in class_attrs]
@@ -251,7 +251,7 @@ def write_python_code(process_name, python_structure, check_repeated=False, inhe
 
         # 3. Per cada camp, si no està repetit l'escrivim
         for class_attr in no_rep:
-            print class_attr
+            print (class_attr)
             # "Normalitzem" el nom. Els atributs tenen nom normalitzat
             norm_class_attr = class_attr.lower()[0]
             for c in class_attr.lower()[1:]:
@@ -280,11 +280,11 @@ def write_python_code(process_name, python_structure, check_repeated=False, inhe
                     python_code.write(method_main.format(norm_class_attr, class_attr))
                 else:
                     python_code.write(method_generic.format(norm_class_attr, class_attr))
-        print "    S'han afegit {0} atributs a la classe {1}: {2}".format(len(no_rep), python_class, no_rep)
+        print ("    S'han afegit {0} atributs a la classe {1}: {2}".format(len(no_rep), python_class, no_rep))
 
 
 def generate_input_test_files_main(process_name, process_data):
-    print "Emplenem el fitxer ''test_code.txt'' i ''test_data.xml per el model {0}''".format(process_name)
+    print("Emplenem el fitxer ''test_code.txt'' i ''test_data.xml per el model {0}''".format(process_name))
     generate_input_test_files(process_name, process_data)
 
 
@@ -334,7 +334,7 @@ def process_text_field(fname, tipus, max_len=30):
     elif flen == 2:
         return "2_"
     else:
-        rm = ''.join([random.choice(string.ascii_letters + string.digits) for n in xrange(flen-1-len(str(flen)))])
+        rm = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(flen-1-len(str(flen)))])
         return "{0}_{1}".format(flen, rm[:min(max_len, flen)])
 
 
@@ -374,7 +374,7 @@ def process_list_field(base_atr, list_atr, process_data):
 def process_class_field(base_atr, class_name, process_data, no_test=False):
     if class_name not in process_data.keys():
         raise Exception("Classe no trobada {0}".format(class_name))
-    print "    Emplenem per la classe {0}".format(class_name)
+    print("    Emplenem per la classe {0}".format(class_name))
     if not no_test:
         test_code.write(test_get_class_template.format(class_name, base_atr))
     generate_input_test_files(class_name, process_data)
@@ -391,7 +391,7 @@ def process_selection_field(fname, tipus, taula_name):
     elif hasattr(dele, taula_name):
         taula = getattr(dgas, taula_name)
     if not taula:
-        print "    Taula no trobada: {0}".format(taula_name)
+        print ("    Taula no trobada: {0}".format(taula_name))
         res = ""
         for i in range(flen):
             res += "0"
@@ -405,7 +405,7 @@ def process_selection_field(fname, tipus, taula_name):
 
 
 def generate_erp_models_main(process_name, process_data):
-    print "Emplenem el fitxer ''erp_code.txt''".format(process_name)
+    print("Emplenem el fitxer ''erp_code.txt''".format(process_name))
     generate_erp_models(process_name, process_data)
 
 
@@ -480,7 +480,7 @@ def process_erp_class_field(fname, nom, process_data, write_class_id=True):
         res = [fname+"_id", "many2one", "'giscegas.atr.{}'".format(fname), ", 'pas_id', {}".format(nom)]
         erp_code.write(erp_column.format(*res))
         erp_create_from_xml_code.write("    '{0}': \n".format(fname))
-    print "    Emplenem per la classe {0}".format(fname)
+    print("    Emplenem per la classe {0}".format(fname))
     erp_code.write("## Data from {0}\n".format(fname))
     generate_erp_models(fname, process_data)
     erp_code.write("## End of {0}\n".format(fname))
@@ -499,7 +499,7 @@ def process_erp_selection_field(fname, tipus, taula_name, nom):
     elif hasattr(dele, taula_name):
         taula = getattr(dgas, taula_name)
     if not taula:
-        print "    Taula no trobada: {0}".format(taula_name)
+        print("    Taula no trobada: {0}".format(taula_name))
 
     return [fname, "selection", taula_name, ", "+nom]
 

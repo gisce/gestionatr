@@ -4,3 +4,4 @@ workdays
 click
 zeep
 suds-community
+six

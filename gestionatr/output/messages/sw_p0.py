@@ -362,6 +362,12 @@ ENVELOP_BY_DISTR = {
             "SOAPAction": ""
         },
     },
+    'reintent_2': {  # Els de CIDE volen el soap action. Com que son molts en comptes de anarlos definint un a un fem un reintent amb aquest header sempre
+        'template': ENVELOPE_TEMPLATE_SENSE_NAMESPACE_AL_PAS01,
+        'extra_headers': {
+            "SOAPAction": "http://localhost/elegibilidad/Sync/syncRequest"
+        },
+    },
     'reintent': {
         'template': ENVELOPE_TEMPLATE_AMB_NAMESPACE_AL_PAS,
         'extra_headers': {

@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-from message_gas import MessageGas
-from Deadlines import ProcessDeadline, DeadLine, Workdays, Naturaldays
+from __future__ import absolute_import, unicode_literals
+from .message_gas import MessageGas
+from .Deadlines import ProcessDeadline, DeadLine, Workdays, Naturaldays
 from gestionatr.utils import get_rec_attr
-from A1_05 import *
+from .A1_05 import *
 
 
 class A1_44(A1_05):

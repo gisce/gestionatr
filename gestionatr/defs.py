@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import, unicode_literals
 
 # Mapeig de distribuïdores
 provincies_arago = ['22', '44', '50']  # Osca, Terol, Saragossa
@@ -2481,7 +2482,32 @@ TABLA_126 = [
             u'por su elevado contenido en azufre o cenizas, representando los residuos más del 25 por ciento de la '
             u'energía primaria utilizada.'),
 ]
-
+# https://www.boe.es/diario_boe/txt.php?id=BOE-A-2022-23737 Punto Octavo
+DISPONIBILITATS_INSTALACIO_MENYS_50MW = {
+    "hidraulica": 0.29,
+    "eolica": 0.22,
+    "solar": 0.11,
+    "biomasa": 0.45,
+    "residuo_solido_industrial": 0.52,
+    "residuo_solido_urbano": 0.48,
+    "calor_residual": 0.29,
+    "carbon": 0.90,
+    "fuel_gasoil": 0.26,
+    "gas_refinería": 0.22,
+    "gas_natural": 0.39,
+}
+DISPONIBILITATS_INSTALACIO_MES_50MW = {
+    "nuclear": 0.87,
+    "hulla+antracita": 0.90,
+    "lignito_negro": 0.89,
+    "carbon_importacion": 0.94,
+    "fuel_gas": 0.75,
+    "ciclo_combinado": 0.93,
+    "bombeo": 0.73,
+    "hidraulica": 0.59,
+    "eolica": 0.22,
+    "solar": 0.11,
+}
 TABLA_127 = [('1', u'Sin excedentes'),
              ('2', u'Con excedentes'), ]
 

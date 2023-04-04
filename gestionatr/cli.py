@@ -1,6 +1,12 @@
-# -*- coding: utf-8 -*-
+# -*- encoding: utf-8 -*-
+from __future__ import absolute_import, unicode_literals
+import six
 import sys
 import click
+from suds.cache import NoCache
+from suds.client import Client
+from suds.transport.https import HttpAuthenticated
+from six.moves import urllib
 import requests
 import base64
 from lxml import etree
@@ -51,24 +57,24 @@ def atr():
 @click.option("--filename", "-f", help="path to XML filename", required=True)
 @click.option("--sector", "-s", help="e (power) or g (gas)", default="e")
 def test(filename, sector):
-    with open(filename, 'r') as xml_file:
+    with open(filename, 'rb') as xml_file:
         try:
             data = xml_file.read()
-            if sector == u'e':
+            if sector == 'e':
                 m = message.Message(data)
-            elif sector == u'g':
+            elif sector == 'g':
                 m = message_gas.MessageGas(data)
             m.parse_xml()
-            sys.stdout.write(u'Correct File\n')
+            sys.stdout.write('Correct File\n')
         except except_f1 as e:
-            error_txt = unicode(e.value).encode(errors='ignore')
+            error_txt = six.text_type(e.value).encode(errors='ignore')
             sys.stdout.write(
-                u'WARNING: Invalid File: {0}\n'.format(error_txt)
+                'WARNING: Invalid File: {0}\n'.format(error_txt)
             )
         except Exception as e:
-            error_txt = unicode(e).encode(errors='ignore')
+            error_txt = six.text_type(e).encode(errors='ignore')
             sys.stdout.write(
-                u'WARNING: Invalid File: {0}\n'.format(error_txt)
+                'WARNING: Invalid File: {0}\n'.format(error_txt)
             )
         finally:
             sys.stdout.flush()
@@ -106,8 +112,9 @@ def request_p0(url, user, password, xml_str=None, params=None):
     # principals que tenim. La "altres" i la "reintent"
     distri_envelop = ENVELOP_BY_DISTR.get(codi_receptor, ENVELOP_BY_DISTR.get("altres"))
     retry_envelop = ENVELOP_BY_DISTR.get("reintent")
+    retry2_envelop = ENVELOP_BY_DISTR.get("reintent_2")
     error = None
-    for envelop in [distri_envelop, retry_envelop]:
+    for envelop in [distri_envelop, retry_envelop, retry2_envelop]:
         xml_str_to_use = xml_str
         soap_content = envelop['template'].format(xml_str=xml_str_to_use)
 
@@ -143,13 +150,17 @@ def request_p0(url, user, password, xml_str=None, params=None):
             res = etree.tostring(aux_res)
             return res
         except P0FaultError as p0efe:
-            raise
+            if not error:
+                error = p0efe
         except Exception as e:
             if not error:
                 error = e
 
     if error:
-        print error
+        if isinstance(error, P0FaultError):
+            raise error
+        else:
+            print(error)
 
     return res
 

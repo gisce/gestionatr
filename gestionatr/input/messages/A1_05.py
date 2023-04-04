@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from A1_02 import *
+from __future__ import absolute_import, unicode_literals
+from .A1_02 import *
 from gestionatr.utils import get_rec_attr
 
 

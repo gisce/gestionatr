@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from A1_38 import *
+from __future__ import absolute_import, unicode_literals
+from .A1_38 import *
 
 
 class A20_36(A1_38):

@@ -1,8 +1,12 @@
+from __future__ import absolute_import, unicode_literals
 from gestionatr import defs
 from gestionatr import defs_gas
 import os
 from collections import namedtuple
 from datetime import datetime
+import six
+if six.PY3:
+    from functools import reduce
 
 _ROOT = os.path.abspath(os.path.dirname(__file__))
 

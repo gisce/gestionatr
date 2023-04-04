@@ -1,6 +1,5 @@
 # gestionatr
-[![Build Status](https://travis-ci.org/gisce/gestionatr.svg?branch=master)](https://travis-ci.org/gisce/gestionatr)
-[![Coverage Status](https://coveralls.io/repos/github/gisce/gestionatr/badge.svg?branch=master)](https://coveralls.io/github/gisce/gestionatr?branch=master)
+[![Tests](https://github.com/gisce/gestionatr/actions/workflows/python-app.yml/badge.svg)](https://github.com/gisce/gestionatr/actions/workflows/python-app.yml)
 
 Libreria para la generación y carga de ficheros de gestion ATR según define
 la CNMC para Electricidad
