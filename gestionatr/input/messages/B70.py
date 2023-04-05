@@ -3,7 +3,7 @@ from __future__ import absolute_import, unicode_literals
 from .message_gas import MessageGas
 from gestionatr.utils import get_rec_attr
 from gestionatr.defs_gas import TIPUS_CONCEPTES, PEAJES_SEMPRE_CAPACIDAD
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 class B7031(MessageGas):
@@ -1309,6 +1309,8 @@ class Medidor(object):
         for meter in self.meters:
             fecha_desde = meter.feclecant
             fecha_actual = meter.feclecact
+            if fecha_desde == fecha_actual and meter.horalecact in ("23:00:00", "24:00:00"):
+                fecha_actual = (datetime.strptime(fecha_actual, "%Y-%m-%d") + timedelta(days=1)).strftime("%Y-%m-%d")
             comptador = meter.numseriemedidor
             periode = meter.tipo_dh
             ajust = float(meter.ajuste)
