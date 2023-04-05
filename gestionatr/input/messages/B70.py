@@ -1310,7 +1310,10 @@ class Medidor(object):
             fecha_desde = meter.feclecant
             fecha_actual = meter.feclecact
             if fecha_desde == fecha_actual and meter.horalecact in ("23:00:00", "24:00:00"):
-                fecha_actual = (datetime.strptime(fecha_actual, "%Y-%m-%d") + timedelta(days=1)).strftime("%Y-%m-%d")
+                # A vegades envien una lectura a les 00 i l'altre a les 23 i son del mateix dia.
+                # Es equivalent a enviar una a les 23 del dia anterior i l'altre a les 23 del dia actual. per tant,
+                # restem un dia a la lectura desde
+                fecha_desde = (datetime.strptime(fecha_desde, "%Y-%m-%d") - timedelta(days=1)).strftime("%Y-%m-%d")
             comptador = meter.numseriemedidor
             periode = meter.tipo_dh
             ajust = float(meter.ajuste)
