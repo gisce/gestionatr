@@ -91,6 +91,10 @@ CODIS_INDEMNITZACIO_AUTOCONSUM = {
     '87': 'Descuento por retardo en activación autoconsumo NO imputable al distribuidor',
 }
 
+CODIS_REPOSICIO = {
+    '19': 'Cost de reposició',
+}
+
 # Totalitzadors a ignorar
 SKIP_TOTALITZADORS = ('00', '60')
 
@@ -531,7 +535,7 @@ class Factura(object):
                     continue
                 elif concepte.is_autoconsum():
                     conceptes.append(concepte)
-                elif concepte.importe or concepte.is_indemnitzacio():
+                elif concepte.importe or concepte.is_indemnitzacio() or concepte.is_reposicio():
                     total += concepte.importe
                     conceptes.append(concepte)
         except AttributeError:
@@ -580,6 +584,11 @@ class Factura(object):
             if iva.base != 0:
                 return False
 
+        return True
+
+    def sin_impuestos(self):
+        if len(self.ivas):
+            return False
         return True
 
     def get_create_invoice_params(self):
@@ -2608,6 +2617,8 @@ class ConceptoRepercutible(object):
     def is_indemnitzacio(self):
         return self.concepto_repercutible in CODIS_INDEMNITZACIO_AUTOCONSUM.keys()
 
+    def is_reposicio(self):
+        return self.concepto_repercutible in CODIS_REPOSICIO.keys()
 
 class OtraFactura(Factura):
     DATOS_GENERALES_NAME = 'DatosGeneralesOtrasFacturas'
