@@ -3093,6 +3093,7 @@ CONVERSION_TIPOVIA_GAS_ELEC = {
     'PSAXE':'PS',
     'PTDA':'PD',
     'PTGE':'PS',
+    'PGE':'PS',
     'PTLLO':'OV',
     'PZO':'OV',
     'PZTA':'PT',
