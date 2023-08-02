@@ -1123,6 +1123,7 @@ TABLA_27 = [
     ('G4', 'Suministro Mínimo Vital'),
     ('G5', 'Este tipo de modificación (“M”/”B”) solo aplica a solicitudes de modificación (formato M1) de suministros en bono social (suministrados por COR)'),
     ('G6', 'No es posible modificar fichero de coeficientes si no ha transcurrido un mínimo de 4 meses desde la última modificación'),
+    ('H4', 'La instalación del cliente no puede tener vertidos a la red'),
     ('99', 'Otros'),
 ]
 
