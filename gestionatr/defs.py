@@ -263,13 +263,6 @@ SUBTYPES_R101 = [
         'type': '07',
     }),
     ({
-        'min_fields': ['nif_cliente', 'nombre_cliente', 'telefono_contacto',
-                       'cups', 'importe_reclamado'],
-        'code': '033',
-        'name': u'POR URGENCIAS',
-        'type': '08',
-    }),
-    ({
         'min_fields': ['cups', 'codigo_de_solicitud',
                        'concepto_contratacion'],
         'code': '034',
@@ -383,36 +376,6 @@ SUBTYPES_R101 = [
         'type': '02',
     }),
     ({
-        'min_fields': ['cups', 'comentarios', 'num_factura'],
-        'code': '050',
-        'name': u'DESACUERDO FACTURACIÓN',
-        'type': '09',
-    }),
-    ({
-        'min_fields': ['nif_cliente', 'nombre_cliente', 'telefono_contacto', 'cups', 'comentarios'],
-        'code': '051',
-        'name': u'CONDUCTA INADECUADA',
-        'type': '09',
-    }),
-    ({
-        'min_fields': ['nif_cliente', 'nombre_cliente', 'telefono_contacto', 'cups', 'comentarios'],
-        'code': '052',
-        'name': u'DISCONFORMIDAD TRABAJOS REALIZADOS',
-        'type': '09',
-    }),
-    ({
-        'min_fields': ['telefono_contacto', 'cups', 'comentarios', 'persona_de_contacto'],
-        'code': '053',
-        'name': u'INCUMPLIMIENTO HORA',
-        'type': '09',
-    }),
-    ({
-        'min_fields': ['nombre_cliente', 'telefono_contacto', 'cups', 'fecha_incidente', 'comentarios'],
-        'code': '054',
-        'name': u'DAÑOS INSPECCIÓN',
-        'type': '09',
-    }),
-    ({
         'min_fields': ['cups', 'comentarios', 'num_fact'],
         'code': '055',
         'name': u'DISCONFORMIDAD SOBRE IMPORTE FACTURADO '
@@ -492,12 +455,6 @@ SUBTYPES_R101 = [
         'type': '02',
     }),
     ({
-        'min_fields': ['nif_cliente', 'nombre_cliente', 'cups', 'comentarios', 'num_fact'],
-        'code': '068',
-        'name': u'RECLAMACIÓN POR APLICACIÓN DEL FACTOR DE CONVERSIÓN O EL PCS',
-        'type': '02',
-    }),
-    ({
         'min_fields': ['cups', 'comentarios', 'num_fact'],
         'code': '069',
         'name': u'COPIA F1 EN PDF',
@@ -533,98 +490,7 @@ SUBTYPES_R101 = [
         'name': u'RETRASO PLAZO ACEPTACIÓN ANULACIÓN',
         'type': '03',
     }),
-    ({
-        'min_fields': [],
-        'code': '100',
-        'name': u'INCIDENCIAS CONTRATACIÓN BONO SOCIAL',
-        'type': '03',
-    }),
-    ({
-        'min_fields': [],
-        'code': '101',
-        'name': u'DATOS BANCARIOS/FORMA DE PAGO ERRÓNEA',
-        'type': '02',
-    }),
-    ({
-        'min_fields': [],
-        'code': '102',
-        'name': u'ERRORES EN COBROS/ ABONOS',
-        'type': '02',
-    }),
-    ({
-        'min_fields': [],
-        'code': '103',
-        'name': u'DISCONFORMIDAD PRECIOS FACTURADOS O REPERCUTIDOS POR LA COMERCIALIZADORA',
-        'type': '02',
-    }),
-    ({
-        'min_fields': [],
-        'code': '104',
-        'name': u'DISCONFORMIDAD FRACCIONAMIENTO O GASTOS ESPECIALES COBRADOS',
-        'type': '02',
-    }),
-    ({
-        'min_fields': [],
-        'code': '105',
-        'name': u'DISCONFORMIDAD CON EL RECOBRO',
-        'type': '02',
-    }),
-    ({
-        'min_fields': [],
-        'code': '106',
-        'name': u'DISCONFORMIDAD CON PENALIZACIÓN POR PRONTA RESOLUCIÓN',
-        'type': '03',
-    }),
-    ({
-        'min_fields': [],
-        'code': '107',
-        'name': u'INSUFICIENTE INFORMACIÓN EN EL MOMENTO DE LA CONTRATACIÓN (Condiciones contractuales, derecho de desistimiento)',
-        'type': '03',
-    }),
-    ({
-        'min_fields': [],
-        'code': '108',
-        'name': u'RECLAMACION  RESPECTO AL DERECHO DE DESISTIMIENTO',
-        'type': '03',
-    }),
-    ({
-        'min_fields': [],
-        'code': '109',
-        'name': u'FACTURACION DE OTROS SERVICIOS TRAS LA CANCELACIÓN DEL SUMINISTRO',
-        'type': '02',
-    }),
-    ({
-        'min_fields': [],
-        'code': '110',
-        'name': u'FALTA DE CLARIDAD EN LAS FACTURAS ',
-        'type': '02',
-    }),
-    ({
-        'min_fields': [],
-        'code': '111',
-        'name': u'FALTA DE CLARIDAD CONDICIONES CONTRACTUALES',
-        'type': '03',
-    }),
-    ({
-        'min_fields': [],
-        'code': '112',
-        'name': u'DIFICULTAD EN LA CONTRATACIÓN DE LA TUR/PVPC CON EL CUR/COR',
-        'type': '03',
-    }),
-    ({
-        'min_fields': [],
-        'code': '113',
-        'name': u'RECLAMACIONES POR PRACTICAS COMERCIALES INCORRECTAS',
-        'type': '03',
-    }),
-    ({
-        'min_fields': [],
-        'code': '114',
-        'name': u'RETRASO EN FACTURACIÓN COMERCIALIZADOR',
-        'type': '03',
-    }),
 ]
-
 SUBTYPES_R1_ATC = [(x['code'], x['name']) for x in SUBTYPES_R101]
 
 
@@ -671,7 +537,7 @@ TABLA_8 = [('A', u"La activación se debe producir cuanto antes"),
 TABLA_9 = [('01', 'Anual'),
            ('02', 'Eventual medido'),
            ('03', 'Temporada'),
-           ('05', 'RECORE'),
+           ('05', 'Suministro a instalaciones RECORE'),
            ('07', 'Suministro de Obras'),
            ('08', 'Suministro de Socorro'),
            ('09', 'Eventual a tanto alzado'),
@@ -1017,7 +883,6 @@ TABLA_27 = [
     ('40', 'Existencia de Solicitud previa en curso M1'),
     ('42', 'No es posible anulación. OT ya en campo o acciones no anulables en una reclamación'),
     ('43', 'No es posible anulación. Solicitud ya activada'),
-    ('44', 'Error en las horas de utilización (Eventuales)'),
     ('46', 'Fecha de la operación solicitada con carácter retroactivo'),
     ('47', 'Potencias No Normalizadas en Suministro Trifásico'),
     ('48', 'Potencias No Normalizadas en Suministro Monofásico'),
@@ -1058,15 +923,7 @@ TABLA_27 = [
     ('86', 'Código de Expediente de Acometida Erróneo'),
     ('87', 'Factura inexistente'),
     ('88', 'Factura no telegestionada'),
-    ('90', 'Autoconsumo 1 o 2B: Titular del consumo no coincide con el de la instalación'),
-    ('91', 'Autoconsumo: Falta solicitud del contrato asociado'),
-    ('92', 'Autoconsumo: No coincide la categoría del autoconsumo de la solicitud con el registrado en Distribuidora.'),
     ('93', 'Autoconsumo:  Tipo de autoconsumo no válido.'),
-    ('94', 'Autoconsumo: Imposible tramitar solicitud sobre ese suministro'),
-    ('95', 'Autoconsumo: Modalidad solicitada no coincide contrato técnico.'),
-    ('96', 'Autoconsumo: Potencia contratada mayor a 100kW'),
-    ('97', 'Autoconsumo: Potencia contratada menor a la instalada en generación'),
-    ('98', 'Autoconsumo: periodo mínimo de permanencia en modalidad de autoconsumo no respetado'),
     ('A1', 'Incidencia no subsanada'),
     ('A2', 'Contrato cortado por el distribuidor'),
     ('A3', 'Instalación peligrosa'),
@@ -1124,6 +981,8 @@ TABLA_27 = [
     ('G5', 'Este tipo de modificación (“M”/”B”) solo aplica a solicitudes de modificación (formato M1) de suministros en bono social (suministrados por COR)'),
     ('G6', 'No es posible modificar fichero de coeficientes si no ha transcurrido un mínimo de 4 meses desde la última modificación'),
     ('H4', 'La instalación del cliente no puede tener vertidos a la red'),
+    ('H5', 'No se puede solicitar una segunda modificación de potencia en un mismo ciclo de facturación'),
+    ('H6', 'La reducción de potencia no cumple con los requisitos establecidos en el artículo 7 RDL 18/2022'),
     ('99', 'Otros'),
 ]
 
@@ -1277,7 +1136,6 @@ TABLA_44 = [
     ('10', u'Telemedida'),
     ('20', u'TPL'),
     ('30', u'Visual'),
-    ('31', u'Visual corregida'),
     ('40', u'Estimada'),
     ('50', u'Autolectura'),
     ('60', u'Telegestión'),
@@ -1296,10 +1154,6 @@ TABLA_45 = [
 ANOMALIA_MESURA = TABLA_45
 
 TABLA_50 = [
-    ('1', 'Una sola potencia contratada sin maxímetro'),
-    ('2', 'Una sola potencia contratada con maxímetro'),
-    ('4', 'Modo 4 con tres maxímetros'),
-    ('8', 'Tarifa de 6 máximas'),
     ('9', 'Dos potencias contratadas sin maxímetro'),
     ('A', 'Dos potencias contratadas con maxímetro'),
     ('B', 'Tarifa de 6 máximas')
@@ -2286,10 +2140,6 @@ CONV_T109_T111 = {'01': '01',  # TG with CCH
 
 TABLA_113 = [
     ('00', u'Sin Autoconsumo'),
-    ('01', u'Autoconsumo Tipo 1'),
-    ('2A', u'Autoconsumo tipo 2 (según el Art. 13. 2. a) RD 900/2015)'),
-    ('2B', u'Autoconsumo tipo 2 (según el Art. 13. 2. b) RD 900/2015)'),
-    ('2G', u'Servicios auxiliares de generación ligada a un autoconsumo tipo 2'),
     ('31', u'Sin Excedentes Individual – Consumo'),
     ('32', u'Sin Excedentes Colectivo – Consumo'),
     ('33', u'Sin Excedentes Colectivo con acuerdo de compensación – Consumo'),
