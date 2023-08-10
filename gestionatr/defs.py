@@ -263,6 +263,13 @@ SUBTYPES_R101 = [
         'type': '07',
     }),
     ({
+        'min_fields': ['nif_cliente', 'nombre_cliente', 'telefono_contacto',
+                       'cups', 'importe_reclamado'],
+        'code': '033',
+        'name': u'POR URGENCIAS',
+        'type': '08',
+    }),
+    ({
         'min_fields': ['cups', 'codigo_de_solicitud',
                        'concepto_contratacion'],
         'code': '034',
@@ -376,6 +383,36 @@ SUBTYPES_R101 = [
         'type': '02',
     }),
     ({
+        'min_fields': ['cups', 'comentarios', 'num_factura'],
+        'code': '050',
+        'name': u'DESACUERDO FACTURACIÓN',
+        'type': '09',
+    }),
+    ({
+        'min_fields': ['nif_cliente', 'nombre_cliente', 'telefono_contacto', 'cups', 'comentarios'],
+        'code': '051',
+        'name': u'CONDUCTA INADECUADA',
+        'type': '09',
+    }),
+    ({
+        'min_fields': ['nif_cliente', 'nombre_cliente', 'telefono_contacto', 'cups', 'comentarios'],
+        'code': '052',
+        'name': u'DISCONFORMIDAD TRABAJOS REALIZADOS',
+        'type': '09',
+    }),
+    ({
+        'min_fields': ['telefono_contacto', 'cups', 'comentarios', 'persona_de_contacto'],
+        'code': '053',
+        'name': u'INCUMPLIMIENTO HORA',
+        'type': '09',
+    }),
+    ({
+        'min_fields': ['nombre_cliente', 'telefono_contacto', 'cups', 'fecha_incidente', 'comentarios'],
+        'code': '054',
+        'name': u'DAÑOS INSPECCIÓN',
+        'type': '09',
+    }),
+    ({
         'min_fields': ['cups', 'comentarios', 'num_fact'],
         'code': '055',
         'name': u'DISCONFORMIDAD SOBRE IMPORTE FACTURADO '
@@ -455,6 +492,12 @@ SUBTYPES_R101 = [
         'type': '02',
     }),
     ({
+        'min_fields': ['nif_cliente', 'nombre_cliente', 'cups', 'comentarios', 'num_fact'],
+        'code': '068',
+        'name': u'RECLAMACIÓN POR APLICACIÓN DEL FACTOR DE CONVERSIÓN O EL PCS',
+        'type': '02',
+    }),
+    ({
         'min_fields': ['cups', 'comentarios', 'num_fact'],
         'code': '069',
         'name': u'COPIA F1 EN PDF',
@@ -466,31 +509,122 @@ SUBTYPES_R101 = [
         'name': u'RETRASO EN LA ATENCIÓN A RECLAMACIONES NO SUJETAS A ATENCIÓN REGLAMENTARIA',
         'type': '01',
     }),
-({
+    ({
         'min_fields': ['cups', 'codigo_de_solicitud'],
         'code': '071',
         'name': u'RETRASO EN PLAZO ACEPTACIÓN DESISTIMIENTO',
         'type': '03',
     }),
-({
+    ({
         'min_fields': ['cups', 'codigo_de_solicitud'],
         'code': '072',
         'name': u'RETRASO EN PLAZO ACTIVACIÓN DESISTIMIENTO',
         'type': '03',
     }),
-({
+    ({
         'min_fields': ['nif_cliente', 'nombre_cliente', 'telefono_contacto', 'cups', 'comentarios',],
         'code': '073',
         'name': u'PARÁMETROS DE COMUNICACIÓN',
         'type': '02',
     }),
-({
+    ({
         'min_fields': ['cups', 'codigo_de_solicitud', 'cod_reclam_anterior'],
         'code': '074',
         'name': u'RETRASO PLAZO ACEPTACIÓN ANULACIÓN',
         'type': '03',
     }),
+    ({
+        'min_fields': [],
+        'code': '100',
+        'name': u'INCIDENCIAS CONTRATACIÓN BONO SOCIAL',
+        'type': '03',
+    }),
+    ({
+        'min_fields': [],
+        'code': '101',
+        'name': u'DATOS BANCARIOS/FORMA DE PAGO ERRÓNEA',
+        'type': '02',
+    }),
+    ({
+        'min_fields': [],
+        'code': '102',
+        'name': u'ERRORES EN COBROS/ ABONOS',
+        'type': '02',
+    }),
+    ({
+        'min_fields': [],
+        'code': '103',
+        'name': u'DISCONFORMIDAD PRECIOS FACTURADOS O REPERCUTIDOS POR LA COMERCIALIZADORA',
+        'type': '02',
+    }),
+    ({
+        'min_fields': [],
+        'code': '104',
+        'name': u'DISCONFORMIDAD FRACCIONAMIENTO O GASTOS ESPECIALES COBRADOS',
+        'type': '02',
+    }),
+    ({
+        'min_fields': [],
+        'code': '105',
+        'name': u'DISCONFORMIDAD CON EL RECOBRO',
+        'type': '02',
+    }),
+    ({
+        'min_fields': [],
+        'code': '106',
+        'name': u'DISCONFORMIDAD CON PENALIZACIÓN POR PRONTA RESOLUCIÓN',
+        'type': '03',
+    }),
+    ({
+        'min_fields': [],
+        'code': '107',
+        'name': u'INSUFICIENTE INFORMACIÓN EN EL MOMENTO DE LA CONTRATACIÓN (Condiciones contractuales, derecho de desistimiento)',
+        'type': '03',
+    }),
+    ({
+        'min_fields': [],
+        'code': '108',
+        'name': u'RECLAMACION  RESPECTO AL DERECHO DE DESISTIMIENTO',
+        'type': '03',
+    }),
+    ({
+        'min_fields': [],
+        'code': '109',
+        'name': u'FACTURACION DE OTROS SERVICIOS TRAS LA CANCELACIÓN DEL SUMINISTRO',
+        'type': '02',
+    }),
+    ({
+        'min_fields': [],
+        'code': '110',
+        'name': u'FALTA DE CLARIDAD EN LAS FACTURAS ',
+        'type': '02',
+    }),
+    ({
+        'min_fields': [],
+        'code': '111',
+        'name': u'FALTA DE CLARIDAD CONDICIONES CONTRACTUALES',
+        'type': '03',
+    }),
+    ({
+        'min_fields': [],
+        'code': '112',
+        'name': u'DIFICULTAD EN LA CONTRATACIÓN DE LA TUR/PVPC CON EL CUR/COR',
+        'type': '03',
+    }),
+    ({
+        'min_fields': [],
+        'code': '113',
+        'name': u'RECLAMACIONES POR PRACTICAS COMERCIALES INCORRECTAS',
+        'type': '03',
+    }),
+    ({
+        'min_fields': [],
+        'code': '114',
+        'name': u'RETRASO EN FACTURACIÓN COMERCIALIZADOR',
+        'type': '03',
+    }),
 ]
+
 SUBTYPES_R1_ATC = [(x['code'], x['name']) for x in SUBTYPES_R101]
 
 
