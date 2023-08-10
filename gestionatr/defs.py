@@ -1039,6 +1039,7 @@ TABLA_35 = [
     ('9', 'Tres periodos'),
     ('A', 'Seis periodos')
 ]
+
 TIPO_DH_APARATO = TABLA_35
 
 TABLA_36 = [('S', 'Lectura no acumulativa'),
