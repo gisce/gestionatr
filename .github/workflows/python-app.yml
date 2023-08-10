@@ -48,5 +48,10 @@ jobs:
         # if [[ $TRAVIS_PYTHON_VERSION == 2.6 ]]; then pip install unittest2; fi
         pip install coveralls
     - name: Run test
+      if: matrix.python-version == '2.7'
+      run: |
+        python setup.py test
+    - name: Run test
+      if: matrix.python-version == '3.11'
       run: |
         coverage run setup.py test
