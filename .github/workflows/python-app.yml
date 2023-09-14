@@ -44,6 +44,7 @@ jobs:
         pip install --upgrade pip setuptools wheel
     - name: Install dependencies
       run: |
+        pip install -r requirements-dev.txt
         pip install .
     - name: Run test
       run: |
