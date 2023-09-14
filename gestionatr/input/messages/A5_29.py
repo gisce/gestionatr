@@ -612,7 +612,7 @@ class DatosCom(object):
     def nombre(self):
         data = False
         try:
-            data = self.datosdis.nombre.text
+            data = self.datoscom.nombre.text
         except AttributeError:
             pass
         return data
@@ -621,7 +621,7 @@ class DatosCom(object):
     def apellido1(self):
         data = False
         try:
-            data = self.datosdis.apellido1.text
+            data = self.datoscom.apellido1.text
         except AttributeError:
             pass
         return data
@@ -630,7 +630,7 @@ class DatosCom(object):
     def apellido2(self):
         data = False
         try:
-            data = self.datosdis.apellido2.text
+            data = self.datoscom.apellido2.text
         except AttributeError:
             pass
         return data
@@ -639,7 +639,7 @@ class DatosCom(object):
     def codprovincia(self):
         data = False
         try:
-            data = self.datosdis.codprovincia.text
+            data = self.datoscom.codprovincia.text
         except AttributeError:
             pass
         return data
@@ -648,7 +648,7 @@ class DatosCom(object):
     def descprovincia(self):
         data = False
         try:
-            data = self.datosdis.descprovincia.text
+            data = self.datoscom.descprovincia.text
         except AttributeError:
             pass
         return data
@@ -657,7 +657,7 @@ class DatosCom(object):
     def codpostal(self):
         data = False
         try:
-            data = self.datosdis.codpostal.text
+            data = self.datoscom.codpostal.text
         except AttributeError:
             pass
         return data
@@ -666,7 +666,7 @@ class DatosCom(object):
     def codmunicipio(self):
         data = False
         try:
-            data = self.datosdis.codmunicipio.text
+            data = self.datoscom.codmunicipio.text
         except AttributeError:
             pass
         return data
@@ -675,7 +675,7 @@ class DatosCom(object):
     def descmunicipio(self):
         data = False
         try:
-            data = self.datosdis.descmunicipio.text
+            data = self.datoscom.descmunicipio.text
         except AttributeError:
             pass
         return data
@@ -684,7 +684,7 @@ class DatosCom(object):
     def tipovia(self):
         data = False
         try:
-            data = self.datosdis.tipovia.text
+            data = self.datoscom.tipovia.text
         except AttributeError:
             pass
         return data
@@ -693,7 +693,7 @@ class DatosCom(object):
     def via(self):
         data = False
         try:
-            data = self.datosdis.via.text
+            data = self.datoscom.via.text
         except AttributeError:
             pass
         return data
@@ -702,7 +702,7 @@ class DatosCom(object):
     def numfinca(self):
         data = False
         try:
-            data = self.datosdis.numfinca.text
+            data = self.datoscom.numfinca.text
         except AttributeError:
             pass
         return data
@@ -711,7 +711,7 @@ class DatosCom(object):
     def portal(self):
         data = False
         try:
-            data = self.datosdis.portal.text
+            data = self.datoscom.portal.text
         except AttributeError:
             pass
         return data
@@ -720,7 +720,7 @@ class DatosCom(object):
     def escalera(self):
         data = False
         try:
-            data = self.datosdis.escalera.text
+            data = self.datoscom.escalera.text
         except AttributeError:
             pass
         return data
@@ -729,7 +729,7 @@ class DatosCom(object):
     def piso(self):
         data = False
         try:
-            data = self.datosdis.piso.text
+            data = self.datoscom.piso.text
         except AttributeError:
             pass
         return data
@@ -738,7 +738,7 @@ class DatosCom(object):
     def puerta(self):
         data = False
         try:
-            data = self.datosdis.puerta.text
+            data = self.datoscom.puerta.text
         except AttributeError:
             pass
         return data
@@ -747,7 +747,7 @@ class DatosCom(object):
     def tipopersona(self):
         data = False
         try:
-            data = self.datosdis.tipopersona.text
+            data = self.datoscom.tipopersona.text
         except AttributeError:
             pass
         return data
@@ -756,7 +756,7 @@ class DatosCom(object):
     def viviendahabitual(self):
         data = False
         try:
-            data = self.datosdis.viviendahabitual.text
+            data = self.datoscom.viviendahabitual.text
         except AttributeError:
             pass
         return data
@@ -765,7 +765,7 @@ class DatosCom(object):
     def impagos(self):
         data = False
         try:
-            data = self.datosdis.impagos.text
+            data = self.datoscom.impagos.text
         except AttributeError:
             pass
         return data
@@ -774,7 +774,7 @@ class DatosCom(object):
     def fecimpagos(self):
         data = False
         try:
-            data = self.datosdis.fecimpagos.text
+            data = self.datoscom.fecimpagos.text
         except AttributeError:
             pass
         return data
@@ -783,7 +783,7 @@ class DatosCom(object):
     def catimpagos(self):
         data = False
         try:
-            data = self.datosdis.catimpagos.text
+            data = self.datoscom.catimpagos.text
         except AttributeError:
             pass
         return data
@@ -792,7 +792,7 @@ class DatosCom(object):
     def usuimpagos(self):
         data = False
         try:
-            data = self.datosdis.usuimpagos.text
+            data = self.datoscom.usuimpagos.text
         except AttributeError:
             pass
         return data
@@ -801,7 +801,7 @@ class DatosCom(object):
     def prohibpublicdatcli(self):
         data = False
         try:
-            data = self.datosdis.prohibpublicdatcli.text
+            data = self.datoscom.prohibpublicdatcli.text
         except AttributeError:
             pass
         return data
@@ -810,7 +810,7 @@ class DatosCom(object):
     def fecactprohibpublic(self):
         data = False
         try:
-            data = self.datosdis.fecactprohibpublic.text
+            data = self.datoscom.fecactprohibpublic.text
         except AttributeError:
             pass
         return data
@@ -819,7 +819,7 @@ class DatosCom(object):
     def catactprohibpublic(self):
         data = False
         try:
-            data = self.datosdis.catactprohibpublic.text
+            data = self.datoscom.catactprohibpublic.text
         except AttributeError:
             pass
         return data
@@ -828,7 +828,7 @@ class DatosCom(object):
     def usuactprohibpublic(self):
         data = False
         try:
-            data = self.datosdis.usuactprohibpublic.text
+            data = self.datoscom.usuactprohibpublic.text
         except AttributeError:
             pass
         return data
