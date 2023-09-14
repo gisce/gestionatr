@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 from .message_gas import MessageGas
-from .Deadlines import ProcessDeadline, DeadLine, Workdays, Naturaldays
+from .Deadlines import ProcessDeadline
 from gestionatr.utils import get_rec_attr
 
 
