@@ -1583,6 +1583,7 @@ class test_D1(unittest.TestCase):
     def setUp(self):
         self.xml_d101 = open(get_data("d101.xml"), "rb")
         self.xml_d101_motiu_13 = open(get_data("d101_motiu_13.xml"), "rb")
+        self.xml_d101_motiu_13_14 = open(get_data("d101_motiu_13_14.xml"), "rb")
         self.xml_d102_accept = open(get_data("d102_accept.xml"), "rb")
         self.xml_d102_reject = open(get_data("d102_reject.xml"), "rb")
 
