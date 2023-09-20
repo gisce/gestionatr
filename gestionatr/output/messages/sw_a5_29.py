@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from libcomxml.core import XmlModel, XmlField
-from gestionatr.output.messages.base_gas import Heading
+from gestionatr.output.messages.base_gas import Cabecera
 
 
 class MensajeA529(XmlModel):
@@ -12,7 +12,7 @@ class MensajeA529(XmlModel):
         self.mensaje = XmlField(
             'sctdapplication', attributes={'xmlns': 'http://localhost/sctd/A529'}
         )
-        self.heading = Heading()
+        self.cabecera = Cabecera()
         self.a529 = A529()
         super(MensajeA529, self).__init__('sctdapplication', 'mensaje')
 
