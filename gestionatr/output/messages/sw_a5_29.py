@@ -19,7 +19,7 @@ class MensajeA529(XmlModel):
 
 class A529(XmlModel):
     _sort_order = (
-        'a529', 'fechacreacion', 'horacreacion', 'cups', 'historicoconsumo', 'validacioncliente', 'tipodocumento', 'numdocumento'
+        'a529', 'fechacreacion', 'horacreacion', 'cups', 'historicoconsumo', 'validacioncliente'
     )
 
     def __init__(self):
@@ -28,8 +28,19 @@ class A529(XmlModel):
         self.horacreacion = XmlField('horacreacion')
         self.cups = XmlField('cups')
         self.historicoconsumo = XmlField('historicoconsumo')
+        self.validacioncliente = ValidacionClienteA529()
+
+        super(A529, self).__init__('a529', 'a529')
+
+
+class ValidacionClienteA529(XmlModel):
+    _sort_order = (
+        'validacioncliente', 'tipodocumento', 'numdocumento'
+    )
+
+    def __init__(self):
         self.validacioncliente = XmlField('validacioncliente')
         self.tipodocumento = XmlField('tipodocumento')
         self.numdocumento = XmlField('numdocumento')
 
-        super(A529, self).__init__('a529', 'a529')
+        super(ValidacionClienteA529, self).__init__('validacioncliente', 'validacioncliente')
