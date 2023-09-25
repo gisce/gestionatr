@@ -20,3 +20,20 @@ class Heading(XmlModel):
         self.messagetype = XmlField('messagetype')
         super(Heading, self).__init__('heading', 'heading')
 
+
+class Cabecera(XmlModel):
+    _sort_order = ('cabecera', 'codenvio',
+                   'empresaemisora', 'empresadestino',
+                   'fechacomunicacion', 'horacomunicacion', 'codproceso',
+                   'tipomensaje')
+
+    def __init__(self):
+        self.cabecera = XmlField('cabecera')
+        self.codenvio = XmlField('codenvio')
+        self.empresaemisora = XmlField('empresaemisora')
+        self.empresadestino = XmlField('empresadestino')
+        self.fechacomunicacion = XmlField('fechacomunicacion')
+        self.horacomunicacion = XmlField('horacomunicacion')
+        self.codproceso = XmlField('codproceso')
+        self.tipomensaje = XmlField('tipomensaje')
+        super(Cabecera, self).__init__('cabecera', 'cabecera')

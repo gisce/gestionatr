@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from libcomxml.core import XmlModel, XmlField
-from gestionatr.output.messages.base_gas import Heading
+from gestionatr.output.messages.base_gas import Cabecera
 
 
 class MensajeA529(XmlModel):
@@ -12,14 +12,14 @@ class MensajeA529(XmlModel):
         self.mensaje = XmlField(
             'sctdapplication', attributes={'xmlns': 'http://localhost/sctd/A529'}
         )
-        self.heading = Heading()
+        self.cabecera = Cabecera()
         self.a529 = A529()
         super(MensajeA529, self).__init__('sctdapplication', 'mensaje')
 
 
 class A529(XmlModel):
     _sort_order = (
-        'a529', 'fechacreacion', 'horacreacion', 'cups', 'historicoconsumo', 'validacioncliente', 'tipodocumento', 'numdocumento'
+        'a529', 'fechacreacion', 'horacreacion', 'cups', 'historicoconsumo', 'validacioncliente'
     )
 
     def __init__(self):
@@ -28,8 +28,19 @@ class A529(XmlModel):
         self.horacreacion = XmlField('horacreacion')
         self.cups = XmlField('cups')
         self.historicoconsumo = XmlField('historicoconsumo')
+        self.validacioncliente = ValidacionClienteA529()
+
+        super(A529, self).__init__('a529', 'a529')
+
+
+class ValidacionClienteA529(XmlModel):
+    _sort_order = (
+        'validacioncliente', 'tipodocumento', 'numdocumento'
+    )
+
+    def __init__(self):
         self.validacioncliente = XmlField('validacioncliente')
         self.tipodocumento = XmlField('tipodocumento')
         self.numdocumento = XmlField('numdocumento')
 
-        super(A529, self).__init__('a529', 'a529')
+        super(ValidacionClienteA529, self).__init__('validacioncliente', 'validacioncliente')

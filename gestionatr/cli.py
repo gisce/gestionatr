@@ -80,6 +80,89 @@ def test(filename, sector):
             sys.stdout.flush()
 
 
+def request_atr_29(url, user, password, xml_str=None, params=None):
+    import random
+    import re
+    from datetime import datetime
+    if xml_str is None and params is None:
+        raise ValueError("XML or params must be passed to request_A5")
+    if xml_str is None and params:
+        codi_receptor = params['destino']
+        params['fecha_solicitud'] = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
+        params['solicitud'] = 10**11 + int((random.random() * 10**11))
+        xml_str = re.sub(r'\s+<', '<', P0_TEMPLATE)
+        xml_str = re.sub(r'\s+$', '', xml_str)
+        xml_str = re.sub(r'\n', '', xml_str).format(**params)
+    else:
+        codi_receptor = xml_str.split("<empresadestino>")[1].split("</empresadestino>")[0]
+
+    base64string = base64.encodestring(str('%s:%s' % (user, password))).replace('\n', '')
+    headers = {
+        "Authorization": "Basic %s" % base64string,
+        "content-type": 'text/xml; charset=utf-8',
+    }
+
+    # Clean XML
+    xml_str = xml_str.strip()
+    xml_str = xml_str.replace("'utf-8'", "'UTF-8'")
+    xml_str = xml_str.replace("<?xml version='1.0' encoding='UTF-8'?>", "")
+
+    # Fem sempre 2 intents: amb el que esta definit per aquella distri i si va malament amb una plantilla base que
+    # sol funcionar en la majoria. Aixi si una distri no la tenim documentada es fa el intent amb les 2 plantilles
+    # principals que tenim. La "altres" i la "reintent"
+
+    distri_envelop = ENVELOP_BY_DISTR.get(codi_receptor, ENVELOP_BY_DISTR.get("altres"))
+    retry_envelop = ENVELOP_BY_DISTR.get("reintent")
+    retry2_envelop = ENVELOP_BY_DISTR.get("reintent_2")
+    error = None
+    for envelop in [distri_envelop, retry_envelop, retry2_envelop]:
+        xml_str_to_use = xml_str
+        soap_content = envelop['template'].format(xml_str=xml_str_to_use)
+
+        # Send request
+        h = headers.copy()
+        h.update(envelop['extra_headers'])
+        res = requests.post(url, data=soap_content, headers=h, auth=(user, password))
+        res = res.content
+        try:
+            def find_child(element, child_name):
+                res = None
+                if child_name in element.tag:
+                    return element
+                for child in element:
+                    res = find_child(child, child_name)
+                    if res is not None:
+                        break
+                return res
+
+            aux = etree.fromstring(res)
+            aux_res = find_child(aux, "a629")
+
+            if aux_res is not None:
+                error_mssg = {
+                    'request': res,
+                    'response': etree.tostring(aux_res)
+                }
+                raise A529FaultError(error_mssg)
+
+            res = etree.tostring(aux_res)
+            return res
+        except A529FaultError as A529efe:
+            if not error:
+                error = A529efe
+        except Exception as e:
+            if not error:
+                error = e
+
+    if error:
+        if isinstance(error, A529FaultError):
+            raise error
+        else:
+            print(error)
+
+    return res
+
+
 def request_p0(url, user, password, xml_str=None, params=None):
     import random
     import re
@@ -187,4 +270,24 @@ def sollicitar_p0(url, user, password, file=None, emisora=None, destino=None, cu
     res = etree.fromstring(res)
     print(etree.tostring(res, pretty_print=True))
 
+@atr.command(name='a529')
+@click.option('-u', '--url', default='http://localhost', help=u'URL del webservice', show_default=True)
+@click.option('-s', '--user', default='admin', help=u'User del webservice', show_default=True)
+@click.option('-p', '--password', default='admin', help=u'Password del webservice', show_default=True)
+@click.option('-f', '--file', help=u'Fitxer 29 pas A5 per enviar', show_default=True)
+@click.option('--emisora', help='Código REE empresa emisora')
+@click.option('--destino', help='Código REE empresa destino')
+@click.option('--cups', help='CUPS')
+def sollicitar_a529(url, user, password, file=None, emisora=None, destino=None, cups=None):
+    params = None
+    from lxml import etree
+    if emisora and destino and cups:
+        params = {
+            'emisora': emisora,
+            'destino': destino,
+            'cups': cups
+        }
 
+    res = request_atr_29(url, user, password, file, params)
+    res = etree.fromstring(res)
+    print(etree.tostring(res, pretty_print=True))
