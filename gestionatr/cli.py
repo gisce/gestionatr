@@ -270,4 +270,24 @@ def sollicitar_p0(url, user, password, file=None, emisora=None, destino=None, cu
     res = etree.fromstring(res)
     print(etree.tostring(res, pretty_print=True))
 
+@atr.command(name='a529')
+@click.option('-u', '--url', default='http://localhost', help=u'URL del webservice', show_default=True)
+@click.option('-s', '--user', default='admin', help=u'User del webservice', show_default=True)
+@click.option('-p', '--password', default='admin', help=u'Password del webservice', show_default=True)
+@click.option('-f', '--file', help=u'Fitxer 29 pas A5 per enviar', show_default=True)
+@click.option('--emisora', help='Código REE empresa emisora')
+@click.option('--destino', help='Código REE empresa destino')
+@click.option('--cups', help='CUPS')
+def sollicitar_a529(url, user, password, file=None, emisora=None, destino=None, cups=None):
+    params = None
+    from lxml import etree
+    if emisora and destino and cups:
+        params = {
+            'emisora': emisora,
+            'destino': destino,
+            'cups': cups
+        }
 
+    res = request_atr_29(url, user, password, file, params)
+    res = etree.fromstring(res)
+    print(etree.tostring(res, pretty_print=True))
