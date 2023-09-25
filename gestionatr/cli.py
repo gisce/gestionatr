@@ -15,6 +15,7 @@ from gestionatr.input.messages import message
 from gestionatr.input.messages import message_gas
 from gestionatr.input.messages.message import except_f1
 from gestionatr.output.messages.sw_p0 import ENVELOP_BY_DISTR
+from gestionatr.output.messages.sw_a5_29 import ENVELOP_GAS_BY_DISTR
 from gestionatr.exceptions import *
 
 from gestionatr import __version__
@@ -38,6 +39,25 @@ P0_TEMPLATE = """
         </MensajeSolicitudInformacionAlRegistroDePS>
 """
 
+A29_TEMPLATE = """
+<sctdapplication xmlns="http://localhost/sctd/A529">
+    <cabecera>
+        <codenvio>GML</codenvio>
+        <empresaemisora>{emisora}</empresaemisora>
+        <empresadestino>{destino}</empresadestino>
+        <fechacomunicacion>{fecha_solicitud}</fechacomunicacion>
+        <horacomunicacion>{hora_solicitud}</horacomunicacion>
+        <codproceso>29</codproceso>
+        <tipomensaje>A5</tipomensaje>
+    </cabecera>
+    <a529>
+        <fechacreacion>{fecha_solicitud}</fechacreacion>
+        <horacreacion>{hora_solicitud}</horacreacion>
+        <cups>{cups}</cups>
+        <historicoconsumo>N</historicoconsumo>
+    </a529>
+</sctdapplication>
+"""
 
 def get_gestionatr_version(ctx, param, value):
     if not value or ctx.resilient_parsing:
@@ -88,9 +108,10 @@ def request_atr_29(url, user, password, xml_str=None, params=None):
         raise ValueError("XML or params must be passed to request_A5")
     if xml_str is None and params:
         codi_receptor = params['destino']
-        params['fecha_solicitud'] = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
+        params['fecha_solicitud'] = datetime.now().strftime('%Y-%m-%d')
+        params['hora_solicitud'] = datetime.now().strftime('%H:%M:%S')
         params['solicitud'] = 10**11 + int((random.random() * 10**11))
-        xml_str = re.sub(r'\s+<', '<', P0_TEMPLATE)
+        xml_str = re.sub(r'\s+<', '<', A29_TEMPLATE)
         xml_str = re.sub(r'\s+$', '', xml_str)
         xml_str = re.sub(r'\n', '', xml_str).format(**params)
     else:
@@ -111,11 +132,12 @@ def request_atr_29(url, user, password, xml_str=None, params=None):
     # sol funcionar en la majoria. Aixi si una distri no la tenim documentada es fa el intent amb les 2 plantilles
     # principals que tenim. La "altres" i la "reintent"
 
-    distri_envelop = ENVELOP_BY_DISTR.get(codi_receptor, ENVELOP_BY_DISTR.get("altres"))
-    retry_envelop = ENVELOP_BY_DISTR.get("reintent")
-    retry2_envelop = ENVELOP_BY_DISTR.get("reintent_2")
+    distri_envelop = ENVELOP_GAS_BY_DISTR.get(codi_receptor, ENVELOP_GAS_BY_DISTR.get("altres"))
+    retry_envelop = ENVELOP_GAS_BY_DISTR.get("reintent")
+    retry_envelop2 = ENVELOP_GAS_BY_DISTR.get("reintent2")
+    retry_envelop3 = ENVELOP_GAS_BY_DISTR.get("reintent3")
     error = None
-    for envelop in [distri_envelop, retry_envelop, retry2_envelop]:
+    for envelop in [distri_envelop, retry_envelop, retry_envelop2, retry_envelop3]:
         xml_str_to_use = xml_str
         soap_content = envelop['template'].format(xml_str=xml_str_to_use)
 
