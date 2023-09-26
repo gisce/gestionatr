@@ -114,6 +114,10 @@ XSD_DATA.update({
             'A25': 'A2543.xsd',
             'A26': 'A2643.xsd',
     },
+    '29': {
+        'A5': 'A529.xsd',
+        'A6': 'A629.xsd',
+    }
 })
 
 MAIN_MESSAGE_XSD.update({
@@ -204,6 +208,9 @@ MAIN_MESSAGE_XSD.update({
     'A443': 'a443',
     'A2543': 'a2543',
     'A2643': 'a2643',
+    # 29
+    'A529': 'a529',
+    'A629': 'a629',
 })
 
 
@@ -242,9 +249,16 @@ class MessageGas(Message):
                 self.pas = self.head.codproceso.text
                 self.codproceso = self.pas
             except:
-                msg = u'No se puede identificar el código de proceso ' \
-                      u'o código de paso'
-                raise except_f1('Error', msg)
+                try:
+                    # If per el "P0" (aka A529)
+                    self.tipus = self.head.codproceso.text
+                    self.processcode = self.tipus
+                    self.pas = self.head.tipomensaje.text
+                    self.messagetype = self.pas
+                except:
+                    msg = u'No se puede identificar el código de proceso ' \
+                          u'o código de paso'
+                    raise except_f1('Error', msg)
 
 
     # Funcions relacionades amb la capçalera del XML
