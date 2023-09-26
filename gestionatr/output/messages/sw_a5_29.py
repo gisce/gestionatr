@@ -46,65 +46,18 @@ class ValidacionClienteA529(XmlModel):
         super(ValidacionClienteA529, self).__init__('validacioncliente', 'validacioncliente')
 
 
-GAS_ENVELOPE_TEMPLATE_AMB_NAMESPACE_AL_PAS = """
-<soap:Envelope 
-xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" 
-xmlns:eleg="http://localhost/sctd/wsrps"
->
-    <soap:Header />
-    <soap:Body>
-        <eleg:consultaCups>
-            <eleg:consultaCups>
-                {xml_str}
-            </eleg:consultaCups>
-        </eleg:consultaCups>
-    </soap:Body>
-</soap:Envelope>
-"""
-
-GAS_ENVELOPE_TEMPLATE_SENSE_NAMESPACE_AL_PAS01 = """
-<soap:Envelope 
-xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" 
-xmlns:eleg="http://localhost/sctd/wsrps"
->
-    <soap:Header />
-    <soap:Body>
-        <eleg:consultaCups>
-            <consultaCups>
-                {xml_str}
-            </consultaCups>
-        </eleg:consultaCups>
-    </soap:Body>
-</soap:Envelope>
-"""
-
 GAS_ENVELOPE_TEMPLATE_CHATGPT = """
 <soapenv:Envelope 
 xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
-xmlns:wsrps="http://localhost/sctd/wsrps" 
+xmlns:wsr="http://localhost/sctd/wsrps" 
 xmlns:a529="http://localhost/sctd/A529">
    <soapenv:Header/>
    <soapenv:Body>
-      <wsrps:consultaCups>
-         <wsrps:consultaCups>
+      <wsr:consultaCups>
+         <consultaCups>
 {xml_str}
-         </wsrps:consultaCups>
-      </wsrps:consultaCups>
-   </soapenv:Body>
-</soapenv:Envelope>
-"""
-
-GAS_ENVELOPE_TEMPLATE_CHATGPT_v2 = """
-<soapenv:Envelope 
-xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
-xmlns:wsrps="http://localhost/sctd/wsrps">
-   <soapenv:Header/>
-   <soapenv:Body>
-      <wsrps:consultaCups>
-         <wsrps:consultaCups>
-{xml_str}
-         </wsrps:consultaCups>
-      </wsrps:consultaCups>
+         </consultaCups>
+      </wsr:consultaCups>
    </soapenv:Body>
 </soapenv:Envelope>
 """
@@ -112,37 +65,9 @@ xmlns:wsrps="http://localhost/sctd/wsrps">
 
 ENVELOP_GAS_BY_DISTR = {
     'altres': {
-        'template': GAS_ENVELOPE_TEMPLATE_SENSE_NAMESPACE_AL_PAS01,
-        'extra_headers': {
-            "soapAction": ""
-        },
-    },
-    'reintent': {
-        'template': GAS_ENVELOPE_TEMPLATE_AMB_NAMESPACE_AL_PAS,
-        'extra_headers': {
-            "soapAction": ""
-        },
-    },
-    'reintent2': {
         'template': GAS_ENVELOPE_TEMPLATE_CHATGPT,
         'extra_headers': {
             "soapAction": ""
-        },
-    },
-    'reintent3': {
-        'template': GAS_ENVELOPE_TEMPLATE_CHATGPT,
-        'extra_headers': {
-        },
-    },
-    'reintent4': {
-        'template': GAS_ENVELOPE_TEMPLATE_CHATGPT_v2,
-        'extra_headers': {
-            "soapAction": ""
-        },
-    },
-    'reintent5': {
-        'template': GAS_ENVELOPE_TEMPLATE_CHATGPT_v2,
-        'extra_headers': {
         },
     },
 }

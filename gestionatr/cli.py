@@ -3,6 +3,7 @@ from __future__ import absolute_import, unicode_literals
 import six
 import sys
 import click
+import re
 from suds.cache import NoCache
 from suds.client import Client
 from suds.transport.https import HttpAuthenticated
@@ -127,17 +128,18 @@ def request_atr_29(url, user, password, xml_str=None, params=None):
     xml_str = xml_str.strip()
     xml_str = xml_str.replace("'utf-8'", "'UTF-8'")
     xml_str = xml_str.replace("<?xml version='1.0' encoding='UTF-8'?>", "")
+    xml_str = xml_str.replace("""<sctdapplication xmlns="http://localhost/sctd/A529">""", "")
+    xml_str = xml_str.replace("""</sctdapplication>""", "")
+    xml_str = xml_str.replace("<", "<a529:")
+    xml_str = xml_str.replace("<a529:/", "</a529:")
 
     # Fem sempre 2 intents: amb el que esta definit per aquella distri i si va malament amb una plantilla base que
     # sol funcionar en la majoria. Aixi si una distri no la tenim documentada es fa el intent amb les 2 plantilles
     # principals que tenim. La "altres" i la "reintent"
 
     distri_envelop = ENVELOP_GAS_BY_DISTR.get(codi_receptor, ENVELOP_GAS_BY_DISTR.get("altres"))
-    retry_envelop = ENVELOP_GAS_BY_DISTR.get("reintent")
-    retry_envelop2 = ENVELOP_GAS_BY_DISTR.get("reintent2")
-    retry_envelop3 = ENVELOP_GAS_BY_DISTR.get("reintent3")
     error = None
-    for envelop in [distri_envelop, retry_envelop, retry_envelop2, retry_envelop3]:
+    for envelop in [distri_envelop]:
         xml_str_to_use = xml_str
         soap_content = envelop['template'].format(xml_str=xml_str_to_use)
 
@@ -157,15 +159,11 @@ def request_atr_29(url, user, password, xml_str=None, params=None):
                         break
                 return res
 
+            res = re.sub(r'\<[^: \n/]+:', '<', res)
+            res = re.sub(r'\</[^: \n/]+:', '</', res)
+            res = res.replace("consultaCupsResponse", "a629")
             aux = etree.fromstring(res)
             aux_res = find_child(aux, "a629")
-
-            if aux_res is not None:
-                error_mssg = {
-                    'request': res,
-                    'response': etree.tostring(aux_res)
-                }
-                raise A529FaultError(error_mssg)
 
             res = etree.tostring(aux_res)
             return res
