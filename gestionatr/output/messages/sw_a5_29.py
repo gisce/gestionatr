@@ -79,7 +79,25 @@ xmlns:eleg="http://localhost/sctd/wsrps"
 """
 
 GAS_ENVELOPE_TEMPLATE_CHATGPT = """
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsrps="http://localhost/sctd/wsrps" xmlns:a529="http://localhost/sctd/A529">
+<soapenv:Envelope 
+xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:wsrps="http://localhost/sctd/wsrps" 
+xmlns:a529="http://localhost/sctd/A529">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <wsrps:consultaCups>
+         <wsrps:consultaCups>
+{xml_str}
+         </wsrps:consultaCups>
+      </wsrps:consultaCups>
+   </soapenv:Body>
+</soapenv:Envelope>
+"""
+
+GAS_ENVELOPE_TEMPLATE_CHATGPT_v2 = """
+<soapenv:Envelope 
+xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:wsrps="http://localhost/sctd/wsrps">
    <soapenv:Header/>
    <soapenv:Body>
       <wsrps:consultaCups>
@@ -113,6 +131,17 @@ ENVELOP_GAS_BY_DISTR = {
     },
     'reintent3': {
         'template': GAS_ENVELOPE_TEMPLATE_CHATGPT,
+        'extra_headers': {
+        },
+    },
+    'reintent4': {
+        'template': GAS_ENVELOPE_TEMPLATE_CHATGPT_v2,
+        'extra_headers': {
+            "soapAction": ""
+        },
+    },
+    'reintent5': {
+        'template': GAS_ENVELOPE_TEMPLATE_CHATGPT_v2,
         'extra_headers': {
         },
     },
