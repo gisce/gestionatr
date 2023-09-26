@@ -161,7 +161,7 @@ def request_atr_29(url, user, password, xml_str=None, params=None):
 
             res = re.sub(r'\<[^: \n/]+:', '<', res)
             res = re.sub(r'\</[^: \n/]+:', '</', res)
-            res = res.replace("consultaCupsResponse", "a629")
+            res = res.replace("consultaCupsResponse", """sctdapplication xmlns="http://localhost/sctd/A629""")
             aux = etree.fromstring(res)
             aux_res = find_child(aux, "a629")
 
