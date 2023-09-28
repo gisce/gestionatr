@@ -335,7 +335,8 @@ class DatosDis(object):
     @property
     def historicoConsumo(self):
         data = []
-        if self.datosdis.historicoConsumo not in [None, False]:
+        obj = get_rec_attr(self.obj, self._header, False)
+        if hasattr(obj, 'historicoConsumo'):
             for i in self.datosdis.historicoConsumo:
                 data.append(HistoricoConsumo(i))
             return data
@@ -461,12 +462,12 @@ class DatosDis(object):
     @property
     def listaproductos(self):
         data = []
-        if self.datosdis.listaproductos not in [None, False]:
+        obj = get_rec_attr(self.obj, self._header, False)
+        if (hasattr(obj, 'listaproductos') and
+                hasattr(obj.listaproductos, 'producto')):
             for i in self.datosdis.listaproductos:
                 data.append(Producto(i))
-            return data
         return data
-
 
 class HistoricoConsumo(object):
     def __init__(self, data):
