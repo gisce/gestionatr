@@ -1583,12 +1583,14 @@ class test_D1(unittest.TestCase):
     def setUp(self):
         self.xml_d101 = open(get_data("d101.xml"), "rb")
         self.xml_d101_motiu_13 = open(get_data("d101_motiu_13.xml"), "rb")
+        self.xml_d101_motiu_13_14 = open(get_data("d101_motiu_13_14.xml"), "rb")
         self.xml_d102_accept = open(get_data("d102_accept.xml"), "rb")
         self.xml_d102_reject = open(get_data("d102_reject.xml"), "rb")
 
     def tearDown(self):
         self.xml_d101.close()
         self.xml_d101_motiu_13.close()
+        self.xml_d101_motiu_13_14.close()
         self.xml_d102_accept.close()
         self.xml_d102_reject.close()
 
@@ -1830,6 +1832,94 @@ class test_D1(unittest.TestCase):
         mensaje.build_tree()
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_d101_motiu_13.read())
+
+    def test_create_pas01_motiu_13_14(self):
+        # MensajeNotificacionCambiosATRDesdeDistribuidor
+        mensaje = d1.MensajeNotificacionCambiosATRDesdeDistribuidor()
+
+        # Cabecera
+        cabecera = d1.Cabecera()
+        cabecera_fields = {
+            'codigo_ree_empresa_emisora': '1234',
+            'codigo_ree_empresa_destino': '4321',
+            'codigo_del_proceso': 'D1',
+            'codigo_del_paso': '01',
+            'codigo_de_solicitud': '201605219497',
+            'secuencial_de_solicitud': '00',
+            'fecha': '2016-06-08T04:24:09',
+            'cups': 'ES0116000000011531LK0F',
+        }
+        cabecera.feed(cabecera_fields)
+
+        # InfoRegistroAutocons
+        info_list0 = []
+        info0 = d1.InfoRetardoActivAutocons()
+        info_retardo_activ_autocons_fields0 = {
+            'codigo_fiscal_factura': '12345678',
+            'fecha_inicio_conteo_activ_autocons': '2022-01-01',
+            'fecha_desde': '2022-01-01',
+            'fecha_hasta': '2022-01-01',
+            'dias_retardo_activ_autocons': 15,
+            'valor_energia_anual_calculada': 100,
+            'valor_energia_horaria_calculada': 200,
+            'pot_instalada_gen': 6,
+        }
+        info0.feed(info_retardo_activ_autocons_fields0)
+        info_list0.append(info0)
+        # NotificacionCambiosATRDesdeDistribuidor
+        notificacion0 = d1.NotificacionCambiosATRDesdeDistribuidor()
+        notificacion_cambios_atr_desde_distribuidor_fields0 = {
+            'motivo_cambio_atr_desde_distribuidora': '13',
+            'info_retardo_activ_autocons_list': info_list0,
+        }
+        notificacion0.feed(notificacion_cambios_atr_desde_distribuidor_fields0)
+
+        # InfoRegistroAutocons
+        info_list1 = []
+        info10 = d1.InfoRetardoActivAutocons()
+        info_retardo_activ_autocons_fields10 = {
+            'codigo_fiscal_factura': '12345678',
+            'fecha_inicio_conteo_activ_autocons': '2022-01-01',
+            'fecha_desde': '2022-01-01',
+            'fecha_hasta': '2022-01-01',
+            'dias_retardo_activ_autocons': 15,
+            'valor_energia_anual_calculada': 100,
+            'valor_energia_horaria_calculada': 200,
+            'pot_instalada_gen': 6,
+        }
+        info10.feed(info_retardo_activ_autocons_fields10)
+        info_list1.append(info10)
+
+        info11 = d1.InfoRetardoActivAutocons()
+        info_retardo_activ_autocons_fields11 = {
+            'codigo_fiscal_factura': '12345679',
+            'fecha_inicio_conteo_activ_autocons': '2022-01-02',
+            'fecha_desde': '2022-01-02',
+            'fecha_hasta': '2022-01-02',
+            'dias_retardo_activ_autocons': 16,
+            'valor_energia_anual_calculada': 101,
+            'valor_energia_horaria_calculada': 201,
+            'pot_instalada_gen': 6,
+        }
+        info11.feed(info_retardo_activ_autocons_fields11)
+        info_list1.append(info11)
+
+        # NotificacionCambiosATRDesdeDistribuidor
+        notificacion1 = d1.NotificacionCambiosATRDesdeDistribuidor()
+        notificacion_cambios_atr_desde_distribuidor_fields1 = {
+            'motivo_cambio_atr_desde_distribuidora': '14',
+            'info_retardo_activ_autocons_list': info_list1,
+        }
+        notificacion1.feed(notificacion_cambios_atr_desde_distribuidor_fields1)
+
+        mensaje_notificacion_cambios_atr_desde_distribuidor_fields = {
+            'cabecera': cabecera,
+            'notificacion_cambios_atr_desde_distribuidor': [notificacion0, notificacion1],
+        }
+        mensaje.feed(mensaje_notificacion_cambios_atr_desde_distribuidor_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_d101_motiu_13_14.read())
 
     def test_create_pas02_accept(self):
         # Cabecera

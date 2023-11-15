@@ -13,7 +13,7 @@ class MensajeNotificacionCambiosATRDesdeDistribuidor(XmlModel):
         self.mensaje = XmlField('MensajeNotificacionCambiosATRDesdeDistribuidor',
                                 attributes={'xmlns': 'http://localhost/elegibilidad'})
         self.cabecera = Cabecera()
-        self.notificacion_cambios_atr_desde_distribuidor = NotificacionCambiosATRDesdeDistribuidor()
+        self.notificacion_cambios_atr_desde_distribuidor = []
         super(MensajeNotificacionCambiosATRDesdeDistribuidor, self) \
             .__init__('MensajeNotificacionCambiosATRDesdeDistribuidor', 'mensaje')
 

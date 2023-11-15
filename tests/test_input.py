@@ -1159,6 +1159,7 @@ class test_D1(TestCaseCompat):
         self.xml_d102_reject = open(get_data("d102_reject.xml"), "rb")
         self.xml_d101_motiu_11 = open(get_data("d101_motiu_11.xml"), "rb")
         self.xml_d101_motiu_13 = open(get_data("d101_motiu_13.xml"), "rb")
+        self.xml_d101_motiu_13_14 = open(get_data("d101_motiu_13_14.xml"), "rb")
 
     def tearDown(self):
         self.xml_d101.close()
@@ -1168,14 +1169,15 @@ class test_D1(TestCaseCompat):
         self.xml_d102_reject.close()
         self.xml_d101_motiu_11.close()
         self.xml_d101_motiu_13.close()
+        self.xml_d101_motiu_13_14.close()
 
     def test_d101(self):
         d1 = D1(self.xml_d101)
         d1.parse_xml()
-        self.assertEqual(d1.periodicidad_facturacion, u'01')
-        self.assertEqual(d1.fecha_prevista_aplicacion_cambio_atr, u'2016-06-09')
-        self.assertEqual(d1.motivo_cambio_atr_desde_distribuidora, u'01')
-        info = d1.info_registro_autocons
+        self.assertEqual(d1.notificacion_cambios_atr_desde_distribuidor[0].periodicidad_facturacion, u'01')
+        self.assertEqual(d1.notificacion_cambios_atr_desde_distribuidor[0].fecha_prevista_aplicacion_cambio_atr, u'2016-06-09')
+        self.assertEqual(d1.notificacion_cambios_atr_desde_distribuidor[0].motivo_cambio_atr_desde_distribuidora, u'01')
+        info = d1.notificacion_cambios_atr_desde_distribuidor[0].info_registro_autocons
         autoconsumo = info.autoconsumo
         self.assertEqual(autoconsumo.cau, u'ES1234000000000001JN0FA001')
         self.assertEqual(autoconsumo.seccion_registro, u'2')
@@ -1242,8 +1244,8 @@ class test_D1(TestCaseCompat):
     def test_d101_min_with_info(self):
         d1 = D1(self.xml_d101_min_with_info)
         d1.parse_xml()
-        self.assertEqual(d1.motivo_cambio_atr_desde_distribuidora, u'04')
-        info = d1.info_registro_autocons
+        self.assertEqual(d1.notificacion_cambios_atr_desde_distribuidor[0].motivo_cambio_atr_desde_distribuidora, u'04')
+        info = d1.notificacion_cambios_atr_desde_distribuidor[0].info_registro_autocons
         autoconsumo = info.autoconsumo
         self.assertEqual(autoconsumo.cau, u'ES1234000000000001JN0FA001')
         self.assertEqual(autoconsumo.seccion_registro, u'2')
@@ -1278,18 +1280,18 @@ class test_D1(TestCaseCompat):
     def test_d101_fully_min(self):
         d1 = D1(self.xml_d101_fully_min)
         d1.parse_xml()
-        self.assertEqual(d1.motivo_cambio_atr_desde_distribuidora, u'01')
+        self.assertEqual(d1.notificacion_cambios_atr_desde_distribuidor[0].motivo_cambio_atr_desde_distribuidora, u'01')
 
     def test_d101_motiu_11(self):
         d1 = D1(self.xml_d101_motiu_11)
         d1.parse_xml()
-        self.assertEqual(d1.motivo_cambio_atr_desde_distribuidora, u'11')
+        self.assertEqual(d1.notificacion_cambios_atr_desde_distribuidor[0].motivo_cambio_atr_desde_distribuidora, u'11')
 
     def test_d101_motiu_13(self):
         d1 = D1(self.xml_d101_motiu_13)
         d1.parse_xml()
-        self.assertEqual(d1.motivo_cambio_atr_desde_distribuidora, u'13')
-        info = d1.info_retardo_activ_autocons[0]
+        self.assertEqual(d1.notificacion_cambios_atr_desde_distribuidor[0].motivo_cambio_atr_desde_distribuidora, u'13')
+        info = d1.notificacion_cambios_atr_desde_distribuidor[0].info_retardo_activ_autocons[0]
         self.assertEqual(info.codigo_fiscal_factura, u'12345678')
         self.assertEqual(info.fecha_inicio_conteo_activ_autocons, u"2022-01-01")
         self.assertEqual(info.fecha_desde, u"2022-01-01")
@@ -1298,6 +1300,46 @@ class test_D1(TestCaseCompat):
         self.assertEqual(info.valor_energia_anual_calculado, u'100')
         self.assertEqual(info.valor_energia_horaria_calculada, u'200')
         self.assertEqual(info.pot_instalada_gen, u'6')
+
+    def test_d101_motiu_13_14(self):
+        d1 = D1(self.xml_d101_motiu_13_14)
+        d1.parse_xml()
+
+        # Notificacio tipus 13
+        notificacio0 = d1.notificacion_cambios_atr_desde_distribuidor[0]
+        self.assertEqual(notificacio0.motivo_cambio_atr_desde_distribuidora, u'13')
+        info = notificacio0.info_retardo_activ_autocons[0]
+        self.assertEqual(info.codigo_fiscal_factura, u'12345678')
+        self.assertEqual(info.fecha_inicio_conteo_activ_autocons, u"2022-01-01")
+        self.assertEqual(info.fecha_desde, u"2022-01-01")
+        self.assertEqual(info.fecha_hasta, u"2022-01-01")
+        self.assertEqual(info.dias_retardo_activ_autocons, u'15')
+        self.assertEqual(info.valor_energia_anual_calculado, u'100')
+        self.assertEqual(info.valor_energia_horaria_calculada, u'200')
+        self.assertEqual(info.pot_instalada_gen, u'6')
+
+        # Notificacio tipus 14
+        notificacio1 = d1.notificacion_cambios_atr_desde_distribuidor[1]
+        self.assertEqual(notificacio1.motivo_cambio_atr_desde_distribuidora, u'14')
+        info10 = notificacio1.info_retardo_activ_autocons[0]
+        self.assertEqual(info10.codigo_fiscal_factura, u'12345678')
+        self.assertEqual(info10.fecha_inicio_conteo_activ_autocons, u"2022-01-01")
+        self.assertEqual(info10.fecha_desde, u"2022-01-01")
+        self.assertEqual(info10.fecha_hasta, u"2022-01-01")
+        self.assertEqual(info10.dias_retardo_activ_autocons, u'15')
+        self.assertEqual(info10.valor_energia_anual_calculado, u'100')
+        self.assertEqual(info10.valor_energia_horaria_calculada, u'200')
+        self.assertEqual(info10.pot_instalada_gen, u'6')
+
+        info11 = notificacio1.info_retardo_activ_autocons[1]
+        self.assertEqual(info11.codigo_fiscal_factura, u'12345679')
+        self.assertEqual(info11.fecha_inicio_conteo_activ_autocons, u"2022-01-02")
+        self.assertEqual(info11.fecha_desde, u"2022-01-02")
+        self.assertEqual(info11.fecha_hasta, u"2022-01-02")
+        self.assertEqual(info11.dias_retardo_activ_autocons, u'16')
+        self.assertEqual(info11.valor_energia_anual_calculado, u'101')
+        self.assertEqual(info11.valor_energia_horaria_calculada, u'201')
+        self.assertEqual(info11.pot_instalada_gen, u'6')
 
     def test_d102_accept(self):
         d1 = D1(self.xml_d102_accept)
