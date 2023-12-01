@@ -1367,6 +1367,18 @@ class Medidor(object):
                     'temperatura_gas': float(temperatura_gas),
                     'pressio_atmosferica': float(pressio_atmosferica),
                 }
+                # Si el consum que calculem amb el factor_k i el pcs no dona el consum informat en el tag consumokwh
+                # pero si fem servir el factor de conversio informat per la distri si que dona, modfiquem el factor_k perque
+                # el factor de conversio calculat sigui igual al informat i aixi el consum també quadri.
+                # TODO
+                # Revisant un cas concret, sembla que realment ens falta aplicar la zeta, per aixo no quadra.
+                # Normalment es 1 pero pot no ser-ho. Aixó es una mandanga per no ahver de treballar amb la zeta.
+                consum_calculat = round(vals['consum_m3'] * vals['pcs'] * vals['factor_k'], 3)
+                consum_facturat = round(vals['consum'], 3)
+                if consum_facturat != consum_calculat:
+                    consum_calculat = round(vals['consum_m3'] * meter.factorconver, 3)
+                    if consum_facturat == consum_calculat:
+                        vals['factor_k'] = meter.factorconver / vals['pcs']
                 res.append(vals)
         return res
 
