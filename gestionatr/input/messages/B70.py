@@ -532,15 +532,9 @@ class Factura(object):
         return data
 
     def get_coeficientecortoplazo(self):
-        obj = self.obj
-        if (hasattr(obj, 'listaconceptos') and
-                hasattr(obj.listaconceptos, 'concepto')):
-            for d in obj.listaconceptos.concepto:
-                try:
-                    if d.coeficientecortoplazo and float(d.coeficientecortoplazo):
-                        return float(d.coeficientecortoplazo)
-                except Exception as e:
-                    pass
+        for d in self.listaconceptos:
+            if d.coeficientecortoplazo and float(d.coeficientecortoplazo):
+                return float(d.coeficientecortoplazo)
         return 0.0
 
     @property
