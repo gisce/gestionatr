@@ -531,6 +531,15 @@ class Factura(object):
                 data.append(Concepto(d))
         return data
 
+    def get_coeficientecortoplazo(self):
+        obj = self.obj
+        if (hasattr(obj, 'listaconceptos') and
+                hasattr(obj.listaconceptos, 'concepto')):
+            for d in obj.listaconceptos.concepto:
+                if d.coeficientecortoplazo and float(d.coeficientecortoplazo):
+                    return float(d.coeficientecortoplazo)
+        return 0.0
+
     @property
     def listamedidores(self):
         data = []
