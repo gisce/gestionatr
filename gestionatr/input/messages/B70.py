@@ -536,8 +536,11 @@ class Factura(object):
         if (hasattr(obj, 'listaconceptos') and
                 hasattr(obj.listaconceptos, 'concepto')):
             for d in obj.listaconceptos.concepto:
-                if d.coeficientecortoplazo and float(d.coeficientecortoplazo):
-                    return float(d.coeficientecortoplazo)
+                try:
+                    if d.coeficientecortoplazo and float(d.coeficientecortoplazo):
+                        return float(d.coeficientecortoplazo)
+                except Exception as e:
+                    pass
         return 0.0
 
     @property
