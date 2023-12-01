@@ -1924,6 +1924,7 @@
 			11	Falta fichero coeficientes del año que inicia
 			13	Información aplicación descuento por retardo en activación autoconsumo imputable al distribuidor
 			14	Información aplicación descuento por retardo en activación autoconsumo NO imputable al distribuidor
+			15	Alta en autoconsumo colectivo comunicada por un representante
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -1940,6 +1941,7 @@
 			<xs:enumeration value="11"/>
 			<xs:enumeration value="13"/>
 			<xs:enumeration value="14"/>
+			<xs:enumeration value="15"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="MotivoFacturacion">
