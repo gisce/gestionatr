@@ -2249,7 +2249,7 @@ TABLA_109 = [('01', u'Telegestión Operativa con CCH'),
              ('11', u'Pendiente envío de fichero de coeficientes de reparto variables para el año en curso'),
              ('13', u'Información aplicación descuento por retardo en activación autoconsumo imputable al distribuidor'),
              ('14', u'Información aplicación descuento por retardo en activación autoconsumo NO imputable al distribuidor'),
-             ('15', u'Alta en autoconsumo colectivo comunicada por un participante'),
+             ('15', u'Alta en autoconsumo colectivo comunicada por un representante'),
              ]
 
 TABLA_110 = [('01', u'Acompaña curva de carga'),
