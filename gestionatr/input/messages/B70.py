@@ -1398,13 +1398,8 @@ class Medidor(object):
                     if not factor_ultima_lectura and self.meters[-1].factorconver:
                         factor_ultima_lectura = float(self.meters[-1].factorconver)
                     if factor_ultima_lectura:
-                        consum_calculat_segons_factor_ultim = round(vals['consum_m3'] * factor_ultima_lectura, 3)
-                        if consum_calculat_segons_factor_ultim == consum_kwh_facturat:
-                            vals['factor_k'] = consum_kwh_facturat / (vals['consum_m3'] * vals['pcs'])
-                            vals['consum'] = consum_kwh_facturat
-                        elif round(consum_calculat_segons_factor_ultim, 0) == consum_kwh_facturat:
-                            vals['factor_k'] = consum_kwh_facturat / (vals['consum_m3'] * vals['pcs'])
-                            vals['consum'] = consum_kwh_facturat
+                        vals['factor_k'] = consum_kwh_facturat / (vals['consum_m3'] * vals['pcs'])
+                        vals['consum'] = consum_kwh_facturat
                 res.append(vals)
         return res
 
