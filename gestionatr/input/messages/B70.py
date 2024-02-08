@@ -1312,6 +1312,7 @@ class Medidor(object):
         res = []
         if not hasattr(self, 'meters'):
             self.meters = [self]
+        factor_ultima_lectura = False
         for meter in self.meters:
             fecha_desde = meter.feclecant
             fecha_actual = meter.feclecact
@@ -1335,7 +1336,7 @@ class Medidor(object):
             excesocaudal = float(meter.excesocaudal)
             temperatura_gas = float(meter.temp)
             pressio_atmosferica = float(meter.presatm)
-
+            consum_kwh_facturat = float(meter.consumokwh)
             for numerador in meter.listanumeradores:
                 lectura_desde_m3 = float(numerador.lectant)
                 lectura_actual_m3 = float(numerador.lecact)
@@ -1373,18 +1374,34 @@ class Medidor(object):
                     'temperatura_gas': float(temperatura_gas),
                     'pressio_atmosferica': float(pressio_atmosferica),
                 }
-                # Si el consum que calculem amb el factor_k i el pcs no dona el consum informat en el tag consumokwh
+
+                # Si el consum que calculem amb el factor_k i el pcs no dona el consum calculat amb el factor de conversio
                 # pero si fem servir el factor de conversio informat per la distri si que dona, modfiquem el factor_k perque
                 # el factor de conversio calculat sigui igual al informat i aixi el consum també quadri.
                 # TODO
                 # Revisant un cas concret, sembla que realment ens falta aplicar la zeta, per aixo no quadra.
                 # Normalment es 1 pero pot no ser-ho. Aixó es una mandanga per no ahver de treballar amb la zeta.
-                consum_calculat = round(vals['consum_m3'] * vals['pcs'] * vals['factor_k'], 3)
-                consum_facturat = round(vals['consum'], 3)
-                if consum_facturat != consum_calculat:
+                consum_calculat_sefons_fomrula = round(vals['consum_m3'] * vals['pcs'] * vals['factor_k'], 3)
+                consum_calculat_segons_factor = round(vals['consum'], 3)
+                if consum_calculat_segons_factor != consum_calculat_sefons_fomrula:
                     consum_calculat = round(vals['consum_m3'] * meter.factorconver, 3)
-                    if consum_facturat == consum_calculat:
+                    if consum_calculat_segons_factor == consum_calculat:
                         vals['factor_k'] = meter.factorconver / vals['pcs']
+
+                # Unaltre cas concret de ***
+                # Hi ha distris que tot i tindre lectures diaries no apliquen el factor de conversio registart en
+                # cada dia, sino que paliquen a totes les lectures de tots els dies el factor de conversio de la
+                # ultima lectura
+                # Per tant: si el consum facturat per la distri no coincideix amb el consum calculat, ero aplicant
+                # el faactor de conversio del ultim dia siq ue aplica, recalculem el factor k perque quadri tot.
+                if consum_kwh_facturat != consum_calculat_segons_factor:
+                    if not factor_ultima_lectura and self.meters[-1].factorconver:
+                        factor_ultima_lectura = float(self.meters[-1].factorconver)
+                    if factor_ultima_lectura:
+                        consum_calculat_segons_factor_ultim = round(vals['consum_m3'] * factor_ultima_lectura, 3)
+                        if consum_calculat_segons_factor_ultim == consum_kwh_facturat:
+                            vals['factor_k'] = factor_ultima_lectura / vals['pcs']
+                            vals['consum'] = consum_kwh_facturat,
                 res.append(vals)
         return res
 
