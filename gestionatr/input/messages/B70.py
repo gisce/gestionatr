@@ -1401,7 +1401,10 @@ class Medidor(object):
                         consum_calculat_segons_factor_ultim = round(vals['consum_m3'] * factor_ultima_lectura, 3)
                         if consum_calculat_segons_factor_ultim == consum_kwh_facturat:
                             vals['factor_k'] = factor_ultima_lectura / vals['pcs']
-                            vals['consum'] = consum_kwh_facturat,
+                            vals['consum'] = consum_kwh_facturat
+                        elif round(consum_calculat_segons_factor_ultim, 0) == consum_kwh_facturat:
+                            vals['factor_k'] = factor_ultima_lectura / vals['pcs']
+                            vals['consum'] = consum_kwh_facturat
                 res.append(vals)
         return res
 
