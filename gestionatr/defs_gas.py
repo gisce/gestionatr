@@ -2825,7 +2825,7 @@ TAULA_PRIORIDAD = [
     ('1', 'Prioridad alta. '),
 ]
 
-REFUND_RECTIFICATIVE_TYPES = ['A', 'B']  # 'R' ?
+REFUND_RECTIFICATIVE_TYPES = ['A']  # 'R' ?
 
 REQUIRE_REFERENCE_TYPES = [
     'A', 'B', 'R'
