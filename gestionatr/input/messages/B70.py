@@ -2,7 +2,7 @@
 from __future__ import absolute_import, unicode_literals
 from .message_gas import MessageGas
 from gestionatr.utils import get_rec_attr
-from gestionatr.defs_gas import TIPUS_CONCEPTES, PEAJES_SEMPRE_CAPACIDAD
+from gestionatr.defs_gas import TIPUS_CONCEPTES, PEAJES_SEMPRE_CAPACIDAD, REFUND_RECTIFICATIVE_TYPES
 from datetime import datetime, timedelta
 
 
@@ -639,7 +639,7 @@ class Factura(object):
         return {
             'tipo_rectificadora': self.clasefact or self.indfacturarect or 'N',
             'date_invoice': self.fecfactura,
-            'check_total': -1 * self.importetotal if self.clasefact in ('A', 'B') else self.importetotal,
+            'check_total': -1 * self.importetotal if self.clasefact in REFUND_RECTIFICATIVE_TYPES else self.importetotal,
             'origin': self.get_origin(),
             'origin_date_invoice': self.fecfactura,
             'reference': self.get_origin(),
