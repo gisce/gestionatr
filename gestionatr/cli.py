@@ -146,7 +146,7 @@ def request_atr_29(url, user, password, xml_str=None, params=None):
         # Send request
         h = headers.copy()
         h.update(envelop['extra_headers'])
-        res = requests.post(url, data=soap_content, headers=h, auth=(user, password))
+        res = requests.post(url, data=soap_content, headers=h, auth=(user, password), verify=False)
         res = res.content
         try:
             def find_child(element, child_name):
@@ -225,7 +225,7 @@ def request_p0(url, user, password, xml_str=None, params=None):
         # Send request
         h = headers.copy()
         h.update(envelop['extra_headers'])
-        res = requests.post(url, data=soap_content, headers=h, auth=(user, password))
+        res = requests.post(url, data=soap_content, headers=h, auth=(user, password), verify=False)
         res = res.content
         try:
             def find_child(element, child_name):
