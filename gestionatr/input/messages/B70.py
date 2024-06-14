@@ -604,14 +604,16 @@ class Factura(object):
         else:
             return False
 
-    def get_periode_factura(self):
+    def get_periode_factura(self, productes_exclosos=None):
         """Retorna tupla amb (data inici,  data fi) de la factura:
             - data inici: la mes antiga de les fecdesde dels conceptes
             - data fi: la mes nova de les fechasta dels conceptes
         """
+        if productes_exclosos is None:
+            productes_exclosos = []
         return (
-            min([x.fecdesde for x in self.listaconceptos]),
-            max([x.fechasta for x in self.listaconceptos])
+            min([x.fecdesde for x in self.listaconceptos if x.codconcepto not in productes_exclosos]),
+            max([x.fechasta for x in self.listaconceptos if x.codconcepto not in productes_exclosos])
         )
 
     def get_periode_factura_peatges(self):
