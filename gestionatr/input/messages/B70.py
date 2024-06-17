@@ -132,7 +132,7 @@ class Datosempresaemisora(Datosempresadestino):
 class Factura(object):
     def __init__(self, data, productes_exclosos):
         self.obj = data
-        self.productes_exclosos
+        self.productes_exclosos = productes_exclosos
 
     @property
     def rangopresiondiseno(self):
