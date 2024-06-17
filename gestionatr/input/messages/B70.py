@@ -7,6 +7,11 @@ from datetime import datetime, timedelta
 
 
 class B7031(MessageGas):
+    def __init__(self, xml, force_tipus=None, productes_exclosos=None):
+        if productes_exclosos is None:
+            productes_exclosos = []
+        super(MessageGas, self).__init__(xml, force_tipus=force_tipus)
+        self.productes_exclosos = productes_exclosos
 
     @property
     def datosempresaemisora(self):
@@ -30,7 +35,7 @@ class B7031(MessageGas):
     def facturas(self):
         data = []
         for d in get_rec_attr(self.obj, 'factura', []):
-            data.append(Factura(d))
+            data.append(Factura(d, self.productes_exclosos))
         return data
 
     def get_datosempresaemisora(self):
@@ -125,8 +130,9 @@ class Datosempresaemisora(Datosempresadestino):
 
 
 class Factura(object):
-    def __init__(self, data):
+    def __init__(self, data, productes_exclosos):
         self.obj = data
+        self.productes_exclosos
 
     @property
     def rangopresiondiseno(self):
@@ -604,16 +610,14 @@ class Factura(object):
         else:
             return False
 
-    def get_periode_factura(self, productes_exclosos=None):
+    def get_periode_factura(self):
         """Retorna tupla amb (data inici,  data fi) de la factura:
             - data inici: la mes antiga de les fecdesde dels conceptes
             - data fi: la mes nova de les fechasta dels conceptes
         """
-        if productes_exclosos is None:
-            productes_exclosos = []
         return (
-            min([x.fecdesde for x in self.listaconceptos if x.codconcepto not in productes_exclosos]),
-            max([x.fechasta for x in self.listaconceptos if x.codconcepto not in productes_exclosos])
+            min([x.fecdesde for x in self.listaconceptos if x.codconcepto not in self.productes_exclosos]),
+            max([x.fechasta for x in self.listaconceptos if x.codconcepto not in self.productes_exclosos])
         )
 
     def get_periode_factura_peatges(self):
