@@ -264,7 +264,7 @@ class Integrador(object):
     def numero_ruedas_enteras(self):
         data = False
         try:
-            data = int(self.integradorNumeroRuedasEnteras.text)
+            data = int(self.integrador.NumeroRuedasEnteras.text)
         except AttributeError:
             pass
         return data
