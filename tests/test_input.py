@@ -1427,7 +1427,9 @@ class test_Q1(TestCaseCompat):
         q1 = Q1(self.xml_q101)
         q1.parse_xml()
         self.assertEqual(q1.cod_pm, u'1112223334445556667779')
-        models = q1.modelos_aparato
+        medidas = q1.medidas
+        self.assertEqual(len(medidas), 1)
+        models = q1.medidas[0].aparatos
         self.assertEqual(len(models), 2)
         self.assertEqual(models[1].tipo_aparato, u'CG')
         self.assertEqual(models[1].marca_aparato, u'136')
@@ -1438,18 +1440,18 @@ class test_Q1(TestCaseCompat):
         int2 = models[1].integradores[1]
         self.assertEqual(int2.codigo_periodo, u'30')
         self.assertEqual(int2.constante_multiplicadora, u'1')
-        self.assertEqual(int2.consumo_calculado, u'5000')
+        self.assertEqual(int2.consumo_calculado, 5000.0)
         self.assertEqual(int2.fecha_hora_maximetro, u'2014-05-18T22:13:37')
         self.assertEqual(int2.magnitud, u'R3')
-        self.assertEqual(int2.numero_ruedas_decimales, u'20')
-        self.assertEqual(int2.numero_ruedas_enteras, u'10')
+        self.assertEqual(int2.numero_ruedas_decimales, 20)
+        self.assertEqual(int2.numero_ruedas_enteras, 10)
         ld = int2.lectura_desde
         self.assertEqual(ld.fecha, u'2014-04-18')
-        self.assertEqual(ld.lectura, u'500')
+        self.assertEqual(ld.lectura, 500.0)
         self.assertEqual(ld.procedencia, u'30')
         lh = int2.lectura_hasta
         self.assertEqual(lh.fecha, u'2014-05-18')
-        self.assertEqual(lh.lectura, u'1500')
+        self.assertEqual(lh.lectura, 1500.0)
         self.assertEqual(lh.procedencia, u'40')
         ajuste = int2.ajuste
         self.assertEqual(ajuste.ajuste_por_integrador, u'1500')
