@@ -160,7 +160,7 @@ def request_atr_29(url, user, password, xml_str=None, params=None):
                 return res
 
             res = re.sub(r'\<[^: \n>/]+:', '<', res)
-            res = re.sub(r'\</[^: \n/]+:', '</', res)
+            res = re.sub(r'\</[^: \n>/]+:', '</', res)
             res = res.replace("<consultaCupsResponse>", """<sctdapplication>""")
             res = res.replace("</consultaCupsResponse>", """</sctdapplication>""", 1)
             aux = etree.fromstring(res)
