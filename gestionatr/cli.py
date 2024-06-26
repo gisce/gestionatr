@@ -126,7 +126,6 @@ def request_atr_29(url, user, password, xml_str=None, params=None):
 
     # Clean XML
     xml_str = xml_str.strip()
-    xml_str = xml_str.replace("'utf-8'", "'UTF-8'")
     xml_str = re.sub(r'<\?.*\?>', '', xml_str)
     xml_str = xml_str.replace("""<sctdapplication xmlns="http://localhost/sctd/A529">""", "")
     xml_str = xml_str.replace("""</sctdapplication>""", "")
@@ -161,6 +160,7 @@ def request_atr_29(url, user, password, xml_str=None, params=None):
 
             res = re.sub(r'\<[^: \n>/]+:', '<', res)
             res = re.sub(r'\</[^: \n>/]+:', '</', res)
+            res = re.sub(r'<\?.*\?>', '', res)
             res = res.replace("<consultaCupsResponse>", """<sctdapplication>""")
             res = res.replace("</consultaCupsResponse>", """</sctdapplication>""", 1)
             aux = etree.fromstring(res)
