@@ -504,6 +504,9 @@ class Factura(object):
                             for periode in terme.Periodo:
                                 if periode and (float(periode.Beta.text) or float(periode.Beta.text) == 0.0):
                                     beta_list.append(float(periode.Beta.text))
+                # If it's a 2.0TD and we have 6 periods, we pop the last 3 (P4, P5, P6)
+                if self.datos_factura.tarifa_atr_fact == '018' and len(beta_list) == 6:
+                    beta_list = beta_list[:len(beta_list)-3]
                 return list(set(beta_list))
         except AttributeError:
             # We might not have any "Coeficient de repartiment" in EnergiaNetaGen
