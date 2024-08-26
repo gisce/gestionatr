@@ -163,7 +163,7 @@ class ModeloAparato(object):
         fecha_desde = False
         for integrador in self.integradores:
             fecha_in_compt = datetime.strptime(
-                integrador.lectura_desde.fecha[:20], '%Y-%m-%d'
+                integrador.lectura_desde.fecha[:10], '%Y-%m-%d'
             )
             if not fecha_desde or fecha_in_compt < fecha_desde:
                 fecha_desde = fecha_in_compt
@@ -175,7 +175,7 @@ class ModeloAparato(object):
         fecha_hasta = False
         for integrador in self.integradores:
             fecha_fi_compt = datetime.strptime(
-                integrador.lectura_hasta.fecha[:20], '%Y-%m-%d'
+                integrador.lectura_hasta.fecha[:10], '%Y-%m-%d'
             )
             if not fecha_hasta or fecha_fi_compt > fecha_hasta:
                 fecha_hasta = fecha_fi_compt
