@@ -1400,7 +1400,7 @@ class Medidor(object):
                 # ultima lectura
                 # Per tant: si el consum facturat per la distri no coincideix amb el consum calculat, ero aplicant
                 # el faactor de conversio del ultim dia siq ue aplica, recalculem el factor k perque quadri tot.
-                if consum_kwh_facturat != consum_calculat_segons_factor and vals['pcs']:
+                if consum_kwh_facturat != consum_calculat_segons_factor and vals['pcs'] and vals['consum_m3']:
                     if not factor_ultima_lectura and self.meters[-1].factorconver:
                         factor_ultima_lectura = float(self.meters[-1].factorconver)
                     if factor_ultima_lectura:
