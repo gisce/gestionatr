@@ -24,6 +24,7 @@ XSD_DATA.update({
         'A2': 'A202.xsd',
         'A3': 'A302.xsd',
         'A4': 'A402.xsd',
+        'A2S': 'A2S02.xsd',
         'A3S': 'A3S02.xsd',
     },
     '05': {
