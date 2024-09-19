@@ -126,8 +126,7 @@ def request_atr_29(url, user, password, xml_str=None, params=None):
 
     # Clean XML
     xml_str = xml_str.strip()
-    xml_str = xml_str.replace("'utf-8'", "'UTF-8'")
-    xml_str = xml_str.replace("<?xml version='1.0' encoding='UTF-8'?>", "")
+    xml_str = re.sub(r'<\?.*\?>', '', xml_str)
     xml_str = xml_str.replace("""<sctdapplication xmlns="http://localhost/sctd/A529">""", "")
     xml_str = xml_str.replace("""</sctdapplication>""", "")
     xml_str = xml_str.replace("<", "<a529:")
@@ -146,7 +145,7 @@ def request_atr_29(url, user, password, xml_str=None, params=None):
         # Send request
         h = headers.copy()
         h.update(envelop['extra_headers'])
-        res = requests.post(url, data=soap_content, headers=h, auth=(user, password))
+        res = requests.post(url, data=soap_content, headers=h, auth=(user, password), verify=False)
         res = res.content
         try:
             def find_child(element, child_name):
@@ -159,8 +158,10 @@ def request_atr_29(url, user, password, xml_str=None, params=None):
                         break
                 return res
 
-            res = re.sub(r'\<[^: \n/]+:', '<', res)
-            res = re.sub(r'\</[^: \n/]+:', '</', res)
+            res = re.sub(r'\<[^: \n>/]+:', '<', res)
+            res = re.sub(r'\</[^: \n>/]+:', '</', res)
+            res = re.sub(r'<\?.*\?>', '', res)
+            res = re.sub(r'<cabecera.*?>', '<cabecera>', res)
             res = res.replace("<consultaCupsResponse>", """<sctdapplication>""")
             res = res.replace("</consultaCupsResponse>", """</sctdapplication>""", 1)
             aux = etree.fromstring(res)
@@ -225,7 +226,7 @@ def request_p0(url, user, password, xml_str=None, params=None):
         # Send request
         h = headers.copy()
         h.update(envelop['extra_headers'])
-        res = requests.post(url, data=soap_content, headers=h, auth=(user, password))
+        res = requests.post(url, data=soap_content, headers=h, auth=(user, password), verify=False)
         res = res.content
         try:
             def find_child(element, child_name):
