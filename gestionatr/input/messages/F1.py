@@ -504,6 +504,9 @@ class Factura(object):
                             for periode in terme.Periodo:
                                 if periode and (float(periode.Beta.text) or float(periode.Beta.text) == 0.0):
                                     beta_list.append(float(periode.Beta.text))
+                # If it's a 2.0TD and we have 6 periods, we pop the last 3 (P4, P5, P6)
+                if self.datos_factura.tarifa_atr_fact == '018' and len(beta_list) == 6:
+                    beta_list = beta_list[:len(beta_list)-3]
                 return list(set(beta_list))
         except AttributeError:
             # We might not have any "Coeficient de repartiment" in EnergiaNetaGen
@@ -1869,7 +1872,7 @@ class FacturaATR(Factura):
             for l in c.get_lectures(force_no_transforma_no_td_a_td=True):
                 if isinstance(l.consumo_calculado, int):
                     return False
-                if not l.ajuste and not l.consumo_calculado.is_integer():
+                if not l.consumo_calculado.is_integer():
                     return True
 
         return False

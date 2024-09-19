@@ -7,6 +7,11 @@ from datetime import datetime, timedelta
 
 
 class B7031(MessageGas):
+    def __init__(self, xml, force_tipus=None, productes_exclosos=None):
+        if productes_exclosos is None:
+            productes_exclosos = []
+        super(MessageGas, self).__init__(xml, force_tipus=force_tipus)
+        self.productes_exclosos = productes_exclosos
 
     @property
     def datosempresaemisora(self):
@@ -30,7 +35,7 @@ class B7031(MessageGas):
     def facturas(self):
         data = []
         for d in get_rec_attr(self.obj, 'factura', []):
-            data.append(Factura(d))
+            data.append(Factura(d, self.productes_exclosos))
         return data
 
     def get_datosempresaemisora(self):
@@ -125,8 +130,9 @@ class Datosempresaemisora(Datosempresadestino):
 
 
 class Factura(object):
-    def __init__(self, data):
+    def __init__(self, data, productes_exclosos):
         self.obj = data
+        self.productes_exclosos = productes_exclosos
 
     @property
     def rangopresiondiseno(self):
@@ -610,8 +616,8 @@ class Factura(object):
             - data fi: la mes nova de les fechasta dels conceptes
         """
         return (
-            min([x.fecdesde for x in self.listaconceptos]),
-            max([x.fechasta for x in self.listaconceptos])
+            min([x.fecdesde for x in self.listaconceptos if x.codconcepto not in self.productes_exclosos]),
+            max([x.fechasta for x in self.listaconceptos if x.codconcepto not in self.productes_exclosos])
         )
 
     def get_periode_factura_peatges(self):
@@ -1383,7 +1389,7 @@ class Medidor(object):
                 # Normalment es 1 pero pot no ser-ho. Aixó es una mandanga per no ahver de treballar amb la zeta.
                 consum_calculat_sefons_fomrula = round(vals['consum_m3'] * vals['pcs'] * vals['factor_k'], 3)
                 consum_calculat_segons_factor = round(vals['consum'], 3)
-                if consum_calculat_segons_factor != consum_calculat_sefons_fomrula:
+                if consum_calculat_segons_factor != consum_calculat_sefons_fomrula and vals['pcs']:
                     consum_calculat = round(vals['consum_m3'] * meter.factorconver, 3)
                     if consum_calculat_segons_factor == consum_calculat:
                         vals['factor_k'] = meter.factorconver / vals['pcs']
@@ -1394,7 +1400,7 @@ class Medidor(object):
                 # ultima lectura
                 # Per tant: si el consum facturat per la distri no coincideix amb el consum calculat, ero aplicant
                 # el faactor de conversio del ultim dia siq ue aplica, recalculem el factor k perque quadri tot.
-                if consum_kwh_facturat != consum_calculat_segons_factor:
+                if consum_kwh_facturat != consum_calculat_segons_factor and vals['pcs'] and vals['consum_m3']:
                     if not factor_ultima_lectura and self.meters[-1].factorconver:
                         factor_ultima_lectura = float(self.meters[-1].factorconver)
                     if factor_ultima_lectura:
