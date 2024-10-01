@@ -478,6 +478,14 @@ class Factura(object):
         return data
 
     @property
+    def ivas_reducidos(self):
+        data = []
+        if hasattr(self.factura, 'IVAReducido'):
+            for d in self.factura.IVAReducido:
+                data.append(IVA(d))
+        return data
+
+    @property
     def conceptos_repercutibles(self):
         data = []
         if hasattr(self.factura, 'ConceptoRepercutible'):
@@ -581,6 +589,12 @@ class Factura(object):
                         l2.precio += round(l.precio*base, 9)
 
         return res
+
+    def con_iva_reducido_exempto(self):
+        for iva in self.ivas_reducidos:
+            if iva.porcentaje != 0:
+                return False
+        return True
 
     def sin_base_imponible(self):
         for iva in self.ivas:
