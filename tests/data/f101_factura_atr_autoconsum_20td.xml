@@ -45,6 +45,8 @@
                     <FechaBOE>2021-12-16</FechaBOE>
                     <TipoAutoconsumo>53</TipoAutoconsumo>
                     <CAU>ES0304000016006825GV0FA000</CAU>
+                    <TipoSubseccion>10</TipoSubseccion>
+                    <TipoCUPS>01</TipoCUPS>
                     <DuracionInfAnio>N</DuracionInfAnio>
                     <TarifaATRFact>018</TarifaATRFact>
                     <ModoControlPotencia>1</ModoControlPotencia>
@@ -113,6 +115,40 @@
                 <ImporteTotalEnergiaActiva>1.21</ImporteTotalEnergiaActiva>
             </EnergiaActiva>
             <Autoconsumo>
+                <EnergiaNetaGen>
+					<TerminoEnergiaNetaGen>
+                        <FechaDesde>2021-12-31</FechaDesde>
+                        <FechaHasta>2022-01-31</FechaHasta>
+						<Periodo>
+							<ValorEnergiaNetaGen>1.00</ValorEnergiaNetaGen>
+						</Periodo>
+						<Periodo>
+							<ValorEnergiaNetaGen>2.00</ValorEnergiaNetaGen>
+						</Periodo>
+						<Periodo>
+							<ValorEnergiaNetaGen>3.00</ValorEnergiaNetaGen>
+						</Periodo>
+					</TerminoEnergiaNetaGen>
+				</EnergiaNetaGen>
+                <EnergiaAutoconsumida>
+                    <TerminoEnergiaAutoconsumida>
+                        <FechaDesde>2021-12-31</FechaDesde>
+                        <FechaHasta>2022-01-31</FechaHasta>
+                        <Periodo>
+                            <ValorEnergiaAutoconsumida>11.00</ValorEnergiaAutoconsumida>
+                            <PagoTDA>0</PagoTDA>
+                        </Periodo>
+                        <Periodo>
+                            <ValorEnergiaAutoconsumida>12.00</ValorEnergiaAutoconsumida>
+                            <PagoTDA>0</PagoTDA>
+                        </Periodo>
+                        <Periodo>
+                            <ValorEnergiaAutoconsumida>13.00</ValorEnergiaAutoconsumida>
+                            <PagoTDA>0</PagoTDA>
+                        </Periodo>
+                    </TerminoEnergiaAutoconsumida>
+                    <ImporteTotalEnergiaActivaAutoconsumida>33</ImporteTotalEnergiaActivaAutoconsumida>
+                </EnergiaAutoconsumida>
                 <EnergiaExcedentaria>
                     <TerminoEnergiaExcedentaria>
                         <FechaDesde>2021-12-31</FechaDesde>
@@ -129,6 +165,31 @@
                     </TerminoEnergiaExcedentaria>
                     <ValorTotalEnergiaExcedentaria>0.00</ValorTotalEnergiaExcedentaria>
                 </EnergiaExcedentaria>
+                <DatosCAU>
+                    <CAU>ES1234000000000001JN0FA001</CAU>
+                    <Colectivo>S</Colectivo>
+                    <EsquemaMedida>B</EsquemaMedida>
+                    <InstalacionGenAutoconsumo>
+                        <CIL>ES1234000000000001JN0F001</CIL>
+                        <TipoInstalacion>01</TipoInstalacion>
+                        <ExentoCargos>S</ExentoCargos>
+                        <EnergiaNetaGen>
+                            <TerminoEnergiaNetaGen>
+                                <FechaDesde>2016-04-04</FechaDesde>
+                                <FechaHasta>2016-05-05</FechaHasta>
+                                <Periodo>
+                                    <ValorEnergiaNetaGen>1.00</ValorEnergiaNetaGen>
+                                </Periodo>
+                                <Periodo>
+                                    <ValorEnergiaNetaGen>2.00</ValorEnergiaNetaGen>
+                                </Periodo>
+                                <Periodo>
+                                    <ValorEnergiaNetaGen>3.00</ValorEnergiaNetaGen>
+                                </Periodo>
+                            </TerminoEnergiaNetaGen>
+                        </EnergiaNetaGen>
+                    </InstalacionGenAutoconsumo>
+                </DatosCAU>
             </Autoconsumo>
             <Cargos>
                 <Cargo>

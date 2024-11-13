@@ -4,7 +4,7 @@
   <Cabecera>
     <CodigoREEEmpresaEmisora>1234</CodigoREEEmpresaEmisora>
     <CodigoREEEmpresaDestino>4321</CodigoREEEmpresaDestino>
-    <CodigoDelProceso>C1</CodigoDelProceso>
+    <CodigoDelProceso>C2</CodigoDelProceso>
     <CodigoDePaso>05</CodigoDePaso>
     <CodigoDeSolicitud>201607211259</CodigoDeSolicitud>
     <SecuencialDeSolicitud>01</SecuencialDeSolicitud>
@@ -76,6 +76,7 @@
           </DatosCAU>
         </DatosSuministro>
       </Autoconsumo>
+      <CUPSPrincipal>ES1234000000000001JN0F</CUPSPrincipal>
       <TipoContratoATR>02</TipoContratoATR>
       <CondicionesContractuales>
         <TarifaATR>018</TarifaATR>
@@ -157,8 +158,6 @@
             </Medidas>
           </Aparato>
         </Aparatos>
-
-
         <Comentarios>Comentarios Varios</Comentarios>
       </PuntoDeMedida>
     </PuntosDeMedida>

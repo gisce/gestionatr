@@ -4,14 +4,14 @@
   <Cabecera>
     <CodigoREEEmpresaEmisora>1234</CodigoREEEmpresaEmisora>
     <CodigoREEEmpresaDestino>4321</CodigoREEEmpresaDestino>
-    <CodigoDelProceso>C1</CodigoDelProceso>
+    <CodigoDelProceso>M1</CodigoDelProceso>
     <CodigoDePaso>05</CodigoDePaso>
     <CodigoDeSolicitud>201607211259</CodigoDeSolicitud>
     <SecuencialDeSolicitud>01</SecuencialDeSolicitud>
     <FechaSolicitud>2016-07-21T12:59:47</FechaSolicitud>
     <CUPS>ES1234000000000001JN0F</CUPS>
   </Cabecera>
-  <ActivacionCambiodeComercializadorSinCambios>
+  <ActivacionModificaciones>
     <DatosActivacion>
       <Fecha>2016-08-21</Fecha>
       <BonoSocial>1</BonoSocial>
@@ -77,6 +77,7 @@
         </DatosSuministro>
       </Autoconsumo>
       <TipoContratoATR>02</TipoContratoATR>
+      <CUPSPrincipal>ES1234000000000001JN0F</CUPSPrincipal>
       <CondicionesContractuales>
         <TarifaATR>018</TarifaATR>
         <PeriodicidadFacturacion>01</PeriodicidadFacturacion>
@@ -168,5 +169,5 @@
            <DireccionUrl>https://www.google.com/</DireccionUrl>
          </RegistroDoc>
      </RegistrosDocumento>
-  </ActivacionCambiodeComercializadorSinCambios>
+  </ActivacionModificaciones>
 </MensajeActivacionCambiodeComercializadorSinCambios>

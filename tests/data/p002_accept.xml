@@ -16,16 +16,68 @@
         <EstadoContratable>
             <Contratable>N</Contratable>
             <Motivo>03</Motivo>
+            <PotenciaMaxSinExpediente>3600</PotenciaMaxSinExpediente>
         </EstadoContratable>
         <ExisteSolicitudEnCurso>S</ExisteSolicitudEnCurso>
         <TipoSolicitudEnCurso>C100</TipoSolicitudEnCurso>
         <Contrato>
             <TipoContratoATR>03</TipoContratoATR>
             <FechaFinalizacion>2020-03-31</FechaFinalizacion>
-            <TipoAutoconsumo>01</TipoAutoconsumo>
+            <Autoconsumo>
+                <DatosSuministro>
+                    <TipoCUPS>01</TipoCUPS>
+                    <RefCatastro>1234567890qwertyuiop</RefCatastro>
+                </DatosSuministro>
+                <DatosCAU>
+                    <CAU>ES1234000000000001JN0FA001</CAU>
+                    <TipoAutoconsumo>11</TipoAutoconsumo>
+                    <TipoSubseccion>10</TipoSubseccion>
+                    <Colectivo>S</Colectivo>
+                    <DatosInstGen>
+                        <CIL>ES1234000000000001JN0F001</CIL>
+                        <PotInstaladaGen>100</PotInstaladaGen>
+                        <TipoInstalacion>01</TipoInstalacion>
+                        <EsquemaMedida>B</EsquemaMedida>
+                        <SSAA>S</SSAA>
+                        <UnicoContrato>S</UnicoContrato>
+                        <RefCatastro>1234567890qwertyuidf</RefCatastro>
+                        <UTM>
+                            <X>100</X>
+                            <Y>200</Y>
+                            <Huso>40</Huso>
+                            <Banda>E</Banda>
+                        </UTM>
+                        <TitularRepresentanteGen>
+                            <IdTitular>
+                                <TipoIdentificador>NI</TipoIdentificador>
+                                <Identificador>111111111H</Identificador>
+                            </IdTitular>
+                            <Nombre>
+                                <NombreDePila>Juan</NombreDePila>
+                                <PrimerApellido>López</PrimerApellido>
+                                <SegundoApellido>Sánchez</SegundoApellido>
+                            </Nombre>
+                            <Telefono>
+                                <PrefijoPais>0034</PrefijoPais>
+                                <Numero>933834841</Numero>
+                            </Telefono>
+                            <Telefono>
+                                <PrefijoPais>0034</PrefijoPais>
+                                <Numero>633834841</Numero>
+                            </Telefono>
+                            <Telefono>
+                                <PrefijoPais>0034</PrefijoPais>
+                                <Numero>683834841</Numero>
+                            </Telefono>
+                            <CorreoElectronico>mail_falso@dominio.com</CorreoElectronico>
+                        </TitularRepresentanteGen>
+                    </DatosInstGen>
+                </DatosCAU>
+            </Autoconsumo>
             <FechaUltimoMovimientoTipoAutocons>2020-01-01</FechaUltimoMovimientoTipoAutocons>
             <IndBonoSocial>N</IndBonoSocial>
             <IndEsencial>N</IndEsencial>
+            <FechaUltimoMovimientoIndEsencial>2016-05-05</FechaUltimoMovimientoIndEsencial>
             <ViviendaHabitual>S</ViviendaHabitual>
             <CNAE>9820</CNAE>
             <CondicionesContractuales>
@@ -65,12 +117,39 @@
             <FechaUltimaVerificacion>1900-01-01</FechaUltimaVerificacion>
             <ResultadoUltimaVerificacion>S</ResultadoUltimaVerificacion>
         </Historia>
+        <Cliente>
+            <IdCliente>
+              <TipoIdentificador>NI</TipoIdentificador>
+              <Identificador>B36385870</Identificador>
+              <TipoPersona>J</TipoPersona>
+            </IdCliente>
+            <Nombre>
+              <RazonSocial>ACC Y COMP DE COCINA MILLAN Y MUÑOZ</RazonSocial>
+            </Nombre>
+            <DireccionSuministro>
+                <Pais>España</Pais>
+                <Provincia>17</Provincia>
+                <Municipio>17079</Municipio>
+                <Poblacion>17079000501</Poblacion>
+                <TipoVia>PZ</TipoVia>
+                <CodPostal>17001</CodPostal>
+                <Calle>MELA MUTERMILCH</Calle>
+                <NumeroFinca>2</NumeroFinca>
+                <DuplicadorFinca>n/a</DuplicadorFinca>
+                <Escalera>001</Escalera>
+                <Piso>001</Piso>
+                <Puerta>001</Puerta>
+                <TipoAclaradorFinca>BI</TipoAclaradorFinca>
+                <AclaradorFinca>Bloque de Pisos</AclaradorFinca>
+            </DireccionSuministro>
+        </Cliente>
         <Equipo>
             <TipoAparato>TT</TipoAparato>
             <TipoEquipo>L09</TipoEquipo>
             <TipoPropiedad>1</TipoPropiedad>
             <CodigoFasesEquipoMedida>T</CodigoFasesEquipoMedida>
             <TipoDHEdM>2</TipoDHEdM>
+            <RelacionTransformacionIntensidad>10/100</RelacionTransformacionIntensidad>
         </Equipo>
         <Equipo>
             <TipoAparato>CG</TipoAparato>
@@ -78,9 +157,12 @@
             <TipoPropiedad>1</TipoPropiedad>
             <CodigoFasesEquipoMedida>T</CodigoFasesEquipoMedida>
             <TipoDHEdM>2</TipoDHEdM>
+            <RelacionTransformacionIntensidad>10/100</RelacionTransformacionIntensidad>
         </Equipo>
         <DocTecnica>
+            <CieDisponible>S</CieDisponible>
             <DatosCie>
+                <PotenciaInstBT>2000</PotenciaInstBT>
                 <CIEPapel>
                     <CodigoCie>12345678901234567890123456789012345</CodigoCie>
                     <FechaEmisionCie>2020-03-01</FechaEmisionCie>
@@ -105,5 +187,12 @@
             <ExpedienteAbierto>S</ExpedienteAbierto>
             <CdigoMotivoExpediente>02</CdigoMotivoExpediente>
         </ExpedienteAcometida>
+        <PuntosDeMedida>
+            <PuntoDeMedida>
+                <DireccionEnlace>39522</DireccionEnlace>
+                <TelefonoTelemedida>987654321</TelefonoTelemedida>
+                <ClaveAcceso>1234</ClaveAcceso>
+            </PuntoDeMedida>
+        </PuntosDeMedida>
     </EnvioInformacionPS>
 </MensajeEnvioInformacionPS>

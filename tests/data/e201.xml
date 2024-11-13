@@ -3,18 +3,16 @@
     <Cabecera>
         <CodigoREEEmpresaEmisora>1234</CodigoREEEmpresaEmisora>
         <CodigoREEEmpresaDestino>4321</CodigoREEEmpresaDestino>
-        <CodigoDelProceso>E1</CodigoDelProceso>
+        <CodigoDelProceso>E2</CodigoDelProceso>
         <CodigoDePaso>01</CodigoDePaso>
         <CodigoDeSolicitud>201607211259</CodigoDeSolicitud>
         <SecuencialDeSolicitud>01</SecuencialDeSolicitud>
         <FechaSolicitud>2016-07-21T12:59:47</FechaSolicitud>
         <CUPS>ES1234000000000001JN0F</CUPS>
     </Cabecera>
-    <SolicitudDesistimiento>
+    <SolicitudReposicion>
         <CodigoDeSolicitudRef>201605219400</CodigoDeSolicitudRef>
-        <TipoDeSolicitud>01</TipoDeSolicitud>
-        <IndEsencial>01</IndEsencial>
-        <FechaUltimoMovimientoIndEsencial>2016-06-06</FechaUltimoMovimientoIndEsencial>
+        <TipoDeReposicion>01</TipoDeReposicion>
         <IdCliente>
             <TipoIdentificador>NI</TipoIdentificador>
             <Identificador>11111111H</Identificador>
@@ -30,5 +28,5 @@
                 <DireccionUrl>http://eneracme.com/docs/NIF11111111H.pdf</DireccionUrl>
             </RegistroDoc>
         </RegistrosDocumento>
-    </SolicitudDesistimiento>
+    </SolicitudReposicion>
 </MensajeSolicitudDesistimiento>
