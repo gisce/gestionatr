@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- edited with XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) by Odelin Calatrava Requena (Comisión Nacional de los Mercados y la Competencia) -->
+<!-- editado con XMLSpy v2020 rel. 2 (x64) (http://www.altova.com) por Teresa Rodriguez-Losada (INECO) -->
 <xs:schema xmlns="http://localhost/elegibilidad" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposComplejos.xsd"/>
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
@@ -28,6 +30,8 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="CNAE" type="CNAE" minOccurs="0"/>
+			<xs:element name="IndEsencial" type="IndEsencial"/>
+			<xs:element name="FechaUltimoMovimientoIndEsencial" type="xs:date" minOccurs="0"/>
 			<xs:element name="PeriodicidadFacturacion" type="PeriodicidadFacturacion" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Tabla 108</xs:documentation>
