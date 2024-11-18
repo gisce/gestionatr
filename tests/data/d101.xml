@@ -111,11 +111,11 @@
                 </DatosCAU>
             </Autoconsumo>
         </InfoRegistroAutocons>
-        <RegistrosDocumento>
+        <RegistrosDocumentos>
          <RegistroDoc>
            <TipoDocAportado>07</TipoDocAportado>
            <DireccionUrl>https://www.google.com/</DireccionUrl>
          </RegistroDoc>
-        </RegistrosDocumento>
+        </RegistrosDocumentos>
     </NotificacionCambiosATRDesdeDistribuidor>
 </MensajeNotificacionCambiosATRDesdeDistribuidor>

@@ -16,7 +16,6 @@
             <Autoconsumo>
                 <DatosSuministro>
                     <TipoCUPS>01</TipoCUPS>
-                    <RefCatastro>1234567890qwertyuiop</RefCatastro>
                 </DatosSuministro>
                 <DatosCAU>
                     <CAU>ES1234000000000001JN0FA001</CAU>
@@ -24,20 +23,14 @@
                     <TipoSubseccion>10</TipoSubseccion>
                     <Colectivo>S</Colectivo>
                     <DatosInstGen>
-                        <CIL>ES1234000000000001JN0F001</CIL>
                         <TecGenerador>b12</TecGenerador>
-                        <Combustible>Diesel</Combustible>
                         <PotInstaladaGen>100</PotInstaladaGen>
                         <TipoInstalacion>01</TipoInstalacion>
-                        <EsquemaMedida>B</EsquemaMedida>
                         <SSAA>S</SSAA>
-                        <UnicoContrato>S</UnicoContrato>
-                        <RefCatastro>1234567890qwertyuidf</RefCatastro>
                         <UTM>
                             <X>100</X>
                             <Y>200</Y>
                             <Huso>40</Huso>
-                            <Banda>E</Banda>
                         </UTM>
                         <TitularRepresentanteGen>
                             <IdTitular>
@@ -47,7 +40,6 @@
                             <Nombre>
                                 <NombreDePila>Juan</NombreDePila>
                                 <PrimerApellido>López</PrimerApellido>
-                                <SegundoApellido>Sánchez</SegundoApellido>
                             </Nombre>
                             <Telefono>
                                 <PrefijoPais>0034</PrefijoPais>
@@ -61,23 +53,17 @@
                                 <PrefijoPais>0034</PrefijoPais>
                                 <Numero>683834841</Numero>
                             </Telefono>
-                            <CorreoElectronico>mail_falso@dominio.com</CorreoElectronico>
                         </TitularRepresentanteGen>
                     </DatosInstGen>
                     <DatosInstGen>
-                        <CIL>ES1234000000000001JN0F002</CIL>
                         <TecGenerador>b11</TecGenerador>
                         <PotInstaladaGen>100</PotInstaladaGen>
                         <TipoInstalacion>01</TipoInstalacion>
-                        <EsquemaMedida>B</EsquemaMedida>
                         <SSAA>S</SSAA>
-                        <UnicoContrato>S</UnicoContrato>
-                        <RefCatastro>1234567890qwertyuidf</RefCatastro>
                         <UTM>
                             <X>100</X>
                             <Y>200</Y>
                             <Huso>40</Huso>
-                            <Banda>E</Banda>
                         </UTM>
                         <TitularRepresentanteGen>
                             <IdTitular>
@@ -87,7 +73,6 @@
                             <Nombre>
                                 <NombreDePila>Juan</NombreDePila>
                                 <PrimerApellido>López</PrimerApellido>
-                                <SegundoApellido>Sánchez</SegundoApellido>
                             </Nombre>
                             <Telefono>
                                 <PrefijoPais>0034</PrefijoPais>
@@ -101,7 +86,6 @@
                                 <PrefijoPais>0034</PrefijoPais>
                                 <Numero>683834841</Numero>
                             </Telefono>
-                            <CorreoElectronico>mail_falso@dominio.com</CorreoElectronico>
                         </TitularRepresentanteGen>
                     </DatosInstGen>
                 </DatosCAU>

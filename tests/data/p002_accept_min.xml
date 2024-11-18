@@ -14,6 +14,7 @@
         <EnVigor>N</EnVigor>
         <EstadoContratable>
             <Contratable>S</Contratable>
+            <PotenciaMaxSinExpediente>3600</PotenciaMaxSinExpediente>
         </EstadoContratable>
         <ExisteSolicitudEnCurso>N</ExisteSolicitudEnCurso>
         <PotenciaMaxAutorizada>10000</PotenciaMaxAutorizada>
