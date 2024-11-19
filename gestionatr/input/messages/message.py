@@ -59,7 +59,8 @@ XSD_DATA = {'F1': {'01': 'Facturacion.xsd'},
                    '13': 'ContestacionIncidencia.xsd'
                    },
             'D1': {'01': 'NotificacionCambiosATRDesdeDistribuidor.xsd',
-                   '02': ('AceptacionNotificacionCambiosATRDesdeDistribuidor.xsd', 'RechazoD1.xsd'),
+                   '02': 'RechazoD1.xsd',
+                   '10': 'AnulacionD1.xsd',
                    },
             'E1': {'01': 'SolicitudDesistimiento.xsd',
                    '02': ('AceptacionDesistimiento.xsd', 'Rechazo.xsd'),
@@ -316,6 +317,7 @@ class Message(MessageBase):
             try:
                 self.obj = objectify.fromstring(self.str_xml, parser)
             except Exception as e:
+                import pudb;pu.db
                 self.error = e
                 if validate:
                     raise except_f1('Error', u'Documento inválido: {0}'.format(e))

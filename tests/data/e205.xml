@@ -75,6 +75,22 @@
                     </DatosInstGen>
                 </DatosCAU>
             </Autoconsumo>
+            <TipoContratoATR>01</TipoContratoATR>
+            <CUPSPrincipal>ES1234000000000001JN0F</CUPSPrincipal>
+            <CondicionesContractuales>
+                <TarifaATR>018</TarifaATR>
+                <PeriodicidadFacturacion>01</PeriodicidadFacturacion>
+                <TipodeTelegestion>01</TipodeTelegestion>
+                <PotenciasContratadas>
+                    <Potencia Periodo='1'>1000</Potencia>
+                    <Potencia Periodo='2'>2000</Potencia>
+                </PotenciasContratadas>
+                <ModoControlPotencia>1</ModoControlPotencia>
+                <MarcaMedidaConPerdidas>S</MarcaMedidaConPerdidas>
+                <TensionDelSuministro>10</TensionDelSuministro>
+                <VAsTrafo>50</VAsTrafo>
+                <PorcentajePerdidas>05</PorcentajePerdidas>
+            </CondicionesContractuales>
             <PuntosDeMedida>
                 <PuntoDeMedida>
                     <CodPM>ES1234000000000001JN0F</CodPM>
@@ -140,6 +156,7 @@
                             </Medidas>
                         </Aparato>
                     </Aparatos>
+                    <Comentarios>Comentario sobre Punto Medida</Comentarios>
             </PuntoDeMedida>
         </PuntosDeMedida>
         <IdCliente>

@@ -167,25 +167,25 @@ class DocTecnica(XmlModel):
 
 class DatosCie(XmlModel):
 
-    _sort_order = ('datos_cie', 'cie_papel', 'cie_electronico', 'validez_cie')
+    _sort_order = ('datos_cie', 'cie_papel', 'cie_electronico', 'validez_cie', 'potencia_no_interrumpible')
 
     def __init__(self):
         self.datos_cie = XmlField('DatosCie')
         self.cie_papel = CIEPapel()
         self.cie_electronico = CIEElectronico()
         self.validez_cie = XmlField('ValidezCIE')
+        self.potencia_no_interrumpible = XmlField('PotenciaNoInterrumpible')
         super(DatosCie, self).__init__('DatosCie', 'datos_cie')
 
 
 class CIEPapel(XmlModel):
 
-    _sort_order = ('cie_papel', 'codigo_cie', 'potencia_inst_bt', 'potencia_no_interrumpible', 'fecha_emision_cie', 'fecha_caducidad_cie', 'nif_instalador', 'codigo_instalador', 'tension_suministro_cie', 'tipo_suministro')
+    _sort_order = ('cie_papel', 'codigo_cie', 'potencia_inst_bt', 'fecha_emision_cie', 'fecha_caducidad_cie', 'nif_instalador', 'codigo_instalador', 'tension_suministro_cie', 'tipo_suministro')
 
     def __init__(self):
         self.cie_papel = XmlField('CIEPapel')
         self.codigo_cie = XmlField('CodigoCie')
         self.potencia_inst_bt = XmlField('PotenciaInstBT')
-        self.potencia_no_interrumpible = XmlField('PotenciaNoInterrumpible')
         self.fecha_emision_cie = XmlField('FechaEmisionCie')
         self.fecha_caducidad_cie = XmlField('FechaCaducidadCie')
         self.nif_instalador = XmlField('NifInstalador')

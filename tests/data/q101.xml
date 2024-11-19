@@ -8,6 +8,7 @@
 		<CodigoDeSolicitud>201412111009</CodigoDeSolicitud>
 		<SecuencialDeSolicitud>01</SecuencialDeSolicitud>
 		<FechaSolicitud>2014-04-16T22:13:37</FechaSolicitud>
+		<CUPS>ES1234000000000001JN0F</CUPS>
 		<CodigoFiscalFactura>123456798</CodigoFiscalFactura>
 		<TipoFactura>N</TipoFactura>
 		<MotivoFacturacion>01</MotivoFacturacion>
@@ -16,7 +17,6 @@
 			<NumeroExpediente>123123132</NumeroExpediente>
 			<CodigoSolicitud>333222111</CodigoSolicitud>
 		</Expediente>
-		<CUPS>ES1234000000000001JN0F</CUPS>
 	</Cabecera>
 	<Datos>
 		<TipoAutoconsumo>11</TipoAutoconsumo>

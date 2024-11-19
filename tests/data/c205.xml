@@ -15,9 +15,9 @@
     <DatosActivacion>
       <Fecha>2016-08-21</Fecha>
       <BonoSocial>1</BonoSocial>
+      <IndEsencial>01</IndEsencial>
+      <FechaUltimoMovimientoIndEsencial>2016-06-06</FechaUltimoMovimientoIndEsencial>
     </DatosActivacion>
-    <IndEsencial>01</IndEsencial>
-    <FechaUltimoMovimientoIndEsencial>2016-06-06</FechaUltimoMovimientoIndEsencial>
     <Contrato>
       <IdContrato>
         <CodContrato>00001</CodContrato>

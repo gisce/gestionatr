@@ -131,7 +131,9 @@
 			10	Anulacion de la baja a la comercializadora saliente.  
 			11	Aceptacion a comercializadora saliente
 			12	Notificacion de rechazo como consecuencia de las actuaciones en campo.
-			13    Contestación de incidencia 		
+			13    Contestación de incidencia 
+			14    Consulta de aceptación de la solicitud de reposición
+			15    Aceptación o rechazo a comunicación de reposición
 			16    Contestación de incidencia 		
 		</xs:documentation>
 		</xs:annotation>
@@ -149,6 +151,8 @@
 			<xs:enumeration value="11"/>
 			<xs:enumeration value="12"/>
 			<xs:enumeration value="13"/>
+			<xs:enumeration value="14"/>
+			<xs:enumeration value="15"/>
 			<xs:enumeration value="16"/>
 		</xs:restriction>
 	</xs:simpleType>
@@ -329,6 +333,8 @@
 			<xs:enumeration value="J2"/>
 			<xs:enumeration value="J3"/>
 			<xs:enumeration value="J4"/>
+			<xs:enumeration value="J5"/>
+			<xs:enumeration value="J6"/>
 			<xs:enumeration value="99"/>
 		</xs:restriction>
 	</xs:simpleType>
@@ -395,6 +401,10 @@
 			85	Regularización descuento en peajes de transporte y distribucióna la industria electrointensiva
 			86	Descuento por retardo en activación autoconsumo imputable al distribuidor
 			87	Descuento por retardo en activación autoconsumo NO imputable al distribuidor
+			88    Derechos de extensión provenientes de una reposición E2, no repercutibles al cliente
+			89    Derechos de acceso provenientes de una reposición E2, no repercutibles al cliente
+			90    Derechos de enganche provenientes de una reposición E2, no repercutibles al cliente
+			91    Actuaciones en equipos de medida provenientes de una reposición E2, no repercutibles al cliente
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -452,6 +462,10 @@
 			<xs:enumeration value="85"/>
 			<xs:enumeration value="86"/>
 			<xs:enumeration value="87"/>
+			<xs:enumeration value="88"/>
+			<xs:enumeration value="89"/>
+			<xs:enumeration value="90"/>
+			<xs:enumeration value="91"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Decimal10">
@@ -908,10 +922,6 @@
 			0490101  	Enviado fichero
 			0490201  	No existe fichero
 			0490202	Improcedente. Se adjunta explicacion en comentarios
-			0550101	Se corrige facturacion autoconsumo
-			0550201	No existe autoconsumo asociado al CUPS
-			0550202	Factura autoconsumo correcta. Se adjunta desglose
-			0550203	Improcedente. Se adjunta explicacion en comentarios
 			0570101	Expediente anulado
 			0570102	Expediente rectificado
 			0570103	El cliente aporta documentacion que justifica suministro sin actividad
@@ -1362,10 +1372,6 @@
 			<xs:enumeration value="0490101"/>
 			<xs:enumeration value="0490201"/>
 			<xs:enumeration value="0490202"/>
-			<xs:enumeration value="0550101"/>
-			<xs:enumeration value="0550201"/>
-			<xs:enumeration value="0550202"/>
-			<xs:enumeration value="0550203"/>
 			<xs:enumeration value="0570101"/>
 			<xs:enumeration value="0570102"/>
 			<xs:enumeration value="0570103"/>
@@ -1485,6 +1491,7 @@
 			<xs:enumeration value="0750202"/>
 			<xs:enumeration value="0760101"/>
 			<xs:enumeration value="0760201"/>
+			<xs:enumeration value="0770101"/>
 			<xs:enumeration value="0770201"/>
 			<xs:enumeration value="0770202"/>
 			<xs:enumeration value="0780101"/>
@@ -1816,8 +1823,11 @@
 			17    Baja en autoconsumo comunicada por un participante, representante de autoconsumo o Comunidad Autónoma 
 			18    Modificación otros datos autoconsumo 
 			19    Alta en autoconsumo colectivo comunicada por un participante 
-			20   Suministro contratable 
-			21   Modificación indicativo esencialidad
+			20    Suministro contratable 
+			21    Modificación indicativo esencialidad
+			22    Modificación coeficiente de reparto comunicada por representante
+			23    Baja en autoconumo comunicada por representante
+			24    Baja en autoconsumo comunicada por Comunidad Autónoma
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -1842,6 +1852,9 @@
 			<xs:enumeration value="19"/>
 			<xs:enumeration value="20"/>
 			<xs:enumeration value="21"/>
+			<xs:enumeration value="22"/>
+			<xs:enumeration value="23"/>
+			<xs:enumeration value="24"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="MotivoFacturacion">
@@ -1858,6 +1871,7 @@
 			09	Intereses de demora
 			10	Servicios
 			11	Inspeccion - Fraude
+			12	Derechos de contratación por reposición 
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2100,7 +2114,6 @@
 			047	SOLICITUD RECALCULO CCH SIN MODIFICACION CIERRE ATR	FASE 1 PVPC
 			048  	PETICIÓN INFORMACIÓN ADICIONAL RECHAZO 
 			049	FALTA FICHERO DE MEDIDA
-			055	DISCONFORMIDAD IMPORTE FACTURADO AUTOCONSUMO
 			057	DISCONFORMIDAD CON EXPEDIENTE DE ANOMALIA Y FRAUDE (sin factura emitida)
 			058	RETRASO EN PLAZO ACEPTACIÓN CAMBIO DE COMERCIALIZADOR
 			059	RETRASO EN PLAZO ACTIVACIÓN CAMBIO DE COMERCIALIZADOR
@@ -2174,7 +2187,6 @@
 			<xs:enumeration value="047"/>
 			<xs:enumeration value="048"/>
 			<xs:enumeration value="049"/>
-			<xs:enumeration value="055"/>
 			<xs:enumeration value="057"/>
 			<xs:enumeration value="058"/>
 			<xs:enumeration value="059"/>
@@ -3643,6 +3655,8 @@ la reclamacion
 				01 - Red interior
 				02 - Red interior da varios consumidores (instalación de enlace)
 				03 - Próxima a través de red
+				04 - En red interior pero próxima a través de red del resto de los CUPS del colectivo
+				05 - Próxima a través de red, pero en red interior de otro de los CUPS del colectivo
 
 			</xs:documentation>
 		</xs:annotation>
@@ -3650,6 +3664,8 @@ la reclamacion
 			<xs:enumeration value="01"/>
 			<xs:enumeration value="02"/>
 			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="EsquemaMedida">
@@ -3923,6 +3939,9 @@ la reclamacion
 			B103	Corte o suspensión del suministro por impago
 			B104	Baja por impago
 			M100	Solicitud de modificación contractual
+			E100	Solicitud de Desistimiento
+			E200	Solicitud de Reposición
+			T100		Traspaso a la COR
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -3934,6 +3953,9 @@ la reclamacion
 			<xs:enumeration value="B103"/>
 			<xs:enumeration value="B104"/>
 			<xs:enumeration value="M100"/>
+			<xs:enumeration value="E100"/>
+			<xs:enumeration value="E200"/>
+			<xs:enumeration value="T100"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TensionPM">
@@ -4171,11 +4193,14 @@ la reclamacion
 
 
 00 No esencial  
-01 Esencial por electrodependencia </xs:documentation>
+01 Esencial por electrodependencia 
+02 Esencial no electrodependiente  
+</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="00"/>
 			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="ResultadoValidacionCliente">

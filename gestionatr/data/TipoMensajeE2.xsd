@@ -26,11 +26,13 @@
 	<!-- Tipos secundarios del E2 02 Solicitud Reposicion-->
 	<xs:complexType name="Reposicion02">
 		<xs:sequence>
-			<xs:element name="AceptacionReposicion" type="Indicativo">
+			<xs:element name="FechaAceptacion" type="xs:date"/>
+			<xs:element name="ActuacionCampo" type="Indicativo">
 				<xs:annotation>
 					<xs:documentation>Tabla 26</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="FechaActivacionPrevista" type="xs:date" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<!-- Tipos secundarios del E2 02 Aceptacion Reposicion-->
@@ -59,13 +61,11 @@
 	<!-- Tipos secundarios del E2 14 Consulta Solicitud Reposicion-->
 	<xs:complexType name="Reposicion04">
 		<xs:sequence>
-			<xs:element name="FechaAceptacion" type="xs:date"/>
-			<xs:element name="ActuacionCampo" type="Indicativo">
+			<xs:element name="AceptacionReposicion" type="Indicativo">
 				<xs:annotation>
 					<xs:documentation>Tabla 26</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="FechaActivacionPrevista" type="xs:date" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<!-- Tipos secundarios del E2 15 Aceptacion Reposicion Receptor-->

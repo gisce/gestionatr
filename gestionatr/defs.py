@@ -775,6 +775,7 @@ TABLA_12 = [
     ('RA', 'Rambla'),
     ('RD', 'Ronda'),
     ('RS', 'Residencial'),
+    ('SU', 'Subida'),
     ('SD', 'Senda'),
     ('TR', 'Travesía'),
     ('UR', 'Urbanización'),
@@ -1011,6 +1012,10 @@ TABLA_25 = [
     ('134', 'ENEL'),
     ('135', 'SAGEMCOM'),
     ('136', 'ADD Grup'),
+    ('137', 'ENPROTECH'),
+    ('138', 'EL SEWEDY'),
+    ('139', 'SANXING'),
+    ('140', 'KAIFA'),
     ('198', 'VARIOS'),
     ('199', 'DESCONOCIDA'),
 ]
@@ -1153,7 +1158,7 @@ TABLA_27 = [
     ('G9', 'La solicitud de modificación no puede incorporar otras modificaciones técnicas'),
     ('H1', 'Tipo Autoconsumo no válido'),
     ('H2', 'Tipo Subsección no válido'),
-    ('H3', 'Autoconsumo colectivo'),
+    ('H3', 'Autoconsumo colectivo/individual'),
     ('H4', 'La instalación del cliente no puede tener vertidos a la red'),
     ('H5', 'No se puede solicitar una segunda modificación de potencia en un mismo ciclo de facturación'),
     ('H6', 'La reducción de potencia no cumple con los requisitos establecidos en el artículo 7 RDL 18/2022'),
@@ -2254,6 +2259,10 @@ TABLA_103 = [
     ('85', u'Regularización descuento en peajes de transporte y distribución de electricidad a la industria electrointensiva'),
     ('86', u'Descuento por retardo en activación autoconsumo imputable al distribuidor'),
     ('87', u'Descuento por retardo en activación autoconsumo NO imputable al distribuidor'),
+    ('88', u'Derechos de extensión provenientes de una reposición E2, no repercutibles al cliente.'),
+    ('89', u'Derechos de acceso provenientes de una reposición E2, no repercutibles al cliente.'),
+    ('90', u'Derechos de enganche provenientes de una reposición E2, no repercutibles al cliente.'),
+    ('91', u'Actuaciones en equipos de medida provenientes de una reposición E2, no repercutibles al cliente.'),
 ]
 
 CONCEPTOS_CON_FECHA_OPERACION = [
@@ -2485,6 +2494,9 @@ TABLA_124 = [
     ('B103', u'Corte o suspensión del suministro por impago'),
     ('B104', u'Baja por Impago'),
     ('M100', u'Solicitud de modificación contractual'),
+    ('E100', u'Solicitud de Desistimiento'),
+    ('E200', u'Solicitud de Reposición'),
+    ('T100', u'Traspaso a la COR'),
 ]
 
 TABLA_125 = [
@@ -2610,7 +2622,7 @@ TABLA_129 = [('01', u'Red interior'),
              ('05', u'Próxima a través de red pero en red interior de otro de los CUPS del colectivo'), ]
 
 TABLA_130 = [('A', u'EdM Bidireccional en PF'),
-             ('B', u'EdM Bidireccional en PF y EdM gen. Neta'),
+             ('B', u'EdM Bidireccional en PF y EdM gen. Neta en serie'),
              ('C', u'EdM Consumo Total y EdM bidireccional gen. Neta'),
              ('D', u'EdM Consumo Total y EdM gen bruta y EdM SSAA'),
              ('E', u'Configuración singular'),
@@ -2635,7 +2647,6 @@ TABLA_134 = [
     ('01', u'Vuelta a la situación anterior – En servicio'),
     ('02', u'Vuelta a la situación anterior – En servicio (cortado)'),
     ('03', u'Traspaso a la COR'),
-    ('04', u'Baja del contrato por rechazo de la COR'),
     ('05', u'Baja por cese de actividad'),
     ('06', u'Activación de cambio de comercializador'),
 ]
@@ -2658,8 +2669,9 @@ TABLA_136 = [
 ]
 
 TABLA_137 = [
-    ('00', u'Reposición por contratación o cambio indebido solicitada por el comercializador entrante.'),
-    ('01', u'Reposición por error administrativo solicitada por el comercializador entrante'),
+    ('00', u'No esencial'),
+    ('01', u'Esencial por electrodependencia'),
+    ('02', u'Esencial no electrodependiente'),
 ]
 
 TABLA_138 = [

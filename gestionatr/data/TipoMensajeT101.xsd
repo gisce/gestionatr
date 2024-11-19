@@ -45,7 +45,7 @@
 	<xs:complexType name="ContratoTraspasoCORT1">
 		<xs:sequence>
 			<xs:element name="FechaFinalizacion" type="xs:date" minOccurs="0"/>
-			<xs:element name="Autoconsumo" type="TypeAutoconsumoActivacionT1"/>
+			<xs:element name="Autoconsumo" type="TypeAutoconsumoActivacionT1" minOccurs="0"/>
 			<xs:element name="TipoContratoATR" type="TipoContratoATR">
 				<xs:annotation>
 					<xs:documentation>Tabla 9</xs:documentation>

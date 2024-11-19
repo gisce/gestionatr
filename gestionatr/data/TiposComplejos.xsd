@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!-- edited with XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) by Odelin Calatrava Requena (Comisión Nacional de los Mercados y la Competencia) -->
-<!-- editado con XMLSpy v2020 rel. 2 (x64) (http://www.altova.com) por Teresa Rodriguez-Losada (INECO) -->
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Comisión Nacional de los Mercados y la Competencia (Comisión Nacional de los Mercados y la Competencia) -->
 <xs:schema xmlns="http://localhost/elegibilidad" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
 	<xs:complexType name="AparatoActivacion">
@@ -280,7 +280,6 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element name="PotenciaNoInterrumpible" type="Potencia" minOccurs="0"/>
 			<xs:element name="FechaEmisionCie" type="xs:date"/>
 			<xs:element name="FechaCaducidadCie" type="xs:date" minOccurs="0"/>
 			<xs:choice>
@@ -344,6 +343,26 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Direccion" type="DireccionCont" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ClienteConSoloDireccionP0">
+		<xs:sequence>
+			<xs:element name="IdCliente" type="IdCliente"/>
+			<xs:element name="Nombre" type="NombreCliente"/>
+			<xs:element name="IndicadorTipoDireccion" type="IndicadorTipoDireccion">
+				<xs:annotation>
+					<xs:documentation>Tabla 11</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DireccionSuministro" type="DireccionContSinApdo"/>
+			<xs:element name="Telefono" type="TelefonoInternacional" minOccurs="0" maxOccurs="5"/>
+			<xs:element name="CorreoElectronico" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X60">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="ClienteConSoloDireccion">
@@ -608,6 +627,7 @@
 					<xs:documentation>Tabla 65</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="PotenciaNoInterrumpible" type="Potencia" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="DatosReclamante">
@@ -1250,21 +1270,21 @@
 			<xs:sequence>
 				<xs:element name="NombreDePila">
 					<xs:simpleType>
-						<xs:restriction base="X45">
+						<xs:restriction base="X80">
 							<xs:whiteSpace value="collapse"/>
 						</xs:restriction>
 					</xs:simpleType>
 				</xs:element>
 				<xs:element name="PrimerApellido">
 					<xs:simpleType>
-						<xs:restriction base="X45">
+						<xs:restriction base="X80">
 							<xs:whiteSpace value="collapse"/>
 						</xs:restriction>
 					</xs:simpleType>
 				</xs:element>
 				<xs:element name="SegundoApellido" minOccurs="0">
 					<xs:simpleType>
-						<xs:restriction base="X45">
+						<xs:restriction base="X80">
 							<xs:whiteSpace value="collapse"/>
 						</xs:restriction>
 					</xs:simpleType>
@@ -1272,7 +1292,7 @@
 			</xs:sequence>
 			<xs:element name="RazonSocial">
 				<xs:simpleType>
-					<xs:restriction base="X45">
+					<xs:restriction base="X80">
 						<xs:whiteSpace value="collapse"/>
 					</xs:restriction>
 				</xs:simpleType>
@@ -1283,6 +1303,7 @@
 		<xs:sequence>
 			<xs:element name="MotivoCambioATRDesdeDistribuidora" type="MotivoCambioATRDesdeDistribuidora"/>
 			<xs:element name="FechaPrevistaAplicacionCambioATR" type="xs:date" minOccurs="0"/>
+			<xs:element name="FechaMaximaRechazo" type="xs:date" minOccurs="0"/>
 			<xs:element name="PeriodicidadFacturacion" type="PeriodicidadFacturacion" minOccurs="0"/>
 			<xs:element name="IndEsencial" type="IndEsencial" minOccurs="0">
 				<xs:annotation>
@@ -1292,7 +1313,7 @@
 			<xs:element name="FechaUltimoMovimientoIndEsencial" type="xs:date" minOccurs="0"/>
 			<xs:element name="InfoRegistroAutocons" type="TypeInfoRegistroAutocons" minOccurs="0"/>
 			<xs:element name="InfoRetardoActivAutocons" type="TypeInfoRetardoActivAutocons" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="RegistrosDocumentos" type="RegistrosDocs" minOccurs="0"/>
+			<xs:element name="RegistrosDocumento" type="RegistrosDocs" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Potencias">
@@ -1501,25 +1522,25 @@
 	</xs:complexType>
 	<xs:complexType name="TypeAutoconsumoSolicitudAlta">
 		<xs:sequence>
-			<xs:element name="DatosSuministro" type="TypeDatosSuministroSolicitud"/>
+			<xs:element name="DatosSuministro" type="TypeDatosSuministroSolicitud" minOccurs="0"/>
 			<xs:element name="DatosCAU" type="TypeDatosCAUAlta" minOccurs="1" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="TypeAutoconsumoActivacion">
 		<xs:sequence>
-			<xs:element name="DatosSuministro" type="TypeDatosSuministroSolicitud"/>
+			<xs:element name="DatosSuministro" type="TypeDatosSuministroSolicitud" minOccurs="0"/>
 			<xs:element name="DatosCAU" type="TypeDatosCAUAlta05" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="TypeAutoconsumoActivacionT1">
 		<xs:sequence>
-			<xs:element name="DatosSuministro" type="TypeDatosSuministroSolicitud"/>
+			<xs:element name="DatosSuministro" type="TypeDatosSuministroSolicitud" minOccurs="0"/>
 			<xs:element name="DatosCAU" type="TypeDatosCAUAltaT1" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="TypeAutoconsumoActivacionD1">
 		<xs:sequence>
-			<xs:element name="DatosSuministro" type="TypeDatosSuministroSolicitud"/>
+			<xs:element name="DatosSuministro" type="TypeDatosSuministroSolicitud" minOccurs="0"/>
 			<xs:element name="DatosCAU" type="TypeDatosCAUAlta05" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -1604,7 +1625,7 @@
 		<xs:sequence>
 			<xs:element name="CIL" type="CodigoCIL" minOccurs="0"/>
 			<xs:element name="PotInstaladaGen" type="Potencia"/>
-			<xs:element name="TipoInstalacion" type="TipoInstalacion" minOccurs="0">
+			<xs:element name="TipoInstalacion" type="TipoInstalacion">
 				<xs:annotation>
 					<xs:documentation>Tabla 129</xs:documentation>
 				</xs:annotation>
@@ -1639,7 +1660,7 @@
 					<xs:documentation>Tabla 130</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="SSAA" type="Indicativo">
+			<xs:element name="SSAA" type="Indicativo" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Tabla 26</xs:documentation>
 				</xs:annotation>
@@ -1733,21 +1754,21 @@
 			<xs:sequence>
 				<xs:element name="NombreDePila">
 					<xs:simpleType>
-						<xs:restriction base="X45">
+						<xs:restriction base="X80">
 							<xs:whiteSpace value="collapse"/>
 						</xs:restriction>
 					</xs:simpleType>
 				</xs:element>
 				<xs:element name="PrimerApellido">
 					<xs:simpleType>
-						<xs:restriction base="X45">
+						<xs:restriction base="X80">
 							<xs:whiteSpace value="collapse"/>
 						</xs:restriction>
 					</xs:simpleType>
 				</xs:element>
 				<xs:element name="SegundoApellido" minOccurs="0">
 					<xs:simpleType>
-						<xs:restriction base="X45">
+						<xs:restriction base="X80">
 							<xs:whiteSpace value="collapse"/>
 						</xs:restriction>
 					</xs:simpleType>
@@ -1755,7 +1776,7 @@
 			</xs:sequence>
 			<xs:element name="RazonSocial">
 				<xs:simpleType>
-					<xs:restriction base="X45">
+					<xs:restriction base="X80">
 						<xs:whiteSpace value="collapse"/>
 					</xs:restriction>
 				</xs:simpleType>
@@ -2035,8 +2056,8 @@
 			<xs:element name="CAU" type="CodigoAutoconsumo" minOccurs="1"/>
 			<xs:element name="TipoAutoconsumo" type="TipoAutoconsumo"/>
 			<xs:element name="TipoSubseccion" type="TipoSubseccion"/>
-			<xs:element name="Colectivo" type="Indicativo" minOccurs="1"/>
-			<xs:element name="DatosInstGen" type="TypeDatosInstGenSolicitud" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="Colectivo" type="Indicativo" minOccurs="0"/>
+			<xs:element name="DatosInstGen" type="TypeDatosInstGenSolicitud" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="TypeDatosCAUAltaT1">
@@ -2052,8 +2073,8 @@
 					<xs:documentation>Tabla 133</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="Colectivo" type="Indicativo"/>
-			<xs:element name="DatosInstGen" type="TypeDatosInstGenActivacionT1" maxOccurs="unbounded"/>
+			<xs:element name="Colectivo" type="Indicativo" minOccurs="0"/>
+			<xs:element name="DatosInstGen" type="TypeDatosInstGenActivacionT1" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="TypeDatosCAUAlta05">
@@ -2069,8 +2090,8 @@
 					<xs:documentation>Tabla 133</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="Colectivo" type="Indicativo" minOccurs="1"/>
-			<xs:element name="DatosInstGen" type="TypeDatosInstGenActivacion" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="Colectivo" type="Indicativo" minOccurs="0"/>
+			<xs:element name="DatosInstGen" type="TypeDatosInstGenActivacion" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="TypeDatosCAUP0">

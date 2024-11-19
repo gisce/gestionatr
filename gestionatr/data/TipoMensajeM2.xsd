@@ -28,6 +28,8 @@
 					<xs:documentation>Tabla 116</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="IndEsencial" type="IndEsencial"/>
+			<xs:element name="FechaUltimoMovimientoIndEsencial" type="xs:date"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="ContratoActivacionModificacionDeATRM2">

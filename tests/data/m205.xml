@@ -17,6 +17,8 @@
             </MotivoActivacionUnidireccional>
             <Fecha>2016-06-06</Fecha>
             <BonoSocial>1</BonoSocial>
+            <IndEsencial>N</IndEsencial>
+            <FechaUltimoMovimientoIndEsencial>1900-01-01</FechaUltimoMovimientoIndEsencial>
         </DatosActivacion>
         <Contrato>
             <IdContrato>

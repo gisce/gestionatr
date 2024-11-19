@@ -21,54 +21,66 @@ class MensajeNotificacionCambiosATRDesdeDistribuidor(XmlModel):
 class NotificacionCambiosATRDesdeDistribuidor(XmlModel):
 
     _sort_order = ('notificacion_cambios_atr_desde_distribuidor', 'motivo_cambio_atr_desde_distribuidora',
-                   'fecha_prevista_aplicacion_cambio_atr', 'periodicidad_facturacion', 'info_registro_autocons',
-                   'info_retardo_activ_autocons_list')
+                   'fecha_prevista_aplicacion_cambio_atr', 'fecha_maxima_rechazo', 'periodicidad_facturacion',
+                   'ind_esencial', 'fecha_ultimo_movimiento_ind_esencial', 'info_registro_autocons',
+                   'info_retardo_activ_autocons_list', 'registros_documento')
 
     def __init__(self):
         self.notificacion_cambios_atr_desde_distribuidor = XmlField('NotificacionCambiosATRDesdeDistribuidor')
         self.motivo_cambio_atr_desde_distribuidora = XmlField('MotivoCambioATRDesdeDistribuidora')
         self.fecha_prevista_aplicacion_cambio_atr = XmlField('FechaPrevistaAplicacionCambioATR')
+        self.fecha_maxima_rechazo = XmlField('FechaMaximaRechazo')
         self.periodicidad_facturacion = XmlField('PeriodicidadFacturacion')
+        self.ind_esencial = XmlField('IndEsencial')
+        self.fecha_ultimo_movimiento_ind_esencial = XmlField('FechaUltimoMovimientoIndEsencial')
         self.info_registro_autocons = InfoRegistroAutocons()
         self.info_retardo_activ_autocons_list = []
+        self.registros_documento = RegistrosDocumento()
         super(NotificacionCambiosATRDesdeDistribuidor, self).__init__('NotificacionCambiosATRDesdeDistribuidor',
                                                                       'notificacion_cambios_atr_desde_distribuidor')
 
 
 class InfoRegistroAutocons(XmlModel):
 
-    _sort_order = ('info_registro_autocons', 'autoconsumo', 'datos_suministro', 'datos_inst_gen',
-                   'comentarios')
+    _sort_order = ('info_registro_autocons', 'autoconsumo')
 
     def __init__(self):
         self.info_registro_autocons = XmlField('InfoRegistroAutocons')
         self.autoconsumo = Autoconsumo()
-        self.datos_suministro = DatosSuministro()
-        self.datos_inst_gen = DatosInstGen()
-        self.comentarios = XmlField('Comentarios')
         super(InfoRegistroAutocons, self).__init__('InfoRegistroAutocons', 'info_registro_autocons')
 
 
 class Autoconsumo(XmlModel):
 
-    _sort_order = ('autoconsumo', 'cau', 'seccion_registro', 'sub_seccion', 'colectivo')
+    _sort_order = ('autoconsumo', 'datos_suministro', 'datos_cau')
 
     def __init__(self):
         self.autoconsumo = XmlField('Autoconsumo')
-        self.cau = XmlField('CAU')
-        self.seccion_registro = XmlField('SeccionRegistro')
-        self.sub_seccion = XmlField('SubSeccion')
-        self.colectivo = XmlField('Colectivo')
+        self.datos_suministro = DatosSuministro()
+        self.datos_cau = DatosCAU()
         super(Autoconsumo, self).__init__('Autoconsumo', 'autoconsumo')
+
+
+class DatosCAU(XmlModel):
+
+    _sort_order = ('datos_suministro', 'cau', 'tipo_autoconsumo', 'tipo_subseccion', 'colectivo', 'datos_inst_gen')
+
+    def __init__(self):
+        self.datos_cau = XmlField('DatosCAU')
+        self.cau = XmlField('CAU')
+        self.tipo_autoconsumo = XmlField('TipoAutoconsumo')
+        self.tipo_subseccion = XmlField('TipoSubseccion')
+        self.colectivo = XmlField('Colectivo')
+        self.datos_inst_gen = DatosInstGen()
+        super(DatosCAU, self).__init__('DatosCAU', 'datos_cau')
 
 
 class DatosSuministro(XmlModel):
 
-    _sort_order = ('datos_suministro', 'cups', 'tipo_cups', 'ref_catastro')
+    _sort_order = ('datos_suministro', 'tipo_cups', 'ref_catastro')
 
     def __init__(self):
         self.datos_suministro = XmlField('DatosSuministro')
-        self.cups = XmlField('CUPS')
         self.tipo_cups = XmlField('TipoCUPS')
         self.ref_catastro = XmlField('RefCatastro')
         super(DatosSuministro, self).__init__('DatosSuministro', 'datos_suministro')
@@ -77,7 +89,7 @@ class DatosSuministro(XmlModel):
 class DatosInstGen(XmlModel):
 
     _sort_order = ('datos_inst_gen', 'cil', 'tec_generador', 'combustible', 'pot_instalada_gen', 'tipo_instalacion',
-                   'esquema_medida', 'ssaa', 'ref_catastro', 'utm', 'titular_representante_gen')
+                   'esquema_medida', 'ssaa', 'unico_contrato', 'ref_catastro', 'utm', 'titular_representante_gen')
 
     def __init__(self):
         self.datos_inst_gen = XmlField('DatosInstGen')
@@ -88,6 +100,7 @@ class DatosInstGen(XmlModel):
         self.tipo_instalacion = XmlField('TipoInstalacion')
         self.esquema_medida = XmlField('EsquemaMedida')
         self.ssaa = XmlField('SSAA')
+        self.unico_contrato = XmlField('UnicoContrato')
         self.ref_catastro = XmlField('RefCatastro')
         self.utm = UTM()
         self.titular_representante_gen = TitularRepresentanteGen()
@@ -109,8 +122,7 @@ class UTM(XmlModel):
 
 class TitularRepresentanteGen(XmlModel):
 
-    _sort_order = ('titular_representante_gen', 'id_titular', 'nombre', 'telefono', 'correo_electronico',
-                   'direccion')
+    _sort_order = ('titular_representante_gen', 'id_titular', 'nombre', 'telefono', 'correo_electronico')
 
     def __init__(self):
         self.titular_representante_gen = XmlField('TitularRepresentanteGen')
@@ -118,7 +130,6 @@ class TitularRepresentanteGen(XmlModel):
         self.nombre = Nombre()
         self.telefono = Telefono()
         self.correo_electronico = XmlField('CorreoElectronico')
-        self.direccion = Direccion()
         super(TitularRepresentanteGen, self).__init__('TitularRepresentanteGen', 'titular_representante_gen')
 
 
@@ -157,42 +168,6 @@ class Telefono(XmlModel):
         super(Telefono, self).__init__('Telefono', 'telefono')
 
 
-class Direccion(XmlModel):
-
-    _sort_order = ('direccion', 'pais', 'provincia', 'municipio', 'poblacion', 'cod_postal', 'via',
-                   'apartado_de_correos')
-
-    def __init__(self):
-        self.direccion = XmlField('Direccion')
-        self.pais = XmlField('Pais')
-        self.provincia = XmlField('Provincia')
-        self.municipio = XmlField('Municipio')
-        self.poblacion = XmlField('Poblacion')
-        self.cod_postal = XmlField('CodPostal')
-        self.via = Via()
-        self.apartado_de_correos = XmlField('ApartadoDeCorreos')
-        super(Direccion, self).__init__('Direccion', 'direccion')
-
-
-class Via(XmlModel):
-
-    _sort_order = ('via', 'tipo_via', 'calle', 'numero_finca', 'duplicador_finca', 'escalera', 'piso', 'puerta',
-                   'tipo_aclarador_finca', 'aclarador_finca')
-
-    def __init__(self):
-        self.via = XmlField('Via')
-        self.tipo_via = XmlField('TipoVia')
-        self.calle = XmlField('Calle')
-        self.numero_finca = XmlField('NumeroFinca')
-        self.duplicador_finca = XmlField('DuplicadorFinca')
-        self.escalera = XmlField('Escalera')
-        self.piso = XmlField('Piso')
-        self.puerta = XmlField('Puerta')
-        self.tipo_aclarador_finca = XmlField('TipoAclaradorFinca')
-        self.aclarador_finca = XmlField('AclaradorFinca')
-        super(Via, self).__init__('Via', 'via')
-
-
 class InfoRetardoActivAutocons(XmlModel):
 
     _sort_order = ('info_retardo_activ_autocons', 'codigo_fiscal_factura', 'fecha_inicio_conteo_activ_autocons',
@@ -209,42 +184,6 @@ class InfoRetardoActivAutocons(XmlModel):
         self.valor_energia_horaria_calculada = XmlField('ValorEnergiaHorariaCalculada')
         self.pot_instalada_gen = XmlField('PotInstaladaGen')
         super(InfoRetardoActivAutocons, self).__init__('InfoRetardoActivAutocons', 'info_retardo_activ_autocons')
-
-
-# Paso 02 accept
-class MensajeAceptacionNotificacionCambiosATRDesdeDistribuidor(XmlModel):
-
-    _sort_order = ('mensaje', 'cabecera', 'aceptacion_notificacion_cambios_atr_desde_distribuidor')
-
-    def __init__(self):
-        self.mensaje = XmlField('MensajeAceptacionNotificacionCambiosATRDesdeDistribuidor',
-                                attributes={'xmlns': 'http://localhost/elegibilidad'})
-        self.cabecera = Cabecera()
-        self.aceptacion_notificacion_cambios_atr_desde_distribuidor = AceptacionNotificacionCambiosATRDesdeDistribuidor()
-        super(MensajeAceptacionNotificacionCambiosATRDesdeDistribuidor, self)\
-            .__init__('MensajeAceptacionNotificacionCambiosATRDesdeDistribuidor', 'mensaje')
-
-
-class AceptacionNotificacionCambiosATRDesdeDistribuidor(XmlModel):
-
-    _sort_order = ('aceptacion_notificacion_cambios_atr_desde_distribuidor', 'datos_aceptacion')
-
-    def __init__(self):
-        self.aceptacion_notificacion_cambios_atr_desde_distribuidor = XmlField('AceptacionNotificacionCambiosATRDesdeDistribuidor')
-        self.datos_aceptacion = DatosAceptacion()
-        super(AceptacionNotificacionCambiosATRDesdeDistribuidor, self)\
-            .__init__('AceptacionNotificacionCambiosATRDesdeDistribuidor',
-                      'aceptacion_notificacion_cambios_atr_desde_distribuidor')
-
-
-class DatosAceptacion(XmlModel):
-
-    _sort_order = ('datos_aceptacion', 'fecha_aceptacion')
-
-    def __init__(self):
-        self.datos_aceptacion = XmlField('DatosAceptacion')
-        self.fecha_aceptacion = XmlField('FechaAceptacion')
-        super(DatosAceptacion, self).__init__('DatosAceptacion', 'datos_aceptacion')
 
 
 # Paso 02 (Rechazo)
@@ -303,3 +242,25 @@ class RegistroDoc(XmlModel):
         self.tipo_doc_aportado = XmlField('TipoDocAportado')
         self.direccion_url = XmlField('DireccionUrl')
         super(RegistroDoc, self).__init__('RegistroDoc', 'registro_doc')
+
+
+# Paso 10
+class MensajeAnulacionD1(XmlModel):
+
+    _sort_order = ('mensaje', 'cabecera', 'datos_anulacion')
+
+    def __init__(self):
+        self.mensaje = XmlField('MensajeAnulacionD1', attributes={'xmlns': 'http://localhost/elegibilidad'})
+        self.cabecera = Cabecera()
+        self.datos_anulacion = []
+        super(MensajeAnulacionD1, self).__init__('MensajeAnulacionD1', 'mensaje')
+
+
+class DatosAnulacion(XmlModel):
+
+    _sort_order = ('datos_anulacion', 'fecha_anulacion')
+
+    def __init__(self):
+        self.datos_anulacion = XmlField('DatosAnulacion')
+        self.fecha_anulacion = XmlField('FechaAnulacion')
+        super(DatosAnulacion, self).__init__('DatosAnulacion', 'datos_anulacion')

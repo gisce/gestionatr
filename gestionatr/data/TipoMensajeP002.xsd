@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!-- edited with XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) by Odelin Calatrava Requena (Comisión Nacional de los Mercados y la Competencia) -->
-<!-- editado con XMLSpy v2020 rel. 2 (x64) (http://www.altova.com) por Teresa Rodriguez-Losada (INECO) -->
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Comisión Nacional de los Mercados y la Competencia (Comisión Nacional de los Mercados y la Competencia) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposComplejos.xsd"/>
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
 	<xs:complexType name="EnvioInformacionPSP002">
 		<xs:sequence>
-			<xs:element name="ResultadoValidacionCliente" type="Indicativo" minOccurs="0">
+			<xs:element name="ResultadoValidacionCliente" type="ResultadoValidacionCliente" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Tabla 26</xs:documentation>
+					<xs:documentation>Tabla 138</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="EnVigor" type="Indicativo" minOccurs="1">
@@ -29,42 +29,42 @@
 			</xs:element>
 			<xs:element name="Contrato" type="ContratoInfoPS002" minOccurs="0"/>
 			<xs:element name="FechaUltimoMovimientoTipoAutocons" type="xs:date" minOccurs="0"/>
-			<xs:element name="IndBonoSocial" type="Indicativo">
+			<xs:element name="IndBonoSocial" type="Indicativo" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Tabla 26</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="IndEsencial" type="Indicativo" minOccurs="0">
+			<xs:element name="IndEsencial" type="IndEsencial" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Tabla 26</xs:documentation>
+					<xs:documentation>Tabla 137</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="FechaUltimoMovimientoIndEsencial" type="xs:date" minOccurs="0"/>
-			<xs:element name="ViviendaHabitual" type="Indicativo">
+			<xs:element name="ViviendaHabitual" type="Indicativo" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Tabla 26</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="CNAE" type="CNAE"/>
-			<xs:element name="CondicionesContractuales" type="CondicionesContractualesP0"/>
-			<xs:element name="ModoFacturacionPotencia" type="ModoMedidaPotencia">
+			<xs:element name="CNAE" type="CNAE" minOccurs="0"/>
+			<xs:element name="CondicionesContractuales" type="CondicionesContractualesP0" minOccurs="0"/>
+			<xs:element name="ModoFacturacionPotencia" type="ModoMedidaPotencia" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Tabla 50</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="NoInterrumpible" type="Indicativo">
+			<xs:element name="NoInterrumpible" type="Indicativo" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Tabla 26</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="PotenciaNoInterrumpible" type="Potencia" minOccurs="0"/>
 			<xs:element name="VAsTrafo" type="Potencia" minOccurs="0"/>
-			<xs:element name="PeriodicidadFacturacion" type="PeriodicidadFacturacion">
+			<xs:element name="PeriodicidadFacturacion" type="PeriodicidadFacturacion" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Tabla 108</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="TipodeTelegestion" type="TipodeTelegestion">
+			<xs:element name="TipodeTelegestion" type="TipodeTelegestion" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Tabla 111</xs:documentation>
 				</xs:annotation>
@@ -74,12 +74,12 @@
 					<xs:documentation>Tabla 26</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="PeajeDirecto" type="Indicativo">
+			<xs:element name="PeajeDirecto" type="Indicativo" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Tabla 26</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="DepositoGarantia" type="Indicativo">
+			<xs:element name="DepositoGarantia" type="Indicativo" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Tabla 26</xs:documentation>
 				</xs:annotation>
@@ -93,7 +93,7 @@
 			<xs:element name="DerechosReconocidos" type="DerechosReconocidos"/>
 			<xs:element name="CaracteristicasPM" type="CaracteristicasPM"/>
 			<xs:element name="Historia" type="HistoriaP0" minOccurs="0"/>
-			<xs:element name="Cliente" type="ClienteConSoloDireccion" minOccurs="0"/>
+			<xs:element name="Cliente" type="ClienteConSoloDireccionP0" minOccurs="0"/>
 			<xs:element name="Equipo" type="EquipoP0" minOccurs="0" maxOccurs="10"/>
 			<xs:element name="DocTecnica" type="DocTecnicaP0" minOccurs="0"/>
 			<xs:element name="ExpedienteAnomaliaFraude" type="ExpedienteAnomaliaFraudeP0" minOccurs="0"/>
@@ -230,7 +230,7 @@
 	</xs:complexType>
 	<xs:complexType name="PuntosDeMedidaP0">
 		<xs:sequence>
-			<xs:element name="PuntoDeMedida" type="PuntoDeMedidaP0" maxOccurs="10"/>
+			<xs:element name="PuntoDeMedida" type="PuntoDeMedidaP0" minOccurs="0" maxOccurs="10"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="ExpedienteAcometidaP0">

@@ -13,6 +13,7 @@
     <NotificacionCambiosATRDesdeDistribuidor>
         <MotivoCambioATRDesdeDistribuidora>01</MotivoCambioATRDesdeDistribuidora>
         <FechaPrevistaAplicacionCambioATR>2016-06-09</FechaPrevistaAplicacionCambioATR>
+        <FechaMaximaRechazo>2016-06-09</FechaMaximaRechazo>
         <PeriodicidadFacturacion>01</PeriodicidadFacturacion>
         <IndEsencial>01</IndEsencial>
         <FechaUltimoMovimientoIndEsencial>2016-06-06</FechaUltimoMovimientoIndEsencial>
@@ -111,11 +112,11 @@
                 </DatosCAU>
             </Autoconsumo>
         </InfoRegistroAutocons>
-        <RegistrosDocumentos>
+        <RegistrosDocumento>
          <RegistroDoc>
            <TipoDocAportado>07</TipoDocAportado>
            <DireccionUrl>https://www.google.com/</DireccionUrl>
          </RegistroDoc>
-        </RegistrosDocumentos>
+        </RegistrosDocumento>
     </NotificacionCambiosATRDesdeDistribuidor>
 </MensajeNotificacionCambiosATRDesdeDistribuidor>

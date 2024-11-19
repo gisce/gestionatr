@@ -164,13 +164,13 @@
                 <CIEPapel>
                     <CodigoCie>1234567</CodigoCie>
                     <PotenciaInstBT>3500</PotenciaInstBT>
-                    <PotenciaNoInterrumpible>2000</PotenciaNoInterrumpible>
                     <FechaEmisionCie>2015-06-04</FechaEmisionCie>
                     <NifInstalador>12345678Z</NifInstalador>
                     <TensionSuministroCIE>10</TensionSuministroCIE>
                     <TipoSuministro>VI</TipoSuministro>
                 </CIEPapel>
                 <ValidezCIE>ES</ValidezCIE>
+                <PotenciaNoInterrumpible>2000</PotenciaNoInterrumpible>
             </DatosCie>
             <DatosAPM>
                 <CodigoApm>1111111111</CodigoApm>

@@ -24,7 +24,7 @@
 					<xs:documentation>Tabla 134</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="CodigoSolCorte" type="X12"/>
+			<xs:element name="CodigoSolCorte" type="X12" minOccurs="0"/>
 			<xs:element name="IndEsencial" type="IndEsencial">
 				<xs:annotation>
 					<xs:documentation>Tabla 113</xs:documentation>

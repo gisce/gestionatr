@@ -126,21 +126,29 @@
             <Nombre>
               <RazonSocial>ACC Y COMP DE COCINA MILLAN Y MUÑOZ</RazonSocial>
             </Nombre>
+            <IndicadorTipoDireccion>F</IndicadorTipoDireccion>
             <DireccionSuministro>
                 <Pais>España</Pais>
                 <Provincia>17</Provincia>
                 <Municipio>17079</Municipio>
                 <Poblacion>17079000501</Poblacion>
-                <TipoVia>PZ</TipoVia>
                 <CodPostal>17001</CodPostal>
-                <Calle>MELA MUTERMILCH</Calle>
-                <NumeroFinca>2</NumeroFinca>
-                <DuplicadorFinca>n/a</DuplicadorFinca>
-                <Escalera>001</Escalera>
-                <Piso>001</Piso>
-                <Puerta>001</Puerta>
-                <TipoAclaradorFinca>BI</TipoAclaradorFinca>
-                <AclaradorFinca>Bloque de Pisos</AclaradorFinca>
+                <Via>
+                    <TipoVia>PZ</TipoVia>
+                    <Calle>MELA MUTERMILCH</Calle>
+                    <NumeroFinca>2</NumeroFinca>
+                    <DuplicadorFinca>n/a</DuplicadorFinca>
+                    <Escalera>001</Escalera>
+                    <Piso>001</Piso>
+                    <Puerta>001</Puerta>
+                    <TipoAclaradorFinca>BI</TipoAclaradorFinca>
+                    <AclaradorFinca>Bloque de Pisos</AclaradorFinca>
+                    <Telefono>
+                        <PrefijoPais>0034</PrefijoPais>
+                        <Numero>633834841</Numero>
+                    </Telefono>
+                    <CorreoElectronico>a@mail.com</CorreoElectronico>
+                </Via>
             </DireccionSuministro>
         </Cliente>
         <Equipo>

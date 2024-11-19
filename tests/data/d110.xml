@@ -10,7 +10,9 @@
         <FechaSolicitud>2016-06-08T04:24:09</FechaSolicitud>
         <CUPS>ES0116000000011531LK0F</CUPS>
     </Cabecera>
-    <DatosAnulacion>
-        <FechaAnulacion>2016-06-10</FechaAnulacion>
-    </DatosAnulacion>
+    <AnulacionNotificacionCambiosATRDdesdeDistribuidor>
+        <DatosAnulacion>
+            <FechaAnulacion>2016-06-10</FechaAnulacion>
+        </DatosAnulacion>
+    </AnulacionNotificacionCambiosATRDdesdeDistribuidor>
 </MensajeAnulacionD1>

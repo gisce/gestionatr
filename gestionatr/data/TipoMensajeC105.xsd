@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Comisión Nacional de los Mercados y la Competencia (Comisión Nacional de los Mercados y la Competencia) -->
 <!-- edited with XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) by Odelin Calatrava Requena (Comisión Nacional de los Mercados y la Competencia) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposComplejos.xsd"/>
@@ -6,8 +7,6 @@
 	<xs:complexType name="ActivacionCambiodeComercializadorSinCambiosC105">
 		<xs:sequence>
 			<xs:element name="DatosActivacion" type="DatosActivacionCambiodeComercializadorSinCambiosC105"/>
-			<xs:element name="IndEsencial" type="IndEsencial"/>
-			<xs:element name="FechaUltimoMovimientoIndEsencial" type="xs:date"/>
 			<xs:element name="Contrato" type="ContratoActivacionCambiodeComercializadorSinCambiosC105"/>
 			<xs:element name="PuntosDeMedida" type="PuntosDeMedida"/>
 			<xs:element name="RegistrosDocumento" type="RegistrosDocs" minOccurs="0"/>
@@ -23,6 +22,8 @@
 					<xs:documentation>Tabla 116</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="IndEsencial" type="IndEsencial"/>
+			<xs:element name="FechaUltimoMovimientoIndEsencial" type="xs:date"/>
 		</xs:sequence>
 	</xs:complexType>
 	<!-- Datos del contrato -->

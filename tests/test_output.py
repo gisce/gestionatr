@@ -1584,15 +1584,14 @@ class test_D1(unittest.TestCase):
         self.xml_d101 = open(get_data("d101.xml"), "rb")
         self.xml_d101_motiu_13 = open(get_data("d101_motiu_13.xml"), "rb")
         self.xml_d101_motiu_13_14 = open(get_data("d101_motiu_13_14.xml"), "rb")
-        self.xml_d102_accept = open(get_data("d102_accept.xml"), "rb")
         self.xml_d102_reject = open(get_data("d102_reject.xml"), "rb")
+        self.xml_d110 = open(get_data("d110.xml"), "rb")
 
     def tearDown(self):
         self.xml_d101.close()
         self.xml_d101_motiu_13.close()
         self.xml_d101_motiu_13_14.close()
-        self.xml_d102_accept.close()
-        self.xml_d102_reject.close()
+        self.xml_d110.close()
 
     def test_create_pas01(self):
         # MensajeNotificacionCambiosATRDesdeDistribuidor
@@ -1612,24 +1611,13 @@ class test_D1(unittest.TestCase):
         }
         cabecera.feed(cabecera_fields)
 
-        # Autoconsumo
-        autoconsumo = d1.Autoconsumo()
-        autoconsumo_fields = {
-            'cau': 'ES1234000000000001JN0FA001',
-            'seccion_registro': '2',
-            'sub_seccion': 'a0',
-            'colectivo': 'S',
-        }
-        autoconsumo.feed(autoconsumo_fields)
-
         # DatosSuministro
-        suministro = d1.DatosSuministro()
-        suministro_fields = {
-            'cups': 'ES1234000000000001JN0F',
+        datos_suministro = d1.DatosSuministro()
+        datos_suministro_fields = {
             'tipo_cups': '01',
             'ref_catastro': '1234567890qwertyuiop',
         }
-        suministro.feed(suministro_fields)
+        datos_suministro.feed(datos_suministro_fields)
 
         # UTM
         utm = d1.UTM()
@@ -1682,33 +1670,6 @@ class test_D1(unittest.TestCase):
         }
         telefono3.feed(telefono3_fields)
 
-        # Via
-        via = d1.Via()
-        via_fields = {
-            'tipo_via': 'CL',
-            'calle': 'Pau Casals',
-            'numero_finca': '18',
-            'duplicador_finca': '1',
-            'escalera': 'D',
-            'piso': '3',
-            'puerta': '2',
-            'tipo_aclarador_finca': 'BI',
-            'aclarador_finca': 'Bar',
-        }
-        via.feed(via_fields)
-
-        # Direccion
-        direccion = d1.Direccion()
-        direccion_fields = {
-            'pais': 'España',
-            'provincia': '17',
-            'municipio': '171181',
-            'poblacion': '17118000400',
-            'cod_postal': '17230',
-            'via': via
-        }
-        direccion.feed(direccion_fields)
-
         # TitularRepresentanteGen
         titular = d1.TitularRepresentanteGen()
         titular_representante_gen_fields = {
@@ -1716,7 +1677,6 @@ class test_D1(unittest.TestCase):
             'nombre': nombre,
             'telefono': [telefono, telefono2, telefono3],
             'correo_electronico': 'mail_falso@dominio.com',
-            'direccion': direccion,
         }
         titular.feed(titular_representante_gen_fields)
 
@@ -1730,6 +1690,7 @@ class test_D1(unittest.TestCase):
             'tipo_instalacion': '01',
             'esquema_medida': 'B',
             'ssaa': 'S',
+            'unico_contrato': 'S',
             'ref_catastro': '1234567890qwertyuidf',
             'utm': utm,
             'titular_representante_gen': titular,
@@ -1747,30 +1708,65 @@ class test_D1(unittest.TestCase):
             'tipo_instalacion': '01',
             'esquema_medida': 'B',
             'ssaa': 'S',
+            'unico_contrato': 'S',
             'ref_catastro': '1234567890qwertyuidf',
             'utm': utm2,
             'titular_representante_gen': titular2,
         }
         datos_2.feed(datos_inst_gen_fields)
 
+        # DatosCAU
+        datos_cau = d1.DatosCAU()
+        datos_cau_fields = {
+            'cau': 'ES1234000000000001JN0FA001',
+            'tipo_autoconsumo': '11',
+            'tipo_subseccion': '10',
+            'colectivo': 'S',
+            'datos_inst_gen': [datos_1, datos_2],
+        }
+        datos_cau.feed(datos_cau_fields)
+
+        # Autoconsumo
+        autoconsumo = d1.Autoconsumo()
+        autoconsumo_fields = {
+            'datos_suministro': datos_suministro,
+            'datos_cau': datos_cau,
+        }
+        autoconsumo.feed(autoconsumo_fields)
         # InfoRegistroAutocons
         info = d1.InfoRegistroAutocons()
         info_registro_autocons_fields = {
             'movimiento': 'A',
             'autoconsumo': autoconsumo,
-            'datos_suministro': suministro,
-            'datos_inst_gen': [datos_1, datos_2],
-            'comentarios': 'Esto es un comentario'
         }
         info.feed(info_registro_autocons_fields)
+
+        # RegistroDoc
+        doc1 = d1.RegistroDoc()
+        registro_doc_fields1 = {
+            'tipo_doc_aportado': '07',
+            'direccion_url': 'https://www.google.com/',
+        }
+        doc1.feed(registro_doc_fields1)
+
+        # RegistrosDocumento
+        registros = d1.RegistrosDocumento()
+        registros_documento_fields = {
+            'registro_doc': doc1,
+        }
+        registros.feed(registros_documento_fields)
 
         # NotificacionCambiosATRDesdeDistribuidor
         notificacion = d1.NotificacionCambiosATRDesdeDistribuidor()
         notificacion_cambios_atr_desde_distribuidor_fields = {
             'motivo_cambio_atr_desde_distribuidora': '01',
             'fecha_prevista_aplicacion_cambio_atr': '2016-06-09',
+            'fecha_maxima_rechazo': '2016-06-09',
             'periodicidad_facturacion': '01',
+            'ind_esencial': '01',
+            'fecha_ultimo_movimiento_ind_esencial': '2016-06-06',
             'info_registro_autocons': info,
+            'registros_documento': registros,
         }
         notificacion.feed(notificacion_cambios_atr_desde_distribuidor_fields)
 
@@ -1921,47 +1917,6 @@ class test_D1(unittest.TestCase):
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_d101_motiu_13_14.read())
 
-    def test_create_pas02_accept(self):
-        # Cabecera
-        cabecera = d1.Cabecera()
-        cabecera_fields = {
-            'codigo_ree_empresa_emisora': '1234',
-            'codigo_ree_empresa_destino': '4321',
-            'codigo_del_proceso': 'D1',
-            'codigo_del_paso': '02',
-            'codigo_de_solicitud': '201607211259',
-            'secuencial_de_solicitud': '01',
-            'fecha': '2016-07-21T12:59:47',
-            'cups': 'ES1234000000000001JN0F',
-        }
-        cabecera.feed(cabecera_fields)
-
-        # DatosAceptacion
-        datos_aceptacion = d1.DatosAceptacion()
-        datos_aceptacion_fields = {
-            'fecha_aceptacion': '2016-06-06',
-        }
-        datos_aceptacion.feed(datos_aceptacion_fields)
-
-        # AceptacionNotificacionCambiosATRDesdeDistribuidor
-        acept_cambio = d1.AceptacionNotificacionCambiosATRDesdeDistribuidor()
-        aceptacion_notificacion_cambios_atr_desde_distribuidor_fields = {
-            'datos_aceptacion': datos_aceptacion,
-        }
-        acept_cambio.feed(aceptacion_notificacion_cambios_atr_desde_distribuidor_fields)
-
-        # MensajeAceptacionCambiodeComercializadorSinCambios
-        mensaje = d1.MensajeAceptacionNotificacionCambiosATRDesdeDistribuidor()
-        mensaje_aceptacion_notificacion_cambios_atr_desde_distribuidor_fields = {
-            'cabecera': cabecera,
-            'aceptacion_notificacion_cambios_atr_desde_distribuidor': acept_cambio,
-        }
-        mensaje.feed(mensaje_aceptacion_notificacion_cambios_atr_desde_distribuidor_fields)
-
-        mensaje.build_tree()
-        xml = str(mensaje)
-        assertXmlEqual(xml, self.xml_d102_accept.read())
-
     def test_create_pas02_rej(self):
         # Cabecera
         cabecera = d1.Cabecera()
@@ -2029,6 +1984,36 @@ class test_D1(unittest.TestCase):
         mensaje_rechazo.build_tree()
         xml = str(mensaje_rechazo)
         assertXmlEqual(xml, self.xml_d102_reject.read())
+
+    def test_create_pas10(self):
+        # Cabecera
+        cabecera = d1.Cabecera()
+        cabecera_fields = {
+            'codigo_ree_empresa_emisora': '1234',
+            'codigo_ree_empresa_destino': '4321',
+            'codigo_del_proceso': 'D1',
+            'codigo_del_paso': '10',
+            'codigo_de_solicitud': '201605219497',
+            'secuencial_de_solicitud': '00',
+            'fecha': '2016-06-08T04:24:09',
+            'cups': 'ES0116000000011531LK0F',
+        }
+        cabecera.feed(cabecera_fields)
+
+        datos_anulacion = d1.DatosAnulacion()
+        datos_anulacion.feed({'fecha_anulacion': "2016-06-10"})
+
+        # MensajeRechazo
+        mensaje_anulacion_d1 = d1.MensajeAnulacionD1()
+        mensaje_rechazo_fields = {
+            'cabecera': cabecera,
+            'datos_anulacion': datos_anulacion,
+        }
+        mensaje_anulacion_d1.feed(mensaje_rechazo_fields)
+
+        mensaje_anulacion_d1.build_tree()
+        xml = str(mensaje_anulacion_d1)
+        assertXmlEqual(xml, self.xml_d110.read())
 
 
 class test_P0(unittest.TestCase):

@@ -30,7 +30,7 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="CNAE" type="CNAE" minOccurs="0"/>
-			<xs:element name="IndEsencial" type="IndEsencial"/>
+			<xs:element name="IndEsencial" type="IndEsencial" minOccurs="0"/>
 			<xs:element name="FechaUltimoMovimientoIndEsencial" type="xs:date" minOccurs="0"/>
 			<xs:element name="PeriodicidadFacturacion" type="PeriodicidadFacturacion" minOccurs="0">
 				<xs:annotation>

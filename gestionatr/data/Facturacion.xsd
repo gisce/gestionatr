@@ -335,7 +335,7 @@
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
-							<xs:element name="Autoconsumo" minOccurs="0" maxOccurs="unbounded">
+							<xs:element name="Autoconsumo" minOccurs="0">
 								<xs:complexType>
 									<xs:sequence>
 										<xs:element name="EnergiaNetaGen" minOccurs="0">

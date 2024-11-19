@@ -77,7 +77,7 @@
 			<xs:element name="IdContrato" type="IdContrato"/>
 			<xs:element name="Autoconsumo" type="TypeAutoconsumoActivacion" minOccurs="0"/>
 			<xs:element name="TipoContratoATR" type="TipoContratoATR"/>
-			<xs:element name="CUPSprincipal" type="Codigo" minOccurs="0"/>
+			<xs:element name="CUPSPrincipal" type="Codigo" minOccurs="0"/>
 			<xs:element name="CondicionesContractuales" type="CondicionesContractualesC"/>
 		</xs:sequence>
 	</xs:complexType>

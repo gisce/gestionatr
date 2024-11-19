@@ -4,7 +4,7 @@
 	<xs:include schemaLocation="TiposComplejos.xsd"/>
 	<xs:include schemaLocation="TipoMensajeM2.xsd"/>
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
-	<xs:element name="MensajeActivacionModificacionDeATR">
+	<xs:element name="MensajeActivacionModificacionDeATRUnidir">
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="Cabecera" type="Cabecera"/>
