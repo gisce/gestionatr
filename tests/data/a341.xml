@@ -62,6 +62,9 @@
         <readingtype>1</readingtype>
         <lectureperiodicity>02</lectureperiodicity>
         <factmethod>2</factmethod>
+        <cnae>9820</cnae>
+        <protectedtype>1</protectedtype>
+        <essentialtype>1</essentialtype>
         <extrainfo>comentarios extras</extrainfo>
         <counterlist>
             <counter>
