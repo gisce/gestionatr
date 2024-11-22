@@ -121,6 +121,9 @@
 					<documentation>Indicador de que se quiere contratar el suministro independientemente de su estado (suspendido o en proceso de baja por impago)</documentation>
 				</annotation>
 			</element>
+			<element name="cnae" type="tns:CNAEType" maxOccurs="1" minOccurs="0"></element>
+			<element name="protectedtype" type="tns:TipoClienteProtegidoType" maxOccurs="1" minOccurs="0"></element>
+			<element name="essentialtype" type="tns:TipoClienteEsencialType" maxOccurs="1" minOccurs="0"></element>
 			<element name="extrainfo" type="tns:ExtrainfoType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Observaciones 1</documentation>

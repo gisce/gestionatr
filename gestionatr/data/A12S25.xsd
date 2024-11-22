@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://localhost/sctd/A12S25"
+	xmlns:tns="http://localhost/sctd/A12S25"
+	elementFormDefault="qualified" >
+
+	<include schemaLocation="CommonTagsCONT.xsd"></include>
+	<element name="sctdapplication"
+		type="tns:SctdapplicationA12S25Type">
+	</element>
+
+	<complexType name="SctdapplicationA12S25Type">
+		<sequence>
+			<element name="heading" type="tns:HeadingA12S25Type" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="a12s25" type="tns:A12S25Type"
+				maxOccurs="unbounded" minOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="HeadingA12S25Type">
+		<sequence>
+			<element name="dispatchingcode" maxOccurs="1"
+				minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="GML"></enumeration>
+						<length value="3"></length>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dispatchingcompany" type="tns:AgenteType"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="destinycompany" type="tns:AgenteType"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="communicationsdate" type="date" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="communicationshour" type="time" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="processcode" maxOccurs="1" minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"></length>
+						<enumeration value="25"></enumeration>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="messagetype" maxOccurs="1" minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="A12S"></enumeration>
+						<minLength value="1"></minLength>
+						<maxLength value="4"></maxLength>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="A12S25Type">
+		<sequence>
+			<element name="reqdate" type="date" maxOccurs="1"
+				minOccurs="1">
+				<annotation>
+					<documentation>Fecha de Respuesta</documentation>
+				</annotation>
+			</element>
+			<element name="reqhour" type="time" maxOccurs="1"
+				minOccurs="1">
+				<annotation>
+					<documentation>Hora de Respuesta</documentation>
+				</annotation>
+			</element>
+			<element name="cups" type="tns:CupsType" maxOccurs="1"
+				minOccurs="1">
+				<annotation>
+					<documentation>CUPS Solicitud</documentation>
+				</annotation>
+			</element>
+			<element name="lastinspectionsdate" type="date"
+				maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Fecha última inspección</documentation>
+				</annotation>
+			</element>
+			<element name="lastinspectionsresult"
+				type="tns:ResultInspectionType" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Resultado de última inspección</documentation>
+				</annotation>
+			</element>
+			<element name="readingtype" type="tns:ReadingType"
+				maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Tipo de Lectura</documentation>
+				</annotation>
+			</element>
+			<element name="transfereffectivedate" type="date"
+				maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Fecha de efecto del cambio</documentation>
+				</annotation>
+			</element>
+			<element name="communicationreason" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Causa de la Comunicación</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<length value="2"/>
+						<enumeration value="01"/>
+						<enumeration value="02"/>
+						<enumeration value="03"/>
+						<enumeration value="04"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="counterlist" type="tns:CounterListType"
+				maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Lista de Contadores</documentation>
+				</annotation>
+			</element>
+			<element name="correctorlist" type="tns:CorrectorListType"
+				maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Lista de Correctores</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

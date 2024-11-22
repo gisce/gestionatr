@@ -79,11 +79,6 @@
 					<documentation>Indicador si el punto de suministro está en un proceso de suspensión o baja por impago o suspendido por impago</documentation>
 				</annotation>
 			</element>
-			<element name="indesencial" type="tns:FlagType" minOccurs="1" maxOccurs="1">
-				<annotation>
-					<documentation>Indicador esencialidad</documentation>
-				</annotation>
-			</element>
 			<element name="contact" type="tns:ContactType" minOccurs="1" maxOccurs="1">
 				<annotation>
 					<documentation>Datos de la persona de contacto</documentation>
@@ -140,6 +135,9 @@
 					<documentation>Tipo de Peaje</documentation>
 				</annotation>
 			</element>
+			<element name="cnae" type="tns:CNAEType" maxOccurs="1" minOccurs="1"></element>
+			<element name="protectedtype" type="tns:TipoClienteProtegidoType" maxOccurs="1" minOccurs="1"></element>
+			<element name="essentialtype" type="tns:TipoClienteEsencialType" maxOccurs="1" minOccurs="1"></element>
 			<element name="extrainfo" type="tns:ExtrainfoType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Observaciones de la solicitud</documentation>
