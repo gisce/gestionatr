@@ -2340,7 +2340,8 @@ class FacturaATR(Factura):
                         new_val = self.get_ajust_from_consum_desitjat(lectura, consum)
                         if new_val:
                             lectura.ajuste.ajuste_por_integrador = new_val
-                            lectura.ajuste.codigo_motivo = motiu_ajust  # normalment 98 - Autoconsumo
+                            if not lectura.ajuste.codigo_motivo:
+                                lectura.ajuste.codigo_motivo = motiu_ajust  # normalment 98 - Autoconsumo
             for l in lectures:
                 if not res.get(l.comptador):
                     res[l.comptador] = []
