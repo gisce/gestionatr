@@ -28,7 +28,7 @@
 					<xs:documentation>Tabla 137</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="FechUltimoMovimientoIndEsencial" type="date-or-nothing" minOccurs="0"/>
+			<xs:element name="FechaUltimoMovimientoIndEsencial" type="date-or-nothing" minOccurs="0"/>
 			<xs:element name="FechaPrevistaAccion" type="date-or-nothing" minOccurs="0"/>
 			<xs:element name="ContratacionIncondicionalPS" type="Indicativo">
 				<xs:annotation>

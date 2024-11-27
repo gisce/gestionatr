@@ -37,11 +37,15 @@ class CambiodeComercializadorSinCambios(XmlModel):
 
 class DatosSolicitud(XmlModel):
 
-    _sort_order = ('datos_solicitud', 'ind_activacion', 'fecha_prevista_accion', 'contratacion_incondicional_ps', 'contratacion_incondicional_bs', 'bono_social', 'solicitud_tension')
+    _sort_order = ('datos_solicitud', 'ind_activacion', 'ind_esencial', 'fecha_ultimo_movimiento_ind_esencial',
+                   'fecha_prevista_accion', 'contratacion_incondicional_ps', 'contratacion_incondicional_bs',
+                   'bono_social', 'solicitud_tension')
 
     def __init__(self):
         self.datos_solicitud = XmlField('DatosSolicitud')
         self.ind_activacion = XmlField('IndActivacion')
+        self.ind_esencial = XmlField('IndEsencial')
+        self.fecha_ultimo_movimiento_ind_esencial = XmlField('FechaUltimoMovimientoIndEsencial')
         self.fecha_prevista_accion = XmlField('FechaPrevistaAccion')
         self.contratacion_incondicional_ps = XmlField('ContratacionIncondicionalPS')
         self.contratacion_incondicional_bs = XmlField('ContratacionIncondicionalBS')
@@ -97,6 +101,100 @@ class Telefono(XmlModel):
         self.prefijo_pais = XmlField('PrefijoPais')
         self.numero = XmlField('Numero')
         super(Telefono, self).__init__('Telefono', 'telefono')
+
+
+class Autoconsumo(XmlModel):
+
+    _sort_order = ('autoconsumo', 'datos_suministro', 'datos_cau')
+
+    def __init__(self):
+        self.autoconsumo = XmlField('Autoconsumo')
+        self.datos_suministro = DatosSuministro()
+        self.datos_cau = DatosCAU()
+        super(Autoconsumo, self).__init__('Autoconsumo', 'autoconsumo')
+
+
+class DatosCAU(XmlModel):
+
+    _sort_order = ('datos_suministro', 'cau', 'tipo_autoconsumo', 'tipo_subseccion', 'colectivo', 'datos_inst_gen')
+
+    def __init__(self):
+        self.datos_cau = XmlField('DatosCAU')
+        self.cau = XmlField('CAU')
+        self.tipo_autoconsumo = XmlField('TipoAutoconsumo')
+        self.tipo_subseccion = XmlField('TipoSubseccion')
+        self.colectivo = XmlField('Colectivo')
+        self.datos_inst_gen = DatosInstGen()
+        super(DatosCAU, self).__init__('DatosCAU', 'datos_cau')
+
+
+class DatosSuministro(XmlModel):
+
+    _sort_order = ('datos_suministro', 'tipo_cups', 'ref_catastro')
+
+    def __init__(self):
+        self.datos_suministro = XmlField('DatosSuministro')
+        self.tipo_cups = XmlField('TipoCUPS')
+        self.ref_catastro = XmlField('RefCatastro')
+        super(DatosSuministro, self).__init__('DatosSuministro', 'datos_suministro')
+
+
+class DatosInstGen(XmlModel):
+
+    _sort_order = ('datos_inst_gen', 'cil', 'tec_generador', 'combustible', 'pot_instalada_gen', 'tipo_instalacion',
+                   'esquema_medida', 'ssaa', 'unico_contrato', 'ref_catastro', 'utm', 'titular_representante_gen')
+
+    def __init__(self):
+        self.datos_inst_gen = XmlField('DatosInstGen')
+        self.cil = XmlField('CIL')
+        self.tec_generador = XmlField('TecGenerador')
+        self.combustible = XmlField('Combustible')
+        self.pot_instalada_gen = XmlField('PotInstaladaGen')
+        self.tipo_instalacion = XmlField('TipoInstalacion')
+        self.esquema_medida = XmlField('EsquemaMedida')
+        self.ssaa = XmlField('SSAA')
+        self.unico_contrato = XmlField('UnicoContrato')
+        self.ref_catastro = XmlField('RefCatastro')
+        self.utm = UTM()
+        self.titular_representante_gen = TitularRepresentanteGen()
+        super(DatosInstGen, self).__init__('DatosInstGen', 'datos_inst_gen')
+
+
+class UTM(XmlModel):
+
+    _sort_order = ('utm', 'x', 'y', 'huso', 'banda')
+
+    def __init__(self):
+        self.utm = XmlField('UTM')
+        self.x = XmlField('X')
+        self.y = XmlField('Y')
+        self.huso = XmlField('Huso')
+        self.banda = XmlField('Banda')
+        super(UTM, self).__init__('UTM', 'utm')
+
+
+class TitularRepresentanteGen(XmlModel):
+
+    _sort_order = ('titular_representante_gen', 'id_titular', 'nombre', 'telefono', 'correo_electronico')
+
+    def __init__(self):
+        self.titular_representante_gen = XmlField('TitularRepresentanteGen')
+        self.id_titular = IdTitular()
+        self.nombre = Nombre()
+        self.telefono = Telefono()
+        self.correo_electronico = XmlField('CorreoElectronico')
+        super(TitularRepresentanteGen, self).__init__('TitularRepresentanteGen', 'titular_representante_gen')
+
+
+class IdTitular(XmlModel):
+
+    _sort_order = ('id_titular', 'tipo_identificador', 'identificador')
+
+    def __init__(self):
+        self.id_titular = XmlField('IdTitular')
+        self.tipo_identificador = XmlField('TipoIdentificador')
+        self.identificador = XmlField('Identificador')
+        super(IdTitular, self).__init__('IdTitular', 'id_titular')
 
 
 class RegistrosDocumento(XmlModel):
@@ -160,13 +258,13 @@ class DatosAceptacion(XmlModel):
 
 class Contrato(XmlModel):
 
-    _sort_order = ('contrato', 'id_contrato', 'data_finalitzacio', 'tipo_autoconsumo', 'tipo_contrato_atr', 'condiciones_contractuales', 'tipo_activacion_prevista', 'fecha_activacion_prevista')
+    _sort_order = ('contrato', 'id_contrato', 'data_finalitzacio', 'autoconsumo', 'tipo_contrato_atr', 'condiciones_contractuales', 'tipo_activacion_prevista', 'fecha_activacion_prevista')
 
     def __init__(self):
         self.contrato = XmlField('Contrato')
         self.id_contrato = IdContrato()
         self.data_finalitzacio = XmlField('FechaFinalizacion')
-        self.tipo_autoconsumo = XmlField('TipoAutoconsumo')
+        self.autoconsumo = Autoconsumo()
         self.tipo_contrato_atr = XmlField('TipoContratoATR')
         self.condiciones_contractuales = CondicionesContractuales()
         self.tipo_activacion_prevista = XmlField('TipoActivacionPrevista')
@@ -273,24 +371,28 @@ class MensajeActivacionCambiodeComercializadorSinCambios(XmlModel):
 
 class ActivacionCambiodeComercializadorSinCambios(XmlModel):
 
-    _sort_order = ('activacion_cambiode_comercializador_sin_cambios', 'datos_activacion', 'contrato', 'puntos_de_medida')
+    _sort_order = ('activacion_cambiode_comercializador_sin_cambios', 'datos_activacion', 'contrato',
+                   'puntos_de_medida', 'registros_documento')
 
     def __init__(self):
         self.activacion_cambiode_comercializador_sin_cambios = XmlField('ActivacionCambiodeComercializadorSinCambios')
         self.datos_activacion = DatosActivacion()
         self.contrato = Contrato()
         self.puntos_de_medida = PuntosDeMedida()
+        self.registros_documento = RegistrosDocumento()
         super(ActivacionCambiodeComercializadorSinCambios, self).__init__('ActivacionCambiodeComercializadorSinCambios', 'activacion_cambiode_comercializador_sin_cambios')
 
 
 class DatosActivacion(XmlModel):
 
-    _sort_order = ('datos_activacion', 'fecha', 'bono_social')
+    _sort_order = ('datos_activacion', 'fecha', 'bono_social', 'ind_esencial', 'fecha_ultimo_movimiento_ind_esencial')
 
     def __init__(self):
         self.datos_activacion = XmlField('DatosActivacion')
         self.fecha = XmlField('Fecha')
         self.bono_social = XmlField('BonoSocial')
+        self.ind_esencial = XmlField('IndEsencial')
+        self.fecha_ultimo_movimiento_ind_esencial = XmlField('FechaUltimoMovimientoIndEsencial')
         super(DatosActivacion, self).__init__('DatosActivacion', 'datos_activacion')
 
 

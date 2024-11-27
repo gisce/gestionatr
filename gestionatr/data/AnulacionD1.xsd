@@ -7,7 +7,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="Cabecera" type="Cabecera"/>
-				<xs:element name="AnulacionNotificacionCambiosATRDesdeDistriuidor">
+				<xs:element name="AnulacionNotificacionCambiosATRDesdeDistribuidor">
 					<xs:complexType>
 						<xs:sequence>
 							<xs:element name="DatosAnulacion" type="DatosAnulacion"/>

@@ -30,7 +30,7 @@ class CambiodeComercializadorConCambios(XmlModel):
         self.datos_solicitud = DatosSolicitud()
         self.contrato = Contrato()
         self.cliente = Cliente()
-        self.medida = Medida()
+        self.medida = MedidaResto()
         self.doc_tecnica = DocTecnica()
         self.comentarios = XmlField('Comentarios')
         self.registros_documento = RegistrosDocumento()
@@ -39,7 +39,10 @@ class CambiodeComercializadorConCambios(XmlModel):
 
 class DatosSolicitud(DatosSolicitud):
 
-    _sort_order = ('datos_solicitud', 'tipo_modificacion', 'tipo_solicitud_administrativa', 'cnae', 'ind_activacion', 'fecha_prevista_accion', 'contratacion_incondicional_ps', 'contratacion_incondicional_bs', 'bono_social', 'solicitud_tension', 'tension_solicitada')
+    _sort_order = ('datos_solicitud', 'tipo_modificacion', 'tipo_solicitud_administrativa', 'cnae', 'ind_esencial',
+                   'fecha_ultimo_movimiento_ind_esencial', 'ind_activacion', 'fecha_prevista_accion',
+                   'contratacion_incondicional_ps', 'contratacion_incondicional_bs', 'bono_social',
+                   'solicitud_tension', 'tension_solicitada')
 
     def __init__(self):
         super(DatosSolicitud, self).__init__()
@@ -51,12 +54,16 @@ class DatosSolicitud(DatosSolicitud):
 
 class Contrato(Contrato):
 
-    _sort_order = ('contrato', 'id_contrato', 'fecha_finalizacion', 'tipo_autoconsumo', 'tipo_contrato_atr', 'condiciones_contractuales', 'periodicidad_facturacion', 'consumo_anual_estimado', 'contacto', 'tipo_activacion_prevista', 'fecha_activacion_prevista')
+    _sort_order = ('contrato', 'id_contrato', 'fecha_finalizacion', 'autoconsumo', 'tipo_contrato_atr',
+                   'cups_principal', 'condiciones_contractuales', 'periodicidad_facturacion',
+                   'consumo_anual_estimado', 'contacto', 'tipo_activacion_prevista', 'fecha_activacion_prevista')
 
     def __init__(self):
         super(Contrato, self).__init__()
         self.fecha_finalizacion = XmlField('FechaFinalizacion')
+        self.autoconsumo = Autoconsumo()
         self.tipo_contrato_atr = XmlField('TipoContratoATR')
+        self.cups_principal = XmlField('CUPSPrincipal')
         self.periodicidad_facturacion = XmlField('PeriodicidadFacturacion')
         self.consumo_anual_estimado = XmlField('ConsumoAnualEstimado')
         self.contacto = Contacto()
@@ -120,16 +127,16 @@ class Via(XmlModel):
         super(Via, self).__init__(name, 'via')
 
 
-class Medida(XmlModel):
+class MedidaResto(XmlModel):
 
-    _sort_order = ('medida', 'propiedad_equipo', 'tipo_equipo_medida', 'modelos_aparato')
+    _sort_order = ('medida_resto', 'propiedad_equipo', 'tipo_equipo_medida', 'modelos_aparato')
 
     def __init__(self):
-        self.medida = XmlField('Medida')
+        self.medida_resto = XmlField('Medida')
         self.propiedad_equipo = XmlField('PropiedadEquipo')
         self.tipo_equipo_medida = XmlField('TipoEquipoMedida')
         self.modelos_aparato = ModelosAparato()
-        super(Medida, self).__init__('Medida', 'medida')
+        super(MedidaResto, self).__init__('medida_resto', 'medida_resto')
 
 
 class ModelosAparato(XmlModel):
@@ -299,13 +306,15 @@ class MensajeActivacionCambiodeComercializadorConCambios(XmlModel):
 
 class ActivacionCambiodeComercializadorConCambios(XmlModel):
 
-    _sort_order = ('activacion_cambiode_comercializador_con_cambios', 'datos_activacion', 'contrato', 'puntos_de_medida')
+    _sort_order = ('activacion_cambiode_comercializador_con_cambios', 'datos_activacion', 'contrato',
+                   'puntos_de_medida', 'registros_documento')
 
     def __init__(self):
         self.activacion_cambiode_comercializador_con_cambios = XmlField('ActivacionCambiodeComercializadorConCambios')
         self.datos_activacion = DatosActivacion()
         self.contrato = Contrato()
         self.puntos_de_medida = PuntosDeMedida()
+        self.registros_documento = RegistrosDocumento()
         super(ActivacionCambiodeComercializadorConCambios, self).__init__('ActivacionCambiodeComercializadorConCambios', 'activacion_cambiode_comercializador_con_cambios')
 
 

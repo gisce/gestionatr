@@ -200,6 +200,15 @@ class Contrato(Contrato):
             pass
         return data
 
+    @property
+    def cups_principal(self):
+        data = ''
+        try:
+            data = self.contrato.CUPSPrincipal.text
+        except AttributeError:
+            pass
+        return data
+
 
 class Contacto(object):
 

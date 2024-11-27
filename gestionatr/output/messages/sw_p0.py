@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from libcomxml.core import XmlModel, XmlField
 from gestionatr.output.messages.base import Cabecera
+from gestionatr.output.messages.sw_c1 import Autoconsumo
+from gestionatr.output.messages.sw_c2 import Cliente, Direccion
 
 
 # Paso 01
@@ -43,9 +45,14 @@ class MensajeEnvioInformacionPS(XmlModel):
 class EnvioInformacionPS(XmlModel):
 
     _sort_order = ('envio_informacion_ps', 'resultado_validacion_cliente', 'en_vigor', 'estado_contratable',
-                   'existe_solicitud_en_curso', 'tipo_solicitud_en_curso', 'contrato', 'potencia_maxima_autorizada',
-                   'tension_del_suministro', 'derechos_reconocidos', 'caracteristicas_pm', 'historia', 'equipo_list',
-                   'doc_tecnica', 'expediente_anomalia_fraude', 'expediente_acometida')
+                   'existe_solicitud_en_curso', 'tipo_solicitud_en_curso', 'contrato',
+                   'fecha_ultimo_movimiento_tipo_autocons', 'ind_bono_social', 'ind_esencial',
+                   'fecha_ultimo_movimiento_ind_esencial','vivienda_habitual','cnae', 'condiciones_contractuales',
+                   'modo_facturacion_potencia', 'no_interrumpible', 'potencia_no_interrumpible', 'vas_trafo',
+                   'periodicidad_facturacion', 'tipo_de_telegestion', 'icp_activado_telegestion', 'peaje_directo',
+                   'deposito_garantia', 'potencia_maxima_autorizada', 'tension_del_suministro', 'derechos_reconocidos',
+                   'caracteristicas_pm', 'historia', 'cliente', 'equipo_list', 'doc_tecnica',
+                   'expediente_anomalia_fraude', 'expediente_acometida', 'puntos_de_medida')
 
     def __init__(self):
         self.envio_informacion_ps = XmlField('EnvioInformacionPS')
@@ -55,59 +62,68 @@ class EnvioInformacionPS(XmlModel):
         self.existe_solicitud_en_curso = XmlField('ExisteSolicitudEnCurso')
         self.tipo_solicitud_en_curso = XmlField('TipoSolicitudEnCurso')
         self.contrato = Contrato()
-        self.potencia_maxima_autorizada = XmlField('PotenciaMaxAutorizada')
-        self.tension_del_suministro = XmlField('TensionDelSuministro')
-        self.derechos_reconocidos = DerechosReconocidos()
-        self.caracteristicas_pm = CaracteristicasPM()
-        self.historia = Historia()
-        self.equipo_list = []
-        self.doc_tecnica = DocTecnica()
-        self.expediente_anomalia_fraude = ExpedienteAnomaliaFraude()
-        self.expediente_acometida = ExpedienteAcometida()
-
-        super(EnvioInformacionPS, self).__init__('EnvioInformacionPS', 'envio_informacion_ps')
-
-
-class EstadoContratable(XmlModel):
-
-    _sort_order = ('estado_contratable', 'contratable', 'motivo')
-
-    def __init__(self):
-        self.estado_contratable = XmlField('EstadoContratable')
-        self.contratable = XmlField('Contratable')
-        self.motivo = XmlField('Motivo')
-        super(EstadoContratable, self).__init__('EstadoContratable', 'estado_contratable')
-
-
-class Contrato(XmlModel):
-
-    _sort_order = ('contrato', 'tipo_contrato_atr', 'fecha_finalizacion', 'tipo_autoconsumo',
-                   'fecha_ultimo_movimiento_tipo_autocons', 'ind_bono_social', 'ind_esencial', 'vivienda_habitual',
-                   'cnae', 'condiciones_contractuales', 'modo_facturacion_potencia', 'no_interrumpible',
-                   'potencia_no_interrumpible', 'potencia_max_sin_expediente', 'vas_trafo', 'periodicidad_facturacion',
-                   'tipo_de_telegestion', 'icp_activado_telegestion', 'peaje_directo', 'deposito_garantia')
-
-    def __init__(self):
-        self.contrato = XmlField('Contrato')
-        self.tipo_contrato_atr = XmlField('TipoContratoATR')
-        self.fecha_finalizacion = XmlField('FechaFinalizacion')
-        self.tipo_autoconsumo = XmlField('TipoAutoconsumo')
         self.fecha_ultimo_movimiento_tipo_autocons = XmlField('FechaUltimoMovimientoTipoAutocons')
         self.ind_bono_social = XmlField('IndBonoSocial')
         self.ind_esencial = XmlField('IndEsencial')
+        self.fecha_ultimo_movimiento_ind_esencial = XmlField('FechaUltimoMovimientoIndEsencial')
         self.vivienda_habitual = XmlField('ViviendaHabitual')
         self.cnae = XmlField('CNAE')
         self.condiciones_contractuales = CondicionesContractuales()
         self.modo_facturacion_potencia = XmlField('ModoFacturacionPotencia')
         self.no_interrumpible = XmlField('NoInterrumpible')
         self.potencia_no_interrumpible = XmlField('PotenciaNoInterrumpible')
-        self.potencia_max_sin_expediente = XmlField('PotenciaMaxSinExpediente')
         self.vas_trafo = XmlField('VAsTrafo')
         self.periodicidad_facturacion = XmlField('PeriodicidadFacturacion')
         self.tipo_de_telegestion = XmlField('TipodeTelegestion')
         self.icp_activado_telegestion = XmlField('ICPActivadoTelegestion')
         self.peaje_directo = XmlField('PeajeDirecto')
         self.deposito_garantia = XmlField('DepositoGarantia')
+        self.potencia_maxima_autorizada = XmlField('PotenciaMaxAutorizada')
+        self.tension_del_suministro = XmlField('TensionDelSuministro')
+        self.derechos_reconocidos = DerechosReconocidos()
+        self.caracteristicas_pm = CaracteristicasPM()
+        self.cliente = Cliente()
+        self.historia = Historia()
+        self.equipo_list = []
+        self.doc_tecnica = DocTecnica()
+        self.expediente_anomalia_fraude = ExpedienteAnomaliaFraude()
+        self.expediente_acometida = ExpedienteAcometida()
+        self.puntos_de_medida = PuntosDeMedida()
+
+        super(EnvioInformacionPS, self).__init__('EnvioInformacionPS', 'envio_informacion_ps')
+
+
+class EstadoContratable(XmlModel):
+
+    _sort_order = ('estado_contratable', 'contratable', 'motivo', 'potencia_max_sin_expediente')
+
+    def __init__(self):
+        self.estado_contratable = XmlField('EstadoContratable')
+        self.contratable = XmlField('Contratable')
+        self.motivo = XmlField('Motivo')
+        self.potencia_max_sin_expediente = XmlField('PotenciaMaxSinExpediente')
+        super(EstadoContratable, self).__init__('EstadoContratable', 'estado_contratable')
+
+
+class Cliente(Cliente):
+    _sort_order = ('cliente', 'id_cliente', 'nombre', 'indicador_tipo_direccion', 'direccion_suministro', 'telefonos',
+                   'correo_electronico')
+
+    def __init__(self):
+        super(Cliente, self).__init__()
+        self.direccion_suministro = Direccion(name='DireccionSuministro')
+
+
+class Contrato(XmlModel):
+
+    _sort_order = ('contrato', 'tipo_contrato_atr', 'fecha_finalizacion', 'autoconsumo',)
+
+    def __init__(self):
+        self.contrato = XmlField('Contrato')
+        self.tipo_contrato_atr = XmlField('TipoContratoATR')
+        self.fecha_finalizacion = XmlField('FechaFinalizacion')
+        self.autoconsumo = Autoconsumo()
+
         super(Contrato, self).__init__('Contrato', 'contrato')
 
 
@@ -151,13 +167,12 @@ class DerechosReconocidos(XmlModel):
 
 class CaracteristicasPM(XmlModel):
 
-    _sort_order = ('caracteristicas_pm', 'tipo_pm', 'tension_pm', 'relacion_transformacion_intensidad')
+    _sort_order = ('caracteristicas_pm', 'tipo_pm', 'tension_pm')
 
     def __init__(self):
         self.caracteristicas_pm = XmlField('CaracteristicasPM')
         self.tipo_pm = XmlField('TipoPM')
         self.tension_pm = XmlField('TensionPM')
-        self.relacion_transformacion_intensidad = XmlField('RelacionTransformacionIntensidad')
         super(CaracteristicasPM, self).__init__('CaracteristicasPM', 'caracteristicas_pm')
 
 
@@ -179,7 +194,7 @@ class Historia(XmlModel):
 class Equipo(XmlModel):
 
     _sort_order = ('equipo', 'tipo_aparato', 'tipo_equipo', 'tipo_propiedad',
-                   'codigo_fases_equipo_medida', 'tipo_dh_edm')
+                   'codigo_fases_equipo_medida', 'tipo_dh_edm', 'relacion_transformacion_intensidad')
 
     def __init__(self):
         self.equipo = XmlField('Equipo')
@@ -188,15 +203,17 @@ class Equipo(XmlModel):
         self.tipo_propiedad = XmlField('TipoPropiedad')
         self.codigo_fases_equipo_medida = XmlField('CodigoFasesEquipoMedida')
         self.tipo_dh_edm = XmlField('TipoDHEdM')
+        self.relacion_transformacion_intensidad = XmlField('RelacionTransformacionIntensidad')
         super(Equipo, self).__init__('Equipo', 'equipo')
 
 
 class DocTecnica(XmlModel):
 
-    _sort_order = ('doc_tecnica', 'datos_cie', 'datos_apm')
+    _sort_order = ('doc_tecnica', 'cie_disponible', 'datos_cie', 'datos_apm')
 
     def __init__(self):
         self.doc_tecnica = XmlField('DocTecnica')
+        self.cie_disponible = XmlField('CIEDisponible')
         self.datos_cie = DatosCie()
         self.datos_apm = DatosAPM()
         super(DocTecnica, self).__init__('DocTecnica', 'doc_tecnica')
@@ -204,10 +221,11 @@ class DocTecnica(XmlModel):
 
 class DatosCie(XmlModel):
 
-    _sort_order = ('datos_cie', 'cie_papel', 'cie_electronico', 'validez_cie')
+    _sort_order = ('datos_cie', 'potencia_ins_bt', 'cie_papel', 'cie_electronico', 'validez_cie')
 
     def __init__(self):
         self.datos_cie = XmlField('DatosCie')
+        self.potencia_ins_bt = XmlField('PotenciaInsBT')
         self.cie_papel = CIEPapel()
         self.cie_electronico = CIEElectronico()
         self.validez_cie = XmlField('ValidezCIE')
@@ -272,6 +290,28 @@ class ExpedienteAcometida(XmlModel):
         self.expediente_abierto = XmlField('ExpedienteAbierto')
         self.codigo_motivo_expediente = XmlField('CdigoMotivoExpediente')
         super(ExpedienteAcometida, self).__init__('ExpedienteAcometida', 'expediente_acometida')
+
+
+class PuntosDeMedida(XmlModel):
+
+    _sort_order = ('puntos_de_medida', 'puntos_de_medida_list')
+
+    def __init__(self):
+        self.puntos_de_medida = XmlField('PuntosDeMedida')
+        self.puntos_de_medida_list = []
+        super(PuntosDeMedida, self).__init__('PuntosDeMedida', 'puntos_de_medida')
+
+
+class PuntoDeMedida(XmlModel):
+
+    _sort_order = ('punto_de_medida', 'direccion_enlace', 'telefono_telemedida', 'clave_acceso')
+
+    def __init__(self):
+        self.punto_de_medida = XmlField('PuntoDeMedida')
+        self.direccion_enlace = XmlField('DireccionEnlace')
+        self.telefono_telemedida = XmlField('TelefonoTelemedida')
+        self.clave_acceso = XmlField('ClaveAcceso')
+        super(PuntoDeMedida, self).__init__('PuntoDeMedida', 'punto_de_medida')
 
 
 # Paso 02 (Rechazo)

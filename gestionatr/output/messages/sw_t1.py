@@ -37,7 +37,7 @@ class SolicitudTraspasoCOR(XmlModel):
 class DatosSolicitud(XmlModel):
 
     _sort_order = ('datos_solicitud', 'motivo_traspaso', 'fecha_prevista_accion', 'cnae',
-                   'ind_esencial', 'susp_baja_impago_en_curso')
+                   'ind_esencial', 'fecha_ultimo_movimiento_ind_esencial', 'susp_baja_impago_en_curso')
 
     def __init__(self):
         self.datos_solicitud = XmlField('DatosSolicitud')
@@ -45,6 +45,7 @@ class DatosSolicitud(XmlModel):
         self.fecha_prevista_accion = XmlField('FechaPrevistaAccion')
         self.cnae = XmlField('CNAE')
         self.ind_esencial = XmlField('IndEsencial')
+        self.fecha_ultimo_movimiento_ind_esencial = XmlField('FechaUltimoMovimientoIndEsencial')
         self.susp_baja_impago_en_curso = XmlField('SuspBajaImpagoEnCurso')
 
         super(DatosSolicitud, self).__init__('DatosSolicitud', 'datos_solicitud')
@@ -52,7 +53,7 @@ class DatosSolicitud(XmlModel):
 
 class ContratoT101(Contrato):
 
-    _sort_order = ('contrato', 'fecha_finalizacion', 'tipo_autoconsumo', 'tipo_contrato_atr',
+    _sort_order = ('contrato', 'fecha_finalizacion', 'autoconsumo', 'tipo_contrato_atr',
                    'condiciones_contractuales', 'periodicidad_facturacion', 'consumo_anual_estimado', 'contacto')
 
     def __init__(self):
@@ -141,12 +142,15 @@ class ActivacionTraspasoCOR(XmlModel):
 
 class DatosActivacion(XmlModel):
 
-    _sort_order = ('datos_activacion', 'fecha_activacion', 'en_servicio')
+    _sort_order = ('datos_activacion', 'fecha_activacion', 'en_servicio', 'ind_esencial',
+                   'fecha_ultimo_movimiento_ind_esencial')
 
     def __init__(self):
         self.datos_activacion = XmlField('DatosActivacion')
         self.fecha_activacion = XmlField('FechaActivacion')
         self.en_servicio = XmlField('EnServicio')
+        self.ind_esencial = XmlField('IndEsencial')
+        self.fecha_ultimo_movimiento_ind_esencial = XmlField('FechaUltimoMovimientoIndEsencial')
         super(DatosActivacion, self).__init__('DatosActivacion', 'datos_activacion')
 
 

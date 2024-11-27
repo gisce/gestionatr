@@ -170,6 +170,24 @@ class DatosSolicitud(object):
         return data
 
     @property
+    def ind_esencial(self):
+        data = False
+        try:
+            data = self.datos_solicitud.IndEsencial.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def fecha_ultimo_movimiento_ind_esencial(self):
+        data = False
+        try:
+            data = self.datos_solicitud.FechaUltimoMovimientoIndEsencial.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
     def fecha_prevista_accion(self):
         data = False
         try:
@@ -600,7 +618,7 @@ class DatosActivacion(object):
     def ind_esencial(self):
         data = False
         try:
-            data = self.datos_solicitud.IndEsencial.text
+            data = self.datos_activacion.IndEsencial.text
         except AttributeError:
             pass
         return data
@@ -609,7 +627,7 @@ class DatosActivacion(object):
     def fecha_ultimo_movimiento_ind_esencial(self):
         data = False
         try:
-            data = self.datos_solicitud.FechaUltimoMovimientoIndEsencial.text
+            data = self.datos_activacion.FechaUltimoMovimientoIndEsencial.text
         except AttributeError:
             pass
         return data
@@ -1087,9 +1105,10 @@ class Autoconsumo(object):
 
     @property
     def datos_cau(self):
-        data = ''
+        data = []
         try:
-            data = DatosCAU(self.autoconsumo.DatosCAU)
+            for datos in self.autoconsumo.DatosCAU:
+                data.append(DatosCAU(datos))
         except AttributeError:
             pass
         return data

@@ -8,6 +8,7 @@ from .A3 import A3
 from .B1 import B1
 from .B2 import B2
 from .M1 import M1
+from .M2 import M2
 from .D1 import D1
 from .E1 import E1
 from .W1 import W1

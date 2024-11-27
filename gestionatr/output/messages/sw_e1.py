@@ -112,20 +112,23 @@ class MensajeNotificacionActivacionPorDesistimiento(XmlModel):
 
 class NotificacionActivacionPorDesistimiento(XmlModel):
 
-    _sort_order = ('notificacion_activacion_desistimiento', 'datos_activacion', 'contrato', 'puntos_de_medida')
+    _sort_order = ('notificacion_activacion_desistimiento', 'datos_activacion', 'contrato', 'puntos_de_medida',
+                   'registros_documento')
 
     def __init__(self):
         self.notificacion_activacion_desistimiento = XmlField('NotificacionActivacionPorDesistimiento')
         self.datos_activacion = DatosActivacion()
         self.contrato = Contrato()
         self.puntos_de_medida = PuntosDeMedida()
+        self.registros_documento = RegistrosDocumento()
         super(NotificacionActivacionPorDesistimiento, self).__init__('NotificacionActivacionPorDesistimiento',
                                                                      'notificacion_activacion_desistimiento')
 
 
 class DatosActivacion(DatosActivacion):
 
-    _sort_order = ('datos_activacion', 'fecha', 'en_servicio', 'ind_anulable')
+    _sort_order = ('datos_activacion', 'fecha', 'en_servicio', 'ind_anulable', 'ind_esencial',
+                   'fecha_ultimo_movimiento_ind_esencial')
 
     def __init__(self):
         super(DatosActivacion, self).__init__()
@@ -144,11 +147,12 @@ class Medida(Medida):
 
 class Contrato(Contrato):
 
-    _sort_order = ('contrato', 'id_contrato', 'tipo_autoconsumo', 'tipo_contrato_atr', 'condiciones_contractuales')
+    _sort_order = ('contrato', 'id_contrato', 'autoconsumo', 'tipo_contrato_atr', 'cups_principal',
+                   'condiciones_contractuales')
 
     def __init__(self):
         super(Contrato, self).__init__()
-
+        self.cups_principal = XmlField('CUPSPrincipal')
 
 # Paso 12
 
