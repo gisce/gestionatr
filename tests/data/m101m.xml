@@ -14,7 +14,7 @@
         <DatosSolicitud>
             <TipoModificacion>M</TipoModificacion>
             <CNAE>2222</CNAE>
-            <IndEsencial>00</IndEsencial>
+            <IndEsencial>01</IndEsencial>
             <FechaUltimoMovimientoIndEsencial>2016-06-06</FechaUltimoMovimientoIndEsencial>
             <PeriodicidadFacturacion>01</PeriodicidadFacturacion>
             <IndActivacion>A</IndActivacion>

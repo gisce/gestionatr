@@ -74,30 +74,29 @@
                     </DatosInstGen>
                 </DatosCAU>
             </Autoconsumo>
-            <FechaUltimoMovimientoTipoAutocons>2020-01-01</FechaUltimoMovimientoTipoAutocons>
-            <IndBonoSocial>N</IndBonoSocial>
-            <IndEsencial>N</IndEsencial>
-            <FechaUltimoMovimientoIndEsencial>2016-05-05</FechaUltimoMovimientoIndEsencial>
-            <ViviendaHabitual>S</ViviendaHabitual>
-            <CNAE>9820</CNAE>
-            <CondicionesContractuales>
-                <TarifaATR>018</TarifaATR>
-                <PotenciasContratadas>
-                    <Potencia Periodo="1">6000</Potencia>
-                </PotenciasContratadas>
-                <ModoControlPotencia>1</ModoControlPotencia>
-            </CondicionesContractuales>
-            <ModoFacturacionPotencia>9</ModoFacturacionPotencia>
-            <NoInterrumpible>S</NoInterrumpible>
-            <PotenciaNoInterrumpible>6000</PotenciaNoInterrumpible>
-            <PotenciaMaxSinExpediente>8000</PotenciaMaxSinExpediente>
-            <VAsTrafo>50</VAsTrafo>
-            <PeriodicidadFacturacion>01</PeriodicidadFacturacion>
-            <TipodeTelegestion>01</TipodeTelegestion>
-            <ICPActivadoTelegestion>S</ICPActivadoTelegestion>
-            <PeajeDirecto>S</PeajeDirecto>
-            <DepositoGarantia>N</DepositoGarantia>
         </Contrato>
+        <FechaUltimoMovimientoTipoAutocons>2020-01-01</FechaUltimoMovimientoTipoAutocons>
+        <IndBonoSocial>N</IndBonoSocial>
+        <IndEsencial>00</IndEsencial>
+        <FechaUltimoMovimientoIndEsencial>2016-05-05</FechaUltimoMovimientoIndEsencial>
+        <ViviendaHabitual>S</ViviendaHabitual>
+        <CNAE>9820</CNAE>
+        <CondicionesContractuales>
+            <TarifaATR>018</TarifaATR>
+            <PotenciasContratadas>
+                <Potencia Periodo="1">6000</Potencia>
+            </PotenciasContratadas>
+            <ModoControlPotencia>1</ModoControlPotencia>
+        </CondicionesContractuales>
+        <ModoFacturacionPotencia>9</ModoFacturacionPotencia>
+        <NoInterrumpible>S</NoInterrumpible>
+        <PotenciaNoInterrumpible>6000</PotenciaNoInterrumpible>
+        <VAsTrafo>50</VAsTrafo>
+        <PeriodicidadFacturacion>01</PeriodicidadFacturacion>
+        <TipodeTelegestion>01</TipodeTelegestion>
+        <ICPActivadoTelegestion>S</ICPActivadoTelegestion>
+        <PeajeDirecto>S</PeajeDirecto>
+        <DepositoGarantia>N</DepositoGarantia>
         <PotenciaMaxAutorizada>10000</PotenciaMaxAutorizada>
         <TensionDelSuministro>02</TensionDelSuministro>
         <DerechosReconocidos>
@@ -108,7 +107,6 @@
         <CaracteristicasPM>
             <TipoPM>05</TipoPM>
             <TensionPM>220</TensionPM>
-            <RelacionTransformacionIntensidad>20/1000</RelacionTransformacionIntensidad>
         </CaracteristicasPM>
         <Historia>
             <FechaUltimoMovimientoContratacion>1900-01-01</FechaUltimoMovimientoContratacion>
@@ -143,13 +141,13 @@
                     <Puerta>001</Puerta>
                     <TipoAclaradorFinca>BI</TipoAclaradorFinca>
                     <AclaradorFinca>Bloque de Pisos</AclaradorFinca>
-                    <Telefono>
-                        <PrefijoPais>0034</PrefijoPais>
-                        <Numero>633834841</Numero>
-                    </Telefono>
-                    <CorreoElectronico>a@mail.com</CorreoElectronico>
                 </Via>
             </DireccionSuministro>
+            <Telefono>
+                <PrefijoPais>0034</PrefijoPais>
+                <Numero>633834841</Numero>
+            </Telefono>
+            <CorreoElectronico>a@mail.com</CorreoElectronico>
         </Cliente>
         <Equipo>
             <TipoAparato>TT</TipoAparato>
@@ -168,9 +166,9 @@
             <RelacionTransformacionIntensidad>10/100</RelacionTransformacionIntensidad>
         </Equipo>
         <DocTecnica>
-            <CieDisponible>S</CieDisponible>
+            <CIEDisponible>S</CIEDisponible>
             <DatosCie>
-                <PotenciaInstBT>2000</PotenciaInstBT>
+                <PotenciaInsBT>2000</PotenciaInsBT>
                 <CIEPapel>
                     <CodigoCie>12345678901234567890123456789012345</CodigoCie>
                     <FechaEmisionCie>2020-03-01</FechaEmisionCie>

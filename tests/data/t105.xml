@@ -14,7 +14,7 @@
         <DatosActivacion>
             <FechaActivacion>2016-08-21</FechaActivacion>
             <EnServicio>S</EnServicio>
-            <IndEsencial>S</IndEsencial>
+            <IndEsencial>01</IndEsencial>
             <FechaUltimoMovimientoIndEsencial>2016-06-06</FechaUltimoMovimientoIndEsencial>
         </DatosActivacion>
         <Contrato>

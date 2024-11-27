@@ -27,13 +27,248 @@ from gestionatr.output.messages import sw_d1 as d1
 from gestionatr.output.messages import sw_e1 as e1
 from gestionatr.output.messages import sw_f1 as f1
 from gestionatr.output.messages import sw_m1 as m1
+from gestionatr.output.messages import sw_m2 as m2
 from gestionatr.output.messages import sw_p0 as p0
 from gestionatr.output.messages import sw_q1 as q1
 from gestionatr.output.messages import sw_r1 as r1
 from gestionatr.output.messages import sw_t1 as t1
 from gestionatr.output.messages import sw_w1 as w1
 from . import unittest
-from .utils import get_data, assertXmlEqual, get_header, get_cliente, get_contacto, get_medida
+from .utils import get_data, assertXmlEqual, get_header, get_cliente, get_contacto, get_medida_resto
+
+
+def get_puntos_medida(obj_proces):
+
+    # El obj_proces equival a c1,c2,m1...
+
+    # PuntosDeMedida
+    puntos_de_medida = obj_proces.PuntosDeMedida()
+    # PuntoDeMedida
+    punto_de_medida = obj_proces.PuntoDeMedida()
+    # Aparatos
+    aparatos = obj_proces.Aparatos()
+    # Aparato
+    aparato = obj_proces.Aparato()
+
+    # ModeloAparato
+    modelo_aparato = obj_proces.ModeloAparato()
+    modelo_aparato_fields = {
+        'tipo_aparato': 'CG',
+        'marca_aparato': '132',
+        'modelo_marca': '011',
+    }
+    modelo_aparato.feed(modelo_aparato_fields)
+
+    # DatosAparato
+    datos_aparato = obj_proces.DatosAparato()
+    datos_aparato_fields = {
+        'periodo_fabricacion': '2005',
+        'numero_serie': '0000539522',
+        'funcion_aparato': 'M',
+        'num_integradores': '18',
+        'constante_energia': '1.000',
+        'constante_maximetro': '1.000',
+        'ruedas_enteras': '08',
+        'ruedas_decimales': '02',
+    }
+    datos_aparato.feed(datos_aparato_fields)
+    # Medidas
+    medidas = obj_proces.Medidas()
+    # Medida 1
+    medida1 = obj_proces.Medida()
+    medida_fields = {
+        'tipo_dhedm': '6',
+        'periodo': '65',
+        'magnitud_medida': 'PM',
+        'procedencia': '30',
+        'ultima_lectura_firme': '0.00',
+        'fecha_lectura_firme': '2003-01-02',
+        'anomalia': '01',
+        'comentarios': 'Comentario sobre anomalia',
+    }
+    medida1.feed(medida_fields)
+    # Medida 2
+    medida2 = obj_proces.Medida()
+    medida_fields = {
+        'tipo_dhedm': '6',
+        'periodo': '66',
+        'magnitud_medida': 'PM',
+        'procedencia': '30',
+        'ultima_lectura_firme': '6.00',
+        'fecha_lectura_firme': '2003-01-03',
+    }
+    medida2.feed(medida_fields)
+    medidas_fields = {
+        'medida_list': [medida1, medida2],
+    }
+    medidas.feed(medidas_fields)
+
+    aparato_fields = {
+        'modelo_aparato': modelo_aparato,
+        'tipo_movimiento': 'CX',
+        'tipo_equipo_medida': 'L03',
+        'tipo_propiedad_aparato': '1',
+        'propietario': 'Desc. Propietario',
+        'tipo_dhedm': '6',
+        'modo_medida_potencia': '9',
+        'lectura_directa': 'N',
+        'cod_precinto': '02',
+        'datos_aparato': datos_aparato,
+        'medidas': medidas
+    }
+
+    aparato.feed(aparato_fields)
+    aparatos_fields = {
+        'aparato_list': [aparato],
+    }
+    aparatos.feed(aparatos_fields)
+
+    punto_de_medida_fields = {
+        'cod_pm': 'ES1234000000000001JN0F',
+        'tipo_movimiento': 'A',
+        'tipo_pm': '03',
+        'cod_pm_principal': 'ES1234000000000002JN0F',
+        'modo_lectura': '1',
+        'funcion': 'P',
+        'direccion_enlace': '39522',
+        'direccion_punto_medida': '000000001',
+        'num_linea': '12',
+        'telefono_telemedida': '987654321',
+        'estado_telefono': '1',
+        'clave_acceso': '0000000007',
+        'tension_pm': '0',
+        'fecha_vigor': '2003-01-01',
+        'fecha_alta': '2003-01-01',
+        'fecha_baja': '2003-02-01',
+        'aparatos': aparatos,
+        'comentarios': 'Comentarios Varios',
+    }
+    punto_de_medida.feed(punto_de_medida_fields)
+
+    puntos_de_medida_fields = {
+        'punto_de_medida_list': [punto_de_medida],
+    }
+    puntos_de_medida.feed(puntos_de_medida_fields)
+
+    return puntos_de_medida
+
+
+def get_autoconsumo(obj_proces, tipus_info='comer'):
+    '''
+
+    :param obj: fitxer c1, c2, a1 ...
+    :param tipus_info: depenent de si es un pas que emet comer o distri es pasa la info de generador i combustible
+    :return: instancia de classe Autoconsumo
+    '''
+    # DatosSuministro
+    datos_suministro = c1.DatosSuministro()
+    datos_suministro_fields = {
+        'tipo_cups': '01',
+        'ref_catastro': '1234567890qwertyuiop',
+    }
+    datos_suministro.feed(datos_suministro_fields)
+
+    # UTM
+    utm = c1.UTM()
+    utm_fields = {
+        'x': '100',
+        'y': '200',
+        'huso': '40',
+        'banda': 'E',
+    }
+    utm.feed(utm_fields)
+
+    # IdTitular
+    id_titular = c1.IdTitular()
+    id_titular_fields = {
+        'tipo_identificador': 'NI',
+        'identificador': '111111111H',
+    }
+    id_titular.feed(id_titular_fields)
+
+    # Nombre
+    nombre = c1.Nombre()
+    nombre_fields = {
+        'nombre_de_pila': 'Juan',
+        'primer_apellido': 'López',
+        'segundo_apellido': 'Sánchez',
+    }
+    nombre.feed(nombre_fields)
+
+    # Telefono
+    telefono = c1.Telefono()
+    telefono_fields = {
+        'prefijo_pais': '0034',
+        'numero': '933834841',
+    }
+    telefono.feed(telefono_fields)
+
+    # Telefono 2
+    telefono2 = c1.Telefono()
+    telefono2_fields = {
+        'prefijo_pais': '0034',
+        'numero': '633834841',
+    }
+    telefono2.feed(telefono2_fields)
+
+    # Telefono 3
+    telefono3 = c1.Telefono()
+    telefono3_fields = {
+        'prefijo_pais': '0034',
+        'numero': '683834841',
+    }
+    telefono3.feed(telefono3_fields)
+
+    # TitularRepresentanteGen
+    titular = c1.TitularRepresentanteGen()
+    titular_representante_gen_fields = {
+        'id_titular': id_titular,
+        'nombre': nombre,
+        'telefono': [telefono, telefono2, telefono3],
+        'correo_electronico': 'mail_falso@dominio.com',
+    }
+    titular.feed(titular_representante_gen_fields)
+
+    # DatosInstGen
+    datos_1 = c1.DatosInstGen()
+    datos_inst_gen_fields = {
+        'cil': 'ES1234000000000001JN0F001',
+        'pot_instalada_gen': '100',
+        'tipo_instalacion': '01',
+        'esquema_medida': 'B',
+        'ssaa': 'S',
+        'unico_contrato': 'S',
+        'ref_catastro': '1234567890qwertyuidf',
+        'utm': utm,
+        'titular_representante_gen': titular,
+    }
+    if tipus_info == 'distri':
+        datos_inst_gen_fields.update({
+            'tec_generador': 'b12',
+            'combustible': 'Diesel'
+        })
+    datos_1.feed(datos_inst_gen_fields)
+
+    # DatosCAU
+    datos_cau = c1.DatosCAU()
+    datos_cau_fields = {
+        'cau': 'ES1234000000000001JN0FA001',
+        'tipo_autoconsumo': '11',
+        'tipo_subseccion': '10',
+        'colectivo': 'S',
+        'datos_inst_gen': [datos_1],
+    }
+    datos_cau.feed(datos_cau_fields)
+
+    # Autoconsumo
+    autoconsumo = c1.Autoconsumo()
+    autoconsumo_fields = {
+        'datos_suministro': datos_suministro,
+        'datos_cau': datos_cau,
+    }
+    autoconsumo.feed(autoconsumo_fields)
+
+    return autoconsumo
 
 
 class test_C1(unittest.TestCase):
@@ -71,115 +306,7 @@ class test_C1(unittest.TestCase):
 
         self.cliente = get_cliente()
 
-        # PuntosDeMedida
-        self.puntos_de_medida = c1.PuntosDeMedida()
-        # PuntoDeMedida
-        punto_de_medida = c1.PuntoDeMedida()
-        # Aparatos
-        aparatos = c1.Aparatos()
-        # Aparato
-        aparato = c1.Aparato()
-
-        # ModeloAparato
-        modelo_aparato = c1.ModeloAparato()
-        modelo_aparato_fields = {
-            'tipo_aparato': 'CG',
-            'marca_aparato': '132',
-            'modelo_marca': '011',
-        }
-        modelo_aparato.feed(modelo_aparato_fields)
-
-        # DatosAparato
-        datos_aparato = c1.DatosAparato()
-        datos_aparato_fields = {
-            'periodo_fabricacion': '2005',
-            'numero_serie': '0000539522',
-            'funcion_aparato': 'M',
-            'num_integradores': '18',
-            'constante_energia': '1.000',
-            'constante_maximetro': '1.000',
-            'ruedas_enteras': '08',
-            'ruedas_decimales': '02',
-        }
-        datos_aparato.feed(datos_aparato_fields)
-
-        # Medidas
-        medidas = c1.Medidas()
-        # Medida 1
-        medida1 = c1.Medida()
-        medida_fields = {
-            'tipo_dhedm': '6',
-            'periodo': '65',
-            'magnitud_medida': 'PM',
-            'procedencia': '30',
-            'ultima_lectura_firme': '0.00',
-            'fecha_lectura_firme': '2003-01-02',
-            'anomalia': '01',
-            'comentarios': 'Comentario sobre anomalia',
-        }
-        medida1.feed(medida_fields)
-        # Medida 2
-        medida2 = c1.Medida()
-        medida_fields = {
-            'tipo_dhedm': '6',
-            'periodo': '66',
-            'magnitud_medida': 'PM',
-            'procedencia': '30',
-            'ultima_lectura_firme': '6.00',
-            'fecha_lectura_firme': '2003-01-03',
-        }
-        medida2.feed(medida_fields)
-        medidas_fields = {
-            'medida_list': [medida1, medida2],
-        }
-        medidas.feed(medidas_fields)
-
-        aparato_fields = {
-            'modelo_aparato': modelo_aparato,
-            'tipo_movimiento': 'CX',
-            'tipo_equipo_medida': 'L03',
-            'tipo_propiedad_aparato': '1',
-            'propietario': 'Desc. Propietario',
-            'tipo_dhedm': '6',
-            'modo_medida_potencia': '9',
-            'lectura_directa': 'N',
-            'cod_precinto': '02',
-            'datos_aparato': datos_aparato,
-            'medidas': medidas
-        }
-
-        aparato.feed(aparato_fields)
-        aparatos_fields = {
-            'aparato_list': [aparato],
-        }
-        aparatos.feed(aparatos_fields)
-
-        punto_de_medida_fields = {
-            'cod_pm': 'ES1234000000000001JN0F',
-            'tipo_movimiento': 'A',
-            'tipo_pm': '03',
-            'cod_pm_principal': 'ES1234000000000002JN0F',
-            'modo_lectura': '1',
-            'funcion': 'P',
-            'direccion_enlace': '39522',
-            'direccion_punto_medida': '000000001',
-            'num_linea': '12',
-            'telefono_telemedida': '987654321',
-            'estado_telefono': '1',
-            'clave_acceso': '0000000007',
-            'tension_pm': '0',
-            'fecha_vigor': '2003-01-01',
-            'fecha_alta': '2003-01-01',
-            'fecha_baja': '2003-02-01',
-            'aparatos': aparatos,
-            'comentarios': 'Comentarios Varios',
-        }
-        punto_de_medida.feed(punto_de_medida_fields)
-
-        puntos_de_medida_fields = {
-            'punto_de_medida_list': [punto_de_medida],
-        }
-        self.puntos_de_medida.feed(puntos_de_medida_fields)
+        self.puntos_de_medida = get_puntos_medida(c1)
 
     def tearDown(self):
         self.xml_c101_completo.close()
@@ -205,6 +332,8 @@ class test_C1(unittest.TestCase):
         datos_solicitud = c1.DatosSolicitud()
         datos_solicitud_fields = {
             'ind_activacion': 'L',
+            'ind_esencial': '01',
+            'fecha_ultimo_movimiento_ind_esencial': '2016-06-06',
             'fecha_prevista_accion': '2016-06-06',
             'contratacion_incondicional_ps': 'S',
             'contratacion_incondicional_bs': 'S',
@@ -354,6 +483,8 @@ class test_C1(unittest.TestCase):
         datos_activacion_fields = {
             'fecha': '2016-08-21',
             'bono_social': '1',
+            'ind_esencial': '01',
+            'fecha_ultimo_movimiento_ind_esencial': '2016-06-06',
         }
         datos_activacion.feed(datos_activacion_fields)
 
@@ -387,10 +518,115 @@ class test_C1(unittest.TestCase):
         }
         condiciones_contractuales.feed(condiciones_contractuales_fields)
 
+        # DatosSuministro
+        datos_suministro = c1.DatosSuministro()
+        datos_suministro_fields = {
+            'tipo_cups': '01',
+            'ref_catastro': '1234567890qwertyuiop',
+        }
+        datos_suministro.feed(datos_suministro_fields)
+
+        # UTM
+        utm = c1.UTM()
+        utm_fields = {
+            'x': '100',
+            'y': '200',
+            'huso': '40',
+            'banda': 'E',
+        }
+        utm.feed(utm_fields)
+
+        # IdTitular
+        id_titular = c1.IdTitular()
+        id_titular_fields = {
+            'tipo_identificador': 'NI',
+            'identificador': '111111111H',
+        }
+        id_titular.feed(id_titular_fields)
+
+        # Nombre
+        nombre = c1.Nombre()
+        nombre_fields = {
+            'nombre_de_pila': 'Juan',
+            'primer_apellido': 'López',
+            'segundo_apellido': 'Sánchez',
+        }
+        nombre.feed(nombre_fields)
+
+        # Telefono
+        telefono = c1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '0034',
+            'numero': '933834841',
+        }
+        telefono.feed(telefono_fields)
+
+        # Telefono 2
+        telefono2 = c1.Telefono()
+        telefono2_fields = {
+            'prefijo_pais': '0034',
+            'numero': '633834841',
+        }
+        telefono2.feed(telefono2_fields)
+
+        # Telefono 3
+        telefono3 = c1.Telefono()
+        telefono3_fields = {
+            'prefijo_pais': '0034',
+            'numero': '683834841',
+        }
+        telefono3.feed(telefono3_fields)
+
+        # TitularRepresentanteGen
+        titular = c1.TitularRepresentanteGen()
+        titular_representante_gen_fields = {
+            'id_titular': id_titular,
+            'nombre': nombre,
+            'telefono': [telefono, telefono2, telefono3],
+            'correo_electronico': 'mail_falso@dominio.com',
+        }
+        titular.feed(titular_representante_gen_fields)
+
+        # DatosInstGen
+        datos_1 = c1.DatosInstGen()
+        datos_inst_gen_fields = {
+            'cil': 'ES1234000000000001JN0F001',
+            'tec_generador': 'b11',
+            'combustible': 'radiación solar',
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'unico_contrato': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm,
+            'titular_representante_gen': titular,
+        }
+        datos_1.feed(datos_inst_gen_fields)
+
+        # DatosCAU
+        datos_cau = c1.DatosCAU()
+        datos_cau_fields = {
+            'cau': 'ES1234000000000001JN0FA001',
+            'tipo_autoconsumo': '11',
+            'tipo_subseccion': '10',
+            'colectivo': 'S',
+            'datos_inst_gen': [datos_1],
+        }
+        datos_cau.feed(datos_cau_fields)
+
+        # Autoconsumo
+        autoconsumo = c1.Autoconsumo()
+        autoconsumo_fields = {
+            'datos_suministro': datos_suministro,
+            'datos_cau': datos_cau,
+        }
+        autoconsumo.feed(autoconsumo_fields)
+
         contrato_fields = {
             'id_contrato': id_contrato,
             'data_finalitzacio': '2020-01-01',
-            'tipo_autoconsumo': '00',
+            'autoconsumo': autoconsumo,
             'tipo_contrato_atr': '02',
             'condiciones_contractuales': condiciones_contractuales,
         }
@@ -399,10 +635,25 @@ class test_C1(unittest.TestCase):
         # Puntos de Medida
         puntos_de_medida = self.puntos_de_medida
 
+        # RegistroDoc
+        doc1 = c1.RegistroDoc()
+        registro_doc_fields1 = {
+            'tipo_doc_aportado': '07',
+            'direccion_url': 'https://www.google.com/',
+        }
+        doc1.feed(registro_doc_fields1)
+        # RegistrosDocumento
+        registros = c1.RegistrosDocumento()
+        registros_documento_fields = {
+            'registro_doc_list': doc1,
+        }
+        registros.feed(registros_documento_fields)
+
         activacion_cambiode_comercializador_sin_cambios_fields = {
             'datos_activacion': datos_activacion,
             'contrato': contrato,
             'puntos_de_medida': puntos_de_medida,
+            'registros_documento': registros
         }
         act_cambio.feed(
             activacion_cambiode_comercializador_sin_cambios_fields)
@@ -414,6 +665,7 @@ class test_C1(unittest.TestCase):
         mensaje.feed(mensaje_activacion_cambiode_comercializador_sin_cambios_fields)
         mensaje.build_tree()
         xml = str(mensaje)
+
         assertXmlEqual(xml, self.xml_c105.read())
 
     def test_create_pas06(self):
@@ -540,12 +792,14 @@ class test_C2(unittest.TestCase):
         self.xml_c201_completo = open(get_data("c201.xml"), "rb")
         self.xml_c202_accept = open(get_data("c202_accept.xml"), "rb")
         self.xml_c203 = open(get_data("c203.xml"), "rb")
+        self.xml_c205 = open(get_data("c205_only_changes.xml"), "rb")
         self.xml_c213 = open(get_data("c213.xml"), "rb")
 
     def tearDown(self):
         self.xml_c201_completo.close()
         self.xml_c202_accept.close()
         self.xml_c203.close()
+        self.xml_c205.close()
         self.xml_c213.close()
 
     def test_create_pas01(self):
@@ -564,6 +818,8 @@ class test_C2(unittest.TestCase):
             'tipo_modificacion': 'S',
             'tipo_solicitud_administrativa': 'S',
             'cnae': '2222',
+            'ind_esencial': '01',
+            'fecha_ultimo_movimiento_ind_esencial': '2016-06-06',
             'ind_activacion': 'L',
             'fecha_prevista_accion': '2016-06-06',
             'contratacion_incondicional_ps': 'S',
@@ -573,6 +829,109 @@ class test_C2(unittest.TestCase):
             'tension_solicitada': '02'
         }
         datos_solicitud.feed(datos_solicitud_fields)
+
+        # DatosSuministro
+        datos_suministro = c1.DatosSuministro()
+        datos_suministro_fields = {
+            'tipo_cups': '01',
+            'ref_catastro': '1234567890qwertyuiop',
+        }
+        datos_suministro.feed(datos_suministro_fields)
+
+        # UTM
+        utm = c1.UTM()
+        utm_fields = {
+            'x': '100',
+            'y': '200',
+            'huso': '40',
+            'banda': 'E',
+        }
+        utm.feed(utm_fields)
+
+        # IdTitular
+        id_titular = c1.IdTitular()
+        id_titular_fields = {
+            'tipo_identificador': 'NI',
+            'identificador': '111111111H',
+        }
+        id_titular.feed(id_titular_fields)
+
+        # Nombre
+        nombre = c1.Nombre()
+        nombre_fields = {
+            'nombre_de_pila': 'Juan',
+            'primer_apellido': 'López',
+            'segundo_apellido': 'Sánchez',
+        }
+        nombre.feed(nombre_fields)
+
+        # Telefono
+        telefono = c1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '0034',
+            'numero': '933834841',
+        }
+        telefono.feed(telefono_fields)
+
+        # Telefono 2
+        telefono2 = c1.Telefono()
+        telefono2_fields = {
+            'prefijo_pais': '0034',
+            'numero': '633834841',
+        }
+        telefono2.feed(telefono2_fields)
+
+        # Telefono 3
+        telefono3 = c1.Telefono()
+        telefono3_fields = {
+            'prefijo_pais': '0034',
+            'numero': '683834841',
+        }
+        telefono3.feed(telefono3_fields)
+
+        # TitularRepresentanteGen
+        titular = c1.TitularRepresentanteGen()
+        titular_representante_gen_fields = {
+            'id_titular': id_titular,
+            'nombre': nombre,
+            'telefono': [telefono, telefono2, telefono3],
+            'correo_electronico': 'mail_falso@dominio.com',
+        }
+        titular.feed(titular_representante_gen_fields)
+
+        # DatosInstGen
+        datos_1 = c2.DatosInstGen()
+        datos_inst_gen_fields = {
+            'cil': 'ES1234000000000001JN0F001',
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'unico_contrato': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm,
+            'titular_representante_gen': titular,
+        }
+        datos_1.feed(datos_inst_gen_fields)
+
+        # DatosCAU
+        datos_cau = c1.DatosCAU()
+        datos_cau_fields = {
+            'cau': 'ES1234000000000001JN0FA001',
+            'tipo_autoconsumo': '11',
+            'tipo_subseccion': '10',
+            'colectivo': 'S',
+            'datos_inst_gen': [datos_1],
+        }
+        datos_cau.feed(datos_cau_fields)
+
+        # Autoconsumo
+        autoconsumo = c1.Autoconsumo()
+        autoconsumo_fields = {
+            'datos_suministro': datos_suministro,
+            'datos_cau': datos_cau,
+        }
+        autoconsumo.feed(autoconsumo_fields)
 
         # Contrato
         contrato = c2.Contrato()
@@ -596,8 +955,9 @@ class test_C2(unittest.TestCase):
 
         contrato_fields = {
             'fecha_finalizacion': '2018-01-01',
-            'tipo_autoconsumo': '00',
+            'autoconsumo': autoconsumo,
             'tipo_contrato_atr': '02',
+            'cups_principal': "ES1234000000000001JN0F",
             'condiciones_contractuales': condiciones_contractuales,
             'periodicidad_facturacion': '01',
             'consumo_anual_estimado': '5000',
@@ -609,7 +969,7 @@ class test_C2(unittest.TestCase):
         cliente = get_cliente(dir=True, tipo_dir='F')
 
         # Medida
-        medida = get_medida()
+        medida = get_medida_resto()
 
         # DocTecnica
         doc_tecnica = c2.DocTecnica()
@@ -622,7 +982,6 @@ class test_C2(unittest.TestCase):
         cie_papel_fields = {
             'codigo_cie': '1234567',
             'potencia_inst_bt': '3500',
-            'potencia_no_interrumpible': '2000',
             'fecha_emision_cie': '2015-06-04',
             'fecha_caducidad_cie': '',
             'nif_instalador': '12345678Z',
@@ -634,6 +993,7 @@ class test_C2(unittest.TestCase):
         datos_cie_fields = {
             'cie_papel': cie_papel,
             'validez_cie': 'ES',
+            'potencia_no_interrumpible': '2000',
         }
         datos_cie.feed(datos_cie_fields)
 
@@ -655,6 +1015,21 @@ class test_C2(unittest.TestCase):
         }
         doc_tecnica.feed(doc_tecnica_fields)
 
+        # RegistroDoc
+        doc1 = d1.RegistroDoc()
+        registro_doc_fields1 = {
+            'tipo_doc_aportado': '07',
+            'direccion_url': 'https://www.google.com/',
+        }
+        doc1.feed(registro_doc_fields1)
+
+        # RegistrosDocumento
+        registros = d1.RegistrosDocumento()
+        registros_documento_fields = {
+            'registro_doc': doc1,
+        }
+        registros.feed(registros_documento_fields)
+
         cambiode_comercializador_con_cambios_fields = {
             'datos_solicitud': datos_solicitud,
             'contrato': contrato,
@@ -662,6 +1037,8 @@ class test_C2(unittest.TestCase):
             'medida': medida,
             'doc_tecnica': doc_tecnica,
             'comentarios': 'Comentario',
+            'registros_documento': registros
+
         }
         cambiode_comercializador_con_cambios.feed(
             cambiode_comercializador_con_cambios_fields)
@@ -778,6 +1155,182 @@ class test_C2(unittest.TestCase):
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_c203.read())
 
+    def test_create_pas05(self):
+        # MensajeActivacionCambiodeComercializadorConCambios
+        mensaje = c2.MensajeActivacionCambiodeComercializadorConCambios()
+
+        # Cabecera
+        cabecera = get_header(process='C2', step='05')
+
+        # ActivacionCambiodeComercializadorSinCambios
+        act_cambio = c2.ActivacionCambiodeComercializadorConCambios()
+
+        # DatosActivacion
+        datos_activacion = c2.DatosActivacion()
+        datos_activacion_fields = {
+            'fecha': '2016-08-21',
+            'bono_social': '1',
+            'ind_esencial': '01',
+            'fecha_ultimo_movimiento_ind_esencial': '2016-06-06',
+        }
+        datos_activacion.feed(datos_activacion_fields)
+
+        # Contrato
+        contrato = c2.Contrato()
+
+        # IdContrato
+        id_contrato = c2.IdContrato()
+        id_contrato_fields = {
+            'cod_contrato': '00001',
+        }
+        id_contrato.feed(id_contrato_fields)
+
+        # DatosSuministro
+        datos_suministro = c2.DatosSuministro()
+        datos_suministro_fields = {
+            'tipo_cups': '01',
+            'ref_catastro': '1234567890qwertyuiop',
+        }
+        datos_suministro.feed(datos_suministro_fields)
+
+        # UTM
+        utm = c2.UTM()
+        utm_fields = {
+            'x': '100',
+            'y': '200',
+            'huso': '40',
+            'banda': 'E',
+        }
+        utm.feed(utm_fields)
+
+        # IdTitular
+        id_titular = c2.IdTitular()
+        id_titular_fields = {
+            'tipo_identificador': 'NI',
+            'identificador': '111111111H',
+        }
+        id_titular.feed(id_titular_fields)
+
+        # Nombre
+        nombre = c2.Nombre()
+        nombre_fields = {
+            'nombre_de_pila': 'Juan',
+            'primer_apellido': 'López',
+            'segundo_apellido': 'Sánchez',
+        }
+        nombre.feed(nombre_fields)
+
+        # Telefono
+        telefono = c2.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '0034',
+            'numero': '933834841',
+        }
+        telefono.feed(telefono_fields)
+
+        # Telefono 2
+        telefono2 = c2.Telefono()
+        telefono2_fields = {
+            'prefijo_pais': '0034',
+            'numero': '633834841',
+        }
+        telefono2.feed(telefono2_fields)
+
+        # Telefono 3
+        telefono3 = c2.Telefono()
+        telefono3_fields = {
+            'prefijo_pais': '0034',
+            'numero': '683834841',
+        }
+        telefono3.feed(telefono3_fields)
+
+        # TitularRepresentanteGen
+        titular = c2.TitularRepresentanteGen()
+        titular_representante_gen_fields = {
+            'id_titular': id_titular,
+            'nombre': nombre,
+            'telefono': [telefono, telefono2, telefono3],
+            'correo_electronico': 'mail_falso@dominio.com',
+        }
+        titular.feed(titular_representante_gen_fields)
+
+        # DatosInstGen
+        datos_1 = c2.DatosInstGen()
+        datos_inst_gen_fields = {
+            'cil': 'ES1234000000000001JN0F001',
+            'tec_generador': 'b12',
+            'combustible': 'Diesel',
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'unico_contrato': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm,
+            'titular_representante_gen': titular,
+        }
+        datos_1.feed(datos_inst_gen_fields)
+
+        # DatosCAU
+        datos_cau = c2.DatosCAU()
+        datos_cau_fields = {
+            'cau': 'ES1234000000000001JN0FA001',
+            'tipo_autoconsumo': '11',
+            'tipo_subseccion': '10',
+            'colectivo': 'S',
+            'datos_inst_gen': [datos_1],
+        }
+        datos_cau.feed(datos_cau_fields)
+
+        # Autoconsumo
+        autoconsumo = c2.Autoconsumo()
+        autoconsumo_fields = {
+            'datos_suministro': datos_suministro,
+            'datos_cau': datos_cau,
+        }
+        autoconsumo.feed(autoconsumo_fields)
+
+        contrato_fields = {
+            'id_contrato': id_contrato,
+            'fecha_finalizacion': '2020-01-01',
+            'autoconsumo': autoconsumo,
+            'tipo_contrato_atr': '02',
+            'cups_principal': "ES1234000000000001JN0F"
+        }
+        contrato.feed(contrato_fields)
+
+        # RegistroDoc
+        doc1 = c2.RegistroDoc()
+        registro_doc_fields1 = {
+            'tipo_doc_aportado': '07',
+            'direccion_url': 'https://www.google.com/',
+        }
+        doc1.feed(registro_doc_fields1)
+
+        # RegistrosDocumento
+        registros = c2.RegistrosDocumento()
+        registros_documento_fields = {
+            'registro_doc_list': doc1,
+        }
+        registros.feed(registros_documento_fields)
+
+        activacion_cambiode_comercializador_con_cambios_fields = {
+            'datos_activacion': datos_activacion,
+            'contrato': contrato,
+            'registros_documento': registros
+        }
+        act_cambio.feed(
+            activacion_cambiode_comercializador_con_cambios_fields)
+
+        mensaje_activacion_cambiode_comercializador_con_cambios_fields = {
+            'cabecera': cabecera,
+            'activacion_cambiode_comercializador_con_cambios': act_cambio,
+        }
+        mensaje.feed(mensaje_activacion_cambiode_comercializador_con_cambios_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_c205.read())
+
     def test_create_pas13(self):
         # MensajeContestacionIncidencia
         mensaje = c2.MensajeContestacionIncidencia()
@@ -850,7 +1403,7 @@ class test_A1(unittest.TestCase):
             cabecera.feed(cabecera_fields)
 
             # Autoconsumo
-            autoconsumo = d1.Autoconsumo()
+            autoconsumo = a1.Autoconsumo()
             autoconsumo_fields = {
                 'cau': 'ES1234000000000001JN0FA001',
                 'seccion_registro': '1',
@@ -860,7 +1413,7 @@ class test_A1(unittest.TestCase):
             autoconsumo.feed(autoconsumo_fields)
 
             # DatosSuministro
-            suministro_1 = d1.DatosSuministro()
+            suministro_1 = a1.DatosSuministro()
             suministro_fields = {
                 'cups': 'ES1234000000000001JN0F',
                 'tipo_cups': '01',
@@ -868,7 +1421,7 @@ class test_A1(unittest.TestCase):
             }
             suministro_1.feed(suministro_fields)
 
-            suministro_2 = d1.DatosSuministro()
+            suministro_2 = a1.DatosSuministro()
             suministro_fields = {
                 'cups': 'ES1234000000000002JN0F',
                 'tipo_cups': '01',
@@ -876,7 +1429,7 @@ class test_A1(unittest.TestCase):
             }
             suministro_2.feed(suministro_fields)
 
-            suministro_3 = d1.DatosSuministro()
+            suministro_3 = a1.DatosSuministro()
             suministro_fields = {
                 'cups': 'ES1234000000000003JN0F',
                 'tipo_cups': '01',
@@ -885,7 +1438,7 @@ class test_A1(unittest.TestCase):
             suministro_3.feed(suministro_fields)
 
             # UTM
-            utm = d1.UTM()
+            utm = a1.UTM()
             utm_fields = {
                 'x': '100',
                 'y': '200',
@@ -895,7 +1448,7 @@ class test_A1(unittest.TestCase):
             utm.feed(utm_fields)
 
             # IdTitular
-            id_titular = d1.IdTitular()
+            id_titular = a1.IdTitular()
             id_titular_fields = {
                 'tipo_identificador': 'NI',
                 'identificador': '111111111H',
@@ -903,7 +1456,7 @@ class test_A1(unittest.TestCase):
             id_titular.feed(id_titular_fields)
 
             # Nombre
-            nombre = d1.Nombre()
+            nombre = a1.Nombre()
             nombre_fields = {
                 'nombre_de_pila': 'Juan',
                 'primer_apellido': 'López',
@@ -912,7 +1465,7 @@ class test_A1(unittest.TestCase):
             nombre.feed(nombre_fields)
 
             # Telefono
-            telefono = d1.Telefono()
+            telefono = a1.Telefono()
             telefono_fields = {
                 'prefijo_pais': '0034',
                 'numero': '933834841',
@@ -920,7 +1473,7 @@ class test_A1(unittest.TestCase):
             telefono.feed(telefono_fields)
 
             # Telefono 2
-            telefono2 = d1.Telefono()
+            telefono2 = a1.Telefono()
             telefono2_fields = {
                 'prefijo_pais': '0034',
                 'numero': '633834841',
@@ -928,7 +1481,7 @@ class test_A1(unittest.TestCase):
             telefono2.feed(telefono2_fields)
 
             # Telefono 3
-            telefono3 = d1.Telefono()
+            telefono3 = a1.Telefono()
             telefono3_fields = {
                 'prefijo_pais': '0034',
                 'numero': '683834841',
@@ -936,7 +1489,7 @@ class test_A1(unittest.TestCase):
             telefono3.feed(telefono3_fields)
 
             # Via
-            via = d1.Via()
+            via = a1.Via()
             via_fields = {
                 'tipo_via': 'CL',
                 'calle': 'Pau Casals',
@@ -951,7 +1504,7 @@ class test_A1(unittest.TestCase):
             via.feed(via_fields)
 
             # Direccion
-            direccion = d1.Direccion()
+            direccion = a1.Direccion()
             direccion_fields = {
                 'pais': 'España',
                 'provincia': '17',
@@ -963,7 +1516,7 @@ class test_A1(unittest.TestCase):
             direccion.feed(direccion_fields)
 
             # TitularRepresentanteGen
-            titular = d1.TitularRepresentanteGen()
+            titular = a1.TitularRepresentanteGen()
             titular_representante_gen_fields = {
                 'id_titular': id_titular,
                 'nombre': nombre,
@@ -974,7 +1527,7 @@ class test_A1(unittest.TestCase):
             titular.feed(titular_representante_gen_fields)
 
             # DatosInstGen
-            datos_1 = d1.DatosInstGen()
+            datos_1 = a1.DatosInstGen()
             datos_inst_gen_fields = {
                 'cil': 'ES1234000000000001JN0F001',
                 'tec_generador': 'b12',
@@ -992,7 +1545,7 @@ class test_A1(unittest.TestCase):
             # utm2 = copy.deepcopy(utm)
             # titular2 = copy.deepcopy(titular)
 
-            datos_2 = d1.DatosInstGen()
+            datos_2 = a1.DatosInstGen()
             datos_inst_gen_fields = {
                 'cil': 'ES1234000000000002JN0F001',
                 'tec_generador': 'b11',
@@ -1153,10 +1706,12 @@ class test_A3(unittest.TestCase):
     def setUp(self):
         self.xml_a301 = open(get_data("a301.xml"), "rb")
         self.xml_a301_correos = open(get_data("a301_correos.xml"), "rb")
+        self.xml_a305_elec = open(get_data("a305_elec.xml"), "rb")
 
     def tearDown(self):
         self.xml_a301.close()
         self.xml_a301_correos.close()
+        self.xml_a305_elec.close()
 
     def test_create_pas01(self):
         # MensajeAlta
@@ -1172,6 +1727,8 @@ class test_A3(unittest.TestCase):
         datos_solicitud = a3.DatosSolicitud()
         datos_solicitud_fields = {
             'cnae': '2222',
+            'ind_esencial': '01',
+            'fecha_ultimo_movimiento_ind_esencial': '2016-06-06',
             'ind_activacion': 'L',
             'fecha_prevista_accion': '2016-06-06',
             'solicitud_tension': 'S',
@@ -1200,10 +1757,114 @@ class test_A3(unittest.TestCase):
         # Contacto
         contacto = get_contacto(email=False)
 
+        # DatosSuministro
+        datos_suministro = c1.DatosSuministro()
+        datos_suministro_fields = {
+            'tipo_cups': '01',
+            'ref_catastro': '1234567890qwertyuiop',
+        }
+        datos_suministro.feed(datos_suministro_fields)
+
+        # UTM
+        utm = c1.UTM()
+        utm_fields = {
+            'x': '100',
+            'y': '200',
+            'huso': '40',
+            'banda': 'E',
+        }
+        utm.feed(utm_fields)
+
+        # IdTitular
+        id_titular = c1.IdTitular()
+        id_titular_fields = {
+            'tipo_identificador': 'NI',
+            'identificador': '111111111H',
+        }
+        id_titular.feed(id_titular_fields)
+
+        # Nombre
+        nombre = c1.Nombre()
+        nombre_fields = {
+            'nombre_de_pila': 'Juan',
+            'primer_apellido': 'López',
+            'segundo_apellido': 'Sánchez',
+        }
+        nombre.feed(nombre_fields)
+
+        # Telefono
+        telefono = c1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '0034',
+            'numero': '933834841',
+        }
+        telefono.feed(telefono_fields)
+
+        # Telefono 2
+        telefono2 = c1.Telefono()
+        telefono2_fields = {
+            'prefijo_pais': '0034',
+            'numero': '633834841',
+        }
+        telefono2.feed(telefono2_fields)
+
+        # Telefono 3
+        telefono3 = c1.Telefono()
+        telefono3_fields = {
+            'prefijo_pais': '0034',
+            'numero': '683834841',
+        }
+        telefono3.feed(telefono3_fields)
+
+        # TitularRepresentanteGen
+        titular = c1.TitularRepresentanteGen()
+        titular_representante_gen_fields = {
+            'id_titular': id_titular,
+            'nombre': nombre,
+            'telefono': [telefono, telefono2, telefono3],
+            'correo_electronico': 'mail_falso@dominio.com',
+        }
+        titular.feed(titular_representante_gen_fields)
+
+        # DatosInstGen
+        datos_1 = c2.DatosInstGen()
+        datos_inst_gen_fields = {
+            'cil': 'ES1234000000000001JN0F001',
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'unico_contrato': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm,
+            'titular_representante_gen': titular,
+        }
+        datos_1.feed(datos_inst_gen_fields)
+
+        # DatosCAU
+        datos_cau = c1.DatosCAU()
+        datos_cau_fields = {
+            'cau': 'ES1234000000000001JN0FA001',
+            'tipo_autoconsumo': '11',
+            'tipo_subseccion': '10',
+            'colectivo': 'S',
+            'datos_inst_gen': [datos_1],
+        }
+        datos_cau.feed(datos_cau_fields)
+
+        # Autoconsumo
+        autoconsumo = c1.Autoconsumo()
+        autoconsumo_fields = {
+            'datos_suministro': datos_suministro,
+            'datos_cau': datos_cau,
+        }
+        autoconsumo.feed(autoconsumo_fields)
+
         contrato_fields = {
             'fecha_finalizacion': '2018-01-01',
-            'tipo_autoconsumo': '00',
+            'autoconsumo': autoconsumo,
             'tipo_contrato_atr': '02',
+            'cups_principal': "ES1234000000000001JN0F",
             'condiciones_contractuales': condiciones_contractuales,
             'consumo_anual_estimado': '5000',
             'contacto': contacto,
@@ -1214,7 +1875,7 @@ class test_A3(unittest.TestCase):
         cliente = get_cliente(dir=True, tipo_dir='F')
 
         # Medida
-        medida = get_medida()
+        medida = get_medida_resto()
 
         # DocTecnica
         doc_tecnica = a3.DocTecnica()
@@ -1328,7 +1989,7 @@ class test_A3(unittest.TestCase):
         cliente = get_cliente(dir="correo", tipo_dir='F')
 
         # Medida
-        medida = get_medida()
+        medida = get_medida_resto()
 
         # DocTecnica
         doc_tecnica = a3.DocTecnica()
@@ -1389,14 +2050,205 @@ class test_A3(unittest.TestCase):
         assertXmlEqual(xml, self.xml_a301_correos.read())
 
 
+    def test_create_pas05(self):
+        # MensajeActivacionAlta
+        mensaje = a3.MensajeActivacionAlta()
+
+        # Cabecera
+        cabecera = get_header(process='A3', step='05', date='2014-04-16T22:13:37', code='201412111009')
+
+        # ActivacionCambiodeComercializadorSinCambios
+        act_cambio = a3.ActivacionAlta()
+
+        # DatosActivacion
+        datos_activacion = a3.DatosActivacion()
+        datos_activacion_fields = {
+            'fecha': '2018-05-05',
+            'ind_esencial': '01',
+            'fecha_ultimo_movimiento_ind_esencial': '2016-06-06',
+        }
+        datos_activacion.feed(datos_activacion_fields)
+
+        # Contrato
+        contrato = a3.Contrato()
+
+        # IdContrato
+        id_contrato = a3.IdContrato()
+        id_contrato_fields = {
+            'cod_contrato': '00001',
+        }
+        id_contrato.feed(id_contrato_fields)
+
+        # DatosSuministro
+        datos_suministro = a3.DatosSuministro()
+        datos_suministro_fields = {
+            'tipo_cups': '01',
+            'ref_catastro': '1234567890qwertyuiop',
+        }
+        datos_suministro.feed(datos_suministro_fields)
+
+        # UTM
+        utm = a3.UTM()
+        utm_fields = {
+            'x': '100',
+            'y': '200',
+            'huso': '40',
+            'banda': 'E',
+        }
+        utm.feed(utm_fields)
+
+        # IdTitular
+        id_titular = a3.IdTitular()
+        id_titular_fields = {
+            'tipo_identificador': 'NI',
+            'identificador': '111111111H',
+        }
+        id_titular.feed(id_titular_fields)
+
+        # Nombre
+        nombre = a3.Nombre()
+        nombre_fields = {
+            'nombre_de_pila': 'Juan',
+            'primer_apellido': 'López',
+            'segundo_apellido': 'Sánchez',
+        }
+        nombre.feed(nombre_fields)
+
+        # Telefono
+        telefono = a3.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '0034',
+            'numero': '933834841',
+        }
+        telefono.feed(telefono_fields)
+
+        # Telefono 2
+        telefono2 = a3.Telefono()
+        telefono2_fields = {
+            'prefijo_pais': '0034',
+            'numero': '633834841',
+        }
+        telefono2.feed(telefono2_fields)
+
+        # Telefono 3
+        telefono3 = a3.Telefono()
+        telefono3_fields = {
+            'prefijo_pais': '0034',
+            'numero': '683834841',
+        }
+        telefono3.feed(telefono3_fields)
+
+        # TitularRepresentanteGen
+        titular = a3.TitularRepresentanteGen()
+        titular_representante_gen_fields = {
+            'id_titular': id_titular,
+            'nombre': nombre,
+            'telefono': [telefono, telefono2, telefono3],
+            'correo_electronico': 'mail_falso@dominio.com',
+        }
+        titular.feed(titular_representante_gen_fields)
+
+        # DatosInstGen
+        datos_1 = a3.DatosInstGen()
+        datos_inst_gen_fields = {
+            'cil': 'ES1234000000000001JN0F001',
+            'tec_generador': 'b12',
+            'combustible': 'Diesel',
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'unico_contrato': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm,
+            'titular_representante_gen': titular,
+        }
+        datos_1.feed(datos_inst_gen_fields)
+
+        # DatosCAU
+        datos_cau = a3.DatosCAU()
+        datos_cau_fields = {
+            'cau': 'ES1234000000000001JN0FA001',
+            'tipo_autoconsumo': '11',
+            'tipo_subseccion': '10',
+            'colectivo': 'S',
+            'datos_inst_gen': [datos_1],
+        }
+        datos_cau.feed(datos_cau_fields)
+
+        # Autoconsumo
+        autoconsumo = a3.Autoconsumo()
+        autoconsumo_fields = {
+            'datos_suministro': datos_suministro,
+            'datos_cau': datos_cau,
+        }
+        autoconsumo.feed(autoconsumo_fields)
+
+        # CondicionesContractuales
+        condiciones_contractuales = a3.CondicionesContractuales()
+
+        # PotenciasContratadas
+        potencias_contratadas = a3.PotenciasContratadas()
+        potencias_contratadas.feed({'p1': 1000, 'p2': 2000})
+
+        condiciones_contractuales_fields = {
+            'tarifa_atr': '018',
+            'periodicidad_facturacion': '01',
+            'tipode_telegestion': '01',
+            'potencias_contratadas': potencias_contratadas,
+            'modo_control_potencia': '1',
+            'marca_medida_con_perdidas': 'S',
+            'tension_del_suministro': '10',
+            'vas_trafo': '50',
+            'porcentaje_perdidas': '05',
+        }
+        condiciones_contractuales.feed(condiciones_contractuales_fields)
+
+        contrato_fields = {
+            'id_contrato': id_contrato,
+            'fecha_finalizacion': '2020-01-01',
+            'autoconsumo': autoconsumo,
+            'tipo_contrato_atr': '02',
+            'condiciones_contractuales': condiciones_contractuales,
+            'cups_principal': "ES1234000000000001JN0F"
+        }
+        contrato.feed(contrato_fields)
+
+        # RegistroDoc
+        doc1 = a3.RegistroDoc()
+        registro_doc_fields1 = {
+            'tipo_doc_aportado': '07',
+            'direccion_url': 'https://www.google.com/',
+        }
+        doc1.feed(registro_doc_fields1)
+        puntos_de_medida = get_puntos_medida(a3)
+        activacion_alta_fields = {
+            'datos_activacion': datos_activacion,
+            'contrato': contrato,
+            'puntos_de_medida': puntos_de_medida
+        }
+        act_cambio.feed(activacion_alta_fields)
+
+        mensaje_activacion_alta_fields = {
+            'cabecera': cabecera,
+            'activacion_alta': act_cambio,
+        }
+        mensaje.feed(mensaje_activacion_alta_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_a305_elec.read())
+
+
 class test_M1(unittest.TestCase):
     def setUp(self):
         self.xml_m101 = open(get_data("m101.xml"), "rb")
         self.xml_m101r = open(get_data("m101r.xml"), "rb")
+        self.xml_m105 = open(get_data("m105.xml"), "rb")
 
     def tearDown(self):
         self.xml_m101.close()
         self.xml_m101r.close()
+        self.xml_m105.close()
 
     def test_create_pas01(self):
         # MensajeModificacionDeATR
@@ -1417,6 +2269,8 @@ class test_M1(unittest.TestCase):
             'ind_activacion': 'L',
             'fecha_prevista_accion': '2016-06-06',
             'cnae': '2222',
+            'ind_esencial': '01',
+            'fecha_ultimo_movimiento_ind_esencial': '2016-06-06',
             'bono_social': '1'
         }
         datos_solicitud.feed(datos_solicitud_fields)
@@ -1442,10 +2296,114 @@ class test_M1(unittest.TestCase):
         # Contacto
         contacto = get_contacto(email=False)
 
+        # DatosSuministro
+        datos_suministro = c1.DatosSuministro()
+        datos_suministro_fields = {
+            'tipo_cups': '01',
+            'ref_catastro': '1234567890qwertyuiop',
+        }
+        datos_suministro.feed(datos_suministro_fields)
+
+        # UTM
+        utm = c1.UTM()
+        utm_fields = {
+            'x': '100',
+            'y': '200',
+            'huso': '40',
+            'banda': 'E',
+        }
+        utm.feed(utm_fields)
+
+        # IdTitular
+        id_titular = c1.IdTitular()
+        id_titular_fields = {
+            'tipo_identificador': 'NI',
+            'identificador': '111111111H',
+        }
+        id_titular.feed(id_titular_fields)
+
+        # Nombre
+        nombre = c1.Nombre()
+        nombre_fields = {
+            'nombre_de_pila': 'Juan',
+            'primer_apellido': 'López',
+            'segundo_apellido': 'Sánchez',
+        }
+        nombre.feed(nombre_fields)
+
+        # Telefono
+        telefono = c1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '0034',
+            'numero': '933834841',
+        }
+        telefono.feed(telefono_fields)
+
+        # Telefono 2
+        telefono2 = c1.Telefono()
+        telefono2_fields = {
+            'prefijo_pais': '0034',
+            'numero': '633834841',
+        }
+        telefono2.feed(telefono2_fields)
+
+        # Telefono 3
+        telefono3 = c1.Telefono()
+        telefono3_fields = {
+            'prefijo_pais': '0034',
+            'numero': '683834841',
+        }
+        telefono3.feed(telefono3_fields)
+
+        # TitularRepresentanteGen
+        titular = c1.TitularRepresentanteGen()
+        titular_representante_gen_fields = {
+            'id_titular': id_titular,
+            'nombre': nombre,
+            'telefono': [telefono, telefono2, telefono3],
+            'correo_electronico': 'mail_falso@dominio.com',
+        }
+        titular.feed(titular_representante_gen_fields)
+
+        # DatosInstGen
+        datos_1 = c2.DatosInstGen()
+        datos_inst_gen_fields = {
+            'cil': 'ES1234000000000001JN0F001',
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'unico_contrato': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm,
+            'titular_representante_gen': titular,
+        }
+        datos_1.feed(datos_inst_gen_fields)
+
+        # DatosCAU
+        datos_cau = c1.DatosCAU()
+        datos_cau_fields = {
+            'cau': 'ES1234000000000001JN0FA001',
+            'tipo_autoconsumo': '11',
+            'tipo_subseccion': '10',
+            'colectivo': 'S',
+            'datos_inst_gen': [datos_1],
+        }
+        datos_cau.feed(datos_cau_fields)
+
+        # Autoconsumo
+        autoconsumo = c1.Autoconsumo()
+        autoconsumo_fields = {
+            'datos_suministro': datos_suministro,
+            'datos_cau': datos_cau,
+        }
+        autoconsumo.feed(autoconsumo_fields)
+
         contrato_fields = {
             'fecha_finalizacion': '2018-01-01',
-            'tipo_autoconsumo': '00',
+            'autoconsumo': autoconsumo,
             'tipo_contrato_atr': '02',
+            'cups_principal': "ES1234000000000001JN0F",
             'condiciones_contractuales': condiciones_contractuales,
             'contacto': contacto,
         }
@@ -1455,7 +2413,7 @@ class test_M1(unittest.TestCase):
         cliente = get_cliente(dir=False, tipo_dir='S')
 
         # Medida
-        medida = m1.Medida()
+        medida = m1.MedidaResto()
         medida_fields = {
             'propiedad_equipo': 'C',
             'tipo_equipo_medida': 'L00',
@@ -1512,6 +2470,109 @@ class test_M1(unittest.TestCase):
         potencias_contratadas = a3.PotenciasContratadas()
         potencias_contratadas.feed({'p1': 1000, 'p2': 2000})
 
+        # DatosSuministro
+        datos_suministro = c1.DatosSuministro()
+        datos_suministro_fields = {
+            'tipo_cups': '01',
+            'ref_catastro': '1234567890qwertyuiop',
+        }
+        datos_suministro.feed(datos_suministro_fields)
+
+        # UTM
+        utm = c1.UTM()
+        utm_fields = {
+            'x': '100',
+            'y': '200',
+            'huso': '40',
+            'banda': 'E',
+        }
+        utm.feed(utm_fields)
+
+        # IdTitular
+        id_titular = c1.IdTitular()
+        id_titular_fields = {
+            'tipo_identificador': 'NI',
+            'identificador': '111111111H',
+        }
+        id_titular.feed(id_titular_fields)
+
+        # Nombre
+        nombre = c1.Nombre()
+        nombre_fields = {
+            'nombre_de_pila': 'Juan',
+            'primer_apellido': 'López',
+            'segundo_apellido': 'Sánchez',
+        }
+        nombre.feed(nombre_fields)
+
+        # Telefono
+        telefono = c1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '0034',
+            'numero': '933834841',
+        }
+        telefono.feed(telefono_fields)
+
+        # Telefono 2
+        telefono2 = c1.Telefono()
+        telefono2_fields = {
+            'prefijo_pais': '0034',
+            'numero': '633834841',
+        }
+        telefono2.feed(telefono2_fields)
+
+        # Telefono 3
+        telefono3 = c1.Telefono()
+        telefono3_fields = {
+            'prefijo_pais': '0034',
+            'numero': '683834841',
+        }
+        telefono3.feed(telefono3_fields)
+
+        # TitularRepresentanteGen
+        titular = c1.TitularRepresentanteGen()
+        titular_representante_gen_fields = {
+            'id_titular': id_titular,
+            'nombre': nombre,
+            'telefono': [telefono, telefono2, telefono3],
+            'correo_electronico': 'mail_falso@dominio.com',
+        }
+        titular.feed(titular_representante_gen_fields)
+
+        # DatosInstGen
+        datos_1 = c2.DatosInstGen()
+        datos_inst_gen_fields = {
+            'cil': 'ES1234000000000001JN0F001',
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'unico_contrato': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm,
+            'titular_representante_gen': titular,
+        }
+        datos_1.feed(datos_inst_gen_fields)
+
+        # DatosCAU
+        datos_cau = c1.DatosCAU()
+        datos_cau_fields = {
+            'cau': 'ES1234000000000001JN0FA001',
+            'tipo_autoconsumo': '11',
+            'tipo_subseccion': '10',
+            'colectivo': 'S',
+            'datos_inst_gen': [datos_1],
+        }
+        datos_cau.feed(datos_cau_fields)
+
+        # Autoconsumo
+        autoconsumo = c1.Autoconsumo()
+        autoconsumo_fields = {
+            'datos_suministro': datos_suministro,
+            'datos_cau': datos_cau,
+        }
+        autoconsumo.feed(autoconsumo_fields)
+
         condiciones_contractuales_fields = {
             'tarifa_atr': '018',
             'potencias_contratadas': potencias_contratadas,
@@ -1525,7 +2586,7 @@ class test_M1(unittest.TestCase):
 
         contrato_fields = {
             'fecha_finalizacion': '2018-01-01',
-            'tipo_autoconsumo': '00',
+            'autoconsumo': autoconsumo,
             'tipo_contrato_atr': '02',
             'condiciones_contractuales': condiciones_contractuales,
             'contacto': contacto,
@@ -1536,7 +2597,7 @@ class test_M1(unittest.TestCase):
         cliente = get_cliente(dir=False, tipo_dir='S')
 
         # Medida
-        medida = m1.Medida()
+        medida = m1.MedidaResto()
         medida_fields = {
             'propiedad_equipo': 'C',
             'tipo_equipo_medida': 'L00',
@@ -1577,6 +2638,334 @@ class test_M1(unittest.TestCase):
         xml = str(mensaje_modificacion_de_atr)
         assertXmlEqual(xml, self.xml_m101r.read())
 
+    def test_create_pas05(self):
+        mensaje = m1.MensajeActivacionModificacionDeATR()
+
+        # Cabecera
+        cabecera = get_header(process='M1', step='05')
+
+        # ActivacionModificaciones
+        act_cambio = m1.ActivacionModificaciones()
+
+        # DatosActivacion
+        datos_activacion = m1.DatosActivacion()
+        datos_activacion_fields = {
+            'fecha': '2016-08-21',
+            'bono_social': '1',
+        }
+        datos_activacion.feed(datos_activacion_fields)
+
+        # Contrato
+        contrato = m1.Contrato()
+
+        # IdContrato
+        id_contrato = m1.IdContrato()
+        id_contrato_fields = {
+            'cod_contrato': '00001',
+        }
+        id_contrato.feed(id_contrato_fields)
+
+        # DatosSuministro
+        datos_suministro = m1.DatosSuministro()
+        datos_suministro_fields = {
+            'tipo_cups': '01',
+            'ref_catastro': '1234567890qwertyuiop',
+        }
+        datos_suministro.feed(datos_suministro_fields)
+
+        # UTM
+        utm = m1.UTM()
+        utm_fields = {
+            'x': '100',
+            'y': '200',
+            'huso': '40',
+            'banda': 'E',
+        }
+        utm.feed(utm_fields)
+
+        # IdTitular
+        id_titular = m1.IdTitular()
+        id_titular_fields = {
+            'tipo_identificador': 'NI',
+            'identificador': '111111111H',
+        }
+        id_titular.feed(id_titular_fields)
+
+        # Nombre
+        nombre = m1.Nombre()
+        nombre_fields = {
+            'nombre_de_pila': 'Juan',
+            'primer_apellido': 'López',
+            'segundo_apellido': 'Sánchez',
+        }
+        nombre.feed(nombre_fields)
+
+        # Telefono
+        telefono = m1.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '0034',
+            'numero': '933834841',
+        }
+        telefono.feed(telefono_fields)
+
+        # Telefono 2
+        telefono2 = m1.Telefono()
+        telefono2_fields = {
+            'prefijo_pais': '0034',
+            'numero': '633834841',
+        }
+        telefono2.feed(telefono2_fields)
+
+        # Telefono 3
+        telefono3 = m1.Telefono()
+        telefono3_fields = {
+            'prefijo_pais': '0034',
+            'numero': '683834841',
+        }
+        telefono3.feed(telefono3_fields)
+
+        # TitularRepresentanteGen
+        titular = m1.TitularRepresentanteGen()
+        titular_representante_gen_fields = {
+            'id_titular': id_titular,
+            'nombre': nombre,
+            'telefono': [telefono, telefono2, telefono3],
+            'correo_electronico': 'mail_falso@dominio.com',
+        }
+        titular.feed(titular_representante_gen_fields)
+
+        # DatosInstGen
+        datos_1 = m1.DatosInstGen()
+        datos_inst_gen_fields = {
+            'cil': 'ES1234000000000001JN0F001',
+            'tec_generador': 'b12',
+            'combustible': 'Diesel',
+            'pot_instalada_gen': '100',
+            'tipo_instalacion': '01',
+            'esquema_medida': 'B',
+            'ssaa': 'S',
+            'unico_contrato': 'S',
+            'ref_catastro': '1234567890qwertyuidf',
+            'utm': utm,
+            'titular_representante_gen': titular,
+        }
+        datos_1.feed(datos_inst_gen_fields)
+
+        # DatosCAU
+        datos_cau = m1.DatosCAU()
+        datos_cau_fields = {
+            'cau': 'ES1234000000000001JN0FA001',
+            'tipo_autoconsumo': '11',
+            'tipo_subseccion': '10',
+            'colectivo': 'S',
+            'datos_inst_gen': [datos_1],
+        }
+        datos_cau.feed(datos_cau_fields)
+
+        # Autoconsumo
+        autoconsumo = m1.Autoconsumo()
+        autoconsumo_fields = {
+            'datos_suministro': datos_suministro,
+            'datos_cau': datos_cau,
+        }
+        autoconsumo.feed(autoconsumo_fields)
+
+        # CondicionesContractuales
+        condiciones_contractuales = m1.CondicionesContractuales()
+
+        # PotenciasContratadas
+        potencias_contratadas = c1.PotenciasContratadas()
+        potencias_contratadas.feed({'p1': 1000, 'p2': 2000})
+
+        condiciones_contractuales_fields = {
+            'tarifa_atr': '018',
+            'periodicidad_facturacion': '01',
+            'tipode_telegestion': '01',
+            'potencias_contratadas': potencias_contratadas,
+            'modo_control_potencia': '1',
+            'marca_medida_con_perdidas': 'S',
+            'tension_del_suministro': '10',
+            'vas_trafo': '50',
+            'porcentaje_perdidas': '05',
+        }
+        condiciones_contractuales.feed(condiciones_contractuales_fields)
+
+        contrato_fields = {
+            'id_contrato': id_contrato,
+            'fecha_finalizacion': '2020-01-01',
+            'autoconsumo': autoconsumo,
+            'tipo_contrato_atr': '02',
+            'condiciones_contractuales': condiciones_contractuales,
+            'cups_principal': "ES1234000000000001JN0F"
+        }
+        contrato.feed(contrato_fields)
+
+        # RegistroDoc
+        doc1 = m1.RegistroDoc()
+        registro_doc_fields1 = {
+            'tipo_doc_aportado': '07',
+            'direccion_url': 'https://www.google.com/',
+        }
+        doc1.feed(registro_doc_fields1)
+
+        # RegistrosDocumento
+        registros = d1.RegistrosDocumento()
+        registros_documento_fields = {
+            'registro_doc': doc1,
+        }
+        registros.feed(registros_documento_fields)
+
+        puntos_de_medida = get_puntos_medida(a3)
+        activacion_alta_fields = {
+            'datos_activacion': datos_activacion,
+            'ind_esencial': '01',
+            'fecha_ultimo_movimiento_ind_esencial': '2016-06-06',
+            'contrato': contrato,
+            'puntos_de_medida': puntos_de_medida,
+            'registros_documento': registros
+        }
+        act_cambio.feed(activacion_alta_fields)
+
+        mensaje_activacion_alta_fields = {
+            'cabecera': cabecera,
+            'activacion_modificaciones': act_cambio,
+        }
+        mensaje.feed(mensaje_activacion_alta_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_m105.read())
+
+class test_M2(unittest.TestCase):
+    def setUp(self):
+        self.xml_m202_reject = open(get_data("m202_reject.xml"), "rb")
+        self.xml_m205 = open(get_data("m205.xml"), "rb")
+
+    def tearDown(self):
+        self.xml_m202_reject.close()
+        self.xml_m205.close()
+
+    def test_create_pas02_rej(self):
+        # MensajeRechazo
+        mensaje_rechazo = m2.MensajeRechazo()
+
+        # Cabecera
+        cabecera = get_header(process='M2', step='02')
+
+        # MensageRechazos
+        rechazos = m2.Rechazos()
+
+        # Rechazos
+        r1 = m2.Rechazo()
+        r1.feed({
+            'secuencial': '1',
+            'codigo_motivo': '01',
+            'comentarios': 'Motiu de rebuig 01: No existe Punto de Suministro asociado al CUPS'
+        })
+        r2 = m2.Rechazo()
+        r2.feed({
+            'secuencial': '2',
+            'codigo_motivo': '03',
+            'comentarios': 'Cuando el CIF-NIF no coincide con el que figura en la base de datos del Distribuidor'
+        })
+
+        # RegistrosDocumento
+        registros_documento = c1.RegistrosDocumento()
+        # RegistroDoc
+        registro_doc1 = c1.RegistroDoc()
+        registro_doc_fields1 = {
+            'tipo_doc_aportado': '08',
+            'direccion_url': 'http://eneracme.com/docs/NIF11111111H.pdf'
+        }
+        registro_doc1.feed(registro_doc_fields1)
+
+        registro_doc2 = c1.RegistroDoc()
+        registro_doc_fields2 = {
+            'tipo_doc_aportado': '07',
+            'direccion_url': 'http://eneracme.com/docs/NIF11111111H.pdf'
+        }
+        registro_doc2.feed(registro_doc_fields2)
+        registros_documento_fields = {
+            'registro_doc_list': [registro_doc1, registro_doc2],
+        }
+        registros_documento.feed(registros_documento_fields)
+
+        rechazos_fields = {
+            'fecha_rechazo': '2016-07-20',
+            'rechazo_list': [r1, r2],
+            'registros_documento': registros_documento,
+        }
+        rechazos.feed(rechazos_fields)
+
+        mensaje_rechazo_fields = {
+            'cabecera': cabecera,
+            'rechazos': rechazos,
+        }
+        mensaje_rechazo.feed(mensaje_rechazo_fields)
+        mensaje_rechazo.build_tree()
+        xml = str(mensaje_rechazo)
+        assertXmlEqual(xml, self.xml_m202_reject.read())
+
+    def test_create_pas05(self):
+        mensaje = m2.MensajeActivacionModificacionDeATRUnidir()
+
+        # Cabecera
+        cabecera = get_header(process='M2', step='05')
+
+        # ActivacionModificaciones
+        act_cambio = m2.ActivacionModificaciones()
+        motivo_activacion_1 = m2.MotivoActivacionUnidireccional()
+        motivo_activacion_1.feed({'motivo': '01'})
+        motivo_activacion_2 = m2.MotivoActivacionUnidireccional()
+        motivo_activacion_2.feed({'motivo': '02'})
+        motivo_activacion_list = [motivo_activacion_1, motivo_activacion_2]
+
+        # DatosActivacion
+        datos_activacion = m2.DatosActivacion()
+        datos_activacion_fields = {
+            'motivo_activacion_list': motivo_activacion_list,
+            'fecha': '2016-06-06',
+            'bono_social': '1',
+            'ind_esencial': '00',
+            'fecha_ultimo_movimiento_ind_esencial': '1900-01-01',
+        }
+        datos_activacion.feed(datos_activacion_fields)
+
+        # Contrato
+        contrato = m2.Contrato()
+
+        # IdContrato
+        id_contrato = m2.IdContrato()
+        id_contrato_fields = {
+            'cod_contrato': '00001',
+        }
+        id_contrato.feed(id_contrato_fields)
+
+        autoconsumo = get_autoconsumo(m2, 'distri')
+
+        contrato_fields = {
+            'id_contrato': id_contrato,
+            'fecha_finalizacion': '2016-05-05',
+            'autoconsumo': autoconsumo,
+        }
+        contrato.feed(contrato_fields)
+
+        puntos_de_medida = get_puntos_medida(m2)
+        activacion_alta_fields = {
+            'datos_activacion': datos_activacion,
+            'contrato': contrato,
+            'puntos_de_medida': puntos_de_medida,
+        }
+        act_cambio.feed(activacion_alta_fields)
+
+        mensaje_activacion_alta_fields = {
+            'cabecera': cabecera,
+            'activacion_modificaciones': act_cambio,
+        }
+        mensaje.feed(mensaje_activacion_alta_fields)
+        mensaje.build_tree()
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_m205.read())
+
 
 class test_D1(unittest.TestCase):
 
@@ -1591,6 +2980,7 @@ class test_D1(unittest.TestCase):
         self.xml_d101.close()
         self.xml_d101_motiu_13.close()
         self.xml_d101_motiu_13_14.close()
+        self.xml_d102_reject.close()
         self.xml_d110.close()
 
     def test_create_pas01(self):
@@ -2002,12 +3392,14 @@ class test_D1(unittest.TestCase):
 
         datos_anulacion = d1.DatosAnulacion()
         datos_anulacion.feed({'fecha_anulacion': "2016-06-10"})
+        node_anulacio = d1.AnulacionNotificacionCambiosATRDesdeDistribuidor()
+        node_anulacio.feed({'datos_anulacion': datos_anulacion})
 
         # MensajeRechazo
         mensaje_anulacion_d1 = d1.MensajeAnulacionD1()
         mensaje_rechazo_fields = {
             'cabecera': cabecera,
-            'datos_anulacion': datos_anulacion,
+            'anulacion_notificacion_cambios_atr_desde_distribuidor': node_anulacio,
         }
         mensaje_anulacion_d1.feed(mensaje_rechazo_fields)
 
@@ -2084,7 +3476,8 @@ class test_P0(unittest.TestCase):
         estado_contratable = p0.EstadoContratable()
         estado_contratable_fields = {
             'contratable': 'N',
-            'motivo': '03'
+            'motivo': '03',
+            'potencia_max_sin_expediente': 3600
         }
         estado_contratable.feed(estado_contratable_fields)
 
@@ -2104,28 +3497,13 @@ class test_P0(unittest.TestCase):
         }
         condiciones_contractuales.feed(condiciones_contractuales_fields)
 
+        autoconsumo = get_autoconsumo(p0, 'comer')
         # Contrato
         contrato = p0.Contrato()
         contrato_fields = {
             'tipo_contrato_atr': '03',
             'fecha_finalizacion': '2020-03-31',
-            'tipo_autoconsumo': '01',
-            'fecha_ultimo_movimiento_tipo_autocons': '2020-01-01',
-            'ind_bono_social': 'N',
-            'ind_esencial': 'N',
-            'vivienda_habitual': 'S',
-            'cnae': '9820',
-            'condiciones_contractuales': condiciones_contractuales,
-            'modo_facturacion_potencia': '9',
-            'no_interrumpible': 'S',
-            'potencia_no_interrumpible': '6000',
-            'potencia_max_sin_expediente': '8000',
-            'vas_trafo': '50',
-            'periodicidad_facturacion': '01',
-            'tipo_de_telegestion': '01',
-            'icp_activado_telegestion': 'S',
-            'peaje_directo': 'S',
-            'deposito_garantia': 'N',
+            'autoconsumo': autoconsumo,
         }
         contrato.feed(contrato_fields)
 
@@ -2165,7 +3543,8 @@ class test_P0(unittest.TestCase):
             'tipo_equipo': 'L09',
             'tipo_propiedad': '1',
             'codigo_fases_equipo_medida': 'T',
-            'tipo_dh_edm': '2'
+            'tipo_dh_edm': '2',
+            'relacion_transformacion_intensidad': '10/100'
         }
         equipo1.feed(equipo1_fields)
 
@@ -2176,7 +3555,8 @@ class test_P0(unittest.TestCase):
             'tipo_equipo': 'L09',
             'tipo_propiedad': '1',
             'codigo_fases_equipo_medida': 'T',
-            'tipo_dh_edm': '2'
+            'tipo_dh_edm': '2',
+            'relacion_transformacion_intensidad': '10/100'
         }
         equipo2.feed(equipo2_fields)
 
@@ -2194,6 +3574,7 @@ class test_P0(unittest.TestCase):
         # DatosCie
         datos_cie = p0.DatosCie()
         datos_cie_fields = {
+            'potencia_ins_bt': "2000",
             'cie_papel': cie_papel,
             'validez_cie': 'AU'
         }
@@ -2212,6 +3593,7 @@ class test_P0(unittest.TestCase):
         # DocTecnica
         doc_tecnica = p0.DocTecnica()
         doc_tecnica_fields = {
+            'cie_disponible': "S",
             'datos_cie': datos_cie,
             'datos_apm': datos_apm,
         }
@@ -2233,6 +3615,56 @@ class test_P0(unittest.TestCase):
         }
         expediente_acometida.feed(expediente_acometida_fields)
 
+        # Cliente
+        cliente_fields = get_cliente(dir=False, tipo_dir='F',
+                                     get_only_fields=True)
+
+        telefono1 = c2.Telefono()
+        telefono_fields = {
+            'prefijo_pais': '0034',
+            'numero': '633834841',
+        }
+        telefono1.feed(telefono_fields)
+        telefonos = [telefono1]
+        via = c2.Via()
+        via.feed({
+            'tipo_via': 'PZ',
+            'calle': 'MELA MUTERMILCH',
+            'numero_finca': '2',
+            'duplicador_finca': 'n/a',
+            'escalera': '001',
+            'piso': '001',
+            'puerta': '001',
+            'tipo_aclarador_finca': 'BI',
+            'aclarador_finca': 'Bloque de Pisos',
+        })
+        # Direccion
+        direccion = c2.Direccion(name="DireccionSuministro")
+        direccion_fields = {
+            'pais': 'España',
+            'provincia': '17',
+            'municipio': '17079',
+            'poblacion': '17079000501',
+            'via': via,
+            'cod_postal': '17001',
+        }
+        direccion.feed(direccion_fields)
+        cliente = p0.Cliente()
+
+        cliente_fields['direccion_suministro'] = direccion
+        cliente_fields['telefonos'] = telefonos
+        cliente_fields['correo_electronico'] = "a@mail.com"
+        cliente.feed(cliente_fields)
+        puntos_de_medida = p0.PuntosDeMedida()
+        punto_medida = p0.PuntoDeMedida()
+        punto_medida_fields = {
+            "direccion_enlace": "39522",
+            "telefono_telemedida": "987654321",
+            "clave_acceso": "1234"
+        }
+        punto_medida.feed(punto_medida_fields)
+        puntos_de_medida.feed({'puntos_de_medida_list': [punto_medida]})
+
         # EnvioInformacionPS
         envio_informacion_ps = p0.EnvioInformacionPS()
         envio_informacion_ps_fields = {
@@ -2242,15 +3674,34 @@ class test_P0(unittest.TestCase):
             'existe_solicitud_en_curso': 'S',
             'tipo_solicitud_en_curso': 'C100',
             'contrato': contrato,
+            'fecha_ultimo_movimiento_tipo_autocons': '2020-01-01',
+            'ind_bono_social': 'N',
+            'ind_esencial': '00',
+            'fecha_ultimo_movimiento_ind_esencial': '2016-05-05',
+            'vivienda_habitual': 'S',
+            'cnae': '9820',
+            'condiciones_contractuales': condiciones_contractuales,
+            'modo_facturacion_potencia': '9',
+            'no_interrumpible': 'S',
+            'potencia_no_interrumpible': '6000',
+            'potencia_max_sin_expediente': '8000',
+            'vas_trafo': '50',
+            'periodicidad_facturacion': '01',
+            'tipo_de_telegestion': '01',
+            'icp_activado_telegestion': 'S',
+            'peaje_directo': 'S',
+            'deposito_garantia': 'N',
             'potencia_maxima_autorizada': '10000',
             'tension_del_suministro': '02',
             'derechos_reconocidos': derechos_reconocidos,
             'caracteristicas_pm': caracteristicas_pm,
             'historia': historia,
+            'cliente': cliente,
             'equipo_list': [equipo1, equipo2],
             'doc_tecnica': doc_tecnica,
             'expediente_anomalia_fraude': expediente_anomalia_fraude,
-            'expediente_acometida': expediente_acometida
+            'expediente_acometida': expediente_acometida,
+            'puntos_de_medida': puntos_de_medida
         }
         envio_informacion_ps.feed(envio_informacion_ps_fields)
 
@@ -3271,6 +4722,8 @@ class test_E1(unittest.TestCase):
         solicitud_desistimiento_fields = {
             'codigo_de_solicitud_ref': '201605219400',
             'tipo_de_solicitud': '01',
+            'ind_esencial': '01',
+            'fecha_ultimo_movimiento_ind_esencial': '2016-06-06',
             'id_cliente': id_cliente,
             'registros_Documento': registros_documento,
         }
@@ -3547,6 +5000,8 @@ class test_E1(unittest.TestCase):
             'fecha': '2016-08-21',
             'en_servicio': 'S',
             'ind_anulable': 'S',
+            'ind_esencial': '01',
+            'fecha_ultimo_movimiento_ind_esencial': '2016-06-06',
         }
         datos_activacion.feed(datos_activacion_fields)
 
@@ -3575,13 +5030,15 @@ class test_E1(unittest.TestCase):
             'porcentaje_perdidas': '05',
         }
         condiciones_contractuales.feed(condiciones_contractuales_fields)
+        autoconsumo = get_autoconsumo(e1, 'distri')
 
         # Contrato
         contrato = e1.Contrato()
         contrato_fields = {
             'id_contrato': id_contrato,
-            'tipo_autoconsumo': '00',
+            'autoconsumo': autoconsumo,
             'tipo_contrato_atr': '02',
+            'cups_principal': 'ES1234000000000001JN0F',
             'condiciones_contractuales': condiciones_contractuales,
         }
         contrato.feed(contrato_fields)
@@ -3589,12 +5046,27 @@ class test_E1(unittest.TestCase):
         # PuntosDeMedida
         puntos_de_medida = self.puntos_de_medida
 
+        # RegistroDoc
+        doc1 = c1.RegistroDoc()
+        registro_doc_fields1 = {
+            'tipo_doc_aportado': '07',
+            'direccion_url': 'https://www.google.com/',
+        }
+        doc1.feed(registro_doc_fields1)
+        # RegistrosDocumento
+        registros = c1.RegistrosDocumento()
+        registros_documento_fields = {
+            'registro_doc_list': doc1,
+        }
+        registros.feed(registros_documento_fields)
+
         # ActivacionDesistimiento
         notificacion_activacion_desistimiento = e1.NotificacionActivacionPorDesistimiento()
         notificacion_activacion_desistimiento_fields = {
             'datos_activacion': datos_activacion,
             'contrato': contrato,
             'puntos_de_medida': puntos_de_medida,
+            'registros_documento': registros
         }
         notificacion_activacion_desistimiento.feed(notificacion_activacion_desistimiento_fields)
 
@@ -3819,10 +5291,12 @@ class test_T1(unittest.TestCase):
             'motivo_traspaso': '03',
             'fecha_prevista_accion': '2020-05-01',
             'cnae': '9820',
-            'ind_esencial': 'S',
+            'ind_esencial': '01',
+            'fecha_ultimo_movimiento_ind_esencial': '2016-06-06',
             'susp_baja_impago_en_curso': 'S',
         }
         datos_solicitud.feed(datos_solicitud_fields)
+        autoconsumo = get_autoconsumo(t1)
 
         # Contrato
         contrato = t1.ContratoT101()
@@ -3846,7 +5320,7 @@ class test_T1(unittest.TestCase):
 
         contrato_fields = {
             'fecha_finalizacion': '2018-01-01',
-            'tipo_autoconsumo': '00',
+            'autoconsumo': autoconsumo,
             'tipo_contrato_atr': '02',
             'condiciones_contractuales': condiciones_contractuales,
             'periodicidad_facturacion': '01',
@@ -4023,6 +5497,8 @@ class test_T1(unittest.TestCase):
         datos_activacion_fields = {
             'fecha_activacion': '2016-08-21',
             'en_servicio': 'S',
+            'ind_esencial': '01',
+            'fecha_ultimo_movimiento_ind_esencial': '2016-06-06',
         }
         datos_activacion.feed(datos_activacion_fields)
 
@@ -4051,12 +5527,12 @@ class test_T1(unittest.TestCase):
             'porcentaje_perdidas': '05',
         }
         condiciones_contractuales.feed(condiciones_contractuales_fields)
-
+        autoconsumo = get_autoconsumo(t1)
         # Contrato
         contrato = t1.Contrato()
         contrato_fields = {
             'id_contrato': id_contrato,
-            'tipo_autoconsumo': '00',
+            'autoconsumo': autoconsumo,
             'tipo_contrato_atr': '02',
             'condiciones_contractuales': condiciones_contractuales,
         }
@@ -4271,6 +5747,12 @@ class test_R1(unittest.TestCase):
         }
         ubicacion_incidencia.feed(ubicacion_incidencia_fields)
 
+        disconformidad_autoconsumo = r1.DisconformidadAutoconsumo()
+        disconformidad_autoconsumo.feed({
+            'tipo_disconformidad_1': '01',
+            'tipo_disconformidad_2': '03'
+        })
+
         variable_detalle_reclamacion_fields = {
             'num_expediente_acometida': '11111',
             'num_expediente_fraude': '22222',
@@ -4279,12 +5761,15 @@ class test_R1(unittest.TestCase):
             'tipo_concepto_facturado': '01',
             'fecha_lectura': '2016-01-20',
             'tipo_dhedm': '1',
+            'cau': 'ES1234000000000001JN0FA001',
             'lecturas_aportadas': lecturas_aportadas,
+            'disconformidad_autoconsumo': disconformidad_autoconsumo,
             'codigo_incidencia': '01',
             'codigo_solicitud': '33333',
             'parametro_contratacion': '01',
             'concepto_disconformidad': '100',
             'tipo_de_atencion_incorrecta': '05',
+            'motivo_consulta': '01',
             'iban': '4444222211113333',
             'contacto': contacto,
             'codigo_solicitud_reclamacion': '11111',

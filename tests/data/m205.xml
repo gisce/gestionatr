@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<MensajeNotificacionActivacionPorDesistimiento xmlns="http://localhost/elegibilidad">
+<MensajeActivacionModificacionDeATRUnidir xmlns="http://localhost/elegibilidad">
     <Cabecera>
         <CodigoREEEmpresaEmisora>1234</CodigoREEEmpresaEmisora>
         <CodigoREEEmpresaDestino>4321</CodigoREEEmpresaDestino>
@@ -13,11 +13,14 @@
     <ActivacionModificaciones>
         <DatosActivacion>
             <MotivoActivacionUnidireccional>
-                <Motivo>Cambio motivado por presencia autoconsumo</Motivo>
+                <Motivo>01</Motivo>
+            </MotivoActivacionUnidireccional>
+            <MotivoActivacionUnidireccional>
+                <Motivo>02</Motivo>
             </MotivoActivacionUnidireccional>
             <Fecha>2016-06-06</Fecha>
             <BonoSocial>1</BonoSocial>
-            <IndEsencial>N</IndEsencial>
+            <IndEsencial>00</IndEsencial>
             <FechaUltimoMovimientoIndEsencial>1900-01-01</FechaUltimoMovimientoIndEsencial>
         </DatosActivacion>
         <Contrato>
@@ -148,4 +151,4 @@
            </PuntoDeMedida>
         </PuntosDeMedida>
     </ActivacionModificaciones>
-</MensajeNotificacionActivacionPorDesistimiento>
+</MensajeActivacionModificacionDeATRUnidir>

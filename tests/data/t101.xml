@@ -15,7 +15,7 @@
             <MotivoTraspaso>03</MotivoTraspaso>
             <FechaPrevistaAccion>2020-05-01</FechaPrevistaAccion>
             <CNAE>9820</CNAE>
-            <IndEsencial>S</IndEsencial>
+            <IndEsencial>01</IndEsencial>
             <FechaUltimoMovimientoIndEsencial>2016-06-06</FechaUltimoMovimientoIndEsencial>
             <SuspBajaImpagoEnCurso>S</SuspBajaImpagoEnCurso>
         </DatosSolicitud>

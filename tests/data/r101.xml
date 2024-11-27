@@ -42,6 +42,7 @@
                 </LecturasAportadas>
                 <DisconformidadAutoconsumo>
                     <TipoDisconformidadAutoconsumo>01</TipoDisconformidadAutoconsumo>
+                    <TipoDisconformidadAutoconsumo>03</TipoDisconformidadAutoconsumo>
                 </DisconformidadAutoconsumo>
                 <CodigoIncidencia>01</CodigoIncidencia>
                 <CodigoSolicitud>33333</CodigoSolicitud>

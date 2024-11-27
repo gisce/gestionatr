@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<MensajeAlta xmlns="http://localhost/elegibilidad">
+<MensajeActivacionAlta xmlns="http://localhost/elegibilidad">
     <Cabecera>
         <CodigoREEEmpresaEmisora>1234</CodigoREEEmpresaEmisora>
         <CodigoREEEmpresaDestino>4321</CodigoREEEmpresaDestino>
@@ -30,14 +30,14 @@
               <CAU>ES1234000000000001JN0FA001</CAU>
               <TipoAutoconsumo>11</TipoAutoconsumo>
               <TipoSubseccion>10</TipoSubseccion>
-              <Colectivo>N</Colectivo>
+              <Colectivo>S</Colectivo>
               <DatosInstGen>
-                <CIL>ES1234000000000001JN0FA00</CIL>
-                <TecGenerador>b11</TecGenerador>
-                <Combustible>radiación solar</Combustible>
+                <CIL>ES1234000000000001JN0F001</CIL>
+                <TecGenerador>b12</TecGenerador>
+                <Combustible>Diesel</Combustible>
                 <PotInstaladaGen>100</PotInstaladaGen>
                 <TipoInstalacion>01</TipoInstalacion>
-                <EsquemaMedida>C</EsquemaMedida>
+                <EsquemaMedida>B</EsquemaMedida>
                 <SSAA>S</SSAA>
                 <UnicoContrato>S</UnicoContrato>
                 <RefCatastro>1234567890qwertyuidf</RefCatastro>
@@ -161,4 +161,4 @@
         </PuntosDeMedida>
 
     </ActivacionAlta>
-</MensajeAlta>
+</MensajeActivacionAlta>

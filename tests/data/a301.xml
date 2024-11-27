@@ -31,12 +31,12 @@
                     <CAU>ES1234000000000001JN0FA001</CAU>
                     <TipoAutoconsumo>11</TipoAutoconsumo>
                     <TipoSubseccion>10</TipoSubseccion>
-                    <Colectivo>N</Colectivo>
+                    <Colectivo>S</Colectivo>
                     <DatosInstGen>
-                        <CIL>ES1234000000000001JN0FA00</CIL>
+                        <CIL>ES1234000000000001JN0F001</CIL>
                         <PotInstaladaGen>100</PotInstaladaGen>
                         <TipoInstalacion>01</TipoInstalacion>
-                        <EsquemaMedida>C</EsquemaMedida>
+                        <EsquemaMedida>B</EsquemaMedida>
                         <SSAA>S</SSAA>
                         <UnicoContrato>S</UnicoContrato>
                         <RefCatastro>1234567890qwertyuidf</RefCatastro>
