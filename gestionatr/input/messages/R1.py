@@ -1119,6 +1119,24 @@ class MinimumFieldsChecker(object):
                 errors.append(field)
         return errors
 
+    def check_tipo_disconforme_autoconsumo(self):
+        for var in self.r1.variables_detalle_reclamacion:
+            if not var.disconformidad_autoconsumo:
+                return False
+        return len(self.r1.variables_detalle_reclamacion) > 0
+
+    def check_CAU(self):
+        for var in self.r1.variables_detalle_reclamacion:
+            if not var.CAU:
+                return False
+        return len(self.r1.variables_detalle_reclamacion) > 0
+
+    def check_motivo_consulta(self):
+        for var in self.r1.variables_detalle_reclamacion:
+            if not var.motivo_consulta:
+                return False
+        return len(self.r1.variables_detalle_reclamacion) > 0
+
     def check_nif_cliente(self):
         return get_rec_attr(self.r1, "cliente.identificador", False)
 
