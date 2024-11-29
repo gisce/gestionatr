@@ -521,8 +521,12 @@ SUBTYPES_R101 = [
         'type': '03',
     }),
     ({
+<<<<<<< Updated upstream
         'min_fields': ['nif_cliente', 'nombre_cliente', 'cups', 'comentarios', 'num_fact',
                        'tipo_disconforme_autoconsumo'],
+=======
+        'min_fields': ['nif_cliente', 'nombre_cliente', 'cups', 'comentarios', 'num_fact', 'tipo_diconforme_auto'],
+>>>>>>> Stashed changes
         'code': '075',
         'name': u'DISCONFORMIDAD CON AUTOCONSUMO FACTURADO',
         'type': '02',
@@ -535,9 +539,15 @@ SUBTYPES_R101 = [
         'type': '03',
     }),
     ({
+<<<<<<< Updated upstream
         'min_fields': ['cups', 'codigo_de_solicitud', 'CAU'],
         'code': '077',
         'name': u'RETRASO EN PLAZO ACTIVACIÓN UNIDIRECCIONAL AUTOCONSUMO',
+=======
+        'min_fields': ['cups', 'codigo_de_solicitud', 'cau'],
+        'code': '077',
+        'name': u'RETRASO EN PLAZO ACTIVACIÓN UNIDIRECCIONAL AUTOCONSUMO ',
+>>>>>>> Stashed changes
         'type': '03',
     }),
     ({
@@ -555,7 +565,11 @@ SUBTYPES_R101 = [
     ({
         'min_fields': ['cups', 'codigo_de_solicitud'],
         'code': '080',
+<<<<<<< Updated upstream
         'name': u'RETRASO EN PLAZO DE ACEPTACIÓN REPOSICIÓN',
+=======
+        'name': u'RETRASO PLAZO ACEPTACIÓN ANULACIÓN',
+>>>>>>> Stashed changes
         'type': '03',
     }),
     ({
@@ -2634,6 +2648,7 @@ TABLA_131 = [('01', u'Consumo'),
 TABLA_132 = [('01', u'Cargo correspondiente al término de potencia'),
              ('02', u'Cargo correspondiente al término de energía'), ]
 
+<<<<<<< Updated upstream
 TABLA_133 = [
     ('10', u'Sin excedentes No acogido a compensación'),
     ('11', u'Sin excedentes acogido a compensación'),
@@ -2696,3 +2711,12 @@ TABLA_140 = [
     ('02', u'Conexiones'),
     ('03', u'Verificación del equipo'),
 ]
+=======
+TABLA_139 = [('01', u'Tipo Autoconsumo'),
+             ('02', u'Tipo subsección'),
+             ('03', u'Colectivo'),
+             ('04', u'Tipo CUPS'),
+             ('05', u'SSAA'),
+             ('06', u'Único contrato'),
+             ('07', u'Generación Neta Beta aplicada'),]
+>>>>>>> Stashed changes
