@@ -30,7 +30,7 @@ class A138(XmlModel):
         'streetnumberowner', 'portalowner', 'staircaseowner', 'floorowner', 'doorowner', 'cups', 'reqqd', 'reqqh',
         'reqestimatedqa', 'reqoutgoingpressure', 'gasusetype', 'tolltype', 'counterproperty', 'aptransind',
         'aptransnumber', 'reig', 'designpower', 'iricertificatedate', 'terminstexist', 'telemetering', 'factmethod', 'gasstationtype',
-        'modeffectdate', 'reqactivationdate', 'extrainfo', 'productlist', 'registerdoclist'
+        'cnae', 'protectedtype', 'essentialtype', 'modeffectdate', 'reqactivationdate', 'extrainfo', 'productlist', 'registerdoclist'
     )
 
     def __init__(self):
@@ -88,6 +88,9 @@ class A138(XmlModel):
         self.telemetering = XmlField('telemetering')
         self.factmethod = XmlField('factmethod')
         self.gasstationtype = XmlField('gasstationtype')
+        self.cnae = XmlField('cnae')
+        self.protectedtype = XmlField('protectedtype')
+        self.essentialtype = XmlField('essentialtype')
         self.modeffectdate = XmlField('modeffectdate')
         self.reqactivationdate = XmlField('reqactivationdate')
         self.extrainfo = XmlField('extrainfo')

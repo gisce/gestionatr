@@ -40,6 +40,9 @@ class A142(XmlModel):
         'surrogacy',
         'newowner',
         'disconnectedserviceaccepted',
+        'cnae',
+        'protectedtype',
+        'essentialtype',
         'extrainfo',
         'productlist',
         'registerdoclist',
@@ -61,6 +64,9 @@ class A142(XmlModel):
         self.surrogacy = XmlField('surrogacy')
         self.newowner = Newowner()
         self.disconnectedserviceaccepted = XmlField('disconnectedserviceaccepted')
+        self.cnae = XmlField('cnae')
+        self.protectedtype = XmlField('protectedtype')
+        self.essentialtype = XmlField('essentialtype')
         self.extrainfo = XmlField('extrainfo')
         self.productlist = ProductList()
         self.registerdoclist = Registerdoclist()

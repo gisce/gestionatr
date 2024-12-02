@@ -1678,6 +1678,7 @@ TAULA_MOTIVO_MODIFICACION = [
     ('25', 'Modificación Peaje circular Peaje 01102021'),
     ('26', 'Cambio de método de facturación'),
     ('27', 'Cambio tipo gasinera'),
+    ('28', 'Cambio de datos de cliente protegido'),
 ]
 TAULA_MOTIVO_DE_MODIFICACION_EN_UN_CAMBIO_DE_COMERCIALIZADOR = [
     ('01', 'Cambio de Titular'),
@@ -1779,6 +1780,24 @@ TAULA_TIPO_GASINERA = [
     ('04', 'Estación sumin.flota (Privada). Mixta'),
     ('05', 'Estación abierta. Exclusiva GNV con certificado'),
 ]
+TAULA_TIPO_CLIENTE_PROTEGIDO_EXTENDED = [
+    ('0', 'No protegido', "No protegido"),
+    ('1', 'Protegido', "Los clientes protegidos a efectos del Reglamento (UE) 2017/1938, del Parlamento Europeo y del Consejo, de 25 de octubre de 2017, son los consumidores domésticos, entendiendo como tales los suministros a domicilios de personas físicas y los usos de calefacción y agua caliente sanitaria colectiva para suministro a domicilios de personas físicas; las PYMES conectadas a la red de distribución; y los servicios esenciales establecidos en el artículo 60 del Real Decreto 1434/2002, de 27 de diciembre, por el que se regulan las actividades de transporte, distribución, comercialización, suministro y procedimientos de autorización de instalaciones de gas natural, o normativa que lo desarrolle o sustituya."),
+    ('2', 'Protegido en virtud del mecanismo de solidaridad', "Los clientes protegidos en virtud del mecanismo de solidaridad a efectos del Reglamento (UE) 2017/1938, del Parlamento Europeo y del Consejo, de 25 de octubre de 2017, son los consumidores domésticos, entendiendo como tales los suministros a domicilios de personas físicas y los usos de calefacción y agua caliente sanitaria colectiva para suministro a domicilios de personas físicas; y los servicios esenciales establecidos en el artículo 60 del Real Decreto 1434/2002, de 27 de diciembre, que no sean servicios educativos ni de administración pública."),
+]
+TAULA_TIPO_CLIENTE_PROTEGIDO = [(x[0], x[1]) for x in TAULA_TIPO_CLIENTE_PROTEGIDO_EXTENDED]
+TAULA_TIPO_CLIENTE_ESENCIAL_EXTENDED = [
+    ("0", "No esencial", "No esencial"),
+    ("1", "a) Centros sanitarios y hospitales", "a) Suministros destinados a centros sanitarios y hospitales que tengan incidencia en la seguridad y bienestar de los pacientes."),
+    ("2", "b) Guarderías y colegios de enseñanza obligatoria", "b) Guarderías y colegios de enseñanza obligatoria."),
+    ("3", "c) Asilos y residencias de ancianos", "c) Asilos y residencias de ancianos."),
+    ("4", "d) Institución vinculada a defensa", "d) Suministros destinados a instituciones directamente vinculadas a la defensa nacional, a las fuerzas y cuerpos de seguridad, a los bomberos, a protección civil y a la policía municipal, salvo las construcciones dedicadas a viviendas, economatos y zonas de recreo de su personal."),
+    ("5", "e) Transporte público con combustible gas", "e) Los medios de transporte público que utilicen gas como combustible."),
+    ("6", "f) Museos, bibliotecas o archivo", "f) Suministros destinados a museos, bibliotecas y archivos dedicados a la protección de bienes de interés cultural o del patrimonio histórico."),
+    ("7", "g) Otros interés social o comunitario", "g) Aquellos otros servicios considerados de interés social o comunitario que en su legislación específica sean declarados como tales."),
+]
+TAULA_TIPO_CLIENTE_ESENCIAL = [(x[0], x[1]) for x in TAULA_TIPO_CLIENTE_ESENCIAL_EXTENDED]
+
 TAULA_TIPO_DE_APARATO = [
     ('CO', 'Contador'),
     ('CR', 'Corrector'),
