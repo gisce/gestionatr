@@ -3002,7 +3002,7 @@ class test_D1(unittest.TestCase):
         cabecera.feed(cabecera_fields)
 
         # DatosSuministro
-        datos_suministro = d1.DatosSuministro()
+        datos_suministro = c1.DatosSuministro()
         datos_suministro_fields = {
             'tipo_cups': '01',
             'ref_catastro': '1234567890qwertyuiop',
@@ -3010,7 +3010,7 @@ class test_D1(unittest.TestCase):
         datos_suministro.feed(datos_suministro_fields)
 
         # UTM
-        utm = d1.UTM()
+        utm = c1.UTM()
         utm_fields = {
             'x': '100',
             'y': '200',
@@ -3020,7 +3020,7 @@ class test_D1(unittest.TestCase):
         utm.feed(utm_fields)
 
         # IdTitular
-        id_titular = d1.IdTitular()
+        id_titular = c1.IdTitular()
         id_titular_fields = {
             'tipo_identificador': 'NI',
             'identificador': '111111111H',
@@ -3028,7 +3028,7 @@ class test_D1(unittest.TestCase):
         id_titular.feed(id_titular_fields)
 
         # Nombre
-        nombre = d1.Nombre()
+        nombre = c1.Nombre()
         nombre_fields = {
             'nombre_de_pila': 'Juan',
             'primer_apellido': 'López',
@@ -3037,7 +3037,7 @@ class test_D1(unittest.TestCase):
         nombre.feed(nombre_fields)
 
         # Telefono
-        telefono = d1.Telefono()
+        telefono = c1.Telefono()
         telefono_fields = {
             'prefijo_pais': '0034',
             'numero': '933834841',
@@ -3045,7 +3045,7 @@ class test_D1(unittest.TestCase):
         telefono.feed(telefono_fields)
 
         # Telefono 2
-        telefono2 = d1.Telefono()
+        telefono2 = c1.Telefono()
         telefono2_fields = {
             'prefijo_pais': '0034',
             'numero': '633834841',
@@ -3053,7 +3053,7 @@ class test_D1(unittest.TestCase):
         telefono2.feed(telefono2_fields)
 
         # Telefono 3
-        telefono3 = d1.Telefono()
+        telefono3 = c1.Telefono()
         telefono3_fields = {
             'prefijo_pais': '0034',
             'numero': '683834841',
@@ -3061,7 +3061,7 @@ class test_D1(unittest.TestCase):
         telefono3.feed(telefono3_fields)
 
         # TitularRepresentanteGen
-        titular = d1.TitularRepresentanteGen()
+        titular = c1.TitularRepresentanteGen()
         titular_representante_gen_fields = {
             'id_titular': id_titular,
             'nombre': nombre,
@@ -3071,7 +3071,7 @@ class test_D1(unittest.TestCase):
         titular.feed(titular_representante_gen_fields)
 
         # DatosInstGen
-        datos_1 = d1.DatosInstGen()
+        datos_1 = c1.DatosInstGen()
         datos_inst_gen_fields = {
             'cil': 'ES1234000000000001JN0F001',
             'tec_generador': 'b12',
@@ -3090,7 +3090,7 @@ class test_D1(unittest.TestCase):
         utm2 = copy.deepcopy(utm)
         titular2 = copy.deepcopy(titular)
 
-        datos_2 = d1.DatosInstGen()
+        datos_2 = c1.DatosInstGen()
         datos_inst_gen_fields = {
             'cil': 'ES1234000000000001JN0F002',
             'tec_generador': 'b11',
@@ -3106,7 +3106,7 @@ class test_D1(unittest.TestCase):
         datos_2.feed(datos_inst_gen_fields)
 
         # DatosCAU
-        datos_cau = d1.DatosCAU()
+        datos_cau = c1.DatosCAU()
         datos_cau_fields = {
             'cau': 'ES1234000000000001JN0FA001',
             'tipo_autoconsumo': '11',
@@ -3117,7 +3117,7 @@ class test_D1(unittest.TestCase):
         datos_cau.feed(datos_cau_fields)
 
         # Autoconsumo
-        autoconsumo = d1.Autoconsumo()
+        autoconsumo = c1.Autoconsumo()
         autoconsumo_fields = {
             'datos_suministro': datos_suministro,
             'datos_cau': datos_cau,
@@ -3574,7 +3574,7 @@ class test_P0(unittest.TestCase):
         # DatosCie
         datos_cie = p0.DatosCie()
         datos_cie_fields = {
-            'potencia_ins_bt': "2000",
+            'potencia_inst_bt': "2000",
             'cie_papel': cie_papel,
             'validez_cie': 'AU'
         }
@@ -6234,6 +6234,12 @@ class test_R1(unittest.TestCase):
         }
         ubicacion_incidencia.feed(ubicacion_incidencia_fields)
 
+        disconformidad_autoconsumo = r1.DisconformidadAutoconsumo()
+        disconformidad_autoconsumo.feed({
+            'tipo_disconformidad_1': '01',
+            'tipo_disconformidad_2': '03'
+        })
+
         vair_fields = {
             'num_expediente_acometida': '11111',
             'num_expediente_fraude': '22222',
@@ -6243,6 +6249,7 @@ class test_R1(unittest.TestCase):
             'fecha_lectura': '2016-01-20',
             'tipo_dhedm': '1',
             'lecturas_aportadas': lecturas_aportadas,
+            'disconformidad_autoconsumo': disconformidad_autoconsumo,
             'codigo_incidencia': '01',
             'codigo_solicitud': '33333',
             'parametro_contratacion': '01',

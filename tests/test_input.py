@@ -2296,6 +2296,10 @@ class test_R1(TestCaseCompat):
         self.assertEqual(cont.telefonos[1][0], u'34')
         self.assertEqual(len(varr1.lecturas_aportadas), 2)
         lect1 = varr1.lecturas_aportadas[0]
+        disconformidad_autoconsumo = varr1.disconformidad_autoconsumo
+        self.assertEqual(len(disconformidad_autoconsumo), 2)
+        self.assertEqual(disconformidad_autoconsumo[0], u'01')
+        self.assertEqual(disconformidad_autoconsumo[1], u'03')
         self.assertEqual(lect1.codigo_periodo_dh, u'21')
         self.assertEqual(lect1.integrador, u'AE')
         self.assertEqual(lect1.lectura_propuesta, u'0000001162.00')
@@ -3883,7 +3887,7 @@ class test_P0(unittest.TestCase):
         self.assertEqual(p0.expediente_acometida.expediente_abierto, 'S')
         self.assertEqual(p0.equipo[0].relacion_transformacion_intensidad, '10/100')
         self.assertEqual(p0.doc_tecnica.cie_disponible, 'S')
-        self.assertEqual(p0.doc_tecnica.datos_cie.potencia_ins_bt, '2000')
+        self.assertEqual(p0.doc_tecnica.datos_cie.potencia_inst_bt, '2000')
         self.assertEqual(len(p0.puntos_de_medida), 1)
         self.assertEqual(p0.puntos_de_medida[0].direccion_enlace, '39522')
         self.assertEqual(p0.puntos_de_medida[0].telefono_telemedida, '987654321')

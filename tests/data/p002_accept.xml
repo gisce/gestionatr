@@ -168,7 +168,7 @@
         <DocTecnica>
             <CIEDisponible>S</CIEDisponible>
             <DatosCie>
-                <PotenciaInsBT>2000</PotenciaInsBT>
+                <PotenciaInstBT>2000</PotenciaInstBT>
                 <CIEPapel>
                     <CodigoCie>12345678901234567890123456789012345</CodigoCie>
                     <FechaEmisionCie>2020-03-01</FechaEmisionCie>
