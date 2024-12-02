@@ -322,7 +322,6 @@ class Message(MessageBase):
             try:
                 self.obj = objectify.fromstring(self.str_xml, parser)
             except Exception as e:
-                import pudb;pu.db
                 self.error = e
                 if validate:
                     raise except_f1('Error', u'Documento inválido: {0}'.format(e))
