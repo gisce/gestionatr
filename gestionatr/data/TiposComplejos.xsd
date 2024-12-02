@@ -1881,7 +1881,7 @@
 	</xs:complexType>
 	<xs:complexType name="DatosCIEP0">
 		<xs:sequence>
-			<xs:element name="PotenciaInsBT" type="Potencia"/>
+			<xs:element name="PotenciaInstBT" type="Potencia"/>
 			<xs:choice>
 				<xs:element name="CIEPapel" type="CIEPapelP0"/>
 				<xs:element name="CIEElectronico" type="CIEElectronicoP0"/>

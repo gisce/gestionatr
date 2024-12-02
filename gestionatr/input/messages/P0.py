@@ -673,10 +673,10 @@ class DatosCie(object):
         self.datos_cie = data
 
     @property
-    def potencia_ins_bt(self):
+    def potencia_inst_bt(self):
         data = ''
         try:
-            data = self.datos_cie.PotenciaInsBT.text
+            data = self.datos_cie.PotenciaInstBT.text
         except AttributeError:
             pass
         return data

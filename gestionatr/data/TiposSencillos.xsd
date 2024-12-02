@@ -3279,9 +3279,10 @@ la reclamacion
 			RD	RONDA
 			RS	RESIDENCIAL
 			SD	SENDA
+			SU	SUBIDA
 			TR	TRAVESÍA
 			UR	URBANIZACIÓN
-			VI	VIAL
+			VI		VIAL
 			ZN	ZONA
 			AD	ALDEA
 			CJ	CALLEJA
@@ -3348,6 +3349,7 @@ la reclamacion
 			<xs:enumeration value="RD"/>
 			<xs:enumeration value="RS"/>
 			<xs:enumeration value="SD"/>
+			<xs:enumeration value="SU"/>
 			<xs:enumeration value="TR"/>
 			<xs:enumeration value="UR"/>
 			<xs:enumeration value="VI"/>
@@ -4132,7 +4134,7 @@ la reclamacion
 01 Vuelta a la situacion anterior En servicio La reposicion ha finalizado devolviendo el PS a la situacion anterior a la peticion que se ha repuesto 
 02 Vuelta a la situacion anterior En servicio (cortado) Reposicion de una solicitud de C1/C2 en la que se produjo un reenganche del PS. Se vuelve a la situacion anterior en la que el PS se encontraba cortado. En el caso de desear la reconexion del PS, la peticion se deberá realizar por fuera del sistema al no existir una solicitud de corte en curso.
 03 Traspaso a la CORTraspaso a la COR en las condiciones originales, en caso de rechazo por parte del receptor.
-04 Baja del contrato por rechazo de la COR Traspaso a la COR en las condiciones originales, en caso de rechazo por parte del receptor.
+04 Baja del contrato por rechazo de la COR Traspaso a la COR en las condiciones originales, en caso de rechazo por parte del receptor. Se da de baja el 26-09-2024
 05 Baja por cese de actividad Concurrencia de procesos: se prioriza la baja (en la medida de lo posible) por cese de actividad solicitada por el consumidor sobre el traspaso a la COR. 
 06 Activacion de cambio de comercializador Concurrencia de procesos: se prioriza el cambio de comercializador sobre el traspaso a la COR. </xs:documentation>
 		</xs:annotation>
@@ -4140,7 +4142,6 @@ la reclamacion
 			<xs:enumeration value="01"/>
 			<xs:enumeration value="02"/>
 			<xs:enumeration value="03"/>
-			<xs:enumeration value="04"/>
 			<xs:enumeration value="05"/>
 			<xs:enumeration value="06"/>
 		</xs:restriction>

@@ -221,11 +221,11 @@ class DocTecnica(XmlModel):
 
 class DatosCie(XmlModel):
 
-    _sort_order = ('datos_cie', 'potencia_ins_bt', 'cie_papel', 'cie_electronico', 'validez_cie')
+    _sort_order = ('datos_cie', 'potencia_inst_bt', 'cie_papel', 'cie_electronico', 'validez_cie')
 
     def __init__(self):
         self.datos_cie = XmlField('DatosCie')
-        self.potencia_ins_bt = XmlField('PotenciaInsBT')
+        self.potencia_inst_bt = XmlField('PotenciaInstBT')
         self.cie_papel = CIEPapel()
         self.cie_electronico = CIEElectronico()
         self.validez_cie = XmlField('ValidezCIE')
