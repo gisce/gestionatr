@@ -175,9 +175,9 @@
 					</restriction>
 				</simpleType>
 			</element>
-			<element name="cnae" type="tns:CNAEType" maxOccurs="1" minOccurs="1"></element>
-			<element name="protectedtype" type="tns:TipoClienteProtegidoType" maxOccurs="1" minOccurs="1"></element>
-			<element name="essentialtype" type="tns:TipoClienteEsencialType" maxOccurs="1" minOccurs="1"></element>
+			<element name="cnae" type="tns:CNAEType" maxOccurs="1" minOccurs="0"></element>
+			<element name="protectedtype" type="tns:TipoClienteProtegidoType" maxOccurs="1" minOccurs="0"></element>
+			<element name="essentialtype" type="tns:TipoClienteEsencialType" maxOccurs="1" minOccurs="0"></element>
 			<element name="communicationreason" minOccurs="1" maxOccurs="1">
 				<annotation>
 					<documentation>Causa de la Comunicación</documentation>

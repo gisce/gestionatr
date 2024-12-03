@@ -329,9 +329,9 @@
 					<documentation>Indicador de Gasineras</documentation>
 				</annotation>
 			</element>
-			<element name="cnae" type="tns:CNAEType" maxOccurs="1" minOccurs="1"></element>
-			<element name="protectedtype" type="tns:TipoClienteProtegidoType" maxOccurs="1" minOccurs="1"></element>
-			<element name="essentialtype" type="tns:TipoClienteEsencialType" maxOccurs="1" minOccurs="1"></element>
+			<element name="cnae" type="tns:CNAEType" maxOccurs="1" minOccurs="0"></element>
+			<element name="protectedtype" type="tns:TipoClienteProtegidoType" maxOccurs="1" minOccurs="0"></element>
+			<element name="essentialtype" type="tns:TipoClienteEsencialType" maxOccurs="1" minOccurs="0"></element>
 			<element name="modeffectdate" type="tns:ModeloFechaSolicitudType" minOccurs="1" maxOccurs="1">
 				<annotation>
 					<documentation>Modelo de Fecha Efecto. Para suministros del grupo 1 o 2, sólo se permitirá a Fecha de Efecto concreta (Cód. '04').</documentation>
