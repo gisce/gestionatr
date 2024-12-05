@@ -200,6 +200,15 @@ class Contrato(Contrato):
             pass
         return data
 
+    @property
+    def cups_principal(self):
+        data = ''
+        try:
+            data = self.contrato.CUPSPrincipal.text
+        except AttributeError:
+            pass
+        return data
+
 
 class Contacto(object):
 
@@ -546,6 +555,15 @@ class DatosCie(object):
             pass
         return data
 
+    @property
+    def potencia_no_interrumpible(self):
+        data = ''
+        try:
+            data = self.datos_cie.PotenciaNoInterrumpible.text
+        except AttributeError:
+            pass
+        return data
+
 
 class CIEPapel(object):
 
@@ -566,15 +584,6 @@ class CIEPapel(object):
         data = ''
         try:
             data = self.cie_papel.PotenciaInstBT.text
-        except AttributeError:
-            pass
-        return data
-
-    @property
-    def potencia_no_interrumpible(self):
-        data = ''
-        try:
-            data = self.cie_papel.PotenciaNoInterrumpible.text
         except AttributeError:
             pass
         return data

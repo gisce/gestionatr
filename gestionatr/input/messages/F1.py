@@ -323,9 +323,14 @@ class DatosGeneralesATR(DatosGenerales):
             return self._datos_factura_atr.TipoAutoconsumo.text.strip()
 
     @property
-    def cau(self):
-        if hasattr(self._datos_factura_atr, 'CAU'):
-            return self._datos_factura_atr.CAU.text.strip()
+    def tipo_subseccion(self):
+        if hasattr(self._datos_factura_atr, 'TipoSubseccion'):
+            return self._datos_factura_atr.TipoSubseccion.text.strip()
+
+    @property
+    def tipo_cups(self):
+        if hasattr(self._datos_factura_atr, 'TipoCUPS'):
+            return self._datos_factura_atr.TipoCUPS.text.strip()
 
     @property
     def duracion_inf_anio(self):
@@ -932,18 +937,6 @@ class PeriodoEnergiaNetaGen(Periodo):
             return float(self.periodo.ValorEnergiaNetaGen.text.strip())
         return None
 
-    @property
-    def beta(self):
-        if hasattr(self.periodo, 'Beta'):
-            return float(self.periodo.Beta.text.strip())
-        return None
-
-    @property
-    def relacion_generacion(self):
-        if hasattr(self.periodo, 'RelacionGeneracion'):
-            return float(self.periodo.RelacionGeneracion.text.strip())
-        return None
-
 
 class PeriodoEnergiaAutoconsumida(Periodo):
 
@@ -1038,6 +1031,12 @@ class InstalacionGenAutoconsumo(object):
         self.instalacion_gen_autoconsumo = data
 
     @property
+    def cil(self):
+        if hasattr(self.instalacion_gen_autoconsumo, 'CIL'):
+            return self.instalacion_gen_autoconsumo.CIL.text.strip()
+        return None
+
+    @property
     def tipo_instalacion(self):
         if hasattr(self.instalacion_gen_autoconsumo, 'TipoInstalacion'):
             return self.instalacion_gen_autoconsumo.TipoInstalacion.text.strip()
@@ -1053,12 +1052,6 @@ class InstalacionGenAutoconsumo(object):
     def energia_neta_gen(self):
         if hasattr(self.instalacion_gen_autoconsumo, 'EnergiaNetaGen'):
             return EnergiaNetaGen(self.instalacion_gen_autoconsumo.EnergiaNetaGen)
-        return None
-
-    @property
-    def energia_autoconsumida(self):
-        if hasattr(self.instalacion_gen_autoconsumo, 'EnergiaAutoconsumida'):
-            return EnergiaAutoconsumida(self.instalacion_gen_autoconsumo.EnergiaAutoconsumida)
         return None
 
 
@@ -1114,12 +1107,6 @@ class EnergiaNetaGen(object):
             for d in self.energia_neta_gen.TerminoEnergiaNetaGen:
                 data.append(TerminoEnergiaNetaGen(d))
         return data
-
-    @property
-    def importe_total(self):
-        if hasattr(self.energia_neta_gen, 'TotalEnergiaNetaGenBeta'):
-            return float(self.energia_neta_gen.TotalEnergiaNetaGenBeta.text.strip())
-        return None
 
 
 class EnergiaAutoconsumida(object):
@@ -1194,18 +1181,57 @@ class Autoconsumo(object):
         self.autoconsumo = data
 
     @property
-    def instalacion_gen_autoconsumo(self):
-        data = []
-        if hasattr(self.autoconsumo, 'InstalacionGenAutoconsumo'):
-            for d in self.autoconsumo.InstalacionGenAutoconsumo:
-                data.append(InstalacionGenAutoconsumo(d))
-        return data
+    def energia_neta_gen(self):
+        if hasattr(self.autoconsumo, 'EnergiaNetaGen'):
+            return EnergiaNetaGen(self.autoconsumo.EnergiaNetaGen)
+        return None
+
+    @property
+    def energia_autoconsumida(self):
+        if hasattr(self.autoconsumo, 'EnergiaAutoconsumida'):
+            return EnergiaAutoconsumida(self.autoconsumo.EnergiaAutoconsumida)
+        return None
 
     @property
     def energia_excedentaria(self):
         if hasattr(self.autoconsumo, 'EnergiaExcedentaria'):
             return EnergiaExcedentaria(self.autoconsumo.EnergiaExcedentaria)
         return None
+
+    @property
+    def datos_cau(self):
+        if hasattr(self.autoconsumo, 'DatosCAU'):
+            return DatosCAU(self.autoconsumo.DatosCAU)
+        return None
+
+
+class DatosCAU(object):
+
+    def __init__(self, data):
+        self.datos_cau = data
+
+    @property
+    def cau(self):
+        if hasattr(self.datos_cau, 'CAU'):
+            return self.datos_cau.CAU.text.strip()
+
+    @property
+    def colectivo(self):
+        if hasattr(self.datos_cau, 'Colectivo'):
+            return self.datos_cau.Colectivo.text.strip()
+
+    @property
+    def esquema_medida(self):
+        if hasattr(self.datos_cau, 'EsquemaMedida'):
+            return self.datos_cau.EsquemaMedida.text.strip()
+
+    @property
+    def instalacion_gen_autoconsumo(self):
+        data = []
+        if hasattr(self.datos_cau, 'InstalacionGenAutoconsumo'):
+            for d in self.datos_cau.InstalacionGenAutoconsumo:
+                data.append(InstalacionGenAutoconsumo(d))
+        return data
 
 
 class Cargos(object):
@@ -1787,7 +1813,7 @@ class InformacionAlConsumidor(object):
 
     PERIODO_TYPE = PeriodoMaximetroConsumidor
 
-    def __init__(self, data):
+    def  __init__(self, data):
         self.informacion_al_consumidor = data
 
     @property

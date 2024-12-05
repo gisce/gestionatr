@@ -19,6 +19,24 @@ class E1(C2):
             return False
 
     @property
+    def ind_esencial(self):
+        tree = '{0}.IndEsencial'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data:
+            return data.text
+        else:
+            return False
+
+    @property
+    def fecha_ultimo_movimiento_ind_esencial(self):
+        tree = '{0}.FechaUltimoMovimientoIndEsencial'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data:
+            return data.text
+        else:
+            return False
+
+    @property
     def tipo_de_solicitud(self):
         tree = '{0}.TipoDeSolicitud'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
