@@ -103,6 +103,16 @@ class E1(C2):
         else:
             return False
 
+    @property
+    def contactos(self):
+        data = []
+        try:
+            for contacto in get_rec_attr(self.obj, 'ContestacionIncidencia.Contacto', []):
+                data.append(Contacto(contacto))
+        except AttributeError:
+            pass
+        return data
+
 
 class IDCliente(object):
 

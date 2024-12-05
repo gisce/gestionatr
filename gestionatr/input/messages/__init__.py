@@ -11,6 +11,7 @@ from .M1 import M1
 from .M2 import M2
 from .D1 import D1
 from .E1 import E1
+from .E2 import E2
 from .W1 import W1
 from .P0 import P0
 from .Q1 import Q1

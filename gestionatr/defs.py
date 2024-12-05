@@ -913,7 +913,6 @@ TABLA_25 = [
     ('036', 'EGA'),
     ('037', 'EGUREN'),
     ('038', 'ELIOP'),
-    ('134', 'ENEL'),
     ('039', 'ERICSON'),
     ('040', 'FECHA'),
     ('041', 'FIERRO'),
@@ -2402,6 +2401,7 @@ TABLA_113 = [
 # es posa NEW perque no es un canvi que afecti a tot el ERP ja que REE encara utilitza els formats antics. Quan REE
 # utilitzi la versio tambe s'adaptara la TABLA_113 amb les dades de TABLA_113_NEW
 TABLA_113_NEW = [
+    ('00', u'Sin Autoconsumo'),
     ('11', u'Sin excedentes'),
     ('12', u'Con excedentes'),
     ('0C', u'Baja como miembro de autoconsumo colectivo'),
