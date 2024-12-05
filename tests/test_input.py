@@ -230,7 +230,9 @@ class test_C1(TestCaseCompat):
         self.assertEqual(titular.telefono[0][0], u'0034')
         self.assertEqual(titular.telefono[0][1], u'933834841')
         self.assertEqual(titular.correo_electronico, u'mail_falso@dominio.com')
-
+        # validem el cau 2
+        datos_cau2 = autoconsumo.datos_cau[1]
+        self.assertEqual(datos_cau2.cau, u'ES1234000000000001JN0FA001')
         # Seguim amb la resta de dades del contracte
         self.assertEqual(c.contrato.tipo_contrato_atr, u'02')
         self.assertEqual(c.contrato.tarifa_atr, u'018')
@@ -409,6 +411,7 @@ class test_C2(TestCaseCompat):
         self.xml_c201_completo.close()
         self.xml_c202_accept.close()
         self.xml_c203.close()
+        self.xml_c205.close()
         self.xml_c213.close()
 
     def test_c201_completo(self):
@@ -2499,6 +2502,8 @@ class test_F1(TestCaseCompat):
             self.xml_f101_integradores_dh = f.read()
         with open(get_data("f101_factura_atr_autoconsum_20td.xml"), "rb") as f:
             self.xml_f101_atr_autoconsum_20td = f.read()
+        with open(get_data("f101_factura_atr_autoconsumo_output.xml"), "rb") as f:
+            self.xml_f101_factura_atr_autoconsumo_output = f.read()
 
     def testATRInvoice(self):
         f1 = F1(self.xml_f101_atr_invoice)
@@ -4543,13 +4548,13 @@ class test_E2(unittest.TestCase):
         e2 = E2(self.xml_e213)
         e2.parse_xml()
         self.assertEqual(e2.contestacion_incidencia, u'02')
-        self.assertEqual(len(e2.contactos), 2)
-        self.assertEqual(e2.contactos[0].persona_de_contacto, 'Nombre Inventado')
-        telefonos = e2.contactos[0].telefonos
+
+        self.assertEqual(e2.contacto.persona_de_contacto, 'Nombre Inventado')
+        telefonos = e2.contacto.telefonos
         self.assertEqual(len(telefonos), 1)
         self.assertEqual(telefonos[0][0], "34")
         self.assertEqual(telefonos[0][1], "683834841")
-        self.assertEqual(e2.contactos[0].correo_electronico, "mail_falso@dominio.com")
+        self.assertEqual(e2.contacto.correo_electronico, "mail_falso@dominio.com")
 
     def test_e214(self):
         e2 = E2(self.xml_e214)
