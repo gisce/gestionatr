@@ -3,6 +3,7 @@ import os
 from gestionatr.output.messages.base import Cabecera
 from gestionatr.output.messages import sw_c1 as c1
 from gestionatr.output.messages import sw_c2 as c2
+from gestionatr.output.messages import sw_q1 as q1
 from . import unittest
 
 _ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -14,7 +15,10 @@ def get_data(path):
 
 
 def get_header(process='C1', step='01', code='201607211259', date='2016-07-21T12:59:47'):
-    header = Cabecera()
+    if process == 'Q1':
+        header = q1.Cabecera()
+    else:
+        header = Cabecera()
     vals = {
         'codigo_del_proceso': process,
         'codigo_del_paso': step,

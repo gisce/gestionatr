@@ -43,8 +43,7 @@
                 </DatosGeneralesFactura>
                 <DatosFacturaATR>
                     <FechaBOE>2021-12-16</FechaBOE>
-                    <TipoAutoconsumo>53</TipoAutoconsumo>
-                    <CAU>ES0304000016006825GV0FA000</CAU>
+                    <TipoAutoconsumo>12</TipoAutoconsumo>
                     <TipoSubseccion>10</TipoSubseccion>
                     <TipoCUPS>01</TipoCUPS>
                     <DuracionInfAnio>N</DuracionInfAnio>
@@ -175,8 +174,8 @@
                         <ExentoCargos>S</ExentoCargos>
                         <EnergiaNetaGen>
                             <TerminoEnergiaNetaGen>
-                                <FechaDesde>2016-04-04</FechaDesde>
-                                <FechaHasta>2016-05-05</FechaHasta>
+                                <FechaDesde>2021-12-31</FechaDesde>
+                                <FechaHasta>2022-01-31</FechaHasta>
                                 <Periodo>
                                     <ValorEnergiaNetaGen>1.00</ValorEnergiaNetaGen>
                                 </Periodo>

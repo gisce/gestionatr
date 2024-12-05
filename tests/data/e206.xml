@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<MensajeNotificacionActivacionPorDesistimiento xmlns="http://localhost/elegibilidad">
+<MensajeNotificacionActivacionPorReposicion xmlns="http://localhost/elegibilidad">
     <Cabecera>
         <CodigoREEEmpresaEmisora>1234</CodigoREEEmpresaEmisora>
         <CodigoREEEmpresaDestino>4321</CodigoREEEmpresaDestino>
@@ -20,7 +20,8 @@
             <IdContrato>
                 <CodContrato>00001</CodContrato>
             </IdContrato>
-            <PuntosDeMedida>
+        </Contrato>
+        <PuntosDeMedida>
                 <PuntoDeMedida>
                     <CodPM>ES1234000000000001JN0F</CodPM>
                     <TipoMovimiento>A</TipoMovimiento>
@@ -88,17 +89,5 @@
                     <Comentarios>Comentarios Varios</Comentarios>
             </PuntoDeMedida>
         </PuntosDeMedida>
-        <IdCliente>
-          <TipoIdentificador>NI</TipoIdentificador>
-          <Identificador>B36385870</Identificador>
-          <TipoPersona>J</TipoPersona>
-        </IdCliente>
-        </Contrato>
-        <RegistrosDocumento>
-         <RegistroDoc>
-           <TipoDocAportado>07</TipoDocAportado>
-           <DireccionUrl>https://www.google.com/</DireccionUrl>
-         </RegistroDoc>
-        </RegistrosDocumento>
     </NotificacionActivacionPorReposicion>
-</MensajeNotificacionActivacionPorDesistimiento>
+</MensajeNotificacionActivacionPorReposicion>

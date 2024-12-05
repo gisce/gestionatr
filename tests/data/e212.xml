@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<MensajeAceptacionDesistimiento xmlns="http://localhost/elegibilidad">
+<MensajeRechazoReposicion xmlns="http://localhost/elegibilidad">
     <Cabecera>
         <CodigoREEEmpresaEmisora>1234</CodigoREEEmpresaEmisora>
         <CodigoREEEmpresaDestino>4321</CodigoREEEmpresaDestino>
@@ -10,7 +10,7 @@
         <FechaSolicitud>2016-07-21T12:59:47</FechaSolicitud>
         <CUPS>ES1234000000000001JN0F</CUPS>
     </Cabecera>
-    <RechazoReposición>
+    <RechazoReposicion>
         <FechaRechazo>2020-05-01</FechaRechazo>
-    </RechazoReposición>
-</MensajeAceptacionDesistimiento>
+    </RechazoReposicion>
+</MensajeRechazoReposicion>

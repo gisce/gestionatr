@@ -3776,7 +3776,17 @@ class test_Q1(unittest.TestCase):
 
         # Cabecera
         cabecera = get_header(process='Q1', step='01', date='2014-04-16T22:13:37', code='201412111009')
+        expediente = f1.Expediente()
+        expediente.feed({'numero_expediente': "123123132", 'codigo_solicitud': "333222111"})
 
+        cabecera_fields = {
+            'codigo_fiscal_factura': "123456798",
+            'tipo_factura': "N",
+            'motivo_facturacion': "01",
+            'codigo_factura_rectificada_anulada': "33333",
+            'expediente': expediente
+        }
+        cabecera.feed(cabecera_fields)
         # Medidas
         medidas = q1.Medidas()
 
@@ -3927,10 +3937,190 @@ class test_Q1(unittest.TestCase):
             'modelo_aparato_list': [ma1, ma2],
         }
         medidas.feed(medidas_fields)
+        energia_neta_gen = f1.EnergiaNetaGen()
+        termino_energia_neta_gen = f1.TerminoEnergiaNetaGen()
+        periodo1 = f1.PeriodoEnergiaNetaGen()
+        periodo1.feed({
+            'valor_energia_neta_gen': 1.00,
+        })
+        periodo2 = f1.PeriodoEnergiaNetaGen()
+        periodo2.feed({
+            'valor_energia_neta_gen': 2.00,
+        })
+        periodo3 = f1.PeriodoEnergiaNetaGen()
+        periodo3.feed({
+            'valor_energia_neta_gen': 3.00,
+        })
+        termino_energia_neta_gen.feed({
+            'fecha_desde': '2016-04-04',
+            'fecha_hasta': '2016-05-05',
+            'periodos': [periodo1, periodo2, periodo3]
+        })
+        energia_neta_gen.feed({'termino_energia_neta_gen': termino_energia_neta_gen})
+
+        energia_autoconsumida = f1.EnergiaAutoconsumida()
+        termino_energia_autoconsumida = f1.TerminoEnergiaAutoconsumida()
+        periodo1 = f1.PeriodoEnergiaAutoconsumida()
+        periodo1.feed({
+            'valor_energia_autoconsumida': 11.00,
+        })
+        periodo2 = f1.PeriodoEnergiaAutoconsumida()
+        periodo2.feed({
+            'valor_energia_autoconsumida': 12.00,
+        })
+        periodo3 = f1.PeriodoEnergiaAutoconsumida()
+        periodo3.feed({
+            'valor_energia_autoconsumida': 13.00,
+        })
+        termino_energia_autoconsumida.feed({
+            'fecha_desde': '2016-04-04',
+            'fecha_hasta': '2016-05-05',
+            'periodos': [periodo1, periodo2, periodo3]
+        })
+        energia_autoconsumida.feed({
+            'termino_energia_autoconsumida': termino_energia_autoconsumida,
+        })
+
+        energia_excedentaria = f1.EnergiaExcedentaria()
+        termino_energia_excedentaria = f1.TerminoEnergiaExcedentaria()
+        periodo1 = f1.PeriodoEnergiaExcedentaria()
+        periodo1.feed({
+            'valor_energia_excedentaria': 21.00,
+        })
+        periodo2 = f1.PeriodoEnergiaExcedentaria()
+        periodo2.feed({
+            'valor_energia_excedentaria': 22.00
+        })
+        periodo3 = f1.PeriodoEnergiaExcedentaria()
+        periodo3.feed({
+            'valor_energia_excedentaria': 23.00,
+        })
+        termino_energia_excedentaria.feed({
+            'fecha_desde': '2016-04-04',
+            'fecha_hasta': '2016-05-05',
+            'periodos': [periodo1, periodo2, periodo3]
+        })
+        energia_excedentaria.feed({
+            'termino_energia_excedentaria': termino_energia_excedentaria,
+        })
+        energia_neta_gen_inst = copy.deepcopy(energia_neta_gen)
+        inst_gen_autoconsumo = f1.InstalacionGenAutoconsumo()
+        inst_gen_autoconsumo_fields = {
+            'cil': 'ES1234000000000001JN0F001',
+            'tipo_instalacion': '01',
+            'energia_neta_gen': energia_neta_gen_inst,
+        }
+        inst_gen_autoconsumo.feed(inst_gen_autoconsumo_fields)
+        datos_cau = f1.DatosCAU()
+        datos_cau_fields = {
+            'cau': 'ES1234000000000001JN0FA001',
+            'colectivo': 'S',
+            'esquema_medida': 'B',
+            'instalacion_gen_autoconsumo_list': [inst_gen_autoconsumo],
+        }
+        datos_cau.feed(datos_cau_fields)
+
+        autoconsumo = f1.Autoconsumo()
+        autoconsumo_fields = {
+            'energia_neta_gen': energia_neta_gen,
+            'energia_autoconsumida': energia_autoconsumida,
+            'energia_excedentaria': energia_excedentaria,
+            'datos_cau_list': [datos_cau]
+        }
+        autoconsumo.feed(autoconsumo_fields)
+        # Datos
+        datos = q1.Datos()
+
+        # Periodo CCH
+        periodo_cch = q1.PeriodoCCH()
+        periodo_cch_fields = {
+            'fecha_desde_cch': '2016-04-04',
+            'fecha_hasta_cch': '2016-05-05'
+        }
+        periodo_cch.feed(periodo_cch_fields)
+
+        # Periodo
+        periodo = q1.Periodo()
+        periodo_fields = {
+            'fecha_desde_factura': '2016-04-04',
+            'fecha_hasta_factura': '2016-05-05',
+            'numero_dias': 30
+        }
+        periodo.feed(periodo_fields)
+
+        datos_fields = {
+            'tipo_autoconsumo': '11',
+            'tipo_subseccion': '10',
+            'tipo_cups': '01',
+            'marca_medida_con_perdidas': 'N',
+            'vas_trafo': 0,
+            'porcentaje_perdidas': 0,
+            'indicativo_curva_carga': '01',
+            'periodo_cch': periodo_cch,
+            'periodo': periodo,
+            'tipo_pm': '05',
+        }
+        datos.feed(datos_fields)
+
+        # Energia activa
+        energia_activa = q1.EnergiaActiva()
+
+        # Periodo energia activa 1
+        periodo_energia1 = f1.PeriodoEnergiaActiva()
+        periodo_energia1_fields = {
+            'valor_energia_activa': 100.0
+        }
+        periodo_energia1.feed(periodo_energia1_fields)
+
+        # Periodo energia activa 2
+        periodo_energia2 = f1.PeriodoEnergiaActiva()
+        periodo_energia2_fields = {
+            'valor_energia_activa': 200.0
+        }
+        periodo_energia2.feed(periodo_energia2_fields)
+
+        # Periodo energia activa 3
+        periodo_energia3 = f1.PeriodoEnergiaActiva()
+        periodo_energia3_fields = {
+            'valor_energia_activa': 300.0
+        }
+        periodo_energia3.feed(periodo_energia3_fields)
+
+        # Termino energia activa
+        termino = f1.TerminoEnergiaActiva()
+        termino_fields = {
+            'fecha_desde': '2016-04-04',
+            'fecha_hasta': '2016-05-05',
+            'periodos': [periodo_energia1, periodo_energia2, periodo_energia3]
+        }
+        termino.feed(termino_fields)
+
+        energia_activa_fields = {
+            'termino_energia_activa': termino
+        }
+        energia_activa.feed(energia_activa_fields)
+
+        periodo_max = f1.PeriodoInfoAlConsumidor()
+        periodo_max.feed({'potencia_max_demandada_anio_movil': 3115})
+        periodo_max2 = f1.PeriodoInfoAlConsumidor()
+        periodo_max2.feed({'potencia_max_demandada_anio_movil': 4045})
+        periodos_maximetros = [periodo_max, periodo_max2]
+        informacion_al_consumidor = f1.InformacionAlConsumidor()
+        informacion_al_consumidor.feed(
+            {
+                'fecha_inicio_anio_movil': '2021-01-31',
+                'periodos': periodos_maximetros,
+                'valor_energia_media_cp': 61083.25
+            }
+        )
 
         mensaje_saldo_lecturas_facturacion_fields = {
             'cabecera': cabecera,
+            'datos': datos,
+            'energia_activa': energia_activa,
+            'autoconsumo': autoconsumo,
             'medidas': medidas,
+            'informacion_consumidor': informacion_al_consumidor,
         }
         mensaje.feed(mensaje_saldo_lecturas_facturacion_fields)
         mensaje.build_tree()
@@ -6523,6 +6713,7 @@ class test_F1(unittest.TestCase):
 
     def setUp(self):
         self.xml_f101_factura_atr = open(get_data("f101_factura_atr.xml"), "rb")
+        self.xml_f101_factura_atr_autoconsumo_output = open(get_data("f101_factura_atr_autoconsumo_output.xml"), "rb")
         self.xml_f101_factura_otros = open(
             get_data("f101_factura_otros.xml"), "rb"
         )
@@ -6638,7 +6829,7 @@ class test_F1(unittest.TestCase):
         atr_data.feed(
             {
                 'fecha_boe': '2016-01-01',
-                'tarifa_atr_fact': '001', 'tipo_autoconsumo': '00', 'duracion_inf_anio': 'N',
+                'tarifa_atr_fact': '001', 'tipo_autoconsumo': '00', 'tipo_cups': '01', 'duracion_inf_anio': 'N',
                 'modo_control_potencia': 1,
                 'marca_medida_con_perdidas': 'N',
                 'vas_trafo': None,
@@ -6655,7 +6846,7 @@ class test_F1(unittest.TestCase):
         self.atr_data_lb.feed(
             {
                 'fecha_boe': '2016-01-01',
-                'tarifa_atr_fact': '001', 'tipo_autoconsumo': '00', 'duracion_inf_anio': 'N',
+                'tarifa_atr_fact': '001', 'tipo_autoconsumo': '00', 'tipo_cups': '01', 'duracion_inf_anio': 'N',
                 'modo_control_potencia': 1,
                 'marca_medida_con_perdidas': 'S',
                 'vas_trafo': 50000.0,
@@ -6953,6 +7144,7 @@ class test_F1(unittest.TestCase):
 
     def tearDown(self):
         self.xml_f101_factura_atr.close()
+        self.xml_f101_factura_atr_autoconsumo_output.close()
         self.xml_f101_factura_otros.close()
         self.xml_f101_factura_atr_direccion_suministro.close()
         self.xml_f101_factura_atr_medidas_baja.close()
@@ -6981,6 +7173,148 @@ class test_F1(unittest.TestCase):
         facturas.feed(
             {
                 'factura_atr': self.factura_atr,
+                'registro_fin': registo_fin
+            }
+        )
+
+        facturacion.feed(
+            {
+                'cabecera': cabecera,
+                'facturas': facturas,
+            }
+        )
+
+        return facturacion
+
+    def with_factura_atr_autoconsumo(self):
+        cabecera = get_header(process='F1', step='01')
+
+        facturacion = f1.Facturacion()
+
+        facturas = f1.Facturas()
+
+        registo_fin = f1.RegistroFin()
+        registo_fin.feed(
+            {
+                'importe_total': 76.48,
+                'saldo_total_facturacion': 76.48,
+                'total_recibos': 1,
+                'tipo_moneda': '02',
+                'fecha_valor': '2017-05-01',
+                'fecha_limite_pago': '2017-06-01',
+                'iban': 'ES7712341234161234567890',
+                'id_remesa': '0',
+            }
+        )
+        factura_atr = copy.deepcopy(self.factura_atr)
+        factura_atr.datos_generales_factura_atr.datos_factura_atr.feed({
+
+            'tipo_autoconsumo': '12',
+            'tipo_subseccion': '10',
+        })
+
+        energia_neta_gen = f1.EnergiaNetaGen()
+        termino_energia_neta_gen = f1.TerminoEnergiaNetaGen()
+        periodo1 = f1.PeriodoEnergiaNetaGen()
+        periodo1.feed({
+            'valor_energia_neta_gen': 1.00,
+        })
+        periodo2 = f1.PeriodoEnergiaNetaGen()
+        periodo2.feed({
+            'valor_energia_neta_gen': 2.00,
+        })
+        periodo3 = f1.PeriodoEnergiaNetaGen()
+        periodo3.feed({
+            'valor_energia_neta_gen': 3.00,
+        })
+        termino_energia_neta_gen.feed({
+            'fecha_desde': '2021-12-31',
+            'fecha_hasta': '2022-01-31',
+            'periodos': [periodo1, periodo2, periodo3]
+        })
+        energia_neta_gen.feed({'termino_energia_neta_gen': termino_energia_neta_gen})
+
+        energia_autoconsumida = f1.EnergiaAutoconsumida()
+        termino_energia_autoconsumida = f1.TerminoEnergiaAutoconsumida()
+        periodo1 = f1.PeriodoEnergiaAutoconsumida()
+        periodo1.feed({
+            'valor_energia_autoconsumida': 11.00,
+            'pago_tda': 0,
+        })
+        periodo2 = f1.PeriodoEnergiaAutoconsumida()
+        periodo2.feed({
+            'valor_energia_autoconsumida': 12.00,
+            'pago_tda': 0,
+        })
+        periodo3 = f1.PeriodoEnergiaAutoconsumida()
+        periodo3.feed({
+            'valor_energia_autoconsumida': 13.00,
+            'pago_tda': 0,
+        })
+        termino_energia_autoconsumida.feed({
+            'fecha_desde': '2021-12-31',
+            'fecha_hasta': '2022-01-31',
+            'periodos': [periodo1, periodo2, periodo3]
+        })
+        energia_autoconsumida.feed({
+            'termino_energia_autoconsumida': termino_energia_autoconsumida,
+            'importe_total_energia_activa_autoconsumida': 33.00
+        })
+
+        energia_excedentaria = f1.EnergiaExcedentaria()
+        termino_energia_excedentaria = f1.TerminoEnergiaExcedentaria()
+        periodo1 = f1.PeriodoEnergiaExcedentaria()
+        periodo1.feed({
+            'valor_energia_excedentaria': 134.19,
+        })
+        periodo2 = f1.PeriodoEnergiaExcedentaria()
+        periodo2.feed({
+            'valor_energia_excedentaria': 73.15,
+        })
+        periodo3 = f1.PeriodoEnergiaExcedentaria()
+        periodo3.feed({
+            'valor_energia_excedentaria': 116.76,
+        })
+        termino_energia_excedentaria.feed({
+            'fecha_desde': '2021-12-31',
+            'fecha_hasta': '2022-01-31',
+            'periodos': [periodo1, periodo2, periodo3]
+        })
+        energia_excedentaria.feed({
+            'termino_energia_excedentaria': termino_energia_excedentaria,
+            'valor_total_energia_excedentaria': 0,
+        })
+        energia_neta_gen_inst = copy.deepcopy(energia_neta_gen)
+        inst_gen_autoconsumo = f1.InstalacionGenAutoconsumo()
+        inst_gen_autoconsumo_fields = {
+            'cil': 'ES1234000000000001JN0F001',
+            'tipo_instalacion': '01',
+            'exento_cargos': 'S',
+            'energia_neta_gen': energia_neta_gen_inst,
+        }
+        inst_gen_autoconsumo.feed(inst_gen_autoconsumo_fields)
+        datos_cau = f1.DatosCAU()
+        datos_cau_fields = {
+            'cau': 'ES1234000000000001JN0FA001',
+            'colectivo': 'S',
+            'esquema_medida': 'B',
+            'instalacion_gen_autoconsumo_list': [inst_gen_autoconsumo],
+        }
+        datos_cau.feed(datos_cau_fields)
+
+        autoconsumo = f1.Autoconsumo()
+        autoconsumo_fields = {
+            'energia_neta_gen': energia_neta_gen,
+            'energia_autoconsumida': energia_autoconsumida,
+            'energia_excedentaria': energia_excedentaria,
+            'datos_cau_list': [datos_cau]
+        }
+        autoconsumo.feed(autoconsumo_fields)
+        factura_atr.feed({'autoconsumo': autoconsumo})
+        autoconsumo.build_tree()
+        facturas.feed(
+            {
+                'factura_atr': factura_atr,
                 'registro_fin': registo_fin
             }
         )
@@ -7038,6 +7372,14 @@ class test_F1(unittest.TestCase):
 
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_f101_factura_atr.read())
+
+    def test_create_pas01_atr_invoice_autoconsumo(self):
+        mensaje = self.with_factura_atr_autoconsumo()
+
+        mensaje.build_tree()
+
+        xml = str(mensaje)
+        assertXmlEqual(xml, self.xml_f101_factura_atr_autoconsumo_output.read())
 
     def test_create_pas01_atr_invoice_direccion_suministro(self):
         mensaje = self.with_factura_atr()

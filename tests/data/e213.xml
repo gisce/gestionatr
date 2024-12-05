@@ -20,5 +20,13 @@
             </Telefono>
             <CorreoElectronico>mail_falso@dominio.com</CorreoElectronico>
         </Contacto>
+        <Contacto>
+            <PersonaDeContacto>Nombre Inventado 2</PersonaDeContacto>
+            <Telefono>
+                <PrefijoPais>34</PrefijoPais>
+                <Numero>683834241</Numero>
+            </Telefono>
+            <CorreoElectronico>mail_falso2@dominio.com</CorreoElectronico>
+        </Contacto>
     </ContestacionIncidencia>
 </MensajeContestacionIncidencia>

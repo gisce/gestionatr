@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<MensajeAceptacionDesistimiento xmlns="http://localhost/elegibilidad">
+<MensajeAceptacionAnulacion xmlns="http://localhost/elegibilidad">
     <Cabecera>
         <CodigoREEEmpresaEmisora>1234</CodigoREEEmpresaEmisora>
         <CodigoREEEmpresaDestino>4321</CodigoREEEmpresaDestino>
@@ -13,4 +13,4 @@
     <AceptacionAnulacion>
         <FechaAceptacion>2020-05-01</FechaAceptacion>
     </AceptacionAnulacion>
-</MensajeAceptacionDesistimiento>
+</MensajeAceptacionAnulacion>

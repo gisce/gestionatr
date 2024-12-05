@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<MensajeSolicitudDesistimiento xmlns="http://localhost/elegibilidad">
+<MensajeConsultaSolicitudReposicion xmlns="http://localhost/elegibilidad">
     <Cabecera>
         <CodigoREEEmpresaEmisora>1234</CodigoREEEmpresaEmisora>
         <CodigoREEEmpresaDestino>4321</CodigoREEEmpresaDestino>
@@ -15,31 +15,31 @@
         <TipoDeReposicion>01</TipoDeReposicion>
         <FechaPrevistaAccion>2016-05-05</FechaPrevistaAccion>
         <ActuacionCampo>N</ActuacionCampo>
-        <DireccionPS>
-            <Pais>España</Pais>
-            <Provincia>17</Provincia>
-            <Municipio>17079</Municipio>
-            <Poblacion>17079000501</Poblacion>
-            <TipoVia>PZ</TipoVia>
-            <CodPostal>17001</CodPostal>
-            <Calle>MELA MUTERMILCH</Calle>
-            <NumeroFinca>2</NumeroFinca>
-            <DuplicadorFinca>n/a</DuplicadorFinca>
-            <Escalera>001</Escalera>
-            <Piso>001</Piso>
-            <Puerta>001</Puerta>
-            <TipoAclaradorFinca>BI</TipoAclaradorFinca>
-            <AclaradorFinca>Bloque de Pisos</AclaradorFinca>
-        </DireccionPS>
-        <RegistrosDocumento>
-            <RegistroDoc>
-                <TipoDocAportado>08</TipoDocAportado>
-                <DireccionUrl>http://eneracme.com/docs/NIF11111111H.pdf</DireccionUrl>
-            </RegistroDoc>
-            <RegistroDoc>
-                <TipoDocAportado>07</TipoDocAportado>
-                <DireccionUrl>http://eneracme.com/docs/NIF11111111H.pdf</DireccionUrl>
-            </RegistroDoc>
-        </RegistrosDocumento>
     </SolicitudReposicion>
-</MensajeSolicitudDesistimiento>
+    <DireccionPS>
+        <Pais>España</Pais>
+        <Provincia>17</Provincia>
+        <Municipio>17079</Municipio>
+        <Poblacion>17079000501</Poblacion>
+        <TipoVia>PZ</TipoVia>
+        <CodPostal>17001</CodPostal>
+        <Calle>MELA MUTERMILCH</Calle>
+        <NumeroFinca>2</NumeroFinca>
+        <DuplicadorFinca>n/a</DuplicadorFinca>
+        <Escalera>001</Escalera>
+        <Piso>001</Piso>
+        <Puerta>001</Puerta>
+        <TipoAclaradorFinca>BI</TipoAclaradorFinca>
+        <AclaradorFinca>Bloque de Pisos</AclaradorFinca>
+    </DireccionPS>
+    <RegistrosDocumento>
+        <RegistroDoc>
+            <TipoDocAportado>08</TipoDocAportado>
+            <DireccionUrl>http://eneracme.com/docs/NIF11111111H.pdf</DireccionUrl>
+        </RegistroDoc>
+        <RegistroDoc>
+            <TipoDocAportado>07</TipoDocAportado>
+            <DireccionUrl>http://eneracme.com/docs/NIF11111111H.pdf</DireccionUrl>
+        </RegistroDoc>
+    </RegistrosDocumento>
+</MensajeConsultaSolicitudReposicion>
