@@ -110,6 +110,7 @@ class DatosActivacion(DatosActivacion):
         return data
 
 
+# Dades del pas 14
 class SolicitudReposicion(object):
 
     def __init__(self, data):

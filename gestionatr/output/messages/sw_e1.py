@@ -19,15 +19,17 @@ class MensajeSolicitudDesistimiento(XmlModel):
 
 class SolicitudDesistimiento(XmlModel):
 
-    _sort_order = ('solicitud_desistimiento', 'codigo_de_solicitud_ref',
-                   'tipo_de_solicitud', 'id_cliente', 'registros_Documento')
+    _sort_order = ('solicitud_desistimiento', 'codigo_de_solicitud_ref', 'tipo_de_solicitud', 'ind_esencial',
+                   'fecha_ultimo_movimiento_ind_esencial', 'id_cliente', 'registros_documento')
 
     def __init__(self):
         self.solicitud_desistimiento = XmlField('SolicitudDesistimiento')
         self.codigo_de_solicitud_ref = XmlField('CodigoDeSolicitudRef')
         self.tipo_de_solicitud = XmlField('TipoDeSolicitud')
+        self.ind_esencial = XmlField('IndEsencial')
+        self.fecha_ultimo_movimiento_ind_esencial = XmlField('FechaUltimoMovimientoIndEsencial')
         self.id_cliente = IdCliente()
-        self.registros_Documento = RegistrosDocumento()
+        self.registros_documento = RegistrosDocumento()
         super(SolicitudDesistimiento, self).__init__('SolicitudDesistimiento', 'solicitud_desistimiento')
 
 

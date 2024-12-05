@@ -110,7 +110,7 @@ class Autoconsumo(XmlModel):
     def __init__(self):
         self.autoconsumo = XmlField('Autoconsumo')
         self.datos_suministro = DatosSuministro()
-        self.datos_cau = DatosCAU()
+        self.datos_cau = []
         super(Autoconsumo, self).__init__('Autoconsumo', 'autoconsumo')
 
 
