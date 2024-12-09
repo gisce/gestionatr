@@ -2819,7 +2819,7 @@ class test_F1(TestCaseCompat):
         self.assertEqual(termino_energia_excedentaria.fecha_hasta, u'2022-01-31')
 
         periodos_excedentaria = termino_energia_excedentaria.periodos
-        self.assertEqual(len(periodos_energia), 3)
+        self.assertEqual(len(periodos_excedentaria), 3)
 
         periodo_excedentaria_1 = periodos_excedentaria[0]
         self.assertEqual(periodo_excedentaria_1.valor_energia_excedentaria, 134.19)
@@ -3211,7 +3211,7 @@ class test_F1(TestCaseCompat):
         self.assertEqual(termino_energia_excedentaria.fecha_hasta, u'2022-01-31')
 
         periodos_excedentaria = termino_energia_excedentaria.periodos
-        self.assertEqual(len(periodos_energia), 3)
+        self.assertEqual(len(periodos_excedentaria), 3)
 
         periodo_excedentaria_1 = periodos_excedentaria[0]
         self.assertEqual(periodo_excedentaria_1.valor_energia_excedentaria, 134.19)
