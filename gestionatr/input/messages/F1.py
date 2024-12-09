@@ -5,6 +5,7 @@ from gestionatr.input.messages.C2 import Direccion
 from gestionatr.defs import TARIFES_SEMPRE_MAX, TARIFES_TD
 from datetime import datetime, date, timedelta
 from gestionatr.utils import repartir_consums_entre_lectures
+import warnings
 import six
 
 # Magnituds d'OCSUM
@@ -418,7 +419,7 @@ class DatosGeneralesATR(DatosGenerales):
     @property
     def tipo_pm(self):
         if hasattr(self._periodo, 'TipoPM'):
-            return int(self._periodo.TipoPM.text.strip())
+            return self._periodo.TipoPM.text.strip()
         return None
 
 
@@ -508,6 +509,9 @@ class Factura(object):
             pass
 
     def get_coeficient_repartiment(self):
+        # la primera es per indicar la crida de la funcio tatxada i la segona es perque surti per consola el avis
+        warnings.warn("El coeficient de repartiment ja no s'informa en el F1", DeprecationWarning)
+        warnings.warn("El coeficient de repartiment ja no s'informa en el F1")
         try:
             if self.factura.Autoconsumo and self.factura.Autoconsumo.InstalacionGenAutoconsumo:
                 beta_list = []
@@ -526,6 +530,8 @@ class Factura(object):
             pass
 
     def get_coeficient_repartiment_from_cr(self):
+        warnings.warn("El coeficient de repartiment ja no s'informa en el F1", DeprecationWarning)
+        warnings.warn("El coeficient de repartiment ja no s'informa en el F1")
         try:
             for concepte in self.conceptos_repercutibles:
                 if concepte.concepto_repercutible == '82':

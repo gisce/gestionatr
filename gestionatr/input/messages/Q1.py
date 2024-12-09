@@ -256,7 +256,7 @@ class Datos(object):
     @property
     def tipo_pm(self):
         if hasattr(self.datos, 'TipoPM'):
-            return int(self.datos.TipoPM.text.strip())
+            return self.datos.TipoPM.text.strip()
         return None
 
 
