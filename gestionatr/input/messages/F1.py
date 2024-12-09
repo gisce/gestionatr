@@ -1634,7 +1634,7 @@ class ModeloAparato(object):
 
         return data_inici, data_final
 
-    def get_lectures(self, tipus=None, force_no_transforma_no_td_a_td=False):
+    def get_lectures(self, tipus=None, force_no_transforma_no_td_a_td=False, force_no_quadrar_ajust=False):
         """Retorna totes les lectures en una llista de Lectura"""
         lectures = []
         try:
@@ -1660,7 +1660,9 @@ class ModeloAparato(object):
             lectures.extend(self.factura.get_fake_AS_p2_lectures())
 
         if not force_no_transforma_no_td_a_td and self.factura:
-            lectures = self.factura.transforma_no_td_a_td(lectures, tipus=tipus)
+            lectures = self.factura.transforma_no_td_a_td(
+                lectures, tipus=tipus, force_no_quadrar_ajust=force_no_quadrar_ajust
+            )
         lectures = sorted(lectures, key=lambda x: x.lectura_desde.fecha)
         return lectures
 
@@ -1681,6 +1683,9 @@ class ModeloAparato(object):
 
     def get_lectures_maximetre(self):
         return self.get_lectures(['M'])
+
+    def get_lectures_energia_sense_activa_entrant(self):
+        return self.get_lectures(['S', 'R', 'RC'])
 
 
 class MultiModeloAparato(ModeloAparato):
@@ -1959,7 +1964,7 @@ class FacturaATR(Factura):
             return InformacionAlConsumidor(self.factura.InformacionAlConsumidor)
         return None
 
-    def transforma_no_td_a_td(self, lectures, tipus=None):
+    def transforma_no_td_a_td(self, lectures, tipus=None, force_no_quadrar_ajust=False):
         if self.datos_factura.tarifa_atr_fact not in TARIFES_TD:
             return lectures
 
@@ -1974,9 +1979,14 @@ class FacturaATR(Factura):
         res = []
         for t in tipus_lectures:
             lectures_td = self.get_lectures_amb_periodes_td(lectures, t)
-            lectures_amb_ajustos = self.get_lectures_amb_ajust_quadrat_amb_consum(t, lectures=lectures_td, motiu_ajust='97')
-            for aux in lectures_amb_ajustos.values():
-                res.extend(aux)
+            # By default
+            if not force_no_quadrar_ajust:
+                lectures_amb_ajustos = self.get_lectures_amb_ajust_quadrat_amb_consum(t, lectures=lectures_td, motiu_ajust='97')
+                for aux in lectures_amb_ajustos.values():
+                    res.extend(aux)
+            else:
+                res.extend(lectures_td)
+
         return res
 
     def get_lectures_amb_periodes_td(self, lectures, tipus):
