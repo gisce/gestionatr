@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- edited with XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) by Odelin Calatrava Requena (Comisión Nacional de los Mercados y la Competencia) -->
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Comisión Nacional de los Mercados y la Competencia (Comisión Nacional de los Mercados y la Competencia) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="TiposComplejos.xsd"/>
+	<xs:include schemaLocation="TiposSencillos.xsd"/>
+	<xs:complexType name="ActivacionReposicion">
+		<xs:sequence>
+			<xs:element name="DatosNotificacion" type="DatosActivacionReposicion"/>
+			<xs:element name="Contrato" type="ContratoActivacionReposicion"/>
+			<xs:element name="PuntosDeMedida" type="PuntosDeMedida"/>
+			<xs:element name="IdCliente" type="IdCliente"/>
+			<xs:element name="RegistrosDocumento" type="RegistrosDocs" minOccurs="0"/>
+			<xs:element name="Comentarios" type="X4000" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Tipos secundarios de la transaccion actual -->
+	<!-- Datos de la activacion -->
+	<xs:complexType name="DatosActivacionReposicion">
+		<xs:sequence>
+			<xs:element name="FechaActivacion" type="xs:date"/>
+			<xs:element name="ResultadoActivacion" type="X2">
+				<xs:annotation>
+					<xs:documentation>Tabla 134</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CodigoSolCorte" type="X12" minOccurs="0"/>
+			<xs:element name="IndEsencial" type="IndEsencial">
+				<xs:annotation>
+					<xs:documentation>Tabla 113</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaUltimoMovimientoIndEsencial" type="xs:date"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Datos del contrato  -->
+	<xs:complexType name="ContratoActivacionReposicion">
+		<xs:sequence>
+			<xs:element name="IdContrato" type="IdContrato"/>
+			<xs:element name="Autoconsumo" type="TypeAutoconsumoActivacion" minOccurs="0"/>
+			<xs:element name="TipoContratoATR" type="TipoContratoATR">
+				<xs:annotation>
+					<xs:documentation>Tabla 9</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CUPSPrincipal" type="Codigo" minOccurs="0"/>
+			<xs:element name="CondicionesContractuales" type="CondicionesContractualesC"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

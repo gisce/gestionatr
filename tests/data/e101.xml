@@ -13,6 +13,8 @@
     <SolicitudDesistimiento>
         <CodigoDeSolicitudRef>201605219400</CodigoDeSolicitudRef>
         <TipoDeSolicitud>01</TipoDeSolicitud>
+        <IndEsencial>01</IndEsencial>
+        <FechaUltimoMovimientoIndEsencial>2016-06-06</FechaUltimoMovimientoIndEsencial>
         <IdCliente>
             <TipoIdentificador>NI</TipoIdentificador>
             <Identificador>11111111H</Identificador>

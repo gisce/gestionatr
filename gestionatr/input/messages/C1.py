@@ -170,6 +170,24 @@ class DatosSolicitud(object):
         return data
 
     @property
+    def ind_esencial(self):
+        data = False
+        try:
+            data = self.datos_solicitud.IndEsencial.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def fecha_ultimo_movimiento_ind_esencial(self):
+        data = False
+        try:
+            data = self.datos_solicitud.FechaUltimoMovimientoIndEsencial.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
     def fecha_prevista_accion(self):
         data = False
         try:
@@ -477,10 +495,10 @@ class Contrato(object):
         return data
 
     @property
-    def tipo_autoconsumo(self):
+    def autoconsumo(self):
         data = ''
         try:
-            data = self.contrato.TipoAutoconsumo.text
+            data = Autoconsumo(self.contrato.Autoconsumo)
         except AttributeError:
             pass
         return data
@@ -592,6 +610,24 @@ class DatosActivacion(object):
         data = ''
         try:
             data = self.datos_activacion.BonoSocial.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def ind_esencial(self):
+        data = False
+        try:
+            data = self.datos_activacion.IndEsencial.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def fecha_ultimo_movimiento_ind_esencial(self):
+        data = False
+        try:
+            data = self.datos_activacion.FechaUltimoMovimientoIndEsencial.text
         except AttributeError:
             pass
         return data
@@ -1048,6 +1084,363 @@ class DatosNotificacion(object):
         data = False
         try:
             data = self.datos_notificacion.IndBonoSocial.text
+        except AttributeError:
+            pass
+        return data
+
+
+class Autoconsumo(object):
+
+    def __init__(self, data):
+        self.autoconsumo = data
+
+    @property
+    def datos_suministro(self):
+        data = ''
+        try:
+            data = DatosSuministro(self.autoconsumo.DatosSuministro)
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def datos_cau(self):
+        data = []
+        try:
+            for datos in self.autoconsumo.DatosCAU:
+                data.append(DatosCAU(datos))
+        except AttributeError:
+            pass
+        return data
+
+
+class DatosSuministro(object):
+
+    def __init__(self, data):
+        self.datos_suministro = data
+
+    @property
+    def tipo_cups(self):
+        data = ''
+        try:
+            data = self.datos_suministro.TipoCUPS.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def ref_catastro(self):
+        data = ''
+        try:
+            data = self.datos_suministro.RefCatastro.text
+        except AttributeError:
+            pass
+        return data
+
+
+class DatosCAU(object):
+
+    def __init__(self, data):
+        self.datos_cau = data
+
+    @property
+    def cau(self):
+        data = ''
+        try:
+            data = self.datos_cau.CAU.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def tipo_autoconsumo(self):
+        data = ''
+        try:
+            data = self.datos_cau.TipoAutoconsumo.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def tipo_subseccion(self):
+        data = ''
+        try:
+            data = self.datos_cau.TipoSubseccion.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def colectivo(self):
+        data = ''
+        try:
+            data = self.datos_cau.Colectivo.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def datos_inst_gen(self):
+        data = []
+        try:
+            for datos in self.datos_cau.DatosInstGen:
+                data.append(DatosInstGen(datos))
+        except AttributeError:
+            pass
+        return data
+
+
+class DatosInstGen(object):
+
+    def __init__(self, data):
+        self.datos_inst_gen = data
+
+    @property
+    def cil(self):
+        data = ''
+        try:
+            data = self.datos_inst_gen.CIL.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def tec_generador(self):
+        data = ''
+        try:
+            data = self.datos_inst_gen.TecGenerador.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def combustible(self):
+        data = ''
+        try:
+            data = self.datos_inst_gen.Combustible.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def pot_instalada_gen(self):
+        data = ''
+        try:
+            data = self.datos_inst_gen.PotInstaladaGen.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def tipo_instalacion(self):
+        data = ''
+        try:
+            data = self.datos_inst_gen.TipoInstalacion.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def esquema_medida(self):
+        data = ''
+        try:
+            data = self.datos_inst_gen.EsquemaMedida.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def ssaa(self):
+        data = ''
+        try:
+            data = self.datos_inst_gen.SSAA.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def unico_contrato(self):
+        data = ''
+        try:
+            data = self.datos_inst_gen.UnicoContrato.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def ref_catastro(self):
+        data = ''
+        try:
+            data = self.datos_inst_gen.RefCatastro.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def utm(self):
+        data = ''
+        try:
+            data = UTM(self.datos_inst_gen.UTM)
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def titular_representante_gen(self):
+        data = ''
+        try:
+            data = TitularRepresentanteGen(self.datos_inst_gen.TitularRepresentanteGen)
+        except AttributeError:
+            pass
+        return data
+
+
+class UTM(object):
+
+    def __init__(self, data):
+        self.utm = data
+
+    @property
+    def x(self):
+        data = ''
+        try:
+            data = self.utm.X.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def y(self):
+        data = ''
+        try:
+            data = self.utm.Y.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def huso(self):
+        data = ''
+        try:
+            data = self.utm.Huso.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def banda(self):
+        data = ''
+        try:
+            data = self.utm.Banda.text
+        except AttributeError:
+            pass
+        return data
+
+
+class TitularRepresentanteGen(object):
+
+    def __init__(self, data):
+        self.titular_representante_gen = data
+
+    @property
+    def id_titular(self):
+        data = ''
+        try:
+            data = IdTitular(self.titular_representante_gen.IdTitular)
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def nombre(self):
+        data = ''
+        try:
+            data = Nombre(self.titular_representante_gen.Nombre)
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def telefono(self):
+        data = []
+        try:
+            for telefono in self.titular_representante_gen.Telefono:
+                data.append((telefono.PrefijoPais.text, telefono.Numero.text))
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def correo_electronico(self):
+        data = ''
+        try:
+            data = self.titular_representante_gen.CorreoElectronico.text
+        except AttributeError:
+            pass
+        return data
+
+
+class IdTitular(object):
+
+    def __init__(self, data):
+        self.id_titular = data
+
+    @property
+    def tipo_identificador(self):
+        data = ''
+        try:
+            data = self.id_titular.TipoIdentificador.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def identificador(self):
+        data = ''
+        try:
+            data = self.id_titular.Identificador.text
+        except AttributeError:
+            pass
+        return data
+
+
+class Nombre(object):
+
+    def __init__(self, data):
+        self.nombre = data
+
+    @property
+    def nombre_de_pila(self):
+        data = ''
+        try:
+            data = self.nombre.NombreDePila.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def primer_apellido(self):
+        data = ''
+        try:
+            data = self.nombre.PrimerApellido.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def segundo_apellido(self):
+        data = ''
+        try:
+            data = self.nombre.SegundoApellido.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def razon_social(self):
+        data = ''
+        try:
+            data = self.nombre.RazonSocial.text
         except AttributeError:
             pass
         return data
