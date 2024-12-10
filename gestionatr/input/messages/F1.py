@@ -2010,8 +2010,11 @@ class FacturaATR(Factura):
         base_lectura = None
         for l in lectures:
             if l.tipus == tipus:
-                lectures_per_periode[l.periode].append(l)
-                base_lectura = l
+                # Mandanga (Puta Fenosa) En cas que ens arribin lectures de periodes fora de la tarifa del contracte
+                # ignorem les lectures dels periodes que estiguin fora de la tarifa ATR del contracte
+                if l.periode in lectures_per_periode.keys():
+                    lectures_per_periode[l.periode].append(l)
+                    base_lectura = l
 
         if not base_lectura:
             return [x for x in lectures if x.tipus == tipus]
@@ -2350,7 +2353,8 @@ class FacturaATR(Factura):
                         new_val = self.get_ajust_from_consum_desitjat(lectura, consum)
                         if new_val:
                             lectura.ajuste.ajuste_por_integrador = new_val
-                            lectura.ajuste.codigo_motivo = motiu_ajust  # normalment 98 - Autoconsumo
+                            if not lectura.ajuste.codigo_motivo:
+                                lectura.ajuste.codigo_motivo = motiu_ajust  # normalment 98 - Autoconsumo
             for l in lectures:
                 if not res.get(l.comptador):
                     res[l.comptador] = []

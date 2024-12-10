@@ -52,7 +52,7 @@
 			<xs:totalDigits value="16"/>
 			<xs:fractionDigits value="7"/>
 			<xs:minInclusive value="0"/>
-			<xs:maxInclusive value="999999999.999999"/>
+			<xs:maxInclusive value="999999999.9999999"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="QiType">
@@ -1258,6 +1258,7 @@
 			<xs:enumeration value="24"/>
 			<xs:enumeration value="26"/>
 			<xs:enumeration value="27"/>
+			<xs:enumeration value="28"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="AmountType">
@@ -2402,6 +2403,33 @@
 			<xs:enumeration value="03"/>
 			<xs:enumeration value="04"/>
 			<xs:enumeration value="05"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CNAEType">
+		<xs:restriction base="xs:string">
+			<xs:length value="4"/>
+			<xs:pattern value="[0-9]{4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoClienteProtegidoType">
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:enumeration value="0"/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoClienteEsencialType">
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:enumeration value="0"/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

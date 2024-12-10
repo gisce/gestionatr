@@ -451,6 +451,33 @@ class DatosDis(object):
         return data
 
     @property
+    def cnae(self):
+        data = False
+        try:
+            data = self.datosdis.cnae.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def protectedtype(self):
+        data = False
+        try:
+            data = self.datosdis.protectedtype.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def essentialtype(self):
+        data = False
+        try:
+            data = self.datosdis.essentialtype.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
     def fecactdist(self):
         data = False
         try:

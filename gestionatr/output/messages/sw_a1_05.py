@@ -30,7 +30,7 @@ class A105(XmlModel):
         'newcaecode', 'newprovinceowner', 'newcityowner', 'newzipcodeowner',
         'newstreettypeowner', 'newstreetowner', 'newstreetnumberowner',
         'newportalowner', 'newstaircaseowner', 'newfloorowner', 'newdoorowner', 'newfactmethod', 'gasstationtype',
-        'extrainfo', 'registerdoclist'
+        'newcnae', 'newprotectedtype', 'newessentialtype', 'readingvalue', 'extrainfo', 'registerdoclist'
     )
 
     def __init__(self):
@@ -74,6 +74,10 @@ class A105(XmlModel):
         self.newdoorowner = XmlField('newdoorowner')
         self.newfactmethod = XmlField('newfactmethod')
         self.gasstationtype = XmlField('gasstationtype')
+        self.newcnae = XmlField('newcnae')
+        self.newprotectedtype = XmlField('newprotectedtype')
+        self.newessentialtype = XmlField('newessentialtype')
+        self.readingvalue = XmlField('readingvalue')
         self.extrainfo = XmlField('extrainfo')
         self.registerdoclist = Registerdoclist()
         super(A105, self).__init__('a105', 'a105')

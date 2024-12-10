@@ -324,6 +324,33 @@ class A1_41(MessageGas, ProcessDeadline):
             return False
 
     @property
+    def cnae(self):
+        tree = '{0}.cnae'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def protectedtype(self):
+        tree = '{0}.protectedtype'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def essentialtype(self):
+        tree = '{0}.essentialtype'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
     def gasstationtype(self):
         tree = '{0}.gasstationtype'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)

@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://localhost/sctd/A1239"
+	xmlns:tns="http://localhost/sctd/A1239"
+	elementFormDefault="qualified" >
+
+	<include schemaLocation="CommonTagsCONT.xsd"></include>
+	<element name="sctdapplication"
+		type="tns:SctdapplicationA1239Type">
+	</element>
+
+	<complexType name="SctdapplicationA1239Type">
+		<sequence>
+			<element name="heading" type="tns:HeadingA1239Type" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="a1239" type="tns:A1239Type"
+				maxOccurs="unbounded" minOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="HeadingA1239Type">
+		<sequence>
+			<element name="dispatchingcode" maxOccurs="1"
+				minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="GML"></enumeration>
+						<length value="3"></length>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dispatchingcompany" type="tns:AgenteType"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="destinycompany" type="tns:AgenteType"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="communicationsdate" type="date" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="communicationshour" type="time" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="processcode" maxOccurs="1" minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="2"></length>
+						<enumeration value="39"></enumeration>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="messagetype" maxOccurs="1" minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="A12"></enumeration>
+						<minLength value="1"></minLength>
+						<maxLength value="3"></maxLength>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="A1239Type">
+		<sequence>
+			<element name="reqdate" type="date" maxOccurs="1"
+				minOccurs="1">
+				<annotation>
+					<documentation>Fecha de Respuesta</documentation>
+				</annotation>
+			</element>
+			<element name="reqhour" type="time" maxOccurs="1"
+				minOccurs="1">
+				<annotation>
+					<documentation>Hora de Respuesta</documentation>
+				</annotation>
+			</element>
+			<element name="titulartype" type="tns:TitularType"
+				maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Tipo de Persona</documentation>
+				</annotation>
+			</element>
+			<element name="nationality" type="tns:NationalityType"
+				maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Nacionalidad</documentation>
+				</annotation>
+			</element>
+			<element name="documentnum" type="tns:DocumentnumType"
+				maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Nº Documento</documentation>
+				</annotation>
+			</element>
+			<element name="documenttype" type="tns:IdDocumentType"
+				maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Tipo Documento de Identificación</documentation>
+				</annotation>
+			</element>
+			<element name="firstname" type="tns:FirstnameType"
+				maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Nombre Cliente</documentation>
+				</annotation>
+			</element>
+			<element name="familyname1" type="tns:FamilynameType"
+				maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Apellido 1 / Razón Social</documentation>
+				</annotation>
+			</element>
+			<element name="familyname2" type="tns:FamilynameType"
+				maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Apellido 2</documentation>
+				</annotation>
+			</element>
+
+			<element name="province" type="tns:CodProvinciaType"
+				maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Provincia del PS</documentation>
+				</annotation>
+			</element>
+			<element name="city" type="tns:CodAlpha5Type" maxOccurs="1"
+				minOccurs="1">
+				<annotation>
+					<documentation>Municipio del PS</documentation>
+				</annotation>
+			</element>
+			<element name="zipcode" type="tns:CodAlpha5Type"
+				maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Código Postal del PS</documentation>
+				</annotation>
+			</element>
+			<element name="streettype" type="tns:TipoViaType"
+				maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Tipo de Vía del PS</documentation>
+				</annotation>
+			</element>
+			<element name="street" type="tns:CalleType" maxOccurs="1"
+				minOccurs="1">
+				<annotation>
+					<documentation>Nombre de Calle del PS</documentation>
+				</annotation>
+			</element>
+			<element name="streetnumber" type="tns:NumFincaType"
+				maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Número de Finca del PS</documentation>
+				</annotation>
+			</element>
+			<element name="portal" type="tns:CodAlpha5Type"
+				maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Portal del PS</documentation>
+				</annotation>
+			</element>
+			<element name="staircase" type="tns:CodAlpha5Type"
+				maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Escalera del PS</documentation>
+				</annotation>
+			</element>
+			<element name="floor" type="tns:CodAlpha5Type"
+				maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Piso del PS</documentation>
+				</annotation>
+			</element>
+			<element name="door" type="tns:CodAlpha5Type" maxOccurs="1"
+				minOccurs="0">
+				<annotation>
+					<documentation>Puerta del PS</documentation>
+				</annotation>
+			</element>
+
+			<element name="regularaddress" type="tns:FlagType"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Uso de la vivienda del PS</documentation></annotation>
+			</element>
+			<element name="prefixtel1" type="tns:PrefixTelType"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Prefijo del número de teléfono fijo</documentation>
+                </annotation>
+			</element>
+			<element name="telephone1" type="tns:TelephoneType"
+				maxOccurs="1" minOccurs="1">
+                <annotation>
+                	<documentation>Número de teléfono fijo</documentation></annotation>
+			</element>
+			<element name="prefixtel2" type="tns:PrefixTelType"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Prefijo del número de teléfono móvil</documentation>
+                </annotation>
+			</element>
+			<element name="telephone2" type="tns:TelephoneType"
+				maxOccurs="1" minOccurs="1">
+                <annotation>
+                	<documentation>Número de teléfono móvil</documentation></annotation>
+			</element>
+			<element name="prefixfax" type="tns:PrefixTelType"
+				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Prefijo nacional del número de fax</documentation></annotation>
+			</element>
+			<element name="fax" type="tns:TelephoneType" maxOccurs="1"
+				minOccurs="0">
+                <annotation>
+                	<documentation>Número de fax</documentation></annotation>
+			</element>
+			<element name="email" type="tns:EmailType" maxOccurs="1"
+				minOccurs="0">
+                <annotation>
+                	<documentation>Correo electrónico</documentation>
+                </annotation>
+			</element>
+			<element name="cups" type="tns:CupsType" maxOccurs="1"
+				minOccurs="1">
+				<annotation>
+					<documentation>CUPS Solicitud</documentation>
+				</annotation>
+			</element>
+			<element name="operationnum" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Número de Operación Generada</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"></minLength>
+						<maxLength value="40"></maxLength>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="netsituation" type="tns:NetType"
+				maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Red o Municipio donde esta conectado el cliente</documentation>
+				</annotation>
+			</element>
+			<element name="canonircperiodicity"
+				type="tns:PeriodicidadCanonIRCType" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Periodicidad de Canon IRC</documentation>
+				</annotation>
+			</element>
+			<element name="resultinspection"
+				type="tns:ResultInspectionType" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Resultado Inspección</documentation>
+				</annotation>
+			</element>
+			<element name="resultinspectiondesc" maxOccurs="1"
+				minOccurs="0">
+				<annotation>
+					<documentation>Descripción de Resultado Inspección</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"></minLength>
+						<maxLength value="250"></maxLength>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="lectureperiodicity"
+				type="tns:PeriodicidadLecturaType" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Periodicidad de Lectura</documentation>
+				</annotation>
+			</element>
+			<element name="tolltype" type="tns:TollType" maxOccurs="1"
+				minOccurs="1">
+				<annotation>
+					<documentation>Tipo de Peaje</documentation>
+				</annotation>
+			</element>
+			<element name="qdgranted" type="tns:QdType" maxOccurs="1"
+				minOccurs="0">
+				<annotation>
+					<documentation>Caudal Diario Concedido Final</documentation>
+				</annotation>
+			</element>
+			<element name="qhgranted" maxOccurs="1" minOccurs="0"
+				type="tns:QhType">
+				<annotation>
+					<documentation>Caudal Horario Concedido Final</documentation>
+				</annotation>
+			</element>
+			<element name="clientyearlyconsumption" type="tns:QaType"
+				maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Caudal anual final (Kwh/año)</documentation>
+				</annotation>
+			</element>
+			<element name="telemetering" type="tns:FlagType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Indicador de telemedida</documentation>
+				</annotation>
+			</element>
+			<element name="factmethod" type="tns:MetodoFacturacionType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Metodo de facturacion</documentation>
+				</annotation>
+			</element>
+			<element name="gasstationtype" type="tns:TipoGasineraType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Indicador de Gasineras</documentation>
+				</annotation>
+			</element>
+
+			<element name="designpower" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Potencia diseño</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="decimal">
+						<totalDigits value="5"></totalDigits>
+						<fractionDigits value="0"></fractionDigits>
+						<minInclusive value="0"></minInclusive>
+					</restriction>
+				</simpleType>
+			</element>
+
+			<element name="terminstexist" type="tns:FlagType"
+				maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Indicador de si existe instalación térmica</documentation>
+				</annotation>
+			</element>
+
+			<element name="reig" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Código de instalador (REIG)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"></minLength>
+						<maxLength value="6"></maxLength>
+					</restriction>
+				</simpleType>
+			</element>
+
+			<element name="transfereffectivedate" type="date"
+				maxOccurs="1" minOccurs="1">
+                <annotation>
+                	<documentation>Fecha efecto del contrato</documentation></annotation>
+			</element>
+
+			<element name="gasusetype" type="tns:UsoGasType"
+				maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Tipo de uso del gas</documentation>
+				</annotation>
+			</element>
+
+			<element name="caecode" maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Código CAE
+</documentation>
+                </annotation>
+                <simpleType>
+					<restriction base="string">
+						<minLength value="1"></minLength>
+						<maxLength value="13"></maxLength>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="cnae" type="tns:CNAEType" maxOccurs="1" minOccurs="0"></element>
+			<element name="protectedtype" type="tns:TipoClienteProtegidoType" maxOccurs="1" minOccurs="0"></element>
+			<element name="essentialtype" type="tns:TipoClienteEsencialType" maxOccurs="1" minOccurs="0"></element>
+			<element name="communicationreason" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Causa de la Comunicación</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<length value="2"/>
+						<enumeration value="01"/>
+						<enumeration value="07"/>
+					</restriction>
+				</simpleType>
+			</element>
+            <element name="extrainfo" type="tns:ExtrainfoType" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Observaciones de la Realización</documentation>
+				</annotation>
+            </element>
+            <element name="conceptnumber" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Número de Conceptos</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="decimal">
+						<totalDigits value="2"></totalDigits>
+						<fractionDigits value="0"></fractionDigits>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="conceptlist" type="tns:ConceptListType"
+				maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Lista de datos de facturación</documentation>
+				</annotation>
+			</element>
+			<element name="counterlist" type="tns:CounterListType"
+				maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Lista de Contadores</documentation>
+				</annotation>
+			</element>
+			<element name="correctorlist" type="tns:CorrectorListType"
+				maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Lista de Correctores</documentation>
+				</annotation>
+			</element>
+			<element name="defectlist" type="tns:DefectListType"
+				maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Lista de anomalías</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

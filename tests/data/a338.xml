@@ -51,6 +51,9 @@
     <telemetering>N</telemetering>
     <factmethod>2</factmethod>
     <gasstationtype>00</gasstationtype>
+    <cnae>9820</cnae>
+    <protectedtype>1</protectedtype>
+    <essentialtype>1</essentialtype>
     <extrainfo>400_ylDyrpjutezfQ2ojWqcyjdpQqN7UG7</extrainfo>
     <conceptnumber>29</conceptnumber>
     <conceptlist>

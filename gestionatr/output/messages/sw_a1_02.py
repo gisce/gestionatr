@@ -24,7 +24,7 @@ class A102(XmlModel):
                    'titulartype', 'nationality', 'documenttype',
                    'documentnum', 'cups', 'reqqd', 'reqestimatedqa',
                    'modeffectdate', 'reqtransferdate',
-                   'disconnectedserviceaccepted', 'extrainfo')
+                   'disconnectedserviceaccepted', 'readingvalue', 'cnae', 'protectedtype', 'essentialtype', 'extrainfo')
 
     def __init__(self):
         self.a102 = XmlField('a102')
@@ -41,5 +41,9 @@ class A102(XmlModel):
         self.modeffectdate = XmlField('modeffectdate')
         self.reqtransferdate = XmlField('reqtransferdate')
         self.disconnectedserviceaccepted = XmlField('disconnectedserviceaccepted')
+        self.readingvalue = XmlField('readingvalue')
+        self.cnae = XmlField('cnae')
+        self.protectedtype = XmlField('protectedtype')
+        self.essentialtype = XmlField('essentialtype')
         self.extrainfo = XmlField('extrainfo')
         super(A102, self).__init__('a102', 'a102')
