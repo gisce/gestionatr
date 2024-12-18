@@ -2880,7 +2880,7 @@ TIPUS_CONCEPTES = {
     '2006': 'tfixe_altres',
     '2007': 'tfixe_demandad_altres',
     '2008': 'tfixe_altres',
-    '2009': 'tfixe_demandad_altres',
+    '2009': 'tfixe_altres',
     '2010': 'tfixe_cargos',
     '2011': 'tfixe_cargos',
     '1212': 'demora',  # Es diferent perque no te impostos, s'ha de tractar per separat
