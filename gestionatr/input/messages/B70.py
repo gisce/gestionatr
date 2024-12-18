@@ -659,6 +659,7 @@ class Factura(object):
             'tfixe_cargos': 'tfixe',
             'tfixe_altres': 'tfixe',
             'tvariable_altres': 'tvariable',
+            'tfixe_demandad_altres': 'tfixe_demandad',
         }
         for concepte in self.listaconceptos:
             tipus = TIPUS_CONCEPTES.get(concepte.codconcepto, "altres")
