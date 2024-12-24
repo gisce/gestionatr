@@ -389,7 +389,8 @@ class Message(MessageBase):
 
 
 class except_f1(Exception):
-    def __init__(self, name, value, values_dict=None):
+    def __init__(self, name, value, values_dict=None, exc_type='warning'):
         self.name = name
         self.value = value
         self.values_dict = values_dict or {}
+        self.exc_type = exc_type.decode('utf-8') if isinstance(exc_type, bytes) else exc_type
