@@ -25,7 +25,7 @@ class ModificacionDeATR(XmlModel):
         self.datos_solicitud = DatosSolicitud()
         self.contrato = Contrato()
         self.cliente = Cliente()
-        self.medida = Medida()
+        self.medida = MedidaResto()
         self.doc_tecnica = DocTecnica()
         self.comentarios = XmlField('Comentarios')
         self.registros_documento = RegistrosDocumento()
@@ -34,7 +34,10 @@ class ModificacionDeATR(XmlModel):
 
 class DatosSolicitud(DatosSolicitud):
 
-    _sort_order = ('datos_solicitud', 'tipo_modificacion', 'tipo_solicitud_administrativa', 'cnae', 'periodicidad_facturacion', 'ind_activacion', 'fecha_prevista_accion', 'contratacion_incondicional_ps', 'bono_social', 'solicitud_tension', 'tension_solicitada')
+    _sort_order = ('datos_solicitud', 'tipo_modificacion', 'tipo_solicitud_administrativa', 'cnae', 'ind_esencial',
+                   'fecha_ultimo_movimiento_ind_esencial',  'periodicidad_facturacion', 'ind_activacion',
+                   'fecha_prevista_accion', 'contratacion_incondicional_ps', 'bono_social', 'solicitud_tension',
+                   'tension_solicitada')
 
     def __init__(self):
         super(DatosSolicitud, self).__init__()
@@ -83,13 +86,17 @@ class MensajeActivacionModificacionDeATR(XmlModel):
 
 class ActivacionModificaciones(XmlModel):
 
-    _sort_order = ('activacion_modificaciones', 'datos_activacion', 'contrato', 'puntos_de_medida')
+    _sort_order = ('activacion_modificaciones', 'datos_activacion', 'ind_esencial',
+                   'fecha_ultimo_movimiento_ind_esencial', 'contrato', 'puntos_de_medida', 'registros_documento')
 
     def __init__(self):
         self.activacion_modificaciones = XmlField('ActivacionModificaciones')
         self.datos_activacion = DatosActivacion()
+        self.ind_esencial = XmlField('IndEsencial')
+        self.fecha_ultimo_movimiento_ind_esencial = XmlField('FechaUltimoMovimientoIndEsencial')
         self.contrato = Contrato()
         self.puntos_de_medida = PuntosDeMedida()
+        self.registros_documento = RegistrosDocumento()
         super(ActivacionModificaciones, self).__init__('ActivacionModificaciones', 'activacion_modificaciones')
 
 

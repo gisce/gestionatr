@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- edited with XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) by Odelin Calatrava Requena (Comisión Nacional de los Mercados y la Competencia) -->
+<!-- editado con XMLSpy v2020 rel. 2 (x64) (http://www.altova.com) por Teresa Rodriguez-Losada (INECO) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="TiposComplejos.xsd"/>
+	<xs:include schemaLocation="TiposSencillos.xsd"/>
+	<xs:complexType name="ActivacionModificacionDeATRM2">
+		<xs:sequence>
+			<xs:element name="DatosActivacion" type="DatosActivacionModificacionDeATRM2"/>
+			<xs:element name="Contrato" type="ContratoActivacionModificacionDeATRM2"/>
+			<xs:element name="PuntosDeMedida" type="PuntosDeMedida"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Tipos secundarios de la transaccion actual -->
+	<!-- Datos de la modificacion de ATR -->
+	<xs:complexType name="DatosActivacionModificacionDeATRM2">
+		<xs:sequence>
+			<xs:element name="MotivoActivacionUnidireccional" maxOccurs="2">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Motivo" type="Motivo"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Fecha" type="xs:date"/>
+			<xs:element name="BonoSocial" type="BonoSocial" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 116</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IndEsencial" type="IndEsencial"/>
+			<xs:element name="FechaUltimoMovimientoIndEsencial" type="xs:date"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ContratoActivacionModificacionDeATRM2">
+		<xs:sequence>
+			<xs:element name="IdContrato" type="IdContrato"/>
+			<xs:element name="FechaFinalizacion" type="xs:date" minOccurs="0"/>
+			<xs:element name="Autoconsumo" type="TypeAutoconsumoActivacion" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

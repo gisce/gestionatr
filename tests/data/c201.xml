@@ -15,6 +15,8 @@
             <TipoModificacion>S</TipoModificacion>
             <TipoSolicitudAdministrativa>S</TipoSolicitudAdministrativa>
             <CNAE>2222</CNAE>
+            <IndEsencial>01</IndEsencial>
+            <FechaUltimoMovimientoIndEsencial>2016-06-06</FechaUltimoMovimientoIndEsencial>
             <IndActivacion>L</IndActivacion>
             <FechaPrevistaAccion>2016-06-06</FechaPrevistaAccion>
             <ContratacionIncondicionalPS>S</ContratacionIncondicionalPS>
@@ -25,8 +27,59 @@
         </DatosSolicitud>
         <Contrato>
             <FechaFinalizacion>2018-01-01</FechaFinalizacion>
-            <TipoAutoconsumo>00</TipoAutoconsumo>
+            <Autoconsumo>
+                <DatosSuministro>
+                    <TipoCUPS>01</TipoCUPS>
+                    <RefCatastro>1234567890qwertyuiop</RefCatastro>
+                </DatosSuministro>
+                <DatosCAU>
+                    <CAU>ES1234000000000001JN0FA001</CAU>
+                    <TipoAutoconsumo>11</TipoAutoconsumo>
+                    <TipoSubseccion>10</TipoSubseccion>
+                    <Colectivo>S</Colectivo>
+                    <DatosInstGen>
+                        <CIL>ES1234000000000001JN0F001</CIL>
+                        <PotInstaladaGen>100</PotInstaladaGen>
+                        <TipoInstalacion>01</TipoInstalacion>
+                        <EsquemaMedida>B</EsquemaMedida>
+                        <SSAA>S</SSAA>
+                        <UnicoContrato>S</UnicoContrato>
+                        <RefCatastro>1234567890qwertyuidf</RefCatastro>
+                        <UTM>
+                            <X>100</X>
+                            <Y>200</Y>
+                            <Huso>40</Huso>
+                            <Banda>E</Banda>
+                        </UTM>
+                        <TitularRepresentanteGen>
+                            <IdTitular>
+                                <TipoIdentificador>NI</TipoIdentificador>
+                                <Identificador>111111111H</Identificador>
+                            </IdTitular>
+                            <Nombre>
+                                <NombreDePila>Juan</NombreDePila>
+                                <PrimerApellido>López</PrimerApellido>
+                                <SegundoApellido>Sánchez</SegundoApellido>
+                            </Nombre>
+                            <Telefono>
+                                <PrefijoPais>0034</PrefijoPais>
+                                <Numero>933834841</Numero>
+                            </Telefono>
+                            <Telefono>
+                                <PrefijoPais>0034</PrefijoPais>
+                                <Numero>633834841</Numero>
+                            </Telefono>
+                            <Telefono>
+                                <PrefijoPais>0034</PrefijoPais>
+                                <Numero>683834841</Numero>
+                            </Telefono>
+                            <CorreoElectronico>mail_falso@dominio.com</CorreoElectronico>
+                        </TitularRepresentanteGen>
+                    </DatosInstGen>
+                </DatosCAU>
+            </Autoconsumo>
             <TipoContratoATR>02</TipoContratoATR>
+            <CUPSPrincipal>ES1234000000000001JN0F</CUPSPrincipal>
             <CondicionesContractuales>
                 <TarifaATR>018</TarifaATR>
                 <PotenciasContratadas>
@@ -111,13 +164,13 @@
                 <CIEPapel>
                     <CodigoCie>1234567</CodigoCie>
                     <PotenciaInstBT>3500</PotenciaInstBT>
-                    <PotenciaNoInterrumpible>2000</PotenciaNoInterrumpible>
                     <FechaEmisionCie>2015-06-04</FechaEmisionCie>
                     <NifInstalador>12345678Z</NifInstalador>
                     <TensionSuministroCIE>10</TensionSuministroCIE>
                     <TipoSuministro>VI</TipoSuministro>
                 </CIEPapel>
                 <ValidezCIE>ES</ValidezCIE>
+                <PotenciaNoInterrumpible>2000</PotenciaNoInterrumpible>
             </DatosCie>
             <DatosAPM>
                 <CodigoApm>1111111111</CodigoApm>
@@ -129,5 +182,11 @@
             </DatosAPM>
         </DocTecnica>
         <Comentarios>Comentario</Comentarios>
+        <RegistrosDocumento>
+         <RegistroDoc>
+           <TipoDocAportado>07</TipoDocAportado>
+           <DireccionUrl>https://www.google.com/</DireccionUrl>
+         </RegistroDoc>
+        </RegistrosDocumento>
     </CambiodeComercializadorConCambios>
 </MensajeCambiodeComercializadorConCambios>

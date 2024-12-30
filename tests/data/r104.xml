@@ -47,6 +47,10 @@
                         <LecturaPropuesta>0000003106.00</LecturaPropuesta>
                     </LecturaAportada>
                 </LecturasAportadas>
+                <DisconformidadAutoconsumo>
+                    <TipoDisconformidadAutoconsumo>01</TipoDisconformidadAutoconsumo>
+                    <TipoDisconformidadAutoconsumo>03</TipoDisconformidadAutoconsumo>
+                </DisconformidadAutoconsumo>
                 <CodigoIncidencia>01</CodigoIncidencia>
                 <CodigoSolicitud>33333</CodigoSolicitud>
                 <ParametroContratacion>01</ParametroContratacion>
