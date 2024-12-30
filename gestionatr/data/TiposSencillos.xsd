@@ -2521,19 +2521,13 @@
 		<xs:annotation>
 			<xs:documentation>Tipo de autoconsumo (Tabla 113)
 			00	Sin autoconsumo
-			01	Autoconsumo tipo 1
-			2A	Autoconsumo tipo 2 segun el Art. 13.2.a) del RD 900/2015
-			2B	Autoconsumo tipo 2 segun el Art. 13.2.b) del RD 900/2015
 			11	Sin excedentes
 			12 	Con excedentes
+			0C	Baja como miembro de autoconsumo colectivo
 		</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="00"/>
-			<xs:enumeration value="01"/>
-			<xs:enumeration value="2A"/>
-			<xs:enumeration value="2B"/>
-			<xs:enumeration value="2G"/>
 			<xs:enumeration value="11"/>
 			<xs:enumeration value="12"/>
 			<xs:enumeration value="0C"/>
