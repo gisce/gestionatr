@@ -1691,7 +1691,7 @@
 					<xs:documentation>Tabla 130</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="SSAA" type="Indicativo">
+			<xs:element name="SSAA" type="Indicativo" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Tabla 26</xs:documentation>
 				</xs:annotation>
