@@ -9,7 +9,7 @@
 		<xs:sequence>
 			<xs:element name="Cabecera" type="CabeceraQ1"/>
 			<xs:element name="Datos" type="DatosQ1"/>
-			<xs:element name="EnergiaActiva" type="EnergiaActivaQ1"/>
+			<xs:element name="EnergiaActiva" type="EnergiaActivaQ1" minOccurs="0"/>
 			<xs:element name="Autoconsumo" type="AutoconsumoQ1" minOccurs="0"/>
 			<xs:element name="Medidas" type="MedidaFact" maxOccurs="10"/>
 			<xs:element name="InformacionAlConsumidor" type="InformacionAlConsumidor" minOccurs="0"/>
