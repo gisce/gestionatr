@@ -2302,6 +2302,8 @@ TABLA_113 = [
 
 TENEN_AUTOCONSUM = [x[0] for x in TABLA_113 if x[0] not in ['00', '01', '2A', '2B', '2G']]
 
+TENEN_AUTOCONSUM_XARXA_INTERIOR = [x[0] for x in TABLA_113 if x[0] not in ['00', '01', '2A', '2B', '2G', '64', '63', '58', '43']]
+
 TABLA_114 = [
     ('1', u'IVA / IPSI/ IGIC'),
     ('2', u'IVA / IPSI/ IGIC Reducido'),
