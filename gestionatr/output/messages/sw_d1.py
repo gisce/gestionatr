@@ -134,7 +134,7 @@ class MensajeAnulacionD1(XmlModel):
     def __init__(self):
         self.mensaje = XmlField('MensajeAnulacionD1', attributes={'xmlns': 'http://localhost/elegibilidad'})
         self.cabecera = Cabecera()
-        self.anulacion_notificacion_cambios_atr_desde_distribuidor = []
+        self.anulacion_notificacion_cambios_atr_desde_distribuidor = AnulacionNotificacionCambiosATRDesdeDistribuidor()
         super(MensajeAnulacionD1, self).__init__('MensajeAnulacionD1', 'mensaje')
 
 
