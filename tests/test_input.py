@@ -1934,7 +1934,7 @@ class test_D1(TestCaseCompat):
     def test_d110(self):
         d1 = D1(self.xml_d110)
         d1.parse_xml()
-        node_anullacio = d1.anulacion_notificacion_cambios_atr_desde_distribuidor[0]
+        node_anullacio = d1.anulacion_notificacion_cambios_atr_desde_distribuidor
         self.assertEqual(node_anullacio.datos_anulacion.fecha_anulacion, "2016-06-10")
 
 

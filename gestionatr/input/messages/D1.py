@@ -19,10 +19,11 @@ class D1(C1):
     @property
     def anulacion_notificacion_cambios_atr_desde_distribuidor(self):
         tree = 'AnulacionNotificacionCambiosATRDesdeDistribuidor'
-        data = []
-        for d in get_rec_attr(self.obj, tree, False):
-            data.append(AnulacionNotificacionCambiosATRDesdeDistribuidor(d))
-        return data
+        data = get_rec_attr(self.obj, tree, False)
+        if data not in [None, False]:
+            return AnulacionNotificacionCambiosATRDesdeDistribuidor(data)
+        else:
+            return False
 
 
 class NotificacionCambiosATRDesdeDistribuidor(object):
