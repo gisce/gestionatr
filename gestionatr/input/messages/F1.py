@@ -2509,10 +2509,9 @@ class FacturaATR(Factura):
         periodes = []
         total = 0
 
-        if self.autoconsumo and self.autoconsumo.instalacion_gen_autoconsumo:
-            for inst in self.autoconsumo.instalacion_gen_autoconsumo:
-                for activa in inst.energia_neta_gen.terminos_energia_neta_gen:
-                    periodes += activa.periodos
+        if self.autoconsumo and self.autoconsumo.energia_neta_gen:
+            for activa in self.autoconsumo.energia_neta_gen.terminos_energia_neta_gen:
+                periodes += activa.periodos
 
         return periodes, total
 
@@ -2520,11 +2519,10 @@ class FacturaATR(Factura):
         periodes = []
         total = 0
 
-        if self.autoconsumo and self.autoconsumo.instalacion_gen_autoconsumo:
-            for inst in self.autoconsumo.instalacion_gen_autoconsumo:
-                total += inst.energia_autoconsumida.importe_total
-                for activa in inst.energia_autoconsumida.terminos_energia_autoconsumida:
-                    periodes += activa.periodos
+        if self.autoconsumo and self.autoconsumo.energia_autoconsumida:
+            total += self.autoconsumo.energia_autoconsumida.importe_total
+            for activa in self.autoconsumo.energia_autoconsumida.terminos_energia_autoconsumida:
+                periodes += activa.periodos
 
         return periodes, total
 
