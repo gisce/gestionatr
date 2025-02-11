@@ -658,6 +658,20 @@ SUBTYPES_R101 = [
 
 SUBTYPES_R1_ATC = [(x['code'], x['name']) for x in SUBTYPES_R101]
 
+TAULA_TIPO_CLIENTE_ESENCIAL_EXTENDED = [  # ley 24/2013 article 52
+    ('0', 'No esencial'),
+    ('1', 'a) Alumbrado público a cargo de las administraciones públicas. No se incluyen los alumbrados ornamentales de plazas, monumentos, fuentes o de cualquier otro edificio o sitio de interés.'),
+    ('2', 'b) Suministro de aguas para el consumo humano a través de red.'),
+    ('3', 'c) Acuartelamientos e instituciones directamente vinculadas a la defensa nacional, a las fuerzas y cuerpos de seguridad, a los bomberos, a protección civil y a la policía municipal, salvo las construcciones dedicadas a viviendas, economato y zonas de recreo de su personal.'),
+    ('4', 'd) Centros penitenciarios, pero no así sus anejos dedicados a la población no reclusa, así como sedes de Juzgados y Tribunales.'),
+    ('5', 'e) Transportes de servicio público y sus equipamientos y las instalaciones dedicadas directamente a la seguridad del tráfico terrestre, marítimo o aéreo.'),
+    ('6', 'f) Centros sanitarios en que existan quirófanos, salas de curas y aparatos de alimentación eléctrica acoplables a los pacientes.'),
+    ('7', 'g) Hospitales.'),
+    ('8', 'h) Servicios funerarios.'),
+    ('9', 'i) Aquellos suministros de ámbito doméstico en los que exista constancia documental formalizada por personal médico de que el suministro de energía eléctrica es imprescindible para la alimentación de un equipo médico que resulte indispensable para mantener con vida a una persona. En todo caso estos suministros se circunscribirán a personas físicas en su vivienda habitual.'),
+]
+
+TAULA_TIPO_CLIENTE_ESENCIAL = [(x[0], x[1]) for x in TAULA_TIPO_CLIENTE_ESENCIAL_EXTENDED]
 
 # TABLES
 TABLA_3 = [
