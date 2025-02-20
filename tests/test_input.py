@@ -2364,6 +2364,7 @@ class test_R1(TestCaseCompat):
         self.assertEqual(varr1.tipo_concepto_facturado, u'01')
         self.assertEqual(varr1.tipo_de_atencion_incorrecta, u'05')
         self.assertEqual(varr1.tipo_dhedm, u'1')
+        self.assertEqual(varr1.cau, u'ES1234000000000001JN0FA001')
         ubi = varr1.ubicacion_incidencia
         self.assertEqual(ubi.des_ubicacion_incidencia, u'Destino')
         self.assertEqual(ubi.cod_postal, u'17001')

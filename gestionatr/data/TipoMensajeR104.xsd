@@ -98,6 +98,7 @@
 					<xs:documentation>Tabla 35</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="CAU" type="CodigoAutoconsumo" minOccurs="0"/>
 			<xs:element name="LecturasAportadas" type="LecturasAportadas" minOccurs="0"/>
 			<xs:element name="DisconformidadAutoconsumo" minOccurs="0">
 				<xs:complexType>

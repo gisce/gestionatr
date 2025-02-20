@@ -6842,6 +6842,7 @@ class test_R1(unittest.TestCase):
             'tipo_concepto_facturado': '01',
             'fecha_lectura': '2016-01-20',
             'tipo_dhedm': '1',
+            'cau': 'ES1234000000000001JN0FA001',
             'lecturas_aportadas': lecturas_aportadas,
             'disconformidad_autoconsumo': disconformidad_autoconsumo,
             'codigo_incidencia': '01',
