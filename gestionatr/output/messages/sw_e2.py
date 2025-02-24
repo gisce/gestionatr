@@ -214,3 +214,50 @@ class SolicitudReposicionConsulta(XmlModel):
 
         super(SolicitudReposicionConsulta, self).__init__('SolicitudReposicionConsulta',
                                                           'solicitud_reposicion_consulta')
+
+# Paso 15
+
+class MensajeAceptacionReposicionReceptor(XmlModel):
+
+    _sort_order = ('mensaje', 'cabecera', 'aceptacion_reposicion_receptor')
+
+    def __init__(self):
+        self.mensaje = XmlField('MensajeAceptacionReposicionReceptor',
+                                attributes={'xmlns': 'http://localhost/elegibilidad'})
+        self.cabecera = Cabecera()
+        self.aceptacion_reposicion = AceptacionReposicionReceptor()
+        super(MensajeAceptacionReposicionReceptor, self).__init__('MensajeAceptacionReposicionReceptor', 'mensaje')
+
+
+class AceptacionReposicionReceptor(XmlModel):
+
+    _sort_order = ('aceptacion_reposicion_receptor', 'aceptacion_reposicion')
+
+    def __init__(self):
+        self.aceptacion_reposicion_receptor = XmlField('AceptacionReposicionReceptor')
+        self.aceptacion_reposicion = XmlField('AceptacionReposicion')
+        super(AceptacionReposicionReceptor, self).__init__('AceptacionReposicionReceptor', 'aceptacion_reposicion_receptor')
+
+class MensajeRechazoReposicionReceptor(XmlModel):
+
+    _sort_order = ('mensaje_rechazo', 'cabecera', 'rechazos',
+                   'registros_documentos')
+
+    def __init__(self):
+        self.mensaje_rechazo = XmlField('MensajeRechazoReposicionReceptor',
+                                        attributes={'xmlns': 'http://localhost/elegibilidad'})
+        self.cabecera = Cabecera()
+        self.rechazos = Rechazos()
+        self.registros_documentos = RegistrosDocumento()
+        super(MensajeRechazoReposicionReceptor, self).__init__('MensajeRechazoReposicionReceptor', 'mensaje_rechazo')
+
+
+class Rechazos(XmlModel):
+
+    _sort_order = ('rechazos', 'fecha_rechazo', 'rechazo_list')
+
+    def __init__(self):
+        self.rechazos = XmlField('Rechazos')
+        self.fecha_rechazo = XmlField('FechaRechazo')
+        self.rechazo_list = []
+        super(Rechazos, self).__init__('Rechazos', 'rechazos')

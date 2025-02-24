@@ -535,7 +535,7 @@ SUBTYPES_R101 = [
         'type': '03',
     }),
     ({
-        'min_fields': ['cups', 'codigo_de_solicitud', 'CAU'],
+        'min_fields': ['cups', 'codigo_de_solicitud', 'cau'],
         'code': '077',
         'name': u'RETRASO EN PLAZO ACTIVACIÓN UNIDIRECCIONAL AUTOCONSUMO',
         'type': '03',
