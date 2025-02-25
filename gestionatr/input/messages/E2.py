@@ -68,6 +68,15 @@ class E2(E1):
                 data.append(RegistroDoc(d))
         return data
 
+    @property
+    def aceptacion_reposicion(self):
+        tree = '{0}.AceptacionReposicion'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data:
+            return data.text
+        else:
+            return False
+
 
 class DatosNotificacion(DatosNotificacion):
 

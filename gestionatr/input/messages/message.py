@@ -169,6 +169,7 @@ MAIN_MESSAGE_XSD = {
     'ActivacionReposicion': 'ActivacionReposicion',
     'ConsultaSolicitudReposicion': 'ConsultaSolicitudReposicion',
     'AceptacionReposicionReceptor': 'AceptacionReposicionReceptor',
+    'RechazoReposicionReceptor': 'Rechazos',
     'NotificacionActivacionPorReposicion': 'NotificacionActivacionPorReposicion',
     'RechazoReposicion': 'RechazoReposicion',
     'ContestacionIncidencia': 'ContestacionIncidencia',
