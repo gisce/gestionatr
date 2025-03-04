@@ -145,7 +145,7 @@ class P0(Message, ProcessDeadline):
         tree = '{0}.CondicionesContractuales'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data:
-            return data.text
+            return CondicionesContractuales(data)
         else:
             return False
 
