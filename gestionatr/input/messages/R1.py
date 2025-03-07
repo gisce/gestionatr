@@ -1125,7 +1125,7 @@ class MinimumFieldsChecker(object):
                 return False
         return len(self.r1.variables_detalle_reclamacion) > 0
 
-    def check_CAU(self):
+    def check_cau(self):
         for var in self.r1.variables_detalle_reclamacion:
             if not var.cau:
                 return False
