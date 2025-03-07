@@ -15,13 +15,68 @@
             <Fecha>2016-08-21</Fecha>
             <EnServicio>S</EnServicio>
             <IndAnulable>S</IndAnulable>
+            <IndEsencial>01</IndEsencial>
+            <FechaUltimoMovimientoIndEsencial>2016-06-06</FechaUltimoMovimientoIndEsencial>
         </DatosActivacion>
         <Contrato>
             <IdContrato>
                 <CodContrato>00001</CodContrato>
             </IdContrato>
-            <TipoAutoconsumo>00</TipoAutoconsumo>
+            <Autoconsumo>
+                <DatosSuministro>
+                    <TipoCUPS>01</TipoCUPS>
+                    <RefCatastro>1234567890qwertyuiop</RefCatastro>
+                </DatosSuministro>
+                <DatosCAU>
+                    <CAU>ES1234000000000001JN0FA001</CAU>
+                    <TipoAutoconsumo>11</TipoAutoconsumo>
+                    <TipoSubseccion>10</TipoSubseccion>
+                    <Colectivo>S</Colectivo>
+                    <DatosInstGen>
+                        <CIL>ES1234000000000001JN0F001</CIL>
+                        <TecGenerador>b12</TecGenerador>
+                        <Combustible>Diesel</Combustible>
+                        <PotInstaladaGen>100</PotInstaladaGen>
+                        <TipoInstalacion>01</TipoInstalacion>
+                        <EsquemaMedida>B</EsquemaMedida>
+                        <SSAA>S</SSAA>
+                        <UnicoContrato>S</UnicoContrato>
+                        <RefCatastro>1234567890qwertyuidf</RefCatastro>
+                        <UTM>
+                            <X>100</X>
+                            <Y>200</Y>
+                            <Huso>40</Huso>
+                            <Banda>E</Banda>
+                        </UTM>
+                        <TitularRepresentanteGen>
+                            <IdTitular>
+                                <TipoIdentificador>NI</TipoIdentificador>
+                                <Identificador>111111111H</Identificador>
+                            </IdTitular>
+                            <Nombre>
+                                <NombreDePila>Juan</NombreDePila>
+                                <PrimerApellido>López</PrimerApellido>
+                                <SegundoApellido>Sánchez</SegundoApellido>
+                            </Nombre>
+                            <Telefono>
+                                <PrefijoPais>0034</PrefijoPais>
+                                <Numero>933834841</Numero>
+                            </Telefono>
+                            <Telefono>
+                                <PrefijoPais>0034</PrefijoPais>
+                                <Numero>633834841</Numero>
+                            </Telefono>
+                            <Telefono>
+                                <PrefijoPais>0034</PrefijoPais>
+                                <Numero>683834841</Numero>
+                            </Telefono>
+                            <CorreoElectronico>mail_falso@dominio.com</CorreoElectronico>
+                        </TitularRepresentanteGen>
+                    </DatosInstGen>
+                </DatosCAU>
+            </Autoconsumo>
             <TipoContratoATR>02</TipoContratoATR>
+            <CUPSPrincipal>ES1234000000000001JN0F</CUPSPrincipal>
             <CondicionesContractuales>
                 <TarifaATR>018</TarifaATR>
                 <PeriodicidadFacturacion>01</PeriodicidadFacturacion>
@@ -105,5 +160,11 @@
                 <Comentarios>Comentarios Varios</Comentarios>
             </PuntoDeMedida>
         </PuntosDeMedida>
+        <RegistrosDocumento>
+         <RegistroDoc>
+           <TipoDocAportado>07</TipoDocAportado>
+           <DireccionUrl>https://www.google.com/</DireccionUrl>
+         </RegistroDoc>
+        </RegistrosDocumento>
     </NotificacionActivacionPorDesistimiento>
 </MensajeNotificacionActivacionPorDesistimiento>

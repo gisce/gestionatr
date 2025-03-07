@@ -25,7 +25,7 @@ class Alta(XmlModel):
         self.datos_solicitud = DatosSolicitud()
         self.contrato = Contrato()
         self.cliente = Cliente()
-        self.medida = Medida()
+        self.medida = MedidaResto()
         self.doc_tecnica = DocTecnica()
         self.comentarios = XmlField('Comentarios')
         self.registros_documento = RegistrosDocumento()

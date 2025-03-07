@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Comisión Nacional de los Mercados y la Competencia (Comisión Nacional de los Mercados y la Competencia) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
-	<xs:include schemaLocation="TipoMensajeR105.xsd"/>
+	<xs:include schemaLocation="TipoMensajeR104.xsd"/>
 	<xs:include schemaLocation="TiposComplejos.xsd"/>
 	<xs:element name="MensajeEnvioInformacionReclamacion">
 		<xs:complexType>

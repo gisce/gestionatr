@@ -1,15 +1,211 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- editado con XMLSpy v2020 sp1 (http://www.altova.com) por pelayo.garcia (INECO) -->
+<!-- edited with XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) by Odelin Calatrava Requena (Comisión Nacional de los Mercados y la Competencia) -->
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Comisión Nacional de los Mercados y la Competencia (Comisión Nacional de los Mercados y la Competencia) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
 	<xs:include schemaLocation="TiposComplejos.xsd"/>
-	<xs:element name="MensajeSaldoLecturasFacturacion">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="Cabecera" type="Cabecera"/>
-				<xs:element name="Medidas" type="MedidaFact" maxOccurs="10"/>
-				<xs:element name="InformacionAlConsumidor" type="InformacionAlConsumidor" minOccurs="0"/>
-				</xs:sequence>
+	<xs:element name="MensajeSaldoLecturasFacturacion" type="MensajeSaldoLecturasFacturacion"/>
+	<xs:complexType name="MensajeSaldoLecturasFacturacion">
+		<xs:sequence>
+			<xs:element name="Cabecera" type="CabeceraQ1"/>
+			<xs:element name="Datos" type="DatosQ1"/>
+			<xs:element name="EnergiaActiva" type="EnergiaActivaQ1" minOccurs="0"/>
+			<xs:element name="Autoconsumo" type="AutoconsumoQ1" minOccurs="0"/>
+			<xs:element name="Medidas" type="MedidaFact" maxOccurs="10"/>
+			<xs:element name="InformacionAlConsumidor" type="InformacionAlConsumidor" minOccurs="0"/>
+		</xs:sequence>
 	</xs:complexType>
-	</xs:element>
+	<xs:complexType name="DatosQ1">
+		<xs:sequence>
+			<xs:element name="TipoAutoconsumo" type="TipoAutoconsumo">
+				<xs:annotation>
+					<xs:documentation> Tabla 113</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TipoSubseccion" type="TipoSubseccion" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 133</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TipoCUPS" type="TipoCUPS">
+				<xs:annotation>
+					<xs:documentation>Tabla 131</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MarcaMedidaConPerdidas" type="Indicativo">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="VAsTrafo" type="Potencia" minOccurs="0"/>
+			<xs:element name="PorcentajePerdidas" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="Decimal3V2">
+						<xs:minInclusive value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="IndicativoCurvaCarga" type="IndicativoCurvaCarga">
+				<xs:annotation>
+					<xs:documentation>Tabla 110 </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PeriodoCCH" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="FechaDesdeCCH" type="xs:date"/>
+						<xs:element name="FechaHastaCCH" type="xs:date"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Periodo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="FechaDesdeFactura" type="xs:date"/>
+						<xs:element name="FechaHastaFactura" type="xs:date"/>
+						<xs:element name="NumeroDias">
+							<xs:simpleType>
+								<xs:restriction base="xs:decimal">
+									<xs:minInclusive value="0"/>
+									<xs:totalDigits value="3"/>
+									<xs:fractionDigits value="0"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="TipoPM" type="TipoPM"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EnergiaActivaQ1">
+		<xs:sequence>
+			<xs:element name="TerminoEnergiaActiva" maxOccurs="6">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="FechaDesde" type="xs:date"/>
+						<xs:element name="FechaHasta" type="xs:date"/>
+						<xs:element name="Periodo" maxOccurs="6">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="ValorEnergiaActiva">
+										<xs:annotation>
+											<xs:documentation>En Kwh</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:decimal">
+												<xs:totalDigits value="13"/>
+												<xs:fractionDigits value="2"/>
+												<xs:maxInclusive value="99999999999.99"/>
+												<xs:minInclusive value="-99999999999.99"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AutoconsumoQ1">
+		<xs:sequence>
+			<xs:element name="EnergiaNetaGen" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="TerminoEnergiaNetaGen" maxOccurs="6">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="FechaDesde" type="xs:date"/>
+									<xs:element name="FechaHasta" type="xs:date"/>
+									<xs:element name="Periodo" maxOccurs="6">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="ValorEnergiaNetaGen">
+													<xs:simpleType>
+														<xs:restriction base="xs:decimal">
+															<xs:totalDigits value="13"/>
+															<xs:fractionDigits value="2"/>
+															<xs:minInclusive value="-99999999999.99"/>
+															<xs:maxInclusive value="99999999999.99"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="EnergiaAutoconsumida" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="TerminoEnergiaAutoconsumida" maxOccurs="6">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="FechaDesde" type="xs:date"/>
+									<xs:element name="FechaHasta" type="xs:date"/>
+									<xs:element name="Periodo" maxOccurs="6">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="ValorEnergiaAutoconsumida">
+													<xs:simpleType>
+														<xs:restriction base="xs:decimal">
+															<xs:totalDigits value="13"/>
+															<xs:fractionDigits value="2"/>
+															<xs:minInclusive value="-99999999999.99"/>
+															<xs:maxInclusive value="99999999999.99"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="EnergiaExcedentaria">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="TerminoEnergiaExcedentaria" maxOccurs="6">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="FechaDesde" type="xs:date"/>
+									<xs:element name="FechaHasta" type="xs:date"/>
+									<xs:element name="Periodo" maxOccurs="6">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="ValorEnergiaExcedentaria">
+													<xs:simpleType>
+														<xs:restriction base="xs:decimal">
+															<xs:totalDigits value="13"/>
+															<xs:fractionDigits value="2"/>
+															<xs:minInclusive value="-99999999999.99"/>
+															<xs:maxInclusive value="99999999999.99"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="DatosCAU" type="TypeDatosCAUQ1" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Tabla 131</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 </xs:schema>

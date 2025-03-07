@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- editado con XMLSpy v2020 rel. 2 (x64) (http://www.altova.com) por Teresa Rodriguez-Losada (INECO) -->
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Comisión Nacional de los Mercados y la Competencia (Comisión Nacional de los Mercados y la Competencia) -->
+<!-- edited with XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) by Odelin Calatrava Requena (Comisión Nacional de los Mercados y la Competencia) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:simpleType name="AltaBajaModificacion">
 		<xs:annotation>
@@ -51,118 +52,6 @@
 			<xs:enumeration value="99"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:simpleType name="BonoSocial">
-		<xs:annotation>
-			<xs:documentation> Bono Social (tabla 116)
-			0	No Bono Social - Retirada
-			1	Bono Social
-			</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="0"/>
-			<xs:enumeration value="1"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="CdigoMotivoExpedienteA">
-		<xs:annotation>
-			<xs:documentation>Código Motivo Expediente Acometida (tabla 125)
-			01	Aumento potencia
-			02 	Cambio tensión 
-			03	Cambio tarifa
-			04     Nuevo suministro
-			05	Colectivo nueva construcción
-			06	Colectivo electrificación rural
-			07	Informativo Plan urbanístico 
-			08	Informativo Plan industrial
-			09	Informativo Productor de Régimen Especial
-			10	Colectivo reconstrucción vivienda 
-			11	TCT No relacionado a NNSS
-			12	TCT Relacionado a NNSS.
-			13	Colectivo renovación de Instalaciones de enlace varios suministros
-			14	Renovación de instalaciones de enlace		
-		</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="01"/>
-			<xs:enumeration value="02"/>
-			<xs:enumeration value="03"/>
-			<xs:enumeration value="04"/>
-			<xs:enumeration value="05"/>
-			<xs:enumeration value="06"/>
-			<xs:enumeration value="07"/>
-			<xs:enumeration value="08"/>
-			<xs:enumeration value="09"/>
-			<xs:enumeration value="10"/>
-			<xs:enumeration value="11"/>
-			<xs:enumeration value="12"/>
-			<xs:enumeration value="13"/>
-			<xs:enumeration value="14"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="CdigoMotivoExpedienteAF">
-		<xs:annotation>
-			<xs:documentation>Código Motivo Anomalía/Fraude (tabla 63)
-			A001	Programación/parametrización errónea
-			A002 	Equipo de Medida con conexión errónea
-			A003	Equipo de Medida inadecuado a instalación
-			A004     Contador averiado
-			A005	Transformadores averiados
-			A006	Módem averiado/Fallo comunicación
-			A007	Error medición fuera de margen
-			A008	Programación/parametrización errónea por avería
-			A009	Contador no se lee
-			A010	Constante contador no corresponde a constante facturación
-			A011	Lectura errónea
-			A012	Suministro no se factura
-			A013     Corriente directa autorizada
-			A014	Tarifa/Discriminación horaria mal informada o aplicada
-			F001		Corriente directa con contrato
-			F002 	Corriente directa con contrato (doble acometida)
-			F003		Corriente directa sin contrato (sin contador)
-			F004     Corriente directa sin contrato (con contador)
-			F005		Inversión entrada-salida
-			F006		Puente entrada-salida en la misma fase (shunt)
-			F007		Puente de tensión aislado/desconectado
-			F008		Equipo de medida manipulado
-			F009		Conexión de equipo de medida manipulada
-			F010		Cambio de placa características de transformadores I/T
-			F011		Equipo de medida sustituido sin autorización
-			F012		Programación/parametrización alterada
-			F013     ICP puenteado o no ajustado a potencia contratada
-			F014		Cesión de energía
-		</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="A001"/>
-			<xs:enumeration value="A002"/>
-			<xs:enumeration value="A003"/>
-			<xs:enumeration value="A004"/>
-			<xs:enumeration value="A005"/>
-			<xs:enumeration value="A006"/>
-			<xs:enumeration value="A007"/>
-			<xs:enumeration value="A008"/>
-			<xs:enumeration value="A009"/>
-			<xs:enumeration value="A010"/>
-			<xs:enumeration value="A011"/>
-			<xs:enumeration value="A012"/>
-			<xs:enumeration value="A013"/>
-			<xs:enumeration value="A014"/>
-			<xs:enumeration value="F001"/>
-			<xs:enumeration value="F002"/>
-			<xs:enumeration value="F003"/>
-			<xs:enumeration value="F004"/>
-			<xs:enumeration value="F005"/>
-			<xs:enumeration value="F006"/>
-			<xs:enumeration value="F007"/>
-			<xs:enumeration value="F008"/>
-			<xs:enumeration value="F009"/>
-			<xs:enumeration value="F010"/>
-			<xs:enumeration value="F011"/>
-			<xs:enumeration value="F012"/>
-			<xs:enumeration value="F013"/>
-			<xs:enumeration value="F014"/>
-		</xs:restriction>
-	</xs:simpleType>
 	<xs:simpleType name="CNAE">
 		<xs:annotation>
 			<xs:documentation>Codigo CNAE
@@ -176,20 +65,6 @@
 		<xs:restriction base="xs:string">
 			<xs:minLength value="20"/>
 			<xs:maxLength value="22"/>
-			<xs:pattern value="[a-zA-Z0-9]*"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="CodigoAutoconsumo">
-		<xs:restriction base="xs:string">
-			<xs:minLength value="26"/>
-			<xs:maxLength value="26"/>
-			<xs:pattern value="[a-zA-Z0-9]*"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="CodigoCIL">
-		<xs:restriction base="xs:string">
-			<xs:minLength value="25"/>
-			<xs:maxLength value="25"/>
 			<xs:pattern value="[a-zA-Z0-9]*"/>
 		</xs:restriction>
 	</xs:simpleType>
@@ -228,12 +103,14 @@
 			<xs:enumeration value="C1"/>
 			<xs:enumeration value="C2"/>
 			<xs:enumeration value="M1"/>
+			<xs:enumeration value="M2"/>
 			<xs:enumeration value="F1"/>
 			<xs:enumeration value="D1"/>
 			<xs:enumeration value="W1"/>
 			<xs:enumeration value="Q1"/>
 			<xs:enumeration value="R1"/>
 			<xs:enumeration value="E1"/>
+			<xs:enumeration value="E2"/>
 			<xs:enumeration value="T1"/>
 			<xs:enumeration value="B2"/>
 			<xs:enumeration value="P0"/>
@@ -254,7 +131,9 @@
 			10	Anulacion de la baja a la comercializadora saliente.  
 			11	Aceptacion a comercializadora saliente
 			12	Notificacion de rechazo como consecuencia de las actuaciones en campo.
-			13    Contestación de incidencia 		
+			13    Contestación de incidencia 
+			14    Consulta de aceptación de la solicitud de reposición
+			15    Aceptación o rechazo a comunicación de reposición
 			16    Contestación de incidencia 		
 		</xs:documentation>
 		</xs:annotation>
@@ -272,6 +151,8 @@
 			<xs:enumeration value="11"/>
 			<xs:enumeration value="12"/>
 			<xs:enumeration value="13"/>
+			<xs:enumeration value="14"/>
+			<xs:enumeration value="15"/>
 			<xs:enumeration value="16"/>
 		</xs:restriction>
 	</xs:simpleType>
@@ -376,8 +257,6 @@
 			<xs:enumeration value="86"/>
 			<xs:enumeration value="87"/>
 			<xs:enumeration value="88"/>
-			<xs:enumeration value="93"/>
-			<xs:enumeration value="99"/>
 			<xs:enumeration value="A1"/>
 			<xs:enumeration value="A2"/>
 			<xs:enumeration value="A3"/>
@@ -430,21 +309,33 @@
 			<xs:enumeration value="G4"/>
 			<xs:enumeration value="G5"/>
 			<xs:enumeration value="G6"/>
+			<xs:enumeration value="G7"/>
+			<xs:enumeration value="G8"/>
+			<xs:enumeration value="G9"/>
+			<xs:enumeration value="H1"/>
+			<xs:enumeration value="H2"/>
+			<xs:enumeration value="H3"/>
 			<xs:enumeration value="H4"/>
 			<xs:enumeration value="H5"/>
 			<xs:enumeration value="H6"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="CodigoMotivoRechazoP0">
-		<xs:annotation>
-			<xs:documentation>codigo motivo del rechazo (tabla 27) permitidos en el proceso de Traspaso a COR 
-			01	No existe Punto de Suministro asociado al CUPS
-			E5	CUPS sujeto a LOPD
-			</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="01"/>
-			<xs:enumeration value="E5"/>
+			<xs:enumeration value="H7"/>
+			<xs:enumeration value="H8"/>
+			<xs:enumeration value="H9"/>
+			<xs:enumeration value="I1"/>
+			<xs:enumeration value="I2"/>
+			<xs:enumeration value="I3"/>
+			<xs:enumeration value="I4"/>
+			<xs:enumeration value="I5"/>
+			<xs:enumeration value="I6"/>
+			<xs:enumeration value="I7"/>
+			<xs:enumeration value="I8"/>
+			<xs:enumeration value="J1"/>
+			<xs:enumeration value="J2"/>
+			<xs:enumeration value="J3"/>
+			<xs:enumeration value="J4"/>
+			<xs:enumeration value="J5"/>
+			<xs:enumeration value="J6"/>
+			<xs:enumeration value="99"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="CodPM">
@@ -505,11 +396,15 @@
 			76	Excedente del periodo 6
 			81	Tipo de autoconsumo
 			82	Coeficiente de reparto
-			83  	Recargo por la no dedicación exclusiva de la carga a vehículos eléctricos
-			84  	Descuento en peajes de transporte y distribución a la industria electrointensiva
+			83  Recargo por la no dedicación exclusiva de la carga a vehículos eléctricos
+			84	Descuento en peajes de transporte y distribución a la industria electrointensiva
 			85	Regularización descuento en peajes de transporte y distribucióna la industria electrointensiva
 			86	Descuento por retardo en activación autoconsumo imputable al distribuidor
 			87	Descuento por retardo en activación autoconsumo NO imputable al distribuidor
+			88    Derechos de extensión provenientes de una reposición E2, no repercutibles al cliente
+			89    Derechos de acceso provenientes de una reposición E2, no repercutibles al cliente
+			90    Derechos de enganche provenientes de una reposición E2, no repercutibles al cliente
+			91    Actuaciones en equipos de medida provenientes de una reposición E2, no repercutibles al cliente
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -567,10 +462,11 @@
 			<xs:enumeration value="85"/>
 			<xs:enumeration value="86"/>
 			<xs:enumeration value="87"/>
+			<xs:enumeration value="88"/>
+			<xs:enumeration value="89"/>
+			<xs:enumeration value="90"/>
+			<xs:enumeration value="91"/>
 		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="date-or-nothing">
-		<xs:union memberTypes="xs:date empty-string"/>
 	</xs:simpleType>
 	<xs:simpleType name="Decimal10">
 		<xs:restriction base="xs:long">
@@ -585,26 +481,10 @@
 			<xs:maxInclusive value="9999999999.99"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:simpleType name="Decimal10V3">
-		<xs:restriction base="xs:decimal">
-			<xs:totalDigits value="13"/>
-			<xs:fractionDigits value="3"/>
-			<xs:minInclusive value="0"/>
-			<xs:maxInclusive value="9999999999.999"/>
-		</xs:restriction>
-	</xs:simpleType>
 	<xs:simpleType name="Decimal11">
 		<xs:restriction base="xs:long">
 			<xs:totalDigits value="11"/>
 			<xs:fractionDigits value="0"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="Decimal11V2">
-		<xs:restriction base="xs:decimal">
-			<xs:totalDigits value="13"/>
-			<xs:fractionDigits value="2"/>
-			<xs:minInclusive value="0"/>
-			<xs:maxInclusive value="99999999999.99"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Decimal12">
@@ -636,6 +516,13 @@
 			<xs:maxInclusive value="99.9999"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="Decimal3V2">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="5"/>
+			<xs:fractionDigits value="2"/>
+			<xs:maxInclusive value="999.99"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="Decimal3">
 		<xs:annotation>
 			<xs:documentation>decimal de tres digitos
@@ -644,13 +531,6 @@
 		<xs:restriction base="xs:integer">
 			<xs:totalDigits value="3"/>
 			<xs:fractionDigits value="0"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="Decimal3V2">
-		<xs:restriction base="xs:decimal">
-			<xs:totalDigits value="5"/>
-			<xs:fractionDigits value="2"/>
-			<xs:maxInclusive value="999.99"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Decimal4">
@@ -679,6 +559,14 @@
 			<xs:maxInclusive value="999999.999"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="Decimal11V2">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="13"/>
+			<xs:fractionDigits value="2"/>
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="99999999999.99"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="Decimal7">
 		<xs:restriction base="xs:long">
 			<xs:totalDigits value="7"/>
@@ -689,14 +577,6 @@
 		<xs:restriction base="xs:long">
 			<xs:totalDigits value="9"/>
 			<xs:fractionDigits value="0"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="Decimal9V9">
-		<xs:restriction base="xs:decimal">
-			<xs:totalDigits value="18"/>
-			<xs:fractionDigits value="9"/>
-			<xs:minInclusive value="0"/>
-			<xs:maxInclusive value="999999999.999999999"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="DecimalS10V4">
@@ -1042,13 +922,6 @@
 			0490101  	Enviado fichero
 			0490201  	No existe fichero
 			0490202	Improcedente. Se adjunta explicacion en comentarios
-			0550101	Se corrige facturacion autoconsumo
-			0550201	No existe autoconsumo asociado al CUPS
-			0550202	Factura autoconsumo correcta. Se adjunta desglose
-			0550203	Improcedente. Se adjunta explicacion en comentarios
-			0560101	Se envia desglose de importes facturados autoconsumo
-			0560201	No existe autoconsumo asociado al CUPS
-			0560202	Improcedente. Se adjunta explicacion en comentarios
 			0570101	Expediente anulado
 			0570102	Expediente rectificado
 			0570103	El cliente aporta documentacion que justifica suministro sin actividad
@@ -1163,6 +1036,23 @@
 			0740202    Movimiento realizado en plazo
 			0740203    Movimiento fuera de plazo imputable al cliente
 			0740204    Improcedente. Se adjunta explicación en comentarios
+			0750101   Se refactura el concepto reclamado
+			0750201   Conceptos reclamados correctamente facturados (incluir explicación en campo comentarios)
+			0750202   Improcedente. Se adjunta explicación en comentarios
+			0760101   Procedente. Se adjunta explicación en comentarios
+			0760201   Improcedente. Se adjunta explicación en comentarios
+			0770101   Procedente. Se agiliza el trámite unilateral
+			0770201   Improcedente. Proceso en plazo
+			0770202   mprocedente. Instalación de generación pendiente de activar
+			0780101   Procedente. Se agiliza el trámite unilateral
+			0780201   Improcedente. Proceso en plazo
+			0780202   Improcedente. Se adjunta explicación en comentarios
+			0790101   Procedente. Se facilita documentación
+			0790201   Improcedente. Se adjunta explicación comentarios
+			0800101   Procedente. Se agiliza trámite de reposición
+			0800201   Improcedente. Se adjunta explicación comentarios
+			0810101   Procedente. Se agiliza trámite de reposición
+			0810201   Improcedente. Se adjunta explicación comentarios			
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -1482,13 +1372,6 @@
 			<xs:enumeration value="0490101"/>
 			<xs:enumeration value="0490201"/>
 			<xs:enumeration value="0490202"/>
-			<xs:enumeration value="0550101"/>
-			<xs:enumeration value="0550201"/>
-			<xs:enumeration value="0550202"/>
-			<xs:enumeration value="0550203"/>
-			<xs:enumeration value="0560101"/>
-			<xs:enumeration value="0560201"/>
-			<xs:enumeration value="0560202"/>
 			<xs:enumeration value="0570101"/>
 			<xs:enumeration value="0570102"/>
 			<xs:enumeration value="0570103"/>
@@ -1603,11 +1486,23 @@
 			<xs:enumeration value="0740202"/>
 			<xs:enumeration value="0740203"/>
 			<xs:enumeration value="0740204"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="empty-string">
-		<xs:restriction base="xs:string">
-			<xs:enumeration value=""/>
+			<xs:enumeration value="0750101"/>
+			<xs:enumeration value="0750201"/>
+			<xs:enumeration value="0750202"/>
+			<xs:enumeration value="0760101"/>
+			<xs:enumeration value="0760201"/>
+			<xs:enumeration value="0770101"/>
+			<xs:enumeration value="0770201"/>
+			<xs:enumeration value="0770202"/>
+			<xs:enumeration value="0780101"/>
+			<xs:enumeration value="0780201"/>
+			<xs:enumeration value="0780202"/>
+			<xs:enumeration value="0790101"/>
+			<xs:enumeration value="0790201"/>
+			<xs:enumeration value="0800101"/>
+			<xs:enumeration value="0800201"/>
+			<xs:enumeration value="0810101"/>
+			<xs:enumeration value="0810201"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="EnergiaFact">
@@ -1625,24 +1520,6 @@
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:maxLength value="3"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="EsquemaMedida">
-		<xs:annotation>
-			<xs:documentation> Esquema de medida (tabla 130)
-				A - EdM Bidireccional en PF
-				B - EdM Bidireccional en PF y EdM gen. neta
-				C - EdM Consumo Total y EdM bidireccional gen. neta
-				D - EdM Consumo Total y EdM gen bruta y EdM cons SSAA
-				E - Configuración singular
-			</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="A"/>
-			<xs:enumeration value="B"/>
-			<xs:enumeration value="C"/>
-			<xs:enumeration value="D"/>
-			<xs:enumeration value="E"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="EstadoTelefono">
@@ -1715,6 +1592,14 @@
 			<xs:fractionDigits value="2"/>
 			<xs:maxInclusive value="9999999999.99"/>
 			<xs:minInclusive value="-9999999999.99"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RecargoInAnio">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="5"/>
+			<xs:fractionDigits value="2"/>
+			<xs:maxInclusive value="99999.99"/>
+			<xs:minInclusive value="-99999.99"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="IndActivacionLectura">
@@ -1876,6 +1761,30 @@
 			<xs:enumeration value="B"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="Motivo">
+		<xs:annotation>
+			<xs:documentation>Motivo de baja o suspension de suministro (tabla 136)
+			01 Modificación del contrato de acceso por modificación del tipo de autoconsumo colectivo 
+			02 Modificación del contrato de acceso por modificación del acuerdo de reparto 
+			03 Modificación del contrato de acceso por modificación de la potencia de generación 
+			04 Modificación del contrato de acceso por Alta en autoconsumo colectivo 
+			05 Modificación del contrato de acceso por baja total del autoconsumo colectivo 
+			06 Modificación del contrato de acceso por baja de un participante en el autoconsumo colectivo 
+			07 Modificación del contrato de acceso por modificación de otros datos de autoconsumo colectivo 
+			08 Modificación del contrato de acceso por modificación de datos de autoconsumo individual
+		</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
+			<xs:enumeration value="07"/>
+			<xs:enumeration value="08"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="MotivoBaja">
 		<xs:annotation>
 			<xs:documentation>Motivo de baja o suspension de suministro (tabla 10)
@@ -1892,24 +1801,6 @@
 			<xs:enumeration value="04"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:simpleType name="MotivoBajaB2">
-		<xs:annotation>
-			<xs:documentation>Motivo Comunicación Baja Unidireccional (tabla 120)
-			01	Baja del contrato de acceso de duración inferior a un año según fecha solicitada por la comercializadora
-			02	Baja del contrato de acceso por orden judicial o mandato de organismo oficial
-			03	Baja del contrato de acceso por rechazo del COR al traspaso
-			04	Baja del contrato de acceso a iniciativa de la distribuidora por seguridad de la red.
-			05	Baja del contrato de acceso por haber pasado dos meses desde que se suspendió un punto de suministro tras el desistimiento de un cambio de comercializador activado sobre un punto de suministro suspendido por impago
-			</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="01"/>
-			<xs:enumeration value="02"/>
-			<xs:enumeration value="03"/>
-			<xs:enumeration value="04"/>
-			<xs:enumeration value="05"/>
-		</xs:restriction>
-	</xs:simpleType>
 	<xs:simpleType name="MotivoCambioATRDesdeDistribuidora">
 		<xs:annotation>
 			<xs:documentation>Motivo ATR desde distribuidora (tabla 109)
@@ -1919,14 +1810,24 @@
 			04	Alta en autoconsumo
 			05	Modificación de tipo de autoconsumo
 			06	Modificación coeficiente de reparto
-			07	Modificación potencia generación
+			07	Modificación potencia generación comunicada por la Comunidad Autónoma
 			08	Baja en autoconsumo
 			09	Modificación desde peaje 3.1A a peaje 6.1DT
 			10	Modificación desde peaje 3.1A a peaje 6.2DT
 			11	Falta fichero coeficientes del año que inicia
+			12	Modificación potencia generación
 			13	Información aplicación descuento por retardo en activación autoconsumo imputable al distribuidor
 			14	Información aplicación descuento por retardo en activación autoconsumo NO imputable al distribuidor
-			15	Alta en autoconsumo colectivo comunicada por un representante
+			15    Alta en autoconsumo colectivo comunicada representante de autoconsumo
+			16    Baja en autoconsumo colectivo 
+			17    Baja en autoconsumo comunicada por un participante, representante de autoconsumo o Comunidad Autónoma 
+			18    Modificación otros datos autoconsumo 
+			19    Alta en autoconsumo colectivo comunicada por un participante 
+			20    Suministro contratable 
+			21    Modificación indicativo esencialidad
+			22    Modificación coeficiente de reparto comunicada por representante
+			23    Baja en autoconumo comunicada por representante
+			24    Baja en autoconsumo comunicada por Comunidad Autónoma
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -1941,9 +1842,19 @@
 			<xs:enumeration value="09"/>
 			<xs:enumeration value="10"/>
 			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
 			<xs:enumeration value="13"/>
 			<xs:enumeration value="14"/>
 			<xs:enumeration value="15"/>
+			<xs:enumeration value="16"/>
+			<xs:enumeration value="17"/>
+			<xs:enumeration value="18"/>
+			<xs:enumeration value="19"/>
+			<xs:enumeration value="20"/>
+			<xs:enumeration value="21"/>
+			<xs:enumeration value="22"/>
+			<xs:enumeration value="23"/>
+			<xs:enumeration value="24"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="MotivoFacturacion">
@@ -1960,6 +1871,7 @@
 			09	Intereses de demora
 			10	Servicios
 			11	Inspeccion - Fraude
+			12	Derechos de contratación por reposición 
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -1974,42 +1886,7 @@
 			<xs:enumeration value="09"/>
 			<xs:enumeration value="10"/>
 			<xs:enumeration value="11"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="MotivoNoContratable">
-		<xs:annotation>
-			<xs:documentation>Motivo No Contratable (tabla 123)
-			01	El PS no ha pasado la inspección de la instalación de enlace (instalación desde la Caja General de Protección, CGP,  al contador)
-			02	Instalación eléctrica peligrosa
-			03	Necesidad de abrir expediente de acometida: Derechos caducados
-			04	Expediente abierto de nuevos suministos
-			05	Expediente abierto de inspección
-			06	Falta licencia de ocupación, cédula de habitabilidad u otra documentación relevante que impide la contratación del NNSS
-			07	Orden o Resolución de la Administración Pública competente, Resolución o Mandato Judicial que impide la contratación en el PS
-			</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="01"/>
-			<xs:enumeration value="02"/>
-			<xs:enumeration value="03"/>
-			<xs:enumeration value="04"/>
-			<xs:enumeration value="05"/>
-			<xs:enumeration value="06"/>
-			<xs:enumeration value="07"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="MotivoTraspaso">
-		<xs:annotation>
-			<xs:documentation>Motivo de posible traspaso a la COR (tabla 119)	
-				01	Solicitud de baja por fin de contrato de energía (B1 motivo 02)
-				02	Solicitud de desistimiento a un cambio de comercilizador de un nuevo titular 
-				03	Decisión fundada de la Dirección General de Política Energética y Minas, cautelar o definitivamente, se traspasan los puntos de suministro al COR				
-			</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="01"/>
-			<xs:enumeration value="02"/>
-			<xs:enumeration value="03"/>
+			<xs:enumeration value="12"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Nombre">
@@ -2029,6 +1906,13 @@
 			07	Modo control potencia
 			08	Periodicidad facturacion
 			09	Direccion Punto de Suministro
+			10	Tipo autoconsumo
+			11	Tipo subsección autoconsumo
+			12	Colectivo
+			13	TipoCups
+			14	Servicios Auxiliares
+			15	Único contrato
+			16	Acuerdo de reparto/ Fichero de coeficientes
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2041,6 +1925,13 @@
 			<xs:enumeration value="07"/>
 			<xs:enumeration value="08"/>
 			<xs:enumeration value="09"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="14"/>
+			<xs:enumeration value="15"/>
+			<xs:enumeration value="16"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="PeriodicidadFacturacion">
@@ -2087,6 +1978,7 @@
 			40	Estimada
 			50	Autolectura
 			60	Telegestion
+			70	Calculada
 			99 	Sin lectura
 		</xs:documentation>
 		</xs:annotation>
@@ -2097,6 +1989,7 @@
 			<xs:enumeration value="40"/>
 			<xs:enumeration value="50"/>
 			<xs:enumeration value="60"/>
+			<xs:enumeration value="70"/>
 			<xs:enumeration value="99"/>
 		</xs:restriction>
 	</xs:simpleType>
@@ -2124,41 +2017,6 @@
 		<xs:restriction base="xs:integer">
 			<xs:totalDigits value="13"/>
 			<xs:fractionDigits value="0"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="RecargoInAnio">
-		<xs:restriction base="xs:decimal">
-			<xs:totalDigits value="5"/>
-			<xs:fractionDigits value="2"/>
-			<xs:maxInclusive value="99999.99"/>
-			<xs:minInclusive value="-99999.99"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="RefCatastro">
-		<xs:restriction base="xs:string">
-			<xs:minLength value="20"/>
-			<xs:maxLength value="20"/>
-			<xs:pattern value="[a-zA-Z0-9]*"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="ResultadoDesistimiento">
-		<xs:annotation>
-			<xs:documentation>Resultado de desistimiento (tabla 118)
-			01	Vuelta a la situación anterior - En servicio
-			02	Vuelta a la situación anterior - Sin servicio (Cortado)
-			03	Traspaso a la COR
-			04	Baja del contrato por rechazo de la COR al traspaso
-			05	Baja por cese de actividad
-			06	Activación de Cambio de Comercializador
-			</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="01"/>
-			<xs:enumeration value="02"/>
-			<xs:enumeration value="03"/>
-			<xs:enumeration value="04"/>
-			<xs:enumeration value="05"/>
-			<xs:enumeration value="06"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="ResultadoIntervencion">
@@ -2205,44 +2063,6 @@
 			<xs:enumeration value="02"/>
 			<xs:enumeration value="03"/>
 			<xs:enumeration value="05"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="SeccionRegistro">
-		<xs:annotation>
-			<xs:documentation> Sección Registro (tabla 127)
-				1 - Sin excedentes
-				2 - Con excedentes
-			</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="1"/>
-			<xs:enumeration value="2"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="SolicitudTension">
-		<xs:annotation>
-			<xs:documentation> tipo de tensión solicitada (tabla 117)
-			M	Monofásica
-			T	Trifásica
-			</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="M"/>
-			<xs:enumeration value="T"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="SubSeccion">
-		<xs:annotation>
-			<xs:documentation> Subsección (tabla 128)
-				a0 - Con excedentes y mecanismo de compesación simplificado
-				b1 - Con excedentes sin mecanismo de compensación y un único contrato de suministro 
-				b2 - Con excedentes sin mecanismo de compensación y varios contratos de suministro
-			</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="a0"/>
-			<xs:enumeration value="b1"/>
-			<xs:enumeration value="b2"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="SubtipoReclamacionPeticion">
@@ -2294,8 +2114,6 @@
 			047	SOLICITUD RECALCULO CCH SIN MODIFICACION CIERRE ATR	FASE 1 PVPC
 			048  	PETICIÓN INFORMACIÓN ADICIONAL RECHAZO 
 			049	FALTA FICHERO DE MEDIDA
-			055	DISCONFORMIDAD IMPORTE FACTURADO AUTOCONSUMO
-			056	PETICIÓN DESGLOSE IMPORTE FACTURADO AUTOCONSUMO
 			057	DISCONFORMIDAD CON EXPEDIENTE DE ANOMALIA Y FRAUDE (sin factura emitida)
 			058	RETRASO EN PLAZO ACEPTACIÓN CAMBIO DE COMERCIALIZADOR
 			059	RETRASO EN PLAZO ACTIVACIÓN CAMBIO DE COMERCIALIZADOR
@@ -2313,6 +2131,13 @@
 			072   RETRASO EN PLAZO DE ACTIVACIÓN DESISTIMIENTO
 			073   PARÁMETROS DE COMUNICACIÓN
 			074   RETRASO PLAZO ACEPTACIÓN ANULACIÓN
+			075   DISCONFORMIDAD CON AUTOCONSUMO FACTURADO 
+			076   CONSULTA SEGUIMIENTO AUTOCONSUMO 
+			077   RETRASO EN EL PLAZO DE ACTIVACIÓN UNIDIRECCIONAL AUTOCONSUMO
+			078   RETRASO EN EL PLAZO DE ACTIVACIÓN BAJA UNIDIRECCIONAL AUTOCONSUMO
+			079   SOLICITUD CONTRATO DE ACCESO
+			080   RETRASO EN PLAZO ACEPTACIÓN REPOSICIÓN
+			081   RETRASO EN PLAZO ACTIVACIÓN REPOSICIÓN 
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2362,8 +2187,6 @@
 			<xs:enumeration value="047"/>
 			<xs:enumeration value="048"/>
 			<xs:enumeration value="049"/>
-			<xs:enumeration value="055"/>
-			<xs:enumeration value="056"/>
 			<xs:enumeration value="057"/>
 			<xs:enumeration value="058"/>
 			<xs:enumeration value="059"/>
@@ -2381,6 +2204,13 @@
 			<xs:enumeration value="072"/>
 			<xs:enumeration value="073"/>
 			<xs:enumeration value="074"/>
+			<xs:enumeration value="075"/>
+			<xs:enumeration value="076"/>
+			<xs:enumeration value="077"/>
+			<xs:enumeration value="078"/>
+			<xs:enumeration value="079"/>
+			<xs:enumeration value="080"/>
+			<xs:enumeration value="081"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TarifaATR">
@@ -2459,34 +2289,6 @@
 			<xs:enumeration value="023"/>
 			<xs:enumeration value="024"/>
 			<xs:enumeration value="025"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="TecGenerador">
-		<xs:annotation>
-			<xs:documentation> Tecnología de generación (tabla 126)
-			</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="a11"/>
-			<xs:enumeration value="a12"/>
-			<xs:enumeration value="a13"/>
-			<xs:enumeration value="a20"/>
-			<xs:enumeration value="b11"/>
-			<xs:enumeration value="b12"/>
-			<xs:enumeration value="b21"/>
-			<xs:enumeration value="b22"/>
-			<xs:enumeration value="b30"/>
-			<xs:enumeration value="b41"/>
-			<xs:enumeration value="b42"/>
-			<xs:enumeration value="b51"/>
-			<xs:enumeration value="b52"/>
-			<xs:enumeration value="b60"/>
-			<xs:enumeration value="b71"/>
-			<xs:enumeration value="b72"/>
-			<xs:enumeration value="b80"/>
-			<xs:enumeration value="c10"/>
-			<xs:enumeration value="c20"/>
-			<xs:enumeration value="c30"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Tension">
@@ -2596,12 +2398,6 @@
 			<xs:enumeration value="48"/>
 			<xs:enumeration value="49"/>
 			<xs:enumeration value="99"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="TensionPM">
-		<xs:restriction base="Decimal9">
-			<xs:minInclusive value="0"/>
-			<xs:whiteSpace value="collapse"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TipoAclaradorFinca">
@@ -2725,73 +2521,16 @@
 		<xs:annotation>
 			<xs:documentation>Tipo de autoconsumo (Tabla 113)
 			00	Sin autoconsumo
-			01	Autoconsumo tipo 1
-			2A	Autoconsumo tipo 2 segun el Art. 13.2.a) del RD 900/2015
-			2B	Autoconsumo tipo 2 segun el Art. 13.2.b) del RD 900/2015
-			31 	Sin Excedentes Individual - Consumo
-			32 	Sin Excedentes Colectivo - Consumo
-			33	Sin Excedentes Colectivo con acuerdo de compensación - Consumo
-			41 	Con excedentes y compensación Individual - Consumo  
-			42 	Con excedentes y compensación Colectivo - Consumo
-			43  Con excedentes y compensación Colectivo a través de red - Consumo
-			51 	Con excedentes sin compensación Individual sin cto de SSAA en Red Interior - Consumo
-			52 	Con excedentes sin compensación Individual con cto SSAA en Red Interior - Consumo
-			53	Con excedentes sin compensación individual con cto SSAA en Red Interior - SSAA
-			54 	Con excedentes sin compensación Colectivo en Red Interior - Consumo
-			55 	Con excedentes sin compensación Colectivo con cto de SSAA en Red Interior - Consumo
-			56	Con excedentes sin compensación Colectivo con cto de SSAA en Red Interior - SSAA
-			57  Con excedentes sin compensación Colectivo sin cto de SSAA (despreciable) en red interior - Consumo
-			58  Con excedentes sin compensación Colectivo sin cto de SSAA a través de red - Consumo
-			61 	Con excedentes sin compensación Individual con cto SSAA a través de red - Consumo
-			62 	Con excedentes sin compensación individual con cto SSAA a través de red - SSAA
-			63 	Con excedentes sin compensación Colectivo con cto de SSAA a través de red - Consumo
-			64 	Con excedentes sin compensación Colectivo  con cto de SSAA a través de red - SSAA	
-			71	Con excedentes sin compensación Individual con cto SSAA a través de red y red interior - Consumo
-			72	Con excedentes sin compensación individual con cto SSAA a través de red y red interior - SSAA
-			73	Con excedentes sin compensación Colectivo con cto de SSAA  a través de red y red interior - Consumo
-			74	Con excedentes sin compensación Colectivo con cto de SSAA a través de red y red interior - SSAA
+			11	Sin excedentes
+			12 	Con excedentes
+			0C	Baja como miembro de autoconsumo colectivo 
 		</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="00"/>
-			<xs:enumeration value="01"/>
-			<xs:enumeration value="2A"/>
-			<xs:enumeration value="2B"/>
-			<xs:enumeration value="2G"/>
-			<xs:enumeration value="31"/>
-			<xs:enumeration value="32"/>
-			<xs:enumeration value="33"/>
-			<xs:enumeration value="41"/>
-			<xs:enumeration value="42"/>
-			<xs:enumeration value="43"/>
-			<xs:enumeration value="51"/>
-			<xs:enumeration value="52"/>
-			<xs:enumeration value="53"/>
-			<xs:enumeration value="54"/>
-			<xs:enumeration value="55"/>
-			<xs:enumeration value="56"/>
-			<xs:enumeration value="57"/>
-			<xs:enumeration value="58"/>
-			<xs:enumeration value="61"/>
-			<xs:enumeration value="62"/>
-			<xs:enumeration value="63"/>
-			<xs:enumeration value="64"/>
-			<xs:enumeration value="71"/>
-			<xs:enumeration value="72"/>
-			<xs:enumeration value="73"/>
-			<xs:enumeration value="74"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="TipoCargoType">
-		<xs:annotation>
-			<xs:documentation>Tipo de cargo (tabla 132)	
-			01 Cargo correspondiente al término de potencia
-			02 Cargo correspondiente al término de energía
-			</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="01"/>
-			<xs:enumeration value="02"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="0C"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TipoCodigoPeriodoDH">
@@ -2911,6 +2650,8 @@ la reclamacion
 			21	Tarifa
 			22	Impuesto Electrico
 			23	Desglose Suplemento Territorial
+			24	Pago por el uso de la red - autoconsumo
+			25	Acuerdo de reparto/ Fichero de coeficientes: Eliminado. Es un concepto de contrato, no de facturación
 			26	Retardo en activación autoconsumo
 			27	Descuento retardo activación autoconsumo superior al valor económico de la energía horaria consumida de la red
 			</xs:documentation>
@@ -2937,6 +2678,7 @@ la reclamacion
 			<xs:enumeration value="21"/>
 			<xs:enumeration value="22"/>
 			<xs:enumeration value="23"/>
+			<xs:enumeration value="24"/>
 			<xs:enumeration value="26"/>
 			<xs:enumeration value="27"/>
 		</xs:restriction>
@@ -2967,30 +2709,6 @@ la reclamacion
 			<xs:enumeration value="10"/>
 			<xs:enumeration value="11"/>
 			<xs:enumeration value="12"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="TipoCUPS">
-		<xs:annotation>
-			<xs:documentation> Tipo CUPS (tabla 131)
-				01 - Consumo
-				02 - Servicios Auxiliares
-			</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="01"/>
-			<xs:enumeration value="02"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="TipoDesistimiento">
-		<xs:annotation>
-			<xs:documentation>Tipo de desistimiento (tabla 122)
-			01	Desistimiento en plazo máx. de 14 días naturales
-			02 	Desistimiento por incumplimiento de comercializador en contratación
-			</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="01"/>
-			<xs:enumeration value="02"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TipodeTelegestion">
@@ -3113,20 +2831,6 @@ la reclamacion
 			<xs:enumeration value="NE"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:simpleType name="TipoImpositivo">
-		<xs:annotation>
-			<xs:documentation> Tipo Impuesto (Tabla 114)
-			1 -  IVA / IPSI/ IGIC    
-			2 -  IVA / IPSI/ IGIC  reducido
-			3 -  IVA / IPSI/ IGIC EXENTO
-			</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="1"/>
-			<xs:enumeration value="2"/>
-			<xs:enumeration value="3"/>
-		</xs:restriction>
-	</xs:simpleType>
 	<xs:simpleType name="TipoIncidencia">
 		<xs:annotation>
 			<xs:documentation>Tipo de incidencia en equipos de medida (Tabla 86)
@@ -3169,20 +2873,6 @@ la reclamacion
 			<xs:enumeration value="06"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:simpleType name="TipoInstalacion">
-		<xs:annotation>
-			<xs:documentation> Tipo de instalación (tabla 129)
-				01 - Red interior
-				02 - Red interior da varios consumidores (instalación de enlace)
-				03 - Próxima a través de red
-			</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="01"/>
-			<xs:enumeration value="02"/>
-			<xs:enumeration value="03"/>
-		</xs:restriction>
-	</xs:simpleType>
 	<xs:simpleType name="TipoIntervencion">
 		<xs:annotation>
 			<xs:documentation>Tipo de Intervencion (tabla 74)
@@ -3201,8 +2891,8 @@ la reclamacion
 				S	Solicitud de modificacion contractual administrativa
 				N	Solicitud de modificacion contractual tecnica
 				A	Solicitud de modificacion tanto administrativa como tecnica
-				M Solicitud de aplicacion SMV
-				B 	Baja de SMV, vuelta a suministro normal
+				M Solicitud de aplicación de SMV.
+				B Baja del SMV. Vuelta al suministro normal.
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -3251,6 +2941,18 @@ la reclamacion
 			<xs:enumeration value="99"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="SolicitudTension">
+		<xs:annotation>
+			<xs:documentation> tipo de tensión solicitada (tabla 117)
+			M	Monofásica
+			T	Trifásica
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="M"/>
+			<xs:enumeration value="T"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="TipoMovimiento">
 		<xs:annotation>
 			<xs:documentation>Tipo movimiento del aparato (tabla 31)
@@ -3277,6 +2979,26 @@ la reclamacion
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="F"/>
 			<xs:enumeration value="J"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BonoSocial">
+		<xs:annotation>
+			<xs:documentation> Bono Social (tabla 116)
+			0	No Bono Social - Retirada
+			1	Bono Social
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="0"/>
+			<xs:enumeration value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Decimal9V9">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="18"/>
+			<xs:fractionDigits value="9"/>
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="999999999.999999999"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TipoPM">
@@ -3346,6 +3068,7 @@ la reclamacion
 			07	Juzgados
 			08	Afectado no titular del PS
 			09	Asociacion de Consumidores
+			11    Junta Arbitral de Consumo
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -3357,6 +3080,7 @@ la reclamacion
 			<xs:enumeration value="07"/>
 			<xs:enumeration value="08"/>
 			<xs:enumeration value="09"/>
+			<xs:enumeration value="11"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TiposDocumentacion">
@@ -3374,6 +3098,7 @@ la reclamacion
 			10	CIE generación	
 			11 	Declaración relativa a puntos de recarga de vehículos eléctricos de acceso público
 			12  	Fichero de coeficientes de reparto
+			13  	Certificado suelo urbanizado
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -3389,6 +3114,7 @@ la reclamacion
 			<xs:enumeration value="10"/>
 			<xs:enumeration value="11"/>
 			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TipoSolicitudAdministrativa">
@@ -3407,32 +3133,10 @@ la reclamacion
 			<xs:enumeration value="S"/>
 			<xs:enumeration value="A"/>
 			<xs:enumeration value="C"/>
+			<xs:enumeration value="D"/>
 			<xs:enumeration value="P"/>
 			<xs:enumeration value="R"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="TipoSolicitudEnCurso">
-		<xs:annotation>
-			<xs:documentation>Solicitud de Contratación (tabla 124)
-			A300	Solicitud de nuevo suministro
-			C100	Solicitud de cambio de comercializador sin modificación en el contrato de acceso
-			C200	Solicitud de cambio de comercializador con modificación en el contrato de acceso
-			B101	Baja por cese de actividad 
-			B102	Baja por fin de contrato de suministro
-			B103	Corte o suspensión del suministro por impago
-			B104	Baja por impago
-			M100	Solicitud de modificación contractual
-			</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="A300"/>
-			<xs:enumeration value="C100"/>
-			<xs:enumeration value="C200"/>
-			<xs:enumeration value="B101"/>
-			<xs:enumeration value="B102"/>
-			<xs:enumeration value="B103"/>
-			<xs:enumeration value="B104"/>
-			<xs:enumeration value="M100"/>
+			<xs:enumeration value="U"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TiposSuministro">
@@ -3569,9 +3273,10 @@ la reclamacion
 			RD	RONDA
 			RS	RESIDENCIAL
 			SD	SENDA
+			SU	SUBIDA
 			TR	TRAVESÍA
 			UR	URBANIZACIÓN
-			VI	VIAL
+			VI		VIAL
 			ZN	ZONA
 			AD	ALDEA
 			CJ	CALLEJA
@@ -3638,6 +3343,7 @@ la reclamacion
 			<xs:enumeration value="RD"/>
 			<xs:enumeration value="RS"/>
 			<xs:enumeration value="SD"/>
+			<xs:enumeration value="SU"/>
 			<xs:enumeration value="TR"/>
 			<xs:enumeration value="UR"/>
 			<xs:enumeration value="VI"/>
@@ -3648,113 +3354,6 @@ la reclamacion
 			<xs:enumeration value="CT"/>
 			<xs:enumeration value="LG"/>
 			<xs:enumeration value="OV"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="TypeBanda">
-		<xs:annotation>
-			<xs:documentation>Cadena de un caracter restringido </xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="C"/>
-			<xs:enumeration value="D"/>
-			<xs:enumeration value="E"/>
-			<xs:enumeration value="F"/>
-			<xs:enumeration value="G"/>
-			<xs:enumeration value="H"/>
-			<xs:enumeration value="J"/>
-			<xs:enumeration value="K"/>
-			<xs:enumeration value="L"/>
-			<xs:enumeration value="M"/>
-			<xs:enumeration value="N"/>
-			<xs:enumeration value="Ñ"/>
-			<xs:enumeration value="P"/>
-			<xs:enumeration value="Q"/>
-			<xs:enumeration value="R"/>
-			<xs:enumeration value="S"/>
-			<xs:enumeration value="T"/>
-			<xs:enumeration value="U"/>
-			<xs:enumeration value="V"/>
-			<xs:enumeration value="W"/>
-			<xs:enumeration value="X"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="typeContestacionIncidencia">
-		<xs:annotation>
-			<xs:documentation> Tipo de contestación indidencia (tabla 121)
-			01 Nuevo teléfono de contacto
-			02 Deficiencia/Trabajos subsanada. Contactar con cliente
-			</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="01"/>
-			<xs:enumeration value="02"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="TypeHuso">
-		<xs:annotation>
-			<xs:documentation>cadena de dos caracteres con valores restringidos</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="1"/>
-			<xs:enumeration value="2"/>
-			<xs:enumeration value="3"/>
-			<xs:enumeration value="4"/>
-			<xs:enumeration value="5"/>
-			<xs:enumeration value="6"/>
-			<xs:enumeration value="7"/>
-			<xs:enumeration value="8"/>
-			<xs:enumeration value="9"/>
-			<xs:enumeration value="10"/>
-			<xs:enumeration value="11"/>
-			<xs:enumeration value="12"/>
-			<xs:enumeration value="13"/>
-			<xs:enumeration value="14"/>
-			<xs:enumeration value="15"/>
-			<xs:enumeration value="16"/>
-			<xs:enumeration value="17"/>
-			<xs:enumeration value="18"/>
-			<xs:enumeration value="19"/>
-			<xs:enumeration value="20"/>
-			<xs:enumeration value="21"/>
-			<xs:enumeration value="22"/>
-			<xs:enumeration value="23"/>
-			<xs:enumeration value="24"/>
-			<xs:enumeration value="25"/>
-			<xs:enumeration value="26"/>
-			<xs:enumeration value="27"/>
-			<xs:enumeration value="28"/>
-			<xs:enumeration value="29"/>
-			<xs:enumeration value="30"/>
-			<xs:enumeration value="31"/>
-			<xs:enumeration value="32"/>
-			<xs:enumeration value="33"/>
-			<xs:enumeration value="34"/>
-			<xs:enumeration value="35"/>
-			<xs:enumeration value="36"/>
-			<xs:enumeration value="37"/>
-			<xs:enumeration value="38"/>
-			<xs:enumeration value="39"/>
-			<xs:enumeration value="40"/>
-			<xs:enumeration value="41"/>
-			<xs:enumeration value="42"/>
-			<xs:enumeration value="43"/>
-			<xs:enumeration value="44"/>
-			<xs:enumeration value="45"/>
-			<xs:enumeration value="46"/>
-			<xs:enumeration value="47"/>
-			<xs:enumeration value="48"/>
-			<xs:enumeration value="49"/>
-			<xs:enumeration value="50"/>
-			<xs:enumeration value="51"/>
-			<xs:enumeration value="52"/>
-			<xs:enumeration value="53"/>
-			<xs:enumeration value="54"/>
-			<xs:enumeration value="55"/>
-			<xs:enumeration value="56"/>
-			<xs:enumeration value="57"/>
-			<xs:enumeration value="58"/>
-			<xs:enumeration value="59"/>
-			<xs:enumeration value="60"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Variable">
@@ -3793,10 +3392,10 @@ la reclamacion
 			<xs:maxLength value="100"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:simpleType name="X11">
+	<xs:simpleType name="X150">
 		<xs:restriction base="xs:string">
-			<xs:minLength value="11"/>
-			<xs:maxLength value="11"/>
+			<xs:minLength value="1"/>
+			<xs:maxLength value="150"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="X12">
@@ -3827,12 +3426,6 @@ la reclamacion
 		<xs:restriction base="xs:string">
 			<xs:minLength value="1"/>
 			<xs:maxLength value="15"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="X150">
-		<xs:restriction base="xs:string">
-			<xs:minLength value="1"/>
-			<xs:maxLength value="150"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="X16">
@@ -3989,6 +3582,674 @@ la reclamacion
 		<xs:restriction base="xs:string">
 			<xs:minLength value="1"/>
 			<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="X11">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="11"/>
+			<xs:maxLength value="11"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoImpositivo">
+		<xs:annotation>
+			<xs:documentation> Tipo Impuesto (Tabla 114)
+			1 -  IVA / IPSI/ IGIC    
+			2 -  IVA / IPSI/ IGIC  reducido
+			3 -  IVA / IPSI/ IGIC EXENTO
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="empty-string">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="date-or-nothing">
+		<xs:union memberTypes="xs:date empty-string"/>
+	</xs:simpleType>
+	<xs:simpleType name="CodigoAutoconsumo">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="26"/>
+			<xs:maxLength value="26"/>
+			<xs:pattern value="[a-zA-Z0-9]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SeccionRegistro">
+		<xs:annotation>
+			<xs:documentation> Sección Registro (tabla 127)
+				1 - Sin excedentes
+				2 - Con excedentes
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SubSeccion">
+		<xs:annotation>
+			<xs:documentation> Subsección (tabla 128)
+				a0 - Con excedentes y mecanismo de compesación simplificado
+				b1 - Con excedentes sin mecanismo de compensación y un único contrato de suministro 
+				b2 - Con excedentes sin mecanismo de compensación y varios contratos de suministro
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="a0"/>
+			<xs:enumeration value="b1"/>
+			<xs:enumeration value="b2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoInstalacion">
+		<xs:annotation>
+			<xs:documentation> Tipo de instalación (tabla 129)
+				01 - Red interior
+				02 - Red interior da varios consumidores (instalación de enlace)
+				03 - Próxima a través de red
+				04 - En red interior pero próxima a través de red del resto de los CUPS del colectivo
+				05 - Próxima a través de red, pero en red interior de otro de los CUPS del colectivo
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EsquemaMedida">
+		<xs:annotation>
+			<xs:documentation> Esquema de medida (tabla 130)
+				A - EdM Bidireccional en PF
+				B - EdM Bidireccional en PF y EdM gen. neta
+				C - EdM Consumo Total y EdM bidireccional gen. neta
+				D - EdM Consumo Total y EdM gen bruta y EdM cons SSAA
+				E - Configuración singular
+				F - Configuración cuando en un mismo CAU multigeneración coexistan esquemas de medida diferentes
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="A"/>
+			<xs:enumeration value="B"/>
+			<xs:enumeration value="C"/>
+			<xs:enumeration value="D"/>
+			<xs:enumeration value="E"/>
+			<xs:enumeration value="F"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoCUPS">
+		<xs:annotation>
+			<xs:documentation> Tipo CUPS (tabla 131)
+				01 - Consumo
+				02 - Servicios Auxiliares
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RefCatastro">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="20"/>
+			<xs:maxLength value="20"/>
+			<xs:pattern value="[a-zA-Z0-9]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CodigoCIL">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="25"/>
+			<xs:maxLength value="25"/>
+			<xs:pattern value="[a-zA-Z0-9]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TecGenerador">
+		<xs:annotation>
+			<xs:documentation> Tecnología de generación (tabla 126)
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="a11"/>
+			<xs:enumeration value="a12"/>
+			<xs:enumeration value="a13"/>
+			<xs:enumeration value="a20"/>
+			<xs:enumeration value="b11"/>
+			<xs:enumeration value="b12"/>
+			<xs:enumeration value="b21"/>
+			<xs:enumeration value="b22"/>
+			<xs:enumeration value="b30"/>
+			<xs:enumeration value="b41"/>
+			<xs:enumeration value="b42"/>
+			<xs:enumeration value="b51"/>
+			<xs:enumeration value="b52"/>
+			<xs:enumeration value="b60"/>
+			<xs:enumeration value="b71"/>
+			<xs:enumeration value="b72"/>
+			<xs:enumeration value="b80"/>
+			<xs:enumeration value="c10"/>
+			<xs:enumeration value="c20"/>
+			<xs:enumeration value="c30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Decimal10V3">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="13"/>
+			<xs:fractionDigits value="3"/>
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="9999999999.999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeHuso">
+		<xs:annotation>
+			<xs:documentation>cadena de dos caracteres con valores restringidos</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+			<xs:enumeration value="8"/>
+			<xs:enumeration value="9"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="14"/>
+			<xs:enumeration value="15"/>
+			<xs:enumeration value="16"/>
+			<xs:enumeration value="17"/>
+			<xs:enumeration value="18"/>
+			<xs:enumeration value="19"/>
+			<xs:enumeration value="20"/>
+			<xs:enumeration value="21"/>
+			<xs:enumeration value="22"/>
+			<xs:enumeration value="23"/>
+			<xs:enumeration value="24"/>
+			<xs:enumeration value="25"/>
+			<xs:enumeration value="26"/>
+			<xs:enumeration value="27"/>
+			<xs:enumeration value="28"/>
+			<xs:enumeration value="29"/>
+			<xs:enumeration value="30"/>
+			<xs:enumeration value="31"/>
+			<xs:enumeration value="32"/>
+			<xs:enumeration value="33"/>
+			<xs:enumeration value="34"/>
+			<xs:enumeration value="35"/>
+			<xs:enumeration value="36"/>
+			<xs:enumeration value="37"/>
+			<xs:enumeration value="38"/>
+			<xs:enumeration value="39"/>
+			<xs:enumeration value="40"/>
+			<xs:enumeration value="41"/>
+			<xs:enumeration value="42"/>
+			<xs:enumeration value="43"/>
+			<xs:enumeration value="44"/>
+			<xs:enumeration value="45"/>
+			<xs:enumeration value="46"/>
+			<xs:enumeration value="47"/>
+			<xs:enumeration value="48"/>
+			<xs:enumeration value="49"/>
+			<xs:enumeration value="50"/>
+			<xs:enumeration value="51"/>
+			<xs:enumeration value="52"/>
+			<xs:enumeration value="53"/>
+			<xs:enumeration value="54"/>
+			<xs:enumeration value="55"/>
+			<xs:enumeration value="56"/>
+			<xs:enumeration value="57"/>
+			<xs:enumeration value="58"/>
+			<xs:enumeration value="59"/>
+			<xs:enumeration value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeBanda">
+		<xs:annotation>
+			<xs:documentation>Cadena de un caracter restringido </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="C"/>
+			<xs:enumeration value="D"/>
+			<xs:enumeration value="E"/>
+			<xs:enumeration value="F"/>
+			<xs:enumeration value="G"/>
+			<xs:enumeration value="H"/>
+			<xs:enumeration value="J"/>
+			<xs:enumeration value="K"/>
+			<xs:enumeration value="L"/>
+			<xs:enumeration value="M"/>
+			<xs:enumeration value="N"/>
+			<xs:enumeration value="Ñ"/>
+			<xs:enumeration value="P"/>
+			<xs:enumeration value="Q"/>
+			<xs:enumeration value="R"/>
+			<xs:enumeration value="S"/>
+			<xs:enumeration value="T"/>
+			<xs:enumeration value="U"/>
+			<xs:enumeration value="V"/>
+			<xs:enumeration value="W"/>
+			<xs:enumeration value="X"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="typeContestacionIncidencia">
+		<xs:annotation>
+			<xs:documentation> Tipo de contestación indidencia (tabla 121)
+			01 Nuevo teléfono de contacto
+			02 Deficiencia/Trabajos subsanada. Contactar con cliente
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MotivoTraspaso">
+		<xs:annotation>
+			<xs:documentation>Motivo de posible traspaso a la COR (tabla 119)	
+				01	Solicitud de baja por fin de contrato de energía (B1 motivo 02)
+				02	Solicitud de desistimiento a un cambio de comercilizador de un nuevo titular 
+				03	Decisión fundada de la Dirección General de Política Energética y Minas, cautelar o definitivamente, se traspasan los puntos de suministro al COR				
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoDesistimiento">
+		<xs:annotation>
+			<xs:documentation>Tipo de desistimiento (tabla 122)
+			01	Desistimiento en plazo máx. de 14 días naturales
+			02 	Desistimiento por incumplimiento de comercializador en contratación
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ResultadoDesistimiento">
+		<xs:annotation>
+			<xs:documentation>Resultado de desistimiento (tabla 118)
+			01	Vuelta a la situación anterior - En servicio
+			02	Vuelta a la situación anterior - Sin servicio (Cortado)
+			03	Traspaso a la COR
+			04	Baja del contrato por rechazo de la COR al traspaso
+			05	Baja por cese de actividad
+			06	Activación de Cambio de Comercializador
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MotivoNoContratable">
+		<xs:annotation>
+			<xs:documentation>Motivo No Contratable (tabla 123)
+			01	El PS no ha pasado la inspección de la instalación de enlace (instalación desde la Caja General de Protección, CGP,  al contador)
+			02	Instalación eléctrica peligrosa
+			03	Necesidad de abrir expediente de acometida: Derechos caducados
+			04	Expediente abierto de nuevos suministos
+			05	Expediente abierto de inspección
+			06	Falta licencia de ocupación, cédula de habitabilidad u otra documentación relevante que impide la contratación del NNSS
+			07	Orden o Resolución de la Administración Pública competente, Resolución o Mandato Judicial que impide la contratación en el PS
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
+			<xs:enumeration value="07"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoSolicitudEnCurso">
+		<xs:annotation>
+			<xs:documentation>Solicitud de Contratación (tabla 124)
+			A300	Solicitud de nuevo suministro
+			C100	Solicitud de cambio de comercializador sin modificación en el contrato de acceso
+			C200	Solicitud de cambio de comercializador con modificación en el contrato de acceso
+			B101	Baja por cese de actividad 
+			B102	Baja por fin de contrato de suministro
+			B103	Corte o suspensión del suministro por impago
+			B104	Baja por impago
+			M100	Solicitud de modificación contractual
+			E100	Solicitud de Desistimiento
+			E200	Solicitud de Reposición
+			T100		Traspaso a la COR
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="A300"/>
+			<xs:enumeration value="C100"/>
+			<xs:enumeration value="C200"/>
+			<xs:enumeration value="B101"/>
+			<xs:enumeration value="B102"/>
+			<xs:enumeration value="B103"/>
+			<xs:enumeration value="B104"/>
+			<xs:enumeration value="M100"/>
+			<xs:enumeration value="E100"/>
+			<xs:enumeration value="E200"/>
+			<xs:enumeration value="T100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TensionPM">
+		<xs:restriction base="Decimal9">
+			<xs:minInclusive value="0"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CdigoMotivoExpedienteAF">
+		<xs:annotation>
+			<xs:documentation>Código Motivo Anomalía/Fraude (tabla 63)
+			A001	Programación/parametrización errónea
+			A002 	Equipo de Medida con conexión errónea
+			A003	Equipo de Medida inadecuado a instalación
+			A004     Contador averiado
+			A005	Transformadores averiados
+			A006	Módem averiado/Fallo comunicación
+			A007	Error medición fuera de margen
+			A008	Programación/parametrización errónea por avería
+			A009	Contador no se lee
+			A010	Constante contador no corresponde a constante facturación
+			A011	Lectura errónea
+			A012	Suministro no se factura
+			A013     Corriente directa autorizada
+			A014	Tarifa/Discriminación horaria mal informada o aplicada
+			F001		Corriente directa con contrato
+			F002 	Corriente directa con contrato (doble acometida)
+			F003		Corriente directa sin contrato (sin contador)
+			F004     Corriente directa sin contrato (con contador)
+			F005		Inversión entrada-salida
+			F006		Puente entrada-salida en la misma fase (shunt)
+			F007		Puente de tensión aislado/desconectado
+			F008		Equipo de medida manipulado
+			F009		Conexión de equipo de medida manipulada
+			F010		Cambio de placa características de transformadores I/T
+			F011		Equipo de medida sustituido sin autorización
+			F012		Programación/parametrización alterada
+			F013     ICP puenteado o no ajustado a potencia contratada
+			F014		Cesión de energía
+		</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="A001"/>
+			<xs:enumeration value="A002"/>
+			<xs:enumeration value="A003"/>
+			<xs:enumeration value="A004"/>
+			<xs:enumeration value="A005"/>
+			<xs:enumeration value="A006"/>
+			<xs:enumeration value="A007"/>
+			<xs:enumeration value="A008"/>
+			<xs:enumeration value="A009"/>
+			<xs:enumeration value="A010"/>
+			<xs:enumeration value="A011"/>
+			<xs:enumeration value="A012"/>
+			<xs:enumeration value="A013"/>
+			<xs:enumeration value="A014"/>
+			<xs:enumeration value="F001"/>
+			<xs:enumeration value="F002"/>
+			<xs:enumeration value="F003"/>
+			<xs:enumeration value="F004"/>
+			<xs:enumeration value="F005"/>
+			<xs:enumeration value="F006"/>
+			<xs:enumeration value="F007"/>
+			<xs:enumeration value="F008"/>
+			<xs:enumeration value="F009"/>
+			<xs:enumeration value="F010"/>
+			<xs:enumeration value="F011"/>
+			<xs:enumeration value="F012"/>
+			<xs:enumeration value="F013"/>
+			<xs:enumeration value="F014"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CdigoMotivoExpedienteA">
+		<xs:annotation>
+			<xs:documentation>Código Motivo Expediente Acometida (tabla 125)
+			01	Aumento potencia
+			02 	Cambio tensión 
+			03	Cambio tarifa
+			04     Nuevo suministro
+			05	Colectivo nueva construcción
+			06	Colectivo electrificación rural
+			07	Informativo Plan urbanístico 
+			08	Informativo Plan industrial
+			09	Informativo Productor de Régimen Especial
+			10	Colectivo reconstrucción vivienda 
+			11	TCT No relacionado a NNSS
+			12	TCT Relacionado a NNSS.
+			13	Colectivo renovación de Instalaciones de enlace varios suministros
+			14	Renovación de instalaciones de enlace		
+		</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
+			<xs:enumeration value="07"/>
+			<xs:enumeration value="08"/>
+			<xs:enumeration value="09"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="14"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CodigoMotivoRechazoP0">
+		<xs:annotation>
+			<xs:documentation>codigo motivo del rechazo (tabla 27) permitidos en el proceso de Traspaso a COR 
+			01	No existe Punto de Suministro asociado al CUPS
+			E5	CUPS sujeto a LOPD
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="E5"/>
+			<xs:enumeration value="I7"/>
+			<xs:enumeration value="I8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MotivoBajaB2">
+		<xs:annotation>
+			<xs:documentation>Motivo Comunicación Baja Unidireccional (tabla 120)
+			01	Baja del contrato de acceso de duración inferior a un año según fecha solicitada por la comercializadora
+			02	Baja del contrato de acceso por orden judicial o mandato de organismo oficial
+			03	Baja del contrato de acceso por rechazo del COR al traspaso
+			04	Baja del contrato de acceso a iniciativa de la distribuidora por seguridad de la red.
+			05	Baja del contrato de acceso por haber pasado dos meses desde que se suspendió un punto de suministro tras el desistimiento de un cambio de comercializador activado sobre un punto de suministro suspendido por impago
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoCargoType">
+		<xs:annotation>
+			<xs:documentation>Tipo de cargo (tabla 132)	
+			01 Cargo correspondiente al término de potencia
+			02 Cargo correspondiente al término de energía
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoSubseccion">
+		<xs:annotation>
+			<xs:documentation> Tipo de subsección (tabla 133)
+				10 - Sin excedentes no acogidos a compensación
+				11 - Sin excedentes acogidos a compensación
+				20 - Con excedentes no acogidos a compensación
+				21 - Con excedentes acogidos a compensación
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="20"/>
+			<xs:enumeration value="21"/>
+			<xs:enumeration value="00"/>
+			<xs:enumeration value="0C"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ResultadoReposicion">
+		<xs:annotation>
+			<xs:documentation>Resultado de la activacion de la reposicion (tabla 134)
+01 Vuelta a la situacion anterior En servicio La reposicion ha finalizado devolviendo el PS a la situacion anterior a la peticion que se ha repuesto 
+02 Vuelta a la situacion anterior En servicio (cortado) Reposicion de una solicitud de C1/C2 en la que se produjo un reenganche del PS. Se vuelve a la situacion anterior en la que el PS se encontraba cortado. En el caso de desear la reconexion del PS, la peticion se deberá realizar por fuera del sistema al no existir una solicitud de corte en curso.
+03 Traspaso a la CORTraspaso a la COR en las condiciones originales, en caso de rechazo por parte del receptor.
+04 Baja del contrato por rechazo de la COR Traspaso a la COR en las condiciones originales, en caso de rechazo por parte del receptor. Se da de baja el 26-09-2024
+05 Baja por cese de actividad Concurrencia de procesos: se prioriza la baja (en la medida de lo posible) por cese de actividad solicitada por el consumidor sobre el traspaso a la COR. 
+06 Activacion de cambio de comercializador Concurrencia de procesos: se prioriza el cambio de comercializador sobre el traspaso a la COR. </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoReposicion">
+		<xs:annotation>
+			<xs:documentation>Tipo de reposicion (tabla 135)
+
+
+
+01 Reposicion por contratacion o cambio indebido solicitada por el comercializador entrante. Por cambio sin autorizacion o firma del cliente 
+02 Reposicion por error administrativo solicitada por el comercializador entrante Por ejemplo, error en CUPS, direccion no coincidente, etc. 
+03 Reposicion solicitada por el comercializador saliente Cuando la reposicion se solicita por el comercializador saliente y no tiene Traspaso a la COR en las condiciones originales, en caso de rechazo por parte del receptor. </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MotivoComunicacionUnidireccional">
+		<xs:annotation>
+			<xs:documentation>Motivo Comunicacion Modificacion Unidireccional (tabla 136)
+ 
+ 
+01 Modificacion del contrato de acceso por modificacion del tipo de autoconsumo colectivo  
+02 Modificacion del contrato de acceso por modificacion del acuerdo de reparto  
+03 Modificacion del contrato de acceso por modificacion de la potencia de generacion 
+04 Modificacion del contrato de acceso por Alta en autoconsumo colectivo  
+05 Modificacion del contrato de acceso por baja total del autoconsumo colectivo  
+06 Modificacion del contrato de acceso por baja de un participante en el autoconsumo colectivo 
+07 Modificacion del contrato de acceso por modificacion de otros datos de autoconsumo colectivo  
+08 Modificación del contrato de acceso por modificación de datos de autoconsumo individual
+</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
+			<xs:enumeration value="07"/>
+			<xs:enumeration value="08"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="IndEsencial">
+		<xs:annotation>
+			<xs:documentation>Tipo esencialidad (tabla 137)
+
+
+00 No esencial  
+01 Esencial por electrodependencia 
+02 Esencial no electrodependiente  
+</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="00"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ResultadoValidacionCliente">
+		<xs:annotation>
+			<xs:documentation>Indicativo validacion cliente (Tabla 138)
+ 
+ 
+S Si 
+N No 
+B Indicador NIF/CIF vacio o no real El Distribuidor devolvera el valor B en los casos en los que no disponga de informacion del NIF/CIF del contrato en vigor o sea un valor no real. </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="S"/>
+			<xs:enumeration value="N"/>
+			<xs:enumeration value="B"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoDiscFacturaAutoconsumo">
+		<xs:annotation>
+			<xs:documentation>Tipo de disconformidad de autoconsumo facturado (tabla 139)
+ 
+ 
+01 Tipo Autoconsumo Disconformidad con la informacion facilitada en este campo del F1 
+02 Tipo subseccion Disconformidad con la informacion facilitada en este campo del F1 
+03 Colectivo Disconformidad con la informacion facilitada en este campo del F1 
+04 Tipo CUPS Disconformidad con la informacion facilitada en este campo del F1 
+05 SSAA Disconformidad con la informacion facilitada en este campo del F1 
+06 Unico contrato Disconformidad con la informacion facilitada en este campo del F1 
+07 Generacion Neta Beta aplicada Disconformidad con la Beta aplicada asociada a un autoconsumo colectivo 
+</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
+			<xs:enumeration value="07"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MotivoConsulta">
+		<xs:annotation>
+			<xs:documentation>Motivo consulta (Tabla 140) 
+ 
+ 
+01 Contratacion  
+02 Conexiones   
+03 Verificacion del equipo </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

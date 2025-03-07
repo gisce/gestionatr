@@ -89,6 +89,15 @@ class DatosSolicitud(object):
         return data
 
     @property
+    def fecha_ultimo_movimiento_ind_esencial(self):
+        data = False
+        try:
+            data = self.datos_solicitud.FechaUltimoMovimientoIndEsencial.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
     def susp_baja_impago_en_curso(self):
         data = ''
         try:
@@ -117,6 +126,24 @@ class DatosActivacion(object):
         data = ''
         try:
             data = self.datos_activacion.EnServicio.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def ind_esencial(self):
+        data = ''
+        try:
+            data = self.datos_activacion.IndEsencial.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def fecha_ultimo_movimiento_ind_esencial(self):
+        data = False
+        try:
+            data = self.datos_activacion.FechaUltimoMovimientoIndEsencial.text
         except AttributeError:
             pass
         return data

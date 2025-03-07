@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<MensajeRechazo xmlns="http://localhost/elegibilidad">
+    <Cabecera>
+        <CodigoREEEmpresaEmisora>1234</CodigoREEEmpresaEmisora>
+        <CodigoREEEmpresaDestino>4321</CodigoREEEmpresaDestino>
+        <CodigoDelProceso>M2</CodigoDelProceso>
+        <CodigoDePaso>02</CodigoDePaso>
+        <CodigoDeSolicitud>201607211259</CodigoDeSolicitud>
+        <SecuencialDeSolicitud>01</SecuencialDeSolicitud>
+        <FechaSolicitud>2016-07-21T12:59:47</FechaSolicitud>
+        <CUPS>ES1234000000000001JN0F</CUPS>
+    </Cabecera>
+    <Rechazos>
+        <FechaRechazo>2016-07-20</FechaRechazo>
+        <Rechazo>
+            <Secuencial>1</Secuencial>
+            <CodigoMotivo>01</CodigoMotivo>
+            <Comentarios>Motiu de rebuig 01: No existe Punto de Suministro asociado al CUPS</Comentarios>
+        </Rechazo>
+        <Rechazo>
+            <Secuencial>2</Secuencial>
+            <CodigoMotivo>03</CodigoMotivo>
+            <Comentarios>Cuando el CIF-NIF no coincide con el que figura en la base de datos del Distribuidor</Comentarios>
+        </Rechazo>
+        <RegistrosDocumento>
+            <RegistroDoc>
+                <TipoDocAportado>08</TipoDocAportado>
+                <DireccionUrl>http://eneracme.com/docs/NIF11111111H.pdf</DireccionUrl>
+            </RegistroDoc>
+            <RegistroDoc>
+                <TipoDocAportado>07</TipoDocAportado>
+                <DireccionUrl>http://eneracme.com/docs/NIF11111111H.pdf</DireccionUrl>
+            </RegistroDoc>
+        </RegistrosDocumento>
+    </Rechazos>
+</MensajeRechazo>

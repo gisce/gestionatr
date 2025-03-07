@@ -3,6 +3,7 @@ import os
 from gestionatr.output.messages.base import Cabecera
 from gestionatr.output.messages import sw_c1 as c1
 from gestionatr.output.messages import sw_c2 as c2
+from gestionatr.output.messages import sw_q1 as q1
 from . import unittest
 
 _ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -14,7 +15,10 @@ def get_data(path):
 
 
 def get_header(process='C1', step='01', code='201607211259', date='2016-07-21T12:59:47'):
-    header = Cabecera()
+    if process == 'Q1':
+        header = q1.Cabecera()
+    else:
+        header = Cabecera()
     vals = {
         'codigo_del_proceso': process,
         'codigo_del_paso': step,
@@ -29,7 +33,7 @@ def get_header(process='C1', step='01', code='201607211259', date='2016-07-21T12
     return header
 
 
-def get_cliente(dir=False, tipo_dir=None):
+def get_cliente(dir=False, tipo_dir=None, get_only_fields=False):
     # Cliente
     cliente = c2.Cliente()
 
@@ -120,6 +124,8 @@ def get_cliente(dir=False, tipo_dir=None):
         'indicador_tipo_direccion': indicador_tipo_direccion,
         'direccion': direccion
     }
+    if get_only_fields:
+        return cliente_fields
     cliente.feed(cliente_fields)
     return cliente
 
@@ -155,9 +161,9 @@ def get_contacto(email=True):
     return contacto
 
 
-def get_medida():
+def get_medida_resto():
     # Medida
-    medida = c2.Medida()
+    medida = c2.MedidaResto()
 
     # ModelosAparato
     md1 = c2.ModeloAparato()
