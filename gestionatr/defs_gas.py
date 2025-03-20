@@ -1022,6 +1022,7 @@ TAULA_MOTIVOS_DE_RECHAZO_CNMC = [
     ('S24', 'Tipo de producto 01 no permitido en nodo productlist'),
     ('S25', 'Telemedida obligatoria'),
     ('S26', 'Incumplimiento condiciones método de facturación'),
+    ('S27', 'Solicitud del comercializador coincide con lo existente en el distribuidor'),
 ]
 TAULA_MOTIVO_RECHAZO_OCSUM = TAULA_MOTIVOS_DE_RECHAZO_CNMC
 
