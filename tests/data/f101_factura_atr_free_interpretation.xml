@@ -45,6 +45,7 @@
                 <DatosFacturaATR>
                     <FechaBOE>2016-12-29</FechaBOE>
 					<TipoAutoconsumo>00</TipoAutoconsumo>
+                    <TipoCUPS>01</TipoCUPS>
 					<DuracionInfAnio>N</DuracionInfAnio>
                     <TarifaATRFact>004</TarifaATRFact>
                     <ModoControlPotencia>1</ModoControlPotencia>

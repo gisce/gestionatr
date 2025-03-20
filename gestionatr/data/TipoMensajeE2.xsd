@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- edited with XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) by Odelin Calatrava Requena (Comisión Nacional de los Mercados y la Competencia) -->
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Comisión Nacional de los Mercados y la Competencia (Comisión Nacional de los Mercados y la Competencia) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="TiposComplejos.xsd"/>
+	<xs:include schemaLocation="TiposSencillos.xsd"/>
+	<!-- Tipos secundarios del E2-->
+	<xs:complexType name="Reposicion01">
+		<xs:sequence>
+			<xs:element name="CodigoDeSolicitudRef">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[0-9]{12}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="TipoDeReposicion" type="TipoReposicion">
+				<xs:annotation>
+					<xs:documentation>Tabla 135</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IdCliente" type="IdCliente"/>
+			<xs:element name="RegistrosDocumento" type="RegistrosDocs" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Tipos secundarios del E2 02 Solicitud Reposicion-->
+	<xs:complexType name="Reposicion02">
+		<xs:sequence>
+			<xs:element name="FechaAceptacion" type="xs:date"/>
+			<xs:element name="ActuacionCampo" type="Indicativo">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaActivacionPrevista" type="xs:date" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Tipos secundarios del E2 02 Aceptacion Reposicion-->
+	<xs:complexType name="Reposicion03">
+		<xs:sequence>
+			<xs:element name="CodigoDeSolicitudRef">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[0-9]{12}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="TipoDeReposicion" type="TipoReposicion">
+				<xs:annotation>
+					<xs:documentation>Tabla 135</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaPrevistaAccion" type="xs:date"/>
+			<xs:element name="ActuacionCampo" type="Indicativo">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Tipos secundarios del E2 14 Consulta Solicitud Reposicion-->
+	<xs:complexType name="Reposicion04">
+		<xs:sequence>
+			<xs:element name="AceptacionReposicion" type="Indicativo">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Tipos secundarios del E2 15 Aceptacion Reposicion Receptor-->
+	<xs:complexType name="NotificacionActivacionPorReposicion">
+		<xs:sequence>
+			<xs:element name="DatosActivacion" type="DatosActivacionReposicionNotificacion"/>
+			<xs:element name="Contrato" type="ContratoReposicion"/>
+			<xs:element name="PuntosDeMedida" type="PuntosDeMedida"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DatosActivacionReposicionNotificacion">
+		<xs:sequence>
+			<xs:element name="Fecha" type="xs:date"/>
+			<xs:element name="ResultadoActivacion" type="X2">
+				<xs:annotation>
+					<xs:documentation>Tabla 134</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EnServicio" type="Indicativo">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Tipos secundarios del E2 06 Notificacion Activacion Reposicion-->
+	<xs:complexType name="ContratoReposicion">
+		<xs:sequence>
+			<xs:element name="IdContrato" type="IdContrato"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Tipos secundarios del E2 15 rechaza-->
+	<xs:complexType name="RechazoReposicion">
+		<xs:sequence>
+			<xs:element name="FechaRechazo" type="xs:date"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Tipos secundarios del E2 12 rechaza-->
+</xs:schema>

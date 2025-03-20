@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<MensajeAceptacionReposicion xmlns="http://localhost/elegibilidad">
+    <Cabecera>
+        <CodigoREEEmpresaEmisora>1234</CodigoREEEmpresaEmisora>
+        <CodigoREEEmpresaDestino>4321</CodigoREEEmpresaDestino>
+        <CodigoDelProceso>E2</CodigoDelProceso>
+        <CodigoDePaso>02</CodigoDePaso>
+        <CodigoDeSolicitud>201607211259</CodigoDeSolicitud>
+        <SecuencialDeSolicitud>01</SecuencialDeSolicitud>
+        <FechaSolicitud>2016-07-21T12:59:47</FechaSolicitud>
+        <CUPS>ES1234000000000001JN0F</CUPS>
+    </Cabecera>
+    <AceptacionReposicion>
+        <FechaAceptacion>2020-05-01</FechaAceptacion>
+        <ActuacionCampo>S</ActuacionCampo>
+        <FechaActivacionPrevista>2020-05-06</FechaActivacionPrevista>
+    </AceptacionReposicion>
+</MensajeAceptacionReposicion>

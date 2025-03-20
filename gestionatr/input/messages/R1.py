@@ -339,6 +339,15 @@ class VariableDetalleReclamacion(object):
         return data
 
     @property
+    def cau(self):
+        data = ''
+        try:
+            data = self.variable.CAU.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
     def codigo_incidencia(self):
         data = ''
         try:
@@ -379,6 +388,15 @@ class VariableDetalleReclamacion(object):
         data = ''
         try:
             data = self.variable.TipoDeAtencionIncorrecta.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def motivo_consulta(self):
+        data = ''
+        try:
+            data = self.variable.MotivoConsulta.text
         except AttributeError:
             pass
         return data
@@ -436,6 +454,16 @@ class VariableDetalleReclamacion(object):
                 hasattr(obj.LecturasAportadas, 'LecturaAportada')):
             for d in obj.LecturasAportadas.LecturaAportada:
                 data.append(LecturaAportada(d))
+        return data
+
+    @property
+    def disconformidad_autoconsumo(self):
+        data = []
+        obj = self.variable
+        if (hasattr(obj, 'DisconformidadAutoconsumo') and
+                hasattr(obj.DisconformidadAutoconsumo, 'TipoDisconformidadAutoconsumo')):
+            for d in obj.DisconformidadAutoconsumo.TipoDisconformidadAutoconsumo:
+                data.append(d.text)
         return data
 
     @property
@@ -1090,6 +1118,24 @@ class MinimumFieldsChecker(object):
             if not valid():
                 errors.append(field)
         return errors
+
+    def check_tipo_disconforme_autoconsumo(self):
+        for var in self.r1.variables_detalle_reclamacion:
+            if not var.disconformidad_autoconsumo:
+                return False
+        return len(self.r1.variables_detalle_reclamacion) > 0
+
+    def check_cau(self):
+        for var in self.r1.variables_detalle_reclamacion:
+            if not var.cau:
+                return False
+        return len(self.r1.variables_detalle_reclamacion) > 0
+
+    def check_motivo_consulta(self):
+        for var in self.r1.variables_detalle_reclamacion:
+            if not var.motivo_consulta:
+                return False
+        return len(self.r1.variables_detalle_reclamacion) > 0
 
     def check_nif_cliente(self):
         return get_rec_attr(self.r1, "cliente.identificador", False)

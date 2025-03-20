@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
-from .message import Message
+from .message import Message, except_f1
 from datetime import datetime
 from gestionatr.utils import get_rec_attr
 from .Deadlines import ProcessDeadline
+from .F1 import EnergiaActiva, Autoconsumo, InformacionAlConsumidor, Expediente
 
 MAGNITUDS_OCSUM = {
     'AE': 'A',
@@ -58,13 +59,56 @@ class Q1(Message, ProcessDeadline):
     """Clase que implementa Q1."""
 
     @property
-    def cod_pm(self):
-        tree = '{0}.CodPM'.format(self._header)
-        data = get_rec_attr(self.obj, tree, False)
-        if data:
-            return data.text
-        else:
+    def get_cabecera_codigo_fiscal_factura(self):
+        val = self.head.CodigoFiscalFactura.text
+        if not val:
+            raise except_f1('Error', u'Q1 sin CodigoFiscalFactura')
+        return val
+
+    @property
+    def get_cabecera_tipo_factura(self):
+        val = self.head.TipoFactura.text
+        if not val:
+            raise except_f1('Error', u'Q1 sin TipoFactura')
+        return val
+
+    @property
+    def get_cabecera_motivo_facturacion(self):
+        val = self.head.MotivoFacturacion.text
+        if not val:
+            raise except_f1('Error', u'Q1 sin MotivoFacturacion')
+        return val
+
+    @property
+    def get_cabecera_codigo_factura_rectificada_anulada(self):
+        val = self.head.CodigoFacturaRectificadaAnulada.text
+        if not val:
             return False
+        return val
+
+    @property
+    def get_cabecera_expediente(self):
+        if hasattr(self.head, 'Expediente'):
+            return Expediente(self.head.Expediente)
+        return None
+
+    @property
+    def datos(self):
+        if hasattr(self.obj, 'Datos'):
+            return Datos(self.obj.Datos)
+        return None
+
+    @property
+    def energia_activa(self):
+        if hasattr(self.obj, 'EnergiaActiva'):
+            return EnergiaActiva(self.obj.EnergiaActiva)
+        return None
+
+    @property
+    def autoconsumo(self):
+        if hasattr(self.obj, 'Autoconsumo'):
+            return Autoconsumo(self.obj.Autoconsumo)
+        return None
 
     @property
     def medidas(self):
@@ -91,6 +135,130 @@ class Q1(Message, ProcessDeadline):
             fh = aparato.fecha_hasta
             contadores.append((fd, fh, aparato))
         return [a[2] for a in sorted(contadores, key=lambda x: x[0])]
+
+    @property
+    def informacion_al_consumidor(self):
+        if hasattr(self.obj, 'InformacionAlConsumidor'):
+            return InformacionAlConsumidor(self.obj.InformacionAlConsumidor)
+        return None
+
+
+class Datos(object):
+
+    def __init__(self, data):
+        self.datos = data
+
+    @property
+    def tipo_autoconsumo(self):
+        data = ''
+        try:
+            data = self.datos.TipoAutoconsumo.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def tipo_subseccion(self):
+        data = ''
+        try:
+            data = self.datos.TipoSubseccion.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def tipo_cups(self):
+        data = ''
+        try:
+            data = self.datos.TipoCUPS.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def marca_medida_con_perdidas(self):
+        data = ''
+        try:
+            data = self.datos.MarcaMedidaConPerdidas.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def vas_trafo(self):
+        data = ''
+        try:
+            data = self.datos.VAsTrafo.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def porcentaje_perdidas(self):
+        data = ''
+        try:
+            data = self.datos.PorcentajePerdidas.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def indicativo_curva_carga(self):
+        data = ''
+        try:
+            data = self.datos.IndicativoCurvaCarga.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def _periodo_cch(self):
+        if hasattr(self.datos, 'PeriodoCCH'):
+            return self.datos.PeriodoCCH
+        return None
+
+    @property
+    def fecha_desde_cch(self):
+        if hasattr(self._periodo_cch, 'FechaDesdeCCH'):
+            return self._periodo_cch.FechaDesdeCCH.text.strip()
+        return None
+
+    @property
+    def fecha_hasta_cch(self):
+        if hasattr(self._periodo_cch, 'FechaHastaCCH'):
+            return self._periodo_cch.FechaHastaCCH.text.strip()
+        return None
+
+    @property
+    def _periodo(self):
+        if hasattr(self.datos, 'Periodo'):
+            return self.datos.Periodo
+        return None
+
+    @property
+    def fecha_desde_factura(self):
+        if hasattr(self._periodo, 'FechaDesdeFactura'):
+            return self._periodo.FechaDesdeFactura.text.strip()
+        return None
+
+    @property
+    def fecha_hasta_factura(self):
+        if hasattr(self._periodo, 'FechaHastaFactura'):
+            return self._periodo.FechaHastaFactura.text.strip()
+        return None
+
+    @property
+    def numero_dias(self):
+        if hasattr(self._periodo, 'NumeroDias'):
+            return int(self._periodo.NumeroDias.text.strip())
+        return None
+
+    @property
+    def tipo_pm(self):
+        if hasattr(self.datos, 'TipoPM'):
+            return self.datos.TipoPM.text.strip()
+        return None
+
 
 class Medida(object):
     def __init__(self, data):

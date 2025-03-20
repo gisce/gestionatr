@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- edited with XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) by Odelin Calatrava Requena (Comisión Nacional de los Mercados y la Competencia) -->
+<!-- editado con XMLSpy v2020 rel. 2 (x64) (http://www.altova.com) por Teresa Rodriguez-Losada (INECO) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposComplejos.xsd"/>
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
 	<xs:complexType name="CambiodeComercializadorConCambiosC201">
 		<xs:sequence>
 			<xs:element name="DatosSolicitud" type="DatosCambiodeComercializadorConCambiosC201"/>
-			<xs:element name="Contrato" type="DatosContratoC2"/>
+			<xs:element name="Contrato" type="DatosContratoC2" minOccurs="0"/>
 			<xs:element name="Cliente" type="ClienteConDireccion"/>
 			<xs:element name="Medida" type="MedidaResto" minOccurs="0"/>
 			<xs:element name="DocTecnica" type="DocTecnica" minOccurs="0"/>
@@ -28,6 +30,12 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="CNAE" type="CNAE" minOccurs="0"/>
+			<xs:element name="IndEsencial" type="IndEsencial" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 137</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaUltimoMovimientoIndEsencial" type="date-or-nothing" minOccurs="0"/>
 			<xs:element name="IndActivacion" type="IndActivacionLectura">
 				<xs:annotation>
 					<xs:documentation>Tabla 8</xs:documentation>
@@ -67,16 +75,13 @@
 	<xs:complexType name="DatosContratoC2">
 		<xs:sequence>
 			<xs:element name="FechaFinalizacion" type="xs:date" minOccurs="0"/>
-			<xs:element name="TipoAutoconsumo" type="TipoAutoconsumo">
-				<xs:annotation>
-					<xs:documentation>Tabla 113</xs:documentation>
-				</xs:annotation>
-			</xs:element>
+			<xs:element name="Autoconsumo" type="TypeAutoconsumoSolicitud" minOccurs="0"/>
 			<xs:element name="TipoContratoATR" type="TipoContratoATR">
 				<xs:annotation>
 					<xs:documentation>Tabla 9</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="CUPSPrincipal" type="Codigo" minOccurs="0"/>
 			<xs:element name="CondicionesContractuales" type="CondicionesContractuales"/>
 			<xs:element name="PeriodicidadFacturacion" type="PeriodicidadFacturacion" minOccurs="0">
 				<xs:annotation>

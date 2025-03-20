@@ -35,6 +35,7 @@
                 <TipoConceptoFacturado>01</TipoConceptoFacturado>
                 <FechaLectura>2016-01-20</FechaLectura>
                 <TipoDHEdM>1</TipoDHEdM>
+                <CAU>ES1234000000000001JN0FA001</CAU>
                 <LecturasAportadas>
                     <LecturaAportada>
                         <Integrador>AE</Integrador>
@@ -47,6 +48,10 @@
                         <LecturaPropuesta>0000003106.00</LecturaPropuesta>
                     </LecturaAportada>
                 </LecturasAportadas>
+                <DisconformidadAutoconsumo>
+                    <TipoDisconformidadAutoconsumo>01</TipoDisconformidadAutoconsumo>
+                    <TipoDisconformidadAutoconsumo>03</TipoDisconformidadAutoconsumo>
+                </DisconformidadAutoconsumo>
                 <CodigoIncidencia>01</CodigoIncidencia>
                 <CodigoSolicitud>33333</CodigoSolicitud>
                 <ParametroContratacion>01</ParametroContratacion>

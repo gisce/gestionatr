@@ -102,7 +102,12 @@ class VariablesDetalleReclamacion(XmlModel):
 
 class VariableDetalleReclamacion(XmlModel):
 
-    _sort_order = ('variable_detalle_reclamacion', 'num_expediente_acometida', 'num_expediente_fraude', 'fecha_incidente', 'num_factura_atr', 'tipo_concepto_facturado', 'fecha_lectura', 'tipo_dhedm', 'lecturas_aportadas', 'codigo_incidencia', 'codigo_solicitud', 'parametro_contratacion', 'concepto_disconformidad', 'tipo_de_atencion_incorrecta', 'iban', 'contacto', 'codigo_solicitud_reclamacion', 'fecha_desde', 'fecha_hasta', 'importe_reclamado', 'ubicacion_incidencia')
+    _sort_order = ('variable_detalle_reclamacion', 'num_expediente_acometida', 'num_expediente_fraude',
+                   'fecha_incidente', 'num_factura_atr', 'tipo_concepto_facturado', 'fecha_lectura', 'tipo_dhedm',
+                   'cau', 'lecturas_aportadas', 'disconformidad_autoconsumo', 'codigo_incidencia', 'codigo_solicitud',
+                   'parametro_contratacion', 'concepto_disconformidad', 'tipo_de_atencion_incorrecta',
+                   'motivo_consulta', 'iban', 'contacto', 'codigo_solicitud_reclamacion', 'fecha_desde', 'fecha_hasta',
+                   'importe_reclamado', 'ubicacion_incidencia')
 
     def __init__(self):
         self.variable_detalle_reclamacion = XmlField('VariableDetalleReclamacion')
@@ -113,12 +118,15 @@ class VariableDetalleReclamacion(XmlModel):
         self.tipo_concepto_facturado = XmlField('TipoConceptoFacturado')
         self.fecha_lectura = XmlField('FechaLectura')
         self.tipo_dhedm = XmlField('TipoDHEdM')
+        self.cau = XmlField('CAU')
         self.lecturas_aportadas = LecturasAportadas()
+        self.disconformidad_autoconsumo = DisconformidadAutoconsumo()
         self.codigo_incidencia = XmlField('CodigoIncidencia')
         self.codigo_solicitud = XmlField('CodigoSolicitud')
         self.parametro_contratacion = XmlField('ParametroContratacion')
         self.concepto_disconformidad = XmlField('ConceptoDisconformidad')
         self.tipo_de_atencion_incorrecta = XmlField('TipoDeAtencionIncorrecta')
+        self.motivo_consulta = XmlField('MotivoConsulta')
         self.iban = XmlField('IBAN')
         self.contacto = Contacto()
         self.codigo_solicitud_reclamacion = XmlField('CodigoSolicitudReclamacion')
@@ -149,6 +157,19 @@ class LecturaAportada(XmlModel):
         self.codigo_periodo_dh = XmlField('CodigoPeriodoDH')
         self.lectura_propuesta = XmlField('LecturaPropuesta')
         super(LecturaAportada, self).__init__('LecturaAportada', 'lectura_aportada')
+
+
+class DisconformidadAutoconsumo(XmlModel):
+
+    _sort_order = ('disconformidad_autoconsumo', 'tipo_disconformidad_1', 'tipo_disconformidad_2',
+                   'tipo_disconformidad_3')
+
+    def __init__(self):
+        self.disconformidad_autoconsumo = XmlField('DisconformidadAutoconsumo')
+        self.tipo_disconformidad_1 = XmlField('TipoDisconformidadAutoconsumo')
+        self.tipo_disconformidad_2 = XmlField('TipoDisconformidadAutoconsumo')
+        self.tipo_disconformidad_3 = XmlField('TipoDisconformidadAutoconsumo')
+        super(DisconformidadAutoconsumo, self).__init__('DisconformidadAutoconsumo', 'disconformidad_autoconsumo')
 
 
 class UbicacionIncidencia(XmlModel):
@@ -435,7 +456,12 @@ class VariablesAportacionInformacionParaRetipificacion(XmlModel):
 
 class VariableAportacionInformacionParaRetipificacion(XmlModel):
 
-    _sort_order = ('variable_aportacion_informacion_para_retipificacion', 'num_expediente_acometida', 'num_expediente_fraude', 'fecha_incidente', 'num_factura_atr', 'tipo_concepto_facturado', 'fecha_lectura', 'tipo_dhedm', 'lecturas_aportadas', 'codigo_incidencia', 'codigo_solicitud', 'parametro_contratacion', 'concepto_disconformidad', 'tipo_de_atencion_incorrecta', 'iban', 'contacto', 'codigo_solicitud_reclamacion', 'fecha_desde', 'fecha_hasta', 'importe_reclamado', 'ubicacion_incidencia')
+    _sort_order = ('variable_aportacion_informacion_para_retipificacion', 'num_expediente_acometida',
+                   'num_expediente_fraude', 'fecha_incidente', 'num_factura_atr', 'tipo_concepto_facturado',
+                   'fecha_lectura', 'tipo_dhedm', 'cau', 'lecturas_aportadas', 'disconformidad_autoconsumo',
+                   'codigo_incidencia', 'codigo_solicitud', 'parametro_contratacion', 'concepto_disconformidad',
+                   'tipo_de_atencion_incorrecta', 'iban', 'contacto', 'codigo_solicitud_reclamacion', 'fecha_desde',
+                   'fecha_hasta', 'importe_reclamado', 'ubicacion_incidencia')
 
     def __init__(self):
         self.variable_aportacion_informacion_para_retipificacion = XmlField('VariableAportacionInformacionParaRetipificacion')
@@ -446,7 +472,9 @@ class VariableAportacionInformacionParaRetipificacion(XmlModel):
         self.tipo_concepto_facturado = XmlField('TipoConceptoFacturado')
         self.fecha_lectura = XmlField('FechaLectura')
         self.tipo_dhedm = XmlField('TipoDHEdM')
+        self.cau = XmlField('CAU')
         self.lecturas_aportadas = LecturasAportadas()
+        self.disconformidad_autoconsumo = DisconformidadAutoconsumo()
         self.codigo_incidencia = XmlField('CodigoIncidencia')
         self.codigo_solicitud = XmlField('CodigoSolicitud')
         self.parametro_contratacion = XmlField('ParametroContratacion')

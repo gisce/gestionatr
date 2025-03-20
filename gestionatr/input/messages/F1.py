@@ -5,6 +5,7 @@ from gestionatr.input.messages.C2 import Direccion
 from gestionatr.defs import TARIFES_SEMPRE_MAX, TARIFES_TD
 from datetime import datetime, date, timedelta
 from gestionatr.utils import repartir_consums_entre_lectures
+import warnings
 import six
 
 # Magnituds d'OCSUM
@@ -323,9 +324,14 @@ class DatosGeneralesATR(DatosGenerales):
             return self._datos_factura_atr.TipoAutoconsumo.text.strip()
 
     @property
-    def cau(self):
-        if hasattr(self._datos_factura_atr, 'CAU'):
-            return self._datos_factura_atr.CAU.text.strip()
+    def tipo_subseccion(self):
+        if hasattr(self._datos_factura_atr, 'TipoSubseccion'):
+            return self._datos_factura_atr.TipoSubseccion.text.strip()
+
+    @property
+    def tipo_cups(self):
+        if hasattr(self._datos_factura_atr, 'TipoCUPS'):
+            return self._datos_factura_atr.TipoCUPS.text.strip()
 
     @property
     def duracion_inf_anio(self):
@@ -413,7 +419,7 @@ class DatosGeneralesATR(DatosGenerales):
     @property
     def tipo_pm(self):
         if hasattr(self._periodo, 'TipoPM'):
-            return int(self._periodo.TipoPM.text.strip())
+            return self._periodo.TipoPM.text.strip()
         return None
 
 
@@ -503,6 +509,9 @@ class Factura(object):
             pass
 
     def get_coeficient_repartiment(self):
+        # la primera es per indicar la crida de la funcio tatxada i la segona es perque surti per consola el avis
+        warnings.warn("El coeficient de repartiment ja no s'informa en el F1", DeprecationWarning)
+        warnings.warn("El coeficient de repartiment ja no s'informa en el F1")
         try:
             if self.factura.Autoconsumo and self.factura.Autoconsumo.InstalacionGenAutoconsumo:
                 beta_list = []
@@ -521,6 +530,8 @@ class Factura(object):
             pass
 
     def get_coeficient_repartiment_from_cr(self):
+        warnings.warn("El coeficient de repartiment ja no s'informa en el F1", DeprecationWarning)
+        warnings.warn("El coeficient de repartiment ja no s'informa en el F1")
         try:
             for concepte in self.conceptos_repercutibles:
                 if concepte.concepto_repercutible == '82':
@@ -932,18 +943,6 @@ class PeriodoEnergiaNetaGen(Periodo):
             return float(self.periodo.ValorEnergiaNetaGen.text.strip())
         return None
 
-    @property
-    def beta(self):
-        if hasattr(self.periodo, 'Beta'):
-            return float(self.periodo.Beta.text.strip())
-        return None
-
-    @property
-    def relacion_generacion(self):
-        if hasattr(self.periodo, 'RelacionGeneracion'):
-            return float(self.periodo.RelacionGeneracion.text.strip())
-        return None
-
 
 class PeriodoEnergiaAutoconsumida(Periodo):
 
@@ -1038,6 +1037,12 @@ class InstalacionGenAutoconsumo(object):
         self.instalacion_gen_autoconsumo = data
 
     @property
+    def cil(self):
+        if hasattr(self.instalacion_gen_autoconsumo, 'CIL'):
+            return self.instalacion_gen_autoconsumo.CIL.text.strip()
+        return None
+
+    @property
     def tipo_instalacion(self):
         if hasattr(self.instalacion_gen_autoconsumo, 'TipoInstalacion'):
             return self.instalacion_gen_autoconsumo.TipoInstalacion.text.strip()
@@ -1053,12 +1058,6 @@ class InstalacionGenAutoconsumo(object):
     def energia_neta_gen(self):
         if hasattr(self.instalacion_gen_autoconsumo, 'EnergiaNetaGen'):
             return EnergiaNetaGen(self.instalacion_gen_autoconsumo.EnergiaNetaGen)
-        return None
-
-    @property
-    def energia_autoconsumida(self):
-        if hasattr(self.instalacion_gen_autoconsumo, 'EnergiaAutoconsumida'):
-            return EnergiaAutoconsumida(self.instalacion_gen_autoconsumo.EnergiaAutoconsumida)
         return None
 
 
@@ -1114,12 +1113,6 @@ class EnergiaNetaGen(object):
             for d in self.energia_neta_gen.TerminoEnergiaNetaGen:
                 data.append(TerminoEnergiaNetaGen(d))
         return data
-
-    @property
-    def importe_total(self):
-        if hasattr(self.energia_neta_gen, 'TotalEnergiaNetaGenBeta'):
-            return float(self.energia_neta_gen.TotalEnergiaNetaGenBeta.text.strip())
-        return None
 
 
 class EnergiaAutoconsumida(object):
@@ -1194,18 +1187,57 @@ class Autoconsumo(object):
         self.autoconsumo = data
 
     @property
-    def instalacion_gen_autoconsumo(self):
-        data = []
-        if hasattr(self.autoconsumo, 'InstalacionGenAutoconsumo'):
-            for d in self.autoconsumo.InstalacionGenAutoconsumo:
-                data.append(InstalacionGenAutoconsumo(d))
-        return data
+    def energia_neta_gen(self):
+        if hasattr(self.autoconsumo, 'EnergiaNetaGen'):
+            return EnergiaNetaGen(self.autoconsumo.EnergiaNetaGen)
+        return None
+
+    @property
+    def energia_autoconsumida(self):
+        if hasattr(self.autoconsumo, 'EnergiaAutoconsumida'):
+            return EnergiaAutoconsumida(self.autoconsumo.EnergiaAutoconsumida)
+        return None
 
     @property
     def energia_excedentaria(self):
         if hasattr(self.autoconsumo, 'EnergiaExcedentaria'):
             return EnergiaExcedentaria(self.autoconsumo.EnergiaExcedentaria)
         return None
+
+    @property
+    def datos_cau(self):
+        if hasattr(self.autoconsumo, 'DatosCAU'):
+            return DatosCAU(self.autoconsumo.DatosCAU)
+        return None
+
+
+class DatosCAU(object):
+
+    def __init__(self, data):
+        self.datos_cau = data
+
+    @property
+    def cau(self):
+        if hasattr(self.datos_cau, 'CAU'):
+            return self.datos_cau.CAU.text.strip()
+
+    @property
+    def colectivo(self):
+        if hasattr(self.datos_cau, 'Colectivo'):
+            return self.datos_cau.Colectivo.text.strip()
+
+    @property
+    def esquema_medida(self):
+        if hasattr(self.datos_cau, 'EsquemaMedida'):
+            return self.datos_cau.EsquemaMedida.text.strip()
+
+    @property
+    def instalacion_gen_autoconsumo(self):
+        data = []
+        if hasattr(self.datos_cau, 'InstalacionGenAutoconsumo'):
+            for d in self.datos_cau.InstalacionGenAutoconsumo:
+                data.append(InstalacionGenAutoconsumo(d))
+        return data
 
 
 class Cargos(object):
@@ -1792,7 +1824,7 @@ class InformacionAlConsumidor(object):
 
     PERIODO_TYPE = PeriodoMaximetroConsumidor
 
-    def __init__(self, data):
+    def  __init__(self, data):
         self.informacion_al_consumidor = data
 
     @property
@@ -2491,10 +2523,9 @@ class FacturaATR(Factura):
         periodes = []
         total = 0
 
-        if self.autoconsumo and self.autoconsumo.instalacion_gen_autoconsumo:
-            for inst in self.autoconsumo.instalacion_gen_autoconsumo:
-                for activa in inst.energia_neta_gen.terminos_energia_neta_gen:
-                    periodes += activa.periodos
+        if self.autoconsumo and self.autoconsumo.energia_neta_gen:
+            for activa in self.autoconsumo.energia_neta_gen.terminos_energia_neta_gen:
+                periodes += activa.periodos
 
         return periodes, total
 
@@ -2502,11 +2533,10 @@ class FacturaATR(Factura):
         periodes = []
         total = 0
 
-        if self.autoconsumo and self.autoconsumo.instalacion_gen_autoconsumo:
-            for inst in self.autoconsumo.instalacion_gen_autoconsumo:
-                total += inst.energia_autoconsumida.importe_total
-                for activa in inst.energia_autoconsumida.terminos_energia_autoconsumida:
-                    periodes += activa.periodos
+        if self.autoconsumo and self.autoconsumo.energia_autoconsumida:
+            total += self.autoconsumo.energia_autoconsumida.importe_total
+            for activa in self.autoconsumo.energia_autoconsumida.terminos_energia_autoconsumida:
+                periodes += activa.periodos
 
         return periodes, total
 
