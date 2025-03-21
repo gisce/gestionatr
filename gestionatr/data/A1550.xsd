@@ -240,9 +240,9 @@
 					<documentation>Periodicidad de Lectura</documentation>
 				</annotation>
 			</element>
-			<element name="cnae" type="tns:CNAEType" maxOccurs="1" minOccurs="0"></element>
-			<element name="protectedtype" type="tns:TipoClienteProtegidoType" maxOccurs="1" minOccurs="0"></element>
-			<element name="essentialtype" type="tns:TipoClienteEsencialType" maxOccurs="1" minOccurs="0"></element>
+			<element name="cnae" type="tns:CNAEType" maxOccurs="1" minOccurs="1"></element>
+			<element name="protectedtype" type="tns:TipoClienteProtegidoType" maxOccurs="1" minOccurs="1"></element>
+			<element name="essentialtype" type="tns:TipoClienteEsencialType" maxOccurs="1" minOccurs="1"></element>
 			<element name="extrainfo" type="tns:ExtrainfoType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Observaciones de la Realización</documentation>

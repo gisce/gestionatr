@@ -1039,6 +1039,7 @@
 			<xs:enumeration value="S24"/>
 			<xs:enumeration value="S25"/>
 			<xs:enumeration value="S26"/>
+			<xs:enumeration value="S27"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TollType">

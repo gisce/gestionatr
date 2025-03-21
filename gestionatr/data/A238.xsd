@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Comisión Nacional de los Mercados y la Competencia (Comisión Nacional de los Mercados y la Competencia) -->
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A238" targetNamespace="http://localhost/sctd/A238" elementFormDefault="qualified">
 	<include schemaLocation="CommonTagsCONT.xsd"/>
 	<element name="sctdapplication" type="tns:SctdapplicationA238Type"/>
@@ -73,7 +74,7 @@
 					<documentation>Descripción de Resultado</documentation>
 				</annotation>
 			</element>
-			<element name="resultreason" type="tns:MotivoRechazoType" minOccurs="0" maxOccurs="1">
+			<element name="resultreason" type="tns:MotivoRechazoType" minOccurs="0">
 				<annotation>
 					<documentation>Código Motivo Resultado OCSUM</documentation>
 				</annotation>
