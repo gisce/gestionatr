@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por dgarciar (Comisión Nacional de los Mercados y la Competencia) -->
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por dgarciar (Comisiï¿½n Nacional de los Mercados y la Competencia) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 	<xs:simpleType name="AgenteType">
 		<xs:restriction base="xs:string">
@@ -33,7 +33,7 @@
 	</xs:complexType>
 	<xs:simpleType name="CodProvinciaType">
 		<xs:annotation>
-			<xs:documentation>Código INE de Provincia</xs:documentation>
+			<xs:documentation>Cï¿½digo INE de Provincia</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:length value="2"/>
@@ -369,8 +369,8 @@
 					<xs:restriction base="xs:decimal">
 						<xs:totalDigits value="29"/>
 						<xs:fractionDigits value="12"/>
-						<xs:maxInclusive value="99999999999999999.999999999999"/>
-						<xs:minInclusive value="-99999999999999999.999999999999"/>
+						<xs:maxInclusive value="99999999999999999.999999"/>
+						<xs:minInclusive value="-99999999999999999.999999"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -379,8 +379,8 @@
 					<xs:restriction base="xs:decimal">
 						<xs:totalDigits value="29"/>
 						<xs:fractionDigits value="12"/>
-						<xs:maxInclusive value="99999999999999999.999999999999"/>
-						<xs:minInclusive value="-99999999999999999.999999999999"/>
+						<xs:maxInclusive value="99999999999999999.999999"/>
+						<xs:minInclusive value="-99999999999999999.999999"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -673,8 +673,8 @@
 					<xs:restriction base="xs:decimal">
 						<xs:totalDigits value="29"/>
 						<xs:fractionDigits value="12"/>
-						<xs:maxInclusive value="99999999999999999.999999999999"/>
-						<xs:minInclusive value="-99999999999999999.999999999999"/>
+						<xs:maxInclusive value="99999999999999999.999999"/>
+						<xs:minInclusive value="-99999999999999999.999999"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -683,8 +683,8 @@
 					<xs:restriction base="xs:decimal">
 						<xs:totalDigits value="29"/>
 						<xs:fractionDigits value="12"/>
-						<xs:maxInclusive value="99999999999999999.999999999999"/>
-						<xs:minInclusive value="-99999999999999999.999999999999"/>
+						<xs:maxInclusive value="99999999999999999.999999"/>
+						<xs:minInclusive value="-99999999999999999.999999"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -693,8 +693,8 @@
 					<xs:restriction base="xs:decimal">
 						<xs:totalDigits value="29"/>
 						<xs:fractionDigits value="12"/>
-						<xs:maxInclusive value="99999999999999999.999999999999"/>
-						<xs:minInclusive value="-99999999999999999.999999999999"/>
+						<xs:maxInclusive value="99999999999999999.999999"/>
+						<xs:minInclusive value="-99999999999999999.999999"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -714,8 +714,8 @@
 					<xs:restriction base="xs:decimal">
 						<xs:totalDigits value="29"/>
 						<xs:fractionDigits value="12"/>
-						<xs:maxInclusive value="99999999999999999.999999999999"/>
-						<xs:minInclusive value="-99999999999999999.999999999999"/>
+						<xs:maxInclusive value="99999999999999999.999999"/>
+						<xs:minInclusive value="-99999999999999999.999999"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -768,7 +768,7 @@
 					<xs:restriction base="xs:decimal">
 						<xs:totalDigits value="29"/>
 						<xs:fractionDigits value="12"/>
-						<xs:maxInclusive value="99999999999999999.999999999999"/>
+						<xs:maxInclusive value="99999999999999999.999999"/>
 						<xs:minInclusive value="0"/>
 					</xs:restriction>
 				</xs:simpleType>
@@ -1056,7 +1056,7 @@
 	</xs:simpleType>
 	<xs:simpleType name="CodTBAI">
 		<xs:annotation>
-			<xs:documentation>Código identificativo TicketBAI, de uso exclusivo en la Comunidad Autónoma Vasca</xs:documentation>
+			<xs:documentation>Cï¿½digo identificativo TicketBAI, de uso exclusivo en la Comunidad Autï¿½noma Vasca</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:minLength value="39"/>
