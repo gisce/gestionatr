@@ -1239,7 +1239,7 @@ class MinimumFieldsChecker(object):
 
     def check_sol_nuevos_suministro(self):
         for var in self.r1.variables_detalle_reclamacion:
-            if not var.num_expediente_acometida:
+            if not var.num_expediente_acometida and var.motivo_consulta == '02':
                 return False
         return len(self.r1.variables_detalle_reclamacion) > 0
 
