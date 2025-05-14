@@ -596,7 +596,7 @@ class Factura(object):
             res[tipus_join]['total'] += info['total']
             for l in info['lines']:
                 for l2 in res[tipus_join]['lines']:
-                    if l2.nombre == l.nombre and l2.cantidad == l.cantidad:
+                    if l2.nombre == l.nombre and l2.fecha_desde >= l.fecha_desde and l2.fecha_hasta <= l.fecha_hasta:
                         l2.precio += round(l.precio*base, 9)
 
         return res
