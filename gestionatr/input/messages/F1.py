@@ -2364,16 +2364,18 @@ class FacturaATR(Factura):
                 lectures_per_periode[periode] = []
             lectures_per_periode[periode].append(lectura)
 
-            nperiodes = len([l for l in lectures_per_periode.keys() if l])
-            if self.periodes_facturats_agrupats(nperiodes, tipus=tipus) and ajust_balancejat:
-                for periode in lectures_per_periode.keys():
-                    if not periode:
-                        continue
-                    periode_agrupat = "P{0}".format(int(periode[1:]) + nperiodes/2)
-                    if lectures_per_periode.get(periode_agrupat):
-                        lectures_per_periode[periode].extend(lectures_per_periode.get(periode_agrupat))
-                        if periode_agrupat != periode:
-                            del lectures_per_periode[periode_agrupat]
+            # Ho comentem perque era una mandanga per les tarifes antigues 3.0A i creiem que ja no fa falta.
+
+            # nperiodes = len([l for l in lectures_per_periode.keys() if l])
+            # if self.periodes_facturats_agrupats(nperiodes, tipus=tipus) and ajust_balancejat:
+            #     for periode in lectures_per_periode.keys():
+            #         if not periode:
+            #             continue
+            #         periode_agrupat = "P{0}".format(int(periode[1:]) + nperiodes/2)
+            #         if lectures_per_periode.get(periode_agrupat):
+            #             lectures_per_periode[periode].extend(lectures_per_periode.get(periode_agrupat))
+            #             if periode_agrupat != periode:
+            #                 del lectures_per_periode[periode_agrupat]
 
         res = {}
         for periode, lectures in lectures_per_periode.iteritems():
