@@ -1599,7 +1599,7 @@ class ModeloAparato(object):
         if hasattr(self.modelo_aparato, 'Integrador'):
             integradors_dh_per_data = {}
             totalitzadors_per_data = {}
-            integradors_per_data_i_periode = {}
+            integradors_per_data_magnitud_i_periode = {}
             for d in self.modelo_aparato.Integrador:
                 integrador = Integrador(d)
                 if integrador.codigo_periodo in ['21', '22', '81', '82', '83'] and integrador.magnitud == 'PM':
@@ -1612,16 +1612,19 @@ class ModeloAparato(object):
                     totalitzadors_per_data.setdefault(integrador.lectura_hasta.fecha, [])
                     totalitzadors_per_data[integrador.lectura_hasta.fecha].append(integrador)
                 else:
-                    integradors_per_data_i_periode.setdefault(integrador.lectura_hasta.fecha, {})
-                    integradors_per_data_i_periode[integrador.lectura_hasta.fecha].setdefault(integrador.periode, [])
-                    integradors_per_data_i_periode[integrador.lectura_hasta.fecha][integrador.periode].append(integrador)
+                    integradors_per_data_magnitud_i_periode.setdefault(integrador.lectura_hasta.fecha, {})
+                    integradors_per_data_magnitud_i_periode[integrador.lectura_hasta.fecha].setdefault(integrador.magnitud, {})
+                    integradors_per_data_magnitud_i_periode[integrador.lectura_hasta.fecha][integrador.magnitud].setdefault(integrador.periode, [])
+                    integradors_per_data_magnitud_i_periode[integrador.lectura_hasta.fecha][integrador.magnitud][integrador.periode].append(integrador)
                     data.append(integrador)
 
             for data_totalitzador, totalitzadors in totalitzadors_per_data.items():
                 for totalitzador in totalitzadors_per_data[data_totalitzador]:
-                    if data_totalitzador not in integradors_per_data_i_periode:
+                    if data_totalitzador not in integradors_per_data_magnitud_i_periode:
                         data.append(totalitzador)
-                    elif totalitzador.periode not in integradors_per_data_i_periode[data_totalitzador]:
+                    elif totalitzador.magnitud not in integradors_per_data_magnitud_i_periode[data_totalitzador]:
+                        data.append(totalitzador)
+                    elif totalitzador.periode not in integradors_per_data_magnitud_i_periode[data_totalitzador][totalitzador.magnitud]:
                         data.append(totalitzador)
 
             # Per tractar els multiples periodes en una DH nosaltres agafarem
