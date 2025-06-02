@@ -2741,7 +2741,7 @@ class RegistroFin(object):
     @property
     def id_remesa(self):
         if hasattr(self.registro, 'IdRemesa'):
-            return self.registro.IdRemesa.text.strip()
+            return (self.registro.IdRemesa.text or "").strip()
         return None
 
     def get_remesa(self):
