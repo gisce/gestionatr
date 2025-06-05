@@ -1707,6 +1707,9 @@ class ModeloAparato(object):
     def get_lectures_activa_sortint(self):
         return self.get_lectures(['S'])
 
+    def get_lectures_activa_sortint_sense_quadrar_ajustos(self):
+        return self.get_lectures(['S'], force_no_transforma_no_td_a_td=True)
+
     def get_lectures_reactiva(self):
         return self.get_lectures(['R'])
 
@@ -2429,8 +2432,8 @@ class FacturaATR(Factura):
     def get_lectures_activa_entrant(self, ajust_balancejat=True, motiu_ajust="98"):
         return self.get_lectures_amb_ajust_quadrat_amb_consum(tipus='A', ajust_balancejat=ajust_balancejat, motiu_ajust=motiu_ajust)
 
-    def get_lectures_activa_sortint(self, ajust_balancejat=True, motiu_ajust="98"):
-        return self.get_lectures_amb_ajust_quadrat_amb_consum(tipus='S', ajust_balancejat=ajust_balancejat, motiu_ajust=motiu_ajust)
+    def get_lectures_activa_sortint(self, ajust_balancejat=True, motiu_ajust="98", lectures=None):
+        return self.get_lectures_amb_ajust_quadrat_amb_consum(tipus='S', ajust_balancejat=ajust_balancejat, motiu_ajust=motiu_ajust, lectures=lectures)
 
     def get_comptadors(self):
         """Retorna totes les lectures en una llista de comptadors"""
