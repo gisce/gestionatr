@@ -1599,7 +1599,7 @@ class ModeloAparato(object):
         if hasattr(self.modelo_aparato, 'Integrador'):
             integradors_dh_per_data = {}
             totalitzadors_per_data = {}
-            integradors_per_data_i_periode = {}
+            integradors_per_data_magnitud_i_periode = {}
             for d in self.modelo_aparato.Integrador:
                 integrador = Integrador(d)
                 if integrador.codigo_periodo in ['21', '22', '81', '82', '83'] and integrador.magnitud == 'PM':
@@ -1612,16 +1612,19 @@ class ModeloAparato(object):
                     totalitzadors_per_data.setdefault(integrador.lectura_hasta.fecha, [])
                     totalitzadors_per_data[integrador.lectura_hasta.fecha].append(integrador)
                 else:
-                    integradors_per_data_i_periode.setdefault(integrador.lectura_hasta.fecha, {})
-                    integradors_per_data_i_periode[integrador.lectura_hasta.fecha].setdefault(integrador.periode, [])
-                    integradors_per_data_i_periode[integrador.lectura_hasta.fecha][integrador.periode].append(integrador)
+                    integradors_per_data_magnitud_i_periode.setdefault(integrador.lectura_hasta.fecha, {})
+                    integradors_per_data_magnitud_i_periode[integrador.lectura_hasta.fecha].setdefault(integrador.magnitud, {})
+                    integradors_per_data_magnitud_i_periode[integrador.lectura_hasta.fecha][integrador.magnitud].setdefault(integrador.periode, [])
+                    integradors_per_data_magnitud_i_periode[integrador.lectura_hasta.fecha][integrador.magnitud][integrador.periode].append(integrador)
                     data.append(integrador)
 
             for data_totalitzador, totalitzadors in totalitzadors_per_data.items():
                 for totalitzador in totalitzadors_per_data[data_totalitzador]:
-                    if data_totalitzador not in integradors_per_data_i_periode:
+                    if data_totalitzador not in integradors_per_data_magnitud_i_periode:
                         data.append(totalitzador)
-                    elif totalitzador.periode not in integradors_per_data_i_periode[data_totalitzador]:
+                    elif totalitzador.magnitud not in integradors_per_data_magnitud_i_periode[data_totalitzador]:
+                        data.append(totalitzador)
+                    elif totalitzador.periode not in integradors_per_data_magnitud_i_periode[data_totalitzador][totalitzador.magnitud]:
                         data.append(totalitzador)
 
             # Per tractar els multiples periodes en una DH nosaltres agafarem
@@ -1683,13 +1686,14 @@ class ModeloAparato(object):
                 and not self.factura.has_AS_lectures():
             # Si no tenim lectures AS pero si que ens han cobrat excedents,
             # creem unes lectures AS ficticies a 0 (puta ENDESA)
-            lectures.extend(self.factura.get_fake_AS_lectures(comptador_base=lectures[0].comptador))
+            comptador_base = (lectures and lectures[0].comptador) or None
+            lectures.extend(self.factura.get_fake_AS_lectures(comptador_base=comptador_base))
         if (not tipus or "S" in tipus) and self.factura and self.factura.has_AS_lectures_only_p0() \
-                and len(self.factura.get_consum_facturat(tipus='S', periode=None)) > 1 \
-                and self.factura.datos_factura.tarifa_atr_fact in ['004', '006', '007', '008']:
+                and len(self.factura.get_consum_facturat(tipus='S', periode=None)) > 1:
             # Si nomes ens envien el P0 de excedents pero ens cobren varis periodes
             # creem una lectura e P2 AS ficticies a 0 (puta FENOSA)
-            lectures.extend(self.factura.get_fake_AS_p2_lectures(comptador_base=lectures[0].comptador))
+            comptador_base = (lectures and lectures[0].comptador) or None
+            lectures.extend(self.factura.get_fake_AS_p2_lectures(comptador_base=comptador_base))
 
         if not force_no_transforma_no_td_a_td and self.factura:
             lectures = self.factura.transforma_no_td_a_td(
@@ -2374,16 +2378,18 @@ class FacturaATR(Factura):
                 lectures_per_periode[periode] = []
             lectures_per_periode[periode].append(lectura)
 
-            nperiodes = len([l for l in lectures_per_periode.keys() if l])
-            if self.periodes_facturats_agrupats(nperiodes, tipus=tipus) and ajust_balancejat:
-                for periode in lectures_per_periode.keys():
-                    if not periode:
-                        continue
-                    periode_agrupat = "P{0}".format(int(periode[1:]) + nperiodes/2)
-                    if lectures_per_periode.get(periode_agrupat):
-                        lectures_per_periode[periode].extend(lectures_per_periode.get(periode_agrupat))
-                        if periode_agrupat != periode:
-                            del lectures_per_periode[periode_agrupat]
+            # Ho comentem perque era una mandanga per les tarifes antigues 3.0A i creiem que ja no fa falta.
+
+            # nperiodes = len([l for l in lectures_per_periode.keys() if l])
+            # if self.periodes_facturats_agrupats(nperiodes, tipus=tipus) and ajust_balancejat:
+            #     for periode in lectures_per_periode.keys():
+            #         if not periode:
+            #             continue
+            #         periode_agrupat = "P{0}".format(int(periode[1:]) + nperiodes/2)
+            #         if lectures_per_periode.get(periode_agrupat):
+            #             lectures_per_periode[periode].extend(lectures_per_periode.get(periode_agrupat))
+            #             if periode_agrupat != periode:
+            #                 del lectures_per_periode[periode_agrupat]
 
         res = {}
         for periode, lectures in lectures_per_periode.iteritems():
@@ -2746,7 +2752,7 @@ class RegistroFin(object):
     @property
     def id_remesa(self):
         if hasattr(self.registro, 'IdRemesa'):
-            return self.registro.IdRemesa.text.strip()
+            return (self.registro.IdRemesa.text or "").strip()
         return None
 
     def get_remesa(self):
