@@ -1683,13 +1683,13 @@ class ModeloAparato(object):
                 and not self.factura.has_AS_lectures():
             # Si no tenim lectures AS pero si que ens han cobrat excedents,
             # creem unes lectures AS ficticies a 0 (puta ENDESA)
-            lectures.extend(self.factura.get_fake_AS_lectures())
+            lectures.extend(self.factura.get_fake_AS_lectures(comptador_base=lectures[0].comptador))
         if (not tipus or "S" in tipus) and self.factura and self.factura.has_AS_lectures_only_p0() \
                 and len(self.factura.get_consum_facturat(tipus='S', periode=None)) > 1 \
                 and self.factura.datos_factura.tarifa_atr_fact in ['004', '006', '007', '008']:
             # Si nomes ens envien el P0 de excedents pero ens cobren varis periodes
             # creem una lectura e P2 AS ficticies a 0 (puta FENOSA)
-            lectures.extend(self.factura.get_fake_AS_p2_lectures())
+            lectures.extend(self.factura.get_fake_AS_p2_lectures(comptador_base=lectures[0].comptador))
 
         if not force_no_transforma_no_td_a_td and self.factura:
             lectures = self.factura.transforma_no_td_a_td(
@@ -2240,7 +2240,7 @@ class FacturaATR(Factura):
                     pass
         return has_p0
 
-    def get_fake_AS_lectures(self):
+    def get_fake_AS_lectures(self, comptador_base=None):
         res = []
         comptador_amb_lectures = None
         for medida in self.medidas:
@@ -2265,6 +2265,9 @@ class FacturaATR(Factura):
                 l2.lectura = 0
                 l2.procedencia = base_info.lectura_hasta.procedencia
                 new_integrador = Integrador(base_info.integrador)
+                if comptador_base:
+                    new_integrador.comptador = comptador_base
+                new_integrador.comptador = base_info.comptador
                 new_integrador.magnitud = "AS"
                 new_integrador.numero_ruedas_enteras = base_info.numero_ruedas_enteras
                 new_integrador.codigo_periodo = base_info.codigo_periodo[0] + str(i)
@@ -2275,7 +2278,7 @@ class FacturaATR(Factura):
                 res.append(new_integrador)
         return res
 
-    def get_fake_pX_lectura(self, tipus, periode, base_info, lectura_desde=0, lectura_hasta=0):
+    def get_fake_pX_lectura(self, tipus, periode, base_info, lectura_desde=0, lectura_hasta=0, comptador_base=None):
         l1 = Lectura(None)
         l1.fecha = base_info.lectura_desde.fecha
         l1.lectura = lectura_desde
@@ -2286,6 +2289,8 @@ class FacturaATR(Factura):
         l2.procedencia = base_info.lectura_hasta.procedencia
 
         new_integrador = Integrador(None)
+        if comptador_base:
+            new_integrador.comptador = comptador_base
         new_integrador.magnitud = {v: k for k, v in MAGNITUDS_OCSUM.iteritems()}.get(tipus, tipus)
         new_integrador.numero_ruedas_enteras = base_info.numero_ruedas_enteras
         new_integrador.codigo_periodo = periode
@@ -2308,7 +2313,7 @@ class FacturaATR(Factura):
 
         return new_integrador
 
-    def get_fake_AS_p2_lectures(self):
+    def get_fake_AS_p2_lectures(self, comptador_base=None):
         res = []
         comptador_amb_lectures = None
         for medida in self.medidas:
@@ -2335,6 +2340,8 @@ class FacturaATR(Factura):
                 l2.lectura = 0
                 l2.procedencia = base_info.lectura_hasta.procedencia
                 new_integrador = Integrador(None)
+                if comptador_base:
+                    new_integrador.comptador = comptador_base
                 new_integrador.magnitud = "AS"
                 new_integrador.numero_ruedas_enteras = base_info.numero_ruedas_enteras
                 new_integrador.codigo_periodo = base_info.codigo_periodo[0] + str(i)
