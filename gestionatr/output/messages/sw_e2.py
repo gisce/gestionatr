@@ -225,18 +225,8 @@ class MensajeAceptacionReposicionReceptor(XmlModel):
         self.mensaje = XmlField('MensajeAceptacionReposicionReceptor',
                                 attributes={'xmlns': 'http://localhost/elegibilidad'})
         self.cabecera = Cabecera()
-        self.aceptacion_reposicion_receptor = AceptacionReposicionReceptor()
         super(MensajeAceptacionReposicionReceptor, self).__init__('MensajeAceptacionReposicionReceptor', 'mensaje')
 
-
-class AceptacionReposicionReceptor(XmlModel):
-
-    _sort_order = ('aceptacion_reposicion_receptor', 'aceptacion_reposicion')
-
-    def __init__(self):
-        self.aceptacion_reposicion_receptor = XmlField('AceptacionReposicionReceptor')
-        self.aceptacion_reposicion = XmlField('AceptacionReposicion')
-        super(AceptacionReposicionReceptor, self).__init__('AceptacionReposicionReceptor', 'aceptacion_reposicion_receptor')
 
 class MensajeRechazoReposicionReceptor(XmlModel):
 

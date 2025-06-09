@@ -2224,6 +2224,10 @@
 			023	6.4TD
 			024	3.0TDVE
 			025	6.1TDVE
+			026	6.2TDVE
+			027	3.0TDVE - Embarcaciones
+			028	6.1TDVE - Embarcaciones
+			029	6.2TDVE - Embarcaciones
 		</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2235,6 +2239,10 @@
 			<xs:enumeration value="023"/>
 			<xs:enumeration value="024"/>
 			<xs:enumeration value="025"/>
+			<xs:enumeration value="026"/>
+			<xs:enumeration value="027"/>
+			<xs:enumeration value="028"/>
+			<xs:enumeration value="029"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TarifaATRFact">
@@ -2255,14 +2263,18 @@
 			015	6.4	
 			016	6.5
 			017	6.1B	
-			018	2.0DT
-			019	3.0DT
-			020	6.1DT
-			021	6.2DT
-			022	6.3DT
-			023	6.4DT
-			024	3.0DTVE
-			025	6.1DTVE
+			018	2.0TD
+			019	3.0TD
+			020	6.1TD
+			021	6.2TD
+			022	6.3TD
+			023	6.4TD
+			024	3.0TDVE
+			025	6.1TDVE
+			026	6.2TDVE
+			027	3.0TDVE - Embarcaciones
+			028	6.1TDVE - Embarcaciones
+			029	6.2TDVE - Embarcaciones
 		</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2289,6 +2301,10 @@
 			<xs:enumeration value="023"/>
 			<xs:enumeration value="024"/>
 			<xs:enumeration value="025"/>
+			<xs:enumeration value="026"/>
+			<xs:enumeration value="027"/>
+			<xs:enumeration value="028"/>
+			<xs:enumeration value="029"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Tension">

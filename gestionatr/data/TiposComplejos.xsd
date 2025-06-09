@@ -941,7 +941,7 @@
 	</xs:complexType>
 	<xs:complexType name="InstalacionGenAutoconsumoType">
 		<xs:sequence>
-			<xs:element name="CIL" type="CodigoCIL" minOccurs="0"/>
+			<xs:element name="CIL" type="CodigoCIL"/>
 			<xs:element name="TipoInstalacion" type="TipoInstalacion">
 				<xs:annotation>
 					<xs:documentation>Tabla 129</xs:documentation>
