@@ -9,7 +9,6 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="Cabecera" type="Cabecera"/>
-				<xs:element name="AceptacionReposicionReceptor" type="Reposicion04"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
