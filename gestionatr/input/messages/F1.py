@@ -1683,7 +1683,7 @@ class ModeloAparato(object):
             pass
 
         if (not tipus or "S" in tipus) and self.factura and self.factura.get_consum_facturat(tipus='S', periode=None) \
-                and not self.has_AS_lectures():
+                and not self.factura.has_AS_lectures():
             # Si no tenim lectures AS pero si que ens han cobrat excedents,
             # creem unes lectures AS ficticies a 0 (puta ENDESA)
             lectures.extend(self.factura.get_fake_AS_lectures(comptador_base=self))
@@ -1699,15 +1699,6 @@ class ModeloAparato(object):
             )
         lectures = sorted(lectures, key=lambda x: x.lectura_desde.fecha)
         return lectures
-
-    def has_AS_lectures(self):
-        try:
-            for integrador in self.integradores:
-                if integrador.tipus == 'S':
-                    return True
-        except AttributeError:
-            pass
-        return False
 
     def has_AS_lectures_only_p0(self):
         has_p0 = False
