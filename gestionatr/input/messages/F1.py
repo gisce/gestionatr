@@ -1683,12 +1683,12 @@ class ModeloAparato(object):
             pass
 
         if (not tipus or "S" in tipus) and self.factura and self.factura.get_consum_facturat(tipus='S', periode=None) \
-                and not self.factura.has_AS_lectures():
+                and not self.has_AS_lectures():
             # Si no tenim lectures AS pero si que ens han cobrat excedents,
             # creem unes lectures AS ficticies a 0 (puta ENDESA)
             comptador_base = (lectures and lectures[0].comptador) or None
             lectures.extend(self.factura.get_fake_AS_lectures(comptador_base=comptador_base))
-        if (not tipus or "S" in tipus) and self.factura and self.factura.has_AS_lectures_only_p0() \
+        if (not tipus or "S" in tipus) and self.factura and self.has_AS_lectures_only_p0() \
                 and len(self.factura.get_consum_facturat(tipus='S', periode=None)) > 1:
             # Si nomes ens envien el P0 de excedents pero ens cobren varis periodes
             # creem una lectura e P2 AS ficticies a 0 (puta FENOSA)
@@ -1701,6 +1701,30 @@ class ModeloAparato(object):
             )
         lectures = sorted(lectures, key=lambda x: x.lectura_desde.fecha)
         return lectures
+
+    def has_AS_lectures(self):
+        try:
+            for integrador in self.integradores:
+                if integrador.tipus == 'S':
+                    return True
+        except AttributeError:
+            pass
+        return False
+
+    def has_AS_lectures_only_p0(self):
+        has_p0 = False
+        try:
+            for integrador in self.integradores:
+                if integrador.tipus != 'S':
+                    continue
+                if integrador.codigo_periodo not in ('10', '20', '30', '90', 'A0'):
+                    return False
+                elif integrador.codigo_periodo in ('10', '20', '30', '90', 'A0'):
+                    has_p0 = True
+        except AttributeError:
+            pass
+        return has_p0
+
 
     def get_lectures_activa(self):
         return self.get_lectures(['A', 'S'])
