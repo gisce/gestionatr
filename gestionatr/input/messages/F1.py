@@ -1686,14 +1686,12 @@ class ModeloAparato(object):
                 and not self.factura.has_AS_lectures():
             # Si no tenim lectures AS pero si que ens han cobrat excedents,
             # creem unes lectures AS ficticies a 0 (puta ENDESA)
-            comptador_base = (lectures and lectures[0].comptador) or None
-            lectures.extend(self.factura.get_fake_AS_lectures(comptador_base=comptador_base))
+            lectures.extend(self.factura.get_fake_AS_lectures(comptador_base=self))
         if (not tipus or "S" in tipus) and self.factura and self.factura.has_AS_lectures_only_p0() \
                 and len(self.factura.get_consum_facturat(tipus='S', periode=None)) > 1:
             # Si nomes ens envien el P0 de excedents pero ens cobren varis periodes
             # creem una lectura e P2 AS ficticies a 0 (puta FENOSA)
-            comptador_base = (lectures and lectures[0].comptador) or None
-            lectures.extend(self.factura.get_fake_AS_p2_lectures(comptador_base=comptador_base))
+            lectures.extend(self.factura.get_fake_AS_p2_lectures(comptador_base=self))
 
         if not force_no_transforma_no_td_a_td and self.factura:
             lectures = self.factura.transforma_no_td_a_td(
