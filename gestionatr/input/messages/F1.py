@@ -2249,9 +2249,9 @@ class FacturaATR(Factura):
             for aparell in medida.modelos_aparatos:
                 try:
                     for integrador in aparell.integradores:
-                        if integrador.tipus == 'S' and  integrador.codigo_periodo not in ('10', '20', '30', '90'):
+                        if integrador.tipus == 'S' and  integrador.codigo_periodo not in ('10', '20', '30', '90', 'A0'):
                             return False
-                        elif integrador.tipus == 'S' and  integrador.codigo_periodo in ('10', '20', '30', '90'):
+                        elif integrador.tipus == 'S' and  integrador.codigo_periodo in ('10', '20', '30', '90', 'A0'):
                             has_p0 = True
                 except AttributeError:
                     pass
