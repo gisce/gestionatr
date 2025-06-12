@@ -522,7 +522,7 @@ SUBTYPES_R101 = [
     }),
     ({
         'min_fields': ['nif_cliente', 'nombre_cliente', 'cups', 'comentarios', 'num_fact',
-                       'tipo_disconforme_autoconsumo'],
+                       'disconformidad_autoconsumo'],
         'code': '075',
         'name': u'DISCONFORMIDAD CON AUTOCONSUMO FACTURADO',
         'type': '02',
