@@ -14,7 +14,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       # You can use PyPy versions in python-version.
@@ -23,33 +23,37 @@ jobs:
         python-version: ["2.7", "3.11"]
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
       if: matrix.python-version == '3.11'
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install Python 2
       if: matrix.python-version == '2.7'
       run: |
         sudo apt update
-        sudo apt install python2 python2-dev
-        curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
-        sudo python2 get-pip.py
+        sudo apt install python2 python2-dev python-pip
         sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 1
         sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 2
         printf '1\n' | sudo update-alternatives --config python
+        cd /usr/bin
+        sudo ln -s /usr/bin/pip2 ./pip
+
     - name: Upgrade pip
       run: |
         pip install --upgrade pip setuptools wheel
+
     - name: Install dependencies
       run: |
         pip install -r requirements-dev.txt
         pip install .
+
     - name: Run test
       if: matrix.python-version == '2.7'
       run: |
         python setup.py test
+
     - name: Run test
       if: matrix.python-version == '3.11'
       run: |

@@ -60,6 +60,11 @@ A29_TEMPLATE = """
 </sctdapplication>
 """
 
+# This timeout in seconds will be used on requesting A5-29 and P0
+# It means 4 seconds to stablish connectiona and 8 seconds to read data
+EXTERNAL_REQUESTS_TIMEOUT = (4, 8)
+
+
 def get_gestionatr_version(ctx, param, value):
     if not value or ctx.resilient_parsing:
         return
@@ -145,7 +150,10 @@ def request_atr_29(url, user, password, xml_str=None, params=None):
         # Send request
         h = headers.copy()
         h.update(envelop['extra_headers'])
-        res = requests.post(url, data=soap_content, headers=h, auth=(user, password), verify=False)
+        res = requests.post(
+            url, data=soap_content, headers=h, auth=(user, password), verify=False,
+            timeout=EXTERNAL_REQUESTS_TIMEOUT
+        )
         res = res.content
         try:
             def find_child(element, child_name):
@@ -226,7 +234,10 @@ def request_p0(url, user, password, xml_str=None, params=None):
         # Send request
         h = headers.copy()
         h.update(envelop['extra_headers'])
-        res = requests.post(url, data=soap_content, headers=h, auth=(user, password), verify=False)
+        res = requests.post(
+            url, data=soap_content, headers=h, auth=(user, password), verify=False,
+            timeout=EXTERNAL_REQUESTS_TIMEOUT
+        )
         res = res.content
         try:
             def find_child(element, child_name):
