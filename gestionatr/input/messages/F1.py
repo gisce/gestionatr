@@ -943,6 +943,10 @@ class PeriodoEnergiaNetaGen(Periodo):
             return float(self.periodo.ValorEnergiaNetaGen.text.strip())
         return None
 
+    def es_facturable(self):
+        """En caso de energía generada es posible que esta sea 0, pero se debería facturar
+        igualmente ya que si no la perdemos de vista en la factura de proveedor"""
+        return True
 
 class PeriodoEnergiaAutoconsumida(Periodo):
 
@@ -961,6 +965,10 @@ class PeriodoEnergiaAutoconsumida(Periodo):
             return float(self.periodo.PagoTDA.text.strip())
         return None
 
+    def es_facturable(self):
+        """En caso de energía autoconsumida es posible que esta sea 0, pero se debería facturar
+        igualmente ya que si no la perdemos de vista en la factura de proveedor"""
+        return True
 
 class PeriodoEnergiaExcedentaria(Periodo):
 
@@ -971,6 +979,11 @@ class PeriodoEnergiaExcedentaria(Periodo):
         if hasattr(self.periodo, 'ValorEnergiaExcedentaria'):
             return float(self.periodo.ValorEnergiaExcedentaria.text.strip())
         return None
+
+    def es_facturable(self):
+        """En caso de energía excedentaria es posible que esta sea 0, pero se debería facturar
+        igualmente ya que si no la perdemos de vista en la factura de proveedor"""
+        return True
 
 
 class PeriodoCargo(Periodo):
