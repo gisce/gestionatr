@@ -1388,7 +1388,7 @@ class Medidor(object):
                 # TODO
                 # Revisant un cas concret, sembla que realment ens falta aplicar la zeta, per aixo no quadra.
                 # Normalment es 1 pero pot no ser-ho. Aixó es una mandanga per no ahver de treballar amb la zeta.
-                consum_calculat_sefons_fomrula = round(vals['consum_m3'] * vals['pcs'] * vals['factor_k'], 3)
+                consum_calculat_sefons_fomrula = round((vals['consum_m3'] * vals['pcs'] * vals['factor_k']) + ajust, 3)
                 consum_calculat_segons_factor = round(vals['consum'], 3)
                 if consum_calculat_segons_factor != consum_calculat_sefons_fomrula and vals['pcs']:
                     consum_calculat = round(vals['consum_m3'] * meter.factorconver, 3)
@@ -1401,12 +1401,19 @@ class Medidor(object):
                 # ultima lectura
                 # Per tant: si el consum facturat per la distri no coincideix amb el consum calculat, ero aplicant
                 # el faactor de conversio del ultim dia siq ue aplica, recalculem el factor k perque quadri tot.
-                if consum_kwh_facturat != consum_calculat_segons_factor and vals['pcs'] and vals['consum_m3']:
+                #
+                # Afegim una excepcio a aquesta mandanga: si el facior k que calculem hauria de ser negatiu, no el
+                # tocarem. Un factor k negatiu no te cap sentit i si el calculem aixi es perque
+                # les lectures que ens envia la distri son incorrectes. S'han trobat casos reals que el consum en
+                # kWh informat es negatiu i el consum en m3 posiiu pero no hi ha cap ajust que ho justifiqui.
+                if round(consum_kwh_facturat, 6) != round(consum_calculat_segons_factor, 6) and vals['pcs'] and vals['consum_m3']:
                     if not factor_ultima_lectura and self.meters[-1].factorconver:
                         factor_ultima_lectura = float(self.meters[-1].factorconver)
                     if factor_ultima_lectura:
-                        vals['factor_k'] = consum_kwh_facturat / (vals['consum_m3'] * vals['pcs'])
-                        vals['consum'] = consum_kwh_facturat
+                        new_factor_k = consum_kwh_facturat / (vals['consum_m3'] * vals['pcs'])
+                        if new_factor_k > 0:
+                            vals['factor_k'] = consum_kwh_facturat / (vals['consum_m3'] * vals['pcs'])
+                            vals['consum'] = consum_kwh_facturat
                 res.append(vals)
         return res
 
