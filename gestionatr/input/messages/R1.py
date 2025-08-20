@@ -1119,7 +1119,7 @@ class MinimumFieldsChecker(object):
                 errors.append(field)
         return errors
 
-    def check_tipo_disconforme_autoconsumo(self):
+    def check_disconformidad_autoconsumo(self):
         for var in self.r1.variables_detalle_reclamacion:
             if not var.disconformidad_autoconsumo:
                 return False
