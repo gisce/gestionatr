@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por dgarciar (Comisiï¿½n Nacional de los Mercados y la Competencia) -->
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por dgarciar (Comisión Nacional de los Mercados y la Competencia) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 	<xs:simpleType name="AgenteType">
 		<xs:restriction base="xs:string">
@@ -33,7 +33,7 @@
 	</xs:complexType>
 	<xs:simpleType name="CodProvinciaType">
 		<xs:annotation>
-			<xs:documentation>Cï¿½digo INE de Provincia</xs:documentation>
+			<xs:documentation>Código INE de Provincia</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:length value="2"/>
@@ -263,6 +263,9 @@
 			<xs:enumeration value="R2"/>
 			<xs:enumeration value="R3"/>
 			<xs:enumeration value="R4"/>
+			<xs:enumeration value="R5"/>
+			<xs:enumeration value="R6"/>
+			<xs:enumeration value="R7"/>
 			<xs:enumeration value="R8"/>
 			<xs:enumeration value="R9"/>
 			<xs:enumeration value="A5"/>
@@ -1056,7 +1059,7 @@
 	</xs:simpleType>
 	<xs:simpleType name="CodTBAI">
 		<xs:annotation>
-			<xs:documentation>Cï¿½digo identificativo TicketBAI, de uso exclusivo en la Comunidad Autï¿½noma Vasca</xs:documentation>
+			<xs:documentation>Código identificativo TicketBAI, de uso exclusivo en la Comunidad Autónoma Vasca</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:minLength value="39"/>
