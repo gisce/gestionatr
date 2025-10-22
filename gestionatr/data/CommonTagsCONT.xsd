@@ -1049,24 +1049,13 @@
 			<xs:enumeration value="R2"/>
 			<xs:enumeration value="R3"/>
 			<xs:enumeration value="R4"/>
+			<xs:enumeration value="R5"/>
+			<xs:enumeration value="R6"/>
+			<xs:enumeration value="R7"/>
 			<xs:enumeration value="R8"/>
 			<xs:enumeration value="R9"/>
 			<xs:enumeration value="L0"/>
 			<xs:enumeration value="L1"/>
-			<xs:enumeration value="A5"/>
-			<xs:enumeration value="A6"/>
-			<xs:enumeration value="A7"/>
-			<xs:enumeration value="B5"/>
-			<xs:enumeration value="B6"/>
-			<xs:enumeration value="B7"/>
-			<xs:enumeration value="S1"/>
-			<xs:enumeration value="S2"/>
-			<xs:enumeration value="S3"/>
-			<xs:enumeration value="S4"/>
-			<xs:enumeration value="S5"/>
-			<xs:enumeration value="S6"/>
-			<xs:enumeration value="S7"/>
-			<xs:enumeration value="S8"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TollType949C62020">
@@ -1097,6 +1086,9 @@
 			<xs:enumeration value="R2"/>
 			<xs:enumeration value="R3"/>
 			<xs:enumeration value="R4"/>
+			<xs:enumeration value="R5"/>
+			<xs:enumeration value="R6"/>
+			<xs:enumeration value="R7"/>
 			<xs:enumeration value="R8"/>
 			<xs:enumeration value="R9"/>
 			<xs:enumeration value="L0"/>
@@ -1642,24 +1634,13 @@
 			<xs:enumeration value="R2"/>
 			<xs:enumeration value="R3"/>
 			<xs:enumeration value="R4"/>
+			<xs:enumeration value="R5"/>
+			<xs:enumeration value="R6"/>
+			<xs:enumeration value="R7"/>
 			<xs:enumeration value="R8"/>
 			<xs:enumeration value="R9"/>
 			<xs:enumeration value="L0"/>
 			<xs:enumeration value="L1"/>
-			<xs:enumeration value="A5"/>
-			<xs:enumeration value="A6"/>
-			<xs:enumeration value="A7"/>
-			<xs:enumeration value="B5"/>
-			<xs:enumeration value="B6"/>
-			<xs:enumeration value="B7"/>
-			<xs:enumeration value="S1"/>
-			<xs:enumeration value="S2"/>
-			<xs:enumeration value="S3"/>
-			<xs:enumeration value="S4"/>
-			<xs:enumeration value="S5"/>
-			<xs:enumeration value="S6"/>
-			<xs:enumeration value="S7"/>
-			<xs:enumeration value="S8"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="productcodeType">
