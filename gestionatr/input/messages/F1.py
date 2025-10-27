@@ -1700,18 +1700,20 @@ class ModeloAparato(object):
                 - Lectura totalitzadora d'AS
                 - Lectura totalitzadora d'AE i F1 no té lectures PRE TD
         """
-        if (not tipus or "S" in tipus) and self.factura and self.factura.get_consum_facturat(tipus='S', periode=None) \
-                and not self.factura.has_AS_lectures():
-            # Si no tenim lectures AS pero si que ens han cobrat excedents,
-            # creem unes lectures AS ficticies a 0 (puta ENDESA)
-            lectures.extend(self.factura.get_fake_AS_lectures(comptador_base=self))
+        generacio_facturada = self.factura.get_consum_facturat(tipus='S', periode=None)
+        if (not tipus or "S" in tipus) and self.factura and not self.factura.has_AS_lectures():
+            # El mètode get_consum_facturat retorna [0.0] si no hi ha consum
+            if len(generacio_facturada) > 1 or generacio_facturada[0] != 0.0:
+                # Si no tenim lectures AS pero si que ens han cobrat excedents,
+                # creem unes lectures AS ficticies a 0 (puta ENDESA)
+                lectures.extend(self.factura.get_fake_AS_lectures(comptador_base=self))
         if (not tipus or "S" in tipus) and self.factura and self.has_AS_lectures_only_p0() \
-                and len(self.factura.get_consum_facturat(tipus='S', periode=None)) > 1:
+                and len(generacio_facturada) > 1:
             # Si nomes ens envien el P0 de excedents pero ens cobren varis periodes
             # creem una lectura e P2 AS ficticies a 0 (puta FENOSA)
             lectures.extend(self.factura.get_fake_AS_p2_lectures(comptador_base=self))
 
-        if (not tipus or "A" in tipus) and self.factura and not self.factura.te_lectures_pre_td_amb_tarifa_td() and len(self.factura.get_consum_facturat(tipus='A', periode=None)) > 1:
+        if (not tipus or "A" in tipus) and self.factura and len(self.factura.get_consum_facturat(tipus='A', periode=None)) > 1:
             # Si ens facturen varis periodes de consum i la factura no té lectures pre td, hem de revisar si la lectura
             # de consum és un totalitzador, ja que si ho és hem de crear les lectures ficticies
             lectures_by_date = {}
@@ -1723,7 +1725,7 @@ class ModeloAparato(object):
             for ldate in lectures_by_date:
                 lectura_ae_totalitzador = self.has_lectura_AE_totalitzador_on_date(ldate)
                 if lectura_ae_totalitzador:
-                    lectures.extend(self.get_fake_pX_lectures(lectura_ae_totalitzador, tipus))
+                    lectures.extend(self.get_fake_pX_lectures(lectura_ae_totalitzador, tipus='A'))
 
     def get_fake_pX_lectures(self, lectura_ae_totalitzador, tipus=None):
         # Si te un totalitzador amb el codi de les noves tarifes, creem les lectures fake
