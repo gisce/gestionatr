@@ -1994,6 +1994,14 @@ class FacturaATR(Factura):
 
         return False
 
+    def te_lectures_amb_totalitzador(self):
+        for c in self.get_comptadors():
+            for l in c.get_lectures(force_no_transforma_no_td_a_td=True):
+                if l.codigo_periodo in ['10', '20', '80', '90', 'A0']:
+                    return True
+
+        return False
+
     def te_lectures_amb_decimals(self):
         if self.datos_factura.tarifa_atr_fact not in TARIFES_TD:
             return False
