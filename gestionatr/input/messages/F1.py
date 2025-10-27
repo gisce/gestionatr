@@ -1700,15 +1700,15 @@ class ModeloAparato(object):
                 - Lectura totalitzadora d'AS
                 - Lectura totalitzadora d'AE i F1 no té lectures PRE TD
         """
-        generacio_facturada = self.factura.get_consum_facturat(tipus='S', periode=None)
+        generacio_facturada = self.factura and self.factura.get_consum_facturat(tipus='S', periode=None)
         if (not tipus or "S" in tipus) and self.factura and not self.factura.has_AS_lectures():
             # El mètode get_consum_facturat retorna [0.0] si no hi ha consum
-            if len(generacio_facturada) > 1 or generacio_facturada[0] != 0.0:
+            if generacio_facturada and len(generacio_facturada) > 1 or generacio_facturada[0] != 0.0:
                 # Si no tenim lectures AS pero si que ens han cobrat excedents,
                 # creem unes lectures AS ficticies a 0 (puta ENDESA)
                 lectures.extend(self.factura.get_fake_AS_lectures(comptador_base=self))
         if (not tipus or "S" in tipus) and self.factura and self.has_AS_lectures_only_p0() \
-                and len(generacio_facturada) > 1:
+                and generacio_facturada and len(generacio_facturada) > 1:
             # Si nomes ens envien el P0 de excedents pero ens cobren varis periodes
             # creem una lectura e P2 AS ficticies a 0 (puta FENOSA)
             lectures.extend(self.factura.get_fake_AS_p2_lectures(comptador_base=self))
