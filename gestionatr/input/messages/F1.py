@@ -1963,6 +1963,11 @@ class FacturaATR(Factura):
 
     def __init__(self, data):
         super(FacturaATR, self).__init__(data)
+        # Mandanga incoming:
+        # El metode "te_lectures_pre_td_amb_tarifa_td" quan estem en un F1 tipus G espera que
+        # el atribut "has_pre_td_readings" estigui inicialitzat. Per tant l'inicialitzem amb un valor dummy
+        # i despres ja s'actualitzarà amb el valor real.
+        self.has_pre_td_readings = False
         self.has_pre_td_readings = self.te_lectures_pre_td_amb_tarifa_td()
         self.GETTERS_LINEAS_FACTURA += [
             ('potencia', self.get_info_potencia),
