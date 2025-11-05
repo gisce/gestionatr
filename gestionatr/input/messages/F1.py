@@ -1713,7 +1713,11 @@ class ModeloAparato(object):
             # creem una lectura e P2 AS ficticies a 0 (puta FENOSA)
             lectures.extend(self.factura.get_fake_AS_p2_lectures(comptador_base=self))
 
-        if (not tipus or "A" in tipus) and self.factura and len(self.factura.get_consum_facturat(tipus='A', periode=None)) > 1:
+        if (
+            (not tipus or "A" in tipus)
+            and self.factura and self.factura.datos_factura.tipo_factura != 'G'
+            and len(self.factura.get_consum_facturat(tipus='A', periode=None)) > 1
+        ):
             # Si ens facturen varis periodes de consum i la factura no té lectures pre td, hem de revisar si la lectura
             # de consum és un totalitzador, ja que si ho és hem de crear les lectures ficticies
             lectures_by_date = {}
