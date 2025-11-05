@@ -1681,17 +1681,8 @@ class ModeloAparato(object):
                     lectures.append(integrador)
         except AttributeError:
             pass
-
-        if (not tipus or "S" in tipus) and self.factura and self.factura.get_consum_facturat(tipus='S', periode=None) \
-                and not self.factura.has_AS_lectures():
-            # Si no tenim lectures AS pero si que ens han cobrat excedents,
-            # creem unes lectures AS ficticies a 0 (puta ENDESA)
-            lectures.extend(self.factura.get_fake_AS_lectures(comptador_base=self))
-        if (not tipus or "S" in tipus) and self.factura and self.has_AS_lectures_only_p0() \
-                and len(self.factura.get_consum_facturat(tipus='S', periode=None)) > 1:
-            # Si nomes ens envien el P0 de excedents pero ens cobren varis periodes
-            # creem una lectura e P2 AS ficticies a 0 (puta FENOSA)
-            lectures.extend(self.factura.get_fake_AS_p2_lectures(comptador_base=self))
+        # Comprovem si es necessari crear alguna lectura ficticia i es modifiquen les lectures si és així
+        self.get_fake_lectures(lectures, tipus)
 
         if not force_no_transforma_no_td_a_td and self.factura:
             lectures = self.factura.transforma_no_td_a_td(
@@ -1699,6 +1690,83 @@ class ModeloAparato(object):
             )
         lectures = sorted(lectures, key=lambda x: x.lectura_desde.fecha)
         return lectures
+
+    def get_fake_lectures(self, lectures, tipus=None):
+        """
+            Aquest mètode contempla les diferents casuistiques que es poden donar perque l'ERP hagi de crear lectures
+            ficticies, ja que per algun motiu no ens arriben les lectures dels periodes pertinents.
+            Casos contemplats:
+                - No tenim lectures AS, pero en el F1 ens cobren excedents
+                - Lectura totalitzadora d'AS
+                - Lectura totalitzadora d'AE i F1 no té lectures PRE TD
+        """
+        generacio_facturada = self.factura and self.factura.get_consum_facturat(tipus='S', periode=None)
+        if (not tipus or "S" in tipus) and self.factura and not self.factura.has_AS_lectures():
+            # El mètode get_consum_facturat retorna [0.0] si no hi ha consum
+            if generacio_facturada and len(generacio_facturada) > 1 or generacio_facturada[0] != 0.0:
+                # Si no tenim lectures AS pero si que ens han cobrat excedents,
+                # creem unes lectures AS ficticies a 0 (puta ENDESA)
+                lectures.extend(self.factura.get_fake_AS_lectures(comptador_base=self))
+        if (not tipus or "S" in tipus) and self.factura and self.has_AS_lectures_only_p0() \
+                and generacio_facturada and len(generacio_facturada) > 1:
+            # Si nomes ens envien el P0 de excedents pero ens cobren varis periodes
+            # creem una lectura e P2 AS ficticies a 0 (puta FENOSA)
+            lectures.extend(self.factura.get_fake_AS_p2_lectures(comptador_base=self))
+
+        if (
+            (not tipus or "A" in tipus)
+            and self.factura and self.factura.datos_factura.tipo_factura != 'G'
+            and len(self.factura.get_consum_facturat(tipus='A', periode=None)) > 1
+        ):
+            # Si ens facturen varis periodes de consum i la factura no té lectures pre td, hem de revisar si la lectura
+            # de consum és un totalitzador, ja que si ho és hem de crear les lectures ficticies
+            lectures_by_date = {}
+            # Mirem cuantes lectures ens arriben al F1.
+            # Si ens arriba totalitzador per la lectura de Gener i per la de Febrer, haurem de crear les lectures fake
+            # per totes dues dates
+            for l in lectures:
+                lectures_by_date.setdefault(l.lectura_desde.fecha, []).append(l)
+            for ldate in lectures_by_date:
+                lectura_ae_totalitzador = self.has_lectura_AE_totalitzador_on_date(ldate)
+                if lectura_ae_totalitzador:
+                    lectures.extend(self.get_fake_pX_lectures(lectura_ae_totalitzador, tipus='A'))
+
+    def get_fake_pX_lectures(self, lectura_ae_totalitzador, tipus=None):
+        # Si te un totalitzador amb el codi de les noves tarifes, creem les lectures fake
+        tarifa_atr = self.factura.datos_factura.tarifa_atr_fact
+        nperiodes_td = PERIODES_PER_TARIFA.get(tarifa_atr, {}).get(tipus, None)
+        # Obtenim els periodes de les lectures segons la tarifa
+        res = []
+        if nperiodes_td:
+            lectures_per_periode = {}
+            for periode in range(1, nperiodes_td + 1):
+                pname = "P" + str(periode)
+                lectures_per_periode[pname] = []
+
+            # Agafem el totalitzador com a lectura "base"
+            base_lectura = lectura_ae_totalitzador
+            # Marquem el totalitzador com a lectura de P1
+            lectures_per_periode[lectura_ae_totalitzador.periode].append(lectura_ae_totalitzador)
+
+            if base_lectura:
+                for periode in lectures_per_periode:
+                    if not lectures_per_periode.get(periode) and base_lectura:
+                        try:
+                            aux = self.factura.get_fake_pX_lectura(tipus, periode, base_lectura)
+                            res.append(aux)
+                        except Exception:
+                            pass
+        return res
+
+    def has_lectura_AE_totalitzador_on_date(self, ldate):
+        # Busquem les lectures d'activa entrant per la data que ens interessa
+        lectures_ae = [
+            lect for lect in self.integradores
+            if lect.tipus == 'A' and lect.lectura_desde.fecha == ldate
+        ]
+        if len(lectures_ae) == 1 and lectures_ae[0].codigo_periodo in ('A0', '90'):
+            return lectures_ae[0]
+        return False
 
     def has_AS_lectures_only_p0(self):
         has_p0 = False
@@ -1899,6 +1967,11 @@ class FacturaATR(Factura):
 
     def __init__(self, data):
         super(FacturaATR, self).__init__(data)
+        # Mandanga incoming:
+        # El metode "te_lectures_pre_td_amb_tarifa_td" quan estem en un F1 tipus G espera que
+        # el atribut "has_pre_td_readings" estigui inicialitzat. Per tant l'inicialitzem amb un valor dummy
+        # i despres ja s'actualitzarà amb el valor real.
+        self.has_pre_td_readings = False
         self.has_pre_td_readings = self.te_lectures_pre_td_amb_tarifa_td()
         self.GETTERS_LINEAS_FACTURA += [
             ('potencia', self.get_info_potencia),
@@ -1928,6 +2001,14 @@ class FacturaATR(Factura):
         for c in self.get_comptadors():
             for l in c.get_lectures(force_no_transforma_no_td_a_td=True):
                 if l.codigo_periodo in PERIODES_NO_TD:
+                    return True
+
+        return False
+
+    def te_lectures_amb_totalitzador(self):
+        for c in self.get_comptadors():
+            for l in c.get_lectures(force_no_transforma_no_td_a_td=True):
+                if l.codigo_periodo in ['10', '20', '80', '90', 'A0']:
                     return True
 
         return False
@@ -2064,6 +2145,7 @@ class FacturaATR(Factura):
             if l.tipus == tipus:
                 # Mandanga (Puta Fenosa) En cas que ens arribin lectures de periodes fora de la tarifa del contracte
                 # ignorem les lectures dels periodes que estiguin fora de la tarifa ATR del contracte
+                # Els codis 90 i A0 corresponen al periode P1
                 if l.periode in lectures_per_periode.keys():
                     lectures_per_periode[l.periode].append(l)
                     base_lectura = l
