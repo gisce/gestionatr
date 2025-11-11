@@ -1691,6 +1691,7 @@ TAULA_MOTIVO_DE_MODIFICACION_EN_UN_CAMBIO_DE_COMERCIALIZADOR = [
 ]
 TAULA_MOTIVO_ANULACION = [
     ('002', 'Anulación de Solicitud de Cambio de Comercializadora'),
+    ('003', 'Anulación de Solicitud de Modificación'),
     ('004', 'Anulación de Solicitud de Baja'),
     ('014', 'Anulación de Solicitud de Baja desde SCTD por '
             'concurrencia Baja / Cambio'),
