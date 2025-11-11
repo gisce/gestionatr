@@ -2259,7 +2259,7 @@ class FacturaATR(Factura):
                 res.append(0.0)
             return res
 
-        return None
+        return []
 
     def get_consums_reactiva_capacitiva_a_facturar(self):
         res = {}
