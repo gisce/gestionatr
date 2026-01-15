@@ -1711,7 +1711,8 @@ class ModeloAparato(object):
                 and generacio_facturada and len(generacio_facturada) > 1:
             # Si nomes ens envien el P0 de excedents pero ens cobren varis periodes
             # creem una lectura e P2 AS ficticies a 0 (puta FENOSA)
-            lectures.extend(self.factura.get_fake_AS_p2_lectures(comptador_base=self))
+            # Setejem el period_start a 2 perque com a lectura de P1 agafem el totalitzador
+            lectures.extend(self.factura.get_fake_AS_lectures(period_start=2, comptador_base=self))
 
         if (
             (not tipus or "A" in tipus)
@@ -1733,16 +1734,10 @@ class ModeloAparato(object):
 
     def get_fake_pX_lectures(self, lectura_ae_totalitzador, tipus=None):
         # Si te un totalitzador amb el codi de les noves tarifes, creem les lectures fake
-        tarifa_atr = self.factura.datos_factura.tarifa_atr_fact
-        nperiodes_td = PERIODES_PER_TARIFA.get(tarifa_atr, {}).get(tipus, None)
         # Obtenim els periodes de les lectures segons la tarifa
+        lectures_per_periode = self.factura.get_periodes_from_tarifa_and_tipus(tipus=tipus)
         res = []
-        if nperiodes_td:
-            lectures_per_periode = {}
-            for periode in range(1, nperiodes_td + 1):
-                pname = "P" + str(periode)
-                lectures_per_periode[pname] = []
-
+        if lectures_per_periode:
             # Agafem el totalitzador com a lectura "base"
             base_lectura = lectura_ae_totalitzador
             # Marquem el totalitzador com a lectura de P1
@@ -2339,44 +2334,6 @@ class FacturaATR(Factura):
                     pass
         return has_p0
 
-    def get_fake_AS_lectures(self, comptador_base=None):
-        res = []
-        comptador_amb_lectures = None
-        for medida in self.medidas:
-            for c in medida.modelos_aparatos:
-                if c.get_lectures_activa_entrant():
-                    comptador_amb_lectures = c
-                    break
-        if comptador_amb_lectures:
-            te_autoconsum = (self.autoconsumo and self.autoconsumo.energia_excedentaria) or ([x for x in (self.conceptos_repercutibles or []) if '7' == x.concepto_repercutible[0]])
-            if not te_autoconsum:
-                return res
-            base_info = comptador_amb_lectures.get_lectures_activa_entrant()[0]
-            i = 0
-            for consum in self.get_consum_facturat(tipus='S'):
-                i += 1
-                l1 = Lectura(None)
-                l1.fecha = base_info.lectura_desde.fecha
-                l1.lectura = 0
-                l1.procedencia = base_info.lectura_desde.procedencia
-                l2 = Lectura(None)
-                l2.fecha = base_info.lectura_hasta.fecha
-                l2.lectura = 0
-                l2.procedencia = base_info.lectura_hasta.procedencia
-                new_integrador = Integrador(base_info.integrador)
-                if comptador_base:
-                    new_integrador.comptador = comptador_base
-                new_integrador.comptador = base_info.comptador
-                new_integrador.magnitud = "AS"
-                new_integrador.numero_ruedas_enteras = base_info.numero_ruedas_enteras
-                new_integrador.codigo_periodo = base_info.codigo_periodo[0] + str(i)
-                if not new_integrador.periode:
-                    new_integrador.codigo_periodo = base_info.codigo_periodo
-                new_integrador.lectura_desde = l1
-                new_integrador.lectura_hasta = l2
-                res.append(new_integrador)
-        return res
-
     def get_fake_pX_lectura(self, tipus, periode, base_info, lectura_desde=0, lectura_hasta=0, comptador_base=None):
         l1 = Lectura(None)
         l1.fecha = base_info.lectura_desde.fecha
@@ -2412,7 +2369,7 @@ class FacturaATR(Factura):
 
         return new_integrador
 
-    def get_fake_AS_p2_lectures(self, comptador_base=None):
+    def get_fake_AS_lectures(self, period_start=1, comptador_base=None):
         res = []
         comptador_amb_lectures = None
         for medida in self.medidas:
@@ -2425,11 +2382,10 @@ class FacturaATR(Factura):
             if not te_autoconsum:
                 return res
             base_info = comptador_amb_lectures.get_lectures_activa_entrant()[0]
-            i = 0
-            for consum in self.get_consum_facturat(tipus='S'):
-                i += 1
-                if i <= 1:
-                    continue
+            num_periodes = self.factura.get_num_periodes_from_tarifa_and_tipus(tipus='S')
+            # Depending on period_start, P1 is skipped. If we have totalizer, it will be skipped, otherwise we need to
+            # create readings for each tariff period
+            for i in range(period_start, num_periodes+1): # num_periodes not included, so we add 1
                 l1 = Lectura(None)
                 l1.fecha = base_info.lectura_desde.fecha
                 l1.lectura = 0
@@ -2722,6 +2678,22 @@ class FacturaATR(Factura):
                 data.append(vals)
                 num_periode += 1
         return data
+
+    def get_num_periodes_from_tarifa_and_tipus(self, tipus='A'):
+        tarifa_atr = self.datos_factura.tarifa_atr_fact
+        nperiodes_td = PERIODES_PER_TARIFA.get(tarifa_atr, {}).get(tipus, None)
+        return nperiodes_td
+
+    def get_periodes_from_tarifa_and_tipus(self, tipus='A'):
+        lectures_per_periode = {}
+        nperiodes_td =  self.get_num_periodes_from_tarifa_and_tipus(tipus=tipus)
+        # Obtenim els periodes de les lectures segons la tarifa
+        if nperiodes_td:
+            for periode in range(1, nperiodes_td + 1):
+                pname = "P" + str(periode)
+                lectures_per_periode[pname] = []
+
+        return lectures_per_periode
 
 
 class ConceptoRepercutible(object):
