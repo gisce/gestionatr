@@ -1703,7 +1703,7 @@ class ModeloAparato(object):
         generacio_facturada = self.factura and self.factura.get_consum_facturat(tipus='S', periode=None)
         if (not tipus or "S" in tipus) and self.factura and not self.factura.has_AS_lectures():
             # El mètode get_consum_facturat retorna [0.0] si no hi ha consum
-            if generacio_facturada and len(generacio_facturada) > 1 or generacio_facturada[0] != 0.0:
+            if generacio_facturada and (len(generacio_facturada) > 1 or generacio_facturada[0] != 0.0):
                 # Si no tenim lectures AS pero si que ens han cobrat excedents,
                 # creem unes lectures AS ficticies a 0 (puta ENDESA)
                 lectures.extend(self.factura.get_fake_AS_lectures(comptador_base=self))
@@ -2374,7 +2374,7 @@ class FacturaATR(Factura):
         comptador_amb_lectures = None
         for medida in self.medidas:
             for c in medida.modelos_aparatos:
-                if c.get_lectures_activa_sortint():
+                if c.get_lectures_activa_entrant():
                     comptador_amb_lectures = c
                     break
         if comptador_amb_lectures:
@@ -2382,7 +2382,7 @@ class FacturaATR(Factura):
             if not te_autoconsum:
                 return res
             base_info = comptador_amb_lectures.get_lectures_activa_entrant()[0]
-            num_periodes = self.factura.get_num_periodes_from_tarifa_and_tipus(tipus='S')
+            num_periodes = self.get_num_periodes_from_tarifa_and_tipus(tipus='S')
             # Depending on period_start, P1 is skipped. If we have totalizer, it will be skipped, otherwise we need to
             # create readings for each tariff period
             for i in range(period_start, num_periodes+1): # num_periodes not included, so we add 1
