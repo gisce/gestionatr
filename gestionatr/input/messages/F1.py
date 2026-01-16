@@ -2369,18 +2369,31 @@ class FacturaATR(Factura):
 
         return new_integrador
 
-    def get_fake_AS_lectures(self, period_start=1, comptador_base=None):
-        res = []
+    def get_comptador_amb_lectures(self, tipus=None):
+        """
+            Retorna el primer comptador que tingui les lectures del tipus inidcat
+            Si cap comptador té lectures del primer tipus, es repeteix el procés amb el seguent tipus
+        """
+        if tipus is None:
+            tipus = ['S', 'A']
         comptador_amb_lectures = None
         for medida in self.medidas:
-            for c in medida.modelos_aparatos:
-                if c.get_lectures_activa_entrant():
-                    comptador_amb_lectures = c
-                    break
+            for t in tipus:
+                for c in medida.modelos_aparatos:
+                    if c.get_lectures(tipus=t):
+                        comptador_amb_lectures = c
+                        break
+
+        return comptador_amb_lectures
+
+    def get_fake_AS_lectures(self, period_start=1, comptador_base=None):
+        res = []
+        # Si no te autoconsum no creem lectures d'excedents
+        te_autoconsum = (self.autoconsumo and self.autoconsumo.energia_excedentaria) or ([x for x in (self.conceptos_repercutibles or []) if '7' == x.concepto_repercutible[0]])
+        if not te_autoconsum:
+            return res
+        comptador_amb_lectures = self.get_comptador_amb_lectures()
         if comptador_amb_lectures:
-            te_autoconsum = (self.autoconsumo and self.autoconsumo.energia_excedentaria) or ([x for x in (self.conceptos_repercutibles or []) if '7' == x.concepto_repercutible[0]])
-            if not te_autoconsum:
-                return res
             base_info = comptador_amb_lectures.get_lectures_activa_entrant()[0]
             num_periodes = self.get_num_periodes_from_tarifa_and_tipus(tipus='S')
             # Depending on period_start, P1 is skipped. If we have totalizer, it will be skipped, otherwise we need to
