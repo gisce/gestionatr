@@ -2383,19 +2383,31 @@ class FacturaATR(Factura):
                     if c.get_lectures(tipus=t):
                         comptador_amb_lectures = c
                         break
+                if comptador_amb_lectures:
+                    break
+            if comptador_amb_lectures:
+                break
 
         return comptador_amb_lectures
 
     def get_fake_AS_lectures(self, period_start=1, comptador_base=None):
         res = []
         # Si no te autoconsum no creem lectures d'excedents
-        te_autoconsum = (self.autoconsumo and self.autoconsumo.energia_excedentaria) or ([x for x in (self.conceptos_repercutibles or []) if '7' == x.concepto_repercutible[0]])
+        conceptes_repercutibles_excedents = [x for x in (self.conceptos_repercutibles or []) if '7' == x.concepto_repercutible[0]]
+        te_autoconsum = (self.autoconsumo and self.autoconsumo.energia_excedentaria) or conceptes_repercutibles_excedents
         if not te_autoconsum:
             return res
         comptador_amb_lectures = self.get_comptador_amb_lectures()
         if comptador_amb_lectures:
             base_info = comptador_amb_lectures.get_lectures_activa_entrant()[0]
             num_periodes = self.get_num_periodes_from_tarifa_and_tipus(tipus='S')
+            # Mandanga per les tarifes antigues. Els excedents s'informaven com a conceptes repercutibles.
+            # Si no hem pogut obtenir el num periodes perque son tarifes antigues, i posem tants periodes com
+            # conceptes repercutibles tingui
+            if not num_periodes:
+                num_periodes = len(conceptes_repercutibles_excedents)
+            if not num_periodes:
+                return res
             # Depending on period_start, P1 is skipped. If we have totalizer, it will be skipped, otherwise we need to
             # create readings for each tariff period
             for i in range(period_start, num_periodes+1): # num_periodes not included, so we add 1
@@ -2694,7 +2706,7 @@ class FacturaATR(Factura):
 
     def get_num_periodes_from_tarifa_and_tipus(self, tipus='A'):
         tarifa_atr = self.datos_factura.tarifa_atr_fact
-        nperiodes_td = PERIODES_PER_TARIFA.get(tarifa_atr, {}).get(tipus, None)
+        nperiodes_td = PERIODES_PER_TARIFA.get(tarifa_atr, {}).get(tipus, 0)
         return nperiodes_td
 
     def get_periodes_from_tarifa_and_tipus(self, tipus='A'):
