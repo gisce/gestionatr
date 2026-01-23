@@ -829,6 +829,10 @@ TABLA_17 = [
     ('023', '6.4TD'),
     ('024', '3.0TDVE'),
     ('025', '6.1TDVE'),
+    ('026', '6.2TDVE'),
+    ('027', '3.0 TDVE - Embarcaciones'),
+    ('028', '6.1 TDVE – Embarcaciones'),
+    ('029', '6.2 TDVE – Embarcaciones'),
 ]
 
 TABLA_20 = [
