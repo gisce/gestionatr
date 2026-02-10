@@ -1691,6 +1691,22 @@ class ModeloAparato(object):
         lectures = sorted(lectures, key=lambda x: x.lectura_desde.fecha)
         return lectures
 
+    def get_lectures_base(self, tipus=None):
+        """Retorna totes les lectures tal com venen informades al F1, sense manipular"""
+        lectures = []
+        try:
+            for integrador in self.integradores:
+                # If we don't have any type requirements or the current
+                # reading is in them
+                if not tipus or (integrador.tipus and integrador.tipus in tipus):
+                    integrador.comptador = self
+                    lectures.append(integrador)
+        except AttributeError:
+            pass
+
+        lectures = sorted(lectures, key=lambda x: x.lectura_desde.fecha)
+        return lectures
+
     def get_fake_lectures(self, lectures, tipus=None):
         """
             Aquest mètode contempla les diferents casuistiques que es poden donar perque l'ERP hagi de crear lectures
@@ -2391,7 +2407,7 @@ class FacturaATR(Factura):
         # Comprova primer el comptador passat
         if comptador:
             for t in tipus:
-                if comptador.get_lectures(tipus=t):
+                if comptador.get_lectures_base(tipus=t):
                     return comptador
 
         # Comprova la resta de comptadors
@@ -2401,7 +2417,7 @@ class FacturaATR(Factura):
                     # Evita tornar a comprovar el comptador passat
                     if comptador and c is comptador:
                         continue
-                    if c.get_lectures(tipus=t):
+                    if c.get_lectures_base(tipus=t):
                         return c
 
         return None
