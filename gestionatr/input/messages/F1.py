@@ -2369,26 +2369,42 @@ class FacturaATR(Factura):
 
         return new_integrador
 
-    def get_comptador_amb_lectures(self, tipus=None):
+    def get_comptador_amb_lectures(self, comptador=None, tipus=None):
         """
-            Retorna el primer comptador que tingui les lectures del tipus inidcat
-            Si cap comptador té lectures del primer tipus, es repeteix el procés amb el seguent tipus
+        Retorna el primer comptador que tingui lectures disponibles segons
+        l’ordre de prioritat dels tipus indicats.
+
+        Primer es comprova el comptador passat com a paràmetre. Si aquest no
+        té lectures, es busquen lectures entre els comptadors de les mesures
+        associades.
+
+        Si no es troba cap comptador amb lectures, es retorna None.
+
+        :param comptador: Comptador a comprovar primer (opcional)
+        :param tipus: Tipus de lectura per ordre de prioritat.
+                      Per defecte ['S', 'A']
+        :return: Comptador amb lectures o None
         """
         if tipus is None:
             tipus = ['S', 'A']
-        comptador_amb_lectures = None
+
+        # Comprova primer el comptador passat
+        if comptador:
+            for t in tipus:
+                if comptador.get_lectures(tipus=t):
+                    return comptador
+
+        # Comprova la resta de comptadors
         for medida in self.medidas:
             for t in tipus:
                 for c in medida.modelos_aparatos:
+                    # Evita tornar a comprovar el comptador passat
+                    if comptador and c is comptador:
+                        continue
                     if c.get_lectures(tipus=t):
-                        comptador_amb_lectures = c
-                        break
-                if comptador_amb_lectures:
-                    break
-            if comptador_amb_lectures:
-                break
+                        return c
 
-        return comptador_amb_lectures
+        return None
 
     def get_fake_AS_lectures(self, period_start=1, comptador_base=None):
         res = []
@@ -2397,7 +2413,7 @@ class FacturaATR(Factura):
         te_autoconsum = (self.autoconsumo and self.autoconsumo.energia_excedentaria) or conceptes_repercutibles_excedents
         if not te_autoconsum:
             return res
-        comptador_amb_lectures = self.get_comptador_amb_lectures()
+        comptador_amb_lectures = self.get_comptador_amb_lectures(comptador=comptador_base)
         if comptador_amb_lectures:
             base_info = comptador_amb_lectures.get_lectures_activa_entrant()[0]
             num_periodes = self.get_num_periodes_from_tarifa_and_tipus(tipus='S')
