@@ -1654,7 +1654,7 @@ class ModeloAparato(object):
     def get_dates_inici_i_final(self):
         data_inici = ''
         data_final = ''
-        for lect in self.get_lectures(force_no_transforma_no_td_a_td=True):
+        for lect in self.get_lectures_base():
             data_in_compt = datetime.strptime(
                 lect.lectura_desde.fecha, '%Y-%m-%d'
             )
