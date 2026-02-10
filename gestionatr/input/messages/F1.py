@@ -2385,30 +2385,31 @@ class FacturaATR(Factura):
 
         return new_integrador
 
-    def get_comptador_amb_lectures(self, comptador=None, tipus=None):
+    def get_lectura_base(self, comptador=None, tipus=None):
         """
-        Retorna el primer comptador que tingui lectures disponibles segons
-        l’ordre de prioritat dels tipus indicats.
+        Retorna la primera lectura disponible segons l’ordre de prioritat dels tipus indicats.
 
-        Primer es comprova el comptador passat com a paràmetre. Si aquest no
-        té lectures, es busquen lectures entre els comptadors de les mesures
-        associades.
+        - Si es proporciona un comptador, es comprova primer i es retorna la seva primera
+          lectura disponible.
+        - Si aquest comptador no té lectures, es busca entre els comptadors de les mesures
+          associades, respectant l’ordre de tipus i mesures.
 
-        Si no es troba cap comptador amb lectures, es retorna None.
+        Si no es troba cap lectura, es retorna `(None, None)`.
 
         :param comptador: Comptador a comprovar primer (opcional)
-        :param tipus: Tipus de lectura per ordre de prioritat.
-                      Per defecte ['S', 'A']
-        :return: Comptador amb lectures o None
+        :param tipus: Tipus de lectura per ordre de prioritat. Per defecte ['S', 'A']
+        :return: La primera lectura disponible o `(None, None)` si no n'hi ha cap
         """
+
         if tipus is None:
             tipus = ['S', 'A']
 
         # Comprova primer el comptador passat
         if comptador:
             for t in tipus:
-                if comptador.get_lectures_base(tipus=t):
-                    return comptador
+                lectures_base = comptador.get_lectures_base(tipus=t)
+                if lectures_base:
+                    return lectures_base[0]
 
         # Comprova la resta de comptadors
         for medida in self.medidas:
@@ -2417,10 +2418,11 @@ class FacturaATR(Factura):
                     # Evita tornar a comprovar el comptador passat
                     if comptador and c is comptador:
                         continue
-                    if c.get_lectures_base(tipus=t):
-                        return c
+                    lectures_base = c.get_lectures_base(tipus=t)
+                    if lectures_base:
+                        return lectures_base[0]
 
-        return None
+        return None, None
 
     def get_fake_AS_lectures(self, period_start=1, comptador_base=None):
         res = []
@@ -2429,9 +2431,8 @@ class FacturaATR(Factura):
         te_autoconsum = (self.autoconsumo and self.autoconsumo.energia_excedentaria) or conceptes_repercutibles_excedents
         if not te_autoconsum:
             return res
-        comptador_amb_lectures = self.get_comptador_amb_lectures(comptador=comptador_base)
-        if comptador_amb_lectures:
-            base_info = comptador_amb_lectures.get_lectures_activa_entrant()[0]
+        base_info = self.get_lectura_base(comptador=comptador_base)
+        if base_info:
             num_periodes = self.get_num_periodes_from_tarifa_and_tipus(tipus='S')
             # Mandanga per les tarifes antigues. Els excedents s'informaven com a conceptes repercutibles.
             # Si no hem pogut obtenir el num periodes perque son tarifes antigues, i posem tants periodes com
