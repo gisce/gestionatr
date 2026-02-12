@@ -20,6 +20,7 @@
       <ContratacionIncondicionalPS>S</ContratacionIncondicionalPS>
       <ContratacionIncondicionalBS>S</ContratacionIncondicionalBS>
       <BonoSocial>0</BonoSocial>
+      <TraspasoCartera>S</TraspasoCartera>
     </DatosSolicitud>
     <Cliente>
       <IdCliente>

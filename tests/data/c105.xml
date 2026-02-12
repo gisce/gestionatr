@@ -23,10 +23,17 @@
         <CodContrato>00001</CodContrato>
       </IdContrato>
       <FechaFinalizacion>2020-01-01</FechaFinalizacion>
+      <RefCatastro>1234567890qwertyuiop</RefCatastro>
+      <RefCatastroFinca>1234567890qwer</RefCatastroFinca>
+      <UTM>
+        <X>100</X>
+        <Y>200</Y>
+        <Huso>40</Huso>
+        <Banda>E</Banda>
+      </UTM>
       <Autoconsumo>
         <DatosSuministro>
           <TipoCUPS>01</TipoCUPS>
-          <RefCatastro>1234567890qwertyuiop</RefCatastro>
         </DatosSuministro>
         <DatosCAU>
           <CAU>ES1234000000000001JN0FA001</CAU>
@@ -124,6 +131,7 @@
         </DatosCAU>
       </Autoconsumo>
       <TipoContratoATR>02</TipoContratoATR>
+      <CUPSPrincipal>ES1234000000000001JN0F</CUPSPrincipal>
       <CondicionesContractuales>
         <TarifaATR>018</TarifaATR>
         <PeriodicidadFacturacion>01</PeriodicidadFacturacion>

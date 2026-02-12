@@ -73,18 +73,19 @@
             </Direccion>
         </Cliente>
         <Medida>
-            <PropiedadEquipo>C</PropiedadEquipo>
             <TipoEquipoMedida>L00</TipoEquipoMedida>
             <ModelosAparato>
                 <ModeloAparato>
                   <TipoAparato>CG</TipoAparato>
                   <MarcaAparato>132</MarcaAparato>
                   <ModeloMarca>011</ModeloMarca>
+                  <PropiedadEquipo>C</PropiedadEquipo>
                 </ModeloAparato>
                 <ModeloAparato>
                   <TipoAparato>CG</TipoAparato>
                   <MarcaAparato>132</MarcaAparato>
                   <ModeloMarca>012</ModeloMarca>
+                  <PropiedadEquipo>C</PropiedadEquipo>
                 </ModeloAparato>
             </ModelosAparato>
         </Medida>

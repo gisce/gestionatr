@@ -439,19 +439,28 @@ class Medida(object):
         self.medida = data
 
     @property
-    def propiedad_equipo(self):
+    def tipo_equipo_medida(self):
         data = ''
         try:
-            data = self.medida.PropiedadEquipo.text
+            data = self.medida.TipoEquipoMedida.text
         except AttributeError:
             pass
         return data
 
     @property
-    def tipo_equipo_medida(self):
+    def cambio_propiedad_elemento_edm(self):
         data = ''
         try:
-            data = self.medida.TipoEquipoMedida.text
+            data = self.medida.CambioPropiedadElementoEdM.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def contacto(self):
+        data = ''
+        try:
+            data = Contacto(self.medida.Contacto)
         except AttributeError:
             pass
         return data
@@ -494,6 +503,15 @@ class ModeloAparato(object):
         data = ''
         try:
             data = self.modelo_aparato.ModeloMarca.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def propiedad_equipo(self):
+        data = ''
+        try:
+            data = self.modelo_aparato.PropiedadEquipo.text
         except AttributeError:
             pass
         return data

@@ -107,14 +107,17 @@
                         <Periodo>
                             <ValorEnergiaAutoconsumida>11.00</ValorEnergiaAutoconsumida>
                             <PagoTDA>0</PagoTDA>
+                            <ImporteEnergiaAutoconsumida>1.00</ImporteEnergiaAutoconsumida>
                         </Periodo>
                         <Periodo>
                             <ValorEnergiaAutoconsumida>12.00</ValorEnergiaAutoconsumida>
                             <PagoTDA>0</PagoTDA>
+                            <ImporteEnergiaAutoconsumida>2.00</ImporteEnergiaAutoconsumida>
                         </Periodo>
                         <Periodo>
                             <ValorEnergiaAutoconsumida>13.00</ValorEnergiaAutoconsumida>
                             <PagoTDA>0</PagoTDA>
+                            <ImporteEnergiaAutoconsumida>3.00</ImporteEnergiaAutoconsumida>
                         </Periodo>
                     </TerminoEnergiaAutoconsumida>
                     <ImporteTotalEnergiaActivaAutoconsumida>33.00</ImporteTotalEnergiaActivaAutoconsumida>

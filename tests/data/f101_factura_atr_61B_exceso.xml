@@ -107,8 +107,12 @@
                 <ImporteTotalTerminoPotencia>3611.37</ImporteTotalTerminoPotencia>
             </Potencia>
             <ExcesoPotencia>
+                <FechaDesde>2017-02-28</FechaDesde>
+                <FechaHasta>2017-03-31</FechaHasta>
                 <Periodo>
                     <ValorExcesoPotencia>186.29</ValorExcesoPotencia>
+                    <NumeroDias>31</NumeroDias>
+                    <PrecioExceso>6.009355</PrecioExceso>
                 </Periodo>
                 <ImporteTotalExcesos>186.29</ImporteTotalExcesos>
             </ExcesoPotencia>
