@@ -35,7 +35,8 @@ from gestionatr.output.messages import sw_r1 as r1
 from gestionatr.output.messages import sw_t1 as t1
 from gestionatr.output.messages import sw_w1 as w1
 from . import unittest
-from .utils import get_data, assertXmlEqual, get_header, get_cliente, get_contacto, get_medida_resto
+from .utils import get_data, assertXmlEqual, get_header, get_cliente, get_contacto, \
+    get_medida_resto, get_contacto_medida
 
 
 def get_puntos_medida(obj_proces):
@@ -165,7 +166,6 @@ def get_autoconsumo(tipus_info='comer', multi=False):
     datos_suministro = c1.DatosSuministro()
     datos_suministro_fields = {
         'tipo_cups': '01',
-        'ref_catastro': '1234567890qwertyuiop',
     }
     datos_suministro.feed(datos_suministro_fields)
 
@@ -234,6 +234,7 @@ def get_autoconsumo(tipus_info='comer', multi=False):
     datos_1 = c1.DatosInstGen()
     datos_inst_gen_fields = {
         'cil': 'ES1234000000000001JN0F001',
+        'tec_generador': 'b11',
         'pot_instalada_gen': '100',
         'tipo_instalacion': '01',
         'esquema_medida': 'B',
@@ -342,6 +343,7 @@ class test_C1(unittest.TestCase):
             'contratacion_incondicional_ps': 'S',
             'contratacion_incondicional_bs': 'S',
             'bono_social': '0',
+            'traspaso_cartera': 'S',
         }
         datos_solicitud.feed(datos_solicitud_fields)
 
@@ -523,11 +525,26 @@ class test_C1(unittest.TestCase):
         condiciones_contractuales.feed(condiciones_contractuales_fields)
 
         autoconsumo = get_autoconsumo(tipus_info='distri', multi=True)
+
+        # UTM contracte
+        utm_c = c1.UTM()
+        utm_c_fields = {
+            'x': '100',
+            'y': '200',
+            'huso': '40',
+            'banda': 'E',
+        }
+        utm_c.feed(utm_c_fields)
+
         contrato_fields = {
             'id_contrato': id_contrato,
             'data_finalitzacio': '2020-01-01',
+            'ref_catastro': '1234567890qwertyuiop',
+            'ref_catastro_finca': '1234567890qwer',
+            'utm': utm_c,
             'autoconsumo': autoconsumo,
             'tipo_contrato_atr': '02',
+            'cups_principal': 'ES1234000000000001JN0F',
             'condiciones_contractuales': condiciones_contractuales,
         }
         contrato.feed(contrato_fields)
@@ -855,6 +872,8 @@ class test_C2(unittest.TestCase):
 
         contrato_fields = {
             'fecha_finalizacion': '2018-01-01',
+            'ref_catastro': '1234567890qwertyuiop',
+            'ref_catastro_finca': '1234567890qwer',
             'autoconsumo': autoconsumo,
             'tipo_contrato_atr': '02',
             'cups_principal': "ES1234000000000001JN0F",
@@ -1117,10 +1136,23 @@ class test_C2(unittest.TestCase):
 
         puntos_de_medida = get_puntos_medida(c2)
 
+        # UTM contracte
+        utm_c = c2.UTM()
+        utm_c_fields = {
+            'x': '100',
+            'y': '200',
+            'huso': '40',
+            'banda': 'E',
+        }
+        utm_c.feed(utm_c_fields)
+
         contrato_fields = {
             'id_contrato': id_contrato,
             'condiciones_contractuales': condiciones_contractuales,
             'fecha_finalizacion': '2020-01-01',
+            'ref_catastro': '1234567890qwertyuiop',
+            'ref_catastro_finca': '1234567890qwer',
+            'utm': utm_c,
             'autoconsumo': autoconsumo,
             'tipo_contrato_atr': '02',
             'cups_principal': "ES1234000000000001JN0F"
@@ -1590,7 +1622,6 @@ class test_A3(unittest.TestCase):
         datos_suministro = c1.DatosSuministro()
         datos_suministro_fields = {
             'tipo_cups': '01',
-            'ref_catastro': '1234567890qwertyuiop',
         }
         datos_suministro.feed(datos_suministro_fields)
 
@@ -1691,6 +1722,8 @@ class test_A3(unittest.TestCase):
 
         contrato_fields = {
             'fecha_finalizacion': '2018-01-01',
+            'ref_catastro': '1234567890qwertyuiop',
+            'ref_catastro_finca': '1234567890qwer',
             'autoconsumo': autoconsumo,
             'tipo_contrato_atr': '02',
             'cups_principal': "ES1234000000000001JN0F",
@@ -1806,6 +1839,8 @@ class test_A3(unittest.TestCase):
 
         contrato_fields = {
             'fecha_finalizacion': '2018-01-01',
+            'ref_catastro': '1234567890qwertyuiop',
+            'ref_catastro_finca': '1234567890qwer',
             'tipo_autoconsumo': '00',
             'tipo_contrato_atr': '02',
             'condiciones_contractuales': condiciones_contractuales,
@@ -1912,7 +1947,6 @@ class test_A3(unittest.TestCase):
         datos_suministro = a3.DatosSuministro()
         datos_suministro_fields = {
             'tipo_cups': '01',
-            'ref_catastro': '1234567890qwertyuiop',
         }
         datos_suministro.feed(datos_suministro_fields)
 
@@ -2033,9 +2067,22 @@ class test_A3(unittest.TestCase):
         }
         condiciones_contractuales.feed(condiciones_contractuales_fields)
 
+        # UTM contracte
+        utm_c = a3.UTM()
+        utm_c_fields = {
+            'x': '100',
+            'y': '200',
+            'huso': '40',
+            'banda': 'E',
+        }
+        utm_c.feed(utm_c_fields)
+
         contrato_fields = {
             'id_contrato': id_contrato,
             'fecha_finalizacion': '2020-01-01',
+            'ref_catastro': '1234567890qwertyuiop',
+            'ref_catastro_finca': '1234567890qwer',
+            'utm': utm_c,
             'autoconsumo': autoconsumo,
             'tipo_contrato_atr': '02',
             'condiciones_contractuales': condiciones_contractuales,
@@ -2230,6 +2277,8 @@ class test_M1(unittest.TestCase):
 
         contrato_fields = {
             'fecha_finalizacion': '2018-01-01',
+            'ref_catastro': '1234567890qwertyuiop',
+            'ref_catastro_finca': '1234567890qwer',
             'autoconsumo': autoconsumo,
             'tipo_contrato_atr': '02',
             'cups_principal': "ES1234000000000001JN0F",
@@ -2244,8 +2293,9 @@ class test_M1(unittest.TestCase):
         # Medida
         medida = m1.MedidaResto()
         medida_fields = {
-            'propiedad_equipo': 'C',
             'tipo_equipo_medida': 'L00',
+            'cambio_propiedad_elemento_edm': 'S',
+            'contacto': get_contacto_medida(email=False),
         }
         medida.feed(medida_fields)
 
@@ -2415,6 +2465,8 @@ class test_M1(unittest.TestCase):
 
         contrato_fields = {
             'fecha_finalizacion': '2018-01-01',
+            'ref_catastro': '1234567890qwertyuiop',
+            'ref_catastro_finca': '1234567890qwer',
             'autoconsumo': autoconsumo,
             'tipo_contrato_atr': '02',
             'condiciones_contractuales': condiciones_contractuales,
@@ -2428,8 +2480,9 @@ class test_M1(unittest.TestCase):
         # Medida
         medida = m1.MedidaResto()
         medida_fields = {
-            'propiedad_equipo': 'C',
             'tipo_equipo_medida': 'L00',
+            'cambio_propiedad_elemento_edm': 'S',
+            'contacto': get_contacto_medida(email=False),
         }
         medida.feed(medida_fields)
 
@@ -2481,6 +2534,8 @@ class test_M1(unittest.TestCase):
         datos_activacion_fields = {
             'fecha': '2016-08-21',
             'bono_social': '1',
+            'ind_esencial': '01',
+            'fecha_ultimo_movimiento_ind_esencial': '2016-06-06',
         }
         datos_activacion.feed(datos_activacion_fields)
 
@@ -2619,9 +2674,22 @@ class test_M1(unittest.TestCase):
         }
         condiciones_contractuales.feed(condiciones_contractuales_fields)
 
+        # UTM contracte
+        utm_c = c1.UTM()
+        utm_c_fields = {
+            'x': '100',
+            'y': '200',
+            'huso': '40',
+            'banda': 'E',
+        }
+        utm_c.feed(utm_c_fields)
+
         contrato_fields = {
             'id_contrato': id_contrato,
             'fecha_finalizacion': '2020-01-01',
+            'ref_catastro': '1234567890qwertyuiop',
+            'ref_catastro_finca': '1234567890qwer',
+            'utm': utm_c,
             'autoconsumo': autoconsumo,
             'tipo_contrato_atr': '02',
             'condiciones_contractuales': condiciones_contractuales,
@@ -2629,29 +2697,11 @@ class test_M1(unittest.TestCase):
         }
         contrato.feed(contrato_fields)
 
-        # RegistroDoc
-        doc1 = m1.RegistroDoc()
-        registro_doc_fields1 = {
-            'tipo_doc_aportado': '07',
-            'direccion_url': 'https://www.google.com/',
-        }
-        doc1.feed(registro_doc_fields1)
-
-        # RegistrosDocumento
-        registros = d1.RegistrosDocumento()
-        registros_documento_fields = {
-            'registro_doc': doc1,
-        }
-        registros.feed(registros_documento_fields)
-
         puntos_de_medida = get_puntos_medida(a3)
         activacion_alta_fields = {
             'datos_activacion': datos_activacion,
-            'ind_esencial': '01',
-            'fecha_ultimo_movimiento_ind_esencial': '2016-06-06',
             'contrato': contrato,
             'puntos_de_medida': puntos_de_medida,
-            'registros_documento': registros
         }
         act_cambio.feed(activacion_alta_fields)
 
@@ -2663,6 +2713,7 @@ class test_M1(unittest.TestCase):
         mensaje.build_tree()
         xml = str(mensaje)
         assertXmlEqual(xml, self.xml_m105.read())
+
 
 class test_M2(unittest.TestCase):
     def setUp(self):
@@ -2771,9 +2822,22 @@ class test_M2(unittest.TestCase):
 
         autoconsumo = get_autoconsumo('distri')
 
+        # UTM contracte
+        utm_c = c1.UTM()
+        utm_c_fields = {
+            'x': '100',
+            'y': '200',
+            'huso': '40',
+            'banda': 'E',
+        }
+        utm_c.feed(utm_c_fields)
+
         contrato_fields = {
             'id_contrato': id_contrato,
             'fecha_finalizacion': '2016-05-05',
+            'ref_catastro': '1234567890qwertyuiop',
+            'ref_catastro_finca': '1234567890qwer',
+            'utm': utm_c,
             'autoconsumo': autoconsumo,
         }
         contrato.feed(contrato_fields)
@@ -2984,6 +3048,8 @@ class test_D1(unittest.TestCase):
             'periodicidad_facturacion': '01',
             'ind_esencial': '01',
             'fecha_ultimo_movimiento_ind_esencial': '2016-06-06',
+            'ref_catastro': '1234567890qwertyuiop',
+            'ref_catastro_finca': '1234567890qwer',
             'info_registro_autocons': info,
             'registros_documento': registros,
         }
@@ -3327,12 +3393,43 @@ class test_P0(unittest.TestCase):
         condiciones_contractuales.feed(condiciones_contractuales_fields)
 
         autoconsumo = get_autoconsumo('comer')
+
+        # UTM contracte
+        utm_c = c1.UTM()
+        utm_c_fields = {
+            'x': '100',
+            'y': '200',
+            'huso': '40',
+            'banda': 'E',
+        }
+        utm_c.feed(utm_c_fields)
+
         # Contrato
         contrato = p0.Contrato()
         contrato_fields = {
             'tipo_contrato_atr': '03',
+            'cups_principal': 'ES1234000000000001JN0F',
             'fecha_finalizacion': '2020-03-31',
+            'ref_catastro': '1234567890qwertyuiop',
+            'ref_catastro_finca': '1234567890qwer',
+            'utm': utm_c,
             'autoconsumo': autoconsumo,
+            'fecha_ultimo_movimiento_tipo_autocons': '2020-01-01',
+            'ind_bono_social': 'N',
+            'ind_esencial': '00',
+            'fecha_ultimo_movimiento_ind_esencial': '2016-05-05',
+            'vivienda_habitual': 'S',
+            'cnae': '9820',
+            'condiciones_contractuales': condiciones_contractuales,
+            'modo_facturacion_potencia': '9',
+            'no_interrumpible': 'S',
+            'potencia_no_interrumpible': '6000',
+            'vas_trafo': '50',
+            'periodicidad_facturacion': '01',
+            'tipo_de_telegestion': '01',
+            'icp_activado_telegestion': 'S',
+            'peaje_directo': 'S',
+            'deposito_garantia': 'N',
         }
         contrato.feed(contrato_fields)
 
@@ -3503,23 +3600,6 @@ class test_P0(unittest.TestCase):
             'existe_solicitud_en_curso': 'S',
             'tipo_solicitud_en_curso': 'C100',
             'contrato': contrato,
-            'fecha_ultimo_movimiento_tipo_autocons': '2020-01-01',
-            'ind_bono_social': 'N',
-            'ind_esencial': '00',
-            'fecha_ultimo_movimiento_ind_esencial': '2016-05-05',
-            'vivienda_habitual': 'S',
-            'cnae': '9820',
-            'condiciones_contractuales': condiciones_contractuales,
-            'modo_facturacion_potencia': '9',
-            'no_interrumpible': 'S',
-            'potencia_no_interrumpible': '6000',
-            'potencia_max_sin_expediente': '8000',
-            'vas_trafo': '50',
-            'periodicidad_facturacion': '01',
-            'tipo_de_telegestion': '01',
-            'icp_activado_telegestion': 'S',
-            'peaje_directo': 'S',
-            'deposito_garantia': 'N',
             'potencia_maxima_autorizada': '10000',
             'tension_del_suministro': '02',
             'derechos_reconocidos': derechos_reconocidos,
@@ -3630,7 +3710,7 @@ class test_Q1(unittest.TestCase):
         lectura_desde_fields = {
             'fecha': '2014-04-18',
             'procedencia': '20',
-            'lectura': '500',
+            'lectura': 500.0,
         }
         lectura_desde.feed(lectura_desde_fields)
 
@@ -3639,7 +3719,7 @@ class test_Q1(unittest.TestCase):
         lectura_hasta_fields = {
             'fecha': '2014-05-18',
             'procedencia': '20',
-            'lectura': '1500',
+            'lectura': 1500.0,
         }
         lectura_hasta.feed(lectura_hasta_fields)
 
@@ -3674,7 +3754,7 @@ class test_Q1(unittest.TestCase):
         lectura_desde_fields = {
             'fecha': '2014-04-18',
             'procedencia': '30',
-            'lectura': '500',
+            'lectura': 500.0,
         }
         lectura_desde.feed(lectura_desde_fields)
 
@@ -3683,7 +3763,7 @@ class test_Q1(unittest.TestCase):
         lectura_hasta_fields = {
             'fecha': '2014-05-18',
             'procedencia': '30',
-            'lectura': '1500',
+            'lectura': 1500.0,
         }
         lectura_hasta.feed(lectura_hasta_fields)
 
@@ -3707,7 +3787,7 @@ class test_Q1(unittest.TestCase):
         lectura_desde_fields = {
             'fecha': '2014-04-18',
             'procedencia': '30',
-            'lectura': '500',
+            'lectura': 500.0,
         }
         lectura_desde.feed(lectura_desde_fields)
 
@@ -3716,7 +3796,7 @@ class test_Q1(unittest.TestCase):
         lectura_hasta_fields = {
             'fecha': '2014-05-18',
             'procedencia': '40',
-            'lectura': '1500',
+            'lectura': 1500.0,
         }
         lectura_hasta.feed(lectura_hasta_fields)
 
@@ -3724,7 +3804,7 @@ class test_Q1(unittest.TestCase):
         ajuste = q1.Ajuste()
         ajuste_fields = {
             'codigo_motivo_ajuste': '01',
-            'ajuste_por_integrador': '1500',
+            'ajuste_por_integrador': 1500.0,
             'comentarios': 'Comentario Ajuste',
         }
         ajuste.feed(ajuste_fields)
@@ -5051,10 +5131,23 @@ class test_E1(unittest.TestCase):
         condiciones_contractuales.feed(condiciones_contractuales_fields)
         autoconsumo = get_autoconsumo('distri')
 
+        # UTM contracte
+        utm_c = c1.UTM()
+        utm_c_fields = {
+            'x': '100',
+            'y': '200',
+            'huso': '40',
+            'banda': 'E',
+        }
+        utm_c.feed(utm_c_fields)
+
         # Contrato
         contrato = e1.Contrato()
         contrato_fields = {
             'id_contrato': id_contrato,
+            'ref_catastro': '1234567890qwertyuiop',
+            'ref_catastro_finca': '1234567890qwer',
+            'utm': utm_c,
             'autoconsumo': autoconsumo,
             'tipo_contrato_atr': '02',
             'cups_principal': 'ES1234000000000001JN0F',
@@ -5428,10 +5521,23 @@ class test_E2(unittest.TestCase):
         condiciones_contractuales.feed(condiciones_contractuales_fields)
         autoconsumo = get_autoconsumo('distri')
 
+        # UTM contracte
+        utm_c = c1.UTM()
+        utm_c_fields = {
+            'x': '100',
+            'y': '200',
+            'huso': '40',
+            'banda': 'E',
+        }
+        utm_c.feed(utm_c_fields)
+
         # Contrato
         contrato = e2.Contrato()
         contrato_fields = {
             'id_contrato': id_contrato,
+            'ref_catastro': '1234567890qwertyuiop',
+            'ref_catastro_finca': '1234567890qwer',
+            'utm': utm_c,
             'autoconsumo': autoconsumo,
             'tipo_contrato_atr': '01',
             'cups_principal': 'ES1234000000000001JN0F',
@@ -5914,8 +6020,11 @@ class test_T1(unittest.TestCase):
 
         contrato_fields = {
             'fecha_finalizacion': '2018-01-01',
+            'ref_catastro': '1234567890qwertyuiop',
+            'ref_catastro_finca': '1234567890qwer',
             'autoconsumo': autoconsumo,
             'tipo_contrato_atr': '02',
+            'cups_principal': 'ES1234000000000001JN0F',
             'condiciones_contractuales': condiciones_contractuales,
             'periodicidad_facturacion': '01',
             'consumo_anual_estimado': '5000',
@@ -6122,12 +6231,27 @@ class test_T1(unittest.TestCase):
         }
         condiciones_contractuales.feed(condiciones_contractuales_fields)
         autoconsumo = get_autoconsumo()
+
+        # UTM contracte
+        utm_c = c1.UTM()
+        utm_c_fields = {
+            'x': '100',
+            'y': '200',
+            'huso': '40',
+            'banda': 'E',
+        }
+        utm_c.feed(utm_c_fields)
+
         # Contrato
         contrato = t1.Contrato()
         contrato_fields = {
             'id_contrato': id_contrato,
+            'ref_catastro': '1234567890qwertyuiop',
+            'ref_catastro_finca': '1234567890qwer',
+            'utm': utm_c,
             'autoconsumo': autoconsumo,
             'tipo_contrato_atr': '02',
+            'cups_principal': 'ES1234000000000001JN0F',
             'condiciones_contractuales': condiciones_contractuales,
         }
         contrato.feed(contrato_fields)
@@ -7482,6 +7606,7 @@ class test_F1(unittest.TestCase):
         concepto_repercutible_enganche.feed(
             {
                 'concepto_repercutible': '04',
+                'codigo_de_solicitud': '10004',
                 'tipo_impositivo_concepto_repercutible': 1,
                 'fecha_operacion': '2016-09-01',
                 'unidades_concepto_repercutible': 1.0,
@@ -7496,6 +7621,7 @@ class test_F1(unittest.TestCase):
         concepto_repercutible_verificacion.feed(
             {
                 'concepto_repercutible': '05',
+                'codigo_de_solicitud': '10005',
                 'tipo_impositivo_concepto_repercutible': 1,
                 'fecha_operacion': '2016-09-01',
                 'unidades_concepto_repercutible': 1.0,
@@ -7645,16 +7771,19 @@ class test_F1(unittest.TestCase):
         periodo1.feed({
             'valor_energia_autoconsumida': 11.00,
             'pago_tda': 0,
+            'importe_energia_autoconsumida': 1.00,
         })
         periodo2 = f1.PeriodoEnergiaAutoconsumida()
         periodo2.feed({
             'valor_energia_autoconsumida': 12.00,
             'pago_tda': 0,
+            'importe_energia_autoconsumida': 2.00,
         })
         periodo3 = f1.PeriodoEnergiaAutoconsumida()
         periodo3.feed({
             'valor_energia_autoconsumida': 13.00,
             'pago_tda': 0,
+            'importe_energia_autoconsumida': 3.00,
         })
         termino_energia_autoconsumida.feed({
             'fecha_desde': '2021-12-31',

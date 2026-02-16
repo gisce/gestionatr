@@ -42,13 +42,13 @@
             <FechaDesde>2016-04-04</FechaDesde>
             <FechaHasta>2016-05-05</FechaHasta>
             <Periodo>
-                <ValorEnergiaActiva>100.00</ValorEnergiaActiva>
+                <ValorEnergiaActiva>100.000</ValorEnergiaActiva>
             </Periodo>
             <Periodo>
-                <ValorEnergiaActiva>200.00</ValorEnergiaActiva>
+                <ValorEnergiaActiva>200.000</ValorEnergiaActiva>
             </Periodo>
             <Periodo>
-                <ValorEnergiaActiva>300.00</ValorEnergiaActiva>
+                <ValorEnergiaActiva>300.000</ValorEnergiaActiva>
             </Periodo>
         </TerminoEnergiaActiva>
     </EnergiaActiva>
@@ -58,13 +58,13 @@
 				<FechaDesde>2016-04-04</FechaDesde>
 				<FechaHasta>2016-05-05</FechaHasta>
 				<Periodo>
-					<ValorEnergiaNetaGen>1.00</ValorEnergiaNetaGen>
+					<ValorEnergiaNetaGen>1.000</ValorEnergiaNetaGen>
 				</Periodo>
 				<Periodo>
-					<ValorEnergiaNetaGen>2.00</ValorEnergiaNetaGen>
+					<ValorEnergiaNetaGen>2.000</ValorEnergiaNetaGen>
 				</Periodo>
 				<Periodo>
-					<ValorEnergiaNetaGen>3.00</ValorEnergiaNetaGen>
+					<ValorEnergiaNetaGen>3.000</ValorEnergiaNetaGen>
 				</Periodo>
 			</TerminoEnergiaNetaGen>
 		</EnergiaNetaGen>
@@ -73,13 +73,13 @@
 				<FechaDesde>2016-04-04</FechaDesde>
 				<FechaHasta>2016-05-05</FechaHasta>
 				<Periodo>
-					<ValorEnergiaAutoconsumida>11.00</ValorEnergiaAutoconsumida>
+					<ValorEnergiaAutoconsumida>11.000</ValorEnergiaAutoconsumida>
 				</Periodo>
 				<Periodo>
-					<ValorEnergiaAutoconsumida>12.00</ValorEnergiaAutoconsumida>
+					<ValorEnergiaAutoconsumida>12.000</ValorEnergiaAutoconsumida>
 				</Periodo>
 				<Periodo>
-					<ValorEnergiaAutoconsumida>13.00</ValorEnergiaAutoconsumida>
+					<ValorEnergiaAutoconsumida>13.000</ValorEnergiaAutoconsumida>
 				</Periodo>
 			</TerminoEnergiaAutoconsumida>
 		</EnergiaAutoconsumida>
@@ -88,13 +88,13 @@
 				<FechaDesde>2016-04-04</FechaDesde>
 				<FechaHasta>2016-05-05</FechaHasta>
                 <Periodo>
-                    <ValorEnergiaExcedentaria>21.00</ValorEnergiaExcedentaria>
+                    <ValorEnergiaExcedentaria>21.000</ValorEnergiaExcedentaria>
                 </Periodo>
                 <Periodo>
-                    <ValorEnergiaExcedentaria>22.00</ValorEnergiaExcedentaria>
+                    <ValorEnergiaExcedentaria>22.000</ValorEnergiaExcedentaria>
                 </Periodo>
                 <Periodo>
-                    <ValorEnergiaExcedentaria>23.00</ValorEnergiaExcedentaria>
+                    <ValorEnergiaExcedentaria>23.000</ValorEnergiaExcedentaria>
                 </Periodo>
             </TerminoEnergiaExcedentaria>
         </EnergiaExcedentaria>
@@ -110,13 +110,13 @@
 						<FechaDesde>2016-04-04</FechaDesde>
 						<FechaHasta>2016-05-05</FechaHasta>
 						<Periodo>
-							<ValorEnergiaNetaGen>1.00</ValorEnergiaNetaGen>
+							<ValorEnergiaNetaGen>1.000</ValorEnergiaNetaGen>
 						</Periodo>
 						<Periodo>
-							<ValorEnergiaNetaGen>2.00</ValorEnergiaNetaGen>
+							<ValorEnergiaNetaGen>2.000</ValorEnergiaNetaGen>
 						</Periodo>
 						<Periodo>
-							<ValorEnergiaNetaGen>3.00</ValorEnergiaNetaGen>
+							<ValorEnergiaNetaGen>3.000</ValorEnergiaNetaGen>
 						</Periodo>
 					</TerminoEnergiaNetaGen>
 				</EnergiaNetaGen>
@@ -140,12 +140,12 @@
 				<LecturaDesde>
 					<Fecha>2014-04-18</Fecha>
 					<Procedencia>20</Procedencia>
-					<Lectura>500</Lectura>
+					<Lectura>500.000</Lectura>
 				</LecturaDesde>
 				<LecturaHasta>
 					<Fecha>2014-05-18</Fecha>
 					<Procedencia>20</Procedencia>
-					<Lectura>1500</Lectura>
+					<Lectura>1500.000</Lectura>
 				</LecturaHasta>
 			</Integrador>
 		</ModeloAparato>
@@ -164,12 +164,12 @@
 				<LecturaDesde>
 					<Fecha>2014-04-18</Fecha>
 					<Procedencia>30</Procedencia>
-					<Lectura>500</Lectura>
+					<Lectura>500.000</Lectura>
 				</LecturaDesde>
 				<LecturaHasta>
 					<Fecha>2014-05-18</Fecha>
 					<Procedencia>30</Procedencia>
-					<Lectura>1500</Lectura>
+					<Lectura>1500.000</Lectura>
 				</LecturaHasta>
 			</Integrador>
 			<Integrador>
@@ -182,16 +182,16 @@
 				<LecturaDesde>
 					<Fecha>2014-04-18</Fecha>
 					<Procedencia>30</Procedencia>
-					<Lectura>500</Lectura>
+					<Lectura>500.000</Lectura>
 				</LecturaDesde>
 				<LecturaHasta>
 					<Fecha>2014-05-18</Fecha>
 					<Procedencia>40</Procedencia>
-					<Lectura>1500</Lectura>
+					<Lectura>1500.000</Lectura>
 				</LecturaHasta>
 				<Ajuste>
 					<CodigoMotivoAjuste>01</CodigoMotivoAjuste>
-					<AjustePorIntegrador>1500</AjustePorIntegrador>
+					<AjustePorIntegrador>1500.000</AjustePorIntegrador>
 					<Comentarios>Comentario Ajuste</Comentarios>
 				</Ajuste>
 				<Anomalia>
@@ -210,6 +210,6 @@
 		<Periodo>
 			<PotenciaMaxDemandadaAnioMovil>4045</PotenciaMaxDemandadaAnioMovil>
 		</Periodo>
-		<ValorEnergiaMediaCP>61083.25</ValorEnergiaMediaCP>
+		<ValorEnergiaMediaCP>61083.250</ValorEnergiaMediaCP>
 	</InformacionAlConsumidor>
 </MensajeSaldoLecturasFacturacion>

@@ -161,6 +161,37 @@ def get_contacto(email=True):
     return contacto
 
 
+def get_contacto_medida(email=True):
+    # Contacto
+    contacto = c2.Contacto()
+
+    # Telefono
+    telefono = c2.Telefono()
+    telefono_fields = {
+        'prefijo_pais': '34',
+        'numero': '666777999',
+    }
+    telefono.feed(telefono_fields)
+    telefono2 = c2.Telefono()
+    telefono_fields = {
+        'prefijo_pais': '34',
+        'numero': '666777555',
+    }
+    telefono2.feed(telefono_fields)
+    telefonos = [telefono, telefono2]
+
+    correo = None
+    if email:
+        correo = 'email@host'
+    contacto_fields = {
+        'persona_de_contacto': 'Nombre Inventado 2',
+        'telefonos': telefonos,
+        'correo_electronico': correo,
+    }
+    contacto.feed(contacto_fields)
+    return contacto
+
+
 def get_medida_resto():
     # Medida
     medida = c2.MedidaResto()
@@ -171,6 +202,7 @@ def get_medida_resto():
         'tipo_aparato': 'CG',
         'marca_aparato': '132',
         'modelo_marca': '011',
+        'propiedad_equipo': 'C',
     }
     md1.feed(modelo_aparato_fields)
     md2 = c2.ModeloAparato()
@@ -178,6 +210,7 @@ def get_medida_resto():
         'tipo_aparato': 'CG',
         'marca_aparato': '132',
         'modelo_marca': '012',
+        'propiedad_equipo': 'C',
     }
     md2.feed(modelo_aparato_fields)
 
@@ -188,8 +221,9 @@ def get_medida_resto():
     modelos_aparato.feed(modelos_aparato_fields)
 
     medida_fields = {
-        'propiedad_equipo': 'C',
         'tipo_equipo_medida': 'L00',
+        'cambio_propiedad_elemento_edm': 'S',
+        'contacto': get_contacto_medida(email=False),
         'modelos_aparato': modelos_aparato,
     }
     medida.feed(medida_fields)

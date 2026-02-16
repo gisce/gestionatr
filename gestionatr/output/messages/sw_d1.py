@@ -23,8 +23,8 @@ class NotificacionCambiosATRDesdeDistribuidor(XmlModel):
 
     _sort_order = ('notificacion_cambios_atr_desde_distribuidor', 'motivo_cambio_atr_desde_distribuidora',
                    'fecha_prevista_aplicacion_cambio_atr', 'fecha_maxima_rechazo', 'periodicidad_facturacion',
-                   'ind_esencial', 'fecha_ultimo_movimiento_ind_esencial', 'info_registro_autocons',
-                   'info_retardo_activ_autocons_list', 'registros_documento')
+                   'ind_esencial', 'fecha_ultimo_movimiento_ind_esencial', 'ref_catastro', 'ref_catastro_finca',
+                   'info_registro_autocons', 'info_retardo_activ_autocons_list', 'registros_documento')
 
     def __init__(self):
         self.notificacion_cambios_atr_desde_distribuidor = XmlField('NotificacionCambiosATRDesdeDistribuidor')
@@ -34,6 +34,8 @@ class NotificacionCambiosATRDesdeDistribuidor(XmlModel):
         self.periodicidad_facturacion = XmlField('PeriodicidadFacturacion')
         self.ind_esencial = XmlField('IndEsencial')
         self.fecha_ultimo_movimiento_ind_esencial = XmlField('FechaUltimoMovimientoIndEsencial')
+        self.ref_catastro = XmlField('RefCatastro')
+        self.ref_catastro_finca = XmlField('RefCatastroFinca')
         self.info_registro_autocons = InfoRegistroAutocons()
         self.info_retardo_activ_autocons_list = []
         self.registros_documento = RegistrosDocumento()

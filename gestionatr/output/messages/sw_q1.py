@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 from libcomxml.core import XmlModel, XmlField
-from gestionatr.output.messages.base import Cabecera
+from gestionatr.output.messages.base import Cabecera, rep_decimal
 from gestionatr.output.messages.sw_f1 import PeriodoCCH, Periodo, EnergiaActiva, Expediente, InformacionAlConsumidor, Autoconsumo
 
 
@@ -111,7 +111,7 @@ class LecturaDesde(XmlModel):
         self.lectura_desde = XmlField('LecturaDesde')
         self.fecha = XmlField('Fecha')
         self.procedencia = XmlField('Procedencia')
-        self.lectura = XmlField('Lectura')
+        self.lectura = XmlField('Lectura', rep=rep_decimal(3))
         super(LecturaDesde, self).__init__('LecturaDesde', 'lectura_desde')
 
 
@@ -123,7 +123,7 @@ class LecturaHasta(XmlModel):
         self.lectura_hasta = XmlField('LecturaHasta')
         self.fecha = XmlField('Fecha')
         self.procedencia = XmlField('Procedencia')
-        self.lectura = XmlField('Lectura')
+        self.lectura = XmlField('Lectura', rep=rep_decimal(3))
         super(LecturaHasta, self).__init__('LecturaHasta', 'lectura_hasta')
 
 
@@ -134,7 +134,7 @@ class Ajuste(XmlModel):
     def __init__(self):
         self.ajuste = XmlField('Ajuste')
         self.codigo_motivo_ajuste = XmlField('CodigoMotivoAjuste')
-        self.ajuste_por_integrador = XmlField('AjustePorIntegrador')
+        self.ajuste_por_integrador = XmlField('AjustePorIntegrador', rep=rep_decimal(3))
         self.comentarios = XmlField('Comentarios')
         super(Ajuste, self).__init__('Ajuste', 'ajuste')
 

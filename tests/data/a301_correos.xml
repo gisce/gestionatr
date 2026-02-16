@@ -18,6 +18,8 @@
         </DatosSolicitud>
         <Contrato>
             <FechaFinalizacion>2018-01-01</FechaFinalizacion>
+            <RefCatastro>1234567890qwertyuiop</RefCatastro>
+            <RefCatastroFinca>1234567890qwer</RefCatastroFinca>
             <TipoContratoATR>02</TipoContratoATR>
             <CondicionesContractuales>
                 <TarifaATR>018</TarifaATR>
@@ -74,6 +76,18 @@
         </Cliente>
         <Medida>
             <TipoEquipoMedida>L00</TipoEquipoMedida>
+            <CambioPropiedadElementoEdM>S</CambioPropiedadElementoEdM>
+            <Contacto>
+                <PersonaDeContacto>Nombre Inventado 2</PersonaDeContacto>
+                <Telefono>
+                    <PrefijoPais>34</PrefijoPais>
+                    <Numero>666777999</Numero>
+                </Telefono>
+                <Telefono>
+                    <PrefijoPais>34</PrefijoPais>
+                    <Numero>666777555</Numero>
+                </Telefono>
+            </Contacto>
             <ModelosAparato>
                 <ModeloAparato>
                   <TipoAparato>CG</TipoAparato>

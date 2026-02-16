@@ -2293,7 +2293,7 @@ class test_Q1(TestCaseCompat):
         self.assertEqual(lh.lectura, 1500.0)
         self.assertEqual(lh.procedencia, u'40')
         ajuste = int2.ajuste
-        self.assertEqual(ajuste.ajuste_por_integrador, u'1500')
+        self.assertEqual(ajuste.ajuste_por_integrador, 1500.0)
         self.assertEqual(ajuste.codigo_motivo_ajuste, u'01')
         self.assertEqual(ajuste.comentarios, u'Comentario Ajuste')
         anomalia = int2.anomalia
