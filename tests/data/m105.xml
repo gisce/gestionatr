@@ -15,18 +15,25 @@
     <DatosActivacion>
       <Fecha>2016-08-21</Fecha>
       <BonoSocial>1</BonoSocial>
+      <IndEsencial>01</IndEsencial>
+      <FechaUltimoMovimientoIndEsencial>2016-06-06</FechaUltimoMovimientoIndEsencial>
     </DatosActivacion>
-    <IndEsencial>01</IndEsencial>
-    <FechaUltimoMovimientoIndEsencial>2016-06-06</FechaUltimoMovimientoIndEsencial>
     <Contrato>
       <IdContrato>
         <CodContrato>00001</CodContrato>
       </IdContrato>
       <FechaFinalizacion>2020-01-01</FechaFinalizacion>
+      <RefCatastro>1234567890qwertyuiop</RefCatastro>
+      <RefCatastroFinca>1234567890qwer</RefCatastroFinca>
+      <UTM>
+          <X>100</X>
+          <Y>200</Y>
+          <Huso>40</Huso>
+          <Banda>E</Banda>
+      </UTM>
       <Autoconsumo>
         <DatosSuministro>
           <TipoCUPS>01</TipoCUPS>
-          <RefCatastro>1234567890qwertyuiop</RefCatastro>
         </DatosSuministro>
         <DatosCAU>
           <CAU>ES1234000000000001JN0FA001</CAU>
@@ -158,16 +165,8 @@
             </Medidas>
           </Aparato>
         </Aparatos>
-
-
         <Comentarios>Comentarios Varios</Comentarios>
       </PuntoDeMedida>
     </PuntosDeMedida>
-     <RegistrosDocumento>
-         <RegistroDoc>
-           <TipoDocAportado>07</TipoDocAportado>
-           <DireccionUrl>https://www.google.com/</DireccionUrl>
-         </RegistroDoc>
-     </RegistrosDocumento>
   </ActivacionModificaciones>
 </MensajeActivacionModificacionDeATR>

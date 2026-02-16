@@ -45,8 +45,19 @@
             <IndicadorTipoDireccion>S</IndicadorTipoDireccion>
         </Cliente>
         <Medida>
-            <PropiedadEquipo>C</PropiedadEquipo>
             <TipoEquipoMedida>L00</TipoEquipoMedida>
+            <CambioPropiedadElementoEdM>S</CambioPropiedadElementoEdM>
+            <Contacto>
+                <PersonaDeContacto>Nombre Inventado 2</PersonaDeContacto>
+                <Telefono>
+                    <PrefijoPais>34</PrefijoPais>
+                    <Numero>666777999</Numero>
+                </Telefono>
+                <Telefono>
+                    <PrefijoPais>34</PrefijoPais>
+                    <Numero>666777555</Numero>
+                </Telefono>
+            </Contacto>
         </Medida>
     </ModificacionDeATR>
 </MensajeModificacionDeATR>
