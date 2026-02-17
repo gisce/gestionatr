@@ -156,6 +156,38 @@ PERIODES_PER_TARIFA = {
         'M': 6,
         'EP': 6,
     },
+    '026': {
+        'A': 6,
+        'S': 6,
+        'R': 6,
+        'RC': 6,
+        'M': 6,
+        'EP': 6,
+    },
+    '027': {
+        'A': 6,
+        'S': 6,
+        'R': 6,
+        'RC': 6,
+        'M': 6,
+        'EP': 6,
+    },
+    '028': {
+        'A': 6,
+        'S': 6,
+        'R': 6,
+        'RC': 6,
+        'M': 6,
+        'EP': 6,
+    },
+    '029': {
+        'A': 6,
+        'S': 6,
+        'R': 6,
+        'RC': 6,
+        'M': 6,
+        'EP': 6,
+    },
 }
 
 
@@ -1694,7 +1726,7 @@ class ModeloAparato(object):
     def get_dates_inici_i_final(self):
         data_inici = ''
         data_final = ''
-        for lect in self.get_lectures(force_no_transforma_no_td_a_td=True):
+        for lect in self.get_lectures_base():
             data_in_compt = datetime.strptime(
                 lect.lectura_desde.fecha, '%Y-%m-%d'
             )
@@ -1728,6 +1760,22 @@ class ModeloAparato(object):
             lectures = self.factura.transforma_no_td_a_td(
                 lectures, tipus=tipus, force_no_quadrar_ajust=force_no_quadrar_ajust
             )
+        lectures = sorted(lectures, key=lambda x: x.lectura_desde.fecha)
+        return lectures
+
+    def get_lectures_base(self, tipus=None):
+        """Retorna totes les lectures tal com venen informades al F1, sense manipular"""
+        lectures = []
+        try:
+            for integrador in self.integradores:
+                # If we don't have any type requirements or the current
+                # reading is in them
+                if not tipus or (integrador.tipus and integrador.tipus in tipus):
+                    integrador.comptador = self
+                    lectures.append(integrador)
+        except AttributeError:
+            pass
+
         lectures = sorted(lectures, key=lambda x: x.lectura_desde.fecha)
         return lectures
 
@@ -2409,26 +2457,44 @@ class FacturaATR(Factura):
 
         return new_integrador
 
-    def get_comptador_amb_lectures(self, tipus=None):
+    def get_lectura_base(self, comptador=None, tipus=None):
         """
-            Retorna el primer comptador que tingui les lectures del tipus inidcat
-            Si cap comptador té lectures del primer tipus, es repeteix el procés amb el seguent tipus
+        Retorna la primera lectura disponible segons l’ordre de prioritat dels tipus indicats.
+
+        - Si es proporciona un comptador, es comprova primer i es retorna la seva primera
+          lectura disponible.
+        - Si aquest comptador no té lectures, es busca entre els comptadors de les mesures
+          associades, respectant l’ordre de tipus i mesures.
+
+        Si no es troba cap lectura, es retorna `(None, None)`.
+
+        :param comptador: Comptador a comprovar primer (opcional)
+        :param tipus: Tipus de lectura per ordre de prioritat. Per defecte ['S', 'A']
+        :return: La primera lectura disponible o `(None, None)` si no n'hi ha cap
         """
+
         if tipus is None:
             tipus = ['S', 'A']
-        comptador_amb_lectures = None
+
+        # Comprova primer el comptador passat
+        if comptador:
+            for t in tipus:
+                lectures_base = comptador.get_lectures_base(tipus=t)
+                if lectures_base:
+                    return lectures_base[0]
+
+        # Comprova la resta de comptadors
         for medida in self.medidas:
             for t in tipus:
                 for c in medida.modelos_aparatos:
-                    if c.get_lectures(tipus=t):
-                        comptador_amb_lectures = c
-                        break
-                if comptador_amb_lectures:
-                    break
-            if comptador_amb_lectures:
-                break
+                    # Evita tornar a comprovar el comptador passat
+                    if comptador and c is comptador:
+                        continue
+                    lectures_base = c.get_lectures_base(tipus=t)
+                    if lectures_base:
+                        return lectures_base[0]
 
-        return comptador_amb_lectures
+        return None, None
 
     def get_fake_AS_lectures(self, period_start=1, comptador_base=None):
         res = []
@@ -2437,9 +2503,8 @@ class FacturaATR(Factura):
         te_autoconsum = (self.autoconsumo and self.autoconsumo.energia_excedentaria) or conceptes_repercutibles_excedents
         if not te_autoconsum:
             return res
-        comptador_amb_lectures = self.get_comptador_amb_lectures()
-        if comptador_amb_lectures:
-            base_info = comptador_amb_lectures.get_lectures_activa_entrant()[0]
+        base_info = self.get_lectura_base(comptador=comptador_base)
+        if base_info:
             num_periodes = self.get_num_periodes_from_tarifa_and_tipus(tipus='S')
             # Mandanga per les tarifes antigues. Els excedents s'informaven com a conceptes repercutibles.
             # Si no hem pogut obtenir el num periodes perque son tarifes antigues, i posem tants periodes com
