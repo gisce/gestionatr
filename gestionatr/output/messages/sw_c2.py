@@ -54,16 +54,17 @@ class DatosSolicitud(DatosSolicitud):
 
 class Contrato(Contrato):
 
-    _sort_order = ('contrato', 'id_contrato', 'fecha_finalizacion', 'autoconsumo', 'tipo_contrato_atr',
+    _sort_order = ('contrato', 'id_contrato', 'fecha_finalizacion', 'ref_catastro',
+                   'ref_catastro_finca', 'utm', 'autoconsumo', 'tipo_contrato_atr',
                    'cups_principal', 'condiciones_contractuales', 'periodicidad_facturacion',
-                   'consumo_anual_estimado', 'contacto', 'tipo_activacion_prevista', 'fecha_activacion_prevista')
+                   'consumo_anual_estimado', 'contacto', 'tipo_activacion_prevista',
+                   'fecha_activacion_prevista')
 
     def __init__(self):
         super(Contrato, self).__init__()
         self.fecha_finalizacion = XmlField('FechaFinalizacion')
         self.autoconsumo = Autoconsumo()
         self.tipo_contrato_atr = XmlField('TipoContratoATR')
-        self.cups_principal = XmlField('CUPSPrincipal')
         self.periodicidad_facturacion = XmlField('PeriodicidadFacturacion')
         self.consumo_anual_estimado = XmlField('ConsumoAnualEstimado')
         self.contacto = Contacto()
@@ -129,12 +130,14 @@ class Via(XmlModel):
 
 class MedidaResto(XmlModel):
 
-    _sort_order = ('medida_resto', 'propiedad_equipo', 'tipo_equipo_medida', 'modelos_aparato')
+    _sort_order = ('medida_resto', 'tipo_equipo_medida', 'cambio_propiedad_elemento_edm',
+                   'contacto', 'modelos_aparato')
 
     def __init__(self):
         self.medida_resto = XmlField('Medida')
-        self.propiedad_equipo = XmlField('PropiedadEquipo')
         self.tipo_equipo_medida = XmlField('TipoEquipoMedida')
+        self.cambio_propiedad_elemento_edm = XmlField('CambioPropiedadElementoEdM')
+        self.contacto = Contacto()
         self.modelos_aparato = ModelosAparato()
         super(MedidaResto, self).__init__('medida_resto', 'medida_resto')
 
@@ -151,13 +154,15 @@ class ModelosAparato(XmlModel):
 
 class ModeloAparato(XmlModel):
 
-    _sort_order = ('modelo_aparato', 'tipo_aparato', 'marca_aparato', 'modelo_marca')
+    _sort_order = ('modelo_aparato', 'tipo_aparato', 'marca_aparato', 'modelo_marca',
+                   'propiedad_equipo')
 
     def __init__(self):
         self.modelo_aparato = XmlField('ModeloAparato')
         self.tipo_aparato = XmlField('TipoAparato')
         self.marca_aparato = XmlField('MarcaAparato')
         self.modelo_marca = XmlField('ModeloMarca')
+        self.propiedad_equipo = XmlField('PropiedadEquipo')
         super(ModeloAparato, self).__init__('ModeloAparato', 'modelo_aparato')
 
 

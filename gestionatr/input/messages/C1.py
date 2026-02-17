@@ -223,6 +223,15 @@ class DatosSolicitud(object):
             pass
         return data
 
+    @property
+    def traspaso_cartera(self):
+        data = ''
+        try:
+            data = self.datos_solicitud.TraspasoCartera.text
+        except AttributeError:
+            pass
+        return data
+
 
 class Cliente(object):
 
@@ -431,6 +440,15 @@ class Contrato(object):
         return data
 
     @property
+    def cups_principal(self):
+        data = ''
+        try:
+            data = self.contrato.CUPSPrincipal.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
     def fecha_activacion_prevista(self):
         data = False
         try:
@@ -490,6 +508,34 @@ class Contrato(object):
         data = ''
         try:
             data = self.contrato.FechaFinalizacion.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def ref_catastro(self):
+        data = ''
+        try:
+            data = self.contrato.RefCatastro.text
+        except AttributeError:
+            pass
+        return data
+
+
+    @property
+    def ref_catastro_finca(self):
+        data = ''
+        try:
+            data = self.contrato.RefCatastroFinca.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def utm(self):
+        data = ''
+        try:
+            data = UTM(self.contrato.UTM)
         except AttributeError:
             pass
         return data
@@ -1124,15 +1170,6 @@ class DatosSuministro(object):
         data = ''
         try:
             data = self.datos_suministro.TipoCUPS.text
-        except AttributeError:
-            pass
-        return data
-
-    @property
-    def ref_catastro(self):
-        data = ''
-        try:
-            data = self.datos_suministro.RefCatastro.text
         except AttributeError:
             pass
         return data

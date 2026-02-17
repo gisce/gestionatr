@@ -94,10 +94,10 @@
 										</xs:annotation>
 										<xs:simpleType>
 											<xs:restriction base="xs:decimal">
-												<xs:totalDigits value="13"/>
-												<xs:fractionDigits value="2"/>
-												<xs:maxInclusive value="99999999999.99"/>
-												<xs:minInclusive value="-99999999999.99"/>
+												<xs:totalDigits value="14"/>
+												<xs:fractionDigits value="3"/>
+												<xs:maxInclusive value="99999999999.999"/>
+												<xs:minInclusive value="-99999999999.999"/>
 											</xs:restriction>
 										</xs:simpleType>
 									</xs:element>
@@ -125,10 +125,10 @@
 												<xs:element name="ValorEnergiaNetaGen">
 													<xs:simpleType>
 														<xs:restriction base="xs:decimal">
-															<xs:totalDigits value="13"/>
-															<xs:fractionDigits value="2"/>
-															<xs:minInclusive value="-99999999999.99"/>
-															<xs:maxInclusive value="99999999999.99"/>
+															<xs:totalDigits value="14"/>
+															<xs:fractionDigits value="3"/>
+															<xs:minInclusive value="-99999999999.999"/>
+															<xs:maxInclusive value="99999999999.999"/>
 														</xs:restriction>
 													</xs:simpleType>
 												</xs:element>
@@ -155,10 +155,10 @@
 												<xs:element name="ValorEnergiaAutoconsumida">
 													<xs:simpleType>
 														<xs:restriction base="xs:decimal">
-															<xs:totalDigits value="13"/>
-															<xs:fractionDigits value="2"/>
-															<xs:minInclusive value="-99999999999.99"/>
-															<xs:maxInclusive value="99999999999.99"/>
+															<xs:totalDigits value="14"/>
+															<xs:fractionDigits value="3"/>
+															<xs:minInclusive value="-99999999999.999"/>
+															<xs:maxInclusive value="99999999999.999"/>
 														</xs:restriction>
 													</xs:simpleType>
 												</xs:element>
@@ -185,10 +185,10 @@
 												<xs:element name="ValorEnergiaExcedentaria">
 													<xs:simpleType>
 														<xs:restriction base="xs:decimal">
-															<xs:totalDigits value="13"/>
-															<xs:fractionDigits value="2"/>
-															<xs:minInclusive value="-99999999999.99"/>
-															<xs:maxInclusive value="99999999999.99"/>
+															<xs:totalDigits value="14"/>
+															<xs:fractionDigits value="3"/>
+															<xs:minInclusive value="-99999999999.999"/>
+															<xs:maxInclusive value="99999999999.999"/>
 														</xs:restriction>
 													</xs:simpleType>
 												</xs:element>

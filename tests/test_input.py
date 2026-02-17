@@ -94,6 +94,7 @@ class test_C1(TestCaseCompat):
         self.assertEqual(c.datos_solicitud.fecha_prevista_accion, u'2016-06-06')
         self.assertEqual(c.datos_solicitud.contratacion_incondicional_ps, u'S')
         self.assertEqual(c.datos_solicitud.bono_social, u'0')
+        self.assertEqual(c.datos_solicitud.traspaso_cartera, u'S')
         self.assertEqual(c.datos_solicitud.contratacion_incondicional_bs, u'S')
         # Cliente
         self.assertEqual(c.cliente.tipo_identificador, u'NI')
@@ -196,11 +197,17 @@ class test_C1(TestCaseCompat):
         # Contrato
         self.assertEqual(c.contrato.cod_contrato, u'00001')
         self.assertEqual(c.contrato.data_finalitzacio, u'2020-01-01')
+        self.assertEqual(c.contrato.ref_catastro, u'1234567890qwertyuiop')
+        self.assertEqual(c.contrato.ref_catastro_finca, u'1234567890qwer')
+        utm_c = c.contrato.utm
+        self.assertEqual(utm_c.x, u'100')
+        self.assertEqual(utm_c.y, u'200')
+        self.assertEqual(utm_c.huso, u'40')
+        self.assertEqual(utm_c.banda, u'E')
         # validem la informacio de autoconsum
         autoconsumo = c.contrato.autoconsumo
         suministro = autoconsumo.datos_suministro
         self.assertEqual(suministro.tipo_cups, u'01')
-        self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')
         datos_cau = autoconsumo.datos_cau[0]
         self.assertEqual(datos_cau.cau, u'ES1234000000000001JN0FA001')
         self.assertEqual(datos_cau.tipo_autoconsumo, u'11')
@@ -235,6 +242,7 @@ class test_C1(TestCaseCompat):
         self.assertEqual(datos_cau2.cau, u'ES1234000000000001JN0FA001')
         # Seguim amb la resta de dades del contracte
         self.assertEqual(c.contrato.tipo_contrato_atr, u'02')
+        self.assertEqual(c.contrato.cups_principal, u'ES1234000000000001JN0F')
         self.assertEqual(c.contrato.tarifa_atr, u'018')
         self.assertEqual(c.contrato.periodicidad_facturacion, u'01')
         self.assertEqual(c.contrato.tipo_de_telegestion, u'01')
@@ -439,6 +447,8 @@ class test_C2(TestCaseCompat):
         self.assertEqual(contacto.telefonos[1][1], u'666777999')
         self.assertEqual(contacto.telefonos[1][0], u'34')
         self.assertEqual(contrato.fecha_finalizacion, u'2018-01-01')
+        self.assertEqual(contrato.ref_catastro, u'1234567890qwertyuiop')
+        self.assertEqual(contrato.ref_catastro_finca, u'1234567890qwer')
         self.assertEqual(contrato.modo_control_potencia, u'1')
         self.assertEqual(contrato.periodicidad_facturacion, u'01')
         self.assertEqual(contrato.consumo_anual_estimado, u'5000')
@@ -451,7 +461,6 @@ class test_C2(TestCaseCompat):
         autoconsumo = c.contrato.autoconsumo
         suministro = autoconsumo.datos_suministro
         self.assertEqual(suministro.tipo_cups, u'01')
-        self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')
         datos_cau = autoconsumo.datos_cau[0]
         self.assertEqual(datos_cau.cau, u'ES1234000000000001JN0FA001')
         self.assertEqual(datos_cau.tipo_autoconsumo, u'11')
@@ -514,8 +523,13 @@ class test_C2(TestCaseCompat):
         self.assertEqual(direccion.tipo_via, u'PZ')
         # Medida
         medida = c.medida
-        self.assertEqual(medida.propiedad_equipo, u'C')
         self.assertEqual(medida.tipo_equipo_medida, u'L00')
+        self.assertEqual(medida.cambio_propiedad_elemento_edm, u'S')
+        contacto = medida.contacto
+        self.assertEqual(contacto.persona_de_contacto, u'Nombre Inventado 2')
+        self.assertEqual(len(contacto.telefonos), 2)
+        self.assertEqual(contacto.telefonos[1][1], u'666777555')
+        self.assertEqual(contacto.telefonos[1][0], u'34')
         mod = medida.modelos_aparato
         self.assertEqual(len(mod), 2)
         mod1 = mod[0]
@@ -523,9 +537,11 @@ class test_C2(TestCaseCompat):
         self.assertEqual(mod1.marca_aparato, u'132')
         self.assertEqual(mod1.modelo_marca, u'011')
         self.assertEqual(mod1.tipo_aparato, u'CG')
+        self.assertEqual(mod1.propiedad_equipo, u'C')
         self.assertEqual(mod2.marca_aparato, u'132')
         self.assertEqual(mod2.modelo_marca, u'012')
         self.assertEqual(mod2.tipo_aparato, u'CG')
+        self.assertEqual(mod2.propiedad_equipo, u'C')
         # Datos CIE
         datos_cie = c.doc_tecnica.datos_cie
         self.assertFalse(datos_cie.cie_electronico)
@@ -605,7 +621,13 @@ class test_C2(TestCaseCompat):
 
         # Contrato
         contrato = c.contrato
-
+        self.assertEqual(contrato.ref_catastro, u'1234567890qwertyuiop')
+        self.assertEqual(contrato.ref_catastro_finca, u'1234567890qwer')
+        utm_c = contrato.utm
+        self.assertEqual(utm_c.x, u'100')
+        self.assertEqual(utm_c.y, u'200')
+        self.assertEqual(utm_c.huso, u'40')
+        self.assertEqual(utm_c.banda, u'E')
         pots = contrato.potencias_contratadas
         self.assertEqual(len(pots), 2)
         self.assertEqual(pots[0][1], 1000)
@@ -615,7 +637,6 @@ class test_C2(TestCaseCompat):
         autoconsumo = c.contrato.autoconsumo
         suministro = autoconsumo.datos_suministro
         self.assertEqual(suministro.tipo_cups, u'01')
-        self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')
         datos_cau = autoconsumo.datos_cau[0]
         self.assertEqual(datos_cau.cau, u'ES1234000000000001JN0FA001')
         self.assertEqual(datos_cau.tipo_autoconsumo, u'11')
@@ -880,6 +901,8 @@ class test_A3(TestCaseCompat):
         self.assertEqual(contacto.telefonos[1][1], u'666777999')
         self.assertEqual(contacto.telefonos[1][0], u'34')
         self.assertEqual(contrato.fecha_finalizacion, u'2018-01-01')
+        self.assertEqual(contrato.ref_catastro, u'1234567890qwertyuiop')
+        self.assertEqual(contrato.ref_catastro_finca, u'1234567890qwer')
         self.assertEqual(contrato.modo_control_potencia, u'1')
         pots = contrato.potencias_contratadas
         self.assertEqual(len(pots), 2)
@@ -890,7 +913,6 @@ class test_A3(TestCaseCompat):
         autoconsumo = a3.contrato.autoconsumo
         suministro = autoconsumo.datos_suministro
         self.assertEqual(suministro.tipo_cups, u'01')
-        self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')
         datos_cau = autoconsumo.datos_cau[0]
         self.assertEqual(datos_cau.cau, u'ES1234000000000001JN0FA001')
         self.assertEqual(datos_cau.tipo_autoconsumo, u'11')
@@ -954,8 +976,13 @@ class test_A3(TestCaseCompat):
         self.assertEqual(direccion.tipo_via, u'PZ')
         # Medida
         medida = a3.medida
-        self.assertEqual(medida.propiedad_equipo, u'C')
         self.assertEqual(medida.tipo_equipo_medida, u'L00')
+        self.assertEqual(medida.cambio_propiedad_elemento_edm, u'S')
+        contacto = medida.contacto
+        self.assertEqual(contacto.persona_de_contacto, u'Nombre Inventado 2')
+        self.assertEqual(len(contacto.telefonos), 2)
+        self.assertEqual(contacto.telefonos[1][1], u'666777555')
+        self.assertEqual(contacto.telefonos[1][0], u'34')
         mod = medida.modelos_aparato
         self.assertEqual(len(mod), 2)
         mod1 = mod[0]
@@ -963,9 +990,11 @@ class test_A3(TestCaseCompat):
         self.assertEqual(mod1.marca_aparato, u'132')
         self.assertEqual(mod1.modelo_marca, u'011')
         self.assertEqual(mod1.tipo_aparato, u'CG')
+        self.assertEqual(mod1.propiedad_equipo, u'C')
         self.assertEqual(mod2.marca_aparato, u'132')
         self.assertEqual(mod2.modelo_marca, u'012')
         self.assertEqual(mod2.tipo_aparato, u'CG')
+        self.assertEqual(mod2.propiedad_equipo, u'C')
         # Datos CIE
         datos_cie = a3.doc_tecnica.datos_cie
         self.assertFalse(datos_cie.cie_papel)
@@ -1014,11 +1043,17 @@ class test_A3(TestCaseCompat):
         self.assertEqual(pots[0][1], 1000)
         self.assertEqual(pots[1][1], 2000)
         self.assertEqual(contrato.tarifa_atr, u'018')
+        self.assertEqual(contrato.ref_catastro, u'1234567890qwertyuiop')
+        self.assertEqual(contrato.ref_catastro_finca, u'1234567890qwer')
+        utm_c = contrato.utm
+        self.assertEqual(utm_c.x, u'100')
+        self.assertEqual(utm_c.y, u'200')
+        self.assertEqual(utm_c.huso, u'40')
+        self.assertEqual(utm_c.banda, u'E')
         # validem la informacio de autoconsum
         autoconsumo = a3.contrato.autoconsumo
         suministro = autoconsumo.datos_suministro
         self.assertEqual(suministro.tipo_cups, u'01')
-        self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')
         datos_cau = autoconsumo.datos_cau[0]
         self.assertEqual(datos_cau.cau, u'ES1234000000000001JN0FA001')
         self.assertEqual(datos_cau.tipo_autoconsumo, u'11')
@@ -1332,12 +1367,14 @@ class test_M1(TestCaseCompat):
         self.xml_m101m = open(get_data("m101m.xml"), "rb")
         self.xml_m101b = open(get_data("m101b.xml"), "rb")
         self.xml_m101r = open(get_data("m101r.xml"), "rb")
+        self.xml_m105 = open(get_data("m105.xml"), "rb")
 
     def tearDown(self):
         self.xml_m101.close()
         self.xml_m101m.close()
         self.xml_m101b.close()
         self.xml_m101r.close()
+        self.xml_m105.close()
 
     def test_m101(self):
         m1 = M1(self.xml_m101)
@@ -1360,6 +1397,8 @@ class test_M1(TestCaseCompat):
         self.assertEqual(contacto.telefonos[1][1], u'666777999')
         self.assertEqual(contacto.telefonos[1][0], u'34')
         self.assertEqual(contrato.fecha_finalizacion, u'2018-01-01')
+        self.assertEqual(contrato.ref_catastro, u'1234567890qwertyuiop')
+        self.assertEqual(contrato.ref_catastro_finca, u'1234567890qwer')
         self.assertEqual(contrato.modo_control_potencia, u'1')
         pots = contrato.potencias_contratadas
         self.assertEqual(len(pots), 2)
@@ -1370,7 +1409,6 @@ class test_M1(TestCaseCompat):
         autoconsumo = m1.contrato.autoconsumo
         suministro = autoconsumo.datos_suministro
         self.assertEqual(suministro.tipo_cups, u'01')
-        self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')
         datos_cau = autoconsumo.datos_cau[0]
         self.assertEqual(datos_cau.cau, u'ES1234000000000001JN0FA001')
         self.assertEqual(datos_cau.tipo_autoconsumo, u'11')
@@ -1420,8 +1458,13 @@ class test_M1(TestCaseCompat):
         self.assertFalse(cliente.direccion)
         # Medida
         medida = m1.medida
-        self.assertEqual(medida.propiedad_equipo, u'C')
         self.assertEqual(medida.tipo_equipo_medida, u'L00')
+        self.assertEqual(medida.cambio_propiedad_elemento_edm, u'S')
+        contacto = medida.contacto
+        self.assertEqual(contacto.persona_de_contacto, u'Nombre Inventado 2')
+        self.assertEqual(len(contacto.telefonos), 2)
+        self.assertEqual(contacto.telefonos[1][1], u'666777555')
+        self.assertEqual(contacto.telefonos[1][0], u'34')
         mod = medida.modelos_aparato
         self.assertEqual(len(mod), 0)
         # DocTec
@@ -1458,8 +1501,13 @@ class test_M1(TestCaseCompat):
         self.assertFalse(cliente.direccion)
         # Medida
         medida = m1.medida
-        self.assertEqual(medida.propiedad_equipo, u'C')
         self.assertEqual(medida.tipo_equipo_medida, u'L00')
+        self.assertEqual(medida.cambio_propiedad_elemento_edm, u'S')
+        contacto = medida.contacto
+        self.assertEqual(contacto.persona_de_contacto, u'Nombre Inventado 2')
+        self.assertEqual(len(contacto.telefonos), 2)
+        self.assertEqual(contacto.telefonos[1][1], u'666777555')
+        self.assertEqual(contacto.telefonos[1][0], u'34')
         mod = medida.modelos_aparato
         self.assertEqual(len(mod), 0)
         # DocTec
@@ -1496,8 +1544,13 @@ class test_M1(TestCaseCompat):
         self.assertFalse(cliente.direccion)
         # Medida
         medida = m1.medida
-        self.assertEqual(medida.propiedad_equipo, u'C')
         self.assertEqual(medida.tipo_equipo_medida, u'L00')
+        self.assertEqual(medida.cambio_propiedad_elemento_edm, u'S')
+        contacto = medida.contacto
+        self.assertEqual(contacto.persona_de_contacto, u'Nombre Inventado 2')
+        self.assertEqual(len(contacto.telefonos), 2)
+        self.assertEqual(contacto.telefonos[1][1], u'666777555')
+        self.assertEqual(contacto.telefonos[1][0], u'34')
         mod = medida.modelos_aparato
         self.assertEqual(len(mod), 0)
         # DocTec
@@ -1524,6 +1577,8 @@ class test_M1(TestCaseCompat):
         self.assertEqual(contacto.telefonos[1][1], u'666777999')
         self.assertEqual(contacto.telefonos[1][0], u'34')
         self.assertEqual(contrato.fecha_finalizacion, u'2018-01-01')
+        self.assertEqual(contrato.ref_catastro, u'1234567890qwertyuiop')
+        self.assertEqual(contrato.ref_catastro_finca, u'1234567890qwer')
         self.assertEqual(contrato.modo_control_potencia, u'1')
         pots = contrato.potencias_contratadas
         self.assertEqual(len(pots), 2)
@@ -1534,7 +1589,6 @@ class test_M1(TestCaseCompat):
         autoconsumo = m1.contrato.autoconsumo
         suministro = autoconsumo.datos_suministro
         self.assertEqual(suministro.tipo_cups, u'01')
-        self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')
         datos_cau = autoconsumo.datos_cau[0]
         self.assertEqual(datos_cau.cau, u'ES1234000000000001JN0FA001')
         self.assertEqual(datos_cau.tipo_autoconsumo, u'11')
@@ -1584,8 +1638,13 @@ class test_M1(TestCaseCompat):
         self.assertFalse(cliente.direccion)
         # Medida
         medida = m1.medida
-        self.assertEqual(medida.propiedad_equipo, u'C')
         self.assertEqual(medida.tipo_equipo_medida, u'L00')
+        self.assertEqual(medida.cambio_propiedad_elemento_edm, u'S')
+        contacto = medida.contacto
+        self.assertEqual(contacto.persona_de_contacto, u'Nombre Inventado 2')
+        self.assertEqual(len(contacto.telefonos), 2)
+        self.assertEqual(contacto.telefonos[1][1], u'666777555')
+        self.assertEqual(contacto.telefonos[1][0], u'34')
         mod = medida.modelos_aparato
         self.assertEqual(len(mod), 0)
         # DocTec
@@ -1594,6 +1653,134 @@ class test_M1(TestCaseCompat):
         self.assertFalse(m1.comentarios)
         documento = m1.registros_documento[0]
         self.assertEqual(documento.tipo_doc_aportado, u'12')
+
+    def test_m105(self):
+        m1 = M1(self.xml_m105)
+        m1.parse_xml()
+        # Datos Solicitud
+        self.assertEqual(m1.datos_activacion.fecha, u'2016-08-21')
+        self.assertEqual(m1.datos_activacion.bono_social, u'1')
+        self.assertEqual(m1.datos_activacion.ind_esencial, u'01')
+        self.assertEqual(m1.datos_activacion.fecha_ultimo_movimiento_ind_esencial, u'2016-06-06')
+        # Contrato
+        contrato = m1.contrato
+        contacto = contrato.contacto
+        self.assertEqual(contrato.cod_contrato, u'00001')
+        self.assertEqual(contrato.fecha_finalizacion, u'2020-01-01')
+        self.assertEqual(contrato.ref_catastro, u'1234567890qwertyuiop')
+        self.assertEqual(contrato.ref_catastro_finca, u'1234567890qwer')
+        utm_c = contrato.utm
+        self.assertEqual(utm_c.x, u'100')
+        self.assertEqual(utm_c.y, u'200')
+        self.assertEqual(utm_c.huso, u'40')
+        self.assertEqual(utm_c.banda, u'E')
+        # Autoconsumo
+        autoconsumo = m1.contrato.autoconsumo
+        suministro = autoconsumo.datos_suministro
+        self.assertEqual(suministro.tipo_cups, u'01')
+        datos_cau = autoconsumo.datos_cau[0]
+        self.assertEqual(datos_cau.cau, u'ES1234000000000001JN0FA001')
+        self.assertEqual(datos_cau.tipo_autoconsumo, u'11')
+        self.assertEqual(datos_cau.tipo_subseccion, u'10')
+        self.assertEqual(datos_cau.colectivo, u'S')
+        inst_gen_1 = datos_cau.datos_inst_gen[0]
+        self.assertEqual(inst_gen_1.cil, u'ES1234000000000001JN0F001')
+        self.assertEqual(inst_gen_1.tec_generador, u'b12')
+        self.assertEqual(inst_gen_1.combustible, u'Diesel')
+        self.assertEqual(inst_gen_1.pot_instalada_gen, u'100')
+        self.assertEqual(inst_gen_1.tipo_instalacion, u'01')
+        self.assertEqual(inst_gen_1.esquema_medida, u'B')
+        self.assertEqual(inst_gen_1.ssaa, u'S')
+        self.assertEqual(inst_gen_1.unico_contrato, u'S')
+        self.assertEqual(inst_gen_1.ref_catastro, u'1234567890qwertyuidf')
+        utm_1 = inst_gen_1.utm
+        self.assertEqual(utm_1.x, u'100')
+        self.assertEqual(utm_1.y, u'200')
+        self.assertEqual(utm_1.huso, u'40')
+        self.assertEqual(utm_1.banda, u'E')
+        titular = inst_gen_1.titular_representante_gen
+        self.assertEqual(titular.id_titular.tipo_identificador, u'NI')
+        self.assertEqual(titular.id_titular.identificador, u'111111111H')
+        self.assertEqual(titular.nombre.nombre_de_pila, u'Juan')
+        self.assertEqual(titular.nombre.primer_apellido, u'López')
+        self.assertEqual(titular.nombre.segundo_apellido, u'Sánchez')
+        self.assertEqual(titular.telefono[0][0], u'0034')
+        self.assertEqual(titular.telefono[0][1], u'933834841')
+        self.assertEqual(titular.correo_electronico, u'mail_falso@dominio.com')
+
+        # Seguim amb la resta de dades del contracte
+        self.assertEqual(m1.contrato.tipo_contrato_atr, u'02')
+        self.assertEqual(m1.contrato.cups_principal, u'ES1234000000000001JN0F')
+        self.assertEqual(m1.contrato.tarifa_atr, u'018')
+        self.assertEqual(m1.contrato.periodicidad_facturacion, u'01')
+        self.assertEqual(m1.contrato.tipo_de_telegestion, u'01')
+        self.assertEqual(m1.contrato.modo_control_potencia, u'1')
+        self.assertEqual(m1.contrato.marca_medida_con_perdidas, u'S')
+        self.assertEqual(m1.contrato.tension_del_suministro, u'10')
+        self.assertEqual(m1.contrato.vas_trafo, u'50')
+        self.assertEqual(m1.contrato.porcentaje_perdidas, u'05')
+        self.assertEqual(len(m1.contrato.potencias_contratadas), 2)
+        pot1 = m1.contrato.potencias_contratadas[0]
+        pot2 = m1.contrato.potencias_contratadas[1]
+        self.assertEqual(pot1[1], 1000)
+        self.assertEqual(pot2[1], 2000)
+        # Puntos Medida
+        self.assertEqual(len(m1.puntos_medida), 1)
+        pm = m1.puntos_medida[0]
+        self.assertEqual(pm.cod_pm, u'ES1234000000000001JN0F')
+        self.assertEqual(pm.tipo_movimiento, u'A')
+        self.assertEqual(pm.tipo_pm, u'03')
+        self.assertEqual(pm.cod_pm_principal, u'ES1234000000000002JN0F')
+        self.assertEqual(pm.modo_lectura, u'1')
+        self.assertEqual(pm.funcion, u'P')
+        self.assertEqual(pm.direccion_enlace, u'39522')
+        self.assertEqual(pm.direccion_punto_medida, u'000000001')
+        self.assertEqual(pm.num_linea, u'12')
+        self.assertEqual(pm.telefono_telemedida, u'987654321')
+        self.assertEqual(pm.estado_telefono, u'1')
+        self.assertEqual(pm.clave_acceso, u'0000000007')
+        self.assertEqual(pm.tension_pm, u'0')
+        self.assertEqual(pm.fecha_vigor, u'2003-01-01')
+        self.assertEqual(pm.fecha_alta, u'2003-01-01')
+        self.assertEqual(pm.fecha_baja, u'2003-02-01')
+        self.assertEqual(pm.comentarios, u'Comentarios Varios')
+        # Aparatos
+        self.assertEqual(len(pm.aparatos), 1)
+        ap = pm.aparatos[0]
+        self.assertEqual(ap.cod_precinto, u'02')
+        self.assertEqual(ap.constante_energia, u'1.000')
+        self.assertEqual(ap.constante_maximetro, u'1.000')
+        self.assertEqual(ap.funcion_aparato, u'M')
+        self.assertEqual(ap.lectura_directa, u'N')
+        self.assertEqual(ap.marca_aparato, u'132')
+        self.assertEqual(ap.modelo_marca, u'011')
+        self.assertEqual(ap.modo_medida_potencia, u'9')
+        self.assertEqual(ap.num_integradores, u'18')
+        self.assertEqual(ap.numero_serie, u'0000539522')
+        self.assertEqual(ap.periodo_fabricacion, u'2005')
+        self.assertEqual(ap.propietario, u'Desc. Propietario')
+        self.assertEqual(ap.ruedas_decimales, u'02')
+        self.assertEqual(ap.ruedas_enteras, u'08')
+        self.assertEqual(ap.tipo_aparato, u'CG')
+        self.assertEqual(ap.tipo_dhedm, u'6')
+        self.assertEqual(ap.tipo_equipo_medida, u'L03')
+        self.assertEqual(ap.tipo_movimiento, u'CX')
+        self.assertEqual(ap.tipo_propiedad_aparato, u'1')
+        # Medidas
+        self.assertEqual(len(ap.medidas), 2)
+        md = ap.medidas[0]
+        self.assertEqual(md.anomalia, u'01')
+        self.assertEqual(md.comentarios, u'Comentario sobre anomalia')
+        self.assertEqual(md.fecha_lectura_firme, u'2003-01-02')
+        self.assertEqual(md.magnitud_medida, u'PM')
+        self.assertEqual(md.periodo, u'65')
+        self.assertEqual(md.procedencia, u'30')
+        self.assertEqual(md.tipo_dhedm, u'6')
+        self.assertEqual(md.ultima_lectura_firme, u'0.00')
+        md2 = ap.medidas[1]
+        self.assertFalse(md2.anomalia)
+        self.assertFalse(md2.comentarios)
+        self.assertEqual(md2.fecha_lectura_firme, u'2003-01-03')
 
 
 class test_M2(TestCaseCompat):
@@ -1645,11 +1832,17 @@ class test_M2(TestCaseCompat):
         contrato = m2.contrato
         self.assertEquals(contrato.cod_contrato, "00001")
         self.assertEquals(contrato.fecha_finalizacion, "2016-05-05")
+        self.assertEqual(contrato.ref_catastro, u'1234567890qwertyuiop')
+        self.assertEqual(contrato.ref_catastro_finca, u'1234567890qwer')
+        utm_c = contrato.utm
+        self.assertEqual(utm_c.x, u'100')
+        self.assertEqual(utm_c.y, u'200')
+        self.assertEqual(utm_c.huso, u'40')
+        self.assertEqual(utm_c.banda, u'E')
         # validem la informacio de autoconsum
         autoconsumo = m2.contrato.autoconsumo
         suministro = autoconsumo.datos_suministro
         self.assertEqual(suministro.tipo_cups, u'01')
-        self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')
         datos_cau = autoconsumo.datos_cau[0]
         self.assertEqual(datos_cau.cau, u'ES1234000000000001JN0FA001')
         self.assertEqual(datos_cau.tipo_autoconsumo, u'11')
@@ -1768,11 +1961,12 @@ class test_D1(TestCaseCompat):
         self.assertEqual(d1.notificacion_cambios_atr_desde_distribuidor[0].motivo_cambio_atr_desde_distribuidora, u'01')
         self.assertEqual(d1.notificacion_cambios_atr_desde_distribuidor[0].ind_esencial, u'01')
         self.assertEqual(d1.notificacion_cambios_atr_desde_distribuidor[0].fecha_ultimo_movimiento_ind_esencial, u'2016-06-06')
+        self.assertEqual(d1.notificacion_cambios_atr_desde_distribuidor[0].ref_catastro, u'1234567890qwertyuiop')
+        self.assertEqual(d1.notificacion_cambios_atr_desde_distribuidor[0].ref_catastro_finca, u'1234567890qwer')
         info = d1.notificacion_cambios_atr_desde_distribuidor[0].info_registro_autocons
         autoconsumo = info.autoconsumo
         suministro = autoconsumo.datos_suministro
         self.assertEqual(suministro.tipo_cups, u'01')
-        self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')
         datos_cau = autoconsumo.datos_cau[0]
         self.assertEqual(datos_cau.cau, u'ES1234000000000001JN0FA001')
         self.assertEqual(datos_cau.tipo_autoconsumo, u'11')
@@ -1837,6 +2031,7 @@ class test_D1(TestCaseCompat):
         self.assertEqual(inst_gen.tec_generador, u'b12')
         self.assertEqual(inst_gen.pot_instalada_gen, u'100')
         self.assertEqual(inst_gen.tipo_instalacion, u'01')
+        self.assertEqual(inst_gen.esquema_medida, u'A')
         self.assertEqual(inst_gen.ssaa, u'S')
         utm = inst_gen.utm
         self.assertEqual(utm.x, u'100')
@@ -2098,7 +2293,7 @@ class test_Q1(TestCaseCompat):
         self.assertEqual(lh.lectura, 1500.0)
         self.assertEqual(lh.procedencia, u'40')
         ajuste = int2.ajuste
-        self.assertEqual(ajuste.ajuste_por_integrador, u'1500')
+        self.assertEqual(ajuste.ajuste_por_integrador, 1500.0)
         self.assertEqual(ajuste.codigo_motivo_ajuste, u'01')
         self.assertEqual(ajuste.comentarios, u'Comentario Ajuste')
         anomalia = int2.anomalia
@@ -3494,12 +3689,15 @@ class test_F1(TestCaseCompat):
         )
 
         exceso_potencia = fact.exceso_potencia
-
+        self.assertEqual(exceso_potencia.fecha_desde, '2017-02-28')
+        self.assertEqual(exceso_potencia.fecha_hasta, '2017-03-31')
         periodos_exceso_potencia = exceso_potencia.periodos
         self.assertEqual(len(periodos_exceso_potencia), 1)
         periodo_exceso_potencia = periodos_exceso_potencia[0]
 
         self.assertEqual(periodo_exceso_potencia.valor_exceso_potencia, 186.29)
+        self.assertEqual(periodo_exceso_potencia.numero_dias, 31)
+        self.assertEqual(periodo_exceso_potencia.precio_exceso, 6.009355)
         self.assertEqual(periodo_exceso_potencia.name, u'P1')
         self.assertEqual(periodo_exceso_potencia.nombre, u'P1')
 
@@ -3579,6 +3777,7 @@ class test_F1(TestCaseCompat):
         concepto_demora = conceptos_repercutibles[2]
 
         self.assertEqual(concepto_enganche.concepto_repercutible, u'04')
+        self.assertEqual(concepto_enganche.codigo_de_solicitud, u'10004')
         self.assertEqual(concepto_enganche.tipo_impositivo, u'1')
         self.assertEqual(concepto_enganche.fecha_operacion, u'2016-09-01')
         self.assertEqual(concepto_enganche.unidades, 1)
@@ -3590,6 +3789,7 @@ class test_F1(TestCaseCompat):
         )
 
         self.assertEqual(concepto_verificacion.concepto_repercutible, u'05')
+        self.assertEqual(concepto_verificacion.codigo_de_solicitud, u'10005')
         self.assertEqual(concepto_verificacion.tipo_impositivo, u'1')
         self.assertEqual(concepto_verificacion.fecha_operacion, u'2016-09-01')
         self.assertEqual(concepto_verificacion.unidades, 1)
@@ -3600,6 +3800,7 @@ class test_F1(TestCaseCompat):
         )
 
         self.assertEqual(concepto_demora.concepto_repercutible, u'11')
+        self.assertFalse(concepto_demora.codigo_de_solicitud)
         self.assertEqual(concepto_demora.tipo_impositivo, u'1')
         self.assertEqual(concepto_demora.fecha_desde, u'2016-09-01')
         self.assertEqual(concepto_demora.fecha_hasta, u'2016-10-01')
@@ -4207,14 +4408,42 @@ class test_P0(unittest.TestCase):
     def test_p002_accept(self):
         p0 = P0(self.xml_p002_accept)
         p0.parse_xml()
-        # Datos Aceptacion
-        self.assertEqual(p0.ind_esencial, '00')
-        self.assertEqual(p0.fecha_ultimo_movimiento_ind_esencial, '2016-05-05')
+        # Contrato
+        self.assertEqual(p0.contrato.tipo_contrato_atr, u'03')
+        self.assertEqual(p0.contrato.cups_principal, u'ES1234000000000001JN0F')
+        self.assertEqual(p0.contrato.fecha_finalizacion, u'2020-03-31')
+        self.assertEqual(p0.contrato.ref_catastro, u'1234567890qwertyuiop')
+        self.assertEqual(p0.contrato.ref_catastro_finca, u'1234567890qwer')
+        utm_c = p0.contrato.utm
+        self.assertEqual(utm_c.x, u'100')
+        self.assertEqual(utm_c.y, u'200')
+        self.assertEqual(utm_c.huso, u'40')
+        self.assertEqual(utm_c.banda, u'E')
+        self.assertEqual(p0.contrato.fecha_ultimo_movimiento_tipo_autocons, u'2020-01-01')
+        self.assertEqual(p0.contrato.ind_bono_social, u'N')
+        self.assertEqual(p0.contrato.ind_esencial, u'00')
+        self.assertEqual(p0.contrato.fecha_ultimo_movimiento_ind_esencial, u'2016-05-05')
+        self.assertEqual(p0.contrato.vivienda_habitual, u'S')
+        self.assertEqual(p0.contrato.cnae, u'9820')
+        self.assertEqual(p0.contrato.modo_control_potencia, u'1')
+        self.assertEqual(len(p0.contrato.potencias_contratadas), 1)
+        self.assertEqual(p0.contrato.potencias_contratadas[0][1], 6000)
+        self.assertEqual(p0.contrato.tarifa_atr, u'018')
+
+        self.assertEqual(p0.contrato.modo_facturacion_potencia, u'9')
+        self.assertEqual(p0.contrato.no_interrumpible, u'S')
+        self.assertEqual(p0.contrato.potencia_no_interrumpible, u'6000')
+        self.assertEqual(p0.contrato.vas_trafo, u'50')
+        self.assertEqual(p0.contrato.periodicidad_facturacion, u'01')
+        self.assertEqual(p0.contrato.tipo_de_telegestion, u'01')
+        self.assertEqual(p0.contrato.icp_activado_telegestion, u'S')
+        self.assertEqual(p0.contrato.peaje_directo, u'S')
+        self.assertEqual(p0.contrato.deposito_garantia, u'N')
+
         # validem camps de autoconsumo
         autoconsumo = p0.contrato.autoconsumo
         suministro = autoconsumo.datos_suministro
         self.assertEqual(suministro.tipo_cups, u'01')
-        self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')
         datos_cau = autoconsumo.datos_cau[0]
         self.assertEqual(datos_cau.cau, u'ES1234000000000001JN0FA001')
         self.assertEqual(datos_cau.tipo_autoconsumo, u'11')
@@ -4222,6 +4451,7 @@ class test_P0(unittest.TestCase):
         self.assertEqual(datos_cau.colectivo, u'S')
         inst_gen_1 = datos_cau.datos_inst_gen[0]
         self.assertEqual(inst_gen_1.cil, u'ES1234000000000001JN0F001')
+        self.assertEqual(inst_gen_1.tec_generador, u'b11')
         self.assertEqual(inst_gen_1.pot_instalada_gen, u'100')
         self.assertEqual(inst_gen_1.tipo_instalacion, u'01')
         self.assertEqual(inst_gen_1.esquema_medida, u'B')
@@ -4470,12 +4700,18 @@ class test_E1(unittest.TestCase):
         self.assertEqual(e1.datos_activacion.ind_anulable, u'S')
         # Contrato
         self.assertEqual(e1.contrato.cod_contrato, u'00001')
+        self.assertEqual(e1.contrato.ref_catastro, u'1234567890qwertyuiop')
+        self.assertEqual(e1.contrato.ref_catastro_finca, u'1234567890qwer')
+        utm_c = e1.contrato.utm
+        self.assertEqual(utm_c.x, u'100')
+        self.assertEqual(utm_c.y, u'200')
+        self.assertEqual(utm_c.huso, u'40')
+        self.assertEqual(utm_c.banda, u'E')
         self.assertEqual(e1.contrato.cups_principal, u'ES1234000000000001JN0F')
         # validem la informacio de autoconsum
         autoconsumo = e1.contrato.autoconsumo
         suministro = autoconsumo.datos_suministro
         self.assertEqual(suministro.tipo_cups, u'01')
-        self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')
         datos_cau = autoconsumo.datos_cau[0]
         self.assertEqual(datos_cau.cau, u'ES1234000000000001JN0FA001')
         self.assertEqual(datos_cau.tipo_autoconsumo, u'11')
@@ -4635,12 +4871,18 @@ class test_E2(unittest.TestCase):
         self.assertEqual(e2.datos_notificacion.fecha_ultimo_movimiento_ind_esencial, u'2016-06-06')
         # Contrato
         self.assertEqual(e2.contrato.cod_contrato, u'00001')
+        self.assertEqual(e2.contrato.ref_catastro, u'1234567890qwertyuiop')
+        self.assertEqual(e2.contrato.ref_catastro_finca, u'1234567890qwer')
+        utm_c = e2.contrato.utm
+        self.assertEqual(utm_c.x, u'100')
+        self.assertEqual(utm_c.y, u'200')
+        self.assertEqual(utm_c.huso, u'40')
+        self.assertEqual(utm_c.banda, u'E')
         self.assertEqual(e2.contrato.cups_principal, u'ES1234000000000001JN0F')
         # validem la informacio de autoconsum
         autoconsumo = e2.contrato.autoconsumo
         suministro = autoconsumo.datos_suministro
         self.assertEqual(suministro.tipo_cups, u'01')
-        self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')
         datos_cau = autoconsumo.datos_cau[0]
         self.assertEqual(datos_cau.cau, u'ES1234000000000001JN0FA001')
         self.assertEqual(datos_cau.tipo_autoconsumo, u'11')
@@ -4884,6 +5126,8 @@ class test_T1(unittest.TestCase):
         self.assertEqual(t1.contrato.contacto.telefonos[1][1], u'666777999')
         self.assertEqual(t1.contrato.contacto.telefonos[1][0], u'34')
         self.assertEqual(t1.contrato.fecha_finalizacion, u'2018-01-01')
+        self.assertEqual(t1.contrato.ref_catastro, u'1234567890qwertyuiop')
+        self.assertEqual(t1.contrato.ref_catastro_finca, u'1234567890qwer')
         self.assertEqual(t1.contrato.modo_control_potencia, u'1')
         self.assertEqual(len(t1.contrato.potencias_contratadas), 2)
         self.assertEqual(t1.contrato.potencias_contratadas[0][1], 1000)
@@ -4893,7 +5137,6 @@ class test_T1(unittest.TestCase):
         autoconsumo = t1.contrato.autoconsumo
         suministro = autoconsumo.datos_suministro
         self.assertEqual(suministro.tipo_cups, u'01')
-        self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')
         datos_cau = autoconsumo.datos_cau[0]
         self.assertEqual(datos_cau.cau, u'ES1234000000000001JN0FA001')
         self.assertEqual(datos_cau.tipo_autoconsumo, u'11')
@@ -4901,6 +5144,7 @@ class test_T1(unittest.TestCase):
         self.assertEqual(datos_cau.colectivo, u'S')
         inst_gen_1 = datos_cau.datos_inst_gen[0]
         self.assertEqual(inst_gen_1.cil, u'ES1234000000000001JN0F001')
+        self.assertEqual(inst_gen_1.tec_generador, u'b11')
         self.assertEqual(inst_gen_1.pot_instalada_gen, u'100')
         self.assertEqual(inst_gen_1.tipo_instalacion, u'01')
         self.assertEqual(inst_gen_1.esquema_medida, u'B')
@@ -4922,6 +5166,7 @@ class test_T1(unittest.TestCase):
         self.assertEqual(titular.telefono[0][1], u'933834841')
         self.assertEqual(titular.correo_electronico, u'mail_falso@dominio.com')
         self.assertEqual(t1.contrato.tipo_contrato_atr, u'02')
+        self.assertEqual(t1.contrato.cups_principal, u'ES1234000000000001JN0F')
         self.assertEqual(t1.contrato.consumo_anual_estimado, u'5000')
         # Cliente
         self.assertEqual(t1.cliente.correo_electronico, u'email@host')
@@ -5004,11 +5249,17 @@ class test_T1(unittest.TestCase):
         self.assertEqual(t1.datos_activacion.fecha_ultimo_movimiento_ind_esencial, u'2016-06-06')
         # Contrato
         self.assertEqual(t1.contrato.cod_contrato, u'00001')
+        self.assertEqual(t1.contrato.ref_catastro, u'1234567890qwertyuiop')
+        self.assertEqual(t1.contrato.ref_catastro_finca, u'1234567890qwer')
+        utm_c = t1.contrato.utm
+        self.assertEqual(utm_c.x, u'100')
+        self.assertEqual(utm_c.y, u'200')
+        self.assertEqual(utm_c.huso, u'40')
+        self.assertEqual(utm_c.banda, u'E')
         # validem la informacio de autoconsum
         autoconsumo = t1.contrato.autoconsumo
         suministro = autoconsumo.datos_suministro
         self.assertEqual(suministro.tipo_cups, u'01')
-        self.assertEqual(suministro.ref_catastro, u'1234567890qwertyuiop')
         datos_cau = autoconsumo.datos_cau[0]
         self.assertEqual(datos_cau.cau, u'ES1234000000000001JN0FA001')
         self.assertEqual(datos_cau.tipo_autoconsumo, u'11')
@@ -5016,6 +5267,7 @@ class test_T1(unittest.TestCase):
         self.assertEqual(datos_cau.colectivo, u'S')
         inst_gen_1 = datos_cau.datos_inst_gen[0]
         self.assertEqual(inst_gen_1.cil, u'ES1234000000000001JN0F001')
+        self.assertEqual(inst_gen_1.tec_generador, u'b11')
         self.assertEqual(inst_gen_1.pot_instalada_gen, u'100')
         self.assertEqual(inst_gen_1.tipo_instalacion, u'01')
         self.assertEqual(inst_gen_1.esquema_medida, u'B')
@@ -5039,6 +5291,7 @@ class test_T1(unittest.TestCase):
 
         # Seguim amb la resta de dades del contracte
         self.assertEqual(t1.contrato.tipo_contrato_atr, u'02')
+        self.assertEqual(t1.contrato.cups_principal, u'ES1234000000000001JN0F')
         self.assertEqual(t1.contrato.tarifa_atr, u'018')
         self.assertEqual(t1.contrato.periodicidad_facturacion, u'01')
         self.assertEqual(t1.contrato.tipo_de_telegestion, u'01')

@@ -28,62 +28,6 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Contrato" type="ContratoInfoPS002" minOccurs="0"/>
-			<xs:element name="FechaUltimoMovimientoTipoAutocons" type="xs:date" minOccurs="0"/>
-			<xs:element name="IndBonoSocial" type="Indicativo" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Tabla 26</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="IndEsencial" type="IndEsencial" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Tabla 137</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="FechaUltimoMovimientoIndEsencial" type="xs:date" minOccurs="0"/>
-			<xs:element name="ViviendaHabitual" type="Indicativo" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Tabla 26</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="CNAE" type="CNAE" minOccurs="0"/>
-			<xs:element name="CondicionesContractuales" type="CondicionesContractualesP0" minOccurs="0"/>
-			<xs:element name="ModoFacturacionPotencia" type="ModoMedidaPotencia" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Tabla 50</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="NoInterrumpible" type="Indicativo" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Tabla 26</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="PotenciaNoInterrumpible" type="Potencia" minOccurs="0"/>
-			<xs:element name="VAsTrafo" type="Potencia" minOccurs="0"/>
-			<xs:element name="PeriodicidadFacturacion" type="PeriodicidadFacturacion" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Tabla 108</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="TipodeTelegestion" type="TipodeTelegestion" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Tabla 111</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="ICPActivadoTelegestion" type="Indicativo" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Tabla 26</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="PeajeDirecto" type="Indicativo" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Tabla 26</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="DepositoGarantia" type="Indicativo" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Tabla 26</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="PotenciaMaxAutorizada" type="Potencia"/>
 			<xs:element name="TensionDelSuministro" type="Tension">
 				<xs:annotation>
@@ -91,7 +35,7 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="DerechosReconocidos" type="DerechosReconocidos"/>
-			<xs:element name="CaracteristicasPM" type="CaracteristicasPM"/>
+			<xs:element name="CaracteristicasPM" type="CaracteristicasPM" minOccurs="0"/>
 			<xs:element name="Historia" type="HistoriaP0" minOccurs="0"/>
 			<xs:element name="Cliente" type="ClienteConSoloDireccionP0" minOccurs="0"/>
 			<xs:element name="Equipo" type="EquipoP0" minOccurs="0" maxOccurs="10"/>
@@ -115,7 +59,7 @@
 					<xs:documentation>Tabla 123</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="PotenciaMaxSinExpediente" type="Potencia" minOccurs="0"/>
+			<xs:element name="PotenciaMaxSinExpediente" type="Potencia"/>
 		</xs:sequence>
 	</xs:complexType>
 	<!-- Datos del contrato  -->
@@ -126,8 +70,68 @@
 					<xs:documentation>Tabla 9</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="CUPSPrincipal" type="Codigo" minOccurs="0"/>
 			<xs:element name="FechaFinalizacion" type="xs:date" minOccurs="0"/>
+			<xs:element name="RefCatastro" type="RefCatastro" minOccurs="0"/>
+			<xs:element name="RefCatastroFinca" type="RefCatastroFinca" minOccurs="0"/>
+			<xs:element name="UTM" type="TypeUTM" minOccurs="0"/>
 			<xs:element name="Autoconsumo" type="TypeAutoconsumoP0" minOccurs="0"/>
+			<xs:element name="FechaUltimoMovimientoTipoAutocons" type="xs:date" minOccurs="0"/>
+			<xs:element name="IndBonoSocial" type="Indicativo">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IndEsencial" type="IndEsencial" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 137</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaUltimoMovimientoIndEsencial" type="xs:date" minOccurs="0"/>
+			<xs:element name="ViviendaHabitual" type="Indicativo">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CNAE" type="CNAE" minOccurs="0"/>
+			<xs:element name="CondicionesContractuales" type="CondicionesContractualesP0"/>
+			<xs:element name="ModoFacturacionPotencia" type="ModoMedidaPotencia">
+				<xs:annotation>
+					<xs:documentation>Tabla 50</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NoInterrumpible" type="Indicativo">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PotenciaNoInterrumpible" type="Potencia" minOccurs="0"/>
+			<xs:element name="VAsTrafo" type="Potencia" minOccurs="0"/>
+			<xs:element name="PeriodicidadFacturacion" type="PeriodicidadFacturacion">
+				<xs:annotation>
+					<xs:documentation>Tabla 108</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TipodeTelegestion" type="TipodeTelegestion">
+				<xs:annotation>
+					<xs:documentation>Tabla 111</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ICPActivadoTelegestion" type="Indicativo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PeajeDirecto" type="Indicativo">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DepositoGarantia" type="Indicativo">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<!-- Características del Punto de Medida PM -->

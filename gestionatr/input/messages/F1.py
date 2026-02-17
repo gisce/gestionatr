@@ -294,6 +294,16 @@ class DatosGenerales(object):
         return None
 
     @property
+    def codigo_factura_abono(self):
+        has_attr = hasattr(
+            self._datos_generales_factura, 'CodigoFacturaAbono'
+        )
+        if has_attr:
+            datos_generales_fact = self._datos_generales_factura
+            return datos_generales_fact.CodigoFacturaAbono.text.strip()
+        return None
+
+    @property
     def expediente(self):
         if hasattr(self._datos_generales_factura, 'Expediente'):
             return Expediente(self._datos_generales_factura.Expediente)
@@ -842,6 +852,18 @@ class PeriodoExcesoPotencia(Periodo):
         return None
 
     @property
+    def numero_dias(self):
+        if hasattr(self.periodo, 'NumeroDias'):
+            return float(self.periodo.NumeroDias.text.strip())
+        return None
+
+    @property
+    def precio_exceso(self):
+        if hasattr(self.periodo, 'PrecioExceso'):
+            return float(self.periodo.PrecioExceso.text.strip())
+        return None
+
+    @property
     def name(self):
         return self._name
 
@@ -863,6 +885,18 @@ class ExcesoPotencia(object):
 
     def __init__(self, data):
         self.exceso_potencia = data
+
+    @property
+    def fecha_desde(self):
+        if hasattr(self.exceso_potencia, 'FechaDesde'):
+            return self.exceso_potencia.FechaDesde.text.strip()
+        return None
+
+    @property
+    def fecha_hasta(self):
+        if hasattr(self.exceso_potencia, 'FechaHasta'):
+            return self.exceso_potencia.FechaHasta.text.strip()
+        return None
 
     @property
     def periodos(self):
@@ -991,6 +1025,12 @@ class PeriodoEnergiaAutoconsumida(Periodo):
     def pago_tda(self):
         if hasattr(self.periodo, 'PagoTDA'):
             return float(self.periodo.PagoTDA.text.strip())
+        return None
+
+    @property
+    def importe_energia_autoconsumida(self):
+        if hasattr(self.periodo, 'ImporteEnergiaAutoconsumida'):
+            return float(self.periodo.ImporteEnergiaAutoconsumida.text.strip())
         return None
 
 
@@ -2795,6 +2835,12 @@ class ConceptoRepercutible(object):
     def concepto_repercutible(self):
         if hasattr(self.concepto, 'ConceptoRepercutible'):
             return self.concepto.ConceptoRepercutible.text.strip()
+        return None
+
+    @property
+    def codigo_de_solicitud(self):
+        if hasattr(self.concepto, 'CodigoDeSolicitud'):
+            return self.concepto.CodigoDeSolicitud.text.strip()
         return None
 
     @property

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
-from gestionatr.input.messages.C1 import Rechazo, Autoconsumo
+from gestionatr.input.messages.C1 import Rechazo, Autoconsumo, UTM
 from gestionatr.input.messages.C2 import Cliente, Direccion
 from .message import Message
 from .Deadlines import ProcessDeadline
@@ -81,152 +81,6 @@ class P0(Message, ProcessDeadline):
         data = get_rec_attr(self.obj, tree, False)
         if data not in [None, False]:
             return Contrato(data)
-        else:
-            return False
-
-    @property
-    def fecha_ultimo_movimiento_tipo_autocons(self):
-        tree = '{0}.FechaUltimoMovimientoTipoAutocons'.format(self._header)
-        data = get_rec_attr(self.obj, tree, False)
-        if data:
-            return data.text
-        else:
-            return False
-
-    @property
-    def ind_bono_social(self):
-        tree = '{0}.IndBonoSocial'.format(self._header)
-        data = get_rec_attr(self.obj, tree, False)
-        if data:
-            return data.text
-        else:
-            return False
-
-    @property
-    def ind_esencial(self):
-        tree = '{0}.IndEsencial'.format(self._header)
-        data = get_rec_attr(self.obj, tree, '')
-        # pot ser que IndEsencial tingui valor '00' indicant que no te. Llavors get_rec_attr el retorna com '0' que
-        # s'interpreta com False pero despres fent data.text retorna '00' per tant es posa default com a ''
-        if data != '':
-            return data.text
-        else:
-            return False
-
-    @property
-    def fecha_ultimo_movimiento_ind_esencial(self):
-        tree = '{0}.FechaUltimoMovimientoIndEsencial'.format(self._header)
-        data = get_rec_attr(self.obj, tree, False)
-        if data:
-            return data.text
-        else:
-            return False
-
-    @property
-    def vivienda_habitual(self):
-        tree = '{0}.ViviendaHabitual'.format(self._header)
-        data = get_rec_attr(self.obj, tree, False)
-        if data:
-            return data.text
-        else:
-            return False
-
-    @property
-    def cnae(self):
-        tree = '{0}.CNAE'.format(self._header)
-        data = get_rec_attr(self.obj, tree, False)
-        if data:
-            return data.text
-        else:
-            return False
-
-    @property
-    def condiciones_contractuales(self):
-        tree = '{0}.CondicionesContractuales'.format(self._header)
-        data = get_rec_attr(self.obj, tree, False)
-        if data:
-            return CondicionesContractuales(data)
-        else:
-            return False
-
-    @property
-    def modo_facturacion_potencia(self):
-        tree = '{0}.ModoFacturacionPotencia'.format(self._header)
-        data = get_rec_attr(self.obj, tree, False)
-        if data:
-            return data.text
-        else:
-            return False
-
-    @property
-    def no_interrumpible(self):
-        tree = '{0}.NoInterrumpible'.format(self._header)
-        data = get_rec_attr(self.obj, tree, False)
-        if data:
-            return data.text
-        else:
-            return False
-
-    @property
-    def potencia_no_interrumpible(self):
-        tree = '{0}.PotenciaNoInterrumpible'.format(self._header)
-        data = get_rec_attr(self.obj, tree, False)
-        if data:
-            return data.text
-        else:
-            return False
-
-    @property
-    def vas_trafo(self):
-        tree = '{0}.VAsTrafo'.format(self._header)
-        data = get_rec_attr(self.obj, tree, False)
-        if data:
-            return data.text
-        else:
-            return False
-
-    @property
-    def periodicidad_facturacion(self):
-        tree = '{0}.PeriodicidadFacturacion'.format(self._header)
-        data = get_rec_attr(self.obj, tree, False)
-        if data:
-            return data.text
-        else:
-            return False
-
-    @property
-    def tipo_de_telegestion(self):
-        tree = '{0}.TipodeTelegestion'.format(self._header)
-        data = get_rec_attr(self.obj, tree, False)
-        if data:
-            return data.text
-        else:
-            return False
-
-    @property
-    def icp_activado_telegestion(self):
-        tree = '{0}.ICPActivadoTelegestion'.format(self._header)
-        data = get_rec_attr(self.obj, tree, False)
-        if data:
-            return data.text
-        else:
-            return False
-
-    @property
-    def peaje_directo(self):
-        tree = '{0}.PeajeDirecto'.format(self._header)
-        data = get_rec_attr(self.obj, tree, False)
-        if data:
-            return data.text
-        else:
-            return False
-
-    @property
-    def deposito_garantia(self):
-        tree = '{0}.DepositoGarantia'.format(self._header)
-        data = get_rec_attr(self.obj, tree, False)
-        if data:
-            return data.text
         else:
             return False
 
@@ -414,6 +268,15 @@ class Contrato(object):
         return data
 
     @property
+    def cups_principal(self):
+        data = ''
+        try:
+            data = self.contrato.CUPSPrincipal.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
     def fecha_finalizacion(self):
         data = ''
         try:
@@ -423,10 +286,201 @@ class Contrato(object):
         return data
 
     @property
+    def ref_catastro(self):
+        data = ''
+        try:
+            data = self.contrato.RefCatastro.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def ref_catastro_finca(self):
+        data = ''
+        try:
+            data = self.contrato.RefCatastroFinca.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def utm(self):
+        data = ''
+        try:
+            data = UTM(self.contrato.UTM)
+        except AttributeError:
+            pass
+        return data
+
+    @property
     def autoconsumo(self):
         data = ''
         try:
             data = Autoconsumo(self.contrato.Autoconsumo)
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def fecha_ultimo_movimiento_tipo_autocons(self):
+        data = ''
+        try:
+            data = self.contrato.FechaUltimoMovimientoTipoAutocons.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def ind_bono_social(self):
+        data = ''
+        try:
+            data = self.contrato.IndBonoSocial.text
+        except AttributeError:
+            pass
+        return data
+
+
+    @property
+    def ind_esencial(self):
+        data = ''
+        try:
+            data = self.contrato.IndEsencial.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def fecha_ultimo_movimiento_ind_esencial(self):
+        data = ''
+        try:
+            data = self.contrato.FechaUltimoMovimientoIndEsencial.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def vivienda_habitual(self):
+        data = ''
+        try:
+            data = self.contrato.ViviendaHabitual.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def cnae(self):
+        data = ''
+        try:
+            data = self.contrato.CNAE.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def tarifa_atr(self):
+        data = ''
+        try:
+            data = self.contrato.CondicionesContractuales.TarifaATR.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def modo_control_potencia(self):
+        data = ''
+        try:
+            data = self.contrato.CondicionesContractuales.ModoControlPotencia.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def potencias_contratadas(self):
+        data = []
+        obj = self.contrato.CondicionesContractuales
+        if (hasattr(obj, 'PotenciasContratadas') and
+                hasattr(obj.PotenciasContratadas, 'Potencia')):
+            for d in obj.PotenciasContratadas.Potencia:
+                data.append((int(d.get('Periodo')), int(d.text)))
+        return data
+
+    @property
+    def modo_facturacion_potencia(self):
+        data = ''
+        try:
+            data = self.contrato.ModoFacturacionPotencia.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def no_interrumpible(self):
+        data = ''
+        try:
+            data = self.contrato.NoInterrumpible.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def potencia_no_interrumpible(self):
+        data = ''
+        try:
+            data = self.contrato.PotenciaNoInterrumpible.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def vas_trafo(self):
+        data = ''
+        try:
+            data = self.contrato.VAsTrafo.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def periodicidad_facturacion(self):
+        data = ''
+        try:
+            data = self.contrato.PeriodicidadFacturacion.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def tipo_de_telegestion(self):
+        data = ''
+        try:
+            data = self.contrato.TipodeTelegestion.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def icp_activado_telegestion(self):
+        data = ''
+        try:
+            data = self.contrato.ICPActivadoTelegestion.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def peaje_directo(self):
+        data = ''
+        try:
+            data = self.contrato.PeajeDirecto.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def deposito_garantia(self):
+        data = ''
+        try:
+            data = self.contrato.DepositoGarantia.text
         except AttributeError:
             pass
         return data

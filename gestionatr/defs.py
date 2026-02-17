@@ -53,6 +53,7 @@ SUBTYPES_R101 = [
                        'fecha_incidente', 'comentarios',
                        'persona_de_contacto',
                        'tipo_atencion_incorrecta'],
+
         'code': '001',
         'name': u'ATENCION INCORRECTA',
         'type': '01',
@@ -562,6 +563,21 @@ SUBTYPES_R101 = [
         'min_fields': ['cups', 'codigo_de_solicitud'],
         'code': '081',
         'name': u'RETRASO EN PLAZO DE ACTIVACIÓN REPOSICIÓN',
+        'type': '03',
+    }),
+    ({
+        'min_fields': ['nif_cliente', 'nombre_cliente', 'comentarios',
+                       'numero_expediente_fraude'],
+        'code': '082',
+        'name': u'PETICIÓN DE DOCUMENTACIÓN DEL EXPEDIENTE DE ANOMALÍA Y FRAUDE',
+        'type': '03',
+    }),
+    ({
+        'min_fields': ['nif_cliente', 'nombre_cliente',
+                       'telefono_contacto', 'cups',
+                       'persona_de_contacto', 'cta_banco'],
+        'code': '083',
+        'name': u'SOLICITUD DE DEVOLUCIÓN DE FIANZA/DEPÓSITO DE GARANTÍA',
         'type': '03',
     }),
     ({
@@ -1173,6 +1189,7 @@ TABLA_27 = [
     ('G7', 'Si los SSAA no son despreciables y se da de alta un único contrato, el tipo de instalación no puede ser “03” (próxima a través de red)'),
     ('G8', 'La solicitud de modificación de autoconsumo coincide con la contratación en vigor.'),
     ('G9', 'La solicitud de modificación no puede incorporar otras modificaciones técnicas'),
+    ('H0', 'Instalación de autoconsumo no preparada en campo'),
     ('H1', 'Tipo Autoconsumo no válido'),
     ('H2', 'Tipo Subsección no válido'),
     ('H3', 'Autoconsumo colectivo/individual'),
@@ -1385,10 +1402,12 @@ TABLA_53 = [
     ('A',
      'Cambio datos administrativos (excepto cambio de titular y corrección de datos identificativos del cliente)'),
     ('C', 'Corrección datos que identifican al cliente'),
-    ('D', 'Cambio de Documentación'),
+    ('D', 'Actualización de Documentación'),
+    ('F', 'Cambio fecha fin de vigencia contrato'),
     ('P', 'La solicitud implica cambio en la periodicidad de la facturación'),
     ('R', 'Modificación acuerdo de reparto/fichero de coeficientes de un autoconsumo colectivo'),
-    ('U', 'Cambio datos administrativos del autoconsumo')
+    ('U', 'Cambio datos administrativos del autoconsumo'),
+    ('G', 'Documentación Hidrógeno Renovable'),
 ]
 
 TABLA_55 = [
@@ -1421,15 +1440,22 @@ TABLA_61 = [
     ('11', u'Declaración relativa a puntos de recarga de vehículos eléctricos de acceso público'),
     ('12', u'Fichero de coeficientes de reparto'),
     ('13', u'Certificado de suelo urbanizado'),
+    ('14', 'Certificado de Hidrógeno Renovable'),
+    ('15', 'Certificado de SSAA batería Standalone'),
 ]
 
 TABLA_62 = [
+    ('AB', 'Almacenamiento tipo bombeo'),
+    ('AH', 'Almacenamiento hibridado'),
     ('AL', u'Almacén'),
+    ('AN', 'Almacenamiento tipo stand-alone'),
     ('AP', u'Alumbrado publico'),
     ('AS', u'Ascensores'),
     ('AT', u'Antena Telefonía Móvil'),
     ('BA', u'Batería de acumuladores'),
     ('CM', u'Centro de Maniobra y Control'),
+    ('CP', 'CPD (Centro de Proceso de Datos)'),
+    ('DE', 'Desaladora'),
     ('EA', u'Escalera-Ascensor'),
     ('ES', u'Escalera'),
     ('FT', u'Fabrica y Talleres sin Riesgo Especifico'),
@@ -1437,6 +1463,10 @@ TABLA_62 = [
     ('GA', u'Garaje'),
     ('GB', u'Grupo Bombeo, Riego por Goteo'),
     ('HP', u'Loc.Húmedos con Riesgo Corrosión o Polv.'),
+    ('HR', 'Producción de Hidrógeno Renovable'),
+    ('IC', 'Infraestructuras para producción de combustibles'),
+    ('IF', 'Infraestructuras ferroviarias'),
+    ('IH', 'Instalaciones Productoras de Hidrógeno Renovable'),
     ('IN', u'Nave industrial'),
     ('IT', u'Instalación Temporal en Emplazam.Abierto'),
     ('KC', u'Kioskos / cabinas tfno'),
@@ -1444,6 +1474,7 @@ TABLA_62 = [
     ('LC', u'Local comercial'),
     ('OF', u'Oficina'),
     ('PC', u'Publica concurrencia'),
+    ('PT', u'Puerto'),
     ('RA', u'Refugio o Albergue Agrícola'),
     ('RT', u'Repetidor de Televisión'),
     ('SA', u'Servicios Auxiliares'),
@@ -2003,7 +2034,13 @@ TABLA_73 = [
     ('0800101', 'Procedente. Se agiliza trámite de reposición'),
     ('0800201', 'Improcedente. Se adjunta explicación comentarios'),
     ('0810101', 'Procedente. Se agiliza trámite de reposición'),
-    ('0810201', 'Improcedente. Se adjunta explicación comentarios')
+    ('0810201', 'Improcedente. Se adjunta explicación comentarios'),
+    ('0820101', 'Se aporta documentación solicitada'),
+    ('0820201', 'Improcedente. Se adjunta explicación en comentarios'),
+    ('0830101', 'Se devuelve fianza'),
+    ('0830201', 'La devolución se efectuó correctamente'),
+    ('0830202', 'No procede devolver'),
+    ('0830203', 'Improcedente. Se adjunta explicación en comentarios'),
 ]
 
 TABLA_74 = [('01', u'Concertacion de visita'),
@@ -2603,6 +2640,7 @@ TABLA_126 = [
             u'combustible productos de explotaciones mineras de calidades no comerciales para la generación eléctrica '
             u'por su elevado contenido en azufre o cenizas, representando los residuos más del 25 por ciento de la '
             u'energía primaria utilizada.'),
+    ('z99', u'[Z99] - Instalaciones no recogidas en el art. 2 RD 413/2014.'),
 ]
 # https://www.boe.es/diario_boe/txt.php?id=BOE-A-2022-23737 Punto Octavo
 DISPONIBILITATS_INSTALACIO_MENYS_50MW = {

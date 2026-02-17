@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from gestionatr.output.messages.sw_c2 import *
-from gestionatr.output.messages.sw_c1 import Medida, Contrato
+from gestionatr.output.messages.sw_c1 import Medida
+from gestionatr.output.messages.sw_e1 import Contrato
 from gestionatr.output.messages.sw_t1 import DireccionPS
 
 # Paso 01
@@ -151,15 +152,6 @@ class Medida(Medida):
     def __init__(self):
         super(Medida, self).__init__()
 
-
-class Contrato(Contrato):
-
-    _sort_order = ('contrato', 'id_contrato', 'autoconsumo', 'tipo_contrato_atr', 'cups_principal',
-                   'condiciones_contractuales')
-
-    def __init__(self):
-        super(Contrato, self).__init__()
-        self.cups_principal = XmlField('CUPSPrincipal')
 
 # Paso 12
 

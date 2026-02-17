@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from libcomxml.core import XmlModel, XmlField
 from gestionatr.output.messages.base import Cabecera
-from gestionatr.output.messages.sw_c1 import Autoconsumo
+from gestionatr.output.messages.sw_c1 import Autoconsumo, UTM
 from gestionatr.output.messages.sw_c2 import Cliente, Direccion
 
 
@@ -44,15 +44,12 @@ class MensajeEnvioInformacionPS(XmlModel):
 
 class EnvioInformacionPS(XmlModel):
 
-    _sort_order = ('envio_informacion_ps', 'resultado_validacion_cliente', 'en_vigor', 'estado_contratable',
-                   'existe_solicitud_en_curso', 'tipo_solicitud_en_curso', 'contrato',
-                   'fecha_ultimo_movimiento_tipo_autocons', 'ind_bono_social', 'ind_esencial',
-                   'fecha_ultimo_movimiento_ind_esencial','vivienda_habitual','cnae', 'condiciones_contractuales',
-                   'modo_facturacion_potencia', 'no_interrumpible', 'potencia_no_interrumpible', 'vas_trafo',
-                   'periodicidad_facturacion', 'tipo_de_telegestion', 'icp_activado_telegestion', 'peaje_directo',
-                   'deposito_garantia', 'potencia_maxima_autorizada', 'tension_del_suministro', 'derechos_reconocidos',
-                   'caracteristicas_pm', 'historia', 'cliente', 'equipo_list', 'doc_tecnica',
-                   'expediente_anomalia_fraude', 'expediente_acometida', 'puntos_de_medida')
+    _sort_order = ('envio_informacion_ps', 'resultado_validacion_cliente', 'en_vigor',
+                   'estado_contratable', 'existe_solicitud_en_curso', 'tipo_solicitud_en_curso',
+                   'contrato', 'potencia_maxima_autorizada', 'tension_del_suministro',
+                   'derechos_reconocidos', 'caracteristicas_pm', 'historia', 'cliente',
+                   'equipo_list', 'doc_tecnica', 'expediente_anomalia_fraude',
+                   'expediente_acometida', 'puntos_de_medida')
 
     def __init__(self):
         self.envio_informacion_ps = XmlField('EnvioInformacionPS')
@@ -62,22 +59,6 @@ class EnvioInformacionPS(XmlModel):
         self.existe_solicitud_en_curso = XmlField('ExisteSolicitudEnCurso')
         self.tipo_solicitud_en_curso = XmlField('TipoSolicitudEnCurso')
         self.contrato = Contrato()
-        self.fecha_ultimo_movimiento_tipo_autocons = XmlField('FechaUltimoMovimientoTipoAutocons')
-        self.ind_bono_social = XmlField('IndBonoSocial')
-        self.ind_esencial = XmlField('IndEsencial')
-        self.fecha_ultimo_movimiento_ind_esencial = XmlField('FechaUltimoMovimientoIndEsencial')
-        self.vivienda_habitual = XmlField('ViviendaHabitual')
-        self.cnae = XmlField('CNAE')
-        self.condiciones_contractuales = CondicionesContractuales()
-        self.modo_facturacion_potencia = XmlField('ModoFacturacionPotencia')
-        self.no_interrumpible = XmlField('NoInterrumpible')
-        self.potencia_no_interrumpible = XmlField('PotenciaNoInterrumpible')
-        self.vas_trafo = XmlField('VAsTrafo')
-        self.periodicidad_facturacion = XmlField('PeriodicidadFacturacion')
-        self.tipo_de_telegestion = XmlField('TipodeTelegestion')
-        self.icp_activado_telegestion = XmlField('ICPActivadoTelegestion')
-        self.peaje_directo = XmlField('PeajeDirecto')
-        self.deposito_garantia = XmlField('DepositoGarantia')
         self.potencia_maxima_autorizada = XmlField('PotenciaMaxAutorizada')
         self.tension_del_suministro = XmlField('TensionDelSuministro')
         self.derechos_reconocidos = DerechosReconocidos()
@@ -116,13 +97,40 @@ class Cliente(Cliente):
 
 class Contrato(XmlModel):
 
-    _sort_order = ('contrato', 'tipo_contrato_atr', 'fecha_finalizacion', 'autoconsumo',)
+    _sort_order = ('contrato', 'tipo_contrato_atr', 'cups_principal', 'fecha_finalizacion',
+                   'ref_catastro', 'ref_catastro_finca', 'utm', 'autoconsumo',
+                   'fecha_ultimo_movimiento_tipo_autocons', 'ind_bono_social', 'ind_esencial',
+                   'fecha_ultimo_movimiento_ind_esencial','vivienda_habitual','cnae',
+                   'condiciones_contractuales', 'modo_facturacion_potencia', 'no_interrumpible',
+                   'potencia_no_interrumpible', 'vas_trafo', 'periodicidad_facturacion',
+                   'tipo_de_telegestion', 'icp_activado_telegestion', 'peaje_directo',
+                   'deposito_garantia',)
 
     def __init__(self):
         self.contrato = XmlField('Contrato')
         self.tipo_contrato_atr = XmlField('TipoContratoATR')
+        self.cups_principal = XmlField('CUPSPrincipal')
         self.fecha_finalizacion = XmlField('FechaFinalizacion')
+        self.ref_catastro = XmlField('RefCatastro')
+        self.ref_catastro_finca = XmlField('RefCatastroFinca')
+        self.utm = UTM()
         self.autoconsumo = Autoconsumo()
+        self.fecha_ultimo_movimiento_tipo_autocons = XmlField('FechaUltimoMovimientoTipoAutocons')
+        self.ind_bono_social = XmlField('IndBonoSocial')
+        self.ind_esencial = XmlField('IndEsencial')
+        self.fecha_ultimo_movimiento_ind_esencial = XmlField('FechaUltimoMovimientoIndEsencial')
+        self.vivienda_habitual = XmlField('ViviendaHabitual')
+        self.cnae = XmlField('CNAE')
+        self.condiciones_contractuales = CondicionesContractuales()
+        self.modo_facturacion_potencia = XmlField('ModoFacturacionPotencia')
+        self.no_interrumpible = XmlField('NoInterrumpible')
+        self.potencia_no_interrumpible = XmlField('PotenciaNoInterrumpible')
+        self.vas_trafo = XmlField('VAsTrafo')
+        self.periodicidad_facturacion = XmlField('PeriodicidadFacturacion')
+        self.tipo_de_telegestion = XmlField('TipodeTelegestion')
+        self.icp_activado_telegestion = XmlField('ICPActivadoTelegestion')
+        self.peaje_directo = XmlField('PeajeDirecto')
+        self.deposito_garantia = XmlField('DepositoGarantia')
 
         super(Contrato, self).__init__('Contrato', 'contrato')
 

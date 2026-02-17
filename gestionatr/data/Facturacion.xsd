@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!-- edited with XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) by Odelin Calatrava Requena (Comisión Nacional de los Mercados y la Competencia) -->
-<!-- editado con XMLSpy v2020 rel. 2 (x64) (http://www.altova.com) por Teresa Rodriguez-Losada (INECO) -->
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Comisión Nacional de los Mercados y la Competencia (Comisión Nacional de los Mercados y la Competencia) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
 	<xs:include schemaLocation="TiposComplejos.xsd"/>
@@ -34,6 +34,13 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="CodigoFacturaRectificadaAnulada" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="26"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="CodigoFacturaAbono" minOccurs="0">
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
 						<xs:maxLength value="26"/>
@@ -225,10 +232,22 @@
 							<xs:element name="ExcesoPotencia" minOccurs="0">
 								<xs:complexType>
 									<xs:sequence>
+										<xs:element name="FechaDesde" type="xs:date"/>
+										<xs:element name="FechaHasta" type="xs:date"/>
 										<xs:element name="Periodo" maxOccurs="6">
 											<xs:complexType>
 												<xs:sequence>
 													<xs:element name="ValorExcesoPotencia" type="ImporteFact"/>
+													<xs:element name="NumeroDias" minOccurs="0">
+														<xs:simpleType>
+															<xs:restriction base="xs:integer">
+																<xs:maxInclusive value="999"/>
+																<xs:minInclusive value="-999" fixed="false"/>
+																<xs:totalDigits value="3"/>
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
+													<xs:element name="PrecioExceso" type="PrecioFact"/>
 												</xs:sequence>
 											</xs:complexType>
 										</xs:element>
@@ -253,10 +272,10 @@
 																	</xs:annotation>
 																	<xs:simpleType>
 																		<xs:restriction base="xs:decimal">
-																			<xs:totalDigits value="13"/>
-																			<xs:fractionDigits value="2"/>
-																			<xs:maxInclusive value="99999999999.99"/>
-																			<xs:minInclusive value="-99999999999.99"/>
+																			<xs:totalDigits value="14"/>
+																			<xs:fractionDigits value="3"/>
+																			<xs:maxInclusive value="99999999999.999"/>
+																			<xs:minInclusive value="-99999999999.999"/>
 																		</xs:restriction>
 																	</xs:simpleType>
 																</xs:element>
@@ -285,10 +304,10 @@
 																<xs:element name="ValorEnergiaReactiva">
 																	<xs:simpleType>
 																		<xs:restriction base="xs:decimal">
-																			<xs:totalDigits value="13"/>
-																			<xs:fractionDigits value="2"/>
-																			<xs:minInclusive value="-99999999999.99"/>
-																			<xs:maxInclusive value="99999999999.99"/>
+																			<xs:totalDigits value="14"/>
+																			<xs:fractionDigits value="3"/>
+																			<xs:minInclusive value="-99999999999.999"/>
+																			<xs:maxInclusive value="99999999999.999"/>
 																		</xs:restriction>
 																	</xs:simpleType>
 																</xs:element>
@@ -317,10 +336,10 @@
 																<xs:element name="ValorEnergiaCapacitiva">
 																	<xs:simpleType>
 																		<xs:restriction base="xs:decimal">
-																			<xs:totalDigits value="13"/>
-																			<xs:fractionDigits value="2"/>
-																			<xs:minInclusive value="-99999999999.99"/>
-																			<xs:maxInclusive value="99999999999.99"/>
+																			<xs:totalDigits value="14"/>
+																			<xs:fractionDigits value="3"/>
+																			<xs:minInclusive value="-99999999999.999"/>
+																			<xs:maxInclusive value="99999999999.999"/>
 																		</xs:restriction>
 																	</xs:simpleType>
 																</xs:element>
@@ -352,10 +371,10 @@
 																			<xs:element name="ValorEnergiaNetaGen">
 																				<xs:simpleType>
 																					<xs:restriction base="xs:decimal">
-																						<xs:totalDigits value="13"/>
-																						<xs:fractionDigits value="2"/>
-																						<xs:minInclusive value="-99999999999.99"/>
-																						<xs:maxInclusive value="99999999999.99"/>
+																						<xs:totalDigits value="14"/>
+																						<xs:fractionDigits value="3"/>
+																						<xs:minInclusive value="-99999999999.999"/>
+																						<xs:maxInclusive value="99999999999.999"/>
 																					</xs:restriction>
 																				</xs:simpleType>
 																			</xs:element>
@@ -382,14 +401,24 @@
 																			<xs:element name="ValorEnergiaAutoconsumida">
 																				<xs:simpleType>
 																					<xs:restriction base="xs:decimal">
-																						<xs:totalDigits value="13"/>
-																						<xs:fractionDigits value="2"/>
-																						<xs:minInclusive value="-99999999999.99"/>
-																						<xs:maxInclusive value="99999999999.99"/>
+																						<xs:totalDigits value="14"/>
+																						<xs:fractionDigits value="3"/>
+																						<xs:minInclusive value="-99999999999.999"/>
+																						<xs:maxInclusive value="99999999999.999"/>
 																					</xs:restriction>
 																				</xs:simpleType>
 																			</xs:element>
 																			<xs:element name="PagoTDA" type="PrecioFact"/>
+																			<xs:element name="ImporteEnergiaAutoconsumida">
+																				<xs:simpleType>
+																					<xs:restriction base="xs:decimal">
+																						<xs:totalDigits value="12"/>
+																						<xs:fractionDigits value="2"/>
+																						<xs:minInclusive value="-9999999999.99"/>
+																						<xs:maxInclusive value="9999999999.99"/>
+																					</xs:restriction>
+																				</xs:simpleType>
+																			</xs:element>
 																		</xs:sequence>
 																	</xs:complexType>
 																</xs:element>
@@ -423,10 +452,10 @@
 																			<xs:element name="ValorEnergiaExcedentaria">
 																				<xs:simpleType>
 																					<xs:restriction base="xs:decimal">
-																						<xs:totalDigits value="13"/>
-																						<xs:fractionDigits value="2"/>
-																						<xs:minInclusive value="-99999999999.99"/>
-																						<xs:maxInclusive value="99999999999.99"/>
+																						<xs:totalDigits value="14"/>
+																						<xs:fractionDigits value="3"/>
+																						<xs:minInclusive value="-99999999999.999"/>
+																						<xs:maxInclusive value="99999999999.999"/>
 																					</xs:restriction>
 																				</xs:simpleType>
 																			</xs:element>
@@ -439,10 +468,10 @@
 													<xs:element name="ValorTotalEnergiaExcedentaria">
 														<xs:simpleType>
 															<xs:restriction base="xs:decimal">
-																<xs:totalDigits value="13"/>
-																<xs:fractionDigits value="2"/>
-																<xs:minInclusive value="-99999999999.99"/>
-																<xs:maxInclusive value="99999999999.99"/>
+																<xs:totalDigits value="14"/>
+																<xs:fractionDigits value="3"/>
+																<xs:minInclusive value="-99999999999.999"/>
+																<xs:maxInclusive value="99999999999.999"/>
 															</xs:restriction>
 														</xs:simpleType>
 													</xs:element>
@@ -456,11 +485,11 @@
 							<xs:element name="Cargos" minOccurs="0">
 								<xs:complexType>
 									<xs:sequence>
-										<xs:element name="Cargo" maxOccurs="unbounded">
+										<xs:element name="Cargo" maxOccurs="2">
 											<xs:complexType>
 												<xs:sequence>
 													<xs:element name="TipoCargo" type="TipoCargoType"/>
-													<xs:element name="TerminoCargo" maxOccurs="6">
+													<xs:element name="TerminoCargo" maxOccurs="unbounded">
 														<xs:complexType>
 															<xs:sequence>
 																<xs:element name="FechaDesde" type="xs:date"/>
@@ -472,10 +501,10 @@
 																				<xs:element name="Energia">
 																					<xs:simpleType>
 																						<xs:restriction base="xs:decimal">
-																							<xs:totalDigits value="13"/>
-																							<xs:fractionDigits value="2"/>
-																							<xs:minInclusive value="-99999999999.99"/>
-																							<xs:maxInclusive value="99999999999.99"/>
+																							<xs:totalDigits value="14"/>
+																							<xs:fractionDigits value="3"/>
+																							<xs:minInclusive value="-99999999999.999"/>
+																							<xs:maxInclusive value="99999999999.999"/>
 																						</xs:restriction>
 																					</xs:simpleType>
 																				</xs:element>
@@ -578,10 +607,10 @@
 											</xs:annotation>
 											<xs:simpleType>
 												<xs:restriction base="xs:decimal">
-													<xs:totalDigits value="13"/>
-													<xs:fractionDigits value="2"/>
-													<xs:maxInclusive value="99999999999.99"/>
-													<xs:minInclusive value="-99999999999.99"/>
+													<xs:totalDigits value="14"/>
+													<xs:fractionDigits value="3"/>
+													<xs:maxInclusive value="99999999999.999"/>
+													<xs:minInclusive value="-99999999999.999"/>
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -759,6 +788,13 @@
 				<xs:annotation>
 					<xs:documentation>Tabla 103</xs:documentation>
 				</xs:annotation>
+			</xs:element>
+			<xs:element name="CodigoDeSolicitud" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="12"/>
+					</xs:restriction>
+				</xs:simpleType>
 			</xs:element>
 			<xs:element name="TipoImpositivoConceptoRepercutible" type="TipoImpositivo"/>
 			<xs:choice>

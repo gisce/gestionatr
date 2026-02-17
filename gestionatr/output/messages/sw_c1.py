@@ -39,7 +39,7 @@ class DatosSolicitud(XmlModel):
 
     _sort_order = ('datos_solicitud', 'ind_activacion', 'ind_esencial', 'fecha_ultimo_movimiento_ind_esencial',
                    'fecha_prevista_accion', 'contratacion_incondicional_ps', 'contratacion_incondicional_bs',
-                   'bono_social', 'solicitud_tension')
+                   'bono_social', 'traspaso_cartera', 'solicitud_tension')
 
     def __init__(self):
         self.datos_solicitud = XmlField('DatosSolicitud')
@@ -50,6 +50,7 @@ class DatosSolicitud(XmlModel):
         self.contratacion_incondicional_ps = XmlField('ContratacionIncondicionalPS')
         self.contratacion_incondicional_bs = XmlField('ContratacionIncondicionalBS')
         self.bono_social = XmlField('BonoSocial')
+        self.traspaso_cartera = XmlField('TraspasoCartera')
         self.solicitud_tension = XmlField('SolicitudTension')
         super(DatosSolicitud, self).__init__('DatosSolicitud', 'datos_solicitud')
 
@@ -130,12 +131,11 @@ class DatosCAU(XmlModel):
 
 class DatosSuministro(XmlModel):
 
-    _sort_order = ('datos_suministro', 'tipo_cups', 'ref_catastro')
+    _sort_order = ('datos_suministro', 'tipo_cups')
 
     def __init__(self):
         self.datos_suministro = XmlField('DatosSuministro')
         self.tipo_cups = XmlField('TipoCUPS')
-        self.ref_catastro = XmlField('RefCatastro')
         super(DatosSuministro, self).__init__('DatosSuministro', 'datos_suministro')
 
 
@@ -258,14 +258,21 @@ class DatosAceptacion(XmlModel):
 
 class Contrato(XmlModel):
 
-    _sort_order = ('contrato', 'id_contrato', 'data_finalitzacio', 'autoconsumo', 'tipo_contrato_atr', 'condiciones_contractuales', 'tipo_activacion_prevista', 'fecha_activacion_prevista')
+    _sort_order = ('contrato', 'id_contrato', 'data_finalitzacio', 'ref_catastro',
+                   'ref_catastro_finca', 'utm', 'autoconsumo', 'tipo_contrato_atr',
+                   'cups_principal', 'condiciones_contractuales', 'tipo_activacion_prevista',
+                   'fecha_activacion_prevista')
 
     def __init__(self):
         self.contrato = XmlField('Contrato')
         self.id_contrato = IdContrato()
         self.data_finalitzacio = XmlField('FechaFinalizacion')
+        self.ref_catastro = XmlField('RefCatastro')
+        self.ref_catastro_finca = XmlField('RefCatastroFinca')
+        self.utm = UTM()
         self.autoconsumo = Autoconsumo()
         self.tipo_contrato_atr = XmlField('TipoContratoATR')
+        self.cups_principal = XmlField('CUPSPrincipal')
         self.condiciones_contractuales = CondicionesContractuales()
         self.tipo_activacion_prevista = XmlField('TipoActivacionPrevista')
         self.fecha_activacion_prevista = XmlField('FechaActivacionPrevista')
