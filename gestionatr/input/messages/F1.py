@@ -1412,7 +1412,7 @@ class Lectura(object):
         if self._lectura is not None:
             return self._lectura
         if hasattr(self.lectura_data, 'Lectura'):
-            return int(float(self.lectura_data.Lectura.text.strip()))
+            return float(self.lectura_data.Lectura.text.strip())
         return None
 
     @lectura.setter
