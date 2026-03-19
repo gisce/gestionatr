@@ -2429,12 +2429,12 @@ class FacturaATR(Factura):
         Si no es troba cap lectura, es retorna `(None, None)`.
 
         :param comptador: Comptador a comprovar primer (opcional)
-        :param tipus: Tipus de lectura per ordre de prioritat. Per defecte ['S', 'A']
+        :param tipus: Tipus de lectura per ordre de prioritat. Per defecte ['A', 'S']
         :return: La primera lectura disponible o `(None, None)` si no n'hi ha cap
         """
 
         if tipus is None:
-            tipus = ['S', 'A']
+            tipus = ['A', 'S']
 
         # Comprova primer el comptador passat
         if comptador:
