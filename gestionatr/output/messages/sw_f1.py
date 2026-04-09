@@ -250,16 +250,14 @@ class PeriodoPotencia(XmlModel):
 
 class ExcesoPotencia(XmlModel):
 
-    _sort_order = ('exceso_potencia', 'fecha_desde', 'fecha_hasta', 'periodo', 'numero_dias',
-                   'precio_exceso', 'importe_total_excesos')
+    _sort_order = ('exceso_potencia', 'fecha_desde', 'fecha_hasta', 'periodo',
+                   'importe_total_excesos')
 
     def __init__(self):
         self.exceso_potencia = XmlField('ExcesoPotencia')
         self.fecha_desde = XmlField('FechaDesde')
         self.fecha_hasta = XmlField('FechaHasta')
         self.periodo = PeriodoExcesoPotencia()
-        self.numero_dias = XmlField('NumeroDias')
-        self.precio_exceso = XmlField('PrecioExceso', rep=rep_decimal(9))
         self.importe_total_excesos = XmlField('ImporteTotalExcesos', rep=rep_decimal(2))
         super(ExcesoPotencia, self).__init__(
             'ExcesoPotencia', 'exceso_potencia'
@@ -268,13 +266,13 @@ class ExcesoPotencia(XmlModel):
 
 class PeriodoExcesoPotencia(XmlModel):
 
-    _sort_order = ('periodo', 'valor_exceso_potencia')
+    _sort_order = ('periodo', 'valor_exceso_potencia', 'numero_dias', 'precio_exceso')
 
     def __init__(self):
         self.periodo = XmlField('Periodo')
-        self.valor_exceso_potencia = XmlField(
-            'ValorExcesoPotencia', rep=rep_decimal(2)
-        )
+        self.valor_exceso_potencia = XmlField('ValorExcesoPotencia', rep=rep_decimal(2))
+        self.numero_dias = XmlField('NumeroDias')
+        self.precio_exceso = XmlField('PrecioExceso', rep=rep_decimal(9))
         super(PeriodoExcesoPotencia, self).__init__('Periodo', 'periodo')
 
 
