@@ -685,6 +685,8 @@ TAULA_TIPO_CLIENTE_ESENCIAL_EXTENDED = [  # ley 24/2013 article 52
     ('7', 'g) Hospitales.'),
     ('8', 'h) Servicios funerarios.'),
     ('9', 'i) Aquellos suministros de ámbito doméstico en los que exista constancia documental formalizada por personal médico de que el suministro de energía eléctrica es imprescindible para la alimentación de un equipo médico que resulte indispensable para mantener con vida a una persona. En todo caso estos suministros se circunscribirán a personas físicas en su vivienda habitual.'),
+    ('10', 'j) En los términos y condiciones que se establezcan reglamentariamente, aquellos suministros a consumidores que tengan la condición de vulnerables severos acogidos a tarifas de último recurso y que estén siendo atendidos, respecto a estos suministros, por los servicios sociales de las Administraciones Públicas competentes por hallarse, en atención a su renta, en riesgo de exclusión social. Estos suministros se circunscribirán a personas físicas en su vivienda habitual. Todo lo anterior deberá ser acreditado mediante documento expedido por los servicios sociales de las referidas Administraciones Públicas.'),
+    ('11', 'k) Aquellos suministros que incurran en impago de la factura eléctrica cuyo titular sea beneficiario del bono social y para su aplicación haya acreditado formar parte de una unidad familiar en la que haya al menos un menor de dieciséis (16) años, o bien el titular, o alguno de los miembros de la unidad familiar se encuentre en situación de dependencia reconocida de grado II o III, o bien tenga una discapacidad reconocida igual o superior al 33 %, todo ello en los términos establecidos en la normativa. La situación de vulnerabilidad social de estos colectivos deberá ser acreditada mediante documento expedido por los servicios sociales de las Administraciones Públicas competentes. Estos suministros se circunscribirán a personas físicas en su vivienda habitual.'),
 ]
 
 TAULA_TIPO_CLIENTE_ESENCIAL = [(x[0], x[1]) for x in TAULA_TIPO_CLIENTE_ESENCIAL_EXTENDED]
@@ -847,8 +849,8 @@ TABLA_17 = [
     ('025', '6.1TDVE'),
     ('026', '6.2TDVE'),
     ('027', '3.0TDVE - Embarcaciones'),
-    ('028', '6.1TDVE – Embarcaciones'),
-    ('029', '6.2TDVE – Embarcaciones'),
+    ('028', '6.1TDVE - Embarcaciones'),
+    ('029', '6.2TDVE - Embarcaciones'),
 ]
 
 TABLA_20 = [
@@ -2377,8 +2379,8 @@ TABLA_107 = [
     ('025',  u'6.1TDVE'),
     ('026',  u'6.2TDVE'),
     ('027',  u'3.0TDVE - Embarcaciones'),
-    ('028',  u'6.1TDVE – Embarcaciones'),
-    ('029',  u'6.2TDVE – Embarcaciones'),
+    ('028',  u'6.1TDVE - Embarcaciones'),
+    ('029',  u'6.2TDVE - Embarcaciones'),
 ]
 
 TABLA_108 = [('01', u'Mensual'),
@@ -2434,27 +2436,27 @@ CONV_T109_T111 = {'01': '01',  # TG with CCH
 
 TABLA_113 = [
     ('00', u'Sin Autoconsumo'),
-    ('31', u'Sin Excedentes Individual – Consumo'),
-    ('32', u'Sin Excedentes Colectivo – Consumo'),
-    ('33', u'Sin Excedentes Colectivo con acuerdo de compensación – Consumo'),
+    ('31', u'Sin Excedentes Individual - Consumo'),
+    ('32', u'Sin Excedentes Colectivo - Consumo'),
+    ('33', u'Sin Excedentes Colectivo con acuerdo de compensación - Consumo'),
     ('41', u'Con excedentes y compensación Individual - Consumo'),
-    ('42', u'Con excedentes y compensación Colectivo– Consumo'),
-    ('43', u'Con excedentes y compensación Colectivo a través de red– Consumo'),
-    ('51', u'Con excedentes sin compensación Individual sin cto de SSAA en Red Interior– Consumo'),
-    ('52', u'Con excedentes sin compensación Colectivo sin cto de SSAA en Red Interior– Consumo'),
-    ('53', u'Con excedentes sin compensación Individual con cto SSAA en Red Interior– Consumo'),
-    ('54', u'Con excedentes sin compensación individual con cto SSAA en Red Interior– SSAA'),
-    ('55', u'Con excedentes sin compensación Colectivo/en Red Interior– Consumo'),
+    ('42', u'Con excedentes y compensación Colectivo - Consumo'),
+    ('43', u'Con excedentes y compensación Colectivo a través de red - Consumo'),
+    ('51', u'Con excedentes sin compensación Individual sin cto de SSAA en Red Interior - Consumo'),
+    ('52', u'Con excedentes sin compensación Colectivo sin cto de SSAA en Red Interior - Consumo'),
+    ('53', u'Con excedentes sin compensación Individual con cto SSAA en Red Interior - Consumo'),
+    ('54', u'Con excedentes sin compensación individual con cto SSAA en Red Interior - SSAA'),
+    ('55', u'Con excedentes sin compensación Colectivo/en Red Interior - Consumo'),
     ('56', u'Con excedentes sin compensación Colectivo/en Red Interior - SSAA'),
-    ('57', u'Con excedentes sin compensación Colectivo sin cto de SSAA (despreciable) en red interior – Consumo'),
+    ('57', u'Con excedentes sin compensación Colectivo sin cto de SSAA (despreciable) en red interior - Consumo'),
     ('58', u'Con excedentes sin compensación Colectivo sin cto de SSAA a través de red - Consumo'),
-    ('61', u'Con excedentes sin compensación Individual con cto SSAA a través de red – Consumo'),
-    ('62', u'Con excedentes sin compensación individual con cto SSAA a través de red – SSAA'),
-    ('63', u'Con excedentes sin compensación Colectivo a través de red – Consumo'),
+    ('61', u'Con excedentes sin compensación Individual con cto SSAA a través de red - Consumo'),
+    ('62', u'Con excedentes sin compensación individual con cto SSAA a través de red - SSAA'),
+    ('63', u'Con excedentes sin compensación Colectivo a través de red - Consumo'),
     ('64', u'Con excedentes sin compensación Colectivo a través de red - SSAA'),
-    ('71', u'Con excedentes sin compensación Individual con cto SSAA a través de red y red interior – Consumo'),
-    ('72', u'Con excedentes sin compensación individual con cto SSAA a través de red y red interior – SSAA'),
-    ('73', u'Con excedentes sin compensación Colectivo con cto de SSAA  a través de red y red interior – Consumo'),
+    ('71', u'Con excedentes sin compensación Individual con cto SSAA a través de red y red interior - Consumo'),
+    ('72', u'Con excedentes sin compensación individual con cto SSAA a través de red y red interior - SSAA'),
+    ('73', u'Con excedentes sin compensación Colectivo con cto de SSAA  a través de red y red interior - Consumo'),
     ('74', u'Con excedentes sin compensación Colectivo con cto de SSAA a través de red y red interior - SSAA'),
 ]
 # es posa NEW perque no es un canvi que afecti a tot el ERP ja que REE encara utilitza els formats antics. Quan REE
@@ -2477,7 +2479,7 @@ TABLA_114 = [
 TABLA_115 = PERSONA
 
 TABLA_116 = [
-    ('0', u'No Bono Social – Retirada del BS'),
+    ('0', u'No Bono Social - Retirada del BS'),
     ('1', u'Bono Social'),
 ]
 
@@ -2489,8 +2491,8 @@ TABLA_117 = [
 ]
 
 TABLA_118 = [
-    ('01', u'Vuelta a la situación anterior – En servicio'),
-    ('02', u'Vuelta a la situación anterior – Sin servicio (cortado)'),
+    ('01', u'Vuelta a la situación anterior - En servicio'),
+    ('02', u'Vuelta a la situación anterior - Sin servicio (cortado)'),
     ('03', u'Traspaso a la COR'),
     ('04', u'Baja del contrato por rechazo de la COR'),
     ('05', u'Baja por cese de actividad'),
@@ -2704,8 +2706,8 @@ TABLA_133 = [
 ]
 
 TABLA_134 = [
-    ('01', u'Vuelta a la situación anterior – En servicio'),
-    ('02', u'Vuelta a la situación anterior – En servicio (cortado)'),
+    ('01', u'Vuelta a la situación anterior - En servicio'),
+    ('02', u'Vuelta a la situación anterior - En servicio (cortado)'),
     ('03', u'Traspaso a la COR'),
     ('05', u'Baja por cese de actividad'),
     ('06', u'Activación de cambio de comercializador'),
