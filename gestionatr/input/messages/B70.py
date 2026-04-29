@@ -1388,12 +1388,15 @@ class Medidor(object):
                 # el deixem tal qual ve al B70
                 if ignorar_ajust_incorrecte and ajust:
                     consum_kwh_b70 = round(consum_kwh_facturat, 3)
-                    calc_consum_m3 = round(vals['lectura_actual_m3'] - vals['lectura_desde_m3'], 3)
-                    consum_kwh_calculat = round(calc_consum_m3 * vals['pcs'] * vals['factor_k'] + vals['ajust'], 3)
+                    consum_kwh_calculat = round(vals['consum_m3'] * vals['pcs'] * vals['factor_k'] + vals['ajust'], 3)
                     if consum_kwh_b70 != consum_kwh_calculat:
-                        consum_kwh_calculat_sense_ajust = round(calc_consum_m3 * vals['pcs'] * vals['factor_k'], 3)
+                        consum_kwh_calculat_sense_ajust = round(vals['consum_m3'] * vals['pcs'] * vals['factor_k'], 3)
                         if consum_kwh_calculat_sense_ajust == consum_kwh_b70:
                             vals.update({'ajust': 0})
+                            ajust = 0
+                        elif abs(consum_kwh_calculat_sense_ajust - consum_kwh_b70) < 1.0:  # Si diferencia es menor 1kWh
+                                vals.update({'ajust': 0})
+                                ajust = 0
 
                 # Si el consum que calculem amb el factor_k i el pcs no dona el consum calculat amb el factor de conversio
                 # pero si fem servir el factor de conversio informat per la distri si que dona, modfiquem el factor_k perque
