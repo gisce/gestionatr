@@ -878,6 +878,10 @@ class PeriodoExcesoPotencia(Periodo):
         el precio a 0"""
         return bool(self.valor_exceso_potencia)
 
+class TerminoExcesoPotencia(Termino):
+
+    PERIODO_TYPE = PeriodoExcesoPotencia
+
 
 class ExcesoPotencia(object):
 
@@ -887,48 +891,11 @@ class ExcesoPotencia(object):
         self.exceso_potencia = data
 
     @property
-    def fecha_desde(self):
-        if hasattr(self.exceso_potencia, 'FechaDesde'):
-            return self.exceso_potencia.FechaDesde.text.strip()
-        return None
-
-    @property
-    def fecha_hasta(self):
-        if hasattr(self.exceso_potencia, 'FechaHasta'):
-            return self.exceso_potencia.FechaHasta.text.strip()
-        return None
-
-    @property
-    def periodos(self):
+    def terminos_exceso_potencia(self):
         data = []
-        periodes_no_facturables = []
-        if hasattr(self.exceso_potencia, 'Periodo'):
-            period_number = 1
-            max_facturat = period_number
-
-            for d in self.exceso_potencia.Periodo:
-                period_name = 'P{0}'.format(period_number)
-                period = self.PERIODO_TYPE(
-                    d, period_name
-                )
-                if period.es_facturable():
-                    data.append(period)
-                    max_facturat = period_number
-                else:
-                    periodes_no_facturables.append((d, period_number))
-                period_number += 1
-
-            if periodes_no_facturables:
-                max_no_facturat = max([x[1] for x in periodes_no_facturables])
-                # Per les 6.1 ens envien periodes amb preu i quantitat 0 pero si que els hem de gestionar
-                if max_facturat > max_no_facturat:
-                    for d, period_number in periodes_no_facturables:
-                        period_name = 'P{0}'.format(period_number)
-                        period = self.PERIODO_TYPE(
-                            d, period_name
-                        )
-                        data.append(period)
-
+        if hasattr(self.exceso_potencia, 'TerminoExcesoPotencia'):
+            for d in self.exceso_potencia.TerminoExcesoPotencia:
+                data.append(TerminoExcesoPotencia(d))
         return data
 
     @property
@@ -2686,7 +2653,8 @@ class FacturaATR(Factura):
         total = 0
         try:
             if self.exceso_potencia:
-                periodes += self.exceso_potencia.periodos
+                for exc in self.exceso_potencia.terminos_exceso_potencia:
+                    periodes += exc.periodos
                 total = self.exceso_potencia.importe_total
         except AttributeError:
             pass

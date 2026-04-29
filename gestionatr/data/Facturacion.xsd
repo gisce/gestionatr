@@ -232,22 +232,28 @@
 							<xs:element name="ExcesoPotencia" minOccurs="0">
 								<xs:complexType>
 									<xs:sequence>
-										<xs:element name="FechaDesde" type="xs:date"/>
-										<xs:element name="FechaHasta" type="xs:date"/>
-										<xs:element name="Periodo" maxOccurs="6">
+										<xs:element name="TerminoExcesoPotencia" maxOccurs="6">
 											<xs:complexType>
 												<xs:sequence>
-													<xs:element name="ValorExcesoPotencia" type="ImporteFact"/>
-													<xs:element name="NumeroDias" minOccurs="0">
-														<xs:simpleType>
-															<xs:restriction base="xs:integer">
-																<xs:maxInclusive value="999"/>
-																<xs:minInclusive value="-999" fixed="false"/>
-																<xs:totalDigits value="3"/>
-															</xs:restriction>
-														</xs:simpleType>
+													<xs:element name="FechaDesde" type="xs:date"/>
+													<xs:element name="FechaHasta" type="xs:date"/>
+													<xs:element name="Periodo" maxOccurs="6">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="ValorExcesoPotencia" type="ImporteFact"/>
+																<xs:element name="NumeroDias" minOccurs="0">
+																	<xs:simpleType>
+																		<xs:restriction base="xs:integer">
+																			<xs:minInclusive value="0"/>
+																			<xs:maxInclusive value="999"/>
+																			<xs:totalDigits value="3"/>
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
+																<xs:element name="PrecioExceso" type="PrecioFact"/>
+															</xs:sequence>
+														</xs:complexType>
 													</xs:element>
-													<xs:element name="PrecioExceso" type="PrecioFact"/>
 												</xs:sequence>
 											</xs:complexType>
 										</xs:element>

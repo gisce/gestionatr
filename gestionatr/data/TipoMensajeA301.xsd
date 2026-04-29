@@ -10,7 +10,7 @@
 			<xs:element name="DatosSolicitud" type="DatosAltaAA3"/>
 			<xs:element name="Contrato" type="ContratoAlta"/>
 			<xs:element name="Cliente" type="ClienteConDireccion"/>
-			<xs:element name="Medida" type="Medida" minOccurs="0"/>
+			<xs:element name="Medida" type="MedidaA3" minOccurs="0"/>
 			<xs:element name="DocTecnica" type="DocTecnica" minOccurs="0"/>
 			<xs:element name="Comentarios" type="X4000" minOccurs="0"/>
 			<xs:element name="RegistrosDocumento" type="RegistrosDocs" minOccurs="0"/>

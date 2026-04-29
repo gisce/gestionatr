@@ -1273,6 +1273,22 @@
 			<xs:element name="ModelosAparato" type="ModelosAparatoPropiedad" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="MedidaA3">
+		<xs:sequence>
+			<xs:element name="TipoEquipoMedida" type="TipoEquipoMedida" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 22</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CambioPropiedadElementoEdM" type="Indicativo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Contacto" type="Contacto" minOccurs="0"/>
+			<xs:element name="ModelosAparato" type="ModelosAparatoPropiedadA3" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="MedidasAparato">
 		<xs:sequence>
 			<xs:element name="Medida" type="MedidaAparato" maxOccurs="unbounded"/>
@@ -1325,6 +1341,32 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="ModeloAparatoPropiedadA3">
+		<xs:sequence>
+			<xs:element name="TipoAparato" type="TipoAparato">
+				<xs:annotation>
+					<xs:documentation>Tabla 24</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MarcaAparato" type="MarcaAparato" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 25</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ModeloMarca" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="X30">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PropiedadEquipo" type="PropiedadEquipo">
+				<xs:annotation>
+					<xs:documentation>Tabla 20</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="ModelosAparato">
 		<xs:sequence>
 			<xs:element name="ModeloAparato" type="ModeloAparato" maxOccurs="50"/>
@@ -1333,6 +1375,11 @@
 	<xs:complexType name="ModelosAparatoPropiedad">
 		<xs:sequence>
 			<xs:element name="ModeloAparato" type="ModeloAparatoPropiedad" maxOccurs="50"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ModelosAparatoPropiedadA3">
+		<xs:sequence>
+			<xs:element name="ModeloAparato" type="ModeloAparatoPropiedadA3" maxOccurs="50"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="NombreCliente">
@@ -1829,7 +1876,7 @@
 					<xs:documentation>Tabla 129</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="EsquemaMedida" type="EsquemaMedida">
+			<xs:element name="EsquemaMedida" type="EsquemaMedida" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Tabla 130</xs:documentation>
 				</xs:annotation>

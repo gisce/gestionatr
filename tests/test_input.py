@@ -3689,9 +3689,11 @@ class test_F1(TestCaseCompat):
         )
 
         exceso_potencia = fact.exceso_potencia
-        self.assertEqual(exceso_potencia.fecha_desde, '2017-02-28')
-        self.assertEqual(exceso_potencia.fecha_hasta, '2017-03-31')
-        periodos_exceso_potencia = exceso_potencia.periodos
+        self.assertEqual(len(exceso_potencia.terminos_exceso_potencia), 1)
+        termino_exceso_potencia = exceso_potencia.terminos_exceso_potencia[0]
+        self.assertEqual(termino_exceso_potencia.fecha_desde, '2017-02-28')
+        self.assertEqual(termino_exceso_potencia.fecha_hasta, '2017-03-31')
+        periodos_exceso_potencia = termino_exceso_potencia.periodos
         self.assertEqual(len(periodos_exceso_potencia), 1)
         periodo_exceso_potencia = periodos_exceso_potencia[0]
 

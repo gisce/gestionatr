@@ -1221,6 +1221,7 @@ TABLA_27 = [
 TABLA_28 = [
     ('01', 'Cliente ausente'),
     ('08', 'Cita concertada'),
+    ('06', 'El Cliente no ha puesto el equipo de su propiedad a disposici�n de la Distribuidora'),
     ('09', 'Deficiencia subsanable en la instalación'),
     ('10', 'Deficiencia subsanable en EdM'),
     ('11', 'Trabajos pendientes de finalizar'),
@@ -2319,6 +2320,7 @@ TABLA_103 = [
     ('89', u'Derechos de acceso provenientes de una reposición E2, no repercutibles al cliente.'),
     ('90', u'Derechos de enganche provenientes de una reposición E2, no repercutibles al cliente.'),
     ('91', u'Actuaciones en equipos de medida provenientes de una reposición E2, no repercutibles al cliente.'),
+    ('92', u'Descuento anticipos por capacidad conexión RDL7/2026')
 ]
 
 CONCEPTOS_CON_FECHA_OPERACION = [
