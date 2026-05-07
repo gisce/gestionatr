@@ -1315,7 +1315,7 @@ class Medidor(object):
                 data.append(Numerador(d))
         return data
 
-    def get_lectures_info(self):
+    def get_lectures_info(self, **kwargs):
         res = []
         if not hasattr(self, 'meters'):
             self.meters = [self]
@@ -1381,6 +1381,25 @@ class Medidor(object):
                     'temperatura_gas': float(temperatura_gas),
                     'pressio_atmosferica': float(pressio_atmosferica),
                 }
+
+                # Si ens diuen de no tenir en compte l'ajust si es incorrecte validem si sense aplicar l'ajust el
+                # consum de kWh calculat a partir de les lectures es el mateix que el que informen en el B70. Si tot i
+                # no aplicar l'ajust el consum en kWh calculat no es igual al consum en kWh del B70 no toquem l'ajust i
+                # el deixem tal qual ve al B70
+                ignorar_ajust_incorrecte = kwargs.get('ignorar_ajust_incorrecte', False)
+                if ignorar_ajust_incorrecte and ajust:
+                    consum_kwh_b70 = round(consum_kwh_facturat, 3)
+                    consum_kwh_calculat = round(vals['consum_m3'] * vals['pcs'] * vals['factor_k'] + vals['ajust'], 3)
+                    if abs(consum_kwh_b70 - consum_kwh_calculat) > 1.0:
+                        consum_kwh_calculat_sense_ajust = round(vals['consum_m3'] * vals['pcs'] * vals['factor_k'], 3)
+                        if consum_kwh_calculat_sense_ajust == consum_kwh_b70:
+                            vals.update({'ajust': 0})
+                            ajust = 0
+                        # Si ni el consum calculat sense ajust coincideix amb el consum kwh del B70 revisem si la
+                        # diferencia es menor a una tolerancia
+                        elif abs(consum_kwh_calculat_sense_ajust - consum_kwh_b70) <= 1.0:
+                            vals.update({'ajust': 0})
+                            ajust = 0
 
                 # Si el consum que calculem amb el factor_k i el pcs no dona el consum calculat amb el factor de conversio
                 # pero si fem servir el factor de conversio informat per la distri si que dona, modfiquem el factor_k perque
