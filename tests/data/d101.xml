@@ -17,11 +17,12 @@
         <PeriodicidadFacturacion>01</PeriodicidadFacturacion>
         <IndEsencial>01</IndEsencial>
         <FechaUltimoMovimientoIndEsencial>2016-06-06</FechaUltimoMovimientoIndEsencial>
+        <RefCatastro>1234567890qwertyuiop</RefCatastro>
+        <RefCatastroFinca>1234567890qwer</RefCatastroFinca>
         <InfoRegistroAutocons>
             <Autoconsumo>
                 <DatosSuministro>
                     <TipoCUPS>01</TipoCUPS>
-                    <RefCatastro>1234567890qwertyuiop</RefCatastro>
                 </DatosSuministro>
                 <DatosCAU>
                     <CAU>ES1234000000000001JN0FA001</CAU>

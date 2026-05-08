@@ -21,10 +21,11 @@
         </DatosSolicitud>
         <Contrato>
             <FechaFinalizacion>2018-01-01</FechaFinalizacion>
+            <RefCatastro>1234567890qwertyuiop</RefCatastro>
+            <RefCatastroFinca>1234567890qwer</RefCatastroFinca>
             <Autoconsumo>
                 <DatosSuministro>
                     <TipoCUPS>01</TipoCUPS>
-                    <RefCatastro>1234567890qwertyuiop</RefCatastro>
                 </DatosSuministro>
                 <DatosCAU>
                     <CAU>ES1234000000000001JN0FA001</CAU>
@@ -33,6 +34,7 @@
                     <Colectivo>S</Colectivo>
                     <DatosInstGen>
                         <CIL>ES1234000000000001JN0F001</CIL>
+                        <TecGenerador>b11</TecGenerador>
                         <PotInstaladaGen>100</PotInstaladaGen>
                         <TipoInstalacion>01</TipoInstalacion>
                         <EsquemaMedida>B</EsquemaMedida>
@@ -73,6 +75,7 @@
                 </DatosCAU>
             </Autoconsumo>
             <TipoContratoATR>02</TipoContratoATR>
+            <CUPSPrincipal>ES1234000000000001JN0F</CUPSPrincipal>
             <CondicionesContractuales>
                 <TarifaATR>018</TarifaATR>
                 <PotenciasContratadas>

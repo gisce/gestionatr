@@ -86,6 +86,24 @@ class NotificacionCambiosATRDesdeDistribuidor(object):
         return data
 
     @property
+    def ref_catastro(self):
+        data = False
+        try:
+            data = self.notificacion_cambios_atr_desde_distribuidor.RefCatastro.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def ref_catastro_finca(self):
+        data = False
+        try:
+            data = self.notificacion_cambios_atr_desde_distribuidor.RefCatastroFinca.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
     def info_registro_autocons(self):
         data = ''
         try:

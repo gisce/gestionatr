@@ -24,10 +24,11 @@
         </DatosSolicitud>
         <Contrato>
             <FechaFinalizacion>2018-01-01</FechaFinalizacion>
+            <RefCatastro>1234567890qwertyuiop</RefCatastro>
+            <RefCatastroFinca>1234567890qwer</RefCatastroFinca>
             <Autoconsumo>
                 <DatosSuministro>
                     <TipoCUPS>01</TipoCUPS>
-                    <RefCatastro>1234567890qwertyuiop</RefCatastro>
                 </DatosSuministro>
                 <DatosCAU>
                     <CAU>ES1234000000000001JN0FA001</CAU>
@@ -122,8 +123,19 @@
             <IndicadorTipoDireccion>S</IndicadorTipoDireccion>
         </Cliente>
         <Medida>
-            <PropiedadEquipo>C</PropiedadEquipo>
             <TipoEquipoMedida>L00</TipoEquipoMedida>
+            <CambioPropiedadElementoEdM>S</CambioPropiedadElementoEdM>
+            <Contacto>
+                <PersonaDeContacto>Nombre Inventado 2</PersonaDeContacto>
+                <Telefono>
+                    <PrefijoPais>34</PrefijoPais>
+                    <Numero>666777999</Numero>
+                </Telefono>
+                <Telefono>
+                    <PrefijoPais>34</PrefijoPais>
+                    <Numero>666777555</Numero>
+                </Telefono>
+            </Contacto>
         </Medida>
     </ModificacionDeATR>
 </MensajeModificacionDeATR>

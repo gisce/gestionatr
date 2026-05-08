@@ -26,6 +26,7 @@
                         <TecGenerador>b12</TecGenerador>
                         <PotInstaladaGen>100</PotInstaladaGen>
                         <TipoInstalacion>01</TipoInstalacion>
+                        <EsquemaMedida>A</EsquemaMedida>
                         <SSAA>S</SSAA>
                         <UTM>
                             <X>100</X>
@@ -59,6 +60,7 @@
                         <TecGenerador>b11</TecGenerador>
                         <PotInstaladaGen>100</PotInstaladaGen>
                         <TipoInstalacion>01</TipoInstalacion>
+                        <EsquemaMedida>A</EsquemaMedida>
                         <SSAA>S</SSAA>
                         <UTM>
                             <X>100</X>

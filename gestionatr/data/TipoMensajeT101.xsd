@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Comisión Nacional de los Mercados y la Competencia (Comisión Nacional de los Mercados y la Competencia) -->
 <!-- edited with XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) by Odelin Calatrava Requena (Comisión Nacional de los Mercados y la Competencia) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://localhost/elegibilidad" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposComplejos.xsd"/>
@@ -45,12 +46,15 @@
 	<xs:complexType name="ContratoTraspasoCORT1">
 		<xs:sequence>
 			<xs:element name="FechaFinalizacion" type="xs:date" minOccurs="0"/>
-			<xs:element name="Autoconsumo" type="TypeAutoconsumoActivacionT1" minOccurs="0"/>
+			<xs:element name="RefCatastro" type="RefCatastro" minOccurs="0"/>
+			<xs:element name="RefCatastroFinca" type="RefCatastroFinca" minOccurs="0"/>
+			<xs:element name="Autoconsumo" type="TypeAutoconsumoActivacionT101" minOccurs="0"/>
 			<xs:element name="TipoContratoATR" type="TipoContratoATR">
 				<xs:annotation>
 					<xs:documentation>Tabla 9</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="CUPSPrincipal" type="Codigo" minOccurs="0"/>
 			<xs:element name="CondicionesContractuales" type="CondicionesContractuales"/>
 			<xs:element name="PeriodicidadFacturacion" type="PeriodicidadFacturacion" minOccurs="0"/>
 			<xs:element name="ConsumoAnualEstimado" minOccurs="0">

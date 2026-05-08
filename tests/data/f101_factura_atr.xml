@@ -77,7 +77,7 @@
                     <FechaDesde>2017-03-31</FechaDesde>
                     <FechaHasta>2017-04-30</FechaHasta>
                     <Periodo>
-                        <ValorEnergiaActiva>300.00</ValorEnergiaActiva>
+                        <ValorEnergiaActiva>300.000</ValorEnergiaActiva>
                         <PrecioEnergia>0.044027000</PrecioEnergia>
                     </Periodo>
                 </TerminoEnergiaActiva>
@@ -106,16 +106,16 @@
                         <ConstanteMultiplicadora>1.0</ConstanteMultiplicadora>
                         <NumeroRuedasEnteras>5</NumeroRuedasEnteras>
                         <NumeroRuedasDecimales>0</NumeroRuedasDecimales>
-                        <ConsumoCalculado>300.00</ConsumoCalculado>
+                        <ConsumoCalculado>300.000</ConsumoCalculado>
                         <LecturaDesde>
                             <Fecha>2017-03-31</Fecha>
                             <Procedencia>30</Procedencia>
-                            <Lectura>100.00</Lectura>
+                            <Lectura>100.000</Lectura>
                         </LecturaDesde>
                         <LecturaHasta>
                             <Fecha>2017-04-30</Fecha>
                             <Procedencia>30</Procedencia>
-                            <Lectura>400.00</Lectura>
+                            <Lectura>400.000</Lectura>
                         </LecturaHasta>
                     </Integrador>
                 </ModeloAparato>
@@ -125,7 +125,7 @@
                 <Periodo>
                     <PotenciaMaxDemandadaAnioMovil>3000</PotenciaMaxDemandadaAnioMovil>
                 </Periodo>
-                <ValorEnergiaMediaCP>61083.25</ValorEnergiaMediaCP>
+                <ValorEnergiaMediaCP>61083.250</ValorEnergiaMediaCP>
             </InformacionAlConsumidor>
         </FacturaATR>
         <RegistroFin>

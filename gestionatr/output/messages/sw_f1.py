@@ -106,9 +106,8 @@ class DatosGeneralesFactura(XmlModel):
         self.codigo_fiscal_factura = XmlField('CodigoFiscalFactura')
         self.tipo_factura = XmlField('TipoFactura')
         self.motivo_facturacion = XmlField('MotivoFacturacion')
-        self.codigo_factura_rectificada_anulada = XmlField(
-            'CodigoFacturaRectificadaAnulada'
-        )
+        self.codigo_factura_rectificada_anulada = XmlField('CodigoFacturaRectificadaAnulada')
+        self.codigo_factura_abono = XmlField('CodigoFacturaAbono')
         self.expediente = Expediente()
         self.fecha_factura = XmlField('FechaFactura')
         self.identificador_emisora = XmlField('IdentificadorEmisora')
@@ -251,28 +250,40 @@ class PeriodoPotencia(XmlModel):
 
 class ExcesoPotencia(XmlModel):
 
-    _sort_order = ('exceso_potencia', 'periodo', 'importe_total_excesos')
+    _sort_order = ('exceso_potencia', 'termino_exceso_potencia', 'importe_total_excesos')
 
     def __init__(self):
         self.exceso_potencia = XmlField('ExcesoPotencia')
-        self.periodo = PeriodoExcesoPotencia()
-        self.importe_total_excesos = XmlField(
-            'ImporteTotalExcesos', rep=rep_decimal(2)
-        )
+        self.termino_exceso_potencia = TerminoExcesoPotencia()
+        self.importe_total_excesos = XmlField('ImporteTotalExcesos', rep=rep_decimal(2))
         super(ExcesoPotencia, self).__init__(
             'ExcesoPotencia', 'exceso_potencia'
         )
 
 
+class TerminoExcesoPotencia(XmlModel):
+
+    _sort_order = ('termino_exceso_potencia', 'fecha_desde', 'fecha_hasta', 'periodos')
+
+    def __init__(self):
+        self.termino_exceso_potencia = XmlField('TerminoExcesoPotencia')
+        self.fecha_desde = XmlField('FechaDesde', rep=rep_fecha_sin_hora)
+        self.fecha_hasta = XmlField('FechaHasta', rep=rep_fecha_sin_hora)
+        self.periodos = PeriodoExcesoPotencia()
+        super(TerminoExcesoPotencia, self).__init__(
+            'TerminoExcesoPotencia', 'termino_exceso_potencia'
+        )
+
+
 class PeriodoExcesoPotencia(XmlModel):
 
-    _sort_order = ('periodo', 'valor_exceso_potencia')
+    _sort_order = ('periodo', 'valor_exceso_potencia', 'numero_dias', 'precio_exceso')
 
     def __init__(self):
         self.periodo = XmlField('Periodo')
-        self.valor_exceso_potencia = XmlField(
-            'ValorExcesoPotencia', rep=rep_decimal(2)
-        )
+        self.valor_exceso_potencia = XmlField('ValorExcesoPotencia', rep=rep_decimal(2))
+        self.numero_dias = XmlField('NumeroDias')
+        self.precio_exceso = XmlField('PrecioExceso', rep=rep_decimal(9))
         super(PeriodoExcesoPotencia, self).__init__('Periodo', 'periodo')
 
 
@@ -315,7 +326,7 @@ class PeriodoEnergiaActiva(XmlModel):
     def __init__(self):
         self.periodo = XmlField('Periodo')
         self.valor_energia_activa = XmlField(
-            'ValorEnergiaActiva', rep=rep_decimal(2)
+            'ValorEnergiaActiva', rep=rep_decimal(3)
         )
         self.precio_energia = XmlField('PrecioEnergia', rep=rep_decimal(9))
         super(PeriodoEnergiaActiva, self).__init__('Periodo', 'periodo')
@@ -400,7 +411,7 @@ class EnergiaExcedentaria(XmlModel):
         self.energia_excedentaria = XmlField('EnergiaExcedentaria')
         self.termino_energia_excedentaria = TerminoEnergiaExcedentaria()
         self.valor_total_energia_excedentaria = XmlField(
-            'ValorTotalEnergiaExcedentaria', rep=rep_decimal(2)
+            'ValorTotalEnergiaExcedentaria', rep=rep_decimal(3)
         )
         super(EnergiaExcedentaria, self).__init__(
             'EnergiaExcedentaria', 'energia_excedentaria'
@@ -529,7 +540,7 @@ class PeriodoEnergiaReactiva(XmlModel):
     def __init__(self):
         self.periodo = XmlField('Periodo')
         self.valor_energia_reactiva = XmlField(
-            'ValorEnergiaReactiva', rep=rep_decimal(2)
+            'ValorEnergiaReactiva', rep=rep_decimal(3)
         )
         self.precio_energia = XmlField(
             'PrecioEnergiaReactiva', rep=rep_decimal(9)
@@ -544,7 +555,7 @@ class PeriodoEnergiaCapacitiva(XmlModel):
     def __init__(self):
         self.periodo = XmlField('Periodo')
         self.valor_energia_capacitiva = XmlField(
-            'ValorEnergiaCapacitiva', rep=rep_decimal(2)
+            'ValorEnergiaCapacitiva', rep=rep_decimal(3)
         )
         self.precio_energia = XmlField(
             'PrecioEnergiaCapacitiva', rep=rep_decimal(9)
@@ -559,21 +570,25 @@ class PeriodoEnergiaNetaGen(XmlModel):
     def __init__(self):
         self.periodo = XmlField('Periodo')
         self.valor_energia_neta_gen = XmlField(
-            'ValorEnergiaNetaGen', rep=rep_decimal(2)
+            'ValorEnergiaNetaGen', rep=rep_decimal(3)
         )
         super(PeriodoEnergiaNetaGen, self).__init__('Periodo', 'periodo')
 
 
 class PeriodoEnergiaAutoconsumida(XmlModel):
 
-    _sort_order = ('periodo', 'valor_energia_autoconsumida', 'pago_tda')
+    _sort_order = ('periodo', 'valor_energia_autoconsumida', 'pago_tda',
+                   'importe_energia_autoconsumida')
 
     def __init__(self):
         self.periodo = XmlField('Periodo')
         self.valor_energia_autoconsumida = XmlField(
-            'ValorEnergiaAutoconsumida', rep=rep_decimal(2)
+            'ValorEnergiaAutoconsumida', rep=rep_decimal(3)
         )
         self.pago_tda = XmlField('PagoTDA')
+        self.importe_energia_autoconsumida = XmlField(
+            'ImporteEnergiaAutoconsumida', rep=rep_decimal(2)
+        )
         super(PeriodoEnergiaAutoconsumida, self).__init__('Periodo', 'periodo')
 
 
@@ -584,7 +599,7 @@ class PeriodoEnergiaExcedentaria(XmlModel):
     def __init__(self):
         self.periodo = XmlField('Periodo')
         self.valor_energia_excedentaria = XmlField(
-            'ValorEnergiaExcedentaria', rep=rep_decimal(2)
+            'ValorEnergiaExcedentaria', rep=rep_decimal(3)
         )
         super(PeriodoEnergiaExcedentaria, self).__init__('Periodo', 'periodo')
 
@@ -595,7 +610,7 @@ class PeriodoCargo(XmlModel):
 
     def __init__(self):
         self.periodo = XmlField('Periodo')
-        self.energia = XmlField('Energia', rep=rep_decimal(2))
+        self.energia = XmlField('Energia', rep=rep_decimal(3))
         self.potencia = XmlField('Potencia', rep=rep_entera2)
         self.precio_cargo = XmlField('PrecioCargo', rep=rep_decimal(9))
         super(PeriodoCargo, self).__init__('Periodo', 'periodo')
@@ -784,7 +799,7 @@ class Integrador(XmlModel):
             'NumeroRuedasDecimales', rep=rep_ruedas
         )
         self.consumo_calculado = XmlField(
-            'ConsumoCalculado', rep=rep_decimal(2)
+            'ConsumoCalculado', rep=rep_decimal(3)
         )
         self.lectura_desde = LecturaDesde()
         self.lectura_hasta = LecturaHasta()
@@ -804,7 +819,7 @@ class LecturaDesde(XmlModel):
         self.lectura_desde = XmlField('LecturaDesde')
         self.fecha = XmlField('Fecha', rep=rep_fecha_sin_hora)
         self.procedencia = XmlField('Procedencia')
-        self.lectura = XmlField('Lectura', rep=rep_decimal(2))
+        self.lectura = XmlField('Lectura', rep=rep_decimal(3))
         super(LecturaDesde, self).__init__('LecturaDesde', 'lectura_desde')
 
 
@@ -816,7 +831,7 @@ class LecturaHasta(XmlModel):
         self.lectura_hasta = XmlField('LecturaHasta')
         self.fecha = XmlField('Fecha', rep=rep_fecha_sin_hora)
         self.procedencia = XmlField('Procedencia')
-        self.lectura = XmlField('Lectura', rep=rep_decimal(2))
+        self.lectura = XmlField('Lectura', rep=rep_decimal(3))
         super(LecturaHasta, self).__init__('LecturaHasta', 'lectura_hasta')
 
 
@@ -829,7 +844,7 @@ class Ajuste(XmlModel):
     def __init__(self):
         self.ajuste = XmlField('Ajuste')
         self.codigo_motivo_ajuste = XmlField('CodigoMotivoAjuste')
-        self.ajuste_por_integrador = XmlField('AjustePorIntegrador')
+        self.ajuste_por_integrador = XmlField('AjustePorIntegrador', rep=rep_decimal(3))
         self.comentarios = XmlField('Comentarios')
         super(Ajuste, self).__init__('Ajuste', 'ajuste')
 
@@ -844,7 +859,7 @@ class InformacionAlConsumidor(XmlModel):
         self.informacion_al_consumidor = XmlField('InformacionAlConsumidor')
         self.fecha_inicio_anio_movil = XmlField('FechaInicioAnioMovil', rep=rep_fecha_sin_hora)
         self.periodos = PeriodoInfoAlConsumidor()
-        self.valor_energia_media_cp = XmlField('ValorEnergiaMediaCP')
+        self.valor_energia_media_cp = XmlField('ValorEnergiaMediaCP', rep=rep_decimal(3))
         super(InformacionAlConsumidor, self).__init__('InformacionAlConsumidor', 'informacion_al_consumidor')
 
 
@@ -936,7 +951,7 @@ class DireccionSuministro(XmlModel):
 class ConceptoRepercutible(XmlModel):
 
     _sort_order = (
-        'concepto_repercutible_fact', 'concepto_repercutible',
+        'concepto_repercutible_fact', 'concepto_repercutible', 'codigo_de_solicitud',
         'tipo_impositivo_concepto_repercutible', 'fecha_desde', 'fecha_hasta',
         'fecha_operacion', 'unidades_concepto_repercutible',
         'precio_unidad_concepto_repercutible',
@@ -946,6 +961,7 @@ class ConceptoRepercutible(XmlModel):
     def __init__(self, drop_empty=False):
         self.concepto_repercutible_fact = XmlField('ConceptoRepercutible')
         self.concepto_repercutible = XmlField('ConceptoRepercutible')
+        self.codigo_de_solicitud = XmlField('CodigoDeSolicitud')
         self.tipo_impositivo_concepto_repercutible = XmlField(
             'TipoImpositivoConceptoRepercutible'
         )

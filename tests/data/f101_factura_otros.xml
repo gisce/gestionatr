@@ -44,6 +44,7 @@
             </DatosGeneralesOtrasFacturas>
             <ConceptoRepercutible>
                 <ConceptoRepercutible>04</ConceptoRepercutible>
+                <CodigoDeSolicitud>10004</CodigoDeSolicitud>
                 <TipoImpositivoConceptoRepercutible>1</TipoImpositivoConceptoRepercutible>
                 <FechaOperacion>2016-09-01</FechaOperacion>
                 <UnidadesConceptoRepercutible>1.0</UnidadesConceptoRepercutible>
@@ -53,6 +54,7 @@
             </ConceptoRepercutible>
             <ConceptoRepercutible>
                 <ConceptoRepercutible>05</ConceptoRepercutible>
+                <CodigoDeSolicitud>10005</CodigoDeSolicitud>
                 <TipoImpositivoConceptoRepercutible>1</TipoImpositivoConceptoRepercutible>
                 <FechaOperacion>2016-09-01</FechaOperacion>
                 <UnidadesConceptoRepercutible>1.0</UnidadesConceptoRepercutible>

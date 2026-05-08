@@ -149,12 +149,12 @@ class Medida(Medida):
 
 class Contrato(Contrato):
 
-    _sort_order = ('contrato', 'id_contrato', 'autoconsumo', 'tipo_contrato_atr', 'cups_principal',
+    _sort_order = ('contrato', 'id_contrato', 'ref_catastro', 'ref_catastro_finca',
+                   'utm', 'autoconsumo', 'tipo_contrato_atr', 'cups_principal',
                    'condiciones_contractuales')
 
     def __init__(self):
         super(Contrato, self).__init__()
-        self.cups_principal = XmlField('CUPSPrincipal')
 
 # Paso 12
 

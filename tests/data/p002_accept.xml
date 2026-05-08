@@ -22,11 +22,19 @@
         <TipoSolicitudEnCurso>C100</TipoSolicitudEnCurso>
         <Contrato>
             <TipoContratoATR>03</TipoContratoATR>
+            <CUPSPrincipal>ES1234000000000001JN0F</CUPSPrincipal>
             <FechaFinalizacion>2020-03-31</FechaFinalizacion>
+            <RefCatastro>1234567890qwertyuiop</RefCatastro>
+            <RefCatastroFinca>1234567890qwer</RefCatastroFinca>
+            <UTM>
+                <X>100</X>
+                <Y>200</Y>
+                <Huso>40</Huso>
+                <Banda>E</Banda>
+            </UTM>
             <Autoconsumo>
                 <DatosSuministro>
                     <TipoCUPS>01</TipoCUPS>
-                    <RefCatastro>1234567890qwertyuiop</RefCatastro>
                 </DatosSuministro>
                 <DatosCAU>
                     <CAU>ES1234000000000001JN0FA001</CAU>
@@ -35,6 +43,7 @@
                     <Colectivo>S</Colectivo>
                     <DatosInstGen>
                         <CIL>ES1234000000000001JN0F001</CIL>
+                        <TecGenerador>b11</TecGenerador>
                         <PotInstaladaGen>100</PotInstaladaGen>
                         <TipoInstalacion>01</TipoInstalacion>
                         <EsquemaMedida>B</EsquemaMedida>
@@ -74,29 +83,29 @@
                     </DatosInstGen>
                 </DatosCAU>
             </Autoconsumo>
+            <FechaUltimoMovimientoTipoAutocons>2020-01-01</FechaUltimoMovimientoTipoAutocons>
+            <IndBonoSocial>N</IndBonoSocial>
+            <IndEsencial>00</IndEsencial>
+            <FechaUltimoMovimientoIndEsencial>2016-05-05</FechaUltimoMovimientoIndEsencial>
+            <ViviendaHabitual>S</ViviendaHabitual>
+            <CNAE>9820</CNAE>
+            <CondicionesContractuales>
+                <TarifaATR>018</TarifaATR>
+                <PotenciasContratadas>
+                    <Potencia Periodo="1">6000</Potencia>
+                </PotenciasContratadas>
+                <ModoControlPotencia>1</ModoControlPotencia>
+            </CondicionesContractuales>
+            <ModoFacturacionPotencia>9</ModoFacturacionPotencia>
+            <NoInterrumpible>S</NoInterrumpible>
+            <PotenciaNoInterrumpible>6000</PotenciaNoInterrumpible>
+            <VAsTrafo>50</VAsTrafo>
+            <PeriodicidadFacturacion>01</PeriodicidadFacturacion>
+            <TipodeTelegestion>01</TipodeTelegestion>
+            <ICPActivadoTelegestion>S</ICPActivadoTelegestion>
+            <PeajeDirecto>S</PeajeDirecto>
+            <DepositoGarantia>N</DepositoGarantia>
         </Contrato>
-        <FechaUltimoMovimientoTipoAutocons>2020-01-01</FechaUltimoMovimientoTipoAutocons>
-        <IndBonoSocial>N</IndBonoSocial>
-        <IndEsencial>00</IndEsencial>
-        <FechaUltimoMovimientoIndEsencial>2016-05-05</FechaUltimoMovimientoIndEsencial>
-        <ViviendaHabitual>S</ViviendaHabitual>
-        <CNAE>9820</CNAE>
-        <CondicionesContractuales>
-            <TarifaATR>018</TarifaATR>
-            <PotenciasContratadas>
-                <Potencia Periodo="1">6000</Potencia>
-            </PotenciasContratadas>
-            <ModoControlPotencia>1</ModoControlPotencia>
-        </CondicionesContractuales>
-        <ModoFacturacionPotencia>9</ModoFacturacionPotencia>
-        <NoInterrumpible>S</NoInterrumpible>
-        <PotenciaNoInterrumpible>6000</PotenciaNoInterrumpible>
-        <VAsTrafo>50</VAsTrafo>
-        <PeriodicidadFacturacion>01</PeriodicidadFacturacion>
-        <TipodeTelegestion>01</TipodeTelegestion>
-        <ICPActivadoTelegestion>S</ICPActivadoTelegestion>
-        <PeajeDirecto>S</PeajeDirecto>
-        <DepositoGarantia>N</DepositoGarantia>
         <PotenciaMaxAutorizada>10000</PotenciaMaxAutorizada>
         <TensionDelSuministro>02</TensionDelSuministro>
         <DerechosReconocidos>

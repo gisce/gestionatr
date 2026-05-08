@@ -31,12 +31,16 @@
 		<xs:sequence>
 			<xs:element name="IdContrato" type="IdContrato"/>
 			<xs:element name="FechaFinalizacion" type="xs:date" minOccurs="0"/>
+			<xs:element name="RefCatastro" type="RefCatastro" minOccurs="0"/>
+			<xs:element name="RefCatastroFinca" type="RefCatastroFinca" minOccurs="0"/>
+			<xs:element name="UTM" type="TypeUTM" minOccurs="0"/>
 			<xs:element name="Autoconsumo" type="TypeAutoconsumoActivacion" minOccurs="0"/>
 			<xs:element name="TipoContratoATR" type="TipoContratoATR">
 				<xs:annotation>
 					<xs:documentation>Tabla 9</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="CUPSPrincipal" type="Codigo" minOccurs="0"/>
 			<xs:element name="CondicionesContractuales" type="CondicionesContractualesC"/>
 		</xs:sequence>
 	</xs:complexType>

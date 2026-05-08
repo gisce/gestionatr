@@ -575,7 +575,7 @@ class Ajuste(object):
     def ajuste_por_integrador(self):
         data = ''
         try:
-            data = self.ajuste.AjustePorIntegrador.text
+            data = float(self.ajuste.AjustePorIntegrador.text.strip())
         except AttributeError:
             pass
         return data

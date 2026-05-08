@@ -53,11 +53,13 @@ class DatosSolicitud(XmlModel):
 
 class ContratoT101(Contrato):
 
-    _sort_order = ('contrato', 'fecha_finalizacion', 'autoconsumo', 'tipo_contrato_atr',
-                   'condiciones_contractuales', 'periodicidad_facturacion', 'consumo_anual_estimado', 'contacto')
+    _sort_order = ('contrato', 'fecha_finalizacion', 'ref_catastro', 'ref_catastro_finca', 'utm',
+                   'autoconsumo', 'tipo_contrato_atr', 'cups_principal', 'condiciones_contractuales',
+                   'periodicidad_facturacion', 'consumo_anual_estimado', 'contacto')
 
     def __init__(self):
         super(ContratoT101, self).__init__()
+
 
 
 class DireccionPS(DireccionSuministro):
