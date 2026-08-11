@@ -253,9 +253,15 @@
 					<restriction base="string">
 						<maxLength value="2"/>
 						<minLength value="1"/>
-						<enumeration value="0"/>
-						<enumeration value="1"/>
-						<enumeration value="2"/>
+						<enumeration value="A"/>
+						<enumeration value="B"/>
+						<enumeration value="C"/>
+						<enumeration value="D"/>
+						<enumeration value="E"/>
+						<enumeration value="F"/>
+						<enumeration value="G"/>
+						<enumeration value="H"/>
+						<enumeration value="I"/>
 					</restriction>
 				</simpleType>
 			</element>

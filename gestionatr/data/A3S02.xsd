@@ -43,7 +43,7 @@
 	</complexType>
 	<complexType name="A3S02Type">
 		<sequence>
-			<element name="reqcode" type="tns:ReqcodeType" minOccurs="0" maxOccurs="1">
+			<element name="reqcode" type="tns:ReqcodeType" minOccurs="1" maxOccurs="1">
 				<annotation>
 					<documentation>Código de Solicitud</documentation>
 				</annotation>

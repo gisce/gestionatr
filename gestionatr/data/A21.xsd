@@ -189,6 +189,15 @@
 					</restriction>
 				</simpleType>
 			</element>
+			<element name="indconectadoplantasatelite" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<length value="1"/>
+						<enumeration value="S"/>
+						<enumeration value="N"/>
+					</restriction>
+				</simpleType>
+			</element>
 		</sequence>
 	</complexType>
 </schema>

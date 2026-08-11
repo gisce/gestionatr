@@ -325,29 +325,15 @@
 	</complexType>
 	<complexType name="DatosComA629Type">
 		<sequence>
-			<element name="nombre" minOccurs="0" maxOccurs="1">
+			<element name="nombre" type="tns:FirstnameType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Nombre Titular</documentation>
 				</annotation>
-				<simpleType>
-					<restriction base="string">
-						<minLength value="1"/>
-						<maxLength value="30"/>
-						<whiteSpace value="collapse"/>
-					</restriction>
-				</simpleType>
 			</element>
-			<element name="apellido1" minOccurs="0" maxOccurs="1">
+			<element name="apellido1" type="tns:FamilynameType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Apellido 1 / Razón Social</documentation>
 				</annotation>
-				<simpleType>
-					<restriction base="string">
-						<minLength value="1"/>
-						<maxLength value="40"/>
-						<whiteSpace value="collapse"/>
-					</restriction>
-				</simpleType>
 			</element>
 			<element name="apellido2" type="tns:FamilynameType" minOccurs="0" maxOccurs="1">
 				<annotation>
