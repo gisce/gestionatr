@@ -380,8 +380,8 @@
 					<xs:restriction base="xs:decimal">
 						<xs:totalDigits value="29"/>
 						<xs:fractionDigits value="12"/>
-						<xs:maxInclusive value="99999999999999999.999999999999"/>
-						<xs:minInclusive value="-99999999999999999.999999999999"/>
+						<xs:maxInclusive value="99999999999999999.999999"/>
+						<xs:minInclusive value="-99999999999999999.999999"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -390,8 +390,8 @@
 					<xs:restriction base="xs:decimal">
 						<xs:totalDigits value="29"/>
 						<xs:fractionDigits value="12"/>
-						<xs:maxInclusive value="99999999999999999.999999999999"/>
-						<xs:minInclusive value="-99999999999999999.999999999999"/>
+						<xs:maxInclusive value="99999999999999999.999999"/>
+						<xs:minInclusive value="-99999999999999999.999999"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -684,8 +684,8 @@
 					<xs:restriction base="xs:decimal">
 						<xs:totalDigits value="29"/>
 						<xs:fractionDigits value="12"/>
-						<xs:maxInclusive value="99999999999999999.999999999999"/>
-						<xs:minInclusive value="-99999999999999999.999999999999"/>
+						<xs:maxInclusive value="99999999999999999.999999"/>
+						<xs:minInclusive value="-99999999999999999.999999"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -694,8 +694,8 @@
 					<xs:restriction base="xs:decimal">
 						<xs:totalDigits value="29"/>
 						<xs:fractionDigits value="12"/>
-						<xs:maxInclusive value="99999999999999999.999999999999"/>
-						<xs:minInclusive value="-99999999999999999.999999999999"/>
+						<xs:maxInclusive value="99999999999999999.999999"/>
+						<xs:minInclusive value="-99999999999999999.999999"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -704,8 +704,8 @@
 					<xs:restriction base="xs:decimal">
 						<xs:totalDigits value="29"/>
 						<xs:fractionDigits value="12"/>
-						<xs:maxInclusive value="99999999999999999.999999999999"/>
-						<xs:minInclusive value="-99999999999999999.999999999999"/>
+						<xs:maxInclusive value="99999999999999999.999999"/>
+						<xs:minInclusive value="-99999999999999999.999999"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -725,8 +725,8 @@
 					<xs:restriction base="xs:decimal">
 						<xs:totalDigits value="29"/>
 						<xs:fractionDigits value="12"/>
-						<xs:maxInclusive value="99999999999999999.999999999999"/>
-						<xs:minInclusive value="-99999999999999999.999999999999"/>
+						<xs:maxInclusive value="99999999999999999.999999"/>
+						<xs:minInclusive value="-99999999999999999.999999"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -779,7 +779,7 @@
 					<xs:restriction base="xs:decimal">
 						<xs:totalDigits value="29"/>
 						<xs:fractionDigits value="12"/>
-						<xs:maxInclusive value="99999999999999999.999999999999"/>
+						<xs:maxInclusive value="99999999999999999.999999"/>
 						<xs:minInclusive value="0"/>
 					</xs:restriction>
 				</xs:simpleType>
