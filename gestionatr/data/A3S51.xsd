@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A3S41" targetNamespace="http://localhost/sctd/A3S41" elementFormDefault="qualified">
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/sctd/A3S51" targetNamespace="http://localhost/sctd/A3S51" elementFormDefault="qualified">
 	<include schemaLocation="CommonTagsCONT.xsd"/>
-	<element name="sctdapplication" type="tns:SctdapplicationA3S41Type"/>
-	<complexType name="SctdapplicationA3S41Type">
+	<element name="sctdapplication" type="tns:SctdapplicationA3S51Type"/>
+	<complexType name="SctdapplicationA3S51Type">
 		<sequence>
-			<element name="heading" type="tns:HeadingA3S41Type" minOccurs="1" maxOccurs="1"/>
-			<element name="a3s41" type="tns:A3S41Type" minOccurs="1" maxOccurs="unbounded"/>
+			<element name="heading" type="tns:HeadingA3S51Type" minOccurs="1" maxOccurs="1"/>
+			<element name="a3s51" type="tns:A3S51Type" minOccurs="1" maxOccurs="unbounded"/>
 		</sequence>
 	</complexType>
-	<complexType name="HeadingA3S41Type">
+	<complexType name="HeadingA3S51Type">
 		<sequence>
 			<element name="dispatchingcode" minOccurs="1" maxOccurs="1">
 				<simpleType>
@@ -26,7 +26,7 @@
 				<simpleType>
 					<restriction base="string">
 						<length value="2"/>
-						<enumeration value="41"/>
+						<enumeration value="51"/>
 					</restriction>
 				</simpleType>
 			</element>
@@ -41,9 +41,9 @@
 			</element>
 		</sequence>
 	</complexType>
-	<complexType name="A3S41Type">
+	<complexType name="A3S51Type">
 		<sequence>
-			<element name="reqcode" type="tns:ReqcodeType" minOccurs="1" maxOccurs="1">
+			<element name="reqcode" type="tns:ReqcodeType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Código de Solicitud</documentation>
 				</annotation>
@@ -56,6 +56,18 @@
 			<element name="responsehour" type="time" minOccurs="1" maxOccurs="1">
 				<annotation>
 					<documentation>Hora de Respuesta</documentation>
+				</annotation>
+			</element>
+			<element name="comreferencenum" type="tns:ComreferencenumType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>
+						Nº Referencia Solicitud Comercializadora
+					</documentation>
+				</annotation>
+			</element>
+			<element name="resactivacion" type="tns:ResultadoActivacionReposicionType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Resultado Activación</documentation>
 				</annotation>
 			</element>
 			<element name="nationality" type="tns:NationalityType" minOccurs="1" maxOccurs="1">
@@ -82,7 +94,7 @@
 			</element>
 			<element name="previousatrcode" type="tns:AtrcodeType" minOccurs="0" maxOccurs="1">
 				<annotation>
-					<documentation>Contrato ATR Vigente antes del Cambio. No se debe informar para suministros del grupo 1 o 2</documentation>
+					<documentation>Contrato ATR Vigente antes de la Reposición</documentation>
 				</annotation>
 			</element>
 			<element name="transfereffectivedate" type="date" minOccurs="1" maxOccurs="1">

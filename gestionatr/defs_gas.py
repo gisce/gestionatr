@@ -944,7 +944,7 @@ TAULA_MOTIVOS_DE_RECHAZO_CNMC = [
     ('R40', 'El comercializador no es la empresa titular del contrato ATR en '
             'vigor.'),
     ('R41', 'No existe una previa del comercializador que solicita la '
-            'Anulación/Desistimiento.'),
+            'Anulación/Desistimiento/Reposición.'),
     ('R42', 'La solicitud que se intenta anular ya está "en trámite" o '
             'formalizada.'),
     ('R43', 'El CUPS ya está activo con la comercializadora solicitante/receptora.'),
@@ -1023,6 +1023,21 @@ TAULA_MOTIVOS_DE_RECHAZO_CNMC = [
     ('S25', 'Telemedida obligatoria'),
     ('S26', 'Incumplimiento condiciones método de facturación'),
     ('S27', 'Solicitud del comercializador coincide con lo existente en el distribuidor'),
+    ('S28', 'Identificador del titular vigente no coincide con el titular que pretende reponer'),
+    ('S29', 'Identificador del titular del contrato anterior al cambio no coincide con el titular que pretende reponer'),
+    ('S30', 'Reposición solicitada para un contrato con tarifa no válida'),
+    ('S31', 'La reposición no aplica al proceso subyacente'),
+    ('S32', 'Reposición no posible técnicamente en campo'),
+    ('S33', 'Reposición no posible por movimiento de contratación posterior'),
+    ('S34', 'Reposición solicitada supera plazo máximo de 1 año'),
+    ('S35', 'Concurrencia con proceso de reposición. Se prioriza la activación de la reposición'),
+    ('S36', 'Vigencia del contrato que se pretende reponer está finalizado'),
+    ('S37', 'Se dispone de aval documental acreditativo'),
+    ('S38', 'Se rechaza reposición sin motivo específico'),
+    ('S39', 'Reposición no necesaria, proceso subyacente rechazado'),
+    ('S40', 'Reposición sobre un proceso de contratación en curso'),
+    ('S41', 'Proceso subyacente en curso no es posible la reposición'),
+    ('S42', 'Rechazo de la CUR por impago previo a la solicitud de reposición según art. 32. 3 del RD 1434/2002'),
 ]
 TAULA_MOTIVO_RECHAZO_OCSUM = TAULA_MOTIVOS_DE_RECHAZO_CNMC
 
@@ -1102,6 +1117,8 @@ TAULA_TIPO_MENSAJE = [
     ('A20', 'Envío petición datos CUPS disponible'),
     ('A21', 'Extracción respuesta de petición datos CUPS disponible'),
     ('A25', 'Respuesta Estado Intervención/incidencia'),
+    ('A28', 'Consulta de Reposición a COM no solicitante'),
+    ('A29', 'Respuesta de COM de Acepto/Rechazo de Reposición'),
     ('A26', 'Envío de información adicional reclamación'),
     ('B70', 'Facturación'),
     ('A61', 'Notificación CUPS sin contrato en vigor disponibles para la contratación'),
@@ -1647,9 +1664,15 @@ TAULA_PRESION_COMUNITARIA = [
     ('BV', 'PRESIONMAX. HASTA 270MM. C.A. CONVALV'),
 ]
 TAULA_TIPO_LECTURA = [
-    ('0', 'Estimada'),
-    ('1', 'Real'),
-    ('2', 'Facilitada por cliente'),
+    ('A', 'Estimada Telemedida'),
+    ('B', 'Estimada Telegestión'),
+    ('C', 'Estimada Analógico'),
+    ('D', 'Real Telemedida'),
+    ('E', 'Real Telegestión'),
+    ('F', 'Real Analógico'),
+    ('G', 'Facilitada por el cliente Telemedida'),
+    ('H', 'Facilitada por el cliente Telegestión'),
+    ('I', 'Facilitada por el cliente Analógico'),
 ]
 TAULA_MOTIVO_BAJA = [
     ('01', 'A petición del cliente por cese de su actividad'),
@@ -1712,6 +1735,8 @@ TAULA_MOTIVO_ANULACION = [
     ('037', 'Anulación de Solicitud de Cambio de Comercializadora con nuevos productos adicionales'),
     ('038', 'Anulación de Solicitud de nuevo Producto/Contrato'),
     ('039', 'Anulación de solicitud de traspaso a la CUR por aceptación de anulación a iniciativa del comercializador sobre la solicitud que motivó tal traspaso'),
+    ('040', 'Anulación de solicitud de reposición'),
+    ('041', 'Anulación de solicitud de traspaso a la CUR por concurrencia con reposición'),
 ]
 TAULA_ESTADO_PUNTO_DE_SUMINISTRO = [
     ('0', 'Sin servicio'),
@@ -1748,6 +1773,17 @@ TAULA_RESULTADO_ACTIVACION_DESISTIMIENTO = [
     ('04', 'Baja por cese de actividad'),
     ('05', 'Activación de Cambio de Comercializador'),
 ]
+TAULA_TIPO_REPOSICION = [
+    ('01', 'Reposición por contratación o cambio indebido solicitada por el comercializador entrante.'),
+    ('02', 'Reposición por error administrativo solicitada por el comercializador entrante'),
+    ('03', 'Reposición solicitada por el comercializador saliente'),
+]
+TAULA_RESULTADO_ACTIVACION_REPOSICION = [
+    ('01', 'Vuelta a la situación anterior'),
+    ('02', 'Traspaso al CUR'),
+    ('03', 'Baja por cese de actividad'),
+    ('04', 'Activación de Cambio de Comercializador'),
+]
 TAULA_CONTESTACION_INCIDENCIA = [
     ('01', 'Nuevo teléfono de contacto.'),
     ('02', 'Deficiencia/Trabajos subsanada. Contactar con cliente'),
@@ -1757,6 +1793,8 @@ TAULA_MOTIVO_TRASPASO_A_CUR = [
     ('02', 'Solicitud de desistimiento a un cambio de comercializador de un nuevo titular'),
     ('03', 'Decisión fundada de la Dirección General de Política Energética y Minas, cautelar o definitivamente, se traspasan los puntos de suministro al CUR'),
     ('04', 'Punto de GLP transformado a GN que en el día de la transformación no ha contratado el suministro de gas natural con un comercializador.'),
+    ('05', 'Solicitud de reposición no activada. Contrato anterior ha perdido vigencia'),
+    ('06', 'Solicitud de reposición no activada. Comercializador anterior ha sido inhabilitado'),
 ]
 TAULA_DIRECCION_FISCAL = [
     ('S', 'Si el domicilio fiscal coincide con el del Suministro'),
@@ -1843,6 +1881,7 @@ TAULA_CLASE_FACTURA_O_TIPO_DE_FACTURA_RECTIFICADORA = [
     ('A', 'Anuladora'),
     ('R', 'Rectificadora'),
     ('B', 'Anuladora con sustituyente'),
+    ('C', 'Complementaria'),
 ]
 TAULA_TIPO_FACTURACION = [
     ('1', 'Regular (periodo completo)'),
@@ -2109,6 +2148,10 @@ TAULA_CONCEPTOS_FACTURACION = [
     ('0', '2011', 'Cargo. Término Fijo Capacidad'),
     ('0', '2012', 'Cuota del GTS'),
     ('0', '2013', 'Tasa CNMC'),
+    ('0', '2014', 'Derechos de alta por reposición (no repercutible a cliente)'),
+    ('0', '2015', 'Derechos de enganche por reposición (no repercutible a cliente)'),
+    ('0', '2016', 'Derechos de reconexión instalaciones por reposición (no repercutible a cliente)'),
+    ('0', '2017', 'Derechos de verificación instalaciones por reposición (no repercutible a cliente)'),
 ]
 TAULA_CONCEPTO_FACTURACION = [(a[1], a[2]) for a in TAULA_CONCEPTOS_FACTURACION]
 
@@ -2818,6 +2861,10 @@ TAULA_DETALLE_DE_RESOLUCION = [
     ('0740202', 'Movimiento realizado en plazo'),
     ('0740203', 'Movimiento fuera de plazo imputable al cliente'),
     ('0740204', 'Improcedente. Se adjunta explicación en comentarios.'),
+    ('0800101', 'Procedente. Se agiliza trámite de reposición'),
+    ('0800201', 'Improcedente. Se adjunta explicación comentarios'),
+    ('0810101', 'Procedente. Se agiliza trámite de reposición'),
+    ('0810201', 'Improcedente. Se adjunta explicación comentarios'),
 ]
 TAULA_RESULTADO_RECLAMACION = [
     ('01', 'Procedente / Favorable'),

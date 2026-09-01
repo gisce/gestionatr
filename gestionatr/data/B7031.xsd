@@ -80,9 +80,9 @@
 			<element name="municipioRed" type="tns:CodAlpha5Type" minOccurs="1" maxOccurs="1"/>
 			<element name="tipodocumento" type="tns:TipoDocumentoType" minOccurs="0" maxOccurs="1"/>
 			<element name="numdocumento" type="tns:NumDocumentoType" minOccurs="0" maxOccurs="1"/>
-			<element name="nombre" type="tns:CodAlpha30Type" minOccurs="0" maxOccurs="1"/>
-			<element name="apellido1" type="tns:CodAlpha40Type" minOccurs="0" maxOccurs="1"/>
-			<element name="apellido2" type="tns:CodAlpha30Type" minOccurs="0" maxOccurs="1"/>
+			<element name="nombre" type="tns:CodAlpha80Type" minOccurs="0" maxOccurs="1"/>
+			<element name="apellido1" type="tns:CodAlpha80Type" minOccurs="0" maxOccurs="1"/>
+			<element name="apellido2" type="tns:CodAlpha80Type" minOccurs="0" maxOccurs="1"/>
 			<element name="tipofactura" type="tns:TipoFacturaType" minOccurs="1" maxOccurs="1"/>
 			<element name="clasefact" type="tns:ClaseFacturaType" minOccurs="1" maxOccurs="1"/>
 			<element name="numfactorigen" minOccurs="0" maxOccurs="1">
@@ -90,6 +90,14 @@
 					<restriction base="string">
 						<minLength value="1"/>
 						<maxLength value="26"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="NumeroExpediente" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="16"/>
 					</restriction>
 				</simpleType>
 			</element>

@@ -398,6 +398,15 @@ class Factura(object):
             return False
 
     @property
+    def numeroexpediente(self):
+        tree = 'NumeroExpediente'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
     def fecfactura(self):
         tree = 'fecfactura'
         data = get_rec_attr(self.obj, tree, False)

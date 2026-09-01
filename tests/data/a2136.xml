@@ -39,5 +39,6 @@
         <iricertificatedate>2020-01-01</iricertificatedate>
         <designpower>10000</designpower>
         <terminstexist>S</terminstexist>
+        <indconectadoplantasatelite>S</indconectadoplantasatelite>
     </a21>
 </sctdapplication>
