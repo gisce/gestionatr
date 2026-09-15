@@ -7211,12 +7211,14 @@ class test_A1_38(unittest.TestCase):
     def setUp(self):
         self.xml_a238 = open(get_data("a238.xml"), "rb")
         self.xml_a2538 = open(get_data("a2538.xml"), "rb")
+        self.xml_a2638 = open(get_data("a2638.xml"), "rb")
         self.xml_a338 = open(get_data("a338.xml"), "rb")
         self.xml_a438 = open(get_data("a438.xml"), "rb")
 
     def tearDown(self):
         self.xml_a238.close()
         self.xml_a2538.close()
+        self.xml_a2638.close()
         self.xml_a338.close()
         self.xml_a438.close()
 
@@ -7290,6 +7292,21 @@ class test_A1_38(unittest.TestCase):
         defect = a2538.defectlist[1]
         self.assertEqual(defect.code, u'002')
         self.assertEqual(defect.description, u'Desc2')
+
+    def test_a2638(self):
+        a2638 = A1_38(self.xml_a2638)
+        a2638.parse_xml()
+        self.assertEqual(a2638.reqcode, u'7777')
+        self.assertEqual(a2638.cups, u'ES1234000000000001JN')
+        self.assertEqual(a2638.comreferencenum, u'000123456789')
+        self.assertEqual(a2638.stateincidence, u'01')
+        contact = a2638.contact
+        self.assertEqual(contact.contactname, u'mortdegana')
+        self.assertEqual(contact.contacttelephone1, u'+34666555444')
+        self.assertEqual(contact.contacttelephone2, u'+34666555444')
+        self.assertEqual(contact.contacttelephone3, u'+34666555444')
+        self.assertEqual(contact.contactemail, u'matalas@gas')
+        self.assertEqual(a2638.extrainfo, u'comentarios extra')
 
     def test_a338(self):
         a338 = A1_38(self.xml_a338)

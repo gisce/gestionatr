@@ -64,6 +64,25 @@ class A1_38(A1_03):
         else:
             return False
 
+    # Pas a26
+    @property
+    def stateincidence(self):
+        tree = '{0}.stateincidence'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def contact(self):
+        tree = '{0}.contact'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return contact(data)
+        else:
+            return False
+
     # Pas a3
     @property
     def province(self):
@@ -165,3 +184,55 @@ class A1_38(A1_03):
             return False
 
     # Pas a4
+    # ----
+
+
+class contact(object):
+
+    def __init__(self, data):
+        self.obj = data
+
+    @property
+    def contactname(self):
+        tree = 'contactname'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def contacttelephone1(self):
+        tree = 'contacttelephone1'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def contacttelephone2(self):
+        tree = 'contacttelephone2'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def contacttelephone3(self):
+        tree = 'contacttelephone3'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def contactemail(self):
+        tree = 'contactemail'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
