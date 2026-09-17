@@ -5457,16 +5457,20 @@ class test_A1_41(unittest.TestCase):
     def setUp(self):
         self.xml_a241 = open(get_data("a241.xml"), "rb")
         self.xml_a2541 = open(get_data("a2541.xml"), "rb")
+        self.xml_a2s41 = open(get_data("a2s41.xml"), "rb")
         self.xml_a341 = open(get_data("a341.xml"), "rb")
         self.xml_a441 = open(get_data("a441.xml"), "rb")
         self.xml_a3s41 = open(get_data("a3s41.xml"), "rb")
+        self.xml_a4s41 = open(get_data("a4s41.xml"), "rb")
 
     def tearDown(self):
         self.xml_a241.close()
         self.xml_a2541.close()
+        self.xml_a2s41.close()
         self.xml_a341.close()
         self.xml_a441.close()
         self.xml_a3s41.close()
+        self.xml_a4s41.close()
 
     def test_a241(self):
         a1_41 = A1_41(self.xml_a241)
@@ -5532,6 +5536,19 @@ class test_A1_41(unittest.TestCase):
         defect = a2541.defectlist[0]
         self.assertEqual(defect.code, u"001")
         self.assertEqual(defect.description, u"FUGA DE GAS")
+
+    def test_a2s41(self):
+        a2s41 = A1_41(self.xml_a2s41)
+        a2s41.parse_xml()
+        self.assertEqual(a2s41.reqcode, u'0123456789')
+        self.assertEqual(a2s41.responsedate, u'2018-05-01')
+        self.assertEqual(a2s41.responsehour, u'13:00:00')
+        self.assertEqual(a2s41.nationality, u"ES")
+        self.assertEqual(a2s41.documenttype, u"01")
+        self.assertEqual(a2s41.documentnum, u"ES11111111H")
+        self.assertEqual(a2s41.cups, u'ES1234000000000001JN')
+        self.assertEqual(a2s41.foreseentransferdate, u'2018-05-09')
+        self.assertEqual(a2s41.extrainfo, u'Coments')
 
     def test_a341(self):
         a1_41 = A1_41(self.xml_a341)
@@ -5675,6 +5692,23 @@ class test_A1_41(unittest.TestCase):
         self.assertEqual(counter.counterproperty, u'06')
         self.assertEqual(counter.countertype, u'tipo2')
         self.assertEqual(counter.reallecture, u'3000')
+
+    def test_a4s41(self):
+        a4s41 = A1_41(self.xml_a4s41)
+        a4s41.parse_xml()
+        self.assertEqual(a4s41.reqcode, '10_z9f2k6S')
+        self.assertEqual(a4s41.responsedate, '2020-03-13')
+        self.assertEqual(a4s41.responsehour, '15:09:09')
+        self.assertEqual(a4s41.nationality, 'ES')
+        self.assertEqual(a4s41.documenttype, '01')
+        self.assertEqual(a4s41.documentnum, '11111111H')
+        self.assertEqual(a4s41.cups, '20aXn4jOtXkA8PF9JCHH')
+        self.assertEqual(a4s41.previousatrcode, '000111222333444555666777')
+        self.assertEqual(a4s41.result, '13')
+        self.assertEqual(a4s41.resultdesc, 'Aceptada')
+        self.assertEqual(a4s41.resultreason, 'R01')
+        self.assertEqual(a4s41.resultreasondesc, u'Cliente suministrado desde planta satélite.')
+        self.assertEqual(a4s41.extrainfo, '400_ssYcpvXKXUF3DuQzltLLSTHWo2SDsC')
 
 
 class test_B70(unittest.TestCase):

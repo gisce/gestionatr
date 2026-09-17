@@ -12,7 +12,6 @@ from expects import *
 class CommandTest(unittest.TestCase):
     def test_version(self):
         runner = CliRunner()
-
         result = runner.invoke(atr, ['--version'])
         expect(result.output).to(
             equal('ATR library version (gestionatr) : {}\n'.format(__version__)))

@@ -2078,9 +2078,9 @@ class FacturaATR(Factura):
             return False
         for c in self.get_comptadors():
             for l in c.get_lectures(force_no_transforma_no_td_a_td=True):
-                if isinstance(l.consumo_calculado, int):
+                if isinstance(l.consumo_calculado, int) and isinstance(l.lectura_hasta.lectura, int):
                     return False
-                if not l.consumo_calculado.is_integer():
+                if not l.consumo_calculado.is_integer() or not l.lectura_hasta.lectura.is_integer():
                     return True
 
         return False
