@@ -1664,6 +1664,11 @@ TAULA_PRESION_COMUNITARIA = [
     ('BV', 'PRESIONMAX. HASTA 270MM. C.A. CONVALV'),
 ]
 TAULA_TIPO_LECTURA = [
+    # tipus lectura antics, es conversen per compatibilitat
+    ('0', 'Estimada'),
+    ('1', 'Real'),
+    ('2', 'Facilitada por cliente'),
+    # tipus lectura nous
     ('A', 'Estimada Telemedida'),
     ('B', 'Estimada Telegestión'),
     ('C', 'Estimada Analógico'),
