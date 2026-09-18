@@ -15,6 +15,7 @@ from gestionatr.output.messages import sw_a1_44 as a1_44
 from gestionatr.output.messages import sw_a1_46 as a1_46
 from gestionatr.output.messages import sw_a1_48 as a1_48
 from gestionatr.output.messages import sw_a1_49 as a1_49
+from gestionatr.output.messages import sw_a1_51 as a1_51
 from gestionatr.output.messages import sw_a20_36 as a20_36
 from gestionatr.output.messages import sw_a25_42 as a25_42
 from gestionatr.output.messages import sw_a1 as a1
@@ -8910,9 +8911,11 @@ class test_A1_38(unittest.TestCase):
 
     def setUp(self):
         self.xml_a138 = open(get_data("a138.xml"), "rb")
+        self.xml_a2638 = open(get_data("a2638.xml"), "rb")
 
     def tearDown(self):
         self.xml_a138.close()
+        self.xml_a2638.close()
 
     def test_create_a138(self):
         # Mensajea138
@@ -9049,6 +9052,52 @@ class test_A1_38(unittest.TestCase):
         mensaje_a138.build_tree()
         xml = str(mensaje_a138)
         assertXmlEqual(xml, self.xml_a138.read())
+
+    def test_create_a2638(self):
+        mensaje_a2638 = a1_38.MensajeA2638()
+
+        heading = a1_38.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '38',
+            'messagetype': 'A26'
+        }
+        heading.feed(heading_fields)
+
+        contact = a1_38.contact()
+        contact_fields = {
+            'contactname': 'mortdegana',
+            'contacttelephone1': '+34666555444',
+            'contacttelephone2': '+34666555444',
+            'contacttelephone3': '+34666555444',
+            'contactemail': 'matalas@gas',
+        }
+        contact.feed(contact_fields)
+
+        a2638 = a1_38.A2638()
+        a2638_fields = {
+            'reqcode': '7777',
+            'cups': 'ES1234000000000001JN',
+            'comreferencenum': '000123456789',
+            'stateincidence': '01',
+            'contact': contact,
+            'extrainfo': 'comentarios extra',
+        }
+        a2638.feed(a2638_fields)
+
+        mensaje_a2638_fields = {
+            'heading': heading,
+            'a2638': a2638,
+        }
+        mensaje_a2638.feed(mensaje_a2638_fields)
+        mensaje_a2638.build_tree()
+        xml = str(mensaje_a2638)
+
+        assertXmlEqual(xml, self.xml_a2638.read())
 
 
 class test_A1_49(unittest.TestCase):
@@ -9504,3 +9553,140 @@ class test_A1_43(unittest.TestCase):
         mensaje_a143.build_tree()
         xml = str(mensaje_a143)
         assertXmlEqual(xml, self.xml_a143.read())
+
+class test_A1_51(unittest.TestCase):
+
+    def setUp(self):
+        self.xml_a151 = open(get_data("a151.xml"), "rb")
+        self.xml_a2651 = open(get_data("a2651.xml"), "rb")
+        self.xml_a2951 = open(get_data("a2951.xml"), "rb")
+
+    def tearDown(self):
+        self.xml_a151.close()
+        self.xml_a2651.close()
+        self.xml_a2951.close()
+
+    def test_create_a151(self):
+        mensaje_a151 = a1_51.MensajeA151()
+
+        heading = a1_51.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '51',
+            'messagetype': 'A1'
+        }
+        heading.feed(heading_fields)
+
+        a151 = a1_51.A151()
+        a151_fields = {
+            'comreferencenum': '000123456789',
+            'reqdate': '2018-05-01',
+            'reqhour': '13:00:00',
+            'cups': 'ES1234000000000001JN',
+            'solicitudreferencia': '123456',
+            'tiporeposicion': '01',
+            'documenttype': '01',
+            'documentnum': 'ES11111111H',
+            'titulartype': 'F',
+            'extrainfo': 'comentarios extras'
+        }
+        a151.feed(a151_fields)
+
+        mensaje_a151_fields = {
+            'heading': heading,
+            'a151': a151,
+        }
+        mensaje_a151.feed(mensaje_a151_fields)
+        mensaje_a151.build_tree()
+        xml = str(mensaje_a151)
+
+        assertXmlEqual(xml, self.xml_a151.read())
+
+    def test_create_a2951(self):
+        mensaje_a2951 = a1_51.MensajeA2951()
+
+        heading = a1_51.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '51',
+            'messagetype': 'A29'
+        }
+        heading.feed(heading_fields)
+
+        a2951 = a1_51.A2951()
+        a2951_fields = {
+            'reqcode': '0123456789',
+            'reqdate': '2018-05-01',
+            'reqhour': '12:00:00',
+            'responsedate': '2018-05-01',
+            'responsehour': '13:00:00',
+            'cups': 'ES1234000000000001JN',
+            'result': '01',
+            'resultreason': 'R32',
+            'extrainfo': 'Coments'
+        }
+        a2951.feed(a2951_fields)
+
+        mensaje_a2951_fields = {
+            'heading': heading,
+            'a2951': a2951,
+        }
+        mensaje_a2951.feed(mensaje_a2951_fields)
+        mensaje_a2951.build_tree()
+        xml = str(mensaje_a2951)
+
+        assertXmlEqual(xml, self.xml_a2951.read())
+
+    def test_create_a2651(self):
+        mensaje_a2651 = a1_51.MensajeA2651()
+
+        heading = a1_51.Heading()
+        heading_fields = {
+            'dispatchingcode': 'GML',
+            'dispatchingcompany': '1234',
+            'destinycompany': '4321',
+            'communicationsdate': '2018-05-01',
+            'communicationshour': '12:00:00',
+            'processcode': '51',
+            'messagetype': 'A26'
+        }
+        heading.feed(heading_fields)
+
+        contact = a1_51.contact()
+        contact_fields = {
+            'contactname': 'mortdegana',
+            'contacttelephone1': '+34666555444',
+            'contacttelephone2': '+34666555444',
+            'contacttelephone3': '+34666555444',
+            'contactemail': 'matalas@gas',
+        }
+        contact.feed(contact_fields)
+
+        a2651 = a1_51.A2651()
+        a2651_fields = {
+            'reqcode': '7777',
+            'cups': 'ES1234000000000001JN',
+            'comreferencenum': '000123456789',
+            'stateincidence': '01',
+            'contact': contact,
+            'extrainfo': 'comentarios extra',
+        }
+        a2651.feed(a2651_fields)
+
+        mensaje_a2651_fields = {
+            'heading': heading,
+            'a2651': a2651,
+        }
+        mensaje_a2651.feed(mensaje_a2651_fields)
+        mensaje_a2651.build_tree()
+        xml = str(mensaje_a2651)
+
+        assertXmlEqual(xml, self.xml_a2651.read())

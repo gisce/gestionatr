@@ -133,6 +133,13 @@
 			<xs:whiteSpace value="collapse"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="CodAlpha80Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="80"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="CodAlpha100Type">
 		<xs:restriction base="xs:string">
 			<xs:minLength value="1"/>
@@ -207,6 +214,7 @@
 			<xs:enumeration value="A"/>
 			<xs:enumeration value="R"/>
 			<xs:enumeration value="B"/>
+			<xs:enumeration value="C"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TipoFacturacionType">
@@ -927,9 +935,15 @@
 		<xs:restriction base="xs:string">
 			<xs:minLength value="1"/>
 			<xs:maxLength value="2"/>
-			<xs:enumeration value="0"/>
-			<xs:enumeration value="1"/>
-			<xs:enumeration value="2"/>
+			<xs:enumeration value="A"/>
+			<xs:enumeration value="B"/>
+			<xs:enumeration value="C"/>
+			<xs:enumeration value="D"/>
+			<xs:enumeration value="E"/>
+			<xs:enumeration value="F"/>
+			<xs:enumeration value="G"/>
+			<xs:enumeration value="H"/>
+			<xs:enumeration value="I"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TipoLecturaNumeradorType">

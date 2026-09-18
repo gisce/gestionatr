@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
-from .A1_38 import *
+from .A1_44 import *
 
 
-class A20_36(A1_38):
+class A1_51(A1_44):
+
+    steps = []
 
     @property
-    def solcode(self):
-        tree = '{0}.solcode'.format(self._header)
+    def solicitudreferencia(self):
+        tree = '{0}.solicitudreferencia'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -15,8 +17,18 @@ class A20_36(A1_38):
             return False
 
     @property
-    def resultdescr(self):
-        tree = '{0}.resultdescr'.format(self._header)
+    def tiporeposicion(self):
+        tree = '{0}.tiporeposicion'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+
+    @property
+    def indactcampo(self):
+        tree = '{0}.indactcampo'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -24,8 +36,8 @@ class A20_36(A1_38):
             return False
 
     @property
-    def reason(self):
-        tree = '{0}.reason'.format(self._header)
+    def stateincidence(self):
+        tree = '{0}.stateincidence'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -33,8 +45,8 @@ class A20_36(A1_38):
             return False
 
     @property
-    def reasondescr(self):
-        tree = '{0}.reasondescr'.format(self._header)
+    def streettype(self):
+        tree = '{0}.streettype'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -42,8 +54,8 @@ class A20_36(A1_38):
             return False
 
     @property
-    def permissionreq(self):
-        tree = '{0}.permissionreq'.format(self._header)
+    def street(self):
+        tree = '{0}.street'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -51,8 +63,8 @@ class A20_36(A1_38):
             return False
 
     @property
-    def expecteddate(self):
-        tree = '{0}.expecteddate'.format(self._header)
+    def streetnumber(self):
+        tree = '{0}.streetnumber'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -60,8 +72,8 @@ class A20_36(A1_38):
             return False
 
     @property
-    def infraestructurestatus(self):
-        tree = '{0}.infraestructurestatus'.format(self._header)
+    def portal(self):
+        tree = '{0}.portal'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -69,8 +81,8 @@ class A20_36(A1_38):
             return False
 
     @property
-    def comunitypressure(self):
-        tree = '{0}.comunitypressure'.format(self._header)
+    def staircase(self):
+        tree = '{0}.staircase'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -78,8 +90,8 @@ class A20_36(A1_38):
             return False
 
     @property
-    def aptransind(self):
-        tree = '{0}.aptransind'.format(self._header)
+    def floor(self):
+        tree = '{0}.floor'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -87,8 +99,8 @@ class A20_36(A1_38):
             return False
 
     @property
-    def aptransnumber(self):
-        tree = '{0}.aptransnumber'.format(self._header)
+    def door(self):
+        tree = '{0}.door'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -96,8 +108,8 @@ class A20_36(A1_38):
             return False
 
     @property
-    def reig(self):
-        tree = '{0}.reig'.format(self._header)
+    def province(self):
+        tree = '{0}.province'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -105,8 +117,8 @@ class A20_36(A1_38):
             return False
 
     @property
-    def iricertificateneeded(self):
-        tree = '{0}.iricertificateneeded'.format(self._header)
+    def city(self):
+        tree = '{0}.city'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -114,8 +126,8 @@ class A20_36(A1_38):
             return False
 
     @property
-    def iricertificatedate(self):
-        tree = '{0}.iricertificatedate'.format(self._header)
+    def zipcode(self):
+        tree = '{0}.zipcode'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -123,8 +135,8 @@ class A20_36(A1_38):
             return False
 
     @property
-    def designpower(self):
-        tree = '{0}.designpower'.format(self._header)
+    def resactivacion(self):
+        tree = '{0}.resactivacion'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -132,8 +144,8 @@ class A20_36(A1_38):
             return False
 
     @property
-    def terminstexist(self):
-        tree = '{0}.terminstexist'.format(self._header)
+    def enservicio(self):
+        tree = '{0}.enservicio'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text
@@ -141,8 +153,59 @@ class A20_36(A1_38):
             return False
 
     @property
-    def indconectadoplantasatelite(self):
-        tree = '{0}.indconectadoplantasatelite'.format(self._header)
+    def contact(self):
+        tree = '{0}.contact'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return contact(data)
+        else:
+            return False
+
+class contact(object):
+
+    def __init__(self, data):
+        self.obj = data
+
+    @property
+    def contactname(self):
+        tree = 'contactname'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def contacttelephone1(self):
+        tree = 'contacttelephone1'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def contacttelephone2(self):
+        tree = 'contacttelephone2'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def contacttelephone3(self):
+        tree = 'contacttelephone3'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+
+    @property
+    def contactemail(self):
+        tree = 'contactemail'
         data = get_rec_attr(self.obj, tree, False)
         if data is not None and data is not False:
             return data.text

@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sctdapplication xmlns="http://localhost/sctd/A2551">
+    <heading>
+        <dispatchingcode>GML</dispatchingcode>
+        <dispatchingcompany>1234</dispatchingcompany>
+        <destinycompany>4321</destinycompany>
+        <communicationsdate>2018-05-01</communicationsdate>
+        <communicationshour>12:00:00</communicationshour>
+        <processcode>51</processcode>
+        <messagetype>A25</messagetype>
+    </heading>
+    <a2551>
+        <reqcode>0123456789</reqcode>
+        <cups>ES1234000000000001JN</cups>
+        <visitdate>2018-05-01</visitdate>
+        <visithour>12:00:00</visithour>
+        <comreferencenum>000123456789</comreferencenum>
+        <informationtype>002</informationtype>
+        <informationtypedesc>Orden de Trabajo pendiente</informationtypedesc>
+        <interventiondate>2016-01-01</interventiondate>
+        <interventionhourfrom>09:00:00</interventionhourfrom>
+        <interventionhourto>12:00:00</interventionhourto>
+        <visitnumber>987</visitnumber>
+        <operationnum>9874</operationnum>
+        <extrainfo>Coments</extrainfo>
+        <defectlist>
+            <defect>
+                <code>001</code>
+                <description>Desc1</description>
+            </defect>
+            <defect>
+                <code>002</code>
+                <description>Desc2</description>
+            </defect>
+        </defectlist>
+    </a2551>
+</sctdapplication>

@@ -97,3 +97,45 @@ class A138(XmlModel):
         self.productlist = ProductList()
         self.registerdoclist = Registerdoclist()
         super(A138, self).__init__('a138', 'a138')
+
+class MensajeA2638(XmlModel):
+    _sort_order = ('mensaje', 'heading', 'a2638')
+
+    def __init__(self):
+        self.doc_root = None
+        self.mensaje = XmlField(
+            'sctdapplication', attributes={'xmlns': 'http://localhost/sctd/A2638'}
+        )
+        self.heading = Heading()
+        self.a2638 = A2638()
+        super(MensajeA2638, self).__init__('sctdapplication', 'mensaje')
+
+
+class A2638(XmlModel):
+
+    _sort_order = ('a2638', 'reqcode', 'cups', 'comreferencenum', 'stateincidence',
+                   'contact', 'extrainfo')
+
+    def __init__(self):
+        self.a2638 = XmlField('a2638')
+        self.reqcode = XmlField('reqcode')
+        self.cups = XmlField('cups')
+        self.comreferencenum = XmlField('comreferencenum')
+        self.stateincidence = XmlField('stateincidence')
+        self.contact = contact()
+        self.extrainfo = XmlField('extrainfo')
+        super(A2638, self).__init__('a2638', 'a2638')
+
+class contact(XmlModel):
+
+    _sort_order = ('contact', 'contactname', 'contacttelephone1', 'contacttelephone2',
+                   'contacttelephone3', 'contactemail')
+
+    def __init__(self):
+        self.contact = XmlField('contact')
+        self.contactname = XmlField('contactname')
+        self.contacttelephone1 = XmlField('contacttelephone1')
+        self.contacttelephone2 = XmlField('contacttelephone2')
+        self.contacttelephone3 = XmlField('contacttelephone3')
+        self.contactemail = XmlField('contactemail')
+        super(contact, self).__init__('contact', 'contact')

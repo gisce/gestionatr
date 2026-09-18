@@ -235,38 +235,20 @@
 					<documentation>Planta Satélite</documentation>
 				</annotation>
 			</element>
-			<element name="firstname" minOccurs="0" maxOccurs="1">
+			<element name="firstname" type="tns:FirstnameType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Nombre del Cliente disponible en Mercado Regulado (MR)</documentation>
 				</annotation>
-				<simpleType>
-					<restriction base="string">
-						<minLength value="1"/>
-						<maxLength value="50"/>
-					</restriction>
-				</simpleType>
 			</element>
-			<element name="familyname1" minOccurs="0" maxOccurs="1">
+			<element name="familyname1" type="tns:FamilynameType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Apellido1 / Razón Social disponible en MR</documentation>
 				</annotation>
-				<simpleType>
-					<restriction base="string">
-						<minLength value="1"/>
-						<maxLength value="50"/>
-					</restriction>
-				</simpleType>
 			</element>
-			<element name="familyname2" minOccurs="0" maxOccurs="1">
+			<element name="familyname2" type="tns:FamilynameType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Apellido 2 disponible en MR</documentation>
 				</annotation>
-				<simpleType>
-					<restriction base="string">
-						<minLength value="1"/>
-						<maxLength value="50"/>
-					</restriction>
-				</simpleType>
 			</element>
 			<element name="tolltype" type="tns:TollType" minOccurs="0" maxOccurs="1">
 				<annotation>

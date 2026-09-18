@@ -269,14 +269,14 @@
 	<xs:simpleType name="FirstnameType">
 		<xs:restriction base="xs:string">
 			<xs:minLength value="1"/>
-			<xs:maxLength value="40"/>
+			<xs:maxLength value="80"/>
 			<xs:whiteSpace value="collapse"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="FamilynameType">
 		<xs:restriction base="xs:string">
 			<xs:minLength value="1"/>
-			<xs:maxLength value="30"/>
+			<xs:maxLength value="80"/>
 			<xs:whiteSpace value="collapse"/>
 		</xs:restriction>
 	</xs:simpleType>
@@ -289,9 +289,15 @@
 	<xs:simpleType name="ReadingType">
 		<xs:restriction base="xs:string">
 			<xs:length value="1"/>
-			<xs:enumeration value="0"/>
-			<xs:enumeration value="1"/>
-			<xs:enumeration value="2"/>
+			<xs:enumeration value="A"/>
+			<xs:enumeration value="B"/>
+			<xs:enumeration value="C"/>
+			<xs:enumeration value="D"/>
+			<xs:enumeration value="E"/>
+			<xs:enumeration value="F"/>
+			<xs:enumeration value="G"/>
+			<xs:enumeration value="H"/>
+			<xs:enumeration value="I"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="RegisterdocType">
@@ -1040,6 +1046,21 @@
 			<xs:enumeration value="S25"/>
 			<xs:enumeration value="S26"/>
 			<xs:enumeration value="S27"/>
+			<xs:enumeration value="S28"/>
+			<xs:enumeration value="S29"/>
+			<xs:enumeration value="S30"/>
+			<xs:enumeration value="S31"/>
+			<xs:enumeration value="S32"/>
+			<xs:enumeration value="S33"/>
+			<xs:enumeration value="S34"/>
+			<xs:enumeration value="S35"/>
+			<xs:enumeration value="S36"/>
+			<xs:enumeration value="S37"/>
+			<xs:enumeration value="S38"/>
+			<xs:enumeration value="S39"/>
+			<xs:enumeration value="S40"/>
+			<xs:enumeration value="S41"/>
+			<xs:enumeration value="S42"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TollType">
@@ -1278,6 +1299,8 @@
 			<xs:enumeration value="037"/>
 			<xs:enumeration value="038"/>
 			<xs:enumeration value="039"/>
+			<xs:enumeration value="040"/>
+			<xs:enumeration value="041"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="PropiedadEquipoType">
@@ -1779,6 +1802,8 @@
 			<xs:enumeration value="02"/>
 			<xs:enumeration value="03"/>
 			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="Client">
@@ -2412,6 +2437,23 @@
 			<xs:enumeration value="5"/>
 			<xs:enumeration value="6"/>
 			<xs:enumeration value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoReposicionType">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ResultadoActivacionReposicionType">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

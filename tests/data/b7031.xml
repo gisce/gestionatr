@@ -47,6 +47,7 @@
         <tipofactura>01</tipofactura>
         <clasefact>N</clasefact>
         <numfactorigen>20180101</numfactorigen>
+        <NumeroExpediente>1234567891234567</NumeroExpediente>
         <fecfactura>2018-01-19</fecfactura>
         <numfactura>RG01A18N00136042</numfactura>
         <tipofacturacion>1</tipofacturacion>
@@ -244,7 +245,7 @@
                         <factmulmed>1.00</factmulmed>
                         <lectant>9832.00</lectant>
                         <lecact>10063.00</lecact>
-                        <tipolec>1</tipolec>
+                        <tipolec>A</tipolec>
                         <consumo>231.00</consumo>
                         <tipolecnum>BR</tipolecnum>
                         <aparatorelevante>S</aparatorelevante>
@@ -301,7 +302,7 @@
                         <factmulmed>1.00</factmulmed>
                         <lectant>9832.00</lectant>
                         <lecact>10063.00</lecact>
-                        <tipolec>1</tipolec>
+                        <tipolec>A</tipolec>
                         <consumo>231.00</consumo>
                         <tipolecnum>BR</tipolecnum>
                         <aparatorelevante>S</aparatorelevante>
@@ -314,7 +315,7 @@
                         <factmulmed>1.00</factmulmed>
                         <lectant>9832.00</lectant>
                         <lecact>10063.00</lecact>
-                        <tipolec>1</tipolec>
+                        <tipolec>A</tipolec>
                         <consumo>231.00</consumo>
                         <tipolecnum>BR</tipolecnum>
                         <aparatorelevante>S</aparatorelevante>

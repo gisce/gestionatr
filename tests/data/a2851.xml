@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sctdapplication xmlns="http://localhost/sctd/A2851">
+    <heading>
+        <dispatchingcode>GML</dispatchingcode>
+        <dispatchingcompany>1234</dispatchingcompany>
+        <destinycompany>4321</destinycompany>
+        <communicationsdate>2018-05-01</communicationsdate>
+        <communicationshour>12:00:00</communicationshour>
+        <processcode>51</processcode>
+        <messagetype>A28</messagetype>
+    </heading>
+    <a2851>
+        <reqcode>0123456789</reqcode>
+        <responsedate>2018-05-01</responsedate>
+        <responsehour>13:00:00</responsehour>
+        <cups>ES1234000000000001JN</cups>
+        <solicitudreferencia>123456</solicitudreferencia>
+        <tiporeposicion>01</tiporeposicion>
+        <indactcampo>S</indactcampo>
+        <foreseentransferdate>2018-05-02</foreseentransferdate>
+        <province>01</province>
+        <city>00001</city>
+        <zipcode>5_MLU</zipcode>
+        <streettype>ACCE</streettype>
+        <street>60_vdL9HZyoO6RyPRQnmirjeDxoLX0Uej</street>
+        <streetnumber>4_tS</streetnumber>
+        <portal>5_PUQ</portal>
+        <staircase>5_7bv</staircase>
+        <floor>5_DLx</floor>
+        <door>5_mmC</door>
+    </a2851>
+</sctdapplication>
