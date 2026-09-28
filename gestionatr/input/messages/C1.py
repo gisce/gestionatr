@@ -880,6 +880,15 @@ class Aparato(object):
         return data
 
     @property
+    def propiedad_equipo(self):
+        data = ''
+        try:
+            data = self.aparato.ModeloAparato.PropiedadEquipo.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
     def tipo_movimiento(self):
         data = ''
         try:

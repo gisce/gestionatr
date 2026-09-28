@@ -472,13 +472,15 @@ class Aparato(XmlModel):
 
 class ModeloAparato(XmlModel):
 
-    _sort_order = ('modelo_aparato', 'tipo_aparato', 'marca_aparato', 'modelo_marca')
+    _sort_order = ('modelo_aparato', 'tipo_aparato', 'marca_aparato', 'modelo_marca',
+                   'propiedad_equipo')
 
     def __init__(self):
         self.modelo_aparato = XmlField('ModeloAparato')
         self.tipo_aparato = XmlField('TipoAparato')
         self.marca_aparato = XmlField('MarcaAparato')
         self.modelo_marca = XmlField('ModeloMarca')
+        self.propiedad_equipo = XmlField('PropiedadEquipo')
         super(ModeloAparato, self).__init__('ModeloAparato', 'modelo_aparato')
 
 
