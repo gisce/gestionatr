@@ -8,7 +8,13 @@ from gestionatr.utils import get_rec_attr
 class A1_41(MessageGas, ProcessDeadline):
     """Clase que implementa C2."""
 
-    steps = []
+    steps = [
+        DeadLine('a1', Workdays(6)),
+        DeadLine('a2', Workdays(1)),
+        DeadLine('a25', Naturaldays(30)),
+        DeadLine('a26', Naturaldays(30)),
+        DeadLine('a3', Workdays(1)),
+    ]
 
     # Datos paso a141
     # TODO

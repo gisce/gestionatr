@@ -5,6 +5,8 @@ from gestionatr.utils import get_rec_attr
 
 class A12_24(A1_04):
     """Clase que implementa A1_44."""
+
+    steps = []
     @property
     def productcode(self):
         tree = '{0}.productcode'.format(self._header)

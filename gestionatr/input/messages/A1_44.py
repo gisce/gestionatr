@@ -9,8 +9,6 @@ from .A1_05 import *
 class A1_44(A1_05):
     """Clase que implementa A1_44."""
 
-    steps = []
-
     # Datos paso a144
     # TODO
 

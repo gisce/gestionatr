@@ -5,7 +5,15 @@ from .A1_44 import *
 
 class A1_51(A1_44):
 
-    steps = []
+    steps = [
+        DeadLine('a1', Workdays(15)),
+        DeadLine('a2', Workdays(1)),
+        DeadLine('a25', Naturaldays(30)),
+        DeadLine('a26', Naturaldays(30)),
+        DeadLine('a28', Workdays(10)),
+        DeadLine('a29', Workdays(10)),
+        DeadLine('a3', Workdays(1)),
+    ]
 
     @property
     def solicitudreferencia(self):

@@ -5,6 +5,8 @@ from .A1_38 import *
 
 class A20_36(A1_38):
 
+    steps = []
+
     @property
     def solcode(self):
         tree = '{0}.solcode'.format(self._header)

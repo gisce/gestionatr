@@ -9,7 +9,14 @@ from gestionatr.defs_gas import SUBTYPES_A1_48
 
 class A1_48(A1_04):
 
-    steps = []
+    steps = [
+        DeadLine('a1', Workdays(5)),
+    ]
+    steps_info = [
+        DeadLine('a1', Workdays(5)),
+        DeadLine('a25', Naturaldays(20)),
+        DeadLine('a26', Naturaldays(20)),
+    ]
 
     @property
     def claimertype(self):

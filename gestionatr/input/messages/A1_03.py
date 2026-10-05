@@ -5,7 +5,9 @@ from .A1_44 import *
 
 class A1_03(A1_44):
 
-    steps = []
+    steps = [
+        DeadLine('a1', Workdays(6)),
+    ]
 
     @property
     def annulmentreason(self):

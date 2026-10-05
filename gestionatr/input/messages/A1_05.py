@@ -7,8 +7,6 @@ from gestionatr.utils import get_rec_attr
 class A1_05(A1_02):
     """Clase que implementa M1."""
 
-    steps = []
-
     # Datos paso a105
     # TODO
 
