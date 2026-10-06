@@ -62,14 +62,10 @@ class test_DeadlineGas(TestCaseCompat):
     def test_standard_steps(self):
         for cls in [A1_02, A1_05, A1_38, A1_41, A1_42, A1_43, A1_44, A1_49]:
             self.assertEqual(cls.get_deadline('a1').days, 6)
-            self.assertIsInstance(
-                cls.get_deadline('a1').days, Deadlines.Workdays
-            )
+            self.assertIsInstance(cls.get_deadline('a1').days, Deadlines.Workdays)
             self.assertEqual(cls.get_deadline('a2').days, 1)
             self.assertEqual(cls.get_deadline('a25').days, 30)
-            self.assertIsInstance(
-                cls.get_deadline('a25').days, Deadlines.Naturaldays
-            )
+            self.assertIsInstance(cls.get_deadline('a25').days, Deadlines.Naturaldays)
             self.assertEqual(cls.get_deadline('a26').days, 30)
             self.assertEqual(cls.get_deadline('a3').days, 1)
 
@@ -80,35 +76,21 @@ class test_DeadlineGas(TestCaseCompat):
 
     def test_a1_04_preaviso(self):
         d = A1_04.get_deadline('a0')
-        self.assertEqual(
-            d.limit(datetime(2024, 1, 15)), datetime(2024, 1, 5)
-        )
+        self.assertEqual(d.limit(datetime(2024, 1, 15)), datetime(2024, 1, 5))
 
     def test_a1_04_urgent_incidences(self):
         for mod in ('911', '912'):
-            self.assertEqual(
-                A1_04.get_deadline('a25', modifier=mod).days, 2
-            )
-            self.assertEqual(
-                A1_04.get_deadline('a26', modifier=mod).days, 2
-            )
+            self.assertEqual(A1_04.get_deadline('a25', modifier=mod).days, 2)
+            self.assertEqual(A1_04.get_deadline('a26', modifier=mod).days, 2)
 
     def test_a1_49_912(self):
-        self.assertEqual(
-            A1_49.get_deadline('a25', modifier='912').days, 2
-        )
-        self.assertEqual(
-            A1_49.get_deadline('a26', modifier='912').days, 2
-        )
+        self.assertEqual(A1_49.get_deadline('a25', modifier='912').days, 2)
+        self.assertEqual(A1_49.get_deadline('a26', modifier='912').days, 2)
 
     def test_a1_48(self):
         self.assertEqual(A1_48.get_deadline('a1').days, 5)
-        self.assertEqual(
-            A1_48.get_deadline('a25', modifier='info').days, 20
-        )
-        self.assertEqual(
-            A1_48.get_deadline('a26', modifier='info').days, 20
-        )
+        self.assertEqual(A1_48.get_deadline('a25', modifier='info').days, 20)
+        self.assertEqual(A1_48.get_deadline('a26', modifier='info').days, 20)
 
     def test_a1_51(self):
         self.assertEqual(A1_51.get_deadline('a1').days, 15)
@@ -119,9 +101,7 @@ class test_DeadlineGas(TestCaseCompat):
     def test_a13_50(self):
         self.assertEqual(A13_50.get_deadline('a14').days, 6)
         self.assertEqual(A13_50.get_deadline('a15').days, 1)
-        self.assertEqual(
-            A13_50.get_deadline('a15', modifier='glp').days, 7
-        )
+        self.assertEqual(A13_50.get_deadline('a15', modifier='glp').days, 7)
 
     def test_no_deadline_classes(self):
         for cls in [A12_24, A12_26, A19_45, A20_36, A5_29]:
