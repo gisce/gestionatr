@@ -5,6 +5,11 @@ from .A1_38 import *
 
 class A1_49(A1_38):
 
+    steps_912 = [
+        DeadLine('a25', Workdays(2)),
+        DeadLine('a26', Workdays(2)),
+    ]
+
     # Pas a2
     @property
     def indanulable(self):

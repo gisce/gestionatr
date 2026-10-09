@@ -6,8 +6,7 @@ from .A1_38 import *
 
 
 class A1_42(A1_38):
-
-    steps = []
+    pass
 
     # Datos paso a242
     # ja tenim de les herències

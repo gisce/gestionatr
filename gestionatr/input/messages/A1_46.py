@@ -8,7 +8,9 @@ from .A1_48 import *
 
 class A1_46(A1_48):
 
-    steps = []
+    steps = [
+        DeadLine('a1', Workdays(6)),
+    ]
 
     @property
     def responsedate(self):
