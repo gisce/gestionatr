@@ -349,6 +349,23 @@ class MessageGas(Message):
             raise except_f1('Error', u'Documento sin código de solicitud')
 
     @property
+    def req_code(self):
+        tree = '{0}.reqcode'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data not in [None, False]:
+            return data.text
+        else:
+            return False
+
+    def comreferencenum(self):
+        tree = '{0}.comreferencenum'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data not in [None, False]:
+            return data.text
+        else:
+            return False
+
+    @property
     def seq_sollicitud(self):
         tree = '{0}.sequential'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
