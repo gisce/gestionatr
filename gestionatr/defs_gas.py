@@ -1272,6 +1272,7 @@ TAULA_ANOMALIA_INSTALACION = [
     ('R7', 'PATIO DE VENTILACIÓN INADECUADO'),
     ('R70', 'DEFECTOS DE CARÁCTER DOCUMENTAL'),
     ('R71', 'OTRAS INADECUACIONES GRAVES'),
+    ('R72', 'FALTA INSTALACIÓN INDIVIDUAL - NO HAY APARATOS CONECTADOS'),
     ('R8', 'MAT. NO AUT. EN TUB. '),
     ('R9', 'CONTACTO TUBER. GAS CON OTRAS CONDUCCION'),
     ('A01', 'M - Fuga De Gas'),
@@ -1686,7 +1687,7 @@ TAULA_MOTIVO_BAJA = [
            'seguridad derivados de inspección'),
     ('05', 'A solicitud del comercializador por fin de contrato de energía'),
     ('09', 'Baja de producto indefinido para gestión solo con productos temporales'),
-
+    ('10', 'A petición de la CUR por exceder plazo'),
 ]
 TAULA_MOTIVO_MODIFICACION = [
     ('01', 'Cambio de Titular'),
@@ -1788,6 +1789,24 @@ TAULA_RESULTADO_ACTIVACION_REPOSICION = [
     ('02', 'Traspaso al CUR'),
     ('03', 'Baja por cese de actividad'),
     ('04', 'Activación de Cambio de Comercializador'),
+]
+TAULA_SOLICITUD_CONTRATACION = [
+    ('0200', 'Solicitud de cambio de comercializador'),
+    ('0300', 'Solicitud de anulación'),
+    ('0401', 'Solicitud de baja por cese de actividad'),
+    ('0402', 'Solicitud de baja por impago del cliente'),
+    ('0404', 'Solicitud de baja por problemas de seguridad derivados de inspección'),
+    ('0405', 'Solicitud de baja por fin de contrato'),
+    ('0409', 'Solicitud de baja de producto indefinido para gestión solo con productos temporales'),
+    ('0410', 'Solicitud de baja a petición de la CUR por exceder plazo'),
+    ('0500', 'Solicitud de modificación'),
+    ('3800', 'Solicitud de nuevo suministro'),
+    ('4100', 'Solicitud de cambio de comercializador con modificación'),
+    ('4200', 'Solicitud de cambio de comercializador con nuevos productos adicionales'),
+    ('4300', 'Solicitud de nuevo producto'),
+    ('4900', 'Solicitud de desistimiento'),
+    ('5000', 'Solicitud de traspaso al CUR'),
+    ('5100', 'Solicitud de reposición'),
 ]
 TAULA_CONTESTACION_INCIDENCIA = [
     ('01', 'Nuevo teléfono de contacto.'),
@@ -2345,6 +2364,8 @@ TAULA_TIPO_OPERACION = [
     ('A10028', 'Op. Urgencias. Sin gas', 'DIS', 'I'),
     ('A10029', 'Op. Urgencias. Visita sin actuación', 'DIS', 'I'),
     ('A10030', 'Reapertura IRI sin certificado. ', 'AMBOS', 'I'),
+    ('A10031', 'Comunicación Interrupción suministro por afecciones en red', 'DIS', 'I'),
+    ('A10032', 'Comunicación Reanudación suministro tras afecciones en red', 'DIS', 'I'),
     ('A20001', 'Lectura facilitada', 'AMBOS', 'A'),
     ('A20002', 'Comunicación Reapertura por instalador', 'AMBOS', 'A'),
     ('A20003', 'Modificación en Estimación', 'AMBOS', 'A'),
@@ -2374,6 +2395,13 @@ TAULA_SITUACION_SUMINISTRO = [
     ('20', 'CERRADO Y PRECINTADO'),
     ('30', 'CERRADO POR FRAUDE Y LEVANTADO'),
     ('50', 'EN SERVICIO POR CLIENTE'),
+    ('60', 'A.U.P POR INSPECCIONES'),
+    ('61', 'A.U.P PREV. POR URG.'),
+    ('62', 'A.U.P POR URGENCIAS'),
+    ('63', 'CIERRE TOTAL POR CIERRE ACOMETIDA'),
+    ('64', 'CIERRE IRC POR URGENCIAS'),
+    ('65', 'CIERRE POR OPERACIONES'),
+    ('66', 'SIN SUMINISTRO POR AFECCIÓN A RED'),
     ('99', 'POLIZA FICTICIA'),
 ]
 TAULA_SITUACION_SERVICIO = [
@@ -2398,11 +2426,20 @@ TAULA_SITUACION_SERVICIO = [
     ('60', 'C.PARCIAL IRC POR INSPECCIONES'),
     ('70', 'C.PARCIAL IRC PREV. POR URG.'),
     ('80', 'C.PARCIAL IRC POR URGENCIAS'),
+    ('81', 'CIERRE TOTAL POR BLOQUEO CON TAPÓN ANTISABOTAJE'),
+    ('82', 'CIERRE V.A. POR CESE ÚLTIMO CLIENTE'),
     ('95', 'ERROR - PSUM-IRC RECIEN CREADO'),
     ('96', 'ERROR EN SIT. SERVICIO (VERIFICAR P.SUM)'),
     ('97', 'PENDIENTE DE CALCULAR EN P.SUM. NUEVO'),
     ('98', 'PUNTO SUM. CON SIT.SERV. NO CONTEMPLADA'),
     ('99', 'SIN SERVICIO'),
+]
+TAULA_CAUSA_INTERRUPCION = [
+    ('01', 'MANTENIMIENTO PROGRAMADO'),
+    ('02', 'AVERÍA - FUGA DE GAS'),
+    ('03', 'AFECCIONES DE TERCEROS'),
+    ('04', 'CORTE DE SUMINISTRO/INCIDENCIAS AGUAS ARRIBA DE LA RED DE DISTRIBUCIÓN'),
+    ('05', 'PLANES DE RESTRICCIÓN DE CONSUMOS FIRMES - GTS'),
 ]
 TAULA_TIPO_DE_RECLAMACION = [
     ('01', 'ATENCIÓN PERSONAL'),
@@ -2954,9 +2991,10 @@ TAULA_TIPO_COMUNICACION_A12_26 = [
 
 TAULA_TIPO_COMUNICACION_A19_45 = [
     ('08', "Comunicación de fecha y resultado de las inspecciones periódicas"),
-    ('09', "Comunicación de cortes y reinicios de actuación derivadas de inspección."),
+    ('09', "Comunicación de cortes y reinicios de actuación derivadas de inspección"),
     ('10', "Comunicación de cortes y reinicios de actuaciones en campo derivadas de operaciones de emergencias"),
-    ('11', "Comunicación de actuación a petición del consumidor."),
+    ('11', "Comunicación de actuación a petición del consumidor"),
+    ('14', "Comunicación de interrupción de suministro por afecciones en la red"),
 ]
 
 TAULA_TIPO_COMUNICACION_A12_24 = [

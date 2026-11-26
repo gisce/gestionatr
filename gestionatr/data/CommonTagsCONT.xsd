@@ -1247,6 +1247,7 @@
 			<xs:enumeration value="04"/>
 			<xs:enumeration value="05"/>
 			<xs:enumeration value="09"/>
+			<xs:enumeration value="10"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="MotivoModificacionType">
@@ -2454,6 +2455,27 @@
 			<xs:enumeration value="02"/>
 			<xs:enumeration value="03"/>
 			<xs:enumeration value="04"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoSolicitudEnCursoType">
+		<xs:restriction base="xs:string">
+			<xs:length value="4"/>
+			<xs:enumeration value="0200"/>
+			<xs:enumeration value="0300"/>
+			<xs:enumeration value="0401"/>
+			<xs:enumeration value="0402"/>
+			<xs:enumeration value="0404"/>
+			<xs:enumeration value="0405"/>
+			<xs:enumeration value="0409"/>
+			<xs:enumeration value="0410"/>
+			<xs:enumeration value="0500"/>
+			<xs:enumeration value="3800"/>
+			<xs:enumeration value="4100"/>
+			<xs:enumeration value="4200"/>
+			<xs:enumeration value="4300"/>
+			<xs:enumeration value="4900"/>
+			<xs:enumeration value="5000"/>
+			<xs:enumeration value="5100"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

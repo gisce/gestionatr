@@ -1014,6 +1014,43 @@ Deberá estar formada por un texto seguido del carácter @ y un nombre de dominio.
 			<xs:minInclusive value="0"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:complexType name="leySACType">
+		<xs:sequence>
+			<xs:element name="cause">
+				<xs:annotation>
+					<xs:documentation>Tabla CAUSA INTERRUPCIÓN</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:length value="2"/>
+						<xs:enumeration value="01"/>
+						<xs:enumeration value="02"/>
+						<xs:enumeration value="03"/>
+						<xs:enumeration value="04"/>
+						<xs:enumeration value="05"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="expectedduration">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="240"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="realduration" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="240"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:simpleType name="MoreInformationType">
 		<xs:restriction base="xs:string">
 			<xs:length value="2"/>
@@ -1222,6 +1259,8 @@ Deberá estar formada por un texto seguido del carácter @ y un nombre de dominio.
 			<xs:enumeration value="A10028"/>
 			<xs:enumeration value="A10029"/>
 			<xs:enumeration value="A10030"/>
+			<xs:enumeration value="A10031"/>
+			<xs:enumeration value="A10032"/>
 			<xs:enumeration value="A20001"/>
 			<xs:enumeration value="A20002"/>
 			<xs:enumeration value="A20003"/>
@@ -1855,6 +1894,8 @@ Para un incidente en un día concreto, la fecha hasta será igual a la fecha desde
 			<xs:enumeration value="60"/>
 			<xs:enumeration value="70"/>
 			<xs:enumeration value="80"/>
+			<xs:enumeration value="81"/>
+			<xs:enumeration value="82"/>
 			<xs:enumeration value="95"/>
 			<xs:enumeration value="96"/>
 			<xs:enumeration value="97"/>
@@ -1904,6 +1945,13 @@ Para un incidente en un día concreto, la fecha hasta será igual a la fecha desde
 			<xs:enumeration value="20"/>
 			<xs:enumeration value="30"/>
 			<xs:enumeration value="50"/>
+			<xs:enumeration value="60"/>
+			<xs:enumeration value="61"/>
+			<xs:enumeration value="62"/>
+			<xs:enumeration value="63"/>
+			<xs:enumeration value="64"/>
+			<xs:enumeration value="65"/>
+			<xs:enumeration value="66"/>
 			<xs:enumeration value="99"/>
 		</xs:restriction>
 	</xs:simpleType>
