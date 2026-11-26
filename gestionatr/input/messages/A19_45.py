@@ -63,3 +63,45 @@ class A19_45(A12_26):
             return data.text
         else:
             return False
+
+    @property
+    def leySAC(self):
+        tree = '{0}.leySAC'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return leySAC(data)
+        else:
+            return False
+
+
+class leySAC(object):
+
+    def __init__(self, data):
+        self.obj = data
+
+    @property
+    def cause(self):
+        tree = 'cause'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def expectedduration(self):
+        tree = 'expectedduration'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False
+
+    @property
+    def realduration(self):
+        tree = 'realduration'
+        data = get_rec_attr(self.obj, tree, False)
+        if data is not None and data is not False:
+            return data.text
+        else:
+            return False

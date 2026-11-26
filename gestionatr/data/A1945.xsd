@@ -246,6 +246,7 @@
 						<enumeration value="09"/>
 						<enumeration value="10"/>
 						<enumeration value="11"/>
+						<enumeration value="14"/>
 					</restriction>
 				</simpleType>
 			</element>
@@ -293,6 +294,11 @@
 						<enumeration value="2"/>
 					</restriction>
 				</simpleType>
+			</element>
+			<element name="leySAC" type="tns:leySACType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Ley SAC. Información por interrupcion de suministro por afecciones en red</documentation>
+				</annotation>
 			</element>
 		</sequence>
 	</complexType>

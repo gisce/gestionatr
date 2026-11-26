@@ -135,6 +135,42 @@ class DatosDis(object):
         return data
 
     @property
+    def envigor(self):
+        data = False
+        try:
+            data = self.datosdis.envigor.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def contratable(self):
+        data = False
+        try:
+            data = self.datosdis.contratable.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def existesolicitudencurso(self):
+        data = False
+        try:
+            data = self.datosdis.existesolicitudencurso.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def tiposolicitudencurso(self):
+        data = False
+        try:
+            data = self.datosdis.tiposolicitudencurso.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
     def codprovincia(self):
         data = False
         try:
@@ -370,6 +406,15 @@ class DatosDis(object):
         return data
 
     @property
+    def indcontadorinteligenteinstalado(self):
+        data = False
+        try:
+            data = self.datosdis.indcontadorinteligenteinstalado.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
     def marcamodelocont(self):
         data = False
         try:
@@ -473,6 +518,15 @@ class DatosDis(object):
         data = False
         try:
             data = self.datosdis.essentialtype.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def codpctd(self):
+        data = False
+        try:
+            data = self.datosdis.codpctd.text
         except AttributeError:
             pass
         return data

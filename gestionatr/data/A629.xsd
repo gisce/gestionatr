@@ -104,6 +104,26 @@
 					<documentation>Razón Social del Distribuidor</documentation>
 				</annotation>
 			</element>
+			<element name="envigor" type="tns:FlagType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Indica si el CUPS dispone de contrato en vigor</documentation>
+				</annotation>
+			</element>
+			<element name="contratable" type="tns:FlagType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Indica si el CUPS está en disposición de ser contratado mediante una solicitud de contratación</documentation>
+				</annotation>
+			</element>
+			<element name="existesolicitudencurso" type="tns:FlagType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Indica si existe alguna solicitud de contratación en curso</documentation>
+				</annotation>
+			</element>
+			<element name="tiposolicitudencurso" type="tns:TipoSolicitudEnCursoType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Proceso de solicitud de contratación en curso</documentation>
+				</annotation>
+			</element>
 			<element name="codprovincia" type="tns:CodProvinciaType" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Provincia del PS</documentation>
@@ -249,6 +269,11 @@
 					<documentation>Dispone de Telemedida</documentation>
 				</annotation>
 			</element>
+			<element name="indcontadorinteligenteinstalado" type="tns:FlagType" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Indicador de si dispone de contador inteligente instalado</documentation>
+				</annotation>
+			</element>
 			<element name="marcamodelocont" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Marca y Modelo de Contador</documentation>
@@ -311,6 +336,14 @@
 			<element name="cnae" type="tns:CNAEType" maxOccurs="1" minOccurs="0"></element>
 			<element name="protectedtype" type="tns:TipoClienteProtegidoType" maxOccurs="1" minOccurs="0"></element>
 			<element name="essentialtype" type="tns:TipoClienteEsencialType" maxOccurs="1" minOccurs="0"></element>
+			<element name="codpctd" minOccurs="0" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="12"/>
+					</restriction>
+				</simpleType>
+			</element>
 			<element name="fecactdist" type="date" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>Fecha Actualización Datos por Parte del Distribuidor</documentation>
