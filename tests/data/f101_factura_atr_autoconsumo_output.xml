@@ -31,6 +31,7 @@
                 <CodContrato>111111</CodContrato>
                 <DatosGeneralesFactura>
                     <CodigoFiscalFactura>F0001</CodigoFiscalFactura>
+                    <FacturaDispuestaAlPago>S</FacturaDispuestaAlPago>
                     <TipoFactura>N</TipoFactura>
                     <MotivoFacturacion>01</MotivoFacturacion>
                     <FechaFactura>2017-05-01</FechaFactura>
@@ -42,8 +43,6 @@
                 </DatosGeneralesFactura>
                 <DatosFacturaATR>
                     <FechaBOE>2016-01-01</FechaBOE>
-                    <TipoAutoconsumo>12</TipoAutoconsumo>
-                    <TipoSubseccion>10</TipoSubseccion>
                     <TipoCUPS>01</TipoCUPS>
                     <DuracionInfAnio>N</DuracionInfAnio>
                     <TarifaATRFact>001</TarifaATRFact>
@@ -140,6 +139,8 @@
                 </EnergiaExcedentaria>
                 <DatosCAU>
                     <CAU>ES1234000000000001JN0FA001</CAU>
+                    <TipoAutoconsumo>12</TipoAutoconsumo>
+                    <TipoSubseccion>10</TipoSubseccion>
                     <Colectivo>S</Colectivo>
                     <EsquemaMedida>B</EsquemaMedida>
                     <InstalacionGenAutoconsumo>

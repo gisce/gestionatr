@@ -11,12 +11,12 @@
         <CUPS>ES1234000000000001JN0F</CUPS>
     </Cabecera>
     <EnvioInformacionPS>
+        <SuspensionSuministroImpago>N</SuspensionSuministroImpago>
         <EnVigor>N</EnVigor>
         <EstadoContratable>
             <Contratable>S</Contratable>
             <PotenciaMaxSinExpediente>3600</PotenciaMaxSinExpediente>
         </EstadoContratable>
-        <ExisteSolicitudEnCurso>N</ExisteSolicitudEnCurso>
         <PotenciaMaxAutorizada>10000</PotenciaMaxAutorizada>
         <TensionDelSuministro>02</TensionDelSuministro>
         <DerechosReconocidos>

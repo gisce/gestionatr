@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- edited with XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) by Odelin Calatrava Requena (Comisión Nacional de los Mercados y la Competencia) -->
+<!-- editado con XMLSpy v2015 rel. 3 sp1 (x64) (http://www.altova.com) por Comisión Nacional de los Mercados y la Competencia (Comisión Nacional de los Mercados y la Competencia) -->
 <xs:schema xmlns="http://localhost/elegibilidad" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://localhost/elegibilidad" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:include schemaLocation="TiposComplejos.xsd"/>
 	<xs:include schemaLocation="TiposSencillos.xsd"/>
@@ -153,12 +155,36 @@
 			<xs:element name="DatosAceptacion" type="DatoAceptacionReclamacion"/>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="AceptacionBajaUnidireccional">
+		<xs:sequence>
+			<xs:element name="DatosAceptacion" type="DatosAceptacionBajaUnidireccional"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Datos  aceptacion B2 -->
 	<xs:complexType name="AceptacionBaja">
 		<xs:sequence>
 			<xs:element name="DatosAceptacion" type="DatosAceptacionBaja"/>
 		</xs:sequence>
 	</xs:complexType>
 	<!-- Datos  aceptacion B1 -->
+	<xs:complexType name="DatosAceptacionBajaUnidireccional">
+		<xs:sequence>
+			<xs:element name="Motivo" type="MotivoBajaB2">
+				<xs:annotation>
+					<xs:documentation>Tabla 120</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaAceptacion" type="xs:date"/>
+			<xs:element name="ActuacionCampo" type="Indicativo"/>
+			<xs:element name="FechaUltimaLecturaFirme" type="xs:date"/>
+			<xs:element name="TipoActivacionPrevista" type="TipoActivacionPrevista" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 55</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaActivacionPrevista" type="xs:date" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="DatosAceptacionBaja">
 		<xs:sequence>
 			<xs:element name="FechaAceptacion" type="xs:date"/>

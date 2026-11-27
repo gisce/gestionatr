@@ -32,14 +32,48 @@
 			<xs:enumeration value="LO"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:simpleType name="AnomaliaMedida">
+	<xs:simpleType name="MotivoDeEstimacion">
 		<xs:annotation>
 			<xs:documentation>Codigo de anomalia (tabla 45)
 			01	Punto de Medida Inaccesible
 			02	Punto de Medida Ilocalizable
 			03	Presunto fraude
-			04	Registrador apagado
-			05	Registrador no comunica
+			04 	Registrador sin alimentación eléctrica 
+			05 	Fallo medida remota causa ajena distribuidora
+			06	Punto de Medida inaccesible: Acceso prohibido
+			07	Punto de Medida inaccesible: Contador Alto
+			08	Punto de Medida inaccesible: Animales peligrosos (Avispas, perros, etc)
+			09	Punto de Medida inaccesible: Camino en mal estado
+			10	Punto de Medida inaccesible: Centralización sin iluminación
+			11	Punto de Medida inaccesible: Centralización en obras
+			12	Punto de Medida inaccesible: Cerradura Averiada/no normalizada
+			13	Punto de Medida inaccesible: Instalación defectuosa
+			14	Punto de Medida inaccesible: Módulo/Armario descolgado
+			15	Punto de Medida inaccesible: No usan servicio
+			16	Punto de Medida inaccesible: Peligro de acceso
+			17	Punto de Medida inaccesible: Riesgo eléctrico
+			18	Punto de Medida inaccesible: Suciedad
+			19	Punto de Medida inaccesible: Vegetación abundante
+			20	Lectura difícil: Cerradura averiada
+			21	Lectura difícil: Contador alto
+			22	Lectura difícil: Instalación defectuosa
+			23	Lectura difícil: Mala iluminación
+			24	Lectura difícil: Módem/Aramario descolgado
+			25	Lectura difícil: Módulo roto/opaco
+			26	Lectura difícil: Puerta averiada
+			27	Lectura difícil: Riesgo eléctrico
+			28	Lectura difícil: Suciedad
+			29	Lectura difícil: Trastos em centralización
+			30	Lectura difícil: Vegetación abundante
+			31	Fallo medida remota causa distribuidora
+			32	Fallo medida local causa incidencia equipo cliente
+			33	Fallo medida local causa incidencia equipo distribuidora
+			34	Dirección errónea
+			35	No hay equipo medida 
+			36	Estimación ajustada con medida real 
+			37	Anormalidad causa cliente
+			38	Anormalidad causa distribuidora
+			39	Fraude contrastado
 			99	Otras anomalias
 			</xs:documentation>
 		</xs:annotation>
@@ -49,6 +83,40 @@
 			<xs:enumeration value="03"/>
 			<xs:enumeration value="04"/>
 			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
+			<xs:enumeration value="07"/>
+			<xs:enumeration value="08"/>
+			<xs:enumeration value="09"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="14"/>
+			<xs:enumeration value="15"/>
+			<xs:enumeration value="16"/>
+			<xs:enumeration value="17"/>
+			<xs:enumeration value="18"/>
+			<xs:enumeration value="19"/>
+			<xs:enumeration value="20"/>
+			<xs:enumeration value="21"/>
+			<xs:enumeration value="22"/>
+			<xs:enumeration value="23"/>
+			<xs:enumeration value="24"/>
+			<xs:enumeration value="25"/>
+			<xs:enumeration value="26"/>
+			<xs:enumeration value="27"/>
+			<xs:enumeration value="28"/>
+			<xs:enumeration value="29"/>
+			<xs:enumeration value="30"/>
+			<xs:enumeration value="31"/>
+			<xs:enumeration value="32"/>
+			<xs:enumeration value="33"/>
+			<xs:enumeration value="34"/>
+			<xs:enumeration value="35"/>
+			<xs:enumeration value="36"/>
+			<xs:enumeration value="37"/>
+			<xs:enumeration value="38"/>
+			<xs:enumeration value="39"/>
 			<xs:enumeration value="99"/>
 		</xs:restriction>
 	</xs:simpleType>
@@ -549,6 +617,8 @@
 			90    Derechos de enganche provenientes de una reposición E2, no repercutibles al cliente
 			91    Actuaciones en equipos de medida provenientes de una reposición E2, no repercutibles al cliente
 			92	Descuento anticipos por capacidad conexión RDL7/2026
+			93	Intereses por facturación de peajes y cargos
+			94	Intereses por facturación de energía
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -611,6 +681,8 @@
 			<xs:enumeration value="90"/>
 			<xs:enumeration value="91"/>
 			<xs:enumeration value="92"/>
+			<xs:enumeration value="93"/>
+			<xs:enumeration value="94"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="date-or-nothing">
@@ -1223,6 +1295,8 @@
 			0830201   La devolución se efectuó correctamente 
 			0830202   No procede devolver 
 			0830203   Improcedente. Se adjunta explicación en comentarios
+			0840101   Procedente
+			0840201   Improcedente. Se adjunta explicación en comentarios
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -1679,6 +1753,8 @@
 			<xs:enumeration value="0830201 "/>
 			<xs:enumeration value="0830202"/>
 			<xs:enumeration value="0830203"/>
+			<xs:enumeration value="0840101"/>
+			<xs:enumeration value="0840201"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="empty-string">
@@ -2018,6 +2094,13 @@
 			03	Baja del contrato de acceso por rechazo del COR al traspaso
 			04	Baja del contrato de acceso a iniciativa de la distribuidora por seguridad de la red.
 			05	Baja del contrato de acceso por haber pasado dos meses desde que se suspendió un punto de suministro tras el desistimiento de un cambio de comercializador activado sobre un punto de suministro suspendido por impago
+			06	Baja por acceso imposibilitado a la encargada de la medida en horas hábiles.
+			07	Baja por negligencia respecto a la custodia de los equipos de medida y control.
+			08	Baja por negligencia respecto a la instalación de correctores cuando se produzcan perturbaciones en la red, sin que ésta se haya efectuado en el plazo establecido por el organismo competente.
+			09	Baja o suspensión por existencia de derivaciones para suministrar energía a una instalación no prevista en el contrato.
+			10	Baja o suspensión por manipulación del equipo de medida o control evitando su correcto funcionamiento.
+			11	Baja o suspensión por fraude contrastado.
+			12	Baja o suspensión por impago relativa a un punto de suministro contratado por más de comercializadora.
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2026,14 +2109,21 @@
 			<xs:enumeration value="03"/>
 			<xs:enumeration value="04"/>
 			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
+			<xs:enumeration value="07"/>
+			<xs:enumeration value="08"/>
+			<xs:enumeration value="09"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="MotivoCambioATRDesdeDistribuidora">
 		<xs:annotation>
 			<xs:documentation>Motivo ATR desde distribuidora (tabla 109)
-			01	Telegestion Operativa con CCH
+			01	Telegestion Operativa con comunicación remota disponible 
 			02	Telegestion No Operativa
-			03	Telegestion Operativa sin CCH
+			03	Telegestion Operativa sin comunicación remota disponible 
 			04	Alta en autoconsumo
 			05	Modificación de tipo de autoconsumo
 			06	Modificación coeficiente de reparto
@@ -2054,6 +2144,10 @@
 			21    Modificación indicativo esencialidad
 			22    Modificación coeficiente de reparto comunicada por representante
 			23    Baja en autoconumo comunicada por representante
+			24    Baja en autoconsumo comunicada por Comunidad Autónoma
+			25	Contador mecánico
+			26	Contador electrónico con módem
+			27	Contador electrónico sin módem
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2079,6 +2173,9 @@
 			<xs:enumeration value="21"/>
 			<xs:enumeration value="22"/>
 			<xs:enumeration value="23"/>
+			<xs:enumeration value="25"/>
+			<xs:enumeration value="26"/>
+			<xs:enumeration value="27"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="MotivoComunicacionUnidireccional">
@@ -2174,6 +2271,22 @@
 			<xs:enumeration value="05"/>
 			<xs:enumeration value="06"/>
 			<xs:enumeration value="07"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MotivoRectificacionFacturacion">
+		<xs:annotation>
+			<xs:documentation>Motivo de baja o suspension de suministro (tabla 141)
+			01 Rectificación por fallo en la gestión de la medida. 
+			02 Rectificación por incidencia administrativa
+			03 Rectificación por retraso en la facturación
+			04 Otros motivos de rectificación.
+		</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="MotivoTraspaso">
@@ -2333,14 +2446,12 @@
 	</xs:simpleType>
 	<xs:simpleType name="RefCatastro">
 		<xs:restriction base="xs:string">
-			<xs:minLength value="20"/>
 			<xs:maxLength value="20"/>
 			<xs:pattern value="[a-zA-Z0-9]*"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="RefCatastroFinca">
 		<xs:restriction base="xs:string">
-			<xs:minLength value="14"/>
 			<xs:maxLength value="14"/>
 			<xs:pattern value="[a-zA-Z0-9]*"/>
 		</xs:restriction>
@@ -2557,6 +2668,7 @@ B Indicador NIF/CIF vacio o no real El Distribuidor devolvera el valor B en los 
 			081   RETRASO EN PLAZO ACTIVACIÓN REPOSICIÓN 
 			082   PETICIÓN DE DOCUMENTACIÓN DEL EXPEDIENTE DE ANOMALÍA Y FRAUDE
 			083   SOLICITUD DE DEVOLUCIÓN DE FIANZA/DEPÓSITO DE GARANTÍA
+			084	SOLICITUD DE PAGO DE INDEMNIZACIÓN DE ENERGÍA, SEGÚN ART. 45 RD 88/2026
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -2632,6 +2744,7 @@ B Indicador NIF/CIF vacio o no real El Distribuidor devolvera el valor B en los 
 			<xs:enumeration value="081"/>
 			<xs:enumeration value="082"/>
 			<xs:enumeration value="083"/>
+			<xs:enumeration value="084"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TarifaATR">
@@ -3138,6 +3251,10 @@ la reclamacion
 			25	Acuerdo de reparto/ Fichero de coeficientes: Eliminado. Es un concepto de contrato, no de facturación
 			26	Retardo en activación autoconsumo
 			27	Descuento retardo activación autoconsumo superior al valor económico de la energía horaria consumida de la red
+			28 	Anticipo capacidad de conexión RDL 7/2026
+			29 	Descuento anticipo por capacidad conexión RDL 7/2026
+			30 	Intereses sobre el importe de peaje Art 44 RD88/2026
+			31	Intereses sobre energía vendida Art 45 RD88/2026
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -3165,6 +3282,10 @@ la reclamacion
 			<xs:enumeration value="24"/>
 			<xs:enumeration value="26"/>
 			<xs:enumeration value="27"/>
+			<xs:enumeration value="28"/>
+			<xs:enumeration value="29"/>
+			<xs:enumeration value="30"/>
+			<xs:enumeration value="31"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TipoContratoATR">
@@ -3369,12 +3490,14 @@ la reclamacion
 			1 -  IVA / IPSI/ IGIC    
 			2 -  IVA / IPSI/ IGIC  reducido
 			3 -  IVA / IPSI/ IGIC EXENTO
+			4 -  Sin IVA
 			</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="1"/>
 			<xs:enumeration value="2"/>
 			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TipoIncidencia">

@@ -11,21 +11,32 @@
 					<xs:documentation>Tabla 138</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="SuspensionSuministroImpago" type="Indicativo">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="EnVigor" type="Indicativo" minOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Tabla 26</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="EstadoContratable" type="IEstadoContratableP002"/>
-			<xs:element name="ExisteSolicitudEnCurso" type="Indicativo" minOccurs="1">
-				<xs:annotation>
-					<xs:documentation>Tabla 26</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="TipoSolicitudEnCurso" type="TipoSolicitudEnCurso" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Tabla 124</xs:documentation>
-				</xs:annotation>
+			<xs:element name="SolicitudEnCurso" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="TipoSolicitudEnCurso" type="TipoSolicitudEnCurso">
+							<xs:annotation>
+								<xs:documentation>Tabla 124</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="PasoCambioComercializadorEnCurso" type="CodigoDePaso" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Tabla 3</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
 			</xs:element>
 			<xs:element name="Contrato" type="ContratoInfoPS002" minOccurs="0"/>
 			<xs:element name="PotenciaMaxAutorizada" type="Potencia"/>
@@ -71,6 +82,7 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="CUPSPrincipal" type="Codigo" minOccurs="0"/>
+			<xs:element name="FechaInicio" type="xs:date" minOccurs="0"/>
 			<xs:element name="FechaFinalizacion" type="xs:date" minOccurs="0"/>
 			<xs:element name="RefCatastro" type="RefCatastro" minOccurs="0"/>
 			<xs:element name="RefCatastroFinca" type="RefCatastroFinca" minOccurs="0"/>
@@ -82,12 +94,23 @@
 					<xs:documentation>Tabla 26</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="IndEsencial" type="IndEsencial" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Tabla 137</xs:documentation>
-				</xs:annotation>
+			<xs:element name="Esencialidad" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="IndEsencialNoVigente" type="Indicativo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Tabla 26</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="IndEsencial" type="IndEsencial" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Tabla 137</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="FechaUltimoMovimientoIndEsencial" type="xs:date" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
 			</xs:element>
-			<xs:element name="FechaUltimoMovimientoIndEsencial" type="xs:date" minOccurs="0"/>
 			<xs:element name="ViviendaHabitual" type="Indicativo">
 				<xs:annotation>
 					<xs:documentation>Tabla 26</xs:documentation>

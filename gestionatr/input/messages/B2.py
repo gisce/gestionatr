@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
-from .B1 import B1, DatosActivacionBaja
+from .B1 import B1, DatosActivacionBaja, DatosAceptacion
 from gestionatr.utils import get_rec_attr
 
 
@@ -15,6 +15,18 @@ class B2(B1):
             return DatosActivacionBaja(sol)
         else:
             return False
+
+
+class DatosAceptacion(DatosAceptacion):
+
+    @property
+    def motivo(self):
+        data = ''
+        try:
+            data = self.datos_aceptacion.Motivo.text
+        except AttributeError:
+            pass
+        return data
 
 
 class DatosActivacionBaja(DatosActivacionBaja):

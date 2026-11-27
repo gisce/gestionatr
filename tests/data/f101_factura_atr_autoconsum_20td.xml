@@ -32,6 +32,7 @@
                 <CodContrato>111111</CodContrato>
                 <DatosGeneralesFactura>
                     <CodigoFiscalFactura>F0001</CodigoFiscalFactura>
+                    <FacturaDispuestaAlPago>S</FacturaDispuestaAlPago>
                     <TipoFactura>N</TipoFactura>
                     <MotivoFacturacion>01</MotivoFacturacion>
                     <FechaFactura>2022-02-10</FechaFactura>
@@ -43,8 +44,6 @@
                 </DatosGeneralesFactura>
                 <DatosFacturaATR>
                     <FechaBOE>2021-12-16</FechaBOE>
-                    <TipoAutoconsumo>12</TipoAutoconsumo>
-                    <TipoSubseccion>10</TipoSubseccion>
                     <TipoCUPS>01</TipoCUPS>
                     <DuracionInfAnio>N</DuracionInfAnio>
                     <TarifaATRFact>018</TarifaATRFact>
@@ -177,6 +176,8 @@
                 </EnergiaExcedentaria>
                 <DatosCAU>
                     <CAU>ES1234000000000001JN0FA001</CAU>
+                    <TipoAutoconsumo>12</TipoAutoconsumo>
+                    <TipoSubseccion>10</TipoSubseccion>
                     <Colectivo>S</Colectivo>
                     <EsquemaMedida>B</EsquemaMedida>
                     <InstalacionGenAutoconsumo>
@@ -240,6 +241,29 @@
                 </Cargo>
                 <TotalImporteCargos>4.54</TotalImporteCargos>
             </Cargos>
+            <JustificacionRectificacion>
+                <MotivoRectificacionFacturacion>01</MotivoRectificacionFacturacion>
+                <MotivoDeEstimacion>08</MotivoDeEstimacion>
+                <Comentarios>Métete tú ahí con esas avispas, listo</Comentarios>
+            </JustificacionRectificacion>
+            <InteresesPorRectificacion>
+                <FacturasRectificadas>
+                    <NumeroFacturaRectificada>987654</NumeroFacturaRectificada>
+                </FacturasRectificadas>
+                <FacturasRectificadas>
+                    <NumeroFacturaRectificada>654321</NumeroFacturaRectificada>
+                </FacturasRectificadas>
+                <ConceptoInformado>93</ConceptoInformado>
+                <MagnitudIntegrador>AE</MagnitudIntegrador>
+                <CodigoPeriodo>92</CodigoPeriodo>
+                <FechaDesde>2014-03-18</FechaDesde>
+                <FechaHasta>2014-04-18</FechaHasta>
+                <UnidadesConcepto>27</UnidadesConcepto>
+            </InteresesPorRectificacion>
+            <ProrrateoRegularizacion>
+                <ImporteProrrateado>12.5</ImporteProrrateado>
+                <NumeroProrrateos>4</NumeroProrrateos>
+            </ProrrateoRegularizacion>
             <ImpuestoElectrico>
                 <BaseImponible>0.00</BaseImponible>
                 <Porcentaje>0.00000000</Porcentaje>

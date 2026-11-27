@@ -30,6 +30,7 @@
                 <CodContrato>10660001</CodContrato>
                 <DatosGeneralesFactura>
                     <CodigoFiscalFactura>M17007566</CodigoFiscalFactura>
+                    <FacturaDispuestaAlPago>S</FacturaDispuestaAlPago>
                     <TipoFactura>N</TipoFactura>
                     <MotivoFacturacion>01</MotivoFacturacion>
                     <FechaFactura>2017-04-06</FechaFactura>
@@ -41,7 +42,6 @@
                 </DatosGeneralesFactura>
                 <DatosFacturaATR>
                     <FechaBOE>2016-12-23</FechaBOE>
-					<TipoAutoconsumo>00</TipoAutoconsumo>
                     <TipoCUPS>01</TipoCUPS>
 					<DuracionInfAnio>N</DuracionInfAnio>
                     <TarifaATRFact>017</TarifaATRFact>

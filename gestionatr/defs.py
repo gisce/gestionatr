@@ -581,6 +581,14 @@ SUBTYPES_R101 = [
         'type': '03',
     }),
     ({
+        'min_fields': ['nif_cliente', 'nombre_cliente',
+                       'telefono_contacto', 'cups',
+                       'persona_de_contacto', 'cta_banco'],
+        'code': '084',
+        'name': u'SOLICITUD DE PAGO DE INDEMNIZACIÓN DE ENERGÍA, SEGÚN ART. 45 RD 88/2026',
+        'type': '03',
+    }),
+    ({
         'min_fields': [],
         'code': '100',
         'name': u'INCIDENCIAS CONTRATACIÓN BONO SOCIAL',
@@ -1268,6 +1276,7 @@ TABLA_27 = [
     ('J4', 'Modificación técnica solicitada coincide con la previa en distribuidor'),
     ('J5', 'Comercializador entrante rechaza la reposición'),
     ('J6', 'Reposición sobre un cambio de comercializador en curso'),
+    ('J7', 'CUPS dista de la generación a una distancia superior a la permitida'),
     ('99', 'Otros'),
 ]
 
@@ -1435,8 +1444,42 @@ TABLA_45 = [
     ('01', 'Punto de medida inaccesible'),
     ('02', 'Punta de medida ilocalizable'),
     ('03', 'Presunto fraude'),
-    ('04', 'Registrador apagado'),
-    ('05', 'Registrador no comunica'),
+    ('04', 'Registrador sin alimentación eléctrica'),
+    ('05', 'Fallo medida remota causa ajena distribuidora'),
+    ('06', 'Punto de Medida inaccesible: Acceso prohibido'),
+    ('07', 'Punto de Medida inaccesible: Contador Alto'),
+    ('08', 'Punto de Medida inaccesible: Animales peligrosos (Avispas, perros, etc)'),
+    ('09', 'Punto de Medida inaccesible: Camino en mal estado'),
+    ('10', 'Punto de Medida inaccesible: Centralización sin iluminación'),
+    ('11', 'Punto de Medida inaccesible: Centralización en obras'),
+    ('12', 'Punto de Medida inaccesible: Cerradura Averiada/no normalizada'),
+    ('13', 'Punto de Medida inaccesible: Instalación defectuosa'),
+    ('14', 'Punto de Medida inaccesible: Módulo/Armario descolgado'),
+    ('15', 'Punto de Medida inaccesible: No usan servicio'),
+    ('16', 'Punto de Medida inaccesible: Peligro de acceso'),
+    ('17', 'Punto de Medida inaccesible: Riesgo eléctrico'),
+    ('18', 'Punto de Medida inaccesible: Suciedad'),
+    ('19', 'Punto de Medida inaccesible: Vegetación abundante'),
+    ('20', 'Lectura difícil: Cerradura averiada'),
+    ('21', 'Lectura difícil: Contador alto'),
+    ('22', 'Lectura difícil: Instalación defectuosa'),
+    ('23', 'Lectura difícil: Mala iluminación'),
+    ('24', 'Lectura difícil: Módem/Aramario descolgado'),
+    ('25', 'Lectura difícil: Módulo roto/opaco'),
+    ('26', 'Lectura difícil: Puerta averiada'),
+    ('27', 'Lectura difícil: Riesgo eléctrico'),
+    ('28', 'Lectura difícil: Suciedad'),
+    ('29', 'Lectura difícil: Trastos em centralización'),
+    ('30', 'Lectura difícil: Vegetación abundante'),
+    ('31', 'Fallo medida remota causa distribuidora'),
+    ('32', 'Fallo medida local causa incidencia equipo cliente'),
+    ('33', 'Fallo medida local causa incidencia equipo distribuidora'),
+    ('34', 'Dirección errónea'),
+    ('35', 'No hay equipo medida'),
+    ('36', 'Estimación ajustada con medida real'),
+    ('37', 'Anormalidad causa cliente'),
+    ('38', 'Anormalidad causa distribuidora'),
+    ('39', 'Fraude contrastado'),
     ('99', 'Otras anomalías'),
 ]
 ANOMALIA_MESURA = TABLA_45
@@ -2097,6 +2140,8 @@ TABLA_73 = [
     ('0830201', 'La devolución se efectuó correctamente'),
     ('0830202', 'No procede devolver'),
     ('0830203', 'Improcedente. Se adjunta explicación en comentarios'),
+    ('0840101', 'Procedente'),
+    ('0840201', 'Improcedente. Se adjunta explicación en comentarios'),
 ]
 
 TABLA_74 = [('01', u'Concertacion de visita'),
@@ -2123,29 +2168,33 @@ TABLA_76 = [('01', u'Nuevo teléfono de contacto'),
 
 TABLA_77 = [
     ('01', u'Potencia'),
-        ('02', u'Reactiva'),
-        ('03', u'Penalización ICP'),
-        ('04', u'Alquiler de equipo de medida'),
-        ('05', u'Impuestos'),
-        ('06', u'Excesos de potencia'),
-        ('08', u'Depósito de garantía'),
-        ('09', u'Verificación de equipos de medida'),
-        ('10', u'Derechos de corte y reconexión'),
-        ('11', u'Abono por calidad de suministro'),
-        ('12', u'Abono por calidad individual'),
-        ('13', u'Coste de reposición'),
-        ('14', u'Refacturaciones regulatorias'),
-        ('16', u'Derechos de acceso'),
-        ('17', u'Derechos de extensión'),
-        ('18', u'Derechos de enganche'),
-        ('19', u'Derechos de actuación en equipo de medida'),
-        ('20', u'Derechos de supervisión'),
-        ('21', u'Tarifa'),
-        ('22', u'Impuesto Eléctrico'),
-        ('23', u'Desglose Suplemento Territorial'),
-        ('24', u'Pago por uso de la red autoconsumo'),
-        ('26', u'Retardo en activación autoconsumo'),
-        ('27', u'Descuento retardo activación autoconsumo superior al valor económico de la energía horaria consumida de la red')
+    ('02', u'Reactiva'),
+    ('03', u'Penalización ICP'),
+    ('04', u'Alquiler de equipo de medida'),
+    ('05', u'Impuestos'),
+    ('06', u'Excesos de potencia'),
+    ('08', u'Depósito de garantía'),
+    ('09', u'Verificación de equipos de medida'),
+    ('10', u'Derechos de corte y reconexión'),
+    ('11', u'Abono por calidad de suministro'),
+    ('12', u'Abono por calidad individual'),
+    ('13', u'Coste de reposición'),
+    ('14', u'Refacturaciones regulatorias'),
+    ('16', u'Derechos de acceso'),
+    ('17', u'Derechos de extensión'),
+    ('18', u'Derechos de enganche'),
+    ('19', u'Derechos de actuación en equipo de medida'),
+    ('20', u'Derechos de supervisión'),
+    ('21', u'Tarifa'),
+    ('22', u'Impuesto Eléctrico'),
+    ('23', u'Desglose Suplemento Territorial'),
+    ('24', u'Pago por uso de la red autoconsumo'),
+    ('26', u'Retardo en activación autoconsumo'),
+    ('27', u'Descuento retardo activación autoconsumo superior al valor económico de la energía horaria consumida de la red'),
+    ('28', u'Anticipo capacidad de conexión RDL 7/2026'),
+    ('29', u'Descuento anticipo por capacidad conexión RDL 7/2026'),
+    ('30', u'Intereses sobre el importe de peaje Art 44 RD88/2026'),
+    ('31', u'Intereses sobre energía vendida Art 45 RD88/2026'),
 ]
 
 TABLA_79 = [
@@ -2373,7 +2422,9 @@ TABLA_103 = [
     ('89', u'Derechos de acceso provenientes de una reposición E2, no repercutibles al cliente.'),
     ('90', u'Derechos de enganche provenientes de una reposición E2, no repercutibles al cliente.'),
     ('91', u'Actuaciones en equipos de medida provenientes de una reposición E2, no repercutibles al cliente.'),
-    ('92', u'Descuento anticipos por capacidad conexión RDL7/2026')
+    ('92', u'Descuento anticipos por capacidad conexión RDL7/2026'),
+    ('93', 'Intereses por facturación de peajes y cargos'),
+    ('94', 'Intereses por facturación de energía'),
 ]
 
 CONCEPTOS_CON_FECHA_OPERACION = [
@@ -2441,9 +2492,9 @@ TABLA_107 = [
 TABLA_108 = [('01', u'Mensual'),
              ('02', u'Bimestral')]
 
-TABLA_109 = [('01', u'Telegestión Operativa con CCH'),
+TABLA_109 = [('01', u'Telegestión Operativa con comunicación remota disponible'),
              ('02', u'Telegestión No Operativa'),
-             ('03', u'Telegestión Operativa sin CCH'),
+             ('03', u'Telegestión Operativa sin comunicación remota disponible'),
              ('04', u'Alta en autoconsumo comunicada por la Comunidad Autónoma'),
              ('05', u'Modificación de tipo de autoconsumo'),
              ('06', u'Modificación coeficiente de reparto comunicada por participante'),
@@ -2464,7 +2515,10 @@ TABLA_109 = [('01', u'Telegestión Operativa con CCH'),
              ('21', u'Modificación indicativo esencialidad'),
              ('22', u'Modificación coeficiente de reparto comunicada por representante'),
              ('23', u'Baja en autoconsumo comunicada por representante'),
-             ('24', u'Baja en autoconsumo comunicada por  Comunidad Autónoma')
+             ('24', u'Baja en autoconsumo comunicada por  Comunidad Autónoma'),
+             ('25', 'Contador mecánico'),
+             ('26', 'Contador electrónico con módem'),
+             ('27', 'Contador electrónico sin módem'),
              ]
 
 TABLA_110 = [('01', u'Acompaña curva de carga'),
@@ -2529,6 +2583,7 @@ TABLA_114 = [
     ('1', u'IVA / IPSI/ IGIC'),
     ('2', u'IVA / IPSI/ IGIC Reducido'),
     ('3', u'IVA / IPSI/ IGIC EXENTO'),
+    ('4', u'Sin IVA'),
 ]
 
 TABLA_115 = PERSONA
@@ -2566,16 +2621,28 @@ TABLA_119 = [
 ]
 
 TABLA_120 = [
-    ('01', u'Baja del contrato de acceso de duración inferior a un año según fecha solicitada por la '
-           u'empresa comercializadora'),
+    ('01', u'Baja del contrato de acceso (contratos eventuales, de temporada, de obras o de '
+           u'pruebas) según fecha solicitada por la empresa comercializadora'),
     ('02', u'Baja del contrato de acceso por suministro cortado/proceso de corte e inhabilitación del '
            u'comercializador en vigor.'),
     ('02', u'Baja del contrato de acceso por orden judicial o mandato de organismo oficial'),
     ('03', u'Baja del contrato de acceso por rechazo del COR al traspaso'),
-    ('04', u'Baja del contrato de acceso a iniciativa de la distribuidora por seguridad de la red.'),
+    ('04', u'Baja o suspensión del contrato de acceso a iniciativa de la distribuidora por seguridad de la red.'),
     ('05', u'Baja del contrato de acceso por haber pasado dos meses desde que se suspendió un punto de '
            u'suministro tras el desistimiento de un cambio de comercializador activado sobre un punto de '
            u'suministro suspendido por impago'),
+    ('06', 'Baja por acceso imposibilitado a la encargada de la medida en horas hábiles.'),
+    ('07', 'Baja por negligencia respecto a la custodia de los equipos de medida y control.'),
+    ('08', 'Baja por negligencia respecto a la instalación de correctores cuando se produzcan '
+           'perturbaciones en la red, sin que ésta se haya efectuado en el plazo establecido por '
+           'el organismo competente.'),
+    ('09', 'Baja o suspensión por existencia de derivaciones para suministrar energía a una '
+           'instalación no prevista en el contrato.'),
+    ('10', 'Baja o suspensión por manipulación del equipo de medida o control evitando su correcto '
+           'funcionamiento.'),
+    ('11', 'Baja o suspensión por fraude contrastado.'),
+    ('12', 'Baja o suspensión por impago relativa a un punto de suministro contratado por más de '
+           'comercializadora.'),
 ]
 
 TABLA_121 = [
@@ -2812,4 +2879,11 @@ TABLA_140 = [
     ('01', u'Contratación'),
     ('02', u'Conexiones'),
     ('03', u'Verificación del equipo'),
+]
+
+TABLA_141 = [
+    ('01', 'Rectificación por fallo en la gestión de la medida.'),
+    ('02', 'Rectificación por incidencia administrativa'),
+    ('03', 'Rectificación por retraso en la facturación'),
+    ('04', 'Otros motivos de rectificación.'),
 ]

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
-from gestionatr.input.messages.C1 import Rechazo, Autoconsumo, UTM
+from gestionatr.input.messages.C1 import Rechazo, Autoconsumo, UTM, DatosCAU
 from gestionatr.input.messages.C2 import Cliente, Direccion
 from .message import Message
 from .Deadlines import ProcessDeadline
@@ -29,10 +29,28 @@ class P0(Message, ProcessDeadline):
         else:
             return False
 
+    @property
+    def consentimiento_expreso(self):
+        tree = '{0}.ConsentimientoExpreso'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data:
+            return data.text
+        else:
+            return False
+
     # Datos paso 02 aceptacion
     @property
     def resultado_validacion_cliente(self):
         tree = '{0}.ResultadoValidacionCliente'.format(self._header)
+        data = get_rec_attr(self.obj, tree, False)
+        if data:
+            return data.text
+        else:
+            return False
+
+    @property
+    def suspension_suministro_impago(self):
+        tree = '{0}.SuspensionSuministroImpago'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
         if data:
             return data.text
@@ -58,20 +76,11 @@ class P0(Message, ProcessDeadline):
             return False
 
     @property
-    def existe_solicitud_en_curso(self):
-        tree = '{0}.ExisteSolicitudEnCurso'.format(self._header)
+    def solicitud_en_curso(self):
+        tree = '{0}.SolicitudEnCurso'.format(self._header)
         data = get_rec_attr(self.obj, tree, False)
-        if data:
-            return data.text
-        else:
-            return False
-
-    @property
-    def tipo_solicitud_en_curso(self):
-        tree = '{0}.TipoSolicitudEnCurso'.format(self._header)
-        data = get_rec_attr(self.obj, tree, False)
-        if data:
-            return data.text
+        if data not in [None, False]:
+            return SolicitudEnCurso(data)
         else:
             return False
 
@@ -253,6 +262,30 @@ class EstadoContratable(object):
         return data
 
 
+class SolicitudEnCurso(object):
+
+    def __init__(self, data):
+        self.solicitud_en_curso = data
+
+    @property
+    def tipo_solicitud_en_curso(self):
+        data = ''
+        try:
+            data = self.solicitud_en_curso.TipoSolicitudEnCurso.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def paso_cambio_comercializador_en_curso(self):
+        data = ''
+        try:
+            data = self.solicitud_en_curso.PasoCambioComercializadorEnCurso.text
+        except AttributeError:
+            pass
+        return data
+
+
 class Contrato(object):
 
     def __init__(self, data):
@@ -272,6 +305,15 @@ class Contrato(object):
         data = ''
         try:
             data = self.contrato.CUPSPrincipal.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def fecha_inicio(self):
+        data = ''
+        try:
+            data = self.contrato.FechaInicio.text
         except AttributeError:
             pass
         return data
@@ -339,21 +381,11 @@ class Contrato(object):
             pass
         return data
 
-
     @property
-    def ind_esencial(self):
+    def esencialidad(self):
         data = ''
         try:
-            data = self.contrato.IndEsencial.text
-        except AttributeError:
-            pass
-        return data
-
-    @property
-    def fecha_ultimo_movimiento_ind_esencial(self):
-        data = ''
-        try:
-            data = self.contrato.FechaUltimoMovimientoIndEsencial.text
+            data = Esencialidad(self.contrato.Esencialidad)
         except AttributeError:
             pass
         return data
@@ -390,6 +422,15 @@ class Contrato(object):
         data = ''
         try:
             data = self.contrato.CondicionesContractuales.ModoControlPotencia.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def ind_potencia_temporal(self):
+        data = ''
+        try:
+            data = self.contrato.CondicionesContractuales.IndPotenciaTemporal.text
         except AttributeError:
             pass
         return data
@@ -515,6 +556,39 @@ class CondicionesContractuales(object):
         data = ''
         try:
             data = self.condiciones_contractuales.ModoControlPotencia.text
+        except AttributeError:
+            pass
+        return data
+
+
+class Esencialidad(object):
+
+    def __init__(self, data):
+        self.esencialidad = data
+
+    @property
+    def ind_esencial_no_vigente(self):
+        data = ''
+        try:
+            data = self.esencialidad.IndEsencialNoVigente.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def ind_esencial(self):
+        data = ''
+        try:
+            data = self.esencialidad.IndEsencial.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def fecha_ultimo_movimiento_ind_esencial(self):
+        data = ''
+        try:
+            data = self.esencialidad.FechaUltimoMovimientoIndEsencial.text
         except AttributeError:
             pass
         return data

@@ -1341,10 +1341,30 @@ class test_B1(TestCaseCompat):
 class test_B2(unittest.TestCase):
 
     def setUp(self):
+        self.xml_b202_accept = open(get_data("b202_accept.xml"), "rb")
+        self.xml_b204_accept = open(get_data("b204_accept.xml"), "rb")
         self.xml_b205 = open(get_data("b205.xml"), "rb")
 
     def tearDown(self):
+        self.xml_b202_accept.close()
+        self.xml_b204_accept.close()
         self.xml_b205.close()
+
+    def test_b202_accept(self):
+        b2 = B2(self.xml_b202_accept)
+        b2.parse_xml()
+        # Datos Aceptacion
+        self.assertEqual(b2.datos_aceptacion.fecha_aceptacion, u'2016-06-06')
+        self.assertEqual(b2.datos_aceptacion.actuacion_campo, u'S')
+        self.assertEqual(b2.datos_aceptacion.tipo_activacion_prevista, u'B1')
+        self.assertEqual(b2.datos_aceptacion.fecha_activacion_prevista, u'2016-06-08')
+        self.assertEqual(b2.datos_aceptacion.fecha_ultima_lectura_firme, u'2016-06-01')
+
+    def test_b204_accept(self):
+        b2 = B2(self.xml_b204_accept)
+        b2.parse_xml()
+        self.assertEqual(b2.fecha_aceptacion, u'2017-02-02')
+        self.assertEqual(b2.hora_aceptacion, u'20:05:10')
 
     def test_b205(self):
         b2 = B2(self.xml_b205)
@@ -1866,6 +1886,8 @@ class test_M2(TestCaseCompat):
         self.assertEqual(rej2.codigo_motivo, u'03')
         self.assertEqual(rej2.comentarios,
                          u'Cuando el CIF-NIF no coincide con el que figura en la base de datos del Distribuidor')
+        cau1 = m2.datos_cau[0]
+        self.assertEqual(cau1.cau, u'ES1234000000000001JN0FA001')
 
     def test_m205(self):
         m2 = M2(self.xml_m205)
@@ -2249,7 +2271,9 @@ class test_Q1(TestCaseCompat):
         q1.parse_xml()
         # cabecera
         cabecera = q1.head
+        self.assertEqual(q1.get_cabecera_recibo, u'N')
         self.assertEqual(q1.get_cabecera_codigo_fiscal_factura, u'123456798')
+        self.assertEqual(q1.get_cabecera_factura_dispuesta_al_pago, u'S')
         self.assertEqual(q1.get_cabecera_tipo_factura, u'N')
         self.assertEqual(q1.get_cabecera_motivo_facturacion, u'01')
         self.assertEqual(q1.get_cabecera_codigo_factura_rectificada_anulada, u'33333')
@@ -2257,8 +2281,6 @@ class test_Q1(TestCaseCompat):
         self.assertEqual(q1.get_cabecera_expediente.codigo_solicitud, u'333222111')
         # Datos
         datos = q1.datos
-        self.assertEqual(datos.tipo_autoconsumo, u'11')
-        self.assertEqual(datos.tipo_subseccion, u'10')
         self.assertEqual(datos.tipo_cups, u'01')
         self.assertEqual(datos.marca_medida_con_perdidas, u'N')
         self.assertEqual(datos.vas_trafo, u'0')
@@ -2304,6 +2326,8 @@ class test_Q1(TestCaseCompat):
         # datos cau
         datos_cau = autoconsumo.datos_cau
         self.assertEqual(datos_cau.cau, u'ES1234000000000001JN0FA001')
+        self.assertEqual(datos_cau.tipo_autoconsumo, u'11')
+        self.assertEqual(datos_cau.tipo_subseccion, u'10')
         self.assertEqual(datos_cau.colectivo, u'S')
         self.assertEqual(datos_cau.esquema_medida, u'B')
         # instalacion gen
@@ -2348,9 +2372,14 @@ class test_Q1(TestCaseCompat):
         self.assertEqual(ajuste.ajuste_por_integrador, 1500.0)
         self.assertEqual(ajuste.codigo_motivo_ajuste, u'01')
         self.assertEqual(ajuste.comentarios, u'Comentario Ajuste')
-        anomalia = int2.anomalia
-        self.assertEqual(anomalia.comentarios, u'Comentarios Anomalia')
-        self.assertEqual(anomalia.tipo_anomalia, u'05')
+        motivo_estimacion = int2.motivo_estimacion
+        self.assertEqual(motivo_estimacion.comentarios, u'Ojo! Avispas!!')
+        self.assertEqual(motivo_estimacion.motivo_de_estimacion, u'08')
+        self.assertEqual(motivo_estimacion.fecha_intento_lectura, u'2014-05-17T22:13:37')
+        evidencia1 = motivo_estimacion.evidencias[0]
+        self.assertEqual(evidencia1.evidencias_distribuidor, u'https://hibirihibiri.evidencia1.com')
+        evidencia2 = motivo_estimacion.evidencias[1]
+        self.assertEqual(evidencia2.evidencias_distribuidor, u'https://hibirihibiri.evidencia2.com')
         # Informacion al consumidor
         info_al_consumidor = q1.informacion_al_consumidor
         self.assertEqual(len(info_al_consumidor.periodos), 2)
@@ -2359,6 +2388,26 @@ class test_Q1(TestCaseCompat):
         periodo_max_2 = info_al_consumidor.periodos[1]
         self.assertEqual(periodo_max_2.potencia_max_demandada_anio_movil, 4045)
         self.assertEqual(info_al_consumidor.valor_energia_media_cp, 61083.25)
+        # Justificacion Rectificacion
+        justificacion_rectificacion = q1.justificacion_rectificacion
+        self.assertEqual(justificacion_rectificacion.motivo_rectificacion_facturacion, u'01')
+        self.assertEqual(justificacion_rectificacion.motivo_de_estimacion, u'08')
+        self.assertEqual(justificacion_rectificacion.comentarios, u'Métete tú ahí con esas avispas, listo')
+        # Intereses Por Rectificacion
+        intereses_por_rectificacion = q1.intereses_por_rectificacion
+        self.assertEqual(intereses_por_rectificacion.concepto_informado, u'93')
+        self.assertEqual(intereses_por_rectificacion.magnitud_integrador, u'AE')
+        self.assertEqual(intereses_por_rectificacion.fecha_desde, u'2014-03-18')
+        self.assertEqual(intereses_por_rectificacion.fecha_hasta, u'2014-04-18')
+        self.assertEqual(intereses_por_rectificacion.unidades_concepto, 27.0)
+        facturas_rectificada1 = intereses_por_rectificacion.facturas_rectificadas[0]
+        self.assertEqual(facturas_rectificada1.numero_factura_rectificada, u'987654')
+        facturas_rectificada2 = intereses_por_rectificacion.facturas_rectificadas[1]
+        self.assertEqual(facturas_rectificada2.numero_factura_rectificada, u'654321')
+        # Prorrateo Regularizacion
+        prorrateo_regularizacion = q1.prorrateo_regularizacion
+        self.assertEqual(prorrateo_regularizacion.importe_prorrateado, 12.5)
+        self.assertEqual(prorrateo_regularizacion.numero_prorrateos, 4)
 
 
 class test_R1(TestCaseCompat):
@@ -2784,6 +2833,7 @@ class test_F1(TestCaseCompat):
 
         self.assertEqual(datos_factura.cod_contrato, u'111111')
         self.assertEqual(datos_factura.codigo_fiscal_factura, u'F0001')
+        self.assertEqual(datos_factura.factura_dispuesta_al_pago, u'S')
         self.assertEqual(datos_factura.tipo_factura, u'N')
         self.assertEqual(datos_factura.motivo_facturacion, u'01')
         self.assertEqual(datos_factura.fecha_factura, u'2017-05-01')
@@ -2948,6 +2998,7 @@ class test_F1(TestCaseCompat):
                 'tipo_factura': '01',
                 'date_invoice': '2017-05-01',
                 'check_total': 100,
+                'dispuesta_al_pago': 'S',
                 'origin': 'F0001',
                 'origin_date_invoice': '2017-05-01',
                 'reference': 'F0001',
@@ -3216,6 +3267,7 @@ class test_F1(TestCaseCompat):
                 'tipo_factura': '01',
                 'date_invoice': '2017-05-01',
                 'check_total': 100,
+                'dispuesta_al_pago': 'S',
                 'origin': 'F0001',
                 'origin_date_invoice': '2017-05-01',
                 'reference': 'F0001',
@@ -3352,8 +3404,6 @@ class test_F1(TestCaseCompat):
         self.assertEqual(datos_factura.saldo_factura, 100)
         self.assertEqual(datos_factura.tipo_moneda, u'02')
         self.assertEqual(datos_factura.fecha_boe, u'2021-12-16')
-        self.assertEqual(datos_factura.tipo_autoconsumo, u'12')
-        self.assertEqual(datos_factura.tipo_subseccion, u'10')
         self.assertEqual(datos_factura.tipo_cups, u'01')
         self.assertEqual(datos_factura.tarifa_atr_fact, u'018')
         self.assertEqual(datos_factura.modo_control_potencia, u'1')
@@ -3500,6 +3550,8 @@ class test_F1(TestCaseCompat):
         # datos cau
         datos_cau = autoconsumo.datos_cau
         self.assertEqual(datos_cau.cau, u'ES1234000000000001JN0FA001')
+        self.assertEqual(datos_cau.tipo_autoconsumo, u'12')
+        self.assertEqual(datos_cau.tipo_subseccion, u'10')
         self.assertEqual(datos_cau.colectivo, u'S')
         self.assertEqual(datos_cau.esquema_medida, u'B')
         # instalacion gen
@@ -3594,6 +3646,27 @@ class test_F1(TestCaseCompat):
 
         self.assertEqual(cargos_energia.importe_total, 2.48)
         self.assertEqual(fact.cargos.total_cargos, 4.54)
+
+        # Justificacion Rectificacion
+        justificacion_rectificacion = fact.justificacion_rectificacion
+        self.assertEqual(justificacion_rectificacion.motivo_rectificacion_facturacion, u'01')
+        self.assertEqual(justificacion_rectificacion.motivo_de_estimacion, u'08')
+        self.assertEqual(justificacion_rectificacion.comentarios, u'Métete tú ahí con esas avispas, listo')
+        # Intereses Por Rectificacion
+        intereses_por_rectificacion = fact.intereses_por_rectificacion
+        self.assertEqual(intereses_por_rectificacion.concepto_informado, u'93')
+        self.assertEqual(intereses_por_rectificacion.magnitud_integrador, u'AE')
+        self.assertEqual(intereses_por_rectificacion.fecha_desde, u'2014-03-18')
+        self.assertEqual(intereses_por_rectificacion.fecha_hasta, u'2014-04-18')
+        self.assertEqual(intereses_por_rectificacion.unidades_concepto, 27.0)
+        facturas_rectificada1 = intereses_por_rectificacion.facturas_rectificadas[0]
+        self.assertEqual(facturas_rectificada1.numero_factura_rectificada, u'987654')
+        facturas_rectificada2 = intereses_por_rectificacion.facturas_rectificadas[1]
+        self.assertEqual(facturas_rectificada2.numero_factura_rectificada, u'654321')
+        # Prorrateo Regularizacion
+        prorrateo_regularizacion = fact.prorrateo_regularizacion
+        self.assertEqual(prorrateo_regularizacion.importe_prorrateado, 12.5)
+        self.assertEqual(prorrateo_regularizacion.numero_prorrateos, 4)
 
         impuesto_electrico = fact.impuesto_electrico
         self.assertEqual(impuesto_electrico.base, 0)
@@ -3706,6 +3779,7 @@ class test_F1(TestCaseCompat):
                 'tipo_factura': '01',
                 'date_invoice': '2022-02-10',
                 'check_total': 100,
+                'dispuesta_al_pago': 'S',
                 'origin': 'F0001',
                 'origin_date_invoice': '2022-02-10',
                 'reference': 'F0001',
@@ -3813,6 +3887,7 @@ class test_F1(TestCaseCompat):
         self.assertEqual(cliente.tipo_persona, u'F')
 
         self.assertEqual(datos_factura.cod_contrato, u'111111')
+        self.assertEqual(datos_factura.recibo, u'N')
         self.assertEqual(datos_factura.codigo_fiscal_factura, u'F0001')
         self.assertEqual(datos_factura.tipo_factura, u'N')
         self.assertEqual(datos_factura.motivo_facturacion, u'01')
@@ -4347,6 +4422,7 @@ class test_F1(TestCaseCompat):
                 'tipo_factura': '01',
                 'date_invoice': '2017-05-01',
                 'check_total': 100,
+                'dispuesta_al_pago': 'S',
                 'origin': 'F0001',
                 'origin_date_invoice': '2017-05-01',
                 'reference': 'F0001',
@@ -4462,9 +4538,17 @@ class test_P0(unittest.TestCase):
     def test_p002_accept(self):
         p0 = P0(self.xml_p002_accept)
         p0.parse_xml()
+        # Datos Aceptacion
+        self.assertEqual(p0.resultado_validacion_cliente, u'S')
+        self.assertEqual(p0.suspension_suministro_impago, u'N')
+        self.assertEqual(p0.en_vigor, u'S')
+        # Solicitud en curso
+        self.assertEqual(p0.solicitud_en_curso.tipo_solicitud_en_curso, u'C100')
+        self.assertEqual(p0.solicitud_en_curso.paso_cambio_comercializador_en_curso, u'02')
         # Contrato
         self.assertEqual(p0.contrato.tipo_contrato_atr, u'03')
         self.assertEqual(p0.contrato.cups_principal, u'ES1234000000000001JN0F')
+        self.assertEqual(p0.contrato.fecha_inicio, u'2020-01-31')
         self.assertEqual(p0.contrato.fecha_finalizacion, u'2020-03-31')
         self.assertEqual(p0.contrato.ref_catastro, u'1234567890qwertyuiop')
         self.assertEqual(p0.contrato.ref_catastro_finca, u'1234567890qwer')
@@ -4475,11 +4559,13 @@ class test_P0(unittest.TestCase):
         self.assertEqual(utm_c.banda, u'E')
         self.assertEqual(p0.contrato.fecha_ultimo_movimiento_tipo_autocons, u'2020-01-01')
         self.assertEqual(p0.contrato.ind_bono_social, u'N')
-        self.assertEqual(p0.contrato.ind_esencial, u'00')
-        self.assertEqual(p0.contrato.fecha_ultimo_movimiento_ind_esencial, u'2016-05-05')
+        self.assertEqual(p0.contrato.esencialidad.ind_esencial_no_vigente, u'N')
+        self.assertEqual(p0.contrato.esencialidad.ind_esencial, u'00')
+        self.assertEqual(p0.contrato.esencialidad.fecha_ultimo_movimiento_ind_esencial, u'2016-05-05')
         self.assertEqual(p0.contrato.vivienda_habitual, u'S')
         self.assertEqual(p0.contrato.cnae, u'9820')
         self.assertEqual(p0.contrato.modo_control_potencia, u'1')
+        self.assertEqual(p0.contrato.ind_potencia_temporal, u'N')
         self.assertEqual(len(p0.contrato.potencias_contratadas), 1)
         self.assertEqual(p0.contrato.potencias_contratadas[0][1], 6000)
         self.assertEqual(p0.contrato.tarifa_atr, u'018')
@@ -4503,6 +4589,10 @@ class test_P0(unittest.TestCase):
         self.assertEqual(datos_cau.tipo_autoconsumo, u'11')
         self.assertEqual(datos_cau.tipo_subseccion, u'10')
         self.assertEqual(datos_cau.colectivo, u'S')
+        datos_reparto = datos_cau.datos_reparto
+        self.assertEqual(datos_reparto.fecha_inicio_reparto, u'2020-01-31')
+        self.assertEqual(datos_reparto.ind_reparto_horario, u'N')
+        self.assertEqual(datos_reparto.coeficiente_reparto, 0.2)
         inst_gen_1 = datos_cau.datos_inst_gen[0]
         self.assertEqual(inst_gen_1.cil, u'ES1234000000000001JN0F001')
         self.assertEqual(inst_gen_1.tec_generador, u'b11')
