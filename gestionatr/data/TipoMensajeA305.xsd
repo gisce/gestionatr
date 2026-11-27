@@ -27,6 +27,7 @@
 	<xs:complexType name="ContratoAltaA305">
 		<xs:sequence>
 			<xs:element name="IdContrato" type="IdContrato"/>
+			<xs:element name="FechaInicio" type="xs:date" minOccurs="0"/>
 			<xs:element name="FechaFinalizacion" type="xs:date" minOccurs="0"/>
 			<xs:element name="RefCatastro" type="RefCatastro" minOccurs="0"/>
 			<xs:element name="RefCatastroFinca" type="RefCatastroFinca" minOccurs="0"/>

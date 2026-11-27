@@ -13,20 +13,13 @@
 			<xs:element name="Autoconsumo" type="AutoconsumoQ1" minOccurs="0"/>
 			<xs:element name="Medidas" type="MedidaFact" maxOccurs="10"/>
 			<xs:element name="InformacionAlConsumidor" type="InformacionAlConsumidor" minOccurs="0"/>
+			<xs:element name="JustificacionRectificacion" type="JustificacionRectificacion" minOccurs="0"/>
+			<xs:element name="InteresesPorRectificacion" type="InteresesPorRectificacion" minOccurs="0"/>
+			<xs:element name="ProrrateoRegularizacion" type="ProrrateoRegularizacion" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="DatosQ1">
 		<xs:sequence>
-			<xs:element name="TipoAutoconsumo" type="TipoAutoconsumo">
-				<xs:annotation>
-					<xs:documentation> Tabla 113</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="TipoSubseccion" type="TipoSubseccion" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Tabla 133</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="TipoCUPS" type="TipoCUPS">
 				<xs:annotation>
 					<xs:documentation>Tabla 131</xs:documentation>

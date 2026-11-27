@@ -4,7 +4,8 @@ from .message import Message, except_f1
 from datetime import datetime
 from gestionatr.utils import get_rec_attr
 from .Deadlines import ProcessDeadline
-from .F1 import EnergiaActiva, Autoconsumo, InformacionAlConsumidor, Expediente
+from .F1 import (EnergiaActiva, Autoconsumo, InformacionAlConsumidor, Expediente, MotivoEstimacion,
+                 JustificacionRectificacion, InteresesPorRectificacion, ProrrateoRegularizacion)
 
 MAGNITUDS_OCSUM = {
     'AE': 'A',
@@ -59,11 +60,23 @@ class Q1(Message, ProcessDeadline):
     """Clase que implementa Q1."""
 
     @property
+    def get_cabecera_recibo(self):
+        if hasattr(self.head, 'Expediente'):
+            return self.head.Recibo.text
+        return None
+
+    @property
     def get_cabecera_codigo_fiscal_factura(self):
         val = self.head.CodigoFiscalFactura.text
         if not val:
             raise except_f1('Error', u'Q1 sin CodigoFiscalFactura')
         return val
+
+    @property
+    def get_cabecera_factura_dispuesta_al_pago(self):
+        if hasattr(self.head, 'FacturaDispuestaAlPago'):
+            return self.head.FacturaDispuestaAlPago.text
+        return None
 
     @property
     def get_cabecera_tipo_factura(self):
@@ -142,29 +155,28 @@ class Q1(Message, ProcessDeadline):
             return InformacionAlConsumidor(self.obj.InformacionAlConsumidor)
         return None
 
+    @property
+    def justificacion_rectificacion(self):
+        if hasattr(self.obj, 'JustificacionRectificacion'):
+            return JustificacionRectificacion(self.obj.JustificacionRectificacion)
+        return None
+
+    @property
+    def intereses_por_rectificacion(self):
+        if hasattr(self.obj, 'InteresesPorRectificacion'):
+            return InteresesPorRectificacion(self.obj.InteresesPorRectificacion)
+        return None
+
+    @property
+    def prorrateo_regularizacion(self):
+        if hasattr(self.obj, 'ProrrateoRegularizacion'):
+            return ProrrateoRegularizacion(self.obj.ProrrateoRegularizacion)
+        return None
 
 class Datos(object):
 
     def __init__(self, data):
         self.datos = data
-
-    @property
-    def tipo_autoconsumo(self):
-        data = ''
-        try:
-            data = self.datos.TipoAutoconsumo.text
-        except AttributeError:
-            pass
-        return data
-
-    @property
-    def tipo_subseccion(self):
-        data = ''
-        try:
-            data = self.datos.TipoSubseccion.text
-        except AttributeError:
-            pass
-        return data
 
     @property
     def tipo_cups(self):
@@ -382,6 +394,7 @@ class Integrador(object):
         self._periode = None
         self._numero_ruedas_enteras = None
         self._ajuste = None
+        self._motivo_estimacion = None
         self.comptador = None
 
     @property
@@ -506,13 +519,16 @@ class Integrador(object):
         return data
 
     @property
-    def anomalia(self):
-        data = ''
-        try:
-            data = Anomalia(self.integrador.Anomalia)
-        except AttributeError:
-            pass
-        return data
+    def motivo_estimacion(self):
+        if self._motivo_estimacion:
+            return self._motivo_estimacion
+        if hasattr(self.integrador, 'MotivoEstimacion'):
+            return MotivoEstimacion(self.integrador.MotivoEstimacion)
+        return None
+
+    @motivo_estimacion.setter
+    def motivo_estimacion(self, value):
+        self._motivo_estimacion = value
 
     @property
     def fecha_hora_maximetro(self):

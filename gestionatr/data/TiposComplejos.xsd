@@ -179,7 +179,13 @@
 					<xs:restriction base="Codigo"/>
 				</xs:simpleType>
 			</xs:element>
+			<xs:element name="Recibo" type="Indicativo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="CodigoFiscalFactura" type="X26"/>
+			<xs:element name="FacturaDispuestaAlPago" type="Indicativo" minOccurs="0"/>
 			<xs:element name="TipoFactura" type="TipoFactura">
 				<xs:annotation>
 					<xs:documentation>Tabla 102</xs:documentation>
@@ -347,9 +353,9 @@
 	</xs:complexType>
 	<xs:complexType name="ClienteConSoloDireccionP0">
 		<xs:sequence>
-			<xs:element name="IdCliente" type="IdCliente"/>
-			<xs:element name="Nombre" type="NombreCliente"/>
-			<xs:element name="IndicadorTipoDireccion" type="IndicadorTipoDireccion">
+			<xs:element name="IdCliente" type="IdCliente" minOccurs="0"/>
+			<xs:element name="Nombre" type="NombreCliente" minOccurs="0"/>
+			<xs:element name="IndicadorTipoDireccion" type="IndicadorTipoDireccion" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Tabla 11</xs:documentation>
 				</xs:annotation>
@@ -706,7 +712,7 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element name="Poblacion" minOccurs="0">
+			<xs:element name="Poblacion">
 				<xs:simpleType>
 					<xs:restriction base="X11">
 						<xs:minLength value="11"/>
@@ -1026,6 +1032,65 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="InteresesPorRectificacion">
+		<xs:sequence>
+			<xs:element name="FacturasRectificadas" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="NumeroFacturaRectificada">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="26"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ConceptoInformado" type="ConceptoRepercutible">
+				<xs:annotation>
+					<xs:documentation>Tabla 103</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MagnitudIntegrador" type="MagnitudMedida">
+				<xs:annotation>
+					<xs:documentation>Tabla 43</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CodigoPeriodo" type="TipoCodigoPeriodoDH">
+				<xs:annotation>
+					<xs:documentation>Tabla 42</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaDesde" type="xs:date"/>
+			<xs:element name="FechaHasta" type="xs:date"/>
+			<xs:element name="UnidadesConcepto">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="13"/>
+						<xs:fractionDigits value="3"/>
+						<xs:minInclusive value="-9999999999.999"/>
+						<xs:maxInclusive value="9999999999.999"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="JustificacionRectificacion">
+		<xs:sequence>
+			<xs:element name="MotivoRectificacionFacturacion" type="MotivoRectificacionFacturacion">
+				<xs:annotation>
+					<xs:documentation>Tabla 141</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MotivoDeEstimacion" type="MotivoDeEstimacion" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 45</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Comentarios" type="X4000" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="LecturasAportadas">
 		<xs:sequence>
 			<xs:element name="LecturaAportada" maxOccurs="20">
@@ -1083,7 +1148,7 @@
 				</xs:simpleType>
 			</xs:element>
 			<xs:element name="FechaLecturaFirme" type="xs:date"/>
-			<xs:element name="Anomalia" type="AnomaliaMedida" minOccurs="0">
+			<xs:element name="Anomalia" type="MotivoDeEstimacion" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Tabla 45</xs:documentation>
 				</xs:annotation>
@@ -1200,15 +1265,23 @@
 											</xs:sequence>
 										</xs:complexType>
 									</xs:element>
-									<xs:element name="Anomalia" minOccurs="0">
+									<xs:element name="MotivoEstimacion" minOccurs="0">
 										<xs:complexType>
 											<xs:sequence>
-												<xs:element name="TipoAnomalia" type="AnomaliaMedida">
+												<xs:element name="MotivoDeEstimacion" type="MotivoDeEstimacion">
 													<xs:annotation>
 														<xs:documentation>Tabla 45</xs:documentation>
 													</xs:annotation>
 												</xs:element>
 												<xs:element name="Comentarios" type="X4000" minOccurs="0"/>
+												<xs:element name="Evidencias" minOccurs="0" maxOccurs="unbounded">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="EvidenciasDistribuidor" type="X4000"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="FechaIntentoLectura" type="xs:dateTime" minOccurs="0"/>
 											</xs:sequence>
 										</xs:complexType>
 									</xs:element>
@@ -1454,6 +1527,21 @@
 					</xs:simpleContent>
 				</xs:complexType>
 			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProrrateoRegularizacion">
+		<xs:sequence>
+			<xs:element name="ImporteProrrateado">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="12"/>
+						<xs:fractionDigits value="2"/>
+						<xs:minInclusive value="-9999999999.99"/>
+						<xs:maxInclusive value="9999999999.99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="NumeroProrrateos" type="X2"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="PuntoDeMedida">
@@ -1749,7 +1837,7 @@
 		<xs:sequence>
 			<xs:element name="CIL" type="CodigoCIL" minOccurs="0"/>
 			<xs:element name="PotInstaladaGen" type="Potencia"/>
-			<xs:element name="TipoInstalacion" type="TipoInstalacion">
+			<xs:element name="TipoInstalacion" type="TipoInstalacion" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Tabla 129</xs:documentation>
 				</xs:annotation>
@@ -1779,7 +1867,7 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="PotInstaladaGen" type="Potencia"/>
-			<xs:element name="TipoInstalacion" type="TipoInstalacion">
+			<xs:element name="TipoInstalacion" type="TipoInstalacion" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Tabla 129</xs:documentation>
 				</xs:annotation>
@@ -1871,7 +1959,7 @@
 			</xs:element>
 			<xs:element name="Combustible" type="X60" minOccurs="0"/>
 			<xs:element name="PotInstaladaGen" type="Potencia"/>
-			<xs:element name="TipoInstalacion" type="TipoInstalacion">
+			<xs:element name="TipoInstalacion" type="TipoInstalacion" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Tabla 129</xs:documentation>
 				</xs:annotation>
@@ -2065,6 +2153,11 @@
 					<xs:documentation>Tabla 51</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="IndPotenciaTemporal" type="Indicativo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="DerechosReconocidos">
@@ -2204,12 +2297,12 @@
 	<xs:complexType name="TypeDatosCAU">
 		<xs:sequence>
 			<xs:element name="CAU" type="CodigoAutoconsumo"/>
-			<xs:element name="TipoAutoconsumo" type="TipoAutoconsumo">
+			<xs:element name="TipoAutoconsumo" type="TipoAutoconsumo" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Tabla 113</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="TipoSubseccion" type="TipoSubseccion"/>
+			<xs:element name="TipoSubseccion" type="TipoSubseccion" minOccurs="0"/>
 			<xs:element name="Colectivo" type="Indicativo" minOccurs="0"/>
 			<xs:element name="DatosInstGen" type="TypeDatosInstGenSolicitud" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
@@ -2217,6 +2310,16 @@
 	<xs:complexType name="TypeDatosCAUF1">
 		<xs:sequence>
 			<xs:element name="CAU" type="CodigoAutoconsumo"/>
+			<xs:element name="TipoAutoconsumo" type="TipoAutoconsumo">
+				<xs:annotation>
+					<xs:documentation> Tabla 113</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TipoSubseccion" type="TipoSubseccion" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 133</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="Colectivo" type="Indicativo">
 				<xs:annotation>
 					<xs:documentation>Tabla 26</xs:documentation>
@@ -2233,6 +2336,16 @@
 	<xs:complexType name="TypeDatosCAUQ1">
 		<xs:sequence>
 			<xs:element name="CAU" type="CodigoAutoconsumo"/>
+			<xs:element name="TipoAutoconsumo" type="TipoAutoconsumo">
+				<xs:annotation>
+					<xs:documentation> Tabla 113</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TipoSubseccion" type="TipoSubseccion" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 133</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="Colectivo" type="Indicativo">
 				<xs:annotation>
 					<xs:documentation>Tabla 26</xs:documentation>
@@ -2249,8 +2362,8 @@
 	<xs:complexType name="TypeDatosCAUAlta">
 		<xs:sequence>
 			<xs:element name="CAU" type="CodigoAutoconsumo" minOccurs="1"/>
-			<xs:element name="TipoAutoconsumo" type="TipoAutoconsumo"/>
-			<xs:element name="TipoSubseccion" type="TipoSubseccion"/>
+			<xs:element name="TipoAutoconsumo" type="TipoAutoconsumo" minOccurs="0"/>
+			<xs:element name="TipoSubseccion" type="TipoSubseccion" minOccurs="0"/>
 			<xs:element name="Colectivo" type="Indicativo" minOccurs="0"/>
 			<xs:element name="DatosInstGen" type="TypeDatosInstGenSolicitud" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
@@ -2258,12 +2371,12 @@
 	<xs:complexType name="TypeDatosCAUAltaT101">
 		<xs:sequence>
 			<xs:element name="CAU" type="CodigoAutoconsumo"/>
-			<xs:element name="TipoAutoconsumo" type="TipoAutoconsumo">
+			<xs:element name="TipoAutoconsumo" type="TipoAutoconsumo" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Tabla 113</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="TipoSubseccion" type="TipoSubseccion">
+			<xs:element name="TipoSubseccion" type="TipoSubseccion" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Tabla 133</xs:documentation>
 				</xs:annotation>
@@ -2337,6 +2450,19 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Colectivo" type="Indicativo" minOccurs="0"/>
+			<xs:element name="DatosReparto" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="FechaInicioReparto" type="xs:date"/>
+						<xs:element name="IndRepartoHorario" type="Indicativo">
+							<xs:annotation>
+								<xs:documentation>Tabla 26</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="CoeficienteReparto" type="X8" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="DatosInstGen" type="TypeDatosInstGenP0" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>

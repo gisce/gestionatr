@@ -23,6 +23,7 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
+			<xs:element name="FacturaDispuestaAlPago" type="Indicativo"/>
 			<xs:element name="TipoFactura" type="TipoFactura">
 				<xs:annotation>
 					<xs:documentation>Tabla 102 </xs:documentation>
@@ -101,16 +102,6 @@
 											<xs:complexType>
 												<xs:sequence>
 													<xs:element name="FechaBOE" type="xs:date"/>
-													<xs:element name="TipoAutoconsumo" type="TipoAutoconsumo">
-														<xs:annotation>
-															<xs:documentation> Tabla 113</xs:documentation>
-														</xs:annotation>
-													</xs:element>
-													<xs:element name="TipoSubseccion" type="TipoSubseccion" minOccurs="0">
-														<xs:annotation>
-															<xs:documentation>Tabla 133</xs:documentation>
-														</xs:annotation>
-													</xs:element>
 													<xs:element name="TipoCUPS" type="TipoCUPS">
 														<xs:annotation>
 															<xs:documentation>Tabla 131</xs:documentation>
@@ -549,6 +540,9 @@
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
+							<xs:element name="JustificacionRectificacion" type="JustificacionRectificacion" minOccurs="0"/>
+							<xs:element name="InteresesPorRectificacion" type="InteresesPorRectificacion" minOccurs="0"/>
+							<xs:element name="ProrrateoRegularizacion" type="ProrrateoRegularizacion" minOccurs="0"/>
 							<xs:element name="ImpuestoElectrico">
 								<xs:complexType>
 									<xs:sequence>
@@ -824,6 +818,11 @@
 	</xs:complexType>
 	<xs:complexType name="TipoDatosGeneralesOtraFactura">
 		<xs:sequence>
+			<xs:element name="Recibo" type="Indicativo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tabla 26</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="CodigoFiscalFactura">
 				<xs:simpleType>
 					<xs:restriction base="xs:string">

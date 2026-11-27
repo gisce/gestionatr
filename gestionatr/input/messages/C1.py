@@ -504,6 +504,15 @@ class Contrato(object):
         return data
 
     @property
+    def fecha_inicio(self):
+        data = ''
+        try:
+            data = self.contrato.FechaInicio.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
     def fecha_finalizacion(self):
         data = ''
         try:
@@ -1226,6 +1235,47 @@ class DatosCAU(object):
             pass
         return data
 
+    @property
+    def datos_reparto(self):
+        data = ''
+        try:
+            data = DatosReparto(self.datos_cau.DatosReparto)
+        except AttributeError:
+            pass
+        return data
+
+
+class DatosReparto(object):
+
+    def __init__(self, data):
+        self.datos_reparto = data
+
+    @property
+    def fecha_inicio_reparto(self):
+        data = ''
+        try:
+            data = self.datos_reparto.FechaInicioReparto.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def ind_reparto_horario(self):
+        data = ''
+        try:
+            data = self.datos_reparto.IndRepartoHorario.text
+        except AttributeError:
+            pass
+        return data
+
+    @property
+    def coeficiente_reparto(self):
+        data = ''
+        try:
+            data = float(self.datos_reparto.CoeficienteReparto.text.replace(',', '.'))
+        except AttributeError:
+            pass
+        return data
 
 class DatosInstGen(object):
 

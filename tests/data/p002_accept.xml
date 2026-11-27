@@ -12,17 +12,21 @@
     </Cabecera>
     <EnvioInformacionPS>
         <ResultadoValidacionCliente>S</ResultadoValidacionCliente>
+        <SuspensionSuministroImpago>N</SuspensionSuministroImpago>
         <EnVigor>S</EnVigor>
         <EstadoContratable>
             <Contratable>N</Contratable>
             <Motivo>03</Motivo>
             <PotenciaMaxSinExpediente>3600</PotenciaMaxSinExpediente>
         </EstadoContratable>
-        <ExisteSolicitudEnCurso>S</ExisteSolicitudEnCurso>
-        <TipoSolicitudEnCurso>C100</TipoSolicitudEnCurso>
+        <SolicitudEnCurso>
+            <TipoSolicitudEnCurso>C100</TipoSolicitudEnCurso>
+            <PasoCambioComercializadorEnCurso>02</PasoCambioComercializadorEnCurso>
+        </SolicitudEnCurso>
         <Contrato>
             <TipoContratoATR>03</TipoContratoATR>
             <CUPSPrincipal>ES1234000000000001JN0F</CUPSPrincipal>
+            <FechaInicio>2020-01-31</FechaInicio>
             <FechaFinalizacion>2020-03-31</FechaFinalizacion>
             <RefCatastro>1234567890qwertyuiop</RefCatastro>
             <RefCatastroFinca>1234567890qwer</RefCatastroFinca>
@@ -41,6 +45,11 @@
                     <TipoAutoconsumo>11</TipoAutoconsumo>
                     <TipoSubseccion>10</TipoSubseccion>
                     <Colectivo>S</Colectivo>
+                    <DatosReparto>
+                        <FechaInicioReparto>2020-01-31</FechaInicioReparto>
+                        <IndRepartoHorario>N</IndRepartoHorario>
+                        <CoeficienteReparto>0.20</CoeficienteReparto>
+                    </DatosReparto>
                     <DatosInstGen>
                         <CIL>ES1234000000000001JN0F001</CIL>
                         <TecGenerador>b11</TecGenerador>
@@ -85,8 +94,11 @@
             </Autoconsumo>
             <FechaUltimoMovimientoTipoAutocons>2020-01-01</FechaUltimoMovimientoTipoAutocons>
             <IndBonoSocial>N</IndBonoSocial>
-            <IndEsencial>00</IndEsencial>
-            <FechaUltimoMovimientoIndEsencial>2016-05-05</FechaUltimoMovimientoIndEsencial>
+            <Esencialidad>
+                <IndEsencialNoVigente>N</IndEsencialNoVigente>
+                <IndEsencial>00</IndEsencial>
+                <FechaUltimoMovimientoIndEsencial>2016-05-05</FechaUltimoMovimientoIndEsencial>
+            </Esencialidad>
             <ViviendaHabitual>S</ViviendaHabitual>
             <CNAE>9820</CNAE>
             <CondicionesContractuales>
@@ -95,6 +107,7 @@
                     <Potencia Periodo="1">6000</Potencia>
                 </PotenciasContratadas>
                 <ModoControlPotencia>1</ModoControlPotencia>
+                <IndPotenciaTemporal>N</IndPotenciaTemporal>
             </CondicionesContractuales>
             <ModoFacturacionPotencia>9</ModoFacturacionPotencia>
             <NoInterrumpible>S</NoInterrumpible>

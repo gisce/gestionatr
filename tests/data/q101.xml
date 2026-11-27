@@ -9,7 +9,9 @@
 		<SecuencialDeSolicitud>01</SecuencialDeSolicitud>
 		<FechaSolicitud>2014-04-16T22:13:37</FechaSolicitud>
 		<CUPS>ES1234000000000001JN0F</CUPS>
+        <Recibo>N</Recibo>
 		<CodigoFiscalFactura>123456798</CodigoFiscalFactura>
+        <FacturaDispuestaAlPago>S</FacturaDispuestaAlPago>
 		<TipoFactura>N</TipoFactura>
 		<MotivoFacturacion>01</MotivoFacturacion>
 		<CodigoFacturaRectificadaAnulada>33333</CodigoFacturaRectificadaAnulada>
@@ -19,8 +21,6 @@
 		</Expediente>
 	</Cabecera>
 	<Datos>
-		<TipoAutoconsumo>11</TipoAutoconsumo>
-		<TipoSubseccion>10</TipoSubseccion>
 		<TipoCUPS>01</TipoCUPS>
 		<MarcaMedidaConPerdidas>N</MarcaMedidaConPerdidas>
 		<VAsTrafo>0</VAsTrafo>
@@ -100,6 +100,8 @@
         </EnergiaExcedentaria>
 		<DatosCAU>
 			<CAU>ES1234000000000001JN0FA001</CAU>
+            <TipoAutoconsumo>11</TipoAutoconsumo>
+		    <TipoSubseccion>10</TipoSubseccion>
 			<Colectivo>S</Colectivo>
 			<EsquemaMedida>B</EsquemaMedida>
 			<InstalacionGenAutoconsumo>
@@ -194,10 +196,17 @@
 					<AjustePorIntegrador>1500.000</AjustePorIntegrador>
 					<Comentarios>Comentario Ajuste</Comentarios>
 				</Ajuste>
-				<Anomalia>
-					<TipoAnomalia>05</TipoAnomalia>
-					<Comentarios>Comentarios Anomalia</Comentarios>
-				</Anomalia>
+				<MotivoEstimacion>
+					<MotivoDeEstimacion>08</MotivoDeEstimacion>
+					<Comentarios>Ojo! Avispas!!</Comentarios>
+                    <Evidencias>
+                        <EvidenciasDistribuidor>https://hibirihibiri.evidencia1.com</EvidenciasDistribuidor>
+                    </Evidencias>
+                    <Evidencias>
+                        <EvidenciasDistribuidor>https://hibirihibiri.evidencia2.com</EvidenciasDistribuidor>
+                    </Evidencias>
+                    <FechaIntentoLectura>2014-05-17T22:13:37</FechaIntentoLectura>
+				</MotivoEstimacion>
 				<FechaHoraMaximetro>2014-05-18T22:13:37</FechaHoraMaximetro>
 			</Integrador>
 		</ModeloAparato>
@@ -212,4 +221,27 @@
 		</Periodo>
 		<ValorEnergiaMediaCP>61083.250</ValorEnergiaMediaCP>
 	</InformacionAlConsumidor>
+    <JustificacionRectificacion>
+        <MotivoRectificacionFacturacion>01</MotivoRectificacionFacturacion>
+        <MotivoDeEstimacion>08</MotivoDeEstimacion>
+        <Comentarios>Métete tú ahí con esas avispas, listo</Comentarios>
+    </JustificacionRectificacion>
+    <InteresesPorRectificacion>
+        <FacturasRectificadas>
+            <NumeroFacturaRectificada>987654</NumeroFacturaRectificada>
+        </FacturasRectificadas>
+        <FacturasRectificadas>
+            <NumeroFacturaRectificada>654321</NumeroFacturaRectificada>
+        </FacturasRectificadas>
+        <ConceptoInformado>93</ConceptoInformado>
+        <MagnitudIntegrador>AE</MagnitudIntegrador>
+        <CodigoPeriodo>92</CodigoPeriodo>
+        <FechaDesde>2014-03-18</FechaDesde>
+        <FechaHasta>2014-04-18</FechaHasta>
+        <UnidadesConcepto>27</UnidadesConcepto>
+    </InteresesPorRectificacion>
+    <ProrrateoRegularizacion>
+        <ImporteProrrateado>12.5</ImporteProrrateado>
+        <NumeroProrrateos>4</NumeroProrrateos>
+    </ProrrateoRegularizacion>
 </MensajeSaldoLecturasFacturacion>

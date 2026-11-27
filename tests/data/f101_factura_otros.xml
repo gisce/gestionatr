@@ -30,6 +30,7 @@
                 </Cliente>
                 <CodContrato>111111</CodContrato>
                 <DatosGeneralesFactura>
+                    <Recibo>N</Recibo>
                     <CodigoFiscalFactura>F0001</CodigoFiscalFactura>
                     <TipoFactura>N</TipoFactura>
                     <MotivoFacturacion>01</MotivoFacturacion>

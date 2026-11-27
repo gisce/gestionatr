@@ -280,6 +280,12 @@ class DatosGenerales(object):
         return None
 
     @property
+    def factura_dispuesta_al_pago(self):
+        if hasattr(self._datos_generales_factura, 'FacturaDispuestaAlPago'):
+            return self._datos_generales_factura.FacturaDispuestaAlPago.text.strip()
+        return None
+
+    @property
     def tipo_factura(self):
         if hasattr(self._datos_generales_factura, 'TipoFactura'):
             return self._datos_generales_factura.TipoFactura.text.strip()
@@ -367,16 +373,6 @@ class DatosGeneralesATR(DatosGenerales):
         if hasattr(self._datos_factura_atr, 'FechaBOE'):
             return self._datos_factura_atr.FechaBOE.text.strip()
         return None
-
-    @property
-    def tipo_autoconsumo(self):
-        if hasattr(self._datos_factura_atr, 'TipoAutoconsumo'):
-            return self._datos_factura_atr.TipoAutoconsumo.text.strip()
-
-    @property
-    def tipo_subseccion(self):
-        if hasattr(self._datos_factura_atr, 'TipoSubseccion'):
-            return self._datos_factura_atr.TipoSubseccion.text.strip()
 
     @property
     def tipo_cups(self):
@@ -474,6 +470,12 @@ class DatosGeneralesATR(DatosGenerales):
 
 
 class DatosGeneralesOtras(DatosGenerales):
+
+    @property
+    def recibo(self):
+        if hasattr(self._datos_generales_factura, 'Recibo'):
+            return self._datos_generales_factura.Recibo.text.strip()
+        return None
 
     @property
     def fecha_boe(self):
@@ -680,6 +682,7 @@ class Factura(object):
             'check_total': -1 * self.datos_factura.importe_total_factura
             if self.datos_factura.tipo_factura in ('A',)
             else self.datos_factura.importe_total_factura,
+            'dispuesta_al_pago': self.datos_factura.factura_dispuesta_al_pago,
             'origin': self.datos_factura.codigo_fiscal_factura,
             'origin_date_invoice': self.datos_factura.fecha_factura,
             'reference': self.datos_factura.codigo_fiscal_factura,
@@ -1273,16 +1276,31 @@ class DatosCAU(object):
     def cau(self):
         if hasattr(self.datos_cau, 'CAU'):
             return self.datos_cau.CAU.text.strip()
+        return None
+
+    @property
+    def tipo_autoconsumo(self):
+        if hasattr(self.datos_cau, 'TipoAutoconsumo'):
+            return self.datos_cau.TipoAutoconsumo.text.strip()
+        return None
+
+    @property
+    def tipo_subseccion(self):
+        if hasattr(self.datos_cau, 'TipoSubseccion'):
+            return self.datos_cau.TipoSubseccion.text.strip()
+        return None
 
     @property
     def colectivo(self):
         if hasattr(self.datos_cau, 'Colectivo'):
             return self.datos_cau.Colectivo.text.strip()
+        return None
 
     @property
     def esquema_medida(self):
         if hasattr(self.datos_cau, 'EsquemaMedida'):
             return self.datos_cau.EsquemaMedida.text.strip()
+        return None
 
     @property
     def instalacion_gen_autoconsumo(self):
@@ -1310,6 +1328,110 @@ class Cargos(object):
     def total_cargos(self):
         if hasattr(self.cargos, 'TotalImporteCargos'):
             return float(self.cargos.TotalImporteCargos.text.strip())
+        return None
+
+
+class JustificacionRectificacion(object):
+
+    def __init__(self, data):
+        self.justificacion_rectificacion = data
+
+    @property
+    def motivo_rectificacion_facturacion(self):
+        if hasattr(self.justificacion_rectificacion, 'MotivoRectificacionFacturacion'):
+            return self.justificacion_rectificacion.MotivoRectificacionFacturacion.text.strip()
+        return None
+
+    @property
+    def motivo_de_estimacion(self):
+        if hasattr(self.justificacion_rectificacion, 'MotivoDeEstimacion'):
+            return self.justificacion_rectificacion.MotivoDeEstimacion.text.strip()
+        return None
+
+    @property
+    def comentarios(self):
+        if hasattr(self.justificacion_rectificacion, 'Comentarios'):
+            return self.justificacion_rectificacion.Comentarios.text.strip()
+        return None
+
+
+class InteresesPorRectificacion(object):
+
+    def __init__(self, data):
+        self.intereses_por_rectificacion = data
+
+    @property
+    def facturas_rectificadas(self):
+        data = []
+        if hasattr(self.intereses_por_rectificacion, 'FacturasRectificadas'):
+            for d in self.intereses_por_rectificacion.FacturasRectificadas:
+                data.append(FacturasRectificadas(d))
+        return data
+
+    @property
+    def concepto_informado(self):
+        if hasattr(self.intereses_por_rectificacion, 'ConceptoInformado'):
+            return self.intereses_por_rectificacion.ConceptoInformado.text.strip()
+        return None
+
+    @property
+    def magnitud_integrador(self):
+        if hasattr(self.intereses_por_rectificacion, 'MagnitudIntegrador'):
+            return self.intereses_por_rectificacion.MagnitudIntegrador.text.strip()
+        return None
+
+    @property
+    def codigo_periodo(self):
+        if hasattr(self.intereses_por_rectificacion, 'CodigoPeriodo'):
+            return self.intereses_por_rectificacion.CodigoPeriodo.text.strip()
+        return None
+
+    @property
+    def fecha_desde(self):
+        if hasattr(self.intereses_por_rectificacion, 'FechaDesde'):
+            return self.intereses_por_rectificacion.FechaDesde.text.strip()
+        return None
+
+    @property
+    def fecha_hasta(self):
+        if hasattr(self.intereses_por_rectificacion, 'FechaHasta'):
+            return self.intereses_por_rectificacion.FechaHasta.text.strip()
+        return None
+
+    @property
+    def unidades_concepto(self):
+        if hasattr(self.intereses_por_rectificacion, 'UnidadesConcepto'):
+            return float(self.intereses_por_rectificacion.UnidadesConcepto.text.strip())
+        return None
+
+
+class FacturasRectificadas(object):
+
+    def __init__(self, data):
+        self.facturas_rectificadas = data
+
+    @property
+    def numero_factura_rectificada(self):
+        if hasattr(self.facturas_rectificadas, 'NumeroFacturaRectificada'):
+            return self.facturas_rectificadas.NumeroFacturaRectificada.text.strip()
+        return None
+
+
+class ProrrateoRegularizacion(object):
+
+    def __init__(self, data):
+        self.prorrateo_regularizacion = data
+
+    @property
+    def importe_prorrateado(self):
+        if hasattr(self.prorrateo_regularizacion, 'ImporteProrrateado'):
+            return float(self.prorrateo_regularizacion.ImporteProrrateado.text.strip())
+        return None
+
+    @property
+    def numero_prorrateos(self):
+        if hasattr(self.prorrateo_regularizacion, 'NumeroProrrateos'):
+            return int(self.prorrateo_regularizacion.NumeroProrrateos.text.strip())
         return None
 
 
@@ -1486,6 +1608,83 @@ class Ajuste(object):
         self._comentario = value
 
 
+class Evidencias(object):
+
+    def __init__(self, data):
+        self.evidencias = data
+
+    @property
+    def evidencias_distribuidor(self):
+        if hasattr(self.evidencias, 'EvidenciasDistribuidor'):
+            return self.evidencias.EvidenciasDistribuidor.text.strip()
+        return None
+
+
+class MotivoEstimacion(object):
+
+    def __init__(self, data):
+        self.motivo_estimacion = data
+        self._comentarios = None
+        self._motivo_de_estimacion = None
+        self._fecha_intento_lectura = None
+
+    @property
+    def motivo_de_estimacion(self):
+        if self._motivo_de_estimacion:
+            return self._motivo_de_estimacion
+        if hasattr(self.motivo_estimacion, 'MotivoDeEstimacion'):
+            return self.motivo_estimacion.MotivoDeEstimacion.text.strip()
+        return None
+
+    @motivo_de_estimacion.setter
+    def motivo_de_estimacion(self, value):
+        self._motivo_de_estimacion = value
+
+    @property
+    def comentarios(self):
+        if self._comentarios:
+            return self._comentarios
+        if hasattr(self.motivo_estimacion, 'Comentarios'):
+            return self.motivo_estimacion.Comentarios.text
+        return None
+
+    @comentarios.setter
+    def comentarios(self, value):
+        self._comentarios = value
+
+    @property
+    def lectura_desde(self):
+        if self._lectura_desde:
+            return self._lectura_desde
+        if hasattr(self.integrador, 'LecturaDesde'):
+            return Lectura(self.integrador.LecturaDesde)
+        return None
+
+    @lectura_desde.setter
+    def lectura_desde(self, value):
+        self._lectura_desde = value
+
+    @property
+    def evidencias(self):
+        data = []
+        if hasattr(self.motivo_estimacion, 'Evidencias'):
+            for d in self.motivo_estimacion.Evidencias:
+                data.append(Evidencias(d))
+        return data
+
+    @property
+    def fecha_intento_lectura(self):
+        if self._fecha_intento_lectura:
+            return self._fecha_intento_lectura
+        if hasattr(self.motivo_estimacion, 'FechaIntentoLectura'):
+            return self.motivo_estimacion.FechaIntentoLectura.text.strip()
+        return None
+
+    @fecha_intento_lectura.setter
+    def fecha_intento_lectura(self, value):
+        self._fecha_intento_lectura = value
+
+
 class Integrador(object):
 
     def __init__(self, data):
@@ -1496,6 +1695,7 @@ class Integrador(object):
         self._periode = None
         self._numero_ruedas_enteras = None
         self._ajuste = None
+        self._motivo_estimacion = None
         self.comptador = None
 
     def unique_name(self):
@@ -1610,6 +1810,24 @@ class Integrador(object):
     @ajuste.setter
     def ajuste(self, value):
         self._ajuste = value
+
+    @property
+    def motivo_estimacion(self):
+        if self._motivo_estimacion:
+            return self._motivo_estimacion
+        if hasattr(self.integrador, 'MotivoEstimacion'):
+            return MotivoEstimacion(self.integrador.MotivoEstimacion)
+        return None
+
+    @motivo_estimacion.setter
+    def motivo_estimacion(self, value):
+        self._motivo_estimacion = value
+
+    @property
+    def fecha_hora_maximetro(self):
+        if hasattr(self.integrador, 'FechaHoraMaximetro'):
+            return self.integrador.FechaHoraMaximetro.text.strip()
+        return None
 
     @property
     def ometre(self):
@@ -2051,8 +2269,10 @@ class FacturaATR(Factura):
         ]
 
     def te_autoconsum(self):
-        if self.datos_factura and self.datos_factura.tipo_autoconsumo and self.datos_factura.tipo_autoconsumo not in ['00', '01', '2A', '2B', '2G']:
-            return True
+        if self.autoconsumo and self.autoconsumo.datos_cau:
+            return any(datos_cau.tipo_autoconsumo not in ['00', '01', '2A', '2B', '2G']
+                       for datos_cau in self.autoconsumo.datos_cau)
+
         for concepte in self.conceptos_repercutibles:
             if concepte.concepto_repercutible in CODIS_AUTOCONSUM.keys():
                 return True
@@ -2133,6 +2353,24 @@ class FacturaATR(Factura):
     def cargos(self):
         if hasattr(self.factura, 'Cargos'):
             return Cargos(self.factura.Cargos)
+        return None
+
+    @property
+    def justificacion_rectificacion(self):
+        if hasattr(self.factura, 'JustificacionRectificacion'):
+            return JustificacionRectificacion(self.factura.JustificacionRectificacion)
+        return None
+
+    @property
+    def intereses_por_rectificacion(self):
+        if hasattr(self.factura, 'InteresesPorRectificacion'):
+            return InteresesPorRectificacion(self.factura.InteresesPorRectificacion)
+        return None
+
+    @property
+    def prorrateo_regularizacion(self):
+        if hasattr(self.factura, 'ProrrateoRegularizacion'):
+            return ProrrateoRegularizacion(self.factura.ProrrateoRegularizacion)
         return None
 
     @property
